@@ -46,7 +46,7 @@ function updateManifest(): Plugin
     name: "update-manifest",
     async writeBundle(): Promise<void>
     {
-      const version = process.env.MODULE_VERSION;
+      const version = process.env.VERSION;
       const contents: string = await fsPromises.readFile(
         "src/module.json",
         "utf-8"

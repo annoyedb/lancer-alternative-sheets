@@ -1,3 +1,8 @@
+# 1.0.3 - Don't Mind Me
+Still experimenting with GitHub CI's on the main branch. `yup.`
+
+Fixes the CI not properly updating the module manifest, so it would appear as "0.0.0" or "0.5.0" instead of the proper version
+
 # 1.0.0 - Hello World!
 This is the initial release of the Lancer Alternative Sheets module.
 

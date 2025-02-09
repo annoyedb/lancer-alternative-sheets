@@ -36,7 +36,20 @@ jobs:
     - name: Create zip archive
       working-directory: dist
       run: zip -r ./module.zip module.json style.css style.css.map scripts/ templates/ lang/
+    
+    - name: Install jq and yq
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq
+        sudo pip install yq
 
+    - name: Extract release notes from CHANGELOG.md
+      id: extract_release_notes
+      run: |
+        VERSION=${{steps.get_version.outputs.version-without-v}}
+        RELEASE_NOTES=$(awk "/^# ${VERSION} - /,/^# /" CHANGELOG.md | sed '$d')
+        echo "::set-output name=notes::$RELEASE_NOTES"
+        
     - name: Update release with files
       id: create_version_release
       uses: ncipollo/release-action@v1
@@ -48,4 +61,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: "./dist/module.json, ./dist/module.zip"
         tag: ${{ github.event.release.tag_name }}
-        body: ${{ github.event.release.body }}
+        body: |
+          ${{ steps.extract_release_notes.outputs.notes }}
+
+          [Full Changelog](https://github.com/annoyedb/lancer-alternative-sheets/blob/master/CHANGELOG.md)
