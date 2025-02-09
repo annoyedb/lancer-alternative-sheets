@@ -2,8 +2,35 @@
 This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the [unofficial Lancer game system](https://github.com/Eranziel/foundryvtt-lancer) to provide alternative player-directed sheets for the tabletop game Lancer by Massif Press.
 
 <details markdown="1">
-<summary>Theme Previews</summary>
-
+  <summary>Sheet/Theme Previews</summary>
+  <details markdown="1">
+    <summary>GMS</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/GMS.png?raw=true"/>
+  </details>
+  <details markdown="1">
+    <summary>IPS-N</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/IPS-N.png?raw=true"/>
+  </details>
+  <details markdown="1">
+    <summary>SSC</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/SSC.png?raw=true"/>
+  </details>
+  <details markdown="1">
+    <summary>HORUS</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/HORUS.png?raw=true"/>
+  </details>
+  <details markdown="1">
+    <summary>HA</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/HA.png"/>
+  </details>
+  <details markdown="1">
+    <summary>MSMC</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/MSMC.png?raw=true"/>
+  </details>
+  <details markdown="1">
+    <summary>GALSIM</summary>
+    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/GALSIM.png?raw=true"/>
+  </details>
 </details>
 
 ## Building
