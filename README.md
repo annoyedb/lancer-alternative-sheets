@@ -43,6 +43,11 @@ Contact me if you know how. :eye::lips::eye:
 ## Installation
 This module can be installed using the Foundry module installer.
 
+## Using the sheet
+To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the images above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
+
+At the moment, the sheet only provides most of the functionality --not all of it-- so it is not recommended to set this sheet as the default
+
 ## Contributing
 Contributions are welcome and issues can be posted here or tagging me (`annoying`) in the Lancer Discord (AKA Pilot NET).
 
