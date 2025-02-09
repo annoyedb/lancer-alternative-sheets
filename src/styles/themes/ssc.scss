@@ -1,0 +1,56 @@
+@use '../open-color' as oc;
+
+// Based off https://github.com/massif-press/compcon/blob/master/src/ui/style/themes
+$ssc-theme: (
+    theme-type: 'light',
+    theme-id: 'ssc',
+    theme-name: 'SSC Constellar Congress (Community)',
+
+    // Main
+    primary: #d1920a,
+    secondary: #685d99,
+    active: #89610B,
+    accent: #b58900,
+    background: #eee8d5,
+
+    // Misc.
+    pilot: #061a1f,
+    exotic: #FFAB00,
+
+    action--downtime: #1f9c9c,
+    reserve--organization: #3ec2c2,
+    action--reaction: #823aa1,
+
+    weapon: #212121,
+    mech-weapon: #212121,
+    pilot-weapon: #212121,
+
+    // Signal
+    error: #cc472d,
+    info: #4276b3,
+    success: #107038,
+    warning: #FFAB00,
+
+    // text: #5e4b30,
+    // subtle: #736e91,
+    // stark: #000,
+    // anti: #fff,
+    // light-text: #8c6f46,
+    // stark-text: #000,
+    // ----------------
+    // Sheet Colors
+    // ----------------
+    header: #eee8d5,
+    header-anti: #5e4b30,
+    bar-back: oc.$oc-gray-5,
+    bar-health: oc.$oc-teal-6,
+    bar-shield: oc.$oc-cyan-3,
+    bar-structure: oc.$oc-indigo-4,
+    bar-heat: oc.$oc-yellow-5,
+    bar-stress: oc.$oc-red-6,
+    bar-burn: oc.$oc-pink-5,
+    card: oc.$oc-gray-3,
+    shadow: rgba(99, 99, 99, 0.2),
+    scrollbar-primary: rgba(#d1920a, 0.5),
+    scrollbar-secondary: rgba(#685d99, 0.5)
+);

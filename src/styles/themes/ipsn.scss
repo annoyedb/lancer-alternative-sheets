@@ -1,0 +1,50 @@
+@use '../open-color' as oc;
+
+// Based off https://github.com/massif-press/compcon/blob/master/src/ui/style/themes
+$ipsn-theme: (
+    theme-type: 'light',
+    theme-id: 'ipsn',
+    theme-name: 'IPS-N Carina (Community)',
+
+    // Main
+    primary: #1952A2,
+    secondary: #c77634,
+    active: #1976D2,
+    accent: #19A2A2,
+    background: #dbdbdb,
+
+    // Misc.
+    pilot: #061a1f,
+    exotic: #FFAB00,
+
+    action--downtime: #1f9c9c,
+    reserve--organization: #3ec2c2,
+    action--reaction: #823aa1,
+
+    weapon: #212121,
+    mech-weapon: #212121,
+    pilot-weapon: #212121,
+
+    // Signal
+    error: #F44336,
+    info: #1565C0,
+    success: #00C853,
+    warning: #FFAB00,
+
+    // ----------------
+    // Sheet Colors
+    // ----------------
+    header: #dbdbdb, // background
+    header-anti: #212121,
+    bar-back: oc.$oc-gray-5,
+    bar-health: oc.$oc-teal-6,
+    bar-shield: oc.$oc-cyan-3,
+    bar-structure: oc.$oc-indigo-4,
+    bar-heat: oc.$oc-yellow-5,
+    bar-stress: oc.$oc-red-6,
+    bar-burn: oc.$oc-pink-5,
+    card: oc.$oc-gray-3,
+    shadow: rgba(99, 99, 99, 0.2),
+    scrollbar-primary: rgba(#1952A2, 0.5), // primary
+    scrollbar-secondary: rgba(#c77634, 0.5) // secondary
+);

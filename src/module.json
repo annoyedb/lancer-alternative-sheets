@@ -1,0 +1,39 @@
+{
+  "id": "lancer-alternative-sheets",
+  "title": "Annoying's Lancer Alternative Sheets",
+  "description": "A collection of alternative character sheets for Lancer, if by 'collection' you mean 'one.'",
+  "version": "0.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "lancer",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "authors": [
+    {
+      "name": "Annoying",
+      "discord": "annoying",
+      "flags": {}
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "style.css"
+  ]
+}

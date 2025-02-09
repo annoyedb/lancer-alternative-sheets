@@ -1,0 +1,61 @@
+@mixin theme($theme-map)
+{
+    @each $name, $color in $theme-map
+    {
+        --#{$name}: #{$color};
+    }
+}
+
+@mixin generate-lancer-classes($theme-map)
+{
+    @each $name, $color in $theme-map
+    {
+        .la-outl-#{$name}
+        {
+            -webkit-text-stroke: var(--size) var(--#{$name});
+        }
+
+        .la-bckg-#{$name}
+        {
+            background-color: var(--#{$name}) !important;
+        }
+
+        .la-text-#{$name}
+        {
+            color: var(--#{$name}) !important;
+        }
+
+        .la-brdr-#{$name}
+        {
+            border-color: var(--#{$name}) !important;
+        }
+
+        .la-anim-#{$name}
+        {
+            --color: var(--#{$name});
+        }
+    }
+}
+
+@mixin generate-manufacturer-class($theme-map)
+{
+    $theme-id: map-get($theme-map, theme-id);
+    $primary-color: map-get($theme-map, primary);
+
+    .la-bckg-#{$theme-id}
+    {
+        background-color: $primary-color;
+    }
+
+    .la-text-#{$theme-id}
+    {
+        color: $primary-color;
+    }
+
+    .la-brdr-#{$theme-id}
+    {
+        border-color: $primary-color;
+    }
+
+    --#{$theme-id}-theme: $primary-color;
+}

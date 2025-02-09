@@ -1,0 +1,9 @@
+@use '../mech/loadout.scss' as *;
+
+.la-details
+{
+    &.-talent
+    {
+        @extend .-mod;
+    }
+}

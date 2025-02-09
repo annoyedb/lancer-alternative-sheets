@@ -1,0 +1,241 @@
+// Sidebar
+.la-body>.la-sidebar
+{
+    flex: 1;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    filter: drop-shadow(-3px 3px 1px var(--shadow));
+    -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
+    -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
+
+    // Frame Name
+    >.la-framename
+    {
+        margin-top: 1rem;
+
+        filter: inherit;
+        -webkit-filter: inherit;
+        -moz-filter: inherit;
+    }
+
+    // Image
+    >.la-mech
+    {
+        position: relative;
+        text-align: center;
+        
+        filter: inherit;
+        -webkit-filter: inherit;
+        -moz-filter: inherit;
+
+        >.la-combine-v
+        {
+            position: absolute;
+            left: 0px;
+            font-size: 5rem;
+
+            >.la-combine-h
+            {
+                font-weight: bolder;
+            }
+        }
+
+        >.las-mech__img
+        {
+            max-height: 25rem;
+        }
+    }
+
+    // Stats
+    >.la-stats
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        font-size: 3.5rem;
+        
+        filter: inherit;
+        -webkit-filter: inherit;
+        -moz-filter: inherit;
+
+        >.la-combine-h>.la-combine-v
+        {
+            --color: var(--primary-color);
+
+            >span
+            {
+                width: 100%;
+            }
+        }
+    }
+
+    // Damage
+    >.la-damage
+    {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        filter: inherit;
+        -webkit-filter: inherit;
+        -moz-filter: inherit;
+
+        >.la-combine-h
+        {
+            // Bars
+            >.la-visuals
+            {
+                flex: 5;
+
+                >.la-combine-h
+                {
+                    gap: 0.5rem;
+    
+                    >.la-damage__span
+                    {
+                        flex-basis: 3.25rem;
+    
+                        font-size: .75rem;
+                        text-align: right;
+                    }
+
+                    >.la-bar-h>.la-tempvalue
+                    {
+                        height: 0.3em;
+                        top: 0.15em;
+
+                        &.-shield
+                        {
+                            filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                            -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                            -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                        }
+
+                        &.-burn
+                        {
+                            filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                            -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                            -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                        }
+                    }
+                }
+            }
+
+            // Temporary Values
+            >.la-combine-v
+            {
+                flex: 1;
+                --thickness: 2px;
+                text-align: center;
+
+                &.-shield
+                {
+                    --color: var(--bar-shield);
+                    filter: drop-shadow(0px 0px 5px var(--bar-shield));
+                    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+                    -moz-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+                }
+
+                &.-burn
+                {
+                    --color: var(--bar-burn);
+                    filter: drop-shadow(0px 0px 5px var(--bar-burn));
+                    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+                    -moz-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+                }
+
+                >.la-damage__input
+                {
+                    font-size: .9rem;
+                    line-height: 1rem;
+                    height: 100%;
+                    width: 50%;
+                    box-shadow: rgba(50, 50, 93, 0.25) -3px 3px 3px 1px inset, rgba(50, 50, 93, 0.2) 2px 0px 2px 0px inset;
+                    border-radius: 4px 4px 0px 0px;
+                }
+
+                >.la-damage__span
+                {
+                    font-weight: normal;
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .la-combine-h
+    {
+        --length: 2;
+        flex: 1;
+    }
+
+    .la-combine-v>span
+    {
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    // Macros/Flows
+    .la-macroflows
+    {
+        width: 100%;
+        align-items: flex-end;
+
+        filter: inherit;
+        -webkit-filter: inherit;
+        -moz-filter: inherit;
+
+        >.la-flow
+        {
+            width: calc(100% - 2rem);
+        }
+    }
+}
+
+// Scrollbar
+.la-body
+{
+    >.la-sidebar
+    {
+        scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-secondary) transparent;
+    }
+
+    >.la-sidebar::-webkit-scrollbar
+    {
+        width: 2px;
+    }
+
+    >.la-sidebar::-webkit-scrollbar-thumb
+    {
+        background: var(--scrollbar-secondary);
+        border: 0px;
+    }
+
+    >.la-sidebar::-webkit-scrollbar-track
+    {
+        background: transparent;
+    }
+
+    >.la-sidebar::-moz-scrollbar
+    {
+        width: 2px;
+    }
+
+    >.la-sidebar::-moz-scrollbar-thumb
+    {
+        background: var(--scrollbar-secondary);
+        border: 0px;
+    }
+
+    >.la-sidebar::-moz-scrollbar-track
+    {
+        background: transparent;
+    }
+}

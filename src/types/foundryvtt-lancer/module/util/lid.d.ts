@@ -1,0 +1,11 @@
+import { LancerActor, LancerDEPLOYABLE } from "../actor/lancer-actor";
+import { LancerItem } from "../item/lancer-item";
+import { EntryType } from "../enums";
+export declare function lookupLIDPlural(lid: string, types?: EntryType | EntryType[]): Promise<Array<LancerActor | LancerItem>>;
+export declare function lookupLID(lid: string, types?: EntryType | EntryType[]): Promise<LancerActor | LancerItem | null>;
+export declare function lookupLIDPluralSync(lid: string, types?: EntryType | EntryType[]): Array<LancerActor | LancerItem>;
+export declare function lookupLIDSync(lid: string, types?: EntryType | EntryType[]): LancerActor | LancerItem | null;
+export declare function lookupDeployables(lids: string[]): Promise<(LancerActor | LancerItem | null)[]>;
+export declare function lookupOwnedDeployables(owner: LancerActor, filter?: string[]): Record<string, LancerDEPLOYABLE>;
+export declare function lookupIntegrated(lids: string[]): Promise<(LancerActor | LancerItem | null)[]>;
+export declare function slugify(name: string, dash?: string): string;

@@ -1,0 +1,50 @@
+@use '../open-color' as oc;
+
+// Based off https://github.com/massif-press/compcon/blob/master/src/ui/style/themes
+$horus-theme: (
+    theme-type: 'dark',
+    theme-id: 'horus',
+    theme-name: 'HORUS Terminal',
+
+    // Main
+    primary: #126127,
+    secondary: #990,
+    active: #00a600,
+    accent: #00d900,
+    background: #000,
+
+    // Misc.
+    pilot: #005454,
+    exotic: #FFAB00,
+
+    action--downtime: #1dc2c2,
+    reserve--organization: #3ec2c2,
+    action--reaction: #be51ed,
+
+    weapon: #555555,
+    mech-weapon: #555555,
+    pilot-weapon: #555555,
+
+    // Signal
+    error: #e50000,
+    info: #00e5e5,
+    success: #00C853,
+    warning: #e5e500,
+
+    // ----------------
+    // Sheet Colors
+    // ----------------
+    header: #f4f4f4,
+    header-anti: #212121,
+    bar-back: oc.$oc-gray-8,
+    bar-health: oc.$oc-lime-9,
+    bar-shield: oc.$oc-cyan-9,
+    bar-structure: oc.$oc-violet-9,
+    bar-heat: oc.$oc-orange-9,
+    bar-stress: oc.$oc-pink-9,
+    bar-burn: oc.$oc-red-9,
+    card: oc.$oc-gray-9,
+    shadow: rgba(99, 99, 99, 0.2),
+    scrollbar-primary: rgba(#126127, 0.5),
+    scrollbar-secondary: rgba(#990, 0.5)
+);
