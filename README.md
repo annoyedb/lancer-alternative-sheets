@@ -34,7 +34,7 @@ This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the
 </details>
 
 ## Building
-This module uses [Vite](https://vite.dev/guide/) to build package the module. Currently the environment is not set up to make use of hot-reloading features.
+This module uses [Vite](https://vite.dev/guide/) to build package the module.  To set up hot reloading, first build the module, then symlink the dist folder into you foundry data folder as `modules/lancer-alternative-sheets`.  Once the link is set up, run `yarn serve` with foundry running, and your browser will open to the vite dev server.  And changes to hbs files or language json files will be picked up and changes to the source files will automatically reload foundry.
 
 Included is a (probably) outdated bunch of type definitions generated from [foundryvtt-lancer](https://github.com/Eranziel/foundryvtt-lancer), but aside from some globally defined constants I haven't found a way to get Vite to roll-up the definitions in a working build.
 
