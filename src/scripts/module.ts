@@ -1,4 +1,3 @@
-import "../lang/en.json";
 import { getTheme } from "./theme";
 import { deleteActiveEffect, LASMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
@@ -65,7 +64,11 @@ function setupSheets()
         }
     }
 
-    Actors.registerSheet("lancer", LASMechSheet, { types: ["mech"], makeDefault: false });
+    Actors.registerSheet("lancer-alternative-sheets", LASMechSheet, {
+        types: ["mech"], 
+        label: "LA.SHEET.mech.label",
+        makeDefault: false
+    });
 }
 
 function setupEventListeners()
