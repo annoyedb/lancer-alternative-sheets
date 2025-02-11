@@ -1,6 +1,26 @@
+# 1.0.6
+## Changes
+* Added missing profile styling
+## Known issues
+* There is only one missing styling called 'bonuses'; if anyone encounters anything that looks odd (tiny text is the most prominent indicator) don't hesitate to notify me!
+* There is no 'frame deployable' styling; this is from frames such as the HORUS Hydra, but I can't get foundryvtt-lancer to generate the data I need to observe it. If anyone has success in generating this (or similar) frame's data, let me know
+
+# 1.0.5
+This is a manual release reverting changes from a recent PR due to CI issues and development pipeline issues hastily introduced
+
+Sorry to everyone who updated within the past few hours
+
+## Changes
+* Imported all changes from 1.0.4
+
+# 1.0.4
+## Changes
+* #2 - Added missing type definition for the button element in core activation, resulting in input events propagating to it unintentionally
+* Fixed 'active effects' type checking; Thanks, Bolts!
+
 # 1.0.3 - Don't Mind Me
 Still experimenting with GitHub CI's on the main branch. `yup.`
-
+## Changes
 Fixes the CI not properly updating the module manifest, so it would appear as "0.0.0" or "0.5.0" instead of the proper version
 
 # 1.0.0 - Hello World!
