@@ -128,6 +128,28 @@
     }
 }
 
+.-pointerdisable
+{
+    pointer-events: none;
+}
+
+.-bold
+{
+    font-weight: bold;
+}
+
+.-padding0-lr
+{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.-padding1-lr
+{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
 .-fullwidth
 {
     width: 100%;

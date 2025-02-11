@@ -553,29 +553,36 @@ function renderWeapon(
         `;
     }
     
-    // Profile
-    let profile = "";
+    // Profile (Weapon Charge Level)
+    let profiles = "";
     if (weapon.system.profiles.length > 1)
     {
-        let profilesArray: string[] = [];
+        let profileArray: string[] = [];
         weapon.system.profiles.forEach((profile: any, index: number) => {
-            profilesArray.push(`
-                <!-- LA: I have not been restyled -->
-                <a 
-                    class="gen-control weapon-profile ${index === weapon.system.selected_profile_index ? "selected-profile" : ""}"
+            // let clipping = "";
+            // if (index === 0 && index === weapon.system.profiles.length - 1)
+            //     clipping = "clipped";
+            // else if (index === 0)
+            //     clipping = "clipped-top";
+            // else if (index === weapon.system.profiles.length - 1)
+            //     clipping = "clipped-bot";
+            // NOTE: unlocalized; incoming data does not have a good way of determing 'type'
+            // e.g. profile.name = "Charge 1", "Charge 2", etc.
+            profileArray.push(`
+                <button type="button" 
+                    class="la-glowover-inv -height5
+                        gen-control ${index === weapon.system.selected_profile_index ? "la-glow la-bckg-secondary selected-profile -pointerdisable" : ""}"
                     data-action="set" data-action-value="(int)${index}"
                     data-path="${weaponPath}.system.selected_profile_index">
-                    <span class="minor">${profile.name}</span>
-                </a>
-                <!-- /LA: I have not been restyled -->
+                    <span class="-padding1-lr -fontsize1 ${index === weapon.system.selected_profile_index ? "-bold la-glow" : ""}">${profile.name.toUpperCase()}</span>
+                </button>
             `);
         });
-        profile = `
-            <!-- LA: I have not been restyled -->
-            <div class="flexrow weapon-profile-wrapper">
-                ${profilesArray.join("")}
-            </div>
-            <!-- /LA: I have not been restyled -->
+        profiles = `
+        <!-- Weapon Profile -->
+<div class="la-limited la-combine-h clipped la-bckg-pilot la-text-header -flex1">
+    ${profileArray.join("")}
+</div>
         `;
     }
     
@@ -687,7 +694,7 @@ function renderWeapon(
             <!-- Generated Content -->
             ${destroyedText}
             ${systemPoints}
-            ${profile}
+            ${profiles}
             <div class="la-resource la-combine-h -fullwidth">
                 ${loading}
                 ${limited}
