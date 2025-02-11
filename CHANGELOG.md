@@ -1,3 +1,7 @@
+# 1.0.4
+* #2 - Added missing type definition for the button element in core activation, resulting in input events propagating to it unintentionally
+* Fixed 'active effects' type checking; Thanks, Bolts!
+
 # 1.0.3 - Don't Mind Me
 Still experimenting with GitHub CI's on the main branch. `yup.`
 

@@ -2,7 +2,7 @@ import { HelperOptions } from "handlebars";
 import { resolveDotpath, spoofHelper } from "./lancer/helpers/common";
 import { getLocalized, randomExtension } from "./helpers";
 import { compactTagListHBS } from "./lancer/helpers/tags";
-import { activationColorMap, activationIconMap } from "./constants";
+import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP } from "./constants";
 import { slugify } from "./lancer/util/lid";
 
 export function renderActionArray(document: any, path: string, options?: HelperOptions & {
@@ -102,7 +102,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
 <div class="la-spacer -medium"></div>
 <div class="la-effectbox -descriptive">
     <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped">
-        <i class="cci ${activationIconMap[action.activation]} -fontsize5"></i>
+        <i class="cci ${ACTIVATION_ICON_MAP[action.activation]} -fontsize5"></i>
         <span class="-fontsize2">
             ${action.name?.toUpperCase() ?? document.name}
         </span>
@@ -131,7 +131,7 @@ export function renderActionButton(
 )
 {
     const activationClass = `activation-${slugify(activation, '-')}`;
-    const themeClass = activationColorMap[activation] || "la-bckg-repcap";
+    const themeClass = ACTIVATION_COLOR_MAP[activation] || "la-bckg-repcap";
     const interactiveClass = options?.nonInteractive ? "noninteractive" : "";
     const label = flowData?.label 
         ? `${flowData.label.toUpperCase()} - ${activation.toUpperCase()}` 
