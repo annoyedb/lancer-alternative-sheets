@@ -35,6 +35,9 @@ export default defineConfig({
       entry: "src/scripts/module.ts",
       formats: ["es"],
     },
+    rollupOptions: {
+      external: [/modules\/lancer-alternative-sheets\/assets/],
+    }
   },
   plugins: [foundryvtt(MANIFEST, { type: "module", substitutions })]
 });
