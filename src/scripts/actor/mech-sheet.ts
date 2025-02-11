@@ -7,7 +7,7 @@ import { compactTagList, compactTagListHBS } from "../lancer/helpers/tags";
 import { getLocalized, randomExtension } from "../helpers";
 import { slugify } from "../lancer/util/lid";
 import { renderActionArray, renderActionButton } from "../item";
-import { activationColorMap, systemIconMap } from "../constants";
+import { ACTIVATION_COLOR_MAP, SYSTEM_ICON_MAP } from "../constants";
 import { collapseID } from "../lancer/helpers/collapse";
 
 export class LASMechSheetBase
@@ -69,7 +69,7 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
     let renderArray: string[] = [];
     effects.forEach((effect: any, index: number) =>
     {
-        if (Object.keys(effect.flags).length > 0 && effect.flags.lancer.ephemeral)
+        if (!effect.isTemporary)
             return;
 
         let icon = effect.icon 
@@ -80,12 +80,16 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
 <details class="la-details -fullwidth la-combine-v -effect">
     <summary class="la-details__summary clipped-bot-alt la-bckg-warning la-text-header-anti -fontsize1">
         <span class="la-terminal -fadein">>//: </span>${effect.name} <span class="la-extension -lower -fadein">--${getLocalized("LA.info.label")}</span><span class="la-cursor -fadein"></span>
-        <a class="lancer-context-menu" data-active-effect-index="${index}" data-uuid="${actor.uuid}">
+        <button type="button"
+            class="lancer-context-menu" 
+            data-active-effect-index="${index}" data-uuid="${actor.uuid}">
             <i class="fas fa-ellipsis-v"></i>
-        </a>
-        <a class="la-delete" data-active-effect-index="${index}" data-active-effect-id="${effect._id}" data-uuid="${actor.uuid}">
+        </button>
+        <button type="button"
+            class="la-delete" 
+            data-active-effect-index="${index}" data-active-effect-id="${effect._id}" data-uuid="${actor.uuid}">
             <i class="fas fa-trash"></i>
-        </a>
+        </button>
     </summary>
     <div class="la-effect la-combine-h">
         <span class="la-effect__span">
@@ -284,7 +288,7 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
     let activeName = core.active_actions.length ? core.active_actions[0].name : core.name;
     let theme = coreEnergy ? getManufacturerColor(frame.system.manufacturer, "bckg") : "la-bckg-repcap";
     let activation = `activation-${slugify(core.activation, "-")}`;
-    let activationTheme = coreEnergy ? activationColorMap[core.activation] : "la-bckg-repcap";
+    let activationTheme = coreEnergy ? ACTIVATION_COLOR_MAP[core.activation] : "la-bckg-repcap";
 
     let actions = "";
     if (core.active_actions.length)
@@ -316,9 +320,9 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
                 ${core.activation.toUpperCase()}
             </span>
             <div class="-fullwidth ${coreEnergy ? "la-dropshadow" : ""}">
-                <button 
-                    class="la-corepower clipped la-text-header la-combine-h -fontsize4 ${coreEnergy ? "" : "-disabled"}
-                        activation-flow ${activation} ${activationTheme}"
+                <button type="button"
+                    class="la-corepower clipped la-text-header la-combine-h -fontsize4
+                        activation-flow ${activation} ${activationTheme}"  ${coreEnergy ? "" : "disabled"}
                     data-uuid="${frame.uuid}" data-path="system.core_system">
                     <i class="la-corepower__i cci cci-corebonus la-dropshadow"></i>
                     <span class="la-corepower__span la-dropshadow">${activeName.toUpperCase()}</span>
@@ -917,7 +921,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     if (!sys) 
         return;
     let collapse = resolveHelperDotpath(options, "collapse") as any;
-    let icon = systemIconMap[sys.system.type] || "cci-system";
+    let icon = SYSTEM_ICON_MAP[sys.system.type] || "cci-system";
     
     let effect = ""
     if (sys.system.effect)

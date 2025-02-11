@@ -1,50 +1,84 @@
 # Lancer Alternative Sheets
 This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the [unofficial Lancer game system](https://github.com/Eranziel/foundryvtt-lancer) to provide alternative player-directed sheets for the tabletop game Lancer by Massif Press.
 
+It is designed to be a player-facing sheet that provides most of the functionality carried over from the original sheet, providing an immersive and convenient way to interact with the Lancer system, a simple-to-understand responsive layout, and compatibility with the [PopOut!](https://github.com/League-of-Foundry-Developers/fvtt-module-popout) module (as well as possibly any others that do event rerouting to another window).
+
 <details markdown="1">
-  <summary>Sheet/Theme Previews</summary>
-  <details markdown="1">
-    <summary>GMS</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/GMS.png?raw=true"/>
-  </details>
-  <details markdown="1">
-    <summary>IPS-N</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/IPS-N.png?raw=true"/>
-  </details>
-  <details markdown="1">
-    <summary>SSC</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/SSC.png?raw=true"/>
-  </details>
-  <details markdown="1">
-    <summary>HORUS</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/HORUS.png?raw=true"/>
-  </details>
-  <details markdown="1">
-    <summary>HA</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/HA.png"/>
-  </details>
-  <details markdown="1">
-    <summary>MSMC</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/MSMC.png?raw=true"/>
-  </details>
-  <details markdown="1">
-    <summary>GALSIM</summary>
-    <img src="https://github.com/annoyedb/lancer-alternative-sheets/blob/master/docs/GALSIM.png?raw=true"/>
-  </details>
+  <summary>
+    <h4>General Massive Systems (GMS)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GMS.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>IPS-Northstar (IPS-N)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/IPS-N.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>Smith-Shimano Corpro (SSC)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/SSC.png"/>
+  </div>
+</details>
+<details>
+  <summary>
+    <h4>HORUS</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/HORUS.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>Harrison Armory (HA)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/HA.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>Mirrorsmoke Mercenary Company (MSMC)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/MSMC.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>Forecast/Galactic Sumulation (GALSIM)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GALSIM.png"/>
+  </div>
 </details>
 
 ## Building
-This module uses [Vite](https://vite.dev/guide/) to build package the module. Currently the environment is not set up to make use of hot-reloading features.
+This module uses [Vite](https://vite.dev/guide/) to build package the module. 
+To set up hot-reloading, first build the module, then symlink the dist folder into your foundry data folder as `modules/lancer-alternative-sheets`. 
+While your Foundry Virtual Tabletop server is running, run `yarn serve` at the module development folder and your browser will automatically open to the Vite development server. 
+
+Any changes to `.hbs` templates, `.json` localization files, and source code will automatically load into Foundry development server.
 
 Included is a (probably) outdated bunch of type definitions generated from [foundryvtt-lancer](https://github.com/Eranziel/foundryvtt-lancer), but aside from some globally defined constants I haven't found a way to get Vite to roll-up the definitions in a working build.
 
 Contact me if you know how. :eye::lips::eye:
 
 ## Installation
-This module can be installed using the Foundry module installer.
+This module can be installed:
+* using the Foundry module installer
+* downloaded and installed manually (from module.zip) found in the [Releases](https://github.com/annoyedb/lancer-alternative-sheets/releases) page
+* https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json
 
 ## Using the sheet
-To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the images above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
+To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the image above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
 
 At the moment, the sheet only provides most of the functionality --not all of it-- so it is not recommended to set this sheet as the default
 
