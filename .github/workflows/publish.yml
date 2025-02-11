@@ -48,7 +48,6 @@ jobs:
     - name: Extract release notes from CHANGELOG.md
       id: extract_release_notes
       run: |
-        VERSION=${{steps.get_version.outputs.version-without-v}}
         RELEASE_NOTES=$(awk "/^# [0-9]+\.[0-9]+\.[0-9]+/{if (p) exit; p=1; next} p" CHANGELOG.md)
         echo "::set-output name=notes::$RELEASE_NOTES"
         
