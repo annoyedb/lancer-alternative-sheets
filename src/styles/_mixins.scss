@@ -1,3 +1,4 @@
+@use "sass:map";
 @mixin theme($theme-map)
 {
     @each $name, $color in $theme-map
@@ -39,8 +40,8 @@
 
 @mixin generate-manufacturer-class($theme-map)
 {
-    $theme-id: map-get($theme-map, theme-id);
-    $primary-color: map-get($theme-map, primary);
+    $theme-id: map.get($theme-map, theme-id);
+    $primary-color: map.get($theme-map, primary);
 
     .la-bckg-#{$theme-id}
     {
