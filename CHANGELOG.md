@@ -1,3 +1,19 @@
+# 1.0.11 - MARGINal improvements
+`ha ha get it`
+Frame deployables are now implemented and many element margins have been redone or fixed
+
+And yes I'm still testing CI `don't judge me` 
+
+## Changes
+* #5 - Added deployables array to frames with deployables linked
+* #8 - Modified all loadout's hover over effects to accomodate GALSIM theme users `at the cost of everyone else`
+* Modified margins between added bonuses and effects to be more consistent
+* Fixed major issue where no talent actions would be returned `because a period was missing`
+* Fixed issue where there was no element to display (e.g. tags) there would just be an empty void
+* Frame actives and passives are now collapsible `you can thank Hydra for that`
+## Known Issues
+* #6 - I'm still seeking more information about this particular topic if anyone more knowledgable with Lancer (both game and systems) would like to take a look
+
 # 1.0.10
 I swear I'm not padding my commit history
 
