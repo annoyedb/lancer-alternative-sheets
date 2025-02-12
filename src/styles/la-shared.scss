@@ -478,13 +478,16 @@
     align-items: center;
     font-size: 0.5em;
 
-    >span:first-child,
-    >i:first-child,
-    >input:first-child
+    &.-divider
     {
-        border-bottom: var(--thickness, 2px) solid var(--color);
+        >span:first-child,
+        >i:first-child,
+        >input:first-child
+        {
+            border-bottom: var(--thickness, 2px) solid var(--color);
+        }
     }
-
+    
     >span,
     >i,
     >input
@@ -734,6 +737,11 @@
             float: left;
             margin-right: 1rem;
         }
+    }
+
+    &.-largeheader
+    {
+        margin-top: 1rem;
     }
 
     >.la-generated

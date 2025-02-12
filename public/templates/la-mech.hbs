@@ -49,7 +49,7 @@
             </div>
             {{!-- Mech Image --}}
             <div class="la-mech">
-                <div class="la-combine-v">
+                <div class="la-combine-v ">
                     {{#if (eq system.size 0.5)}}
                     <i class="cci cci-size-half la-text-primary la-outl-background"></i>
                     {{else}}
@@ -69,21 +69,21 @@
                 <div class="la-combine-h">
                     {{!-- the mdi shield is a bit larger than the cci icons --}}
                     <i class="mdi mdi-shield-half-full" style="font-size: 0.75em"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.armor}}</span>
                         <span>{{localize "LA.armor.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-evasion"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.evasion}}</span>
                         <span>{{localize "LA.evasion.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-edef"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.edef}}</span>
                         <span>{{localize "LA.edefense.short"}}</span>
                     </div>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     {{!-- SHIELD (VALUE) --}}
-                    <div class="la-combine-v -shield">
+                    <div class="la-combine-v -divider -shield">
                         <input class="la-damage__input" type="number" name="system.overshield.value" data-dtype="Number"
                             value="{{system.overshield.value}}">
                         <span class="la-damage__span">{{localize "LA.overshield.short"}}</span>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     {{!-- BURN (VALUE) --}}
-                    <div class="la-combine-v -burn">
+                    <div class="la-combine-v -divider -burn">
                         <input class="la-damage__input" type="number" name="system.burn" data-dtype="Number"
                             value="{{system.burn}}">
                         <span class="la-damage__span">{{localize "LA.burn.short"}}</span>
@@ -185,21 +185,21 @@
             <div class="la-stats">
                 <div class="la-combine-h">
                     <i class="cci cci-tech-full"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.tech_attack}}</span>
                         <span>{{localize "LA.tattack.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-save"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.save}}</span>
                         <span>{{localize "LA.save.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-sensor"></i>
-                    <div class="la-combine-v">
+                    <div class="la-combine-v -divider">
                         <span>{{system.sensor_range}}</span>
                         <span>{{localize "LA.sensor.short"}}</span>
                     </div>
@@ -277,7 +277,7 @@
             <div class="la-hase">
                 <div class="la-attribute la-text-secondary -grit
                         mdi mdi-hexagon">
-                    <div class="la-combine-v la-text-header -grit">
+                    <div class="la-combine-v -divider la-text-header -grit">
                         <span class="la-label__span">
                             {{localize "LA.grit.short"}}
                         </span>
@@ -294,7 +294,7 @@
                 </div>
                 <div class="la-attribute la-text-secondary -hull 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -hull la-text-header">
+                    <div class="la-combine-v -divider -hull la-text-header">
                         <span class="la-label__span">
                             {{localize "LA.hull.short"}}
                         </span>
@@ -308,7 +308,7 @@
                 </div>
                 <div class="la-attribute la-text-secondary -agility
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -agility la-text-header">
+                    <div class="la-combine-v -divider -agility la-text-header">
                         <span class="la-label__span">
                             {{localize "LA.agility.short"}}
                         </span>
@@ -322,7 +322,7 @@
                 </div>
                 <div class="la-attribute la-text-secondary -systems 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -systems la-text-header">
+                    <div class="la-combine-v -divider -systems la-text-header">
                         <span class="la-label__span">
                             {{localize "LA.systems.short"}}
                         </span>
@@ -335,7 +335,7 @@
                 </div>
                 <div class="la-attribute la-text-secondary -engineering 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -engineering la-text-header">
+                    <div class="la-combine-v -divider -engineering la-text-header">
                         <span class="la-label__span">
                             {{localize "LA.engineering.short"}}
                         </span>
@@ -375,7 +375,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-structure"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.structure.label"}}</span>
-                            <div class="la-combine-v">
+                            <div class="la-combine-v -divider">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{system.structure.value}}</span>
                                 <span class="la-bottom__span -narrow">{{system.structure.max}}</span>
@@ -399,7 +399,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-repair"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.flow.repair.label"}}</span>
-                            <div class="la-combine-v">
+                            <div class="la-combine-v -divider">
                                 <input class="la-top__input" type="number" name="system.repairs.value"
                                     data-dtype="Number" value={{system.repairs.value}} />
                                 <span class="la-bottom__span">{{system.repairs.max}}</span>
@@ -440,7 +440,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-reactor"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.stress.label"}}</span>
-                            <div class="la-combine-v">
+                            <div class="la-combine-v -divider">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{system.stress.value}}</span>
                                 <span class="la-bottom__span -narrow">{{system.stress.max}}</span>
@@ -463,7 +463,7 @@
                     <div class="la-structure la-combine-h la-bckg-card">
                         <div class="la-combine-h">
                             <i class="mdi mdi-lightning-bolt"></i>
-                            <div class="la-combine-v">
+                            <div class="la-combine-v -divider">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{overchargeStage actor "system.overcharge"}}</span>
                                 <span class="la-bottom__span -fontsize1">{{localize "LA.flow.overcharge.label"}}</span>
