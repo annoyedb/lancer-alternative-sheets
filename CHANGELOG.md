@@ -1,3 +1,11 @@
+# 1.0.9
+You guessed it
+
+# 1.0.8
+Still pushing releases to test CI
+## Changes
+* None for you, all for me
+
 # 1.0.7
 Mostly an excuse to test CI again
 ## Changes
