@@ -43,7 +43,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
     <div class="la-details-wrapper la-brdr-exotic
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, talent, true)}">
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
             ${ranks}
         </div>
@@ -118,7 +118,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
         <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-exotic -fontsize1">
             ${talent.system.ranks[i]?.description}
         </span>
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
             ${actions 
                 ? `<div class="la-spacer -medium">&nbsp</div>${actions}` 

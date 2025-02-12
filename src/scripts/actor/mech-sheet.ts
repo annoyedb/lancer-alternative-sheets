@@ -171,14 +171,14 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
 <div class="la-details-wrapper la-dropshadow ${getManufacturerColor(frame.system.manufacturer, "brdr")}
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-    <div class="la-core-power la-combine-h clipped-alt la-bckg-pilot la-text-header -align-center">
+    <div class="la-combine-h clipped-alt la-bckg-pilot la-text-header -padding0 -align-center">
         <span class="-fontsize1">${coreEnergy ? getLocalized("LA.mech.core.online.label") : getLocalized("LA.mech.core.offline.label")}</span>
         <div class="${coreEnergy ? "" : ""}">
             <input name="system.core_energy" class="core-power-toggle mdi mdi-battery-outline la-text-repcap -fontsize5" type="checkbox" data-dtype="Boolean" ${coreEnergy ? "checked" : ""}>
         </div>
     </div>
     <div class="la-spacer -medium">&nbsp</div>
-    <div class="la-generated la-combine-v">
+    <div class="la-generated -fullwidth -gap1 la-combine-v">
         ${power}
         ${traits.join("")}
     </div>
@@ -389,7 +389,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
                 ${trait.description}
             </span>
@@ -485,7 +485,7 @@ export function renderWeaponMounts(loadoutPath: string, options: HelperOptions)
         class="la-cursor la-anim-header -fadein">
     </span>
 </h1>
-<div class="la-details-wrapper la-brdr-primary
+<div class="la-details-wrapper la-brdr-primary la-combine-v -gap1
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
     ${slots.join("")}
@@ -694,7 +694,7 @@ function renderWeapon(
     <div class="la-details-wrapper la-brdr-pilot ${destroyed ? "-destroyed" : ""} 
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, weapon, true)}">
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
             ${profiles}
@@ -784,23 +784,24 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
         addedDamage = renderAddedDamage(damageArray, options);
     }
 
-    let modifiers = "";
-    if (addedDamage || addedRange)
-    {
-        modifiers = `
-            <div class="la-resource la-combine-h -fullwidth">
-                ${addedRange}
-                ${addedDamage}
-            </div>
-        `
-    }
-
     // Added Tags
     let addedTags = ""
     if (mod.system.added_tags.length)
     {
         let tagArray = renderTagsArray(`${modPath}.system.added_tags`, options);
         addedTags = renderAddedTags(tagArray, options);
+    }
+
+    let modifiers = "";
+    if (addedDamage || addedRange || addedTags)
+    {
+        modifiers = `
+            <div class="la-resource la-combine-h -fullwidth">
+                ${addedRange}
+                ${addedDamage}
+                ${addedTags}
+            </div>
+        `
     }
 
     // Actions
@@ -843,14 +844,13 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, mod, true)}">
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
             ${resources}
             ${modifiers}
             ${effect}
             ${bonuses}
             ${actions}
-            ${addedTags}
         </div>
         <!-- Generated Tags -->
         ${tags}
@@ -1040,7 +1040,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, sys, true)}">
-        <div class="la-generated la-combine-v">
+        <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
             ${resources}
@@ -1181,7 +1181,7 @@ function renderAddedTags(tagList: string, _options: HelperOptions)
 {
     return `
 <!-- Added Tags -->
-<div class="la-effectbox la-bckg-card la-combine-h">
+<div class="la-effectbox la-bckg-card la-combine-h -allround">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
         ${getLocalized("LA.mech.mod.tags.label")}
     </span>
@@ -1327,7 +1327,7 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
         click-open">
         ${deployable.name ? deployable.name.toUpperCase() : ""}
     </span>
-    <div class="la-generated la-combine-v">
+    <div class="la-generated -gap1 la-combine-v">
         <div class="-fontsize1">
             ${buttonDisplay}
             ${deployable.system.detail}
