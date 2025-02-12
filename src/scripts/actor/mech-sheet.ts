@@ -239,10 +239,10 @@ function renderFramePassive(framePath: string, options: HelperOptions)
         actions = renderActionArray(frame, "system.core_system.passive_actions");
     }
 
-    let passiveText = ""
+    let passive = ""
     if (core.passive_effect !== "")
     {
-        passiveText = `
+        passive = `
             <div class="la-effectbox la-combine-v -align-left">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                     ${getLocalized("LA.mech.core.passive.label")}
@@ -279,7 +279,7 @@ function renderFramePassive(framePath: string, options: HelperOptions)
     <div class="la-generated
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-        ${passiveText}
+        ${passive}
         <!-- Generated Content -->
         ${actions}
     </div>
@@ -306,8 +306,12 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
         );
     }
 
-    // let deployables = "";
-    //...
+    let deployables = "";
+    if (core.deployables.length)
+    {
+        deployables = renderDeployableArray(framePath, options);
+    }
+    
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let collID = `${frame.uuid}_active`;
     return `
@@ -346,6 +350,7 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
         </div>
         <!-- Generated Content -->
         ${actions}
+        ${deployables}
     </div>
 </div>
     `;
@@ -555,17 +560,9 @@ function renderWeapon(
     {
         return renderWeaponEmpty(weaponPath, size, options);
     }
-    let destroyed = weapon.system.destroyed;
 
     // Weapon
     let weaponMod = renderWeaponMod(modPath, options);
-    let destroyedText = "";
-    if (destroyed)
-    {
-        destroyedText = `
-            <span class="la-warn__span la-text-header la-bckg-repcap clipped horus--very--subtle la-locked -fontsize2">${getLocalized("LA.mech.slot.destroyed.subLabel")}</span>
-        `;
-    }
 
     // Profile (Weapon Charge Level)
     let profiles = "";
@@ -650,10 +647,13 @@ function renderWeapon(
     let tagsPath = `${weaponPath}.system.profiles.${weapon.system.selected_profile_index}.all_tags`;
     let tags = renderTagsArray(tagsPath, options);
 
+    let destroyed = weapon.system.destroyed;
+    let destroyedText = destroyed
+        ? renderDestroyed(getLocalized("LA.mech.slot.destroyed.subLabel"))
+        : "";
     let slot = destroyed
         ? getLocalized("LA.mech.slot.destroyed.label")
         : `${weapon.system.size.toUpperCase()} ${activeProfile.type.toUpperCase()}` || getLocalized("LA.placeholder");
-
     return `
 <!-- Weapon -->
 <div 
@@ -975,9 +975,9 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     }
 
     let deployables = ""
-    if (sys.system.deployables.length && sys.actor)
+    if (sys.system.deployables.length)
     {
-        deployables = renderDeployableArray(sys, options);
+        deployables = renderDeployableArray(systemPath, options);
     }
 
     let limited = ""
@@ -999,13 +999,9 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     let tags = renderTagsArray(`${systemPath}.system.tags`, options);
 
     let destroyed = sys.system.destroyed;
-    let destroyedText = "";
-    if (destroyed)
-    {
-        destroyedText = `
-            <span class="la-warn__span la-text-header la-bckg-repcap clipped horus--very--subtle la-locked -fontsize2">${getLocalized("LA.mech.system.destroyed.subLabel")}</span>
-        `;
-    }
+    let destroyedText = destroyed
+        ? renderDestroyed(getLocalized("LA.mech.system.destroyed.subLabel"))
+        : "";
 
     let slot = destroyed
         ? getLocalized("LA.mech.system.destroyed.label")
@@ -1259,16 +1255,15 @@ function renderHexArray(curr: number, max: number, path: string, classes?: strin
 }
 
 /*
-TODO: refactor when foundryvtt-lancer is updated to support frame trait and frame core deployables
-
 Need LIDs (to get the path to the actual item entry) and the item itself (to build a linkable ref to the actor when clicking on the deployable name)
 
 For systems, actors are got from the global actor list and filtered down and taking their LIDs;
-everything else is currently unsupported
 */
-function renderDeployableArray(item: any, options: HelperOptions)
+function renderDeployableArray(deployablePath: string, options: HelperOptions)
 {
-    if (item.actor.is_deployable() || item.actor.isToken)
+    let item = resolveHelperDotpath(options, deployablePath) as any;
+
+    if (!item.actor || item.actor.is_deployable() || item.actor.isToken)
         return "";
 
     let foundDeployables = game.actors!.filter(a => !!(a.is_deployable() && a.system.owner?.value == item.actor))
@@ -1354,6 +1349,15 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
     </div>
 </div>
     `;
+}
+
+function renderDestroyed(text: string, _options?: HelperOptions)
+{
+    return `
+<span class="la-warn__span la-text-header la-bckg-repcap clipped horus--very--subtle la-locked -fontsize2">
+    ${text}
+</span>
+    `
 }
 
 export function deleteActiveEffect(_app: any, html: JQuery<HTMLElement>, context: any)
