@@ -238,9 +238,11 @@
         visibility: hidden;
     }
 
-    animation: fadeOut 0.25s forwards;
-    -webkit-animation: fadeOut 0.25s forwards;
-    -moz-animation: fadeOut 0.25s forwards;
+    & {
+        animation: fadeOut 0.25s forwards;
+        -webkit-animation: fadeOut 0.25s forwards;
+        -moz-animation: fadeOut 0.25s forwards;
+    }
 
     @keyframes fadeOut
     {
@@ -289,9 +291,11 @@
         visibility: visible;
     }
 
-    animation: fadeIn 0.25s forwards;
-    -webkit-animation: fadeIn 0.25s forwards;
-    -moz-animation: fadeIn 0.25s forwards;
+    & {
+        animation: fadeIn 0.25s forwards;
+        -webkit-animation: fadeIn 0.25s forwards;
+        -moz-animation: fadeIn 0.25s forwards;
+    }
 
     @keyframes fadeIn
     {
@@ -391,7 +395,9 @@
 {
     @include hoverFadeOut;
 
-    display: inline;
+    & {
+        display: inline;
+    }
 }
 
 .la-root *:hover>.la-terminal,
@@ -417,9 +423,11 @@
     @include blinking;
     @include hoverFadeIn;
 
-    animation: fadeIn 0.25s, blink 1s step-end infinite;
-    -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
-    -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+    & {
+        animation: fadeIn 0.25s, blink 1s step-end infinite;
+        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+    }
 }
 
 .la-extension

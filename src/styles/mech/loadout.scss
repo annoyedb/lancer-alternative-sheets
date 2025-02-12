@@ -97,9 +97,11 @@
                     @include blinking;
                     @include hoverFadeIn;
                     
-                    animation: fadeIn 0.25s, blink 1s step-end infinite;
-                    -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
-                    -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                    & {
+                        animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                    }
                 }
             }
         }
