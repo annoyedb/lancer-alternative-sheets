@@ -11,11 +11,11 @@ export function renderActionArray(document: any, path: string, options?: HelperO
 })
 {
     let actions = resolveDotpath(document, path, []) as any[];
-    let out: string[] = [];
-    actions.forEach((_: any, index: number) =>
+    let out = actions.map((_: any, index: number) =>
     {
         let action = resolveDotpath(document, `${path}.${index}`, options);
-        if (!action) return;
+        console.log(action);
+        if (!action) return "";
 
         let defaultPlaceholder = getLocalized("LA.placeholder");
         let button = "";
@@ -50,8 +50,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
                     ${action.detail || defaultPlaceholder}
                 </div>
             `;
-        }
-        else
+        } else
         {
             detailText = `
                 <div class="-fontsize1 ${options?.full ? "" : "collapsed"}">
@@ -81,8 +80,8 @@ export function renderActionArray(document: any, path: string, options?: HelperO
                 <!-- LA: I have not been restyled -->
                 <div class="action-editor-wrapper -fontsize1">
                     <a class="gen-control" data-uuid="${document.uuid}" data-action="splice" data-path="${path}">
-                        <i class="fas fa-trash"></i><
-                    /a>
+                        <i class="fas fa-trash"></i>
+                    </a>
                     <a class="action-editor fas fa-edit" data-path="${path}"></a>
                 </div>
                 <!-- /LA: I have not been restyled -->
@@ -97,7 +96,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
             tags = compactTagListHBS("tags", spoofHelper({ tags: document.getTags()! }));
         }
 
-        out.push(`
+        return `
 <!-- Action Array -->
 <div class="la-effectbox la-bckg-card -descriptive -largeheader">
     <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped">
@@ -110,8 +109,8 @@ export function renderActionArray(document: any, path: string, options?: HelperO
     ${detailText}
     ${tags}
 </div>
-        `);
-    });
+        `;
+    }).filter(Boolean);
 
     return out.join("");
 }
@@ -132,9 +131,9 @@ export function renderActionButton(
     const activationClass = `activation-${slugify(activation, '-')}`;
     const themeClass = ACTIVATION_COLOR_MAP[activation] || "la-bckg-repcap";
     const interactiveClass = options?.nonInteractive ? "noninteractive" : "";
-    const label = flowData?.label 
-        ? `${flowData.label.toUpperCase()} - ${activation.toUpperCase()}` 
-        : `${!options?.nonInteractive ? getLocalized("LA.use.label")+" " : ""}${activation.toUpperCase()}`;
+    const label = flowData?.label
+        ? `${flowData.label.toUpperCase()} - ${activation.toUpperCase()}`
+        : `${!options?.nonInteractive ? getLocalized("LA.use.label") + " " : ""}${activation.toUpperCase()}`;
 
     if (flowData && flowData.uuid && flowData.path !== undefined)
     {
@@ -163,7 +162,7 @@ export function renderActionButton(
     }
 }
 
-export function renderTagsArray(tagsPath: string, options: HandlebarsHelpers & { editable?: boolean }) : string
+export function renderTagsArray(tagsPath: string, options: HandlebarsHelpers & { editable?: boolean }): string
 {
     let tagArray = getTagArray(tagsPath, options as any);
     let tags = "";
