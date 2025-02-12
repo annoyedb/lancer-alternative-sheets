@@ -15,7 +15,7 @@ export class LASMechSheetBase
     static get mergeOptions()
     {
         return {
-            classes: ["lancer", "sheet", "actor", "mech", "la-common"],
+            classes: ["lancer", "sheet", "actor", "mech", "la-common", "la-header__override"],
             template: TEMPLATE_PATHS.mechSheet,
             width: 900,
             height: 800,
@@ -118,8 +118,7 @@ function renderMechFrameEmpty(mech: any, options: HelperOptions)
     <div class="la-systemsheader-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.placeholder")} 
-        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span>
-        <span class="la-cursor la-anim-header -fadein"></span>
+        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
     <div class="-fontsize2">
         <i class="mdi mdi-battery-off-outline -fontsize2"></i>
@@ -167,8 +166,7 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
     <div class="la-systemsheader-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${frame.system.manufacturer.toUpperCase()} ${frame.name.toUpperCase()} 
-        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span>
-        <span class="la-cursor la-anim-header -fadein"></span>
+        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
 </h1>
 <div class="la-details-wrapper la-dropshadow ${getManufacturerColor(frame.system.manufacturer, "brdr")}
@@ -267,7 +265,7 @@ function renderFramePassive(frame: any)
             ${core.passive_name}
         </span>
         <div class="la-options la-combine-h">
-            <button class="chat-flow-button la-loadout-button -fontsize3" 
+            <button class="chat-flow-button -glow-header -glow-active-hover -fontsize3" 
                 data-type="passive" data-uuid="${frame.uuid}">
                 <i class="mdi mdi-message"></i>
             </button>
@@ -383,7 +381,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="chat-flow-button la-loadout-button -fontsize2">
+                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2">
                     <i class="mdi mdi-message"></i>
                 </button>
             </div>
@@ -559,28 +557,19 @@ function renderWeapon(
     {
         let profileArray: string[] = [];
         weapon.system.profiles.forEach((profile: any, index: number) => {
-            // let clipping = "";
-            // if (index === 0 && index === weapon.system.profiles.length - 1)
-            //     clipping = "clipped";
-            // else if (index === 0)
-            //     clipping = "clipped-top";
-            // else if (index === weapon.system.profiles.length - 1)
-            //     clipping = "clipped-bot";
-            // NOTE: unlocalized; incoming data does not have a good way of determing 'type'
-            // e.g. profile.name = "Charge 1", "Charge 2", etc.
             profileArray.push(`
                 <button type="button" 
-                    class="la-glowover-inv -height5
-                        gen-control ${index === weapon.system.selected_profile_index ? "la-glow la-bckg-secondary selected-profile -pointerdisable" : ""}"
+                    class="-glow-active-hover -height5
+                        gen-control ${index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
                     data-action="set" data-action-value="(int)${index}"
                     data-path="${weaponPath}.system.selected_profile_index">
-                    <span class="-padding1-lr -fontsize1 ${index === weapon.system.selected_profile_index ? "-bold la-glow" : ""}">${profile.name.toUpperCase()}</span>
+                    <span class="-padding1-lr -fontsize1 ${index === weapon.system.selected_profile_index ? "-glow-header -bold" : ""}">${profile.name.toUpperCase()}</span>
                 </button>
             `);
         });
         profiles = `
         <!-- Weapon Profile -->
-<div class="la-limited la-combine-h clipped la-bckg-pilot la-text-header -flex1">
+<div class="la-limited la-combine-h la-text-header la-bckg-pilot clipped -flex1">
     ${profileArray.join("")}
 </div>
         `;
@@ -648,7 +637,7 @@ function renderWeapon(
         <!-- Roll Attack, Name, Type -->
         <div class="la-left la-combine-h">
             <button type="button" 
-                class="roll-attack la-text-header la-loadout-button -fontsize6" draggable="true" ${destroyed ? "disabled" : ""}
+                class="roll-attack la-text-header -glow-header -glow-active-hover -fontsize6" draggable="true" ${destroyed ? "disabled" : ""}
                 data-tooltip="${getLocalized("LA.flow.rollAttack.tooltip")}">
                 <i class="cci cci-weapon ${destroyed ? "la-text-repcap" : ""}"></i>
             </button>
@@ -677,11 +666,11 @@ function renderWeapon(
             <!-- Options -->
             <div class="la-options la-combine-v">
                 <button type="button"
-                    class="chat-flow-button la-loadout-button -fontsize2" draggable="true">
+                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2" draggable="true">
                     <i class="mdi mdi-message"></i>
                 </button>
                 <button type="button"
-                    class="lancer-context-menu la-loadout-button -fontsize2" data-path="${weaponPath}">
+                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${weaponPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -812,7 +801,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="lancer-context-menu la-loadout-button -fontsize2" data-path="${modPath}">
+                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${modPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -857,8 +846,7 @@ export function renderSystemMountEmpty(loadout: string, options: HelperOptions)
     <div class="la-systemsheader-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.placeholder")} 
-        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span>
-        <span class="la-cursor la-anim-header -fadein"></span>
+        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
     <div class="-fontsize2">
         <i class="mdi mdi-battery-off-outline -fontsize2"></i>
@@ -906,8 +894,7 @@ export function renderSystemMounts(loadoutPath: string, options: HelperOptions)
     <div class="la-systemsheader-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.mech.system.label")} 
-        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span>
-        <span class="la-cursor la-anim-header -fadein"></span>
+        <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
     <div class="-fontsize2">
         <span>${loadout.sp.value} / ${loadout.sp.max}</span>
@@ -1000,11 +987,11 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
             <!-- Options -->
             <div class="la-options la-combine-v">
                 <button type="button"
-                    class="chat-flow-button la-loadout-button -fontsize2" draggable="true">
+                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2" draggable="true">
                     <i class="mdi mdi-message"></i>
                 </button>
                 <button type="button"
-                    class="lancer-context-menu la-loadout-button -fontsize2" data-path="${systemPath}">
+                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${systemPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -1223,7 +1210,7 @@ function renderHexArray(curr: number, max: number, path: string, classes?: strin
         const available = index + 1 <= curr;
         return `
 <!-- Hex Array -->
-<button class="la-hexarray__button la-loadout-button -fontsize5">
+<button class="la-hexarray__button -glow-header -glow-active-hover -fontsize5">
     <i class="${classes ?? ""} mdi ${available ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}" data-available="${available} -fontsizeinherit" 
         data-path="${path}">
     </i>

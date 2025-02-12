@@ -563,46 +563,6 @@
     }
 }
 
-// TODO: rename this to la-glowover
-.la-loadout-button
-{
-    filter: drop-shadow(0px 0px 1.5px var(--header));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-
-    &:hover
-    {
-        filter: drop-shadow(0px 0px 5px var(--active));
-        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
-        -moz-filter: drop-shadow(0px 0px 5px var(--active));
-    }
-}
-
-// TODO: doover both glowovers to only separate their hover thing
-.la-glowover-inv
-{
-    &:hover
-    {
-        filter: drop-shadow(0px 0px 5px var(--active));
-        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
-        -moz-filter: drop-shadow(0px 0px 5px var(--active));
-    }
-
-    &:active
-    {
-        filter: drop-shadow(0px 0px 1.5px var(--header));
-        -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-        -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-    }
-}
-
-.la-glow
-{
-    filter: drop-shadow(0px 0px 1.5px var(--header));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-}
-
 // Flow buttons
 .la-flow
 {
