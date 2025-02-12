@@ -12,7 +12,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
     if (!talents)
         return "";
 
-    let renderArray: string[] = talents.map((talent: any, _index: number) =>
+    let renderArray: string[] = talents.map((talent: any, index: number) =>
     {
         let ranks = renderTalentArray(talent, options);
         return `
@@ -34,7 +34,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="lancer-context-menu -glow-header -glow-primary-hover -fontsize2" data-path="${talentPath}">
+                    class="lancer-context-menu -glow-header -glow-primary-hover -fontsize2" data-path="${talentPath}.${index}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
