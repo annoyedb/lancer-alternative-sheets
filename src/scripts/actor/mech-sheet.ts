@@ -98,7 +98,7 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
     </div>
 </details>
         `;
-    }).filter(effect => effect !== "");
+    });
 
     return renderArray.join("");
 }
@@ -1280,8 +1280,9 @@ function renderDeployableArray(deployablePath: string, options: HelperOptions)
                 return `<span>Unresolved deployable LID "${lid}". Re-import + set yourself as its owner</span>`;
             }
         }
+
         return '';
-    }).filter(Boolean);
+    });
 
     return deployables.join("");
 }

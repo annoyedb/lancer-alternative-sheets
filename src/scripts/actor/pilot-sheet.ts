@@ -75,7 +75,9 @@ function renderTalentArray(talent: any, options: HelperOptions)
 {
     let collapse = resolveHelperDotpath(options, "collapse") as any;
 
-    let ranksArray: string[] = talent.system.ranks.map((rank: any, i: number) =>
+    let ranksArray: string[] = talent.system.ranks
+        .filter((_rank: any, i: number) => i < talent.system.curr_rank)
+        .map((rank: any, i: number) =>
     {
         let actions = "";
         if (rank.actions)
