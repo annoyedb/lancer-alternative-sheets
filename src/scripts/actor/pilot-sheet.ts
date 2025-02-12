@@ -34,7 +34,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="lancer-context-menu la-loadout-button -fontsize2" data-path="${talentPath}">
+                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${talentPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -104,7 +104,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="chat-flow-button la-loadout-button -fontsize2"
+                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2"
                 data-uuid="${talent.uuid}"
                 data-rank="${i}">
                     <i class="mdi mdi-message"></i>

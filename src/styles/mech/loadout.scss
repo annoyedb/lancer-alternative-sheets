@@ -1,5 +1,5 @@
 @use '../la-shared' as *;
-
+// TODO: rip any generated content styles out
 .la-loadout.la-tab
 {
     filter: drop-shadow(-3px 3px 1px var(--shadow));
@@ -325,11 +325,16 @@
                 padding: 1rem;
             }
 
-            // Loading, Limited, etc
+            // Loading, Limited
             .la-hexarray
             {
                 padding-left: 0.5rem;
                 padding-right: 0.5rem;
+                gap: 0.25rem;
+            }
+
+            .la-weaponprofile
+            {
                 gap: 0.25rem;
             }
                 

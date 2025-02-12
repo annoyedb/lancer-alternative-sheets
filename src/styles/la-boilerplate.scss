@@ -1,6 +1,16 @@
 // Overrides for Foundry and Lancer
+.la-header__override
+{
+    >.window-header
+    {
+        // If a way to hook into foundryvtt-lancer's settings menu is found, 
+        // this can be replaced to set the window-header via TS
+        background-color: var(--primary-color); // Pray that the original sheet's primary color theme is the same
+        border-bottom: unset;
+    }
+}
 
-.window-content:has(> .la-root)
+.window-content:has(>.la-root)
 {
     padding: inherit;
     overflow: hidden;
@@ -9,11 +19,14 @@
 .lancer.sheet header:not(.window-header).la-header
 {
     margin: unset;
+    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
     background-color: var(--primary); // Since this is above the actual sheets, it needs to be hard coded here
 }
 
 .lancer.sheet body:not(.window-body).la-body
 {
+    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
+    // TODO: does not cover the content body for some reason
     background-color: var(--background);
 }
 
@@ -126,6 +139,28 @@
         font-size: unset;
         color: unset;
     }
+}
+
+.-pointerdisable
+{
+    pointer-events: none;
+}
+
+.-bold
+{
+    font-weight: bold;
+}
+
+.-padding0-lr
+{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.-padding1-lr
+{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .-fullwidth
@@ -241,6 +276,41 @@
 .-height10
 {
     height: 4rem;
+}
+
+
+.-glow-header
+{
+    filter: drop-shadow(0px 0px 1.5px var(--header));
+    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+}
+
+.-glow-active-hover
+{
+    &:hover
+    {
+        filter: drop-shadow(0px 0px 5px var(--active));
+        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
+        -moz-filter: drop-shadow(0px 0px 5px var(--active));
+    }
+}
+
+.-glow-header-active
+{
+    &:active
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--header));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+    }
+}
+
+.-glow-header
+{
+    filter: drop-shadow(0px 0px 1.5px var(--header));
+    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
 }
 
 // TODO: probably generate these in the mixin

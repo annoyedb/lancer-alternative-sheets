@@ -571,20 +571,6 @@
     }
 }
 
-.la-loadout-button
-{
-    filter: drop-shadow(0px 0px 1.5px var(--header));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-
-    &:hover
-    {
-        filter: drop-shadow(0px 0px 5px var(--active));
-        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
-        -moz-filter: drop-shadow(0px 0px 5px var(--active));
-    }
-}
-
 // Flow buttons
 .la-flow
 {
