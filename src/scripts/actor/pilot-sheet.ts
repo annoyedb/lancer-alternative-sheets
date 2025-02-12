@@ -9,13 +9,13 @@ export function renderTalents(talentPath: string, options: HelperOptions)
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let mech = resolveHelperDotpath(options, "actor") as any;
     let talents = resolveHelperDotpath(options, talentPath) as any;
-    if (!talents) 
+    if (!talents)
         return "";
 
-    let renderArray: string[] = [];
-    talents.forEach((talent: any, _index: number) => {
+    let renderArray: string[] = talents.map((talent: any, _index: number) =>
+    {
         let ranks = renderTalentArray(talent, options);
-        renderArray.push(`
+        return `
 <!-- Talent -->
 <div class="la-details -fullwidth -talent
     ref set"
@@ -49,7 +49,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
         </div>
     </div>
 </div>
-        `);
+        `;
     });
 
     let collID = `${mech.uuid}_talents`;
@@ -75,17 +75,16 @@ function renderTalentArray(talent: any, options: HelperOptions)
 {
     let collapse = resolveHelperDotpath(options, "collapse") as any;
 
-    let ranksArray: string[] = [];
-    for (let i = 0; i < talent.system.curr_rank; i++)
+    let ranksArray: string[] = talent.system.ranks.map((rank: any, i: number) =>
     {
         let actions = "";
-        if (talent.system.ranks[i].actions)
+        if (rank.actions)
         {
-            actions = renderActionArray(talent, `system.ranks${i}.actions`)
+            actions = renderActionArray(talent, `system.ranks${i}.actions`);
         }
 
         let collID = `${talent.uuid}_${i}`;
-        ranksArray.push(`
+        return `
 <!-- Talent Rank -->
 <div class="la-details -fullwidth -talent
     ref set"
@@ -97,7 +96,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
         <!-- Icon, Name -->
         <div class="la-left la-combine-h">
             <i class="la-icon cci cci-rank-${i + 1} -fontsize3"></i>
-            <span class="la-name__span -fontsize2">${talent.system.ranks[i]?.name}</span>
+            <span class="la-name__span -fontsize2">${rank?.name}</span>
         </div>
         <!-- Options -->
         <div class="la-right la-combine-h">
@@ -119,19 +118,19 @@ function renderTalentArray(talent: any, options: HelperOptions)
             <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                 ${getLocalized("LA.pilot.trait.label")}
             </span>
-            ${talent.system.ranks[i]?.description}
+            ${rank?.description}
         </span>
         <div class="la-generated -fullwidth -gap1 la-combine-v">
             <!-- Generated Content -->
-            ${actions 
-                ? `<div class="la-spacer -medium">&nbsp</div>${actions}` 
+            ${actions
+                ? `<div class="la-spacer -medium">&nbsp</div>${actions}`
                 : ""
             }
         </div>
     </div>
 </div>
-        `);
-    }
+        `;
+    });
 
     return ranksArray.join("");
 }

@@ -149,7 +149,7 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
     if (!frame)
         return renderMechFrameEmpty(mech, options);
 
-    let traits = frame.system.traits.map((_trait: any, index: number) =>
+    let traits: string[] = frame.system.traits.map((_trait: any, index: number) =>
         renderFrameTrait(`system.traits.${index}`, options)
     );
 
@@ -230,7 +230,7 @@ function renderFramePassive(framePath: string, options: HelperOptions)
     let core = frame.system.core_system;
     if (core.passive_effect === "" && core.passive_actions.length === 0 && core.passive_bonuses.length === 0)
         return "";
-    
+
     let theme = getManufacturerColor(frame.system.manufacturer, "bckg");
 
     let actions = "";
@@ -311,7 +311,7 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
     {
         deployables = renderDeployableArray(framePath, options);
     }
-    
+
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let collID = `${frame.uuid}_active`;
     return `
@@ -774,7 +774,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     let tags = mod.system.tags.length ? renderTagsArray(`${modPath}.system.tags`, options) : "";
 
     let limited = mod.system.tags.some((t: { is_limited: any; }) => t.is_limited) ? renderLimited(mod, modPath) : "";
-    
+
     let resources = "";
     if (limited)
     {
@@ -1301,7 +1301,7 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
         { label: "RECALL", action: deployable.system.recall },
         { label: "REDEPLOY", action: deployable.system.redeploy },
     ].filter(a => !!a.action);
-    let buttons = standardActions.map(a =>
+    let buttons: string[] = standardActions.map(a =>
         renderActionButton(
             a.action,
             { label: a.label, uuid: deployable.uuid, path: source?.path },
