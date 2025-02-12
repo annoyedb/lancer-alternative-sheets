@@ -43,6 +43,11 @@ export function overchargeStage(actor: any, overchargePath: string, options: Hel
     return sequence[index];
 }
 
+export function getTagArray(tagsPath: string, options: HelperOptions)
+{
+    return options.hash["tags"] ?? resolveHelperDotpath(options, tagsPath) ?? [];
+}
+
 export function randomExtension(): string
 {
     const extensions = [".exe", ".bat", ".cmd", ".sh", ".bash", ".zsh", ".ksh", ".csh"];

@@ -1,12 +1,13 @@
 // TODO: abstract out these render functions once there's more than one sheet
+// TODO: look into moving to svelte; or just something that lets you reuse 
+// html components without too much back and forth between files
 import { HelperOptions } from "handlebars";
 import { TEMPLATE_PATHS } from "../loader";
 import { getBrightness, getManufacturerColor } from '../theme';
 import { resolveDotpath, resolveHelperDotpath } from '../lancer/helpers/common';
-import { compactTagList, compactTagListHBS } from "../lancer/helpers/tags";
 import { getLocalized, randomExtension } from "../helpers";
 import { slugify } from "../lancer/util/lid";
-import { renderActionArray, renderActionButton } from "../item";
+import { renderActionArray, renderActionButton, renderTagsArray } from '../item';
 import { ACTIVATION_COLOR_MAP, SYSTEM_ICON_MAP } from "../constants";
 import { collapseID } from "../lancer/helpers/collapse";
 
@@ -66,16 +67,14 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
         return "";
 
     let theme = getBrightness();
-    let renderArray: string[] = [];
-    effects.forEach((effect: any, index: number) =>
+    let renderArray: string[] = effects.map((effect: any, index: number) =>
     {
-        if (!effect.isTemporary)
-            return;
+        if (!effect.isTemporary) return "";
 
-        let icon = effect.icon 
-            ? (theme === "dark" ? effect.icon : effect.icon.replace('/white/', '/')) 
+        let icon = effect.icon
+            ? (theme === "dark" ? effect.icon : effect.icon.replace('/white/', '/'))
             : (theme === "dark" ? "systems/lancer/assets/icons/white/difficulty.svg" : "systems/lancer/assets/icons/difficulty.svg");
-        renderArray.push(`
+        return `
 <!-- Active Effect -->
 <details class="la-details -fullwidth la-combine-v -effect">
     <summary class="la-details__summary clipped-bot-alt la-bckg-warning la-text-header-anti -fontsize1">
@@ -98,8 +97,8 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
         </span>
     </div>
 </details>
-        `);
-    });
+        `;
+    }).filter(effect => effect !== "");
 
     return renderArray.join("");
 }
@@ -150,7 +149,7 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
     if (!frame)
         return renderMechFrameEmpty(mech, options);
 
-    let traits = frame.system.traits.map((_trait: any, index: number) => 
+    let traits = frame.system.traits.map((_trait: any, index: number) =>
         renderFrameTrait(`system.traits.${index}`, options)
     );
 
@@ -190,7 +189,7 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
 function renderFramePower(framePath: string, coreEnergy: number, options: HelperOptions)
 {
     let frame = resolveHelperDotpath(options, framePath) as any;
-    let tags = compactTagListHBS(`${framePath}.core_system.tags`, options);
+    let tags = renderTagsArray(`${framePath}.core_system.tags`, options);
 
     let core = frame.system.core_system;
 
@@ -234,7 +233,7 @@ function renderFramePassive(frame: any)
 {
     let core = frame.system.core_system;
     let theme = getManufacturerColor(frame.system.manufacturer, "bckg");
-    
+
     let actions = "";
     if (core.passive_actions.length)
     {
@@ -265,7 +264,7 @@ function renderFramePassive(frame: any)
             ${core.passive_name}
         </span>
         <div class="la-options la-combine-h">
-            <button class="chat-flow-button -glow-header -glow-active-hover -fontsize3" 
+            <button class="chat-flow-button -glow-header -glow-primary-hover -fontsize3" 
                 data-type="passive" data-uuid="${frame.uuid}">
                 <i class="mdi mdi-message"></i>
             </button>
@@ -359,7 +358,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
     // {
     //     deployables = renderDeployableArray
     // }
-    
+
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let collID = `${frame.uuid}_frame_trait_${index}`;
     return `
@@ -381,7 +380,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2">
+                    class="chat-flow-button -glow-header -glow-primary-hover -fontsize2">
                     <i class="mdi mdi-message"></i>
                 </button>
             </div>
@@ -390,12 +389,14 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
-        <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
-            ${trait.description}
-        </span>
-        <!-- Generated Content -->
-        ${actions}
-        <!-- Generated Tags -->
+        <div class="la-generated la-combine-v">
+            <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
+                ${trait.description}
+            </span>
+            <!-- Generated Content -->
+            ${actions}
+            <!-- Generated Tags -->
+        </div>
     </div>
 </div>
     `;
@@ -440,14 +441,12 @@ export function renderWeaponMounts(loadoutPath: string, options: HelperOptions)
     let mech = resolveHelperDotpath(options, "actor") as any;
     let loadout = resolveHelperDotpath(options, loadoutPath) as any;
 
-    let renderArray: string[] = [];
-    loadout.weapon_mounts.forEach((mount: { type: string, bracing: boolean, slots: any }, mountIndex: number) =>
+    let renderArray: string[] = loadout.weapon_mounts.map((mount: { type: string, bracing: boolean, slots: any }, mountIndex: number) =>
     {
         if (mount.bracing)
         {
-            renderArray.push(renderWeaponMountBracing(mech, mount, options));
-        }
-        else
+            return renderWeaponMountBracing(mech, mount, options);
+        } else
         {
             let slots = mount.slots.map((slot: { size: string; }, slotIndex: any) =>
             {
@@ -476,7 +475,7 @@ export function renderWeaponMounts(loadoutPath: string, options: HelperOptions)
 
             let collapse = resolveHelperDotpath(options, "collapse") as any;
             let collID = `${mech.id}_${mount.type}`;
-            renderArray.push(`
+            return `
 <!-- Weapon Mount -->
 <h1 class="la-subcontent la-bckg-primary la-text-header clipped-top -fontsize2
         collapse-trigger"
@@ -491,7 +490,7 @@ export function renderWeaponMounts(loadoutPath: string, options: HelperOptions)
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
     ${slots.join("")}
 </div>
-            `);
+            `;
         }
     });
 
@@ -502,8 +501,8 @@ function renderWeaponEmpty(weaponPath: string, size: string, options: HelperOpti
 {
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let weapon = resolveHelperDotpath(options, weaponPath) as any;
-    const slotSize = size === "Flex" 
-        ? `${getLocalized(slotLocalizeMap['Main'])} || ${getLocalized(slotLocalizeMap['Auxiliary'])}` 
+    const slotSize = size === "Flex"
+        ? `${getLocalized(slotLocalizeMap['Main'])} || ${getLocalized(slotLocalizeMap['Auxiliary'])}`
         : getLocalized(slotLocalizeMap[size]) || "any";
     // Basically identical to bracing
     return `
@@ -550,22 +549,22 @@ function renderWeapon(
             <span class="la-warn__span la-text-header la-bckg-repcap clipped horus--very--subtle la-locked -fontsize2">${getLocalized("LA.mech.slot.destroyed.subLabel")}</span>
         `;
     }
-    
+
     // Profile (Weapon Charge Level)
     let profiles = "";
     if (weapon.system.profiles.length > 1)
     {
-        let profileArray: string[] = [];
-        weapon.system.profiles.forEach((profile: any, index: number) => {
-            profileArray.push(`
-                <button type="button" 
-                    class="-glow-active-hover -height5
-                        gen-control ${index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
-                    data-action="set" data-action-value="(int)${index}"
-                    data-path="${weaponPath}.system.selected_profile_index">
-                    <span class="-padding1-lr -fontsize1 ${index === weapon.system.selected_profile_index ? "-glow-header -bold" : ""}">${profile.name.toUpperCase()}</span>
-                </button>
-            `);
+        let profileArray = weapon.system.profiles.map((profile: any, index: number) =>
+        {
+            return `
+            <button type="button" 
+                class="-glow-primary-hover -height5
+                gen-control ${index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
+                data-action="set" data-action-value="(int)${index}"
+                data-path="${weaponPath}.system.selected_profile_index">
+                <span class="-padding1-lr -fontsize1 ${index === weapon.system.selected_profile_index ? "-glow-header -bold" : ""}">${profile.name.toUpperCase()}</span>
+            </button>
+            `;
         });
         profiles = `
         <!-- Weapon Profile -->
@@ -573,13 +572,6 @@ function renderWeapon(
     ${profileArray.join("")}
 </div>
         `;
-    }
-    
-    // Loading
-    let loading = "";
-    if (weapon.system.all_tags.some((t: { is_loading: boolean; }) => t.is_loading))
-    {
-        loading = renderLoading(weapon, weaponPath);
     }
 
     // Effects
@@ -602,6 +594,13 @@ function renderWeapon(
         actions += renderActionArray(weapon, `system.profiles.${weapon.system.selected_profile_index}.actions`)
     }
 
+    // Loading
+    let loading = "";
+    if (weapon.system.all_tags.some((t: { is_loading: boolean; }) => t.is_loading))
+    {
+        loading = renderLoading(weapon, weaponPath);
+    }
+
     let limited = "";
     if (weapon.isLimited())
     {
@@ -612,16 +611,32 @@ function renderWeapon(
     if (weapon.system.sp)
     {
         systemPoints = `
-            <div class="la-systempoints la-combine-h">
-                <span class="la-systempoints__span">${weapon.system.sp}</span>
+            <div class="la-loading la-hexarray la-combine-h clipped-alt la-bckg-pilot la-text-header -flex1 -fontsize5">
+                <span class="la-hexarray__span -fontsize4">${weapon.system.sp}</span>
                 <i class="cci cci-system-point"></i>
             </div>
         `;
     }
 
-    let slot = destroyed 
+    let resources = "";
+    if (limited || loading || systemPoints)
+    {
+        resources = `
+            <div class="la-resource la-combine-h -fullwidth">
+                ${loading}
+                ${limited}
+                ${systemPoints}
+            </div>
+        `;
+    }
+
+    let tagsPath = `${weaponPath}.system.profiles.${weapon.system.selected_profile_index}.all_tags`;
+    let tags = renderTagsArray(tagsPath, options);
+
+    let slot = destroyed
         ? getLocalized("LA.mech.slot.destroyed.label")
         : `${weapon.system.size.toUpperCase()} ${activeProfile.type.toUpperCase()}` || getLocalized("LA.placeholder");
+
     return `
 <!-- Weapon -->
 <div 
@@ -637,7 +652,7 @@ function renderWeapon(
         <!-- Roll Attack, Name, Type -->
         <div class="la-left la-combine-h">
             <button type="button" 
-                class="roll-attack la-text-header -glow-header -glow-active-hover -fontsize6" draggable="true" ${destroyed ? "disabled" : ""}
+                class="roll-attack la-text-header -glow-header -glow-primary-hover -fontsize6" draggable="true" ${destroyed ? "disabled" : ""}
                 data-tooltip="${getLocalized("LA.flow.rollAttack.tooltip")}">
                 <i class="cci cci-weapon ${destroyed ? "la-text-repcap" : ""}"></i>
             </button>
@@ -666,11 +681,11 @@ function renderWeapon(
             <!-- Options -->
             <div class="la-options la-combine-v">
                 <button type="button"
-                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2" draggable="true">
+                    class="chat-flow-button -glow-header -glow-primary-hover -fontsize2" draggable="true">
                     <i class="mdi mdi-message"></i>
                 </button>
                 <button type="button"
-                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${weaponPath}">
+                    class="lancer-context-menu -glow-header -glow-primary-hover -fontsize2" data-path="${weaponPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -682,12 +697,8 @@ function renderWeapon(
         <div class="la-generated la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
-            ${systemPoints}
             ${profiles}
-            <div class="la-resource la-combine-h -fullwidth">
-                ${loading}
-                ${limited}
-            </div>
+            ${resources}
             ${effect}
             ${onAttack}
             ${onHit}
@@ -696,7 +707,7 @@ function renderWeapon(
             ${weaponMod}
         </div>
         <!-- Generated Tags -->
-        ${compactTagListHBS(`${weaponPath}.system.profiles.${weapon.system.selected_profile_index}.all_tags`, options)}
+        ${tags}
     </div>
 </div>
     `;
@@ -706,7 +717,7 @@ function renderWeaponModEmpty(modPath: string, options: HelperOptions)
 {
     let mod = resolveHelperDotpath(options, modPath) as any;
     let collapse = resolveHelperDotpath(options, "collapse") as any;
-    
+
     return `
 <!-- Empty Weapon Mod -->
 <div 
@@ -741,10 +752,21 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     }
 
     // Limited, Effect Box, Bonuses, Tags
-    let limited = mod.system.tags.some((t: { is_limited: any; }) => t.is_limited) ? renderLimited(mod, modPath) : "";
     let effect = mod.system.effect ? renderEffectBox(getLocalized("LA.mech.mod.effect.label"), mod.system.effect, { flow: true }) : "";
     let bonuses = mod.system.bonuses.length > 0 ? renderBonuses(`${modPath}.system.bonuses`, false, options) : "";
-    let tags = mod.system.tags.length ? compactTagListHBS(`${modPath}.system.tags`, options) : "";
+    let tags = mod.system.tags.length ? renderTagsArray(`${modPath}.system.tags`, options) : "";
+
+    let limited = mod.system.tags.some((t: { is_limited: any; }) => t.is_limited) ? renderLimited(mod, modPath) : "";
+    
+    let resources = "";
+    if (limited)
+    {
+        resources = `
+            <div class="la-resource la-combine-h -fullwidth">
+                ${limited}
+            </div>
+        `;
+    }
 
     // Added Range
     let addedRange = "";
@@ -758,15 +780,26 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     let addedDamage = "";
     if (mod.system.added_damage.length)
     {
-        let damageArray = renderDamageArray(mod.system.added_damage);   
+        let damageArray = renderDamageArray(mod.system.added_damage);
         addedDamage = renderAddedDamage(damageArray, options);
+    }
+
+    let modifiers = "";
+    if (addedDamage || addedRange)
+    {
+        modifiers = `
+            <div class="la-resource la-combine-h -fullwidth">
+                ${addedRange}
+                ${addedDamage}
+            </div>
+        `
     }
 
     // Added Tags
     let addedTags = ""
     if (mod.system.added_tags.length)
     {
-        let tagArray = compactTagListHBS(`${modPath}.system.added_tags`, options);
+        let tagArray = renderTagsArray(`${modPath}.system.added_tags`, options);
         addedTags = renderAddedTags(tagArray, options);
     }
 
@@ -801,7 +834,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
             <span class="la-divider-v la-bckg-header">&nbsp;</span>
             <div class="la-options la-combine-h">
                 <button type="button"
-                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${modPath}">
+                    class="lancer-context-menu -glow-header -glow-primary-hover -fontsize2" data-path="${modPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -812,13 +845,8 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
         data-la-collapse-id="${collapseID(collapse, mod, true)}">
         <div class="la-generated la-combine-v">
             <!-- Generated Content -->
-            <div class="la-resource la-combine-h -fullwidth">
-                ${limited}
-            </div>
-            <div class="la-resource la-combine-h -fullwidth">
-                ${addedRange}
-                ${addedDamage}
-            </div>
+            ${resources}
+            ${modifiers}
             ${effect}
             ${bonuses}
             ${actions}
@@ -875,7 +903,7 @@ export function renderSystemMounts(loadoutPath: string, options: HelperOptions)
     let loadout = resolveHelperDotpath(options, loadoutPath) as any;
     if (!loadout.systems.length)
         return renderSystemMountEmpty(loadoutPath, options);
-    
+
     let slots = loadout.systems.map((_system: any, index: number) => 
     {
         let systemPath = `${loadoutPath}.systems.${index}.value`;
@@ -912,11 +940,11 @@ export function renderSystemMounts(loadoutPath: string, options: HelperOptions)
 function renderSystem(systemPath: string, options: HelperOptions & { nonInteractive?: boolean })
 {
     let sys = resolveHelperDotpath(options, systemPath) as any;
-    if (!sys) 
+    if (!sys)
         return;
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let icon = SYSTEM_ICON_MAP[sys.system.type] || "cci-system";
-    
+
     let effect = ""
     if (sys.system.effect)
     {
@@ -941,6 +969,18 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
         limited = renderLimited(sys, systemPath, options);
     }
 
+    let resources = ""
+    if (limited)
+    {
+        resources = `
+            <div class="la-resource la-combine-h -fullwidth">
+                ${limited}
+            </div>
+        `;
+    }
+
+    let tags = renderTagsArray(`${systemPath}.system.tags`, options);
+
     let destroyed = sys.system.destroyed;
     let destroyedText = "";
     if (destroyed)
@@ -949,8 +989,8 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
             <span class="la-warn__span la-text-header la-bckg-repcap clipped horus--very--subtle la-locked -fontsize2">${getLocalized("LA.mech.system.destroyed.subLabel")}</span>
         `;
     }
-    
-    let slot = destroyed 
+
+    let slot = destroyed
         ? getLocalized("LA.mech.system.destroyed.label")
         : getLocalized(systemLocalizeMap[sys.system.type]) || getLocalized("LA.mech.system.system.label");
     return `
@@ -987,11 +1027,11 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
             <!-- Options -->
             <div class="la-options la-combine-v">
                 <button type="button"
-                    class="chat-flow-button -glow-header -glow-active-hover -fontsize2" draggable="true">
+                    class="chat-flow-button -glow-header -glow-primary-hover -fontsize2" draggable="true">
                     <i class="mdi mdi-message"></i>
                 </button>
                 <button type="button"
-                    class="lancer-context-menu -glow-header -glow-active-hover -fontsize2" data-path="${systemPath}">
+                    class="lancer-context-menu -glow-header -glow-primary-hover -fontsize2" data-path="${systemPath}">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
             </div>
@@ -1003,17 +1043,13 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
         <div class="la-generated la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
-            <div class="la-resource la-combine-h -fullwidth">
-                ${limited}
-            </div>
+            ${resources}
             ${effect}
             ${actions}
             ${deployables}
         </div>
         <!-- Generated Tags -->
-        ${compactTagList(sys.system.tags, `${systemPath}.system.tags`, {
-            editable: !(options?.nonInteractive ?? false),
-        })}
+        ${tags}
     </div>
 </div>
     `;
@@ -1024,12 +1060,12 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
 function renderAddedDamage(damageArray: string, options: HelperOptions & { rollable?: boolean })
 {
     let classes = options.hash["classes"] || "";
-    
+
     if (options.rollable)
     {
         return `
 <!-- Added Damage Rollable -->
-<div class="la-effectbox la-bckg-card la-combine-h">
+<div class="la-effectbox la-bckg-card la-combine-h -allround">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
         ${getLocalized("LA.mech.mod.damage.label")}
     </span>
@@ -1040,33 +1076,27 @@ function renderAddedDamage(damageArray: string, options: HelperOptions & { rolla
 </div>
         `;
     }
-    else
-    {
-        return `
+
+    return `
 <!-- Added Damage -->
-<div class="la-effectbox la-bckg-card la-combine-h">
+<div class="la-effectbox la-bckg-card la-combine-h -allround">
     <div class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">${getLocalized("LA.mech.mod.damage.label")}</div>
     <div class="la-combine-h -fontsize3 ${classes}">${damageArray}</div>
 </div>
-        `;
-    }
+    `;
 }
 
 function renderDamageArray(array: any[])
 {
-    let out: string[] = [];
-    array.forEach((d: any) =>
-    {
-        out.push(`
-            <span class="la-number__span">${d.val}</span>
-            <i class="cci ${d.icon} -glow-${d.type.toLowerCase()}"></i>
-        `);
-    });
+    let renderArray = array.map((d: any) => `
+        <span class="la-number__span">${d.val}</span>
+        <i class="cci ${d.icon} -glow-${d.type.toLowerCase()}"></i>
+    `);
 
     return `
         <!-- Damage Array -->
         <span class="la-damage la-combine-h la-">
-            ${out.join("")}
+            ${renderArray.join("")}
         </span>
     `;
 }
@@ -1076,7 +1106,7 @@ function renderAddedRange(rangeArray: string, options: HelperOptions)
     let classes = options.hash["classes"] || "";
     return `
 <!-- Added Range -->
-<div class="la-effectbox la-bckg-card la-combine-h">
+<div class="la-effectbox la-bckg-card la-combine-h -allround">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">${getLocalized("LA.mech.mod.range.label")}</span>
     <div class="la-combine-h -fontsize3 ${classes}">${rangeArray}</div>
 </div>
@@ -1085,19 +1115,15 @@ function renderAddedRange(rangeArray: string, options: HelperOptions)
 
 function renderRangeArray(array: any[])
 {
-    let out: string[] = [];
-    array.forEach((r: any) =>
-    {
-        out.push(`
-            <span class="la-number__span">${r.val}</span>
-            <i class="cci ${r.icon}"></i>
-        `);
-    });
+    let renderArray = array.map((r: any) => `
+        <span class="la-number__span">${r.val}</span>
+        <i class="cci ${r.icon}"></i>
+    `);
 
     return `
         <!-- Range Array -->
         <span class="la-range la-combine-h">
-            ${out.join("")}
+            ${renderArray.join("")}
         </span>
     `;
 }
@@ -1132,15 +1158,11 @@ function renderBonuses(bonusPath: string, edit: boolean, options: HelperOptions)
     let bonuses = resolveHelperDotpath(options, bonusPath) as any[];
 
     let renderArray: string[] = [];
-    bonuses.forEach((bonus: any, index: number) => {
-        renderArray.push(`
-            <!-- LA: I have not been restyled -->
-            <div class="bonus ${edit ? "editable" : ""}" data-path="${bonusPath}.${index}">
-                ${renderEffectBox(bonus.lid, bonus.val)}
-            </div>
-            <!-- /LA: I have not been restyled -->
-        `);
-    });
+    renderArray = bonuses.map((bonus: any, index: number) => `
+        <div class="${edit ? "editable" : ""}" data-path="${bonusPath}.${index}">
+            ${renderEffectBox(bonus.lid, bonus.val)}
+        </div>
+    `);
 
     return `
 <!-- LA: I have not been restyled -->
@@ -1168,12 +1190,12 @@ function renderAddedTags(tagList: string, _options: HelperOptions)
     `;
 }
 
-function renderLoading(item: any, path: string, options?: { nonInteractive?: boolean})
+function renderLoading(item: any, path: string, options?: { nonInteractive?: boolean })
 {
     if (!(
         item.type === "mech_weapon" ||
         item.type === "pilot_weapon" ||
-        (item.type === "npc_feature" && item.system.type === "Weapon") 
+        (item.type === "npc_feature" && item.system.type === "Weapon")
     ))
         return "";
 
@@ -1189,7 +1211,7 @@ function renderLoading(item: any, path: string, options?: { nonInteractive?: boo
     `;
 }
 
-function renderLimited(item: any, path: string, options?: { nonInteractive?: boolean})
+function renderLimited(item: any, path: string, options?: { nonInteractive?: boolean })
 {
     let uses = item.system.uses;
     let nonInteractive = options?.nonInteractive ? "non-interactive" : "";
@@ -1210,8 +1232,8 @@ function renderHexArray(curr: number, max: number, path: string, classes?: strin
         const available = index + 1 <= curr;
         return `
 <!-- Hex Array -->
-<button class="la-hexarray__button -glow-header -glow-active-hover -fontsize5">
-    <i class="${classes ?? ""} mdi ${available ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}" data-available="${available} -fontsizeinherit" 
+<button class="la-hexarray__button -glow-header -glow-primary-hover -fontsize5">
+    <i class="${classes ?? ""} mdi ${available ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}" data-available="${available}" 
         data-path="${path}">
     </i>
 </button>
@@ -1229,7 +1251,7 @@ everything else is currently unsupported
 */
 function renderDeployableArray(item: any, options: HelperOptions)
 {
-    if (item.actor.is_deployable() || item.actor.isToken) 
+    if (item.actor.is_deployable() || item.actor.isToken)
         return "";
 
     let foundDeployables = game.actors!.filter(a => !!(a.is_deployable() && a.system.owner?.value == item.actor))
@@ -1252,8 +1274,8 @@ function renderDeployableArray(item: any, options: HelperOptions)
     return deployables.join("");
 }
 
-function renderDeployable(deployable: StoredDocument<any>, source: { item: any, path: string } | null, options: HelperOptions & 
-    { nonInteractive?: boolean, vertical?: boolean })
+function renderDeployable(deployable: StoredDocument<any>, source: { item: any, path: string } | null, options: HelperOptions &
+{ nonInteractive?: boolean, vertical?: boolean })
 {
 
     let theme = getBrightness();
@@ -1267,14 +1289,14 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
         { label: "RECALL", action: deployable.system.recall },
         { label: "REDEPLOY", action: deployable.system.redeploy },
     ].filter(a => !!a.action);
-    let buttons = standardActions.map(a => 
+    let buttons = standardActions.map(a =>
         renderActionButton(
-            a.action, 
-            { label: a.label, uuid: deployable.uuid, path: source?.path }, 
+            a.action,
+            { label: a.label, uuid: deployable.uuid, path: source?.path },
             options as any
         )
     );
-    let buttonDisplay = buttons.length > 1 
+    let buttonDisplay = buttons.length > 1
         ? `
         <div class="la-effectbox-buttons la-combine-h -justify-between">
             <div class="la-combine-v -align-left">${buttons.join("")}</div>
@@ -1287,15 +1309,15 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
     let actions = "";
     if (deployable.system.actions.length)
     {
-        actions = deployable.system.actions.map((_action: any, _index: number) => 
+        actions = deployable.system.actions.map((_action: any, _index: number) =>
             renderActionArray(
-                deployable, 
-                `system.actions`, 
+                deployable,
+                `system.actions`,
                 { full: true, nonInteractive: options?.nonInteractive } as any
             )
         );
     }
-    
+
     return `
 <!-- Deployable -->
 <div class="la-effectbox la-bckg-card -descriptive
@@ -1305,11 +1327,11 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
         click-open">
         ${deployable.name ? deployable.name.toUpperCase() : ""}
     </span>
-    <div class="-fontsize1">
-        ${buttonDisplay}
-        ${deployable.system.detail}
-    </div>
     <div class="la-generated la-combine-v">
+        <div class="-fontsize1">
+            ${buttonDisplay}
+            ${deployable.system.detail}
+        </div>
         <!-- Generated Content -->
         ${actions}
     </div>

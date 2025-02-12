@@ -1,7 +1,7 @@
 import { HelperOptions } from "handlebars";
 import { resolveDotpath, spoofHelper } from "./lancer/helpers/common";
-import { getLocalized, randomExtension } from "./helpers";
-import { compactTagListHBS } from "./lancer/helpers/tags";
+import { getLocalized, getTagArray, randomExtension } from "./helpers";
+import { compactTagList, compactTagListHBS } from "./lancer/helpers/tags";
 import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP } from "./constants";
 import { slugify } from "./lancer/util/lid";
 
@@ -57,7 +57,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
                 <div class="-fontsize1 ${options?.full ? "" : "collapsed"}">
                     <div class="la-divider-h la-bckg-primary"></div>
                     <!-- Trigger -->
-                    <div class="la-effectbox la-combine-v -align-left -descriptive">
+                    <div class="la-effectbox la-combine-v -borderbottom -align-left -descriptive">
                         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">${getLocalized("LA.trigger.label")}</span>
                         ${button}
                         <div class="la-spacer -medium">&nbsp</div>
@@ -99,8 +99,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
 
         out.push(`
 <!-- Action Array -->
-<div class="la-spacer -medium"></div>
-<div class="la-effectbox -descriptive">
+<div class="la-effectbox la-bckg-card -descriptive -largeheader">
     <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped">
         <i class="cci ${ACTIVATION_ICON_MAP[action.activation]} -fontsize5"></i>
         <span class="-fontsize2">
@@ -162,4 +161,16 @@ export function renderActionButton(
 </span>
         `;
     }
+}
+
+export function renderTagsArray(tagsPath: string, options: HandlebarsHelpers & { editable?: boolean }) : string
+{
+    let tagArray = getTagArray(tagsPath, options as any);
+    let tags = "";
+    if (tagArray.length > 0)
+    {
+        tags = compactTagList(tagArray, tagsPath, options);
+    }
+
+    return tags;
 }
