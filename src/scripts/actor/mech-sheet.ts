@@ -9,7 +9,7 @@ import { getLocalized, randomExtension } from "../helpers";
 import { slugify } from "../lancer/util/lid";
 import { renderActionArray, renderActionButton, renderTagsArray } from '../item';
 import { ACTIVATION_COLOR_MAP, SYSTEM_ICON_MAP } from "../constants";
-import { collapseID } from "../lancer/helpers/collapse";
+import { collapseID } from '../lancer/helpers/collapse';
 
 export class LASMechSheetBase
 {
@@ -193,12 +193,7 @@ function renderFramePower(framePath: string, coreEnergy: number, options: Helper
 
     let core = frame.system.core_system;
 
-    let passive = "";
-    if (core.passive_effect !== "" || core.passive_actions.length > 0 || core.passive_bonuses.length > 0)
-    {
-        passive = `<div class="frame-passive">${renderFramePassive(frame)}</div>`;
-    }
-
+    let passive = renderFramePassive(framePath, options);
     let active = renderFrameActive(framePath, coreEnergy, options);
 
     // TODO: implement when supported
@@ -229,9 +224,13 @@ function renderFramePower(framePath: string, coreEnergy: number, options: Helper
     `;
 }
 
-function renderFramePassive(frame: any)
+function renderFramePassive(framePath: string, options: HelperOptions)
 {
+    let frame = resolveHelperDotpath(options, framePath) as any;
     let core = frame.system.core_system;
+    if (core.passive_effect === "" && core.passive_actions.length === 0 && core.passive_bonuses.length === 0)
+        return "";
+    
     let theme = getManufacturerColor(frame.system.manufacturer, "bckg");
 
     let actions = "";
@@ -244,7 +243,10 @@ function renderFramePassive(frame: any)
     if (core.passive_effect !== "")
     {
         passiveText = `
-            <div class="la-effectbox la-combine-v -align-left -descriptive">
+            <div class="la-effectbox la-combine-v -align-left">
+                <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
+                    ${getLocalized("LA.mech.core.passive.label")}
+                </span>
                 <div class="la-dropshadow -fullwidth">
                     <div class="-fontsize1">
                         ${core.passive_effect ?? ""}
@@ -254,11 +256,15 @@ function renderFramePassive(frame: any)
         `;
     }
 
+    let collapse = resolveHelperDotpath(options, "collapse") as any;
+    let collID = `${frame.uuid}_passive`;
     return `
 <!-- Frame Passive -->
 <div class="la-spacer -medium"></div>
-<div class="la-effectbox la-bckg-card -descriptive">
-    <div class="la-actionheader la-combine-h ${theme} la-text-header clipped">
+<div class="la-effectbox la-bckg-card -descriptive ${getManufacturerColor(frame.system.manufacturer, "brdr")}">
+    <div class="la-actionheader la-combine-h ${theme} la-text-header clipped
+            collapse-trigger"
+        data-la-collapse-id="${collapseID(collapse, collID, false)}">
         <i class="cci cci-corebonus -fontsize5"></i>
         <span class="-fontsize2">
             ${core.passive_name}
@@ -270,10 +276,13 @@ function renderFramePassive(frame: any)
             </button>
         </div>
     </div>
-    ${passiveText}
-    <div class="la-divider-h la-bckg-primary"></div>
-    <!-- Generated Content -->
-    ${actions}
+    <div class="la-generated
+        collapse collapsed"
+    data-la-collapse-id="${collapseID(collapse, collID, true)}">
+        ${passiveText}
+        <!-- Generated Content -->
+        ${actions}
+    </div>
 </div>
     `;
 }
@@ -299,18 +308,23 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
 
     // let deployables = "";
     //...
-
+    let collapse = resolveHelperDotpath(options, "collapse") as any;
+    let collID = `${frame.uuid}_active`;
     return `
 <!-- Frame Active -->
 <div class="la-spacer -medium"></div>
 <div class="la-effectbox la-bckg-card -descriptive ${getManufacturerColor(frame.system.manufacturer, "brdr")}">
-    <div class="la-actionheader la-combine-h ${theme} la-text-header clipped">
+    <div class="la-actionheader la-combine-h ${theme} la-text-header clipped
+            collapse-trigger"
+        data-la-collapse-id="${collapseID(collapse, collID, false)}">
         <i class="cci cci-corebonus -fontsize5"></i>
         <span class="-fontsize2">
             ${core.active_name}
         </span>
     </div>
-    <div class="-fontsize1">
+    <div class="
+            collapse collapsed"
+        data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <div class="la-divider-h la-bckg-primary"></div>
         <div class="la-effectbox la-combine-v -align-left -descriptive">
             <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
@@ -391,6 +405,9 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <div class="la-generated -fullwidth -gap1 la-combine-v">
             <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
+                <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
+                    ${getLocalized("LA.mech.frame.trait.label")}
+                </span>
                 ${trait.description}
             </span>
             <!-- Generated Content -->

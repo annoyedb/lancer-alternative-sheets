@@ -105,11 +105,13 @@
     "LA.mech.system.tech.label": "TECH",
 	"LA.mech.frame.empty.label": "NO FRAME",
 	"LA.mech.frame.empty.subLabel": "// FRAME NOT DETECTED //",
+	"LA.mech.frame.trait.label": "FRAME TRAIT",
 	"LA.mech.core.offline.label": "CORE POWER DEPLETED",
 	"LA.mech.core.online.label": "CORE POWER AVAILABLE",
 	"LA.mech.core.passive.label": "PASSIVE",
 	"LA.effect.attack.label": "ON ATTACK",
 	"LA.effect.hit.label": "ON HIT",
 	"LA.effect.crit.label": "ON CRITICAL",
-	"LA.pilot.talent.label": "PILOT TALENTS"
+	"LA.pilot.talent.label": "PILOT TALENTS",
+	"LA.pilot.trait.label": "PILOT TRAIT"
 }

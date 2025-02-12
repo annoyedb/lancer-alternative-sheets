@@ -116,6 +116,9 @@ function renderTalentArray(talent: any, options: HelperOptions)
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-exotic -fontsize1">
+            <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
+                ${getLocalized("LA.pilot.trait.label")}
+            </span>
             ${talent.system.ranks[i]?.description}
         </span>
         <div class="la-generated -fullwidth -gap1 la-combine-v">
