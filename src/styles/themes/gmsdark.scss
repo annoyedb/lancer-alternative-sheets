@@ -1,0 +1,50 @@
+@use '../open-color' as oc;
+
+// GMS... but darker
+$gmsdark-theme: (
+    theme-type: 'dark',
+    theme-id: 'gmsdark',
+    theme-name: 'GMS Dark',
+
+    // Main
+    primary: #991E2A,
+    secondary: #283593,
+    active: #d93f4e,
+    accent: #8c1420,
+    background: #111111,
+
+    // Misc.
+    pilot: #424242,
+    exotic: #673AB7,
+
+    action--downtime: #37474F,
+    reserve--organization: #455A64,
+    action--reaction: #512DA8,
+
+    weapon: #212121,
+    mech-weapon: #212121,
+    pilot-weapon: #212121,
+
+    // Signal
+    error: #F44336,
+    info: #1565C0,
+    success: #00C853,
+    warning: #FFAB00,
+
+    // ----------------
+    // Sheet Colors
+    // ----------------
+    header: #f4f4f4,
+    header-anti: #212121,
+    bar-back: oc.$oc-gray-8,
+    bar-health: oc.$oc-lime-9,
+    bar-shield: oc.$oc-cyan-9,
+    bar-structure: oc.$oc-violet-9,
+    bar-heat: oc.$oc-orange-9,
+    bar-stress: oc.$oc-pink-9,
+    bar-burn: oc.$oc-red-9,
+    card: oc.$oc-gray-9,
+    shadow: rgba(99, 99, 99, 0.2),
+    scrollbar-primary: rgba(#991E2A, 0.5), // primary
+    scrollbar-secondary: rgba(#283593, 0.5) // secondary
+);

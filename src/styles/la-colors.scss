@@ -1,4 +1,5 @@
 @use 'themes/gms' as gms;
+@use 'themes/gmsdark' as gmsdark;
 @use 'themes/ipsn' as ipsn;
 @use 'themes/ssc' as ssc;
 @use 'themes/horus' as horus;
@@ -17,6 +18,11 @@
 .la-gms
 {
     @include theme(gms.$gms-theme);
+}
+
+.la-gmsdark
+{
+    @include theme(gmsdark.$gmsdark-theme);
 }
 
 .la-ipsn

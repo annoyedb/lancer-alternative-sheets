@@ -13,6 +13,7 @@ import "../styles/pilot/loadout.scss";
 
 import "../styles/themes/common.scss";
 import "../styles/themes/gms.scss";
+import "../styles/themes/gmsdark.scss";
 import "../styles/themes/ipsn.scss";
 import "../styles/themes/ssc.scss";
 import "../styles/themes/galsim.scss";
@@ -21,9 +22,9 @@ import "../styles/themes/ha.scss";
 import "../styles/themes/horus.scss";
 import { slugify } from "./lancer/util/lid";
 
-const themeMap: { [key: string]: string } = {
+const THEME_MAP: { [key: string]: string } = {
     "gms": "la-gms",
-    "gmsDark": "",
+    "gmsDark": "la-gmsdark",
     "msmc": "la-msmc",
     "gal": "la-galsim",
     "horus": "la-horus",
@@ -32,9 +33,9 @@ const themeMap: { [key: string]: string } = {
     "ipsn": "la-ipsn",
 };
 
-const lightMap: { [key: string]: string } = {
+const LIGHT_MAP: { [key: string]: string } = {
     "gms": "light",
-    "gmsDark": "",
+    "gmsDark": "dark",
     "msmc": "dark",
     "gal": "dark",
     "horus": "dark",
@@ -46,13 +47,13 @@ const lightMap: { [key: string]: string } = {
 export function getTheme()
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    return themeMap[currentTheme];
+    return THEME_MAP[currentTheme];
 }
 
 export function getBrightness()
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    return lightMap[currentTheme];
+    return LIGHT_MAP[currentTheme];
 }
 
 export function getManufacturerColor(key: string, type: "bckg" | "text" | "brdr")

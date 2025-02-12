@@ -48,7 +48,7 @@ jobs:
     - name: Extract release notes from CHANGELOG.md
       id: extract_release_notes
       run: |
-        RELEASE_NOTES=$(awk "/^# [0-9]+\.[0-9]+\.[0-9]+/{if (p) exit; p=1; next} p" CHANGELOG.md)
+        RELEASE_NOTES=$(awk "/^# [0-9]+\.[0-9]+\.[0-9]+/{if (p) exit; p=1; next} p" RS="\n# " ORS="\n# " CHANGELOG.md)
         echo "::set-output name=notes::$RELEASE_NOTES"
         
     - name: Update release with files
