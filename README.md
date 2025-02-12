@@ -63,9 +63,11 @@ It is designed to be a player-facing sheet that provides most of the functionali
 ## Building
 This module uses [Vite](https://vite.dev/guide/) to build package the module. 
 To set up hot-reloading, first build the module, then symlink the dist folder into your foundry data folder as `modules/lancer-alternative-sheets`. 
-While your Foundry Virtual Tabletop server is running, run `yarn serve` at the module development folder and your browser will automatically open to the Vite development server. 
+Make sure your Foundry Virtual Tabletop server is running and have the ['Hot-Reload Package Files' enabled](/docs/HotReload.png) in your Foundry settings, run `yarn serve` at the module development folder and your browser will automatically open to the Vite development server.
 
-Any changes to `.hbs` templates, `.json` localization files, and source code will automatically load into Foundry development server.
+Now any changes to `.hbs` templates, `.json` localization files, and source code will automatically load into Foundry development server.
+
+Note that [module manifests](/dist/module.json) may become 'stale' if adding anything new that is declared in them, in which case Foundry (and by extension the Vite server) needs to be returned to the Setup menu to reload the manifest.
 
 Included is a (probably) outdated bunch of type definitions generated from [foundryvtt-lancer](https://github.com/Eranziel/foundryvtt-lancer), but aside from some globally defined constants I haven't found a way to get Vite to roll-up the definitions in a working build.
 

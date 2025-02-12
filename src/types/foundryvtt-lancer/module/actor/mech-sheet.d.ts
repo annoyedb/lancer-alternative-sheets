@@ -4,13 +4,11 @@ import { ResolvedDropData } from "../helpers/dragdrop";
 import { EntryType } from "../enums";
 import { LancerActorSheetData } from "../interfaces";
 import { LancerMechSheet } from '@foundryvtt-lancer/actor/mech-sheet';
-declare global {
 
-}
 /**
  * Extend the basic ActorSheet
  */
-declare global {
+
 class LancerMechSheet extends LancerActorSheet<EntryType.MECH> {
     /**
      * Extend and override the default options used by the NPC Sheet
@@ -79,5 +77,4 @@ class LancerMechSheet extends LancerActorSheet<EntryType.MECH> {
     _activateMountContextMenus(html: any): void;
     _event_handler(mode: "reset-wep" | "reset-all-weapon-mounts" | "reset-sys" | "overcharge" | "overcharge-rollback", evt: JQuery.ClickEvent): Promise<void>;
     getData(): Promise<LancerActorSheetData<EntryType.MECH>>;
-}
 }
