@@ -82,7 +82,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
         let actions = "";
         if (rank.actions)
         {
-            actions = renderActionArray(talent, `system.ranks${i}.actions`);
+            actions = renderActionArray(talent, `system.ranks.${i}.actions`);
         }
 
         let collID = `${talent.uuid}_${i}`;
