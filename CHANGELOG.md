@@ -1,3 +1,8 @@
+# 1.0.7
+Mostly an excuse to test CI again
+## Changes
+* Added window header styling to be whatever the primary theme is determined by foundryvtt-lancer
+
 # 1.0.6
 ## Changes
 * Added missing profile styling
