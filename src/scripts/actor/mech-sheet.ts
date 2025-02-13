@@ -1290,7 +1290,6 @@ function renderDeployableArray(deployablePath: string, options: HelperOptions)
 function renderDeployable(deployable: StoredDocument<any>, source: { item: any, path: string } | null, options: HelperOptions &
 { nonInteractive?: boolean, vertical?: boolean })
 {
-
     let theme = getBrightness();
     let img = deployable.img
         ? (theme === "dark" ? deployable.img.replace('/icons/', '/icons/white/') : deployable.img)

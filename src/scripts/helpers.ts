@@ -30,7 +30,7 @@ const localizeMap: { [key: string]: string } = {};
 export function getLocalized(key: string): string
 {
     if (!(key in localizeMap))
-        localizeMap[key] = HandlebarsHelpers.localize(key, {} as any);
+        localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
     return localizeMap[key];
 }
 

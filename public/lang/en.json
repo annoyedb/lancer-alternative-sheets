@@ -1,5 +1,8 @@
 {
+	"LA.SHEET.setting.label": "Customize",
 	"LA.SHEET.mech.label": "Alternative Mech Sheet",
+	"LA.SETTINGS.mech.ratio.label": "Sidebar to Content Body Ratio",
+	"LA.SETTINGS.mech.ratio.tooltip": "Adjust the ratio of the sidebar to the content body",
 	"LA.placeholder": "UNKNOWN",
 	"LA.namePlaceholder": "Name: UNKNOWN",
 	"LA.imgPlaceholder": "Visual: UNKNOWN",

@@ -4,10 +4,13 @@ import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
 import { renderTalents } from "./actor/pilot-sheet";
 import { applyCollapseListeners, initializeCollapses} from "./collapse";
+import { registerMechSheetSettings } from "./settings/mech-sheet";
+import { LancerAlternative } from "../enums/LancerAlternative";
 
 Hooks.once("init", () =>
 {
     registerHandlebarsHelpers();
+    registerSettings();
 });
 
 Hooks.once("setup", async () =>
@@ -45,6 +48,11 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("renderTalents", renderTalents);
 }
 
+function registerSettings()
+{
+    registerMechSheetSettings();
+}
+
 function setupSheets()
 {
     // Declare extension classes at runtime since they're only defined at that point
@@ -64,7 +72,7 @@ function setupSheets()
         }
     }
 
-    Actors.registerSheet("lancer-alternative-sheets", LASMechSheet, {
+    Actors.registerSheet(LancerAlternative.Name, LASMechSheet, {
         types: ["mech"], 
         label: "LA.SHEET.mech.label",
         makeDefault: false
