@@ -35,7 +35,7 @@
     "lancer-alternative-sheets.mjs"
   ],
   "styles": [
-    "lancer-alternative-sheets.css"
+    "styles/lancer-alternative-sheets.css"
   ],
   "flags": {
     "hotReload": { "extensions": ["hbs", "json"], "paths": ["templates", "lang"] }
