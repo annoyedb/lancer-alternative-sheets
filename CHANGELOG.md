@@ -1,3 +1,11 @@
+# 1.0.12
+Last patch before refactoring over to Svelte (and then NPC sheets soon)
+## Changes
+* #6 - Added bonuses styling where applicable. Note that with Hydra's `why is it always Hydra` drone HP bonus, the Lancer system currently does not added the appropriate bonus to the system data (though this bonus is accounted for in the deployable themselves). Thanks @Eliemer!
+* Added Core Bonuses to the mech sheet (flavor text omitted)
+* Readded lost stylings from CSS refaactor introduced last release in generated blocks
+* Minimum sheet width adjusted for certain elements
+
 # 1.0.11 - MARGINal improvements
 `ha ha get it`
 Frame deployables are now implemented and many element margins have been redone or fixed
