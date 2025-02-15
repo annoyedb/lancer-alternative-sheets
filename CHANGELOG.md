@@ -5,6 +5,7 @@ Last patch before refactoring over to Svelte (and then NPC sheets soon)
 * Added Core Bonuses to the mech sheet (flavor text omitted)
 * Readded lost stylings from CSS refaactor introduced last release in generated blocks
 * Minimum sheet width adjusted for certain elements
+* Added GMS Dark theme
 
 # 1.0.11 - MARGINal improvements
 `ha ha get it`
