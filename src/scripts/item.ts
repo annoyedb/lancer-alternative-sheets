@@ -14,7 +14,6 @@ export function renderActionArray(document: any, path: string, options?: HelperO
     let out = actions.map((_: any, index: number) =>
     {
         let action = resolveDotpath(document, `${path}.${index}`, options);
-        console.log(action);
         if (!action) return "";
 
         let defaultPlaceholder = getLocalized("LA.placeholder");

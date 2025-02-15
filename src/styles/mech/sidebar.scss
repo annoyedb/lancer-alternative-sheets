@@ -1,6 +1,7 @@
 // Sidebar
 .la-body>.la-sidebar
 {
+    min-width: 15rem;
     flex: 1;
 
     overflow-y: scroll;

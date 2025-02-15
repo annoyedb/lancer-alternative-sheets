@@ -480,9 +480,7 @@
 
     &.-divider
     {
-        >span:first-child,
-        >i:first-child,
-        >input:first-child
+        >*:first-child
         {
             border-bottom: var(--thickness, 2px) solid var(--color);
         }

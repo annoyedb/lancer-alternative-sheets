@@ -39,8 +39,7 @@
         <section class="la-sidebar la-bg-scroll la-shadow -soft -inset LA_SCROLL_SIDEBAR">
             {{!-- Frame Name --}}
             <div class="la-framename">
-                <div class="la-flow la-bckg-primary la-text-header clipped-bot-alt" data-uuid="{{getFrameUUID "
-                    system.loadout.frame.value"}}">
+                <div class="la-flow la-bckg-primary la-text-header clipped-bot-alt" data-uuid="{{getFrameUUID "system.loadout.frame.value"}}">
                     <span class="la-terminal la-text-header -fadein">>//: </span>
                     {{getFrameManufacturer "system.loadout.frame.value"}} {{getFrameName "system.loadout.frame.value"}}
                     <span class="la-extension la-text-header -lower -fadein">--{{localize "LA.scan.label"}}</span><span
@@ -512,6 +511,7 @@
                     {{{renderWeaponMounts "system.loadout"}}}
                     {{{renderSystemMounts "system.loadout"}}}
                     {{#if system.pilot.value}}
+                        {{{renderCoreBonuses "system.pilot.value.itemTypes.core_bonus"}}}
                         {{{renderTalents "system.pilot.value.itemTypes.talent"}}}
                     {{/if}}
                 </div>

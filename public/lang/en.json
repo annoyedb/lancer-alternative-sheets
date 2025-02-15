@@ -116,5 +116,6 @@
 	"LA.effect.hit.label": "ON HIT",
 	"LA.effect.crit.label": "ON CRITICAL",
 	"LA.pilot.talent.label": "PILOT TALENTS",
-	"LA.pilot.trait.label": "TALENT TRAIT"
+	"LA.pilot.trait.label": "TALENT TRAIT",
+	"LA.pilot.coreBonus.label": "CORE BONUSES"
 }

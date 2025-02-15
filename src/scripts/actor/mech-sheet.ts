@@ -32,7 +32,7 @@ export class LASMechSheetBase
     }
 }
 
-const mountLocalizeMap: { [key: string]: string } = {
+const MOUNT_LOCALIZE_MAP: { [key: string]: string } = {
     "Main": "LA.mech.mount.main.label",
     "Heavy": "LA.mech.mount.heavy.label",
     "Aux/Aux": "LA.mech.mount.auxAux.label",
@@ -44,7 +44,7 @@ const mountLocalizeMap: { [key: string]: string } = {
     "Unknown": "LA.mech.mount.unknown.label",
 }
 
-const slotLocalizeMap: { [key: string]: string } = {
+const SLOT_LOCALIZE_MAP: { [key: string]: string } = {
     "Auxiliary": "LA.mech.slot.aux.label",
     "Main": "LA.mech.slot.main.label",
     "Flex": "LA.mech.slot.flex.label",
@@ -53,7 +53,7 @@ const slotLocalizeMap: { [key: string]: string } = {
     "Integrated": "LA.mech.slot.integrated.label",
 }
 
-const systemLocalizeMap: { [key: string]: string } = {
+const SYSTEM_LOCALIZE_MAP: { [key: string]: string } = {
     "Deployable": "LA.mech.system.deployable.label",
     "Drone": "LA.mech.system.drone.label",
     "Mod": "LA.mech.system.mod.label",
@@ -195,10 +195,6 @@ function renderFramePower(framePath: string, coreEnergy: number, options: Helper
 
     let passive = renderFramePassive(framePath, options);
     let active = renderFrameActive(framePath, coreEnergy, options);
-
-    // TODO: implement when supported
-    // let deployables = "";
-    // ...
 
     let theme = getManufacturerColor(frame.system.manufacturer, "bckg");
     return `
@@ -371,12 +367,11 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
         actions = renderActionArray(frame, `${traitPath}.actions`);
     }
 
-    // TODO: implement when supported
-    // let deployables = "";
-    // if (trait.deployables.length)
-    // {
-    //     deployables = renderDeployableArray
-    // }
+    let deployables = "";
+    if (trait.deployables.length)
+    {
+        deployables = renderDeployableArray(traitPath, options);
+    }
 
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let collID = `${frame.uuid}_frame_trait_${index}`;
@@ -417,6 +412,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
             </span>
             <!-- Generated Content -->
             ${actions}
+            ${deployables}
             <!-- Generated Tags -->
         </div>
     </div>
@@ -436,7 +432,7 @@ function renderWeaponMountBracing(mech: any, mount: any, options: HelperOptions)
 <h1 class="la-subcontent la-bckg-primary la-text-header clipped-top -fontsize2
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <span class="la-terminal la-text-header -fadein">>//: </span>${getLocalized(mountLocalizeMap[mount.type])} <span
+    <span class="la-terminal la-text-header -fadein">>//: </span>${getLocalized(MOUNT_LOCALIZE_MAP[mount.type])} <span
         class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span
         class="la-cursor la-anim-header -fadein"></span>
 </h1>
@@ -502,7 +498,7 @@ export function renderWeaponMounts(loadoutPath: string, options: HelperOptions)
 <h1 class="la-subcontent la-bckg-primary la-text-header clipped-top -fontsize2
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <span class="la-terminal la-text-header -fadein">>//: </span>${getLocalized(mountLocalizeMap[mount.type])} <span
+    <span class="la-terminal la-text-header -fadein">>//: </span>${getLocalized(MOUNT_LOCALIZE_MAP[mount.type])} <span
         class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span
         class="la-cursor la-anim-header -fadein">
     </span>
@@ -524,8 +520,8 @@ function renderWeaponEmpty(weaponPath: string, size: string, options: HelperOpti
     let collapse = resolveHelperDotpath(options, "collapse") as any;
     let weapon = resolveHelperDotpath(options, weaponPath) as any;
     const slotSize = size === "Flex"
-        ? `${getLocalized(slotLocalizeMap['Main'])} || ${getLocalized(slotLocalizeMap['Auxiliary'])}`
-        : getLocalized(slotLocalizeMap[size]) || "any";
+        ? `${getLocalized(SLOT_LOCALIZE_MAP['Main'])} || ${getLocalized(SLOT_LOCALIZE_MAP['Auxiliary'])}`
+        : getLocalized(SLOT_LOCALIZE_MAP[size]) || "any";
     // Basically identical to bracing
     return `
 <!-- Empty Weapon -->
@@ -674,8 +670,8 @@ function renderWeapon(
                 <i class="cci cci-weapon ${destroyed ? "la-text-repcap" : ""}"></i>
             </button>
             <!-- Name, Slot -->
-            <div class="la-name la-combine-v"> 
-                <span class="la-top__span -fontsize2 ${destroyed ? "la-text-repcap -strikethrough" : ""}">
+            <div class="la-name la-combine-v -divider"> 
+                <span class="la-top__span -fullwidth -fontsize2 ${destroyed ? "la-text-repcap -strikethrough" : ""}">
                     ${weapon.name}
                 </span>
                 <span class="la-bottom__span ${destroyed ? "la-text-error horus--very--subtle" : ""}">
@@ -686,7 +682,7 @@ function renderWeapon(
         <!-- Roll Damage, Range, Damage, Options -->
         <div class="la-right la-combine-h">
             <button type="button" ${destroyed ? "disabled" : ""}
-                class="la-properties la-combine-v -fontsize3 ${destroyed ? "la-text-repcap" : ""}
+                class="la-properties la-combine-v -fontsize3 ${damage === "" ? "" : "-divider"} ${destroyed ? "la-text-repcap" : ""}
                     compact-damage roll-damage"
                 data-tooltip="${getLocalized("LA.flow.rollDamage.tooltip")}">
                 <!-- Generated Range -->
@@ -770,7 +766,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
 
     // Limited, Effect Box, Bonuses, Tags
     let effect = mod.system.effect ? renderEffectBox(getLocalized("LA.mech.mod.effect.label"), mod.system.effect, { flow: true }) : "";
-    let bonuses = mod.system.bonuses.length > 0 ? renderBonuses(`${modPath}.system.bonuses`, false, options) : "";
+    let bonuses = mod.system.bonuses.length > 0 ? renderAddedBonus(`${modPath}.system.bonuses`, false, options) : "";
     let tags = mod.system.tags.length ? renderTagsArray(`${modPath}.system.tags`, options) : "";
 
     let limited = mod.system.tags.some((t: { is_limited: any; }) => t.is_limited) ? renderLimited(mod, modPath) : "";
@@ -968,6 +964,12 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
         effect = renderEffectBox(getLocalized("LA.mech.system.effect.label"), sys.system.effect, { flow: !options?.nonInteractive || false });
     }
 
+    let bonus = ""
+    if (sys.system.bonuses.length)
+    {
+        bonus = renderAddedBonus(`${systemPath}.system.bonuses`, false, options);
+    }
+
     let actions = ""
     if (sys.system.actions.length)
     {
@@ -1005,7 +1007,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
 
     let slot = destroyed
         ? getLocalized("LA.mech.system.destroyed.label")
-        : getLocalized(systemLocalizeMap[sys.system.type]) || getLocalized("LA.mech.system.system.label");
+        : getLocalized(SYSTEM_LOCALIZE_MAP[sys.system.type]) || getLocalized("LA.mech.system.system.label");
     return `
 <!-- System -->
 <div class="la-details -fullwidth la-dropshadow -system 
@@ -1057,6 +1059,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
             <!-- Generated Content -->
             ${destroyedText}
             ${resources}
+            ${bonus}
             ${effect}
             ${actions}
             ${deployables}
@@ -1105,10 +1108,14 @@ function renderDamageArray(array: any[])
         <span class="la-number__span">${d.val}</span>
         <i class="cci ${d.icon} -glow-${d.type.toLowerCase()}"></i>
     `);
+    if (renderArray.length === 0)
+    {
+        return "";
+    }
 
     return `
         <!-- Damage Array -->
-        <span class="la-damage la-combine-h la-">
+        <span class="la-damage la-combine-h">
             ${renderArray.join("")}
         </span>
     `;
@@ -1132,6 +1139,10 @@ function renderRangeArray(array: any[])
         <span class="la-number__span">${r.val}</span>
         <i class="cci ${r.icon}"></i>
     `);
+    if (renderArray.length === 0)
+    {
+        return "";
+    }
 
     return `
         <!-- Range Array -->
@@ -1141,7 +1152,7 @@ function renderRangeArray(array: any[])
     `;
 }
 
-function renderEffectBox(title: string, text: string, options?: { add_classes?: string; flow?: boolean })
+export function renderEffectBox(title: string, text: string, options?: { add_classes?: string; flow?: boolean })
 {
     if (!text) return "";
 
@@ -1166,28 +1177,51 @@ function renderEffectBox(title: string, text: string, options?: { add_classes?: 
     `;
 }
 
-function renderBonuses(bonusPath: string, edit: boolean, options: HelperOptions)
+export function renderAddedBonus(bonusPath: string, edit: boolean, options: HelperOptions)
 {
+    // NOTE: Lancer system does not transfer Hydra's bonus (or is bugged) into drones
     let bonuses = resolveHelperDotpath(options, bonusPath) as any[];
+    if (!bonuses || bonuses.length === 0)
+    {
+        return "";
+    }
 
-    let renderArray: string[] = [];
-    renderArray = bonuses.map((bonus: any, index: number) => `
-        <div class="${edit ? "editable" : ""}" data-path="${bonusPath}.${index}">
-            ${renderEffectBox(bonus.lid, bonus.val)}
+    let renderArray = bonuses.map((bonus: any, index: number) => `
+        <!-- Bonus -->
+        <div class="la-effectbox la-bckg-card la-combine-h -allround">
+            <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -upper -fontsize0
+                ${edit ? "editable" : ""}" data-path="${bonusPath}.${index}">
+                ${bonus.lid}
+            </span>
+            <div class="la-combine-h -fontsize3">${bonus.val}</div>
         </div>
     `);
+    if (renderArray.length === 0)
+    {
+        return "";
+    }
 
     return `
-<!-- LA: I have not been restyled -->
-<div class="card bonus-list">
-    <div class="lancer-header lancer-bonus">
-    <span class="left">${getLocalized("LA.bonuses")}</span>
-    ${edit ? `<a class="gen-control fas fa-plus" data-action="append" data-path="${bonusPath}" data-action-value="(struct)bonus"></a>` : ""}
+    <div class="la-combine-h -fullwidth">
+        ${renderArray.join("")}
     </div>
-    ${renderArray.join("\n")}
-</div>
-<!-- /LA: I have not been restyled -->
     `;
+
+// Editability not implemented yet in system?
+//     return `
+// <!-- Bonuses -->
+// <div class="la-effectbox la-bckg-card la-combine-h -allround">
+//     <button type="button"
+//         class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0
+//             ${edit ? "gen-control" : ""}"
+//         ${edit ? `data-action="append"` : ""} 
+//         ${edit ? `data-path="${bonusPath}"` : ""}
+//         ${edit ? `data-action-value="(struct)bonus"` : ""}>
+//         ${getLocalized("LA.bonuses")}
+//     </button>
+//     <div class="la-combine-h -fontsize3">${renderArray.join("\n")}</div>
+// </div>
+//     `;
 }
 
 function renderAddedTags(tagList: string, _options: HelperOptions)
@@ -1259,7 +1293,7 @@ Need LIDs (to get the path to the actual item entry) and the item itself (to bui
 
 For systems, actors are got from the global actor list and filtered down and taking their LIDs;
 */
-function renderDeployableArray(deployablePath: string, options: HelperOptions)
+export function renderDeployableArray(deployablePath: string, options: HelperOptions)
 {
     let item = resolveHelperDotpath(options, deployablePath) as any;
 
