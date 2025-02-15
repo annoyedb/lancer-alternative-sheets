@@ -1,11 +1,10 @@
 import { getTheme } from "./theme";
-import { deleteActiveEffect, LASMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
+import { deleteActiveEffect, LAMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
-import { renderTalents } from "./actor/pilot-sheet";
-import { applyCollapseListeners, initializeCollapses} from "./collapse";
+import { renderCoreBonuses, renderTalents } from "./actor/pilot-sheet";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
-import { LancerAlternative } from "../enums/LancerAlternative";
+import { MechSheetBase } from "../classes/actor/MechSheetBase";
 
 Hooks.once("init", () =>
 {
@@ -46,6 +45,7 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("renderSystemMounts", renderSystemMounts);
     Handlebars.registerHelper("renderMechFrame", renderMechFrame);
     Handlebars.registerHelper("renderTalents", renderTalents);
+    Handlebars.registerHelper("renderCoreBonuses", renderCoreBonuses);
 }
 
 function registerSettings()
@@ -56,27 +56,8 @@ function registerSettings()
 function setupSheets()
 {
     // Declare extension classes at runtime since they're only defined at that point
-    const LASMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
-    {        
-        static override get defaultOptions()
-        {
-            return mergeObject(super.defaultOptions, LASMechSheetBase.mergeOptions);
-        }
-
-        override activateListeners(html: JQuery<HTMLElement>)
-        {
-            super.activateListeners(html);
-            // PopOut! compatibility
-            initializeCollapses(html);
-            applyCollapseListeners(html);
-        }
-    }
-
-    Actors.registerSheet(LancerAlternative.Name, LASMechSheet, {
-        types: ["mech"], 
-        label: "LA.SHEET.mech.label",
-        makeDefault: false
-    });
+    LAMechSheetBase.setupSheet();
+    MechSheetBase.setupSheet();
 }
 
 function setupEventListeners()

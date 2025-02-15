@@ -1,7 +1,4 @@
-// TODO: abstract out these render functions once there's more than one sheet
-// TODO: look into moving to svelte; or just something that lets you reuse 
-// html components without too much back and forth between files
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { TEMPLATE_PATHS } from "../loader";
 import { getBrightness, getManufacturerColor } from '../theme';
 import { resolveDotpath, resolveHelperDotpath } from '../lancer/helpers/common';
@@ -10,8 +7,10 @@ import { slugify } from "../lancer/util/lid";
 import { renderActionArray, renderActionButton, renderTagsArray } from '../item';
 import { ACTIVATION_COLOR_MAP, SYSTEM_ICON_MAP } from "../constants";
 import { collapseID } from '../lancer/helpers/collapse';
+import { applyCollapseListeners, initializeCollapses } from "../collapse";
+import { LancerAlternative } from "../../enums/LancerAlternative";
 
-export class LASMechSheetBase
+export class LAMechSheetBase
 {
     static get mergeOptions()
     {
@@ -29,6 +28,32 @@ export class LASMechSheetBase
             ],
             scrollY: [".LA_SCROLL_BODY", ".LA_SCROLL_SIDEBAR"],
         }
+    }
+
+    static setupSheet()
+    {
+        // Declare extension classes at runtime since they're only defined at that point
+        const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
+        {        
+            static override get defaultOptions()
+            {
+                return mergeObject(super.defaultOptions, LAMechSheetBase.mergeOptions);
+            }
+
+            override activateListeners(html: JQuery<HTMLElement>)
+            {
+                super.activateListeners(html);
+                // PopOut! compatibility
+                initializeCollapses(html);
+                applyCollapseListeners(html);
+            }
+        }
+
+        Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
+            types: ["mech"],
+            label: "LA.SHEET.mech.label",
+            makeDefault: false
+        });
     }
 }
 

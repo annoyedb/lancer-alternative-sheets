@@ -1,4 +1,4 @@
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { resolveHelperDotpath } from "../lancer/helpers/common";
 import { renderActionArray } from "../item";
 import { collapseID } from "../lancer/helpers/collapse";

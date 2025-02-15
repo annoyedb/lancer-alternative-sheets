@@ -1,5 +1,5 @@
 // Bridge module and foundryvtt-lancer system
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { resolveHelperDotpath } from './lancer/helpers/common';
 
 export function frameName(framePath: string, options: HelperOptions): string

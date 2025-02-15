@@ -1,6 +1,6 @@
 // Reimplementation of bare-minimum foundryvtt-lancer functionality
 
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { slugify } from "../util/lid";
 
 // Helper function to format a dotpath to not have any square brackets, instead using pure dot notation

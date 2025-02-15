@@ -1,4 +1,4 @@
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { resolveDotpath, spoofHelper } from "./lancer/helpers/common";
 import { getLocalized, getTagArray, randomExtension } from "./helpers";
 import { compactTagList, compactTagListHBS } from "./lancer/helpers/tags";

@@ -1,4 +1,11 @@
 // Overrides for Foundry and Lancer
+.la-svelte
+{
+    height: inherit;
+    display: inherit;
+    flex-direction: inherit;
+}
+
 .la-header__override
 {
     >.window-header
