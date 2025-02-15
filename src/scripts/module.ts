@@ -2,8 +2,8 @@ import { getTheme } from "./theme";
 import { deleteActiveEffect, LASMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
-import { renderTalents } from "./actor/pilot-sheet";
 import { applyCollapseListeners, initializeCollapses} from "./collapse";
+import { renderCoreBonuses, renderTalents } from "./actor/pilot-sheet";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
 import { LancerAlternative } from "../enums/LancerAlternative";
 
@@ -46,6 +46,7 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("renderSystemMounts", renderSystemMounts);
     Handlebars.registerHelper("renderMechFrame", renderMechFrame);
     Handlebars.registerHelper("renderTalents", renderTalents);
+    Handlebars.registerHelper("renderCoreBonuses", renderCoreBonuses);
 }
 
 function registerSettings()
