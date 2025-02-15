@@ -77,7 +77,7 @@ Contact me if you know how. :eye::lips::eye:
 This module can be installed:
 * using the Foundry module installer
 * downloaded and installed manually (from module.zip) found in the [Releases](https://github.com/annoyedb/lancer-alternative-sheets/releases) page
-* https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json
+* through the manifest link - `https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json`
 
 ## Using the sheet
 To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the image above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
