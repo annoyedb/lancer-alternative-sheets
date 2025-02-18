@@ -1,200 +1,187 @@
-//https://flowcharts.sapphire-games.com/img/dots.svg
-// Body
-.la-body
+.la-root
 {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    overflow: auto;
-    position: relative;
-    overflow-y: hidden;
-}
-
-// When Foundry is in mobile mode, we want to stack the sidebar on top of the main content
-@media (max-width: 768px)
-{
+    // Body
     .la-body
     {
-        flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        overflow: auto;
+        position: relative;
+        overflow-y: hidden;
+    }
+
+    .la-content
+    {
+        flex: 2;
+
         overflow-y: scroll;
-    }
-}
+        overflow-x: hidden;
 
-.la-content
-{
-    flex: 2;
-
-    width: 100%;
-    height: 100%;
-
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-    >.la-tab
-    {
-        margin-top: 1rem;
-        margin-left: 2.2rem;
-    }
-
-    >.la-hase
-    {
-        pointer-events: none;
-        position: absolute;
-        translate: -3rem; // Same as margin-left of la-tab + width of la-hase;
-
-        filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
-
-        >.la-attribute
+        >.la-tab
         {
-            font-size: 4rem;
-            position: relative;
+            margin-top: 1rem;
+            margin-left: 2.2rem;
+        }
 
-            &.-grit
+        .la-hase
+        {
+            pointer-events: none;
+            position: absolute;
+            translate: -3rem; // Same as margin-left of la-tab + width of la-hase;
+
+            filter: drop-shadow(-3px 3px 1px var(--shadow));
+            -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
+            -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
+
+            >.la-attribute
             {
-                top: 0.2rem;
-                right: 0.5rem;
-                font-size: 5rem;
-            }
-
-            &.-hull
-            {
-                top: -1.9rem;
-                right: -1.56125rem;
-            }
-
-            &.-agility
-            {
-                top: -6.6125rem;
-                right: 1.56125rem;
-            }
-
-            &.-systems
-            {
-                top: -8.6125rem;
-                right: 0rem;
-            }
-
-            &.-engineering
-            {
-                top: -10.6125rem;
-                right: -1.56125rem;
-            }
-
-            >.la-combine-v
-            {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                --color: var(--background);
-                --thickness: 1px;
+                font-size: 4rem;
+                position: relative;
 
                 &.-grit
                 {
-                    top: 0rem;
-                    right: 0rem;
-                    gap: 0.05rem;
+                    top: 0.2rem;
+                    right: 0.5rem;
+                    font-size: 5rem;
                 }
 
                 &.-hull
                 {
-                    top: 0.2rem;
-                    right: 0.5rem;
+                    top: -1.9rem;
+                    right: -1.56125rem;
                 }
 
                 &.-agility
                 {
-                    top: 0.2rem;
-                    right: 0.5rem;
+                    top: -6.6125rem;
+                    right: 1.56125rem;
                 }
 
                 &.-systems
                 {
-                    top: 0.2rem;
-                    right: 0.5rem;
+                    top: -8.6125rem;
+                    right: 0rem;
                 }
 
                 &.-engineering
                 {
-                    top: 0.2rem;
-                    right: 0.5rem;
+                    top: -10.6125rem;
+                    right: -1.56125rem;
                 }
 
-                >.la-label__span
+                >.la-combine-v
                 {
-                    font-size: 0.6rem;
-                    width: 50%;
-                }
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
-                >.la-value__span
-                {
-                    font-size: 1.65rem;
-                    width: 2ch;
-                }
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    text-align: center;
+                    --color: var(--background);
+                    --thickness: 1px;
 
-                button
-                {
-                    pointer-events: auto;
-
-                    &:hover
+                    &.-grit
                     {
-                        filter: drop-shadow(0px 0px 5px var(--active));
-                        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
-                        -moz-filter: drop-shadow(0px 0px 5px var(--active));
+                        top: 0rem;
+                        right: 0rem;
+                        gap: 0.05rem;
+                    }
+
+                    &.-hull
+                    {
+                        top: 0.2rem;
+                        right: 0.5rem;
+                    }
+
+                    &.-agility
+                    {
+                        top: 0.2rem;
+                        right: 0.5rem;
+                    }
+
+                    &.-systems
+                    {
+                        top: 0.2rem;
+                        right: 0.5rem;
+                    }
+
+                    &.-engineering
+                    {
+                        top: 0.2rem;
+                        right: 0.5rem;
+                    }
+
+                    >.la-label__span
+                    {
+                        font-size: 0.6rem;
+                        width: 50%;
+                    }
+
+                    >.la-value__button
+                    {
+                        font-size: 1.65rem;
+                        width: 3ch;
+                    }
+
+                    button
+                    {
+                        pointer-events: auto;
+
+                        &:hover
+                        {
+                            filter: drop-shadow(0px 0px 5px var(--active));
+                            -webkit-filter: drop-shadow(0px 0px 5px var(--active));
+                            -moz-filter: drop-shadow(0px 0px 5px var(--active));
+                        }
                     }
                 }
             }
         }
     }
-}
 
-// Scrollbar
-.la-body
-{
-    // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-    >.la-content
+    // Scrollbar
+    .la-body
     {
-        scrollbar-width: thin;
-        scrollbar-color: var(--scrollbar-primary) transparent;
-    }
+        // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
+        >.la-content
+        {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-primary) transparent;
+        }
 
-    >.la-content::-webkit-scrollbar
-    {
-        width: 2px;
-    }
+        >.la-content::-webkit-scrollbar
+        {
+            width: 2px;
+        }
 
-    >.la-content::-webkit-scrollbar-thumb
-    {
-        background: var(--scrollbar-primary);
-        border: 0px;
-    }
+        >.la-content::-webkit-scrollbar-thumb
+        {
+            background: var(--scrollbar-primary);
+            border: 0px;
+        }
 
-    >.la-content::-webkit-scrollbar-track
-    {
-        background: transparent;
-    }
+        >.la-content::-webkit-scrollbar-track
+        {
+            background: transparent;
+        }
 
-    >.la-content::-moz-scrollbar
-    {
-        width: 2px;
-    }
+        >.la-content::-moz-scrollbar
+        {
+            width: 2px;
+        }
 
-    >.la-content::-moz-scrollbar-thumb
-    {
-        background: var(--scrollbar-primary);
-        border: 0px;
-    }
+        >.la-content::-moz-scrollbar-thumb
+        {
+            background: var(--scrollbar-primary);
+            border: 0px;
+        }
 
-    >.la-content::-moz-scrollbar-track
-    {
-        background: transparent;
+        >.la-content::-moz-scrollbar-track
+        {
+            background: transparent;
+        }
     }
 }

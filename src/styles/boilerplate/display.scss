@@ -1,0 +1,27 @@
+.la-root
+{
+    .-overflowhidden
+    {
+        overflow: hidden;
+    }
+
+    .-displayinline
+    {
+        display: inline;
+    }
+
+    .-displayflex
+    {
+        display: flex;
+
+        &.-direction-column
+        {
+            flex-direction: column;
+        }
+
+        &.-direction-row
+        {
+            flex-direction: row;
+        }
+    }
+}

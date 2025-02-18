@@ -4,15 +4,16 @@
     <header 
         class="la-header la-bg-scroll -flex0
             sheet-header">
-        <div class="la-combine-h">
-            <div class="la-names las-combine-v">
+        <div class="la-header-content la-combine-h">
+            <div class="la-names las-combine-v -margin3">
                 <input 
-                    class="la-mechname__input la-text-header -upper
+                    class="la-mechname__input la-text-header -upper -fontsize5
                         charname"
                     name="name" type="text" value="{{actor.name}}" 
                     placeholder="{{localize " LA.namePlaceholder"}}" />
                 <hr class="la-divider-h -large -spacemedium la-bckg-header">
-                <span class="la-pilotname__span -upper la-text-header ref set pilot click-open"
+                <span class="la-pilotname__span -upper la-text-header -fontsize3 
+                    ref set pilot click-open"
                     data-uuid="{{pilot.uuid}}" data-path="system.pilot"
                     data-accept-types="pilot">{{pilot.system.callsign}} </span>
                 <span class="la-pilotlevel__span -upper la-text-header">LL{{pilot.system.level}}</span>
@@ -22,11 +23,11 @@
         {{!-- Navigation --}}
         <div class="la-island">
             <nav class="la-tabs la-bckg-pilot clipped-alt" data-group="primary">
-                <a class="la-tab clipped-bot-alt la-text-bright-text -fontsize2" data-tab="status" data-text="{{localize "
+                <a class="la-tab clipped-bot-alt la-text-bright-text -fontsize2 -padding1" data-tab="status" data-group="primary" data-text="{{localize "
                     LA.tab.status.label"}}">
                     {{localize "LA.tab.status.label"}}
                 </a>
-                <a class="la-tab clipped-bot-alt la-text-bright-text -fontsize2" data-tab="loadout" data-text="{{localize "
+                <a class="la-tab clipped-bot-alt la-text-bright-text -fontsize2 -padding1" data-tab="loadout" data-group="primary" data-text="{{localize "
                     LA.tab.loadout.label"}}">
                     {{localize "LA.tab.loadout.label"}}
                 </a>
@@ -38,14 +39,14 @@
         {{!-- Sidebar --}}
         <section class="la-sidebar la-bg-scroll la-shadow -soft -inset LA_SCROLL_SIDEBAR">
             {{!-- Frame Name --}}
-            <div class="la-framename">
-                <div class="la-flow la-bckg-primary la-text-header clipped-bot-alt" data-uuid="{{getFrameUUID "system.loadout.frame.value"}}">
+            <span class="la-framename -overflowhidden">
+                <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" data-uuid="{{getFrameUUID "system.loadout.frame.value"}}">
                     <span class="la-terminal la-text-header -fadein">>//: </span>
                     {{getFrameManufacturer "system.loadout.frame.value"}} {{getFrameName "system.loadout.frame.value"}}
                     <span class="la-extension la-text-header -lower -fadein">--{{localize "LA.scan.label"}}</span><span
                         class="la-cursor la-anim-header -fadein" />
                 </div>
-            </div>
+            </span>
             {{!-- Mech Image --}}
             <div class="la-mech">
                 <div class="la-combine-v ">
@@ -68,33 +69,33 @@
                 <div class="la-combine-h">
                     {{!-- the mdi shield is a bit larger than the cci icons --}}
                     <i class="mdi mdi-shield-half-full" style="font-size: 0.75em"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.armor}}</span>
                         <span>{{localize "LA.armor.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-evasion"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.evasion}}</span>
                         <span>{{localize "LA.evasion.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-edef"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.edef}}</span>
                         <span>{{localize "LA.edefense.short"}}</span>
                     </div>
                 </div>
             </div>
             {{!-- Mech Bars --}}
-            <div class="la-damage">
+            <div class="la-damage -margin0-lr -margin3-tb">
                 <div class="la-combine-h">
                     <div class="la-visuals">
                         {{!-- HP, SHIELD (BAR) --}}
                         <div class="la-combine-h -fontsize1">
-                            <span class="la-damage__span">{{localize "LA.hitpoint.short"}}</span>
+                            <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.hitpoint.short"}}</span>
                             <div class="la-bar-h clipped la-bckg-bar-back -flex1">
                                 <div class="la-bar-h-progress la-combine-h">
                                     <input class="la-bar-h-progress__input -flex1"
@@ -112,7 +113,7 @@
                         <div class="la-spacer -tiny"></div>
                         {{!-- STRUCTURE --}}
                         <div class="la-combine-h -fontsize1">
-                            <span class="la-damage__span">{{localize "LA.structure.label"}}</span>
+                            <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.structure.label"}}</span>
                             <div class="la-bar-h clipped-alt la-bckg-bar-back -flex1">
                                 <div class="la-bar-h-progress la-combine-h">
                                     <input class="la-bar-h-progress__input -flex1" 
@@ -128,9 +129,9 @@
                     </div>
                     {{!-- SHIELD (VALUE) --}}
                     <div class="la-combine-v -divider -shield">
-                        <input class="la-damage__input" type="number" name="system.overshield.value" data-dtype="Number"
+                        <input class="la-damage__input -heightfull" type="number" name="system.overshield.value" data-dtype="Number"
                             value="{{system.overshield.value}}">
-                        <span class="la-damage__span">{{localize "LA.overshield.short"}}</span>
+                        <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.overshield.short"}}</span>
                     </div>
                 </div>
 
@@ -140,7 +141,7 @@
                     <div class="la-visuals">
                         {{!-- HEAT --}}
                         <div class="la-combine-h -fontsize1">
-                            <span class="la-damage__span">{{localize "LA.heat.label"}}</span>
+                            <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.heat.label"}}</span>
                             <div class="la-bar-h clipped la-bckg-bar-back -flex1">
                                 <div class="la-bar-h-progress la-combine-h">
                                     <input class="la-bar-h-progress__input -flex1" 
@@ -158,7 +159,7 @@
                         <div class="la-spacer -tiny"></div>
                         {{!-- STRESS, BURN (BAR) --}}
                         <div class="la-combine-h -fontsize1">
-                            <span class="la-damage__span">{{localize "LA.stress.label"}}</span>
+                            <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.stress.label"}}</span>
                             <div class="la-bar-h clipped-alt la-bckg-bar-back -flex1">
                                 <div class="la-bar-h-progress la-combine-h">
                                     <input class="la-bar-h-progress__input -flex1" 
@@ -174,9 +175,9 @@
                     </div>
                     {{!-- BURN (VALUE) --}}
                     <div class="la-combine-v -divider -burn">
-                        <input class="la-damage__input" type="number" name="system.burn" data-dtype="Number"
+                        <input class="la-damage__input -heightfull" type="number" name="system.burn" data-dtype="Number"
                             value="{{system.burn}}">
-                        <span class="la-damage__span">{{localize "LA.burn.short"}}</span>
+                        <span class="la-damage__span -fontsize0 -heightfull">{{localize "LA.burn.short"}}</span>
                     </div>
                 </div>
             </div>
@@ -184,21 +185,21 @@
             <div class="la-stats">
                 <div class="la-combine-h">
                     <i class="cci cci-tech-full"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.tech_attack}}</span>
                         <span>{{localize "LA.tattack.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-save"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.save}}</span>
                         <span>{{localize "LA.save.short"}}</span>
                     </div>
                 </div>
                 <div class="la-combine-h">
                     <i class="cci cci-sensor"></i>
-                    <div class="la-combine-v -divider">
+                    <div class="la-combine-v -divider -fontsize0">
                         <span>{{system.sensor_range}}</span>
                         <span>{{localize "LA.sensor.short"}}</span>
                     </div>
@@ -206,9 +207,9 @@
             </div>
             {{!-- Macros/Flows --}}
             <div class="la-spacer -large"></div>
-            <div class="la-macroflows la-combine-v">
+            <div class="la-macroflows la-combine-v -widthfull">
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         lancer-flow-button"
                     data-flow-type="Stabilize" data-flow-args="{}"
                     data-tooltip="{{localize "LA.flow.stabilize.tooltip"}}">
@@ -218,7 +219,7 @@
                         class="la-cursor la-anim-header -fadein" />
                 </button>
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         lancer-flow-button"
                     data-uuid="{{actor.uuid}}" data-flow-type="Overcharge" data-flow-args="{}"
                     data-tooltip="{{localize "LA.flow.overcharge.tooltip"}}">
@@ -228,7 +229,7 @@
                         class="la-cursor la-anim-header -fadein" />
                 </button>
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         roll-stat"
                     data-uuid="{{actor.uuid}}" data-path="system.grit" data-flow-args=""
                     data-tooltip="{{localize "LA.grit.tooltip"}}">
@@ -238,7 +239,7 @@
                         class="la-cursor la-anim-header -fadein" />
                 </button>
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         lancer-flow-button"
                     data-uuid="{{actor.uuid}}" data-flow-type="BasicAttack" data-flow-args="{}"
                     data-tooltip="{{localize "LA.flow.rollAttack.tooltip"}}">
@@ -248,7 +249,7 @@
                         class="la-cursor la-anim-header -fadein" />
                 </button>
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         lancer-flow-button"
                     data-uuid="{{actor.uuid}}" data-flow-type="Damage" data-flow-args="{}"
                     data-tooltip="{{localize "LA.flow.rollDamage.tooltip"}}">
@@ -258,7 +259,7 @@
                         class="la-cursor la-anim-header -fadein" />
                 </button>
                 <button type="button"
-                    class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                         lancer-flow-button"
                     data-uuid="{{actor.uuid}}" data-flow-type="TechAttack" data-flow-args="{}"
                     data-tooltip="{{localize "LA.flow.rollTechAttack.tooltip"}}">
@@ -271,16 +272,16 @@
         </section>
         {{!-- Main Content --}}
         <div class="la-ruler"></div>
-        <section class="la-content sheet-body LA_SCROLL_BODY">
+        <section class="la-content sheet-body -widthfull -heightfull LA_SCROLL_BODY">
             {{!-- HASE Stats --}}
             <div class="la-hase">
                 <div class="la-attribute la-text-secondary -grit
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -divider la-text-header -grit">
+                    <div class="la-combine-v -divider la-text-header -widthfull -heightfull -grit">
                         <span class="la-label__span">
                             {{localize "LA.grit.short"}}
                         </span>
-                        <button type="button" class="la-value__span roll-stat" data-uuid="{{actor.uuid}}"
+                        <button type="button" class="la-value__button roll-stat" data-uuid="{{actor.uuid}}"
                             data-path="system.grit" data-flow-args=""
                             data-tooltip="{{localize "LA.grit.tooltip"}}">
                             {{#gt system.grit 0}}
@@ -293,12 +294,12 @@
                 </div>
                 <div class="la-attribute la-text-secondary -hull 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -divider -hull la-text-header">
+                    <div class="la-combine-v -divider -hull la-text-header -widthfull -heightfull">
                         <span class="la-label__span">
                             {{localize "LA.hull.short"}}
                         </span>
                         <button type="button" 
-                            class="la-value__span roll-stat hase" 
+                            class="la-value__button roll-stat hase" 
                             data-uuid="{{actor.uuid}}" data-path="system.hull" 
                             data-flow-args="" data-tooltip="{{localize "LA.hull.tooltip"}}">
                             {{system.hull}}
@@ -307,12 +308,12 @@
                 </div>
                 <div class="la-attribute la-text-secondary -agility
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -divider -agility la-text-header">
+                    <div class="la-combine-v -divider -agility la-text-header -widthfull -heightfull">
                         <span class="la-label__span">
                             {{localize "LA.agility.short"}}
                         </span>
                         <button type="button" 
-                            class="la-value__span roll-stat hase" 
+                            class="la-value__button roll-stat hase" 
                             data-uuid="{{actor.uuid}}" data-path="system.agi" 
                             data-flow-args="" data-tooltip="{{localize "LA.agility.tooltip"}}">
                             {{system.agi}}
@@ -321,11 +322,11 @@
                 </div>
                 <div class="la-attribute la-text-secondary -systems 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -divider -systems la-text-header">
+                    <div class="la-combine-v -divider -systems la-text-header -widthfull -heightfull">
                         <span class="la-label__span">
                             {{localize "LA.systems.short"}}
                         </span>
-                        <button type="button" class="la-value__span roll-stat hase" data-uuid="{{actor.uuid}}"
+                        <button type="button" class="la-value__button roll-stat hase" data-uuid="{{actor.uuid}}"
                             data-path="system.sys" data-flow-args=""
                             data-tooltip="{{localize "LA.systems.tooltip"}}">
                             {{system.sys}}
@@ -334,11 +335,11 @@
                 </div>
                 <div class="la-attribute la-text-secondary -engineering 
                         mdi mdi-hexagon">
-                    <div class="la-combine-v -divider -engineering la-text-header">
+                    <div class="la-combine-v -divider -engineering la-text-header -widthfull -heightfull">
                         <span class="la-label__span">
                             {{localize "LA.engineering.short"}}
                         </span>
-                        <button type="button" class="la-value__span roll-stat hase" data-uuid="{{actor.uuid}}"
+                        <button type="button" class="la-value__button roll-stat hase" data-uuid="{{actor.uuid}}"
                             data-path="system.eng" data-flow-args=""
                             data-tooltip="{{localize "LA.engineering.tooltip"}}">
                             {{system.eng}}
@@ -351,7 +352,7 @@
                 class="la-status la-tab -fontsize2
                     tab" 
                 data-group="primary" data-tab="status">
-                <div class="la-status__list la-combine-v -fullwidth">
+                <div class="la-status__list la-combine-v -widthfull -gap0">
                     {{!-- Active Effects --}}
                     <h1 class="la-subcontent la-bckg-primary la-text-header clipped-top -fontsize2">
                         <span class="la-terminal la-text-header -fadein">>//: </span>{{localize
@@ -374,7 +375,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-structure"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.structure.label"}}</span>
-                            <div class="la-combine-v -divider">
+                            <div class="la-combine-v -divider -fontsize4">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{system.structure.value}}</span>
                                 <span class="la-bottom__span -narrow">{{system.structure.max}}</span>
@@ -382,7 +383,7 @@
                         </div>
                         <div class="la-combine-v">
                             <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                                     lancer-flow-button"
                                 data-flow-type="Structure" data-flow-args="{}"
                                 data-tooltip="{{localize "LA.flow.structureDamage.tooltip"}}">
@@ -398,7 +399,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-repair"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.flow.repair.label"}}</span>
-                            <div class="la-combine-v -divider">
+                            <div class="la-combine-v -divider -fontsize4">
                                 <input class="la-top__input" type="number" name="system.repairs.value"
                                     data-dtype="Number" value={{system.repairs.value}} />
                                 <span class="la-bottom__span">{{system.repairs.max}}</span>
@@ -406,7 +407,7 @@
                         </div>
                         <div class="la-combine-v">
                             <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                                     lancer-flow-button"
                                 data-flow-type="FullRepair.label" data-flow-args="{}"
                                 data-tooltip="{{localize "LA.flow.fullRepair.tooltip"}}">
@@ -417,7 +418,7 @@
                             </button>
                             {{!-- TODO: make a flow for partial repair --}}
                             {{!-- <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                                     lancer-flow-button"
                                 data-flow-type="FullRepair.label" data-flow-args="{}"
                                 data-tooltip="{{localize "LA.flow.repair.tooltip"}}">
@@ -439,7 +440,7 @@
                         <div class="la-combine-h">
                             <i class="cci cci-reactor"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.stress.label"}}</span>
-                            <div class="la-combine-v -divider">
+                            <div class="la-combine-v -divider -fontsize4">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{system.stress.value}}</span>
                                 <span class="la-bottom__span -narrow">{{system.stress.max}}</span>
@@ -447,7 +448,7 @@
                         </div>
                         <div class="la-combine-v">
                             <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                                     lancer-flow-button"
                                 data-flow-type="Overheat" data-flow-args="{}"
                                 data-tooltip="{{localize "LA.flow.reactorStress.tooltip"}}">
@@ -462,7 +463,7 @@
                     <div class="la-structure la-combine-h la-bckg-card">
                         <div class="la-combine-h">
                             <i class="mdi mdi-lightning-bolt"></i>
-                            <div class="la-combine-v -divider">
+                            <div class="la-combine-v -divider -fontsize4">
                                 {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
                                 <span class="la-top__span">{{overchargeStage actor "system.overcharge"}}</span>
                                 <span class="la-bottom__span -fontsize1">{{localize "LA.flow.overcharge.label"}}</span>
@@ -470,7 +471,7 @@
                         </div>
                         <div class="la-combine-v">
                             <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt
                                     overcharge-reset"
                                 data-tooltip="{{localize "LA.flow.overchargeReset.tooltip"}}">
                                 <span class="la-terminal la-text-header -fadein">>//: </span>
@@ -486,11 +487,11 @@
                             <i class="cci cci-burn"></i>
                             <span class="la-label__span -fontsize1">{{localize "LA.burn.label"}}</span>
                             {{!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) --}}
-                            <span class="la-value__span">{{system.burn}}</span>
+                            <span class="la-value__button">{{system.burn}}</span>
                         </div>
                         <div class="la-combine-v">
                             <button type="button"
-                                class="la-flow la-button la-bckg-secondary la-text-header clipped-bot-alt 
+                                class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
                                     lancer-flow-button"
                                 data-uuid="{{actor.uuid}}" data-flow-type="Burn"
                                 data-tooltip="{{localize "LA.flow.extinguish.tooltip"}}">
@@ -506,7 +507,7 @@
             {{!-- Loadout Tab --}}
             <div class="la-loadout la-tab tab -fontsize2" data-group="primary" data-tab="loadout">
                 {{!-- Category --}}
-                <div class="la-mount__list la-combine-v -fullwidth">
+                <div class="la-mount__list la-combine-v -widthfull">
                     {{{renderMechFrame "system.loadout" system.core_energy}}}
                     {{{renderWeaponMounts "system.loadout"}}}
                     {{{renderSystemMounts "system.loadout"}}}

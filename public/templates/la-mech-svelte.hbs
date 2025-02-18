@@ -1,5 +1,75 @@
 <form class="la-mech {{cssClass}} la-root flexcol {{getTheme}}" autocomplete="off">
-    <div class="la-svelte">
-        {{!-- Svelte is injected in-place here --}}
+    <header 
+        class="la-header la-bg-scroll -flex0
+            sheet-header"
+    >
+        <div class="la-SVELTE-HEADER">
+            {{!-- (#1)
+            // Foundry seems to initialize nav tabs only once on the constructor,
+            // but Svelte unfortunately mounts after the constructor so we must reconcile.
+            // 
+            // Chosen approach was made because navbar and relative content containers aren't
+            // reactive, so doing it how Foundry likes it is better than dealing with potential
+            // side-effects over trying to be consistent with the rest of the codebase.
+            //
+            // If Svelte needs to be reconciled (i.e. now that they don't have a common
+            // parent), <svelte:window on:eventsomewhere={}>CONTENT HERE</svelte:window> 
+            // can be used to listen for events in other mounted components, or an event 
+            // listener can be added through the activateListeners() override
+            --}}
+        </div>
+        <!-- Navigation -->
+        <div class="la-island">
+            <nav 
+                class="la-tabs la-bckg-pilot clipped-alt" 
+                data-group="primary">
+                <button type="button"
+                    class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
+                    data-group="primary"
+                    data-tab="status">
+                    {{localize "LA.tab.status.label"}}
+                </button>
+                <button type="button"
+                    class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
+                    data-group="primary" 
+                    data-tab="loadout">
+                    {{localize "LA.tab.loadout.label"}}
+                </button>
+            </nav>
+        </div>
+    </header>
+    <div class="la-body la-combine-h la-bckg-background -heightfull">
+        <!-- Sidebar -->
+        <section class="la-SVELTE-SIDEBAR la-sidebar la-bg-scroll la-shadow -soft -inset LA_SCROLL_SIDEBAR">
+            {{!-- (#1) --}}
+            {{!-- Svelte is injected in-place here --}}
+        </section>
+        <div class="la-ruler">&nbsp;</div>
+        <section 
+            class="la-content -widthfull -heightfull LA_SCROLL_BODY
+                sheet-body"
+        >
+            {{!-- (#1) --}}
+            <div class="la-SVELTE-HASE">
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div 
+                class="la-SVELTE-STATUS la-status la-tab -fontsize2
+                    tab" 
+                data-group="primary" 
+                data-tab="status"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div 
+                class="la-SVELTE-LOADOUT la-loadout la-tab -fontsize2
+                    tab" 
+                data-group="primary" 
+                data-tab="loadout"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+        </section>
+        <div class="la-ruler">&nbsp;</div>
     </div>
 </form>

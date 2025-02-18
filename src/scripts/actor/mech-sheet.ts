@@ -47,6 +47,11 @@ export class LAMechSheetBase
                 initializeCollapses(html);
                 applyCollapseListeners(html);
             }
+
+            protected override _onChangeTab(event: MouseEvent | null, tabs: Tabs, active: string): void
+            {
+                super._onChangeTab(event, tabs, active);
+            }
         }
 
         Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
@@ -94,14 +99,14 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
     let theme = getBrightness();
     let renderArray: string[] = effects.map((effect: any, index: number) =>
     {
-        if (!effect.isTemporary) return "";
+        // if (!effect.isTemporary) return ""; // No effect isTemporary on received effects
 
         let icon = effect.icon
             ? (theme === "dark" ? effect.icon : effect.icon.replace('/white/', '/'))
             : (theme === "dark" ? "systems/lancer/assets/icons/white/difficulty.svg" : "systems/lancer/assets/icons/difficulty.svg");
         return `
 <!-- Active Effect -->
-<details class="la-details -fullwidth la-combine-v -effect">
+<details class="la-details -widthfull la-combine-v -effect">
     <summary class="la-details__summary clipped-bot-alt la-bckg-warning la-text-header-anti -fontsize1">
         <span class="la-terminal -fadein">>//: </span>${effect.name} <span class="la-extension -lower -fadein">--${getLocalized("LA.info.label")}</span><span class="la-cursor -fadein"></span>
         <button type="button"
@@ -111,7 +116,7 @@ export function renderActiveEffects(actor: any, effects: any[], _options: Handle
         </button>
         <button type="button"
             class="la-delete" 
-            data-active-effect-index="${index}" data-active-effect-id="${effect._id}" data-uuid="${actor.uuid}">
+            data-uuid="${effect._id}">
             <i class="fas fa-trash"></i>
         </button>
     </summary>
@@ -136,10 +141,10 @@ function renderMechFrameEmpty(mech: any, options: HelperOptions)
     let collID = `${mech.id}_frame_empty`;
     return `
 <!-- Empty Frame -->
-<h1 class="la-systemsheader la-subcontent la-combine-h la-bckg-frame la-text-header clipped-top -justify-between
+<h1 class="la-summary la-subcontent la-combine-h la-bckg-frame la-text-header clipped-top -justifybetween
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <div class="la-systemsheader-label -fontsize2">
+    <div class="la-summary-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.placeholder")} 
         <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
@@ -151,7 +156,7 @@ function renderMechFrameEmpty(mech: any, options: HelperOptions)
 <div class="la-details-wrapper la-dropshadow -borderoff
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-    <details class="la-details -fullwidth la-combine-v -empty">
+    <details class="la-details -widthfull la-combine-v -empty">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2"></i>
@@ -184,10 +189,10 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
     let collID = `${mech.id}_frame`;
     return `
 <!-- Frame -->
-<h1 class="la-systemsheader la-subcontent la-combine-h la-text-header clipped-top -justify-between ${getManufacturerColor(frame.system.manufacturer, "bckg")}
+<h1 class="la-summary la-subcontent la-combine-h la-text-header clipped-top -justifybetween ${getManufacturerColor(frame.system.manufacturer, "bckg")}
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <div class="la-systemsheader-label -fontsize2">
+    <div class="la-summary-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${frame.system.manufacturer.toUpperCase()} ${frame.name.toUpperCase()} 
         <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
@@ -196,14 +201,14 @@ export function renderMechFrame(loadoutPath: string, coreEnergy: number, options
 <div class="la-details-wrapper la-dropshadow ${getManufacturerColor(frame.system.manufacturer, "brdr")}
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-    <div class="la-combine-h clipped-alt la-bckg-pilot la-text-header -padding0 -align-center">
+    <div class="la-combine-h clipped-alt la-bckg-pilot la-text-header -padding0 -aligncenter">
         <span class="-fontsize1">${coreEnergy ? getLocalized("LA.mech.core.online.label") : getLocalized("LA.mech.core.offline.label")}</span>
         <div class="${coreEnergy ? "" : ""}">
             <input name="system.core_energy" class="core-power-toggle mdi mdi-battery-outline la-text-repcap -fontsize5" type="checkbox" data-dtype="Boolean" ${coreEnergy ? "checked" : ""}>
         </div>
     </div>
     <div class="la-spacer -medium">&nbsp</div>
-    <div class="la-generated -fullwidth -gap1 la-combine-v">
+    <div class="la-generated -widthfull -gap1 la-combine-v">
         ${power}
         ${traits.join("")}
     </div>
@@ -225,7 +230,7 @@ function renderFramePower(framePath: string, coreEnergy: number, options: Helper
     return `
 <!-- Frame Power -->
 <div 
-    class="la-details -fullwidth -frame">
+    class="la-details -widthfull -frame">
     <summary class="la-details__summary la-combine-h clipped-bot-alt ${theme} la-text-header -fontsize2
             collapse-trigger"
         data-la-collapse-id="${frame.id}_core">
@@ -264,11 +269,11 @@ function renderFramePassive(framePath: string, options: HelperOptions)
     if (core.passive_effect !== "")
     {
         passive = `
-            <div class="la-effectbox la-combine-v -align-left">
+            <div class="la-effectbox la-combine-v -alignleft">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                     ${getLocalized("LA.mech.core.passive.label")}
                 </span>
-                <div class="la-dropshadow -fullwidth">
+                <div class="la-dropshadow -widthfull">
                     <div class="-fontsize1">
                         ${core.passive_effect ?? ""}
                     </div>
@@ -351,11 +356,11 @@ function renderFrameActive(framePath: string, coreEnergy: number, options: Helpe
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <div class="la-divider-h la-bckg-primary"></div>
-        <div class="la-effectbox la-combine-v -align-left -descriptive">
+        <div class="la-effectbox la-combine-v -alignleft -descriptive">
             <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                 ${core.activation.toUpperCase()}
             </span>
-            <div class="-fullwidth ${coreEnergy ? "la-dropshadow" : ""}">
+            <div class="-widthfull ${coreEnergy ? "la-dropshadow" : ""}">
                 <button type="button"
                     class="la-corepower clipped la-text-header la-combine-h -fontsize4
                         activation-flow ${activation} ${activationTheme}"  ${coreEnergy ? "" : "disabled"}
@@ -402,7 +407,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
     let collID = `${frame.uuid}_frame_trait_${index}`;
     return `
 <!-- Frame Trait -->
-<div class="la-details -fullwidth -frame">
+<div class="la-details -widthfull -frame">
     <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-pilot la-text-header -fontsize2
             collapse-trigger"
         data-uuid="${frame.uuid}" 
@@ -428,7 +433,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                     ${getLocalized("LA.mech.frame.trait.label")}
@@ -464,7 +469,7 @@ function renderWeaponMountBracing(mech: any, mount: any, options: HelperOptions)
 <div class="la-details-wrapper la-dropshadow la-brdr-repcap
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-    <details class="la-details -fullwidth la-combine-v -bracing">
+    <details class="la-details -widthfull la-combine-v -bracing">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2"></i>
@@ -551,7 +556,7 @@ function renderWeaponEmpty(weaponPath: string, size: string, options: HelperOpti
     return `
 <!-- Empty Weapon -->
 <div 
-    class="la-details -fullwidth la-dropshadow -empty
+    class="la-details -widthfull la-dropshadow -empty
         ref slot drop-settable mech_weapon"
     data-path="${weaponPath}"
     data-accept-types="mech_weapon">
@@ -657,7 +662,7 @@ function renderWeapon(
     if (limited || loading || systemPoints)
     {
         resources = `
-            <div class="la-resource la-combine-h -fullwidth">
+            <div class="la-resource la-combine-h -widthfull">
                 ${loading}
                 ${limited}
                 ${systemPoints}
@@ -678,7 +683,7 @@ function renderWeapon(
     return `
 <!-- Weapon -->
 <div 
-    class="la-details -fullwidth la-dropshadow -weapon
+    class="la-details -widthfull la-dropshadow -weapon
         ref set drop-settable mech_weapon item"
     data-uuid="${weapon.uuid}" 
     data-path="${weaponPath}" 
@@ -696,7 +701,7 @@ function renderWeapon(
             </button>
             <!-- Name, Slot -->
             <div class="la-name la-combine-v -divider"> 
-                <span class="la-top__span -fullwidth -fontsize2 ${destroyed ? "la-text-repcap -strikethrough" : ""}">
+                <span class="la-top__span -widthfull -fontsize2 ${destroyed ? "la-text-repcap -strikethrough" : ""}">
                     ${weapon.name}
                 </span>
                 <span class="la-bottom__span ${destroyed ? "la-text-error horus--very--subtle" : ""}">
@@ -732,7 +737,7 @@ function renderWeapon(
     <div class="la-details-wrapper la-brdr-pilot ${destroyed ? "-destroyed" : ""} 
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, weapon, true)}">
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
             ${profiles}
@@ -759,7 +764,7 @@ function renderWeaponModEmpty(modPath: string, options: HelperOptions)
     return `
 <!-- Empty Weapon Mod -->
 <div 
-    class="la-details -fullwidth -mod
+    class="la-details -widthfull -mod
         ref slot drop-settable weapon_mod"
     data-path="${modPath}"
     data-accept-types="weapon_mod">
@@ -800,7 +805,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     if (limited)
     {
         resources = `
-            <div class="la-resource la-combine-h -fullwidth">
+            <div class="la-resource la-combine-h -widthfull">
                 ${limited}
             </div>
         `;
@@ -834,7 +839,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     if (addedDamage || addedRange || addedTags)
     {
         modifiers = `
-            <div class="la-resource la-combine-h -fullwidth">
+            <div class="la-resource la-combine-h -widthfull">
                 ${addedRange}
                 ${addedDamage}
                 ${addedTags}
@@ -851,7 +856,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
 
     return `
 <!-- Weapon Mod -->
-<div class="la-details -fullwidth -mod
+<div class="la-details -widthfull -mod
     ref set drop-settable weapon_mod"
     data-uuid="${mod.uuid}"
     data-path="${modPath}"
@@ -882,7 +887,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, mod, true)}">
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <!-- Generated Content -->
             ${resources}
             ${modifiers}
@@ -906,10 +911,10 @@ export function renderSystemMountEmpty(loadout: string, options: HelperOptions)
     let collID = `${mech.id}_system_empty`;
     return `
 <!-- Empty Systems -->
-<h1 class="la-systemsheader la-subcontent la-combine-h la-bckg-frame la-text-header clipped-top -justify-between
+<h1 class="la-summary la-subcontent la-combine-h la-bckg-frame la-text-header clipped-top -justifybetween
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <div class="la-systemsheader-label -fontsize2">
+    <div class="la-summary-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.placeholder")} 
         <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
@@ -921,7 +926,7 @@ export function renderSystemMountEmpty(loadout: string, options: HelperOptions)
 <div class="la-details-wrapper la-dropshadow -borderoff
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
-    <details class="la-details -fullwidth la-combine-v -empty">
+    <details class="la-details -widthfull la-combine-v -empty">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2"></i>
@@ -954,10 +959,10 @@ export function renderSystemMounts(loadoutPath: string, options: HelperOptions)
     // Systems header needs a special class to check for hover state
     return `
 <!-- Systems -->
-<h1 class="la-systemsheader la-subcontent la-combine-h la-bckg-system la-text-header clipped-top -justify-between
+<h1 class="la-summary la-subcontent la-combine-h la-bckg-system la-text-header clipped-top -justifybetween
         collapse-trigger"
     data-la-collapse-id="${collapseID(collapse, collID, false)}">
-    <div class="la-systemsheader-label -fontsize2">
+    <div class="la-summary-label -fontsize2">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         ${getLocalized("LA.mech.system.label")} 
         <span class="la-extension la-text-header -lower -fadein">--${getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
@@ -1017,7 +1022,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     if (limited)
     {
         resources = `
-            <div class="la-resource la-combine-h -fullwidth">
+            <div class="la-resource la-combine-h -widthfull">
                 ${limited}
             </div>
         `;
@@ -1035,7 +1040,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
         : getLocalized(SYSTEM_LOCALIZE_MAP[sys.system.type]) || getLocalized("LA.mech.system.system.label");
     return `
 <!-- System -->
-<div class="la-details -fullwidth la-dropshadow -system 
+<div class="la-details -widthfull la-dropshadow -system 
     ref set drop-settable mech_system"
     data-item-id="${sys.uuid}"
     data-uuid="${sys.uuid}"
@@ -1080,7 +1085,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
     <div class="la-details-wrapper -borderoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, sys, true)}">
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <!-- Generated Content -->
             ${destroyedText}
             ${resources}
@@ -1186,7 +1191,7 @@ export function renderEffectBox(title: string, text: string, options?: { add_cla
     {
         flowButton = `
     <button type="button"
-        class="la-flow la-button la-bckg-secondary la-text-header clipped-bot effect-flow">
+        class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot effect-flow">
         <span class="la-terminal -fadein">>//: </span>${getLocalized("LA.use.label")}<span class="la-extension -lower -fadein">${randomExtension()}</span><span class="la-cursor -fadein"></span>
     </button>
         `;
@@ -1227,7 +1232,7 @@ export function renderAddedBonus(bonusPath: string, edit: boolean, options: Help
     }
 
     return `
-    <div class="la-combine-h -fullwidth">
+    <div class="la-combine-h -widthfull">
         ${renderArray.join("")}
     </div>
     `;
@@ -1321,7 +1326,7 @@ For systems, actors are got from the global actor list and filtered down and tak
 export function renderDeployableArray(deployablePath: string, options: HelperOptions)
 {
     let item = resolveHelperDotpath(options, deployablePath) as any;
-
+    console.log(item);
     if (!item.actor || item.actor.is_deployable() || item.actor.isToken)
         return "";
 
@@ -1369,8 +1374,8 @@ function renderDeployable(deployable: StoredDocument<any>, source: { item: any, 
     );
     let buttonDisplay = buttons.length > 1
         ? `
-        <div class="la-effectbox-buttons la-combine-h -justify-between">
-            <div class="la-combine-v -align-left">${buttons.join("")}</div>
+        <div class="la-effectbox-buttons la-combine-h -justifybetween">
+            <div class="la-combine-v -alignleft">${buttons.join("")}</div>
             <img class="-height10 click-open" src="${img}"/>
         </div>
         <div class="la-spacer -medium">&nbsp</div>
@@ -1423,13 +1428,14 @@ export function deleteActiveEffect(_app: any, html: JQuery<HTMLElement>, context
 {
     html.on('click', '.la-delete', function (event)
     {
+        console.log("Delete button clicked")
         if (!context.owner)
         {
             console.error("Lancer Alternative Sheets: User is not the owner of this actor.");
             return;
         }
 
-        let id = $(event.currentTarget).data('active-effect-id');
+        let id = $(event.currentTarget).data('uuid');
         try
         {
             // TODO: Removing active effect while sheet is up throws an error. No idea how to fix it.

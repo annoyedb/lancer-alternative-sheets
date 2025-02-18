@@ -63,7 +63,7 @@ function renderCoreBonusArray(coreBonusPath: string, options: HelperOptions): st
     let collID = `${mech.uuid}_${coreBonus.system.lid}`;
     return `
 <!-- Core Bonus -->
-<div class="la-details -fullwidth -talent
+<div class="la-details -widthfull -talent
     ref set"
     data-uuid="${coreBonus.uuid}"
     draggable="true">
@@ -89,7 +89,7 @@ function renderCoreBonusArray(coreBonusPath: string, options: HelperOptions): st
     <div class="la-details-wrapper la-brdr-action--downtime
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
-        <div class="la-generated la-combine-v -fullwidth -gap1">
+        <div class="la-generated la-combine-v -widthfull -gap1">
             <!-- Generated Content -->
             ${bonuses}
             ${effect}
@@ -113,7 +113,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
         let ranks = renderTalentArray(talent, options);
         return `
 <!-- Talent -->
-<div class="la-details -fullwidth -talent
+<div class="la-details -widthfull -talent
     ref set"
     data-uuid="${talent.uuid}"
     draggable="true">
@@ -139,7 +139,7 @@ export function renderTalents(talentPath: string, options: HelperOptions)
     <div class="la-details-wrapper la-brdr-exotic
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, talent, true)}">
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <!-- Generated Content -->
             ${ranks}
         </div>
@@ -184,7 +184,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
         let collID = `${talent.uuid}_${i}`;
         return `
 <!-- Talent Rank -->
-<div class="la-details -fullwidth -talent
+<div class="la-details -widthfull -talent
     ref set"
     data-uuid="${talent.uuid}"
     draggable="true">
@@ -218,7 +218,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
             </span>
             ${rank?.description}
         </span>
-        <div class="la-generated -fullwidth -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap1 la-combine-v">
             <!-- Generated Content -->
             ${actions
                 ? `<div class="la-spacer -medium">&nbsp</div>${actions}`

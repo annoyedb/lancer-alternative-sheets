@@ -1,0 +1,39 @@
+export interface HeaderSecondaryProps
+{
+    children?: any;
+    
+    title: string;
+
+    uuid?: string;
+    path?: string;
+    acceptTypes?: string;
+
+    headerStyle?: Array<string>;
+    headerFontStyle?: Array<string>;
+    headerIconStyle?: Array<string>;
+    borderStyle?: Array<string>;
+    rootStyle?: Array<string>;
+    collapseID?: string;
+    collapse?: any;
+    startCollapsed?: Boolean;
+
+    spOption?: Boolean;
+    spValue?: number;
+    spTextStyle?: Array<string>;
+    spIconStyle?: Array<string>;
+
+    deleteOption?: Boolean;
+    deleteUUID?: string,
+    deleteOnClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+    deleteStyle?: Array<string>;
+
+    messageOption?: Boolean;
+    messageUUID?: string,
+    messageType?: string,
+    messageIndex?: number,
+    messageStyle?: Array<string>;
+
+    editOption?: Boolean;
+    editStyle?: Array<string>;
+    editIconStyle?: Array<string>;
+}

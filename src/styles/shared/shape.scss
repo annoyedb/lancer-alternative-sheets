@@ -1,0 +1,55 @@
+:root
+{
+    $clip_in: 10px;
+    --bot-dogear-path-alt: polygon(0 0,
+        100% 0,
+        100% 100%,
+        #{$clip_in} 100%,
+        0 calc(100% - #{$clip_in}));
+    --top-dogear-path-alt: polygon(0 0,
+        calc(100% - #{$clip_in}) 0,
+        100% #{$clip_in},
+        100% 100%,
+        0 100%);
+    --double-dogear-path-alt: polygon(0 0,
+        calc(100% - #{$clip_in}) 0,
+        100% #{$clip_in},
+        100% 100%,
+        #{$clip_in} 100%,
+        0 calc(100% - #{$clip_in}));
+}
+
+.clipped-bot-alt
+{
+    clip-path: var(--bot-dogear-path-alt);
+    -webkit-clip-path: var(--bot-dogear-path-alt);
+    -moz-clip-path: var(--bot-dogear-path-alt);
+}
+
+.clipped-top-alt
+{
+    clip-path: var(--top-dogear-path-alt);
+    -webkit-clip-path: var(--top-dogear-path-alt);
+    -moz-clip-path: var(--top-dogear-path-alt);
+}
+
+.clipped-alt
+{
+    clip-path: var(--double-dogear-path-alt);
+    -webkit-clip-path: var(--double-dogear-path-alt);
+    -moz-clip-path: var(--double-dogear-path-alt);
+}
+
+.sliced
+{
+    clip-path: polygon(0 0, calc(100% - 30px) 0%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 0, calc(100% - 30px) 0%, 100% 100%, 0% 100%);
+    -moz-clip-path: polygon(0 0, calc(100% - 30px) 0%, 100% 100%, 0% 100%);
+}
+
+.dual-sliced
+{
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    -moz-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}

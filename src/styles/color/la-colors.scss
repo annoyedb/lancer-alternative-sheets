@@ -7,11 +7,26 @@
 @use 'themes/galsim' as galsim;
 @use 'themes/msmc' as msmc;
 @use 'themes/common' as common;
-@use 'mixins' as *;
+@use '../mixins' as *;
 
 :root
 {
     --size: .2px;
+}
+
+.la-brdr-transparent
+{
+    border-color: transparent;
+}
+
+.lancer-text-dark
+{
+    color: var(--dark-text)
+}
+
+.lancer-text-light
+{
+    color: var(--light-text)
 }
 
 // Themes

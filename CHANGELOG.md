@@ -1,3 +1,24 @@
+# 1.1.0
+ᕕ( ᐛ )ᕗ New `minor` version
+
+## Changes
+* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should, but this is intentional! If any discrepancies are found, let me know
+* Theme changes can now be applied without having to reopen the sheets!
+* Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
+* Added collapsibility to the status tab --that's all of them for mech sheets!
+* Macro/flow buttons no longer overflow into new lines, giving a more consistent UX
+* Fixed a critical error where Active Effects would never display since the value it was checking for did not exist from a patch added in 1.0.4 onwards `i am literally cascading`
+* Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed event.stopPropogation()
+* Fixed an issue where the "Full Repair" button did nothing because of an incorrect flow type definition
+* Fixed a bug where having a frame deployable would display all deployables owned by that actor, rather than just the deployables relevant to the frame `give me a scenario where Hydra isn't a pain in everyone's ass`
+* Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (except give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
+
+## 1.0.0 -> 1.1.0 Summary
+* Added GMS Dark theme
+* Finished implementing mech sheet features (deployables, talents, core bonuses, etc) to display all effects, bonuses, etc
+* Externally loaded assets stop randomly going to grab milk between patches and never coming back
+* Minor styling changes to consistency and usability
+
 # 1.0.12
 Last patch before refactoring over to Svelte (and then NPC sheets soon)
 ## Changes

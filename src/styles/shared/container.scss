@@ -1,0 +1,218 @@
+@use './general' as *;
+
+.la-root
+{
+    // Flexboxes
+    .la-combine-v,
+    .la-combine-h,
+    .la-combine-grid
+    {
+        &.-justifycenter
+        {
+            justify-content: center;
+        }
+        
+        &.-justifybetween
+        {
+            justify-content: space-between;
+        }
+
+        &.-justifystart
+        {
+            justify-content: flex-start;
+        }
+
+        &.-justifyend
+        {
+            justify-content: flex-end;
+        }
+        
+        &.-alignleft
+        {
+            align-items: flex-start;
+        }
+
+        &.-aligncenter
+        {
+            align-items: center;
+        }
+
+        >.-flex1
+        {
+            flex: 1;
+        }
+
+        >.-flex0
+        {
+            flex: 0;
+        }
+
+        >.-flexthird
+        {
+            flex: 1 1 33.3333%;
+        }
+    }
+
+    // Vertical flexbox
+    .la-combine-v
+    {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+
+        &.-divider
+        {
+            >*:not(:last-child)
+            {
+                border-bottom: var(--thickness, 2px) solid var(--color);
+                border-radius: unset;
+            }
+        }
+    }
+
+    // Horizontal flexbox
+    .la-combine-h
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0;
+        font-size: calc(1em / var(--length));
+    }
+
+    // Dropdowns for Effect, Weapons, Systems, etc
+    .la-details.la-combine-v
+    {
+        // Summary
+        >.la-details__summary
+        {
+            padding: 0.5rem;
+            border-radius: 4px 0px 0px 0px;
+            cursor: pointer;
+
+            .la-cursor
+            {
+                --color: currentColor;
+            }
+
+            a
+            {
+                text-align: center;
+                width: 1rem;
+            }
+        }
+    }
+
+    .la-effectbox
+    {
+        width: 100%;
+        position: relative;
+        border-radius: 8px 0px 0px 8px;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: var(--repcap);
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5em;
+
+        &.-allround
+        {
+            border-radius: 8px;
+        }
+        
+        &.-descriptive
+        {
+            padding: 0.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1rem;
+
+            .la-flow
+            {
+                min-width: 12em;
+                width: auto;
+                float: left;
+                margin-right: 1rem;
+            }
+        }
+
+        &.-largeheader
+        {
+            margin-top: 1rem;
+        }
+
+        >.la-effectbox__span
+        {
+            position: absolute;
+            top: -0.5rem;
+            left: 0.5rem;
+            padding: 0.1rem;
+            padding-right: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        >.la-effectbox__edit
+        {
+            position: absolute;
+            top: -0.5rem;
+            right: 0.5rem;
+            padding: 0.1rem;
+            padding-right: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .la-actionheader
+        {
+            position: absolute;
+            width: calc(100% - 1rem);
+            top: -1rem;
+        }
+    }
+
+    // Edits here are made so that when the user hovers over the header, 
+    // the anims will play regardless of whether there are additional 
+    // elements in the header
+    .la-collapsegroup
+    {
+        >.la-summary
+        {
+            &:hover
+            {
+                >.la-summary-label>.la-terminal,
+                >.la-summary-label>.la-extension
+                {
+                    @include hoverFadeIn;
+                }
+
+                >.la-summary-label>.la-cursor
+                {
+                    @include blinking;
+                    @include hoverFadeIn;
+
+                    &
+                    {
+                        animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                    }
+                }
+            }
+        }
+
+        >.la-details-wrapper
+        {
+            border-width: 0px 0px 1px 1px;
+            border-radius: 0px 0px 0px 8px;
+            border-style: solid;
+        }
+    }
+
+    .la-activeeffect
+    {
+        >.la-activeeffect__img
+        {
+            float: left;
+            max-height: 4rem;
+        }
+    }
+}

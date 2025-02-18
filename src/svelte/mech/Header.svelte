@@ -1,60 +1,35 @@
 <script lang="ts">
-    import type { MechSheetData } from "@/interfaces/actor/MechSheetData";
+    import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { id as moduleID } from '@/module.json';
 
-    const { actor, pilot }: MechSheetData = $props();
+    const { actor, pilot }: MechSheetProps = $props();
 </script>
 
-<header 
-    class="la-header la-bg-scroll -flex0
-        sheet-header">
-    <!-- Header -->
-    <div class="la-combine-h">
-        <div class="la-names las-combine-v">
-            <input 
-                class="la-mechname__input la-text-header -upper
-                    charname"
-                name="name" type="text" value="{actor.name}" 
-                placeholder="{getLocalized(" LA.namePlaceholder")}" />
-            <hr class="la-divider-h -large -spacemedium la-bckg-header">
-            <span class="la-pilotname__span -upper la-text-header \
-                    ref set pilot click-open"
-                data-uuid="{pilot ? pilot.uuid : ""}" 
-                data-path="system.pilot"
-                data-accept-types="pilot">{pilot ? pilot.system.callsign : getLocalized("LA.pilotPlaceholder")} </span>
-        {#if pilot}
-            <span class="la-pilotlevel__span -upper la-text-header"
-                >LL{pilot.system.level}</span>
-        {:else}
-            <div>WARNING</div>
-        {/if}
-        </div>
-        <img 
-            class="la-mechhead__img" src="{actor.img}" 
-            alt={`modules/${moduleID}/assets/assets/nodata.png`}
-        />
+<!-- Header -->
+<div class="la-header-content la-combine-h">
+    <div class="la-names las-combine-v -margin3">
+        <input 
+            class="la-mechname__input la-text-header -upper -fontsize5
+                charname"
+            name="name" type="text" value="{actor.name}" 
+            placeholder="{getLocalized(" LA.namePlaceholder")}" />
+        <hr class="la-divider-h -large -spacemedium la-bckg-header">
+        <span class="la-pilotname__span -upper la-text-header -fontsize3
+                ref set pilot click-open"
+            data-uuid="{pilot ? pilot.uuid : ""}" 
+            data-path="system.pilot"
+            data-accept-types="pilot">{pilot ? pilot.system.callsign : getLocalized("LA.pilotPlaceholder")} </span>
+    {#if pilot}
+        <span class="la-pilotlevel__span -upper la-text-header">LL{pilot.system.level} </span>
+        <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.search.label")}</span><!--
+    ---><span class="la-cursor la-anim-header -fadein"></span>
+    {:else}
+        <div>{getLocalized("LA.mech.noPilot.label")}</div>
+    {/if}
     </div>
-    <!-- Navigation -->
-    <div class="la-island">
-        <nav class="la-tabs la-bckg-pilot clipped-alt" 
-            data-group="primary">
-            <!-- svelte-ignore a11y_missing_attribute -->
-            <a class="la-tab clipped-bot-alt la-text-header -fontsize2"
-                data-tab="status" 
-                data-text="{getLocalized("LA.tab.status.label")}">
-                {getLocalized("LA.tab.status.label")}
-            </a>
-            <!-- svelte-ignore a11y_missing_attribute -->
-            <a class="la-tab clipped-bot-alt la-text-header -fontsize2" 
-                data-tab="loadout" 
-                data-text="{getLocalized("LA.tab.loadout.label")}">
-                {getLocalized("LA.tab.loadout.label")}
-            </a>
-        </nav>
-    </div>
-</header>
-
-<style lang="scss">
-    @use "src/styles/mech/header";
-</style>
+    <img 
+        class="la-mechhead__img" src="{actor.img}" 
+        alt={`modules/${moduleID}/assets/assets/nodata.png`}
+    />
+</div>

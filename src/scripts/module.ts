@@ -1,4 +1,4 @@
-import { getTheme } from "./theme";
+import { applyTheme, getTheme } from "./theme";
 import { deleteActiveEffect, LAMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
@@ -63,4 +63,7 @@ function setupSheets()
 function setupEventListeners()
 {
     Hooks.on("renderLASMechSheet", deleteActiveEffect);
+    // TODO: Until a Lancer settings/theme hook is available, 
+    // this blasts on every single time the settings close
+    Hooks.on("closeSettingsConfig", applyTheme);
 }

@@ -1,82 +1,79 @@
 // Header
-.la-header
+.la-root
 {
-    min-height: 10rem;
-    height: 10rem;
-    position: relative;
-
-    >.la-combine-h>.la-names
+    .la-header
     {
-        flex: 1;
+        min-height: 10rem;
+        max-height: 10rem;
+        height: 10rem;
+        position: relative;
 
-        align-self: flex-start;
-        margin: 1rem;
-
-        >.la-mechname__input
+        >.la-island
         {
-            pointer-events: auto;
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 0.25rem;
-            text-overflow: ellipsis;
-        }
-
-        >.la-pilotname__span
-        {
-            font-size: 1.5rem;
-            border-bottom: 0;
-            margin: 0;
-        }
-        
-        &.-alt
-        {
+            z-index: 1;
+            right: 0rem;
+            top: 8.25rem;
             position: absolute;
-        }
-    }
+            filter: drop-shadow(-3px 3px 1px var(--shadow));
+            -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
+            -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
 
-    >.la-combine-h>.la-mechhead__img
-    {
-        pointer-events: none;
-        flex: 1;
-
-        overflow: hidden;
-        height: 50%;
-        mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
-        -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
-        -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
-    }
-
-    >.la-island
-    {
-        z-index: 1;
-        right: 0rem;
-        top: 8.25rem;
-        position: absolute;
-        filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
-
-        >.la-tabs
-        {
-            display: flex;
-
-            >.la-tab
+            >.la-tabs
             {
-                letter-spacing: 0.2rem;
-                text-align: center;
-                padding: 0.5rem;
+                display: flex;
 
-                transition: all 0.15s ease-in;
-
-                &:hover
+                >.la-tab
                 {
-                    background-color: var(--darken-1);
-                }
+                    letter-spacing: 0.2rem;
+                    text-align: center;
 
-                &.active
-                {
-                    background-color: var(--darken-2);
+                    transition: all 0.15s ease-in;
+
+                    &:hover
+                    {
+                        background-color: var(--darken-1);
+                    }
+
+                    &.active
+                    {
+                        background-color: var(--darken-2);
+                    }
                 }
+            }
+        }
+
+        .la-header-content
+        {
+            >.la-names
+            {
+                flex: 1;
+                align-self: flex-start;
+                min-width: 15rem;
+
+                >.la-mechname__input
+                {
+                    pointer-events: auto;
+                    font-weight: bold;
+                    letter-spacing: 0.25rem;
+                    text-overflow: ellipsis;
+                }
+                
+                &.-alt
+                {
+                    position: absolute;
+                }
+            }
+
+            >.la-mechhead__img
+            {
+                pointer-events: none;
+                flex: 1;
+
+                overflow: hidden;
+                height: 50%;
+                mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
+                -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
+                -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
             }
         }
     }

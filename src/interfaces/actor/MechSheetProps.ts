@@ -1,4 +1,4 @@
-export interface MechSheetData extends ActorSheet.Data<ActorSheet.Options>
+export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
 {
     root: any, // TODO: possibly (hopefully) unnecessary
     
@@ -14,4 +14,5 @@ export interface MechSheetData extends ActorSheet.Data<ActorSheet.Options>
 
     isActive: Boolean,
     isLimited: Boolean,
+    isOwner: Boolean,
 }

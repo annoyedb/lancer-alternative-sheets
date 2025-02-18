@@ -55,7 +55,7 @@ export function renderActionArray(document: any, path: string, options?: HelperO
                 <div class="-fontsize1 ${options?.full ? "" : "collapsed"}">
                     <div class="la-divider-h la-bckg-primary"></div>
                     <!-- Trigger -->
-                    <div class="la-effectbox la-combine-v -borderbottom -align-left -descriptive">
+                    <div class="la-effectbox la-combine-v -borderbottom -alignleft -descriptive">
                         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">${getLocalized("LA.trigger.label")}</span>
                         ${button}
                         <div class="la-spacer -medium">&nbsp</div>
@@ -139,7 +139,7 @@ export function renderActionButton(
         return `
 <!-- Action Button Flow -->
 <button type="button"
-    class="la-flow la-button la-text-header clipped-bot ${themeClass}
+    class="la-flow -textalignleft -letterspacing0 -padding0 la-text-header clipped-bot ${themeClass}
         activation-flow ${activationClass} ${interactiveClass}"
     data-uuid=${flowData.uuid} 
     data-path="${flowData.path}">
