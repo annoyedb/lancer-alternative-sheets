@@ -6,9 +6,10 @@
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import LimitedBox from "../actor/LimitedBox.svelte";
-    import ProfileBox from "../actor/ProfileBox.svelte";
-    import WeaponMod from "./WeaponMod.svelte";
+    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
+    import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
 
     const {
         mount,
@@ -19,7 +20,7 @@
     function getSlotSize(size: string)
     {
         return size === "Flex"
-            ? `1 ${getLocalized(SLOT_LOCALIZE_MAP['Main'])} || 2 ${getLocalized(SLOT_LOCALIZE_MAP['Auxiliary'])}`
+            ? `${getLocalized(SLOT_LOCALIZE_MAP['Main'])} || 2x ${getLocalized(SLOT_LOCALIZE_MAP['Auxiliary'])}`
             : getLocalized(SLOT_LOCALIZE_MAP[size]) || "any";
     }
 
@@ -148,21 +149,33 @@
             />
             <ActionBox
                 actions={slot.weapon.value.system.actions}
-                actionsPath={`system.actions`}
+                path={`system.actions`}
             />
+        {#if slot.size !== "Integrated"}
             <WeaponMod
                 collapse={collapse}
                 mod={slot.weapon.value.system.mod}
                 path={`${getModPath(index)}`}
             />
-    <!-- Generated Tags -->
-        <!-- TODO: TAGS -->
+        {/if}
+        {#if slot.weapon.value.system.all_tags.length}
+            <TagArray 
+                tags={slot.weapon.value.system.all_tags}
+                path={`${getWeaponPath(index)}.system.all_tags`}
+                justify={"start"}
+            />
+        {/if}
         </div>
     {/if}
     </HeaderTertiary>
 {:else}
 <!-- Empty Weapon -->
-<details class="la-details -widthfull la-combine-v"
+<!-- svelte-ignore block_empty -->
+{#if index === 1 && mount.slots[0].size === "Flex" && 
+    (mount.slots[0].weapon?.value.system.size !== "Auxiliary")}
+{:else}
+<details class="la-details -widthfull la-combine-v
+        ref set drop-settable mech_weapon"
     data-accept-types="mech_weapon"
     data-path={getWeaponPath(index)}>
     <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l">
@@ -175,5 +188,6 @@
         <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getSlotSize(slot.size)}</span>
     </div>
 </details>
+{/if}
 {/if}
 {/each}

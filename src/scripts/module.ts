@@ -1,7 +1,7 @@
 import { applyTheme, getTheme } from "./theme";
 import { deleteActiveEffect, LAMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
-import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
+import { frameManufacturer, frameName, frameUUID, logData, overchargeStage as overchargeStage, randomExtension } from "./helpers";
 import { renderCoreBonuses, renderTalents } from "./actor/pilot-sheet";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
 import { MechSheetBase } from "../classes/actor/MechSheetBase";
@@ -22,6 +22,7 @@ Hooks.once("setup", async () =>
 
 function registerHandlebarsHelpers()
 {
+    Handlebars.registerHelper("log", logData);
     Handlebars.registerHelper("print", function (value) { console.log(value); });
     Handlebars.registerHelper("gt", function (this: any, a, b, options)
     {

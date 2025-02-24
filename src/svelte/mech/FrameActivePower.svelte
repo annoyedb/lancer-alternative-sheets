@@ -35,7 +35,7 @@
 </script>
 
 <!-- Frame Active -->
-<div class="la-effectbox la-bckg-card -descriptive -margin3-t {frameColorBrdr}">
+<div class="la-effectbox la-bckg-card -descriptive -margin3-t -roundborders-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
@@ -71,7 +71,7 @@
         data-la-collapse-id="{registerCollapse(collapse, collID, true)}">
         <div class="la-divider-h la-bckg-primary"></div>
         <div class="la-combine-v -gap0">
-            <div class="la-effectbox la-combine-v -alignleft">
+            <div class="la-effectbox la-combine-v -roundborders-ltb -alignleft">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0 -upper">
                     {getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
                 </span>
@@ -83,7 +83,7 @@
             <ActionBox
                 uuid={frame.uuid}
                 actions={core.active_actions}
-                actionsPath={'system.core_system.active_actions'}
+                path={'system.core_system.active_actions'}
             />
             <DeployableBox
                 source={actor}

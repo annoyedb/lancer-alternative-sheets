@@ -54,3 +54,9 @@ export function randomExtension(): string
     const randomIndex = Math.floor(Math.random() * extensions.length);
     return extensions[randomIndex];
 }
+
+export function logData(path: string, options: HelperOptions)
+{
+    const data = resolveHelperDotpath(options, path);
+    console.log(data);
+}

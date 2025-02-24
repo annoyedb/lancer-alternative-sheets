@@ -1,7 +1,7 @@
 export interface ActionBoxProps
 {
     actions: Array<any>
-    actionsPath?: string
+    path?: string
     uuid?: string,
     edit?: Boolean,
     editDetails?: Boolean,

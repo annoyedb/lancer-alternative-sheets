@@ -3,23 +3,29 @@
     import { getLocalized } from "@/scripts/helpers";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import RangeArray from "@/svelte/actor/RangeArray.svelte";
+    import DamageArray from "@/svelte/actor/DamageArray.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
+    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import BonusBox from "@/svelte/actor/BonusBox.svelte";
 
     const {
         collapse,
         mod,
         path,
     }: WeaponModProps = $props();
-
-    console.log(mod?.system.sp, mod?.uuid, mod?.name);
 </script>
 
 {#if mod}
     <HeaderSecondary
         title={mod.name}
-        rootStyle={["ref", "set", "drop-settable", "weapon_mod"]}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
         headerFontStyle={["-fontsize2"]}
         headerIconStyle={["cci", "cci-weaponmod", "-fontsize5", "-lineheight3"]}
+        
+        rootStyle={["ref", "set", "drop-settable", "weapon_mod"]}
         uuid={mod.uuid}
         path={path}
         acceptTypes={"weapon_mod"}
@@ -35,23 +41,79 @@
         editOption={true}
         editIconStyle={["-lineheight3"]}
     >
-    <!-- <div class="la-generated -widthfull -gap1 la-combine-v"> -->
-        <!-- Generated Content --> TODO: LEFT OFF HERE
-        <LimitedBox
-            usesValue={mod.system.uses.value}
-            usesMax={mod.system.uses.max}
-            path={path}
-        />
-        <!-- ${resources}
-        ${modifiers}
-        ${effect}
-        ${bonuses}
-        ${actions}
-    </div>
-    ${tags} -->
+        <div class="la-generated -widthfull -gap1 la-combine-v">
+            <!-- Generated Content -->
+        {#if !!(mod.system.uses.max || mod.system.counters.length)}
+            <div class="la-combine-h">
+            {#if mod.system.uses.max}
+                <LimitedBox
+                    usesValue={mod.system.uses.value}
+                    usesMax={mod.system.uses.max}
+                    path={path}
+                />
+            {/if}
+            {#if mod.system.counters.length}
+            {#each mod.system.counters as counter, index}
+                <CounterBox
+                    name={counter.name}
+                    usesValue={counter.value}
+                    usesMax={counter.max}
+                    path={`${path}.system.counters.${index}`}
+                />
+            {/each}
+            {/if}
+            </div>
+        {/if}
+        {#if mod.system.added_range.length || mod.system.added_damage.length}
+            <div class="la-combine-h -widthfull">
+            {#if mod.system.added_range.length}
+                <EffectBox
+                    name={getLocalized("LA.mech.mod.range.label")}
+                    innerStyle={["-fontsize3"]}
+                    outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-roundborders"] : []}
+                >
+                    <RangeArray
+                        ranges={mod.system.added_range}
+                    />
+                </EffectBox>
+            {/if}
+            {#if mod.system.added_damage.length}
+                <EffectBox
+                    name={getLocalized("LA.mech.mod.damage.label")}
+                    innerStyle={["-fontsize3"]}
+                >
+                    <DamageArray
+                        damages={mod.system.added_damage}
+                    />
+                </EffectBox>
+            {/if}
+            </div>
+        {/if}
+            <BonusBox
+                bonuses={mod.system.bonuses}
+                bonusPath={`${path}.system.bonuses`}
+            />
+            <EffectBox
+                name={getLocalized("LA.mech.mod.tags.label")}
+            >
+                <TagArray
+                    tags={mod.system.added_tags}
+                    path={`${path}.system.added_tags`}
+                />
+            </EffectBox>
+            <EffectBox
+                name={getLocalized("LA.mech.mod.effect.label")}
+                effect={mod.system.effect}
+            />
+            <ActionBox
+                actions={mod.system.actions}
+                path={`system.actions`}
+            />
+        </div>
     </HeaderSecondary>
 {:else}
-    <details class="la-details -widthfull la-combine-v"
+    <details class="la-details -widthfull la-combine-v
+            ref set drop-settable weapon_mod"
         data-accept-types="weapon_mod"
         data-path={path}>
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l">

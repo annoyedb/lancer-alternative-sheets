@@ -2,7 +2,7 @@
 ᕕ( ᐛ )ᕗ New `minor` version
 
 ## Changes
-* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should, but this is intentional! If any discrepancies are found, let me know
+* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any (negative) discrepancies are found, let me know
 * Theme changes can now be applied without having to reopen the sheets!
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
 * Added collapsibility to the status tab --that's all of them for mech sheets!
@@ -11,7 +11,9 @@
 * Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed event.stopPropogation()
 * Fixed an issue where the "Full Repair" button did nothing because of an incorrect flow type definition
 * Fixed a bug where having a frame deployable would display all deployables owned by that actor, rather than just the deployables relevant to the frame `give me a scenario where Hydra isn't a pain in everyone's ass`
-* Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (except give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
+* Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (for now --though they do give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
+* Custom counters added through the system's "Custom Counter" editable are now supported in the alternative sheets for mech weapons, mech weapon mods, and mech systems, frame cores, and frame traits
+* Added missing data path for Core Bonus option button
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme

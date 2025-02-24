@@ -67,6 +67,7 @@ export class MechSheetBase
             {
                 super.activateListeners(html);
 
+                this.reapplyImgListener(html);
                 initializeCollapses(html); // PopOut! compatibility override
                 applyCollapseListeners(html); // PopOut! compatibility override
             }
@@ -74,12 +75,10 @@ export class MechSheetBase
             override async getData(): Promise<MechSheetProps>
             {
                 let data = await super.getData() as any;
-                data.root = data;
                 data.isActive = data.is_active;
                 data.effectCategories = data.effect_categories;
                 data.isLimited = data.limited;
                 data.isOwner = data.owner;
-
                 return data as MechSheetProps;
             }
             
@@ -159,10 +158,16 @@ export class MechSheetBase
                 });
                 
                 this.activateListeners(html);
-                
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender
                 this._restoreScrollPositions(html);
+            }
+
+            reapplyImgListener(html: JQuery<HTMLElement>)
+            {
+                html.find('img[data-edit="img"]').each((_, img) => {
+                    $(img).on('click', this._onEditImage.bind(this));
+                });
             }
         }
 

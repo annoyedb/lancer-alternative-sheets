@@ -2,6 +2,20 @@
 
 .la-root
 {
+    .-roundborders-ltb
+    {
+        border-radius: 8px 0px 0px 8px;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+    }
+
+    .-roundborders
+    {
+        border-radius: 8px;
+        border-width: 1px;
+        border-style: solid;
+    }
+
     // Flexboxes
     .la-combine-v,
     .la-combine-h,
@@ -107,19 +121,11 @@
     {
         width: 100%;
         position: relative;
-        border-radius: 8px 0px 0px 8px;
-        border-width: 1px 0px 1px 1px;
-        border-style: solid;
         border-color: var(--repcap);
         margin-top: 0.5rem;
         padding: 0.5rem;
         padding-top: 1rem;
         padding-bottom: 0.5em;
-
-        &.-allround
-        {
-            border-radius: 8px;
-        }
         
         &.-descriptive
         {

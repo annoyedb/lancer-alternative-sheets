@@ -23,7 +23,6 @@
     function deleteActiveEffect(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
     {
         event.stopPropagation();
-        console.log("pressed delete");
         if (!isOwner)
         {
             console.error("Lancer Alternative Sheets: User is not the owner of this actor.");
@@ -31,14 +30,13 @@
         }
 
         let id = event.currentTarget.getAttribute('data-uuid');
-        console.log(id, isOwner);
         try
         {
             actor.deleteEmbeddedDocuments("ActiveEffect", [id], { diff: true, render: true, type: 'ActiveEffect' });
         } 
         catch (error)
         {
-            console.error("Lancer Alternative Sheets: Error deleting active effect, known issue --just aesthetic.");
+            console.error("Lancer Alternative Sheets: Error deleting active effect.", error);
         }
     }
 </script>
@@ -46,7 +44,7 @@
 <!-- TODO: effect.name needs a localization map -->
 <!-- TODO: effect.description needs a localization map-->
 <div class="la-combine-v -gap0">
-{#if effects.length > 0}
+{#if effects.length}
 {#each effects as effect}
     <HeaderMain
         title={effect.name}
@@ -70,7 +68,7 @@
                 src="{encodeURI(getThemedIcon(effect))}" 
                 alt="Effect Icon"
             >
-            <span class="la-active-effect__span -fontsize1">{effect.description}</span>
+            <span class="la-active-effect__span -fontsize1">{@html effect.description}</span>
         </span>
     </HeaderMain>
 {/each}

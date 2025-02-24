@@ -8,7 +8,7 @@
 
     const {
         actions,
-        actionsPath,
+        path,
         uuid,
         edit,
         editDetails,
@@ -30,7 +30,7 @@
 {#if actions.length > 0}
 {#each actions as action, index}
     <!-- Action Array -->
-    <div class="la-effectbox la-bckg-card -largeheader">
+    <div class="la-effectbox la-bckg-card -largeheader -roundborders-ltb">
         <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped -padding0">
             <i class="cci {ACTIVATION_ICON_MAP[action.activation]} -height3 -lineheight3 -fontsize5 -flexthird"></i>
             <span class="-fontsize2 -flexthird -textwrapnowrap -textaligncenter"><!--
@@ -47,7 +47,7 @@
                         class="la-actionheader__button mdi mdi-delete -fontsize3" 
                         data-action="splice"
                         data-uuid={uuid}
-                        data-path={actionsPath}
+                        data-path={path}
                         aria-label={getLocalized("LA.delete.label")}
                     >
                     </button>
@@ -59,41 +59,37 @@
         <div class="-fontsize1">
             <div class="la-divider-h la-bckg-primary"></div>
             <!-- Trigger -->
-            <div class="la-effectbox la-combine-v -borderbottom -alignleft">
+            <div class="la-effectbox la-combine-v -borderbottom -alignleft -roundborders-ltb">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0"><!--
                 --->{getLocalized("LA.trigger.label")}<!--
             ---></span>
-                <div class="la-combine-h -justifybetween -widthfull">
-                    <!-- TODO: Move to a snippet -->
-                    <FlowButton
-                        name={getActivationName(action.activation)}
-                        flowClass={action && uuid && actionsPath 
-                            ? `${FlowClass.Activation} ${getActivationClass(action.activation)}`
-                            : getActivationClass(action.activation)
-                        }
-                        tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
-                        tooltip={`${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`}
-                        tooltipDirection={"LEFT"}
-                        uuid={uuid}
-                        dataPath={`${actionsPath}.${index}`}
-                        style={["clipped-bot"]}
-                        backgroundStyle={ACTIVATION_COLOR_MAP[action.activation]}
-                    />
-                    <hr>
-                    <div>
-                        <span class="-fontsize1">—{@html action.trigger || defaultPlaceholder}</span>
-                    </div>
-                </div>
+                <!-- TODO: Move to a snippet? -->
+                <FlowButton
+                    name={getActivationName(action.activation)}
+                    flowClass={action && uuid && path 
+                        ? `${FlowClass.Activation} ${getActivationClass(action.activation)}`
+                        : getActivationClass(action.activation)
+                    }
+                    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
+                    tooltip={`${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`}
+                    tooltipDirection={"LEFT"}
+                    uuid={uuid}
+                    dataPath={`${path}.${index}`}
+                    style={["clipped-bot"]}
+                    backgroundStyle={ACTIVATION_COLOR_MAP[action.activation]}
+                />
+                <hr class="-widthfull">
+                {@html action.trigger || defaultPlaceholder}
             </div>
             <!-- Effect -->
-            <div class="la-effectbox">
+            <div class="la-effectbox -roundborders-ltb">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0"><!--
                 --->{getLocalized("LA.mech.system.effect.label")}<!--
             --->{#if editDetails}
                     <!-- TODO: allow edit details -->
                     <button type="button" 
                         class="fas fa-edit popout-text-edit-button" 
-                        data-path={`${actionsPath}.detail`}
+                        data-path={`${path}.detail`}
                         aria-label={getLocalized("LA.edit.label")}>
                     </button><!--
             --->{/if}<!--
@@ -104,10 +100,10 @@
     {:else}
         <div class="-fontsize1">
             <div class="la-divider-h la-bckg-primary"></div>
-            <!-- TODO: Move to a snippet -->
+            <!-- TODO: Move to a snippet? -->
             <FlowButton
                 name={getActivationName(action.activation)}
-                flowClass={action && uuid && actionsPath 
+                flowClass={action && uuid && path 
                     ? `${FlowClass.Activation} ${getActivationClass(action.activation)}`
                     : getActivationClass(action.activation)
                 }
@@ -115,19 +111,17 @@
                 tooltip={`${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`}
                 tooltipDirection={"LEFT"}
                 uuid={uuid}
-                dataPath={`${actionsPath}.${index}`}
+                dataPath={`${path}.${index}`}
                 style={["clipped-bot"]}
                 backgroundStyle={ACTIVATION_COLOR_MAP[action.activation]}
             />
             <hr>
-            <div>
-                <span class="-fontsize1">{@html action.detail || defaultPlaceholder}</span>
-            </div>
+            {@html action.detail || defaultPlaceholder}
         </div>
     {/if}
-    <!-- {#if tags}
-        TODO: IMPLEMENT TAGS
-    {/if} -->
+    <!-- The original source reference opened the potential for tags to appear here,
+        but official Lancer data does not have tags for IActionData 
+    -->
     </div>
 {/each}
 {/if}

@@ -132,7 +132,7 @@
                 <button type="button"
                     class="{messageStyle?.join(' ') || defaultRightOptionStyle}
                         chat-flow-button"
-                    data-uuid="{uuid}"
+                    data-uuid={uuid}
                     data-tooltip={chatTip}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={"RIGHT"}

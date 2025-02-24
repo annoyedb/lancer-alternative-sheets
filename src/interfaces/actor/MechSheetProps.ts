@@ -1,10 +1,9 @@
 export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
-{
-    root: any, // TODO: possibly (hopefully) unnecessary
-    
+{    
     actor: any,
     collapse: any,
     deployables: any,
+    document: any,
     effectCategories: Array<any>,
     effects: Array<any>,
     itemTypes: any,

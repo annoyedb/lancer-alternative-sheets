@@ -7,7 +7,10 @@
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "../actor/StatComboShort.svelte";
 
-    const { system, actor }: MechSheetProps = $props();
+    const { 
+        system,
+        actor,
+    }: MechSheetProps = $props();
     let frame = system.loadout.frame?.value;
     let frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
@@ -39,8 +42,10 @@
             </div>
         </div>
         <img class="las-mech__img" 
-            src="{actor.img}" data-edit="img" data-uuid="{actor.uuid}"
+            src="{actor.img}"
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
+            data-edit="img" 
+            data-uuid="{actor.uuid}"
         />
     </div>
     <!-- Mech Stats 1 -->

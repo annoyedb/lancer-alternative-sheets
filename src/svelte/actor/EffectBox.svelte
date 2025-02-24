@@ -5,15 +5,18 @@
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
 
     const {
+        children,
         name,
         effect,
         hasFlow,
+        innerStyle,
+        outerStyle
     }: EffectBoxProps = $props();
 
 </script>
 
-{#if effect}
-<div class="la-effectbox la-bckg-card -fontsize1">
+{#if effect || children}
+<div class="la-effectbox la-bckg-card -fontsize1 -roundborders-ltb {outerStyle?.join(' ')}">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
         {name}
     </span>
@@ -23,8 +26,13 @@
             flowClass={FlowClass.Effect}
         />
     {/if}
-    <span>
-        {effect}
+    <span
+        class="{innerStyle?.join(' ')}"
+    >
+        {@html effect}
+    {#if children}
+        {@render children()}
+    {/if}
     </span>
 </div>
 {/if}

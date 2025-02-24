@@ -105,8 +105,8 @@
 
         spOption={true}
         spValue={component.value.system.sp}
-        spTextStyle={[getSPStyle(component), "-fontsize4"]}
-        spIconStyle={[getSPStyle(component), "-fontsize4"]}
+        spTextStyle={[getSPStyle(component), "-fontsize2"]}
+        spIconStyle={[getSPStyle(component), "-fontsize5"]}
 
         messageOption={true}
         messageIconStyle={["-lineheight0"]}
@@ -131,7 +131,7 @@
             <ActionBox
                 uuid={component.value.uuid}
                 actions={component.value.system.actions}
-                actionsPath={`system.actions`}
+                path={`system.actions`}
             />
             <DeployableBox
                 source={actor}
@@ -142,7 +142,8 @@
     </HeaderTertiary>
 {/each}
 {:else}
-    <details class="la-details -widthfull la-combine-v"
+    <details class="la-details -widthfull la-combine-v
+            ref set drop-settable mech_system"
         data-accept-types="mech_system"
         data-path="system.loadout.systems">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l">

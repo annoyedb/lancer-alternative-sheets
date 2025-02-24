@@ -3,7 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
-    import MountSlots from "./MountSlots.svelte";
+    import MountSlots from "@/svelte/mech/MountSlots.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -20,7 +20,7 @@
     }
 </script>
 
-{#if weaponMounts.length}
+{#if system.loadout.frame && weaponMounts.length}
 {#each weaponMounts as mount, index}
     <HeaderMain
         title={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
@@ -38,7 +38,7 @@
             <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l">
                 <div class="la-left la-combine-h">
                     <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                    <span class="la-name__span -fontsize2">${getLocalized("LA.mech.mount.locked.label")}</span>
+                    <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mount.locked.label")}</span>
                 </div>
             </summary>
             <div class="la-details-wrapper -borderoff">
@@ -51,14 +51,6 @@
             mountIndex={index}
             collapse={collapse}
         />
-        <!-- {#if mount.type === "Flex" && 
-            mount.slots.length === 1 && 
-            mount.slots[0].weapon?.value?.system.size === "Auxiliary"}
-            <MountSlots
-                mount={mount}
-                weaponPath=
-            />
-        {/if} -->
     {/if}
     </HeaderMain>
 {/each}

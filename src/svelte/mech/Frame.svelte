@@ -6,7 +6,9 @@
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "./FramePassivePower.svelte";
     import FrameTrait from "./FrameTrait.svelte";
-    import HeaderSecondary from "../actor/HeaderSecondary.svelte";
+    import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
+    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -16,6 +18,7 @@
     } = props;
 
     let frame: any | undefined = system.loadout.frame?.value;
+    let core: any = frame?.system.core_system;
     let frameName: string = frame
         ? `${frame.system.manufacturer.toUpperCase()} ${frame.name.toUpperCase()}`
         : getLocalized("LA.placeholder");
@@ -54,7 +57,7 @@
     <div class="la-generated la-combine-v -widthfull -gap1">
         <!-- FRAME POWER -->
         <HeaderSecondary
-            title={frame.system.core_system.name}
+            title={core.name}
             rootStyle={["-margin0-t"]}
             headerStyle={[frameColorBckg, "clipped-bot-alt", "-margin1-b", "-padding0", "-padding3-r", "la-text-header"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
@@ -63,9 +66,24 @@
             collapseID={`${collID}_core`}
             startCollapsed={false}
         >
+        {#if core.counters?.length}
+        {#each core.counters as counter, index}
+            <CounterBox
+                name={counter.name}
+                usesValue={counter.value}
+                usesMax={counter.max}
+                path={`system.core_system.counters.${index}`}
+            />
+        {/each}
+        {/if}
             <FrameActivePower {...props} />
             <FramePassivePower {...props} />
-            <!-- TODO: TAGS -->
+        {#if core.tags?.length}
+            <TagArray 
+                tags={core.tags}
+                path={"system.core_system.tags"}
+            />
+        {/if}
         </HeaderSecondary>
         <FrameTrait {...props} />
     </div>

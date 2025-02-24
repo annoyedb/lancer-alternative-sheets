@@ -138,7 +138,7 @@
         <!-- Overcharge -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="mdi mdi-lightning-bolt -fontsize6"></i>
+                <i class="cci cci-overcharge -fontsize6"></i>
                 <div class="la-combine-v -divider -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                     <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>

@@ -3,17 +3,19 @@
     import Frame from "@/svelte/mech/Frame.svelte";
     import Systems from "@/svelte/mech/Systems.svelte";
     import Mounts from "@/svelte/mech/Mounts.svelte";
+    import CoreBonus from "@/svelte/pilot/CoreBonus.svelte";
+    import Talents from "@/svelte/pilot/Talents.svelte";
 
-    const props: MechSheetProps = $props();    
+    const props: MechSheetProps = $props();
 </script>
 
 <div class="la-mount__list la-combine-v -widthfull">
     <Frame {...props} />
     <Mounts {...props} />
     <Systems {...props} />
-    <!-- 
-    {#if system.pilot.value}
-        {{{renderCoreBonuses "system.pilot.value.itemTypes.core_bonus"}}}
-        {{{renderTalents "system.pilot.value.itemTypes.talent"}}}
-    {/if} -->
+    
+    {#if props.pilot}
+        <CoreBonus {...props} />
+        <Talents {...props} />
+    {/if}
 </div>

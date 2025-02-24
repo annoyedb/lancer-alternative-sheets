@@ -23,7 +23,7 @@
 {#if core.passive_effect !== "" || core.passive_actions.length || core.passive_bonuses.length}
 <!-- Frame Passive -->
 <div class="la-spacer -medium"></div>
-<div class="la-effectbox la-bckg-card -descriptive {frameColorBrdr}">
+<div class="la-effectbox la-bckg-card -descriptive -roundborders-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
@@ -49,7 +49,7 @@
         data-la-collapse-id="{registerCollapse(collapse, collID, true)}"
     >
     {#if core.passive_effect}
-        <div class="la-effectbox la-combine-v -alignleft">
+        <div class="la-effectbox la-combine-v -roundborders-ltb -alignleft">
             <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                 {getLocalized("LA.mech.core.passive.label")}
             </span>
@@ -64,7 +64,7 @@
         <ActionBox
             uuid={frame.uuid}
             actions={core.passive_actions}
-            actionsPath={'system.core_system.passive_actions'}
+            path={'system.core_system.passive_actions'}
         />
     </div>
 </div>

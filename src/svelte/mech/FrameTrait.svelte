@@ -3,7 +3,9 @@
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
-    import DeployableBox from "../actor/DeployableBox.svelte";
+    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
+    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import BonusBox from "../actor/BonusBox.svelte";
 
     const {
         actor,
@@ -36,23 +38,36 @@
     startCollapsed={false}
 >
     <div class="la-generated -widthfull -gap1 la-combine-v">
-        <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -fontsize1">
+        <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -roundborders-ltb -fontsize1">
             <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
                 {getLocalized("LA.mech.frame.trait.label")}
             </span>
-            {trait.description}
+            {@html trait.description}
         </span>
         <!-- Generated Content -->
+    {#if trait.counters?.length}
+    {#each trait.counters as counter}
+        <CounterBox
+            name={counter.name}
+            usesValue={counter.value}
+            usesMax={counter.max}
+            path={`system.traits.${index}.counters`}
+        />
+    {/each}
+    {/if}
+        <BonusBox    
+            bonuses={trait.bonuses}
+            bonusPath={`system.traits.${index}.bonuses`}
+        />
         <ActionBox
             uuid={frame.uuid}
             actions={trait.actions}
-            actionsPath={`system.traits.${index}.actions`}
+            path={`system.traits.${index}.actions`}
         />
         <DeployableBox
             source={actor}
             lidSource={trait}
         />
-        <!-- TODO: TAGS -->
     </div>
 </HeaderSecondary>
 {/each}

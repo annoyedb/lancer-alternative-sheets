@@ -1326,7 +1326,6 @@ For systems, actors are got from the global actor list and filtered down and tak
 export function renderDeployableArray(deployablePath: string, options: HelperOptions)
 {
     let item = resolveHelperDotpath(options, deployablePath) as any;
-    console.log(item);
     if (!item.actor || item.actor.is_deployable() || item.actor.isToken)
         return "";
 
@@ -1428,7 +1427,6 @@ export function deleteActiveEffect(_app: any, html: JQuery<HTMLElement>, context
 {
     html.on('click', '.la-delete', function (event)
     {
-        console.log("Delete button clicked")
         if (!context.owner)
         {
             console.error("Lancer Alternative Sheets: User is not the owner of this actor.");

@@ -65,7 +65,7 @@
 {#each globallyOwnedDeployables as deployable}
     {#if lidSourceHasDeployable(deployable)}
     <!-- Deployable -->
-    <div class="la-effectbox la-bckg-card -descriptive
+    <div class="la-effectbox la-bckg-card -descriptive -roundborders-ltb
         ref set"
         data-uuid="{deployable.uuid}">
         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0
@@ -101,13 +101,13 @@
                     />
                 </div>
                 <hr>
-                {deployable.system.detail}
+                {@html deployable.system.detail}
             </div>
             <!-- Actions -->
-        {#if deployable.system.activations.length}
+        {#if deployable.system.actions.length}
             <ActionBox
                 actions={deployable.system.actions}
-                actionsPath={`system.actions`}
+                path={`system.actions`}
             />
         {/if}
         </div>

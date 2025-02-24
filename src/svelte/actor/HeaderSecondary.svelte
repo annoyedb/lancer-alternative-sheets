@@ -44,7 +44,7 @@
     
     let collapsing = collapse && collapseID;
     let collapsed = collapsing && startCollapsed ? "collapsed" : "";
-    let extraOptions = deleteOption || messageOption || spOption ? true : false;
+    let extraOptions = deleteOption || messageOption || spOption || editOption ? true : false;
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
 
@@ -59,7 +59,7 @@
     data-accept-types="{acceptTypes}"
     draggable="true">
     <div class="la-summary la-combine-h la-dropshadow 
-            -justifybetween -widthfull -whitespacenowrap 
+                -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || defaultHeaderStyle}
             {collapsing ? "collapse-trigger" : ""}"
         data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">
@@ -78,7 +78,7 @@
             </div>
         {/if}
         {#if deleteOption && deleteUUID}
-            <!-- onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
+            <!-- (#3) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
                 class="la-delete {deleteStyle?.join(' ') || buttonDefaultStyle}" 
@@ -99,6 +99,7 @@
                 data-tooltip-direction={"RIGHT"}
                 data-type={messageType}
                 data-index={messageIndex}
+                data-rank={messageType === "rank" ? messageIndex : ""}
                 aria-label="{getLocalized("LA.chat.tooltip")}">
                 <i class="mdi mdi-message"></i>
             </button>
