@@ -278,7 +278,7 @@
     {
         width: 100%;
         height: 100%;
-        background: url(modules/lancer-alternative-sheets/assets/grid.png);
+        background: url(/assets/grid.png);
         animation: 400s scroll infinite linear;
         -webkit-animation: 400s scroll infinite linear;
         -moz-animation: 400s scroll infinite linear;
@@ -312,7 +312,7 @@
     {
         width: 1rem;
         height: 100%;
-        background-image: url(modules/lancer-alternative-sheets/assets/scale_1.png);
+        background-image: url(/assets/scale_1.png);
         background-repeat: repeat-y;
         animation: scroll-up 600s infinite linear;
         -webkit-animation: scroll-up 600s infinite linear;
