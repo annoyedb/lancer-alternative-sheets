@@ -87,8 +87,7 @@
                             tooltipDirection={"LEFT"}
                             uuid={deployable.uuid}
                             dataPath={`deployables.${deployable.system.lid}`}
-                            style={["clipped-bot", "-widthfull"]}
-                            backgroundStyle={ACTIVATION_COLOR_MAP[action.deployableAction]}
+                            style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
                         />
                     {/each}
                     </div>

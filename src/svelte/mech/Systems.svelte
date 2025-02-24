@@ -83,7 +83,7 @@
     spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
 {#if systemComponents.length}
-    <div class="la-combine-v -gap0">
+    <div class="la-combine-v -gap0 -widthfull">
     {#each systemComponents as component, index}
         <HeaderTertiary
             itemID={component.value.uuid}
@@ -97,7 +97,7 @@
 
             subTitle={getSubtitle(component)}
             subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
-            iconStyle={[getIconStyle(component), "-fontsize6", "-lineheight8"]}
+            iconStyle={[getIconStyle(component), "-fontsize9", "-lineheight8"]}
 
             borderStyle={["-bordersoff"]}
 
@@ -155,7 +155,7 @@
             </div>
         </summary>
         <div class="la-details__wrapper -bordersround -bordersoff">
-            <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.system.empty.subLabel")}</span>
+            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.mech.system.empty.subLabel")}</div>
         </div>
     </details>
 {/if}

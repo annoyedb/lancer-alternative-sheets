@@ -123,7 +123,7 @@
             </div>
         </summary>
         <div class="la-details__wrapper -bordersround -bordersoff">
-            <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.mod.empty.subLabel")}</span>
+            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.mech.mod.empty.subLabel")}</div>
         </div>
     </details>
 {/if}

@@ -23,6 +23,7 @@
         dataPath={"system.grit"}
         sign={true}
         style={["-grit"]}
+        textStyle={["-glow-header"]}
     />
     <HexButton
         name={getLocalized("LA.hull.short")}
@@ -33,6 +34,7 @@
         dataPath={"system.hull"}
         sign={false}
         style={["-hull"]}
+        textStyle={["-glow-header"]}
     />
     <HexButton
         name={getLocalized("LA.agility.short")}
@@ -43,6 +45,7 @@
         dataPath={"system.agi"}
         sign={false}
         style={["-agility"]}
+        textStyle={["-glow-header"]}
     />
     <HexButton
         name={getLocalized("LA.systems.short")}
@@ -53,6 +56,7 @@
         dataPath={"system.sys"}
         sign={false}
         style={["-systems"]}
+        textStyle={["-glow-header"]}
     />
     <HexButton
         name={getLocalized("LA.engineering.short")}
@@ -63,6 +67,7 @@
         dataPath={"system.eng"}
         sign={false}
         style={["-engineering"]}
+        textStyle={["-glow-header"]}
     />
 </div>
 {/if}

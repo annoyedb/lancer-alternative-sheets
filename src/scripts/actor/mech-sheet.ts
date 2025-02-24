@@ -695,7 +695,7 @@ function renderWeapon(
         <!-- Roll Attack, Name, Type -->
         <div class="la-left la-combine-h">
             <button type="button" 
-                class="roll-attack la-text-header -glow-header -glow-primary-hover -fontsize6" draggable="true" ${destroyed ? "disabled" : ""}
+                class="roll-attack la-text-header -glow-header -glow-primary-hover -fontsize9" draggable="true" ${destroyed ? "disabled" : ""}
                 data-tooltip="${getLocalized("LA.flow.rollAttack.tooltip")}">
                 <i class="cci cci-weapon ${destroyed ? "la-text-repcap" : ""}"></i>
             </button>
@@ -1051,7 +1051,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
         data-la-collapse-id="${collapseID(collapse, sys, false)}">
         <!-- Icon, Name -->
         <div class="la-left la-combine-h">
-            <i class="la-icon cci ${icon} -fontsize6 ${destroyed ? "la-text-repcap" : ""}"></i>
+            <i class="la-icon cci ${icon} -fontsize9 ${destroyed ? "la-text-repcap" : ""}"></i>
             <!-- Name, Type -->
             <div class="la-name la-combine-v"> 
                 <span class="la-top__span -fontsize2 ${destroyed ? "la-text-repcap -strikethrough" : ""}">

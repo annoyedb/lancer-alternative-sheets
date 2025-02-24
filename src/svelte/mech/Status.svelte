@@ -47,7 +47,7 @@
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <!-- Info -->
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-structure la-dropshadow -fontsize6 -displayinline"></i>
+                <i class="cci cci-structure la-dropshadow -fontsize9 -displayinline"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
                 <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
@@ -71,7 +71,7 @@
         <!-- Repair -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-repair la-dropshadow -fontsize6"></i>
+                <i class="cci cci-repair la-dropshadow -fontsize9"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
                 <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <input class="la-top__input -width2ch la-shadow -medium -inset"
@@ -128,7 +128,7 @@
         <!-- Stress -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-reactor la-dropshadow -fontsize6"></i>
+                <i class="cci cci-reactor la-dropshadow -fontsize9"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.stress.label")}</span>
                 <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
@@ -152,7 +152,7 @@
         <!-- Overcharge -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-overcharge la-dropshadow -fontsize6"></i>
+                <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
                 <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                     <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
@@ -182,7 +182,7 @@
         <!-- Burn -->
         <div class="la-structure la-brdr-primary la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-burn la-dropshadow -fontsize6"></i>
+                <i class="cci cci-burn la-dropshadow -fontsize9"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.burn.label")}</span>
                 <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                 <span class="la-value__button -fontsize4 -textaligncenter -width2ch">{system.burn}</span>

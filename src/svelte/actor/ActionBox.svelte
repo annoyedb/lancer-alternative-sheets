@@ -76,8 +76,7 @@
                     tooltipDirection={"LEFT"}
                     uuid={uuid}
                     dataPath={`${path}.${index}`}
-                    style={["clipped-bot"]}
-                    backgroundStyle={ACTIVATION_COLOR_MAP[action.activation]}
+                    style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
                 />
                 <hr class="-widthfull">
                 {@html action.trigger || defaultPlaceholder}
@@ -113,8 +112,7 @@
                 tooltipDirection={"LEFT"}
                 uuid={uuid}
                 dataPath={`${path}.${index}`}
-                style={["clipped-bot"]}
-                backgroundStyle={ACTIVATION_COLOR_MAP[action.activation]}
+                style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
             />
             <hr>
             {@html action.detail || defaultPlaceholder}

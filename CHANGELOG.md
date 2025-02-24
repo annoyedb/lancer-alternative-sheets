@@ -16,6 +16,7 @@
 * Added missing data path for Core Bonus option button
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
 * Compacted main collapsables more closely together
+* Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme

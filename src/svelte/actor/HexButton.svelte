@@ -13,7 +13,8 @@
         flowClass,
         dataPath,
         sign,
-        style
+        style,
+        textStyle
     }: HexButtonProps = $props();
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
@@ -34,7 +35,7 @@
             data-path="{dataPath}"
             aria-label="{name}"
         >
-            <span class="la-value__span"><!--
+            <span class="la-value__span {textStyle?.join(' ')}"><!--
         --->{#if sign && value > 0}<!--
             --->+<!--
         --->{:else if sign && value < 0}<!--

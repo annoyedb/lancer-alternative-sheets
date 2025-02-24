@@ -42,11 +42,11 @@
                 </div>
             </summary>
             <div class="la-details__wrapper -bordersround -bordersoff">
-                <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.system.empty.subLabel")}</span>
+                <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.mech.system.empty.subLabel")}</div>
             </div>
         </details>
     {:else}
-        <div class="la-combine-v -gap0">
+        <div class="la-combine-v -gap0 -widthfull">
             <MountSlots
                 mount={mount}
                 mountIndex={index}

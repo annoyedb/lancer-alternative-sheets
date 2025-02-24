@@ -69,7 +69,6 @@
 .lancer.sheet body:not(.window-body).la-body
 {
     // Somewhat redundant, but just to stay mutually exclusive from the default sheets
-    // TODO: does not cover the content body for some reason
     background-color: var(--background);
 }
 
@@ -142,6 +141,13 @@
         border: unset;
         border-radius: unset;
         box-shadow: unset;
+        position: relative;
+
+        .roll-attack__bckg
+        {
+            position: absolute;
+            z-index: -1;
+        }
     }
 
     .roll-damage

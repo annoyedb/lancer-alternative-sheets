@@ -32,7 +32,7 @@ startCollapsed={true}
 spTextStyle={["la-text-header", "-fontsize2"]}
 spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
-    <div class="la-combine-v -gap0">
+    <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
         <HeaderSecondary
             title={`${talent.name} ${talent.system.curr_rank}`}
@@ -51,7 +51,7 @@ spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
             editOption={true}
             editIconStyle={["-lineheight3"]}
         >
-            <div class="la-combine-v -gap0">
+            <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
             {#if jndex < talent.system.curr_rank}
                 <HeaderSecondary

@@ -10,8 +10,6 @@ export interface FlowButtonProps
     flowArgs?: any, // If button class
     dataPath?: string // If roll class
     style?: Array<string>
-    backgroundStyle?: string
-    textStyle?: string
     disableSlide?: Boolean
     
     tooltipHeader?: string,

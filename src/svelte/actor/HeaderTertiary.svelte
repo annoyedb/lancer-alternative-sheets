@@ -77,7 +77,7 @@
         <div class="la-left la-combine-h">
         {#if rollAttackOption}
             <button type="button" 
-                class="roll-attack la-text-header -glow-header -glow-primary-hover -fontsize6"
+                class="roll-attack la-text-header -fontsize9 -lineheight8"
                 data-tooltip={rollAttackTip}
                 data-tooltip-class="clipped-bot la-tooltip"
                 data-tooltip-direction="LEFT"
@@ -85,10 +85,11 @@
                 aria-label="{getLocalized("LA.flow.rollAttack.label")}"
                 disabled={weaponDestroyed || false}
             >
-                <i class="cci cci-weapon {rollAttackStyle?.join(' ')}"></i>
+                <i class="roll-attack__bckg mdi mdi-hexagon la-text-scrollbar-secondary"></i>
+                <i class="roll-attack__icon cci cci-weapon -glow-header -glow-primary-hover {rollAttackStyle?.join(' ')}"></i>
             </button>
         {:else}
-            <i class="la-icon {iconStyle?.join(' ') || "-fontsize6 -lineheight8"}"></i>
+            <i class="la-icon {iconStyle?.join(' ') || "-fontsize9 -lineheight8"}"></i>
         {/if}
             <div class="la-summary-label la-combine-v la-anim-accent -alignleft -justifycenter -divider">
                 <span class="la-top__span -widthfull {headerFontStyle?.join(' ') || "-fontsize3"}">{title}</span>

@@ -59,7 +59,7 @@
             aria-label="{name}"
             disabled={!system.core_energy}
         >
-            <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize8"></i>
+            <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize10"></i>
             <span class="la-corepower__span la-dropshadow -upper -flexthird -textwrapnowrap"><!--
             --->{name}<!--
         ---></span>
