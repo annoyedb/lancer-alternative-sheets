@@ -9,6 +9,7 @@ import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
+import { getLocalized } from "@/scripts/helpers";
 
 export class MechSheetBase
 {
@@ -35,12 +36,11 @@ export class MechSheetBase
 
     static setupSheet()
     {
-        // TODO: rename to LAMechSheet when old one is fully implemented
         // Unfortunately, since we are mounting from a Foundry class, and more specifically,
         // from Lancer's extension of a ActorSheet, we have to essentially run setup 'twice'
         //
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
-        const LAMechSheetSvelte = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
+        const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
         {
             tabMap: { [key: string]: {nav: HTMLElement, content: HTMLElement} } | null = null;
 
@@ -171,9 +171,9 @@ export class MechSheetBase
             }
         }
 
-        Actors.registerSheet(LancerAlternative.Name, LAMechSheetSvelte, {
+        Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
             types: ["mech"],
-            label: "LA.SHEET.mech.svelte.label",
+            label: getLocalized("LA.SHEET.mech.label"),
             makeDefault: false
         });
     }

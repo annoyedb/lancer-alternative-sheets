@@ -1,10 +1,8 @@
 import { applyTheme, getTheme } from "./theme";
-import { deleteActiveEffect, LAMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
 import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, logData, overchargeStage as overchargeStage, randomExtension } from "./helpers";
-import { renderCoreBonuses, renderTalents } from "./actor/pilot-sheet";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
-import { MechSheetBase } from "../classes/actor/MechSheetBase";
+import { MechSheetBase } from "@/classes/actor/MechSheetBase";
 
 Hooks.once("init", () =>
 {
@@ -41,12 +39,6 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("getFrameUUID", frameUUID);
     Handlebars.registerHelper("overchargeStage", overchargeStage);
     Handlebars.registerHelper("randomExtension", randomExtension);
-    Handlebars.registerHelper("renderActiveEffects", renderActiveEffects);
-    Handlebars.registerHelper("renderWeaponMounts", renderWeaponMounts);
-    Handlebars.registerHelper("renderSystemMounts", renderSystemMounts);
-    Handlebars.registerHelper("renderMechFrame", renderMechFrame);
-    Handlebars.registerHelper("renderTalents", renderTalents);
-    Handlebars.registerHelper("renderCoreBonuses", renderCoreBonuses);
 }
 
 function registerSettings()
@@ -57,13 +49,11 @@ function registerSettings()
 function setupSheets()
 {
     // Declare extension classes at runtime since they're only defined at that point
-    LAMechSheetBase.setupSheet();
     MechSheetBase.setupSheet();
 }
 
 function setupEventListeners()
 {
-    Hooks.on("renderLASMechSheet", deleteActiveEffect);
     // TODO: Until a Lancer settings/theme hook is available, 
     // this blasts on every single time the settings close
     Hooks.on("closeSettingsConfig", applyTheme);
