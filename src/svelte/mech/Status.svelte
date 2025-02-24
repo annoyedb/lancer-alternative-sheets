@@ -64,7 +64,6 @@
                     tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
                     flowType={"Structure"}
                     flowArgs={emptyObject}
-                    style={["-padding0-lr", "clipped-bot-alt"]}
                 />
             </div>
         </div>
@@ -100,7 +99,6 @@
                     tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
                     flowType={"FullRepair"}
                     flowArgs={emptyObject}
-                    style={["-padding0-lr", "clipped-bot-alt"]}
                 />
                 <!-- TODO: make a flow for partial repair -->
                 <!-- <button type="button"
@@ -145,7 +143,6 @@
                     tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
                     flowType={"Overheat"}
                     flowArgs={emptyObject}
-                    style={["-padding0-lr", "clipped-bot-alt"]}
                 />
             </div>
         </div>
@@ -175,7 +172,6 @@
                     uuid={actor.uuid}
                     flowClass={FlowClass.OverchargeReset}
                     tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
-                    style={["-padding0-lr", "clipped-bot-alt"]}
                 />
             </div>
         </div>
@@ -197,7 +193,6 @@
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                     flowType={"Burn"}
                     flowArgs={emptyObject}
-                    style={["-padding0-lr", "clipped-bot-alt"]}
                 />
             </div>
         </div>
