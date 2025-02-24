@@ -119,14 +119,17 @@
         </div>
     {/if}
     </div>
-    <div class="la-details-wrapper la-dropshadow -padding0-l
-            -widthfull -heightfull
-            {borderStyle?.join(' ') || "la-brdr-primary"}
+    <div class="la-collapsegroup__wrapper
             {collapsing ? "collapse" : ""} {collapsed}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}">
-        <!-- https://svelte.dev/docs/svelte/v5-migration-guide#Snippets-instead-of-slots -->
-        {#if children}
-            {@render children()}
-        {/if}
+        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"
+    >
+        <div class="la-collapsecontent la-dropshadow 
+                -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
+                {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
+        >
+            {#if children}
+                {@render children()}
+            {/if}
+        </div>
     </div>
 </div>

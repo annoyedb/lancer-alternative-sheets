@@ -90,7 +90,7 @@
         {:else}
             <i class="la-icon {iconStyle?.join(' ') || "-fontsize6 -lineheight8"}"></i>
         {/if}
-            <div class="la-summary-label la-combine-v -alignleft -justifycenter -divider">
+            <div class="la-summary-label la-combine-v la-anim-accent -alignleft -justifycenter -divider">
                 <span class="la-top__span -widthfull {headerFontStyle?.join(' ') || "-fontsize3"}">{title}</span>
                 <span class="la-bottom__span {subHeaderFontStyle?.join(' ') || "-fontsize0"}">{subTitle}</span>
             </div>
@@ -106,7 +106,7 @@
         {/if}
         {#if weaponOption}
             <button type="button"
-                class="la-properties la-combine-v -fontsize3 
+                class="la-properties la-combine-v -fontsize3 la-anim-accent
                     {weaponDamage && weaponRange ? "-divider" : ""} {weaponStyle?.join(' ')}
                     compact-damage roll-damage"
                 data-tooltip={rollDamageTip}
@@ -156,14 +156,17 @@
         {/if}
         </div>
     </div>
-    <div class="la-details-wrapper la-dropshadow -padding0-l
-            -widthfull -heightfull
-            {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}
+    <div class="la-collapsegroup__wrapper
             {collapsing ? "collapse" : ""} {collapsed}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}">
-        <!-- https://svelte.dev/docs/svelte/v5-migration-guide#Snippets-instead-of-slots -->
-        {#if children}
-            {@render children()}
-        {/if}
+        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"
+    >
+        <div class="la-collapsecontent la-dropshadow 
+                -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
+                {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
+        >
+            {#if children}
+                {@render children()}
+            {/if}
+        </div>
     </div>
 </div>

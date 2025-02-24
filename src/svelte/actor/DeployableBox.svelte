@@ -16,7 +16,6 @@
 
     let tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
 
-    let theme = getBrightness();
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
     );
@@ -28,6 +27,7 @@
 
     function getThemeImg(deployable: StoredDocument<LancerActor>)
     {
+        let theme = getBrightness();
         return deployable.img
         ? (theme === "dark" ? deployable.img.replace('/icons/', '/icons/white/') : deployable.img)
         : (theme === "dark" ? "systems/lancer/assets/icons/white/generic_item.svg" : "systems/lancer/assets/icons/generic_item.svg");
@@ -65,7 +65,7 @@
 {#each globallyOwnedDeployables as deployable}
     {#if lidSourceHasDeployable(deployable)}
     <!-- Deployable -->
-    <div class="la-effectbox la-bckg-card -descriptive -roundborders-ltb
+    <div class="la-effectbox -descriptive la-bckg-card la-brdr-repcap -widthful -bordersround-ltb
         ref set"
         data-uuid="{deployable.uuid}">
         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0
@@ -73,7 +73,7 @@
         --->{deployable.name ? deployable.name.toUpperCase() : ""}<!--
     ---></span>
         <!-- Generated Content -->
-        <div class="la-generated -gap1 la-combine-v">
+        <div class="la-generated -gap2 la-combine-v">
             <div class="-fontsize1">
                 <!-- Deployable Actions -->
                 <div class="la-effectbox-buttons la-combine-h -justifybetween">

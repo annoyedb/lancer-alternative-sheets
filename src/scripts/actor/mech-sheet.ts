@@ -153,7 +153,7 @@ function renderMechFrameEmpty(mech: any, options: HelperOptions)
         <i class="mdi mdi-battery-off-outline -fontsize2"></i>
     </div>
 </h1>
-<div class="la-details-wrapper la-dropshadow -borderoff
+<div class="la-details-wrapper la-dropshadow -bordersoff
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
     <details class="la-details -widthfull la-combine-v -empty">
@@ -163,7 +163,7 @@ function renderMechFrameEmpty(mech: any, options: HelperOptions)
                 <span class="la-name__span -fontsize2 -strikethrough">${getLocalized("LA.mech.frame.empty.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details-wrapper -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">${getLocalized("LA.mech.frame.empty.subLabel")}</span>
         </div>
     </details>
@@ -239,7 +239,7 @@ function renderFramePower(framePath: string, coreEnergy: number, options: Helper
             <span class="la-name__span -fontsize2">${core.name}</span>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff
+    <div class="la-details-wrapper -bordersoff
             collapse collapsed"
         data-la-collapse-id="${frame.id}_core">
         ${active}
@@ -430,7 +430,7 @@ function renderFrameTrait(traitPath: string, options: HelperOptions)
             </div>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff
+    <div class="la-details-wrapper -bordersoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <div class="la-generated -widthfull -gap1 la-combine-v">
@@ -476,7 +476,7 @@ function renderWeaponMountBracing(mech: any, mount: any, options: HelperOptions)
                 <span class="la-name__span -fontsize2 -strikethrough">${getLocalized("LA.mech.mount.locked.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details-wrapper -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">${getLocalized("LA.mech.mount.locked.subLabel")}</span>
         </div>
     </details>
@@ -884,7 +884,7 @@ function renderWeaponMod(modPath: string, options: HelperOptions & { rollable?: 
             </div>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff
+    <div class="la-details-wrapper -bordersoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, mod, true)}">
         <div class="la-generated -widthfull -gap1 la-combine-v">
@@ -923,7 +923,7 @@ export function renderSystemMountEmpty(loadout: string, options: HelperOptions)
         <i class="mdi mdi-battery-off-outline -fontsize2"></i>
     </div>
 </h1>
-<div class="la-details-wrapper la-dropshadow -borderoff
+<div class="la-details-wrapper la-dropshadow -bordersoff
         collapse collapsed"
     data-la-collapse-id="${collapseID(collapse, collID, true)}">
     <details class="la-details -widthfull la-combine-v -empty">
@@ -933,7 +933,7 @@ export function renderSystemMountEmpty(loadout: string, options: HelperOptions)
                 <span class="la-name__span -fontsize2 -strikethrough">${getLocalized("LA.mech.system.empty.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details-wrapper -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">${getLocalized("LA.mech.system.empty.subLabel")}</span>
         </div>
     </details>
@@ -1082,7 +1082,7 @@ function renderSystem(systemPath: string, options: HelperOptions & { nonInteract
             </div>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff
+    <div class="la-details-wrapper -bordersoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, sys, true)}">
         <div class="la-generated -widthfull -gap1 la-combine-v">

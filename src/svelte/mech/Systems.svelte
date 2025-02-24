@@ -83,64 +83,66 @@
     spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
 {#if systemComponents.length}
-{#each systemComponents as component, index}
-    <HeaderTertiary
-        itemID={component.value.uuid}
-        uuid={component.value.uuid}
-        path={`system.loadout.systems.${index}.value`}
-        acceptTypes={"mech_system"}
+    <div class="la-combine-v -gap0">
+    {#each systemComponents as component, index}
+        <HeaderTertiary
+            itemID={component.value.uuid}
+            uuid={component.value.uuid}
+            path={`system.loadout.systems.${index}.value`}
+            acceptTypes={"mech_system"}
 
-        title={component.value.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-        headerFontStyle={[getTitleStyle(component), "-fontsize3"]}
+            title={component.value.name}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
+            headerFontStyle={[getTitleStyle(component), "-fontsize3"]}
 
-        subTitle={getSubtitle(component)}
-        subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
-        iconStyle={[getIconStyle(component), "-fontsize6", "-lineheight8"]}
+            subTitle={getSubtitle(component)}
+            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
+            iconStyle={[getIconStyle(component), "-fontsize6", "-lineheight8"]}
 
-        borderStyle={["-borderoff"]}
+            borderStyle={["-bordersoff"]}
 
-        collapse={collapse}
-        collapseID={component?.value.uuid}
+            collapse={collapse}
+            collapseID={component?.value.uuid}
 
-        spOption={true}
-        spValue={component.value.system.sp}
-        spTextStyle={[getSPStyle(component), "-fontsize2"]}
-        spIconStyle={[getSPStyle(component), "-fontsize5"]}
+            spOption={true}
+            spValue={component.value.system.sp}
+            spTextStyle={[getSPStyle(component), "-fontsize2"]}
+            spIconStyle={[getSPStyle(component), "-fontsize5"]}
 
-        messageOption={true}
-        messageIconStyle={["-lineheight0"]}
-        editOption={true}
-        editIconStyle={["-lineheight0"]}
-    >
-    {#if !getDestroyed(component)}
-        <div class="la-generated -widthfull -gap1 la-combine-v">
-            <LimitedBox
-                usesValue={component.value.system.uses.value}
-                usesMax={component.value.system.uses.max}
-                path={`system.loadout.systems.${index}.value`}
-            />
-            <BonusBox
-                bonuses={component.value.system.bonuses}
-                bonusPath={`system.loadout.systems.${index}.value.system.bonuses`}
-            />
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                effect={component.value.system.effect}
-            />
-            <ActionBox
-                uuid={component.value.uuid}
-                actions={component.value.system.actions}
-                path={`system.actions`}
-            />
-            <DeployableBox
-                source={actor}
-                lidSource={component.value.system}
-            />
-        </div>
-    {/if}
-    </HeaderTertiary>
-{/each}
+            messageOption={true}
+            messageIconStyle={["-lineheight0"]}
+            editOption={true}
+            editIconStyle={["-lineheight0"]}
+        >
+        {#if !getDestroyed(component)}
+            <div class="la-generated -widthfull -gap2 la-combine-v">
+                <LimitedBox
+                    usesValue={component.value.system.uses.value}
+                    usesMax={component.value.system.uses.max}
+                    path={`system.loadout.systems.${index}.value`}
+                />
+                <BonusBox
+                    bonuses={component.value.system.bonuses}
+                    bonusPath={`system.loadout.systems.${index}.value.system.bonuses`}
+                />
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    effect={component.value.system.effect}
+                />
+                <ActionBox
+                    uuid={component.value.uuid}
+                    actions={component.value.system.actions}
+                    path={`system.actions`}
+                />
+                <DeployableBox
+                    source={actor}
+                    lidSource={component.value.system}
+                />
+            </div>
+        {/if}
+        </HeaderTertiary>
+    {/each}
+    </div>
 {:else}
     <details class="la-details -widthfull la-combine-v
             ref set drop-settable mech_system"
@@ -152,7 +154,7 @@
                 <span class="la-name__span -fontsize2">{getLocalized("LA.mech.system.empty.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details__wrapper -bordersround -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.system.empty.subLabel")}</span>
         </div>
     </details>

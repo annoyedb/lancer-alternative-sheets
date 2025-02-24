@@ -86,7 +86,7 @@
 
         subTitle={getSubtitle(slot.weapon.value)}
         subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
-        borderStyle={["-borderoff"]}
+        borderStyle={["-bordersoff"]}
         
         collapse={collapse}
         collapseID={slot.weapon.value}
@@ -103,7 +103,7 @@
         editOption={true}
     >
     {#if !slot.weapon.value.system.destroyed}
-        <div class="la-generated -widthfull -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap2 la-combine-v">
         <!-- Generated Content -->
         <ProfileBox
             profiles={slot.weapon.value.system.profiles}
@@ -184,7 +184,7 @@
             <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mount.empty.label")}</span>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff">
+    <div class="la-details__wrapper -bordersround -bordersoff">
         <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getSlotSize(slot.size)}</span>
     </div>
 </details>

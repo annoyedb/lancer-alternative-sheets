@@ -22,9 +22,9 @@
 {#if coreBonuses.length}
 <HeaderMain
 title={getLocalized("LA.pilot.coreBonus.label")}
-headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
 headerFontStyle={["la-text-header", "-fontsize2"]}
-borderStyle={["la-brdr-action--downtime"]}
+borderStyle={["la-brdr-weapon"]}
 
 collapse={collapse}
 collapseID={collapseID}
@@ -33,53 +33,55 @@ startCollapsed={true}
 spTextStyle={["la-text-header", "-fontsize2"]}
 spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
-{#each coreBonuses as coreBonus, index}
-    <HeaderSecondary
-        title={coreBonus.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={["-fontsize2"]}
-        headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
-        borderStyle={["-borderoff"]}
-        
-        rootStyle={["ref", "set"]}
-        uuid={coreBonus.uuid}
-        path={`system.pilot.value.itemTypes.core_bonus.${index}`}
-        collapse={collapse}
-        collapseID={coreBonus}
-        startCollapsed={false}
+    <div class="la-combine-v -gap0">
+    {#each coreBonuses as coreBonus, index}
+        <HeaderSecondary
+            title={coreBonus.name}
+            headerStyle={["la-bckg-action--downtime", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+            headerFontStyle={["-fontsize2"]}
+            headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
+            borderStyle={["-bordersoff"]}
+            
+            rootStyle={["ref", "set"]}
+            uuid={coreBonus.uuid}
+            path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+            collapse={collapse}
+            collapseID={coreBonus}
+            startCollapsed={false}
 
-        editOption={true}
-        editIconStyle={["-lineheight3"]}
-    >
-        <div class="la-generated -widthfull -gap1 la-combine-v">
-        {#if coreBonus.system.counters.length}
-        {#each coreBonus.system.counters as counter, jndex}
-            <CounterBox
-                name={counter.name}
-                usesValue={counter.value}
-                usesMax={counter.max}
-                path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
-            />
-        {/each}
-        {/if}
-            <BonusBox
-                bonuses={coreBonus.system.bonuses}
-                bonusPath={`itemTypes.core_bonus.${index}.system.bonuses`}
-            />
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                effect={coreBonus.system.effect}
-            />
-            <ActionBox
-                actions={coreBonus.system.actions}
-                path={`itemTypes.core_bonus.${index}.system.actions`}
-            />
-            <DeployableBox
-                source={pilot}
-                lidSource={coreBonus.system}
-            />
-        </div>
-    </HeaderSecondary>
-{/each}
+            editOption={true}
+            editIconStyle={["-lineheight3"]}
+        >
+            <div class="la-generated -widthfull -gap2 la-combine-v">
+            {#if coreBonus.system.counters.length}
+            {#each coreBonus.system.counters as counter, jndex}
+                <CounterBox
+                    name={counter.name}
+                    usesValue={counter.value}
+                    usesMax={counter.max}
+                    path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
+                />
+            {/each}
+            {/if}
+                <BonusBox
+                    bonuses={coreBonus.system.bonuses}
+                    bonusPath={`itemTypes.core_bonus.${index}.system.bonuses`}
+                />
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    effect={coreBonus.system.effect}
+                />
+                <ActionBox
+                    actions={coreBonus.system.actions}
+                    path={`itemTypes.core_bonus.${index}.system.actions`}
+                />
+                <DeployableBox
+                    source={pilot}
+                    lidSource={coreBonus.system}
+                />
+            </div>
+        </HeaderSecondary>
+    {/each}
+    </div>
 </HeaderMain>
 {/if}

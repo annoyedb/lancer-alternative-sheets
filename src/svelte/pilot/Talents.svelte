@@ -21,9 +21,9 @@
 {#if talents.length}
 <HeaderMain
 title={getLocalized("LA.pilot.talent.label")}
-headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
 headerFontStyle={["la-text-header", "-fontsize2"]}
-borderStyle={["la-brdr-action--downtime"]}
+borderStyle={["la-brdr-weapon"]}
 
 collapse={collapse}
 collapseID={collapseID}
@@ -32,72 +32,76 @@ startCollapsed={true}
 spTextStyle={["la-text-header", "-fontsize2"]}
 spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
-{#each talents as talent, index}
-    <HeaderSecondary
-        title={`${talent.name} ${talent.system.curr_rank}`}
-        headerStyle={["la-bckg-primary", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={["-fontsize2"]}
-        headerIconStyle={["cci", "cci-license", "-fontsize5", "-lineheight3"]}
-        borderStyle={["-borderoff"]}
-        
-        rootStyle={["ref", "set"]}
-        uuid={talent.uuid}
-        path={`system.pilot.value.itemTypes.talent.${index}`}
-        collapse={collapse}
-        collapseID={talent}
-        startCollapsed={false}
-
-        editOption={true}
-        editIconStyle={["-lineheight3"]}
-    >
-    {#each talent.system.ranks as rank, jndex}
-    {#if jndex < talent.system.curr_rank}
+    <div class="la-combine-v -gap0">
+    {#each talents as talent, index}
         <HeaderSecondary
-            title={rank.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+            title={`${talent.name} ${talent.system.curr_rank}`}
+            headerStyle={["la-bckg-action--downtime", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
             headerFontStyle={["-fontsize2"]}
-            headerIconStyle={["cci", "cci-talent", "-fontsize5", "-lineheight3"]}
-            borderStyle={["la-brdr-pilot"]}
-
+            headerIconStyle={["cci", "cci-license", "-fontsize5", "-lineheight3"]}
+            borderStyle={["-bordersoff"]}
+            
             rootStyle={["ref", "set"]}
             uuid={talent.uuid}
+            path={`system.pilot.value.itemTypes.talent.${index}`}
             collapse={collapse}
-            collapseID={rank}
+            collapseID={talent}
             startCollapsed={false}
 
-            messageOption={true}
-            messageType="rank"
-            messageIndex={jndex}
-            messageUUID={talent.uuid}
+            editOption={true}
+            editIconStyle={["-lineheight3"]}
         >
-            <div class="la-generated -widthfull -gap1 la-combine-v">
-            {#if rank.counters.length}
-            {#each rank.counters as counter, kndex}
-                <CounterBox
-                    name={counter.name}
-                    usesValue={counter.value}
-                    usesMax={counter.max}
-                    path={`itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
-                />
-            {/each}
+            <div class="la-combine-v -gap0">
+            {#each talent.system.ranks as rank, jndex}
+            {#if jndex < talent.system.curr_rank}
+                <HeaderSecondary
+                    title={rank.name}
+                    headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+                    headerFontStyle={["-fontsize2"]}
+                    headerIconStyle={["cci", "cci-talent", "-fontsize5", "-lineheight3"]}
+                    borderStyle={["la-brdr-pilot"]}
+
+                    rootStyle={["ref", "set"]}
+                    uuid={talent.uuid}
+                    collapse={collapse}
+                    collapseID={rank}
+                    startCollapsed={false}
+
+                    messageOption={true}
+                    messageType="rank"
+                    messageIndex={jndex}
+                    messageUUID={talent.uuid}
+                >
+                    <div class="la-generated -widthfull -gap2 la-combine-v">
+                    {#if rank.counters.length}
+                    {#each rank.counters as counter, kndex}
+                        <CounterBox
+                            name={counter.name}
+                            usesValue={counter.value}
+                            usesMax={counter.max}
+                            path={`itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
+                        />
+                    {/each}
+                    {/if}
+                        <BonusBox
+                            bonuses={rank.bonuses}
+                            bonusPath={`itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}
+                        />
+                        <EffectBox
+                            name={getLocalized("LA.pilot.trait.label")}
+                            effect={rank.description}
+                        />
+                        <ActionBox
+                            actions={rank.actions}
+                            path={`itemTypes.talent.${index}.system.ranks.${jndex}.actions`}
+                        />
+                    </div>
+                </HeaderSecondary>
             {/if}
-                <BonusBox
-                    bonuses={rank.bonuses}
-                    bonusPath={`itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}
-                />
-                <EffectBox
-                    name={getLocalized("LA.pilot.trait.label")}
-                    effect={rank.description}
-                />
-                <ActionBox
-                    actions={rank.actions}
-                    path={`itemTypes.talent.${index}.system.ranks.${jndex}.actions`}
-                />
+            {/each}
             </div>
         </HeaderSecondary>
-    {/if}
     {/each}
-    </HeaderSecondary>
-{/each}
+    </div>
 </HeaderMain>
 {/if}

@@ -5,6 +5,7 @@
     import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import EffectBox from "../actor/EffectBox.svelte";
 
     const {
         actor,
@@ -23,7 +24,7 @@
 {#if core.passive_effect !== "" || core.passive_actions.length || core.passive_bonuses.length}
 <!-- Frame Passive -->
 <div class="la-spacer -medium"></div>
-<div class="la-effectbox la-bckg-card -descriptive -roundborders-ltb {frameColorBrdr}">
+<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -descriptive -bordersround-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
@@ -49,16 +50,10 @@
         data-la-collapse-id="{registerCollapse(collapse, collID, true)}"
     >
     {#if core.passive_effect}
-        <div class="la-effectbox la-combine-v -roundborders-ltb -alignleft">
-            <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
-                {getLocalized("LA.mech.core.passive.label")}
-            </span>
-            <div class="la-dropshadow -widthfull">
-                <div class="-fontsize1">
-                    <span>{@html core.passive_effect ?? ""}</span>
-                </div>
-            </div>
-        </div>
+        <EffectBox
+            name={getLocalized("LA.mech.core.passive.label")}
+            effect={core.passive_effect}
+        />
     {/if}
         <!-- Generated Content -->
         <ActionBox

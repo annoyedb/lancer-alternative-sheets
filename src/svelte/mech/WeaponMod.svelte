@@ -41,7 +41,7 @@
         editOption={true}
         editIconStyle={["-lineheight3"]}
     >
-        <div class="la-generated -widthfull -gap1 la-combine-v">
+        <div class="la-generated -widthfull -gap2 la-combine-v">
             <!-- Generated Content -->
         {#if !!(mod.system.uses.max || mod.system.counters.length)}
             <div class="la-combine-h">
@@ -70,7 +70,7 @@
                 <EffectBox
                     name={getLocalized("LA.mech.mod.range.label")}
                     innerStyle={["-fontsize3"]}
-                    outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-roundborders"] : []}
+                    outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-bordersround"] : []}
                 >
                     <RangeArray
                         ranges={mod.system.added_range}
@@ -122,7 +122,7 @@
                 <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mod.empty.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details__wrapper -bordersround -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.mod.empty.subLabel")}</span>
         </div>
     </details>

@@ -8,6 +8,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
+    import EffectBox from "../actor/EffectBox.svelte";
 
     const {
         actor,
@@ -35,7 +36,7 @@
 </script>
 
 <!-- Frame Active -->
-<div class="la-effectbox la-bckg-card -descriptive -margin3-t -roundborders-ltb {frameColorBrdr}">
+<div class="la-effectbox -descriptive la-bckg-card la-brdr-repcap -widthfull -margin3-t -bordersround-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
@@ -70,15 +71,11 @@
             collapse"
         data-la-collapse-id="{registerCollapse(collapse, collID, true)}">
         <div class="la-divider-h la-bckg-primary"></div>
-        <div class="la-combine-v -gap0">
-            <div class="la-effectbox la-combine-v -roundborders-ltb -alignleft">
-                <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0 -upper">
-                    {getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
-                </span>
-                <div class="-fontsize1">
-                    <span>{@html core.active_effect ?? ""}</span>
-                </div>
-            </div>
+        <div class="la-combine-v -gap1">
+            <EffectBox
+                name={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
+                effect={core.active_effect}
+            />
             <!-- Generated Content -->
             <ActionBox
                 uuid={frame.uuid}

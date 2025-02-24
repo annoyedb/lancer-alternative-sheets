@@ -6,6 +6,7 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "../actor/BonusBox.svelte";
+    import EffectBox from "../actor/EffectBox.svelte";
 
     const {
         actor,
@@ -28,7 +29,7 @@
     title={trait.name}
     headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-justifybetween", "-padding0", "-padding3-r", "la-text-header"]}
     headerIconStyle={["cci", "cci-frame", "-fontsize5", "-lineheight3"]}
-    borderStyle={["-borderoff"]}
+    borderStyle={["-bordersoff"]}
     collapse={collapse}
     collapseID={getCollapseID(index)}
     messageOption={true}
@@ -37,13 +38,11 @@
     messageIndex={index}
     startCollapsed={false}
 >
-    <div class="la-generated -widthfull -gap1 la-combine-v">
-        <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-frame -roundborders-ltb -fontsize1">
-            <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
-                {getLocalized("LA.mech.frame.trait.label")}
-            </span>
-            {@html trait.description}
-        </span>
+    <div class="la-generated -widthfull -gap2 la-combine-v">
+        <EffectBox
+            name={getLocalized("LA.mech.frame.trait.label")}
+            effect={trait.description}
+        />
         <!-- Generated Content -->
     {#if trait.counters?.length}
     {#each trait.counters as counter}

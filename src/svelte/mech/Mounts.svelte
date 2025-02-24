@@ -41,16 +41,18 @@
                     <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mount.locked.label")}</span>
                 </div>
             </summary>
-            <div class="la-details-wrapper -borderoff">
+            <div class="la-details__wrapper -bordersround -bordersoff">
                 <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.system.empty.subLabel")}</span>
             </div>
         </details>
     {:else}
-        <MountSlots
-            mount={mount}
-            mountIndex={index}
-            collapse={collapse}
-        />
+        <div class="la-combine-v -gap0">
+            <MountSlots
+                mount={mount}
+                mountIndex={index}
+                collapse={collapse}
+            />
+        </div>
     {/if}
     </HeaderMain>
 {/each}

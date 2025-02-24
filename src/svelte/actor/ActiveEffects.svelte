@@ -11,10 +11,9 @@
         isOwner,
     }: ActiveEffectsProps = $props();
 
-    let theme = getBrightness();
-
     function getThemedIcon(effect: any)
     {
+        let theme = getBrightness();
         return effect.icon
             ? (theme === "dark" ? effect.icon : effect.icon.replace('/white/', '/'))
             : (theme === "dark" ? "systems/lancer/assets/icons/white/difficulty.svg" : "systems/lancer/assets/icons/difficulty.svg");
@@ -43,7 +42,7 @@
 
 <!-- TODO: effect.name needs a localization map -->
 <!-- TODO: effect.description needs a localization map-->
-<div class="la-combine-v -gap0">
+<div class="la-combine-v -gap1">
 {#if effects.length}
 {#each effects as effect}
     <HeaderMain
@@ -64,7 +63,7 @@
     >
         <span class="la-activeeffect">
             <img 
-                class="la-activeeffect__img la-dropshadow" 
+                class="la-activeeffect__img la-dropshadow -float-l -height10"
                 src="{encodeURI(getThemedIcon(effect))}" 
                 alt="Effect Icon"
             >

@@ -54,14 +54,14 @@
         />
     </div>
     {#if frame}
-    <div class="la-generated la-combine-v -widthfull -gap1">
+    <div class="la-generated la-combine-v -widthfull -gap2">
         <!-- FRAME POWER -->
         <HeaderSecondary
             title={core.name}
             rootStyle={["-margin0-t"]}
             headerStyle={[frameColorBckg, "clipped-bot-alt", "-margin1-b", "-padding0", "-padding3-r", "la-text-header"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
-            borderStyle={["-borderoff"]}
+            borderStyle={["-bordersoff"]}
             collapse={collapse}
             collapseID={`${collID}_core`}
             startCollapsed={false}
@@ -95,7 +95,7 @@
                 <span class="la-name__span -fontsize2">{getLocalized("LA.mech.frame.empty.label")}</span>
             </div>
         </summary>
-        <div class="la-details-wrapper -borderoff">
+        <div class="la-details__wrapper -bordersround -bordersoff">
             <span class="la-warn__span la-details__span la-text-repcap la-locked -fontsize3">{getLocalized("LA.mech.frame.empty.subLabel")}</span>
         </div>
     </details>

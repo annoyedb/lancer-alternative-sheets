@@ -2,18 +2,30 @@
 
 .la-root
 {
-    .-roundborders-ltb
+    .-bordersround-ltb
     {
         border-radius: 8px 0px 0px 8px;
         border-width: 1px 0px 1px 1px;
         border-style: solid;
     }
 
-    .-roundborders
+    .-bordersround-lb
+    {
+        border-radius: 0px 0px 0px 8px;
+        border-width: 0px 0px 1px 1px;
+        border-style: solid;
+    }
+
+    .-bordersround
     {
         border-radius: 8px;
         border-width: 1px;
         border-style: solid;
+    }
+
+    .-bordersoff
+    {
+        border-color: transparent;
     }
 
     // Flexboxes
@@ -119,9 +131,7 @@
 
     .la-effectbox
     {
-        width: 100%;
         position: relative;
-        border-color: var(--repcap);
         margin-top: 0.5rem;
         padding: 0.5rem;
         padding-top: 1rem;
@@ -203,22 +213,6 @@
                     }
                 }
             }
-        }
-
-        >.la-details-wrapper
-        {
-            border-width: 0px 0px 1px 1px;
-            border-radius: 0px 0px 0px 8px;
-            border-style: solid;
-        }
-    }
-
-    .la-activeeffect
-    {
-        >.la-activeeffect__img
-        {
-            float: left;
-            max-height: 4rem;
         }
     }
 }

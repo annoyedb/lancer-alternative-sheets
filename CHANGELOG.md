@@ -15,6 +15,7 @@
 * Custom counters added through the system's "Custom Counter" editable are now supported in the alternative sheets for mech weapons, mech weapon mods, and mech systems, frame cores, and frame traits
 * Added missing data path for Core Bonus option button
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
+* Compacted main collapsables more closely together
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme

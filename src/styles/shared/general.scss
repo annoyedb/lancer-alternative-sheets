@@ -179,6 +179,14 @@
                 box-shadow: inset 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
             }
         }
+
+        &.-medium
+        {
+            &.-inset
+            {
+                box-shadow: rgba(50, 50, 93, 0.25) -3px 3px 3px 1px inset, rgba(50, 50, 93, 0.2) 2px 0px 2px 0px inset;
+            }
+        }
     }
 
     .la-dropshadow
@@ -443,15 +451,5 @@
                 width: 2ch;
             }
         }
-    }
-
-
-    // TODO: depreciate (done in svelte already)
-    .la-subcontent
-    {
-        padding: 0.25rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        width: 100%;
     }
 }

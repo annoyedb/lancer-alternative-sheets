@@ -209,7 +209,7 @@ function renderTalentArray(talent: any, options: HelperOptions)
             </div>
         </div>
     </summary>
-    <div class="la-details-wrapper -borderoff
+    <div class="la-details-wrapper -bordersoff
             collapse collapsed"
         data-la-collapse-id="${collapseID(collapse, collID, true)}">
         <span class="la-details-wrapper__span la-effectbox la-bckg-card la-brdr-exotic -fontsize1">

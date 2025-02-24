@@ -5,6 +5,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { slugify } from "@/scripts/lancer/util/lid";
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import EffectBox from "./EffectBox.svelte";
 
     const {
         actions,
@@ -30,7 +31,7 @@
 {#if actions.length > 0}
 {#each actions as action, index}
     <!-- Action Array -->
-    <div class="la-effectbox la-bckg-card -largeheader -roundborders-ltb">
+    <div class="la-effectbox la-bckg-card la-brdr-repcap -largeheader -bordersround-ltb -widthfull -bordersround">
         <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped -padding0">
             <i class="cci {ACTIVATION_ICON_MAP[action.activation]} -height3 -lineheight3 -fontsize5 -flexthird"></i>
             <span class="-fontsize2 -flexthird -textwrapnowrap -textaligncenter"><!--
@@ -59,10 +60,10 @@
         <div class="-fontsize1">
             <div class="la-divider-h la-bckg-primary"></div>
             <!-- Trigger -->
-            <div class="la-effectbox la-combine-v -borderbottom -alignleft -roundborders-ltb">
-                <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0"><!--
-                --->{getLocalized("LA.trigger.label")}<!--
-            ---></span>
+            <EffectBox
+                name={getLocalized("LA.trigger.label")}
+                outerStyle={["-bordersround"]}
+            >
                 <!-- TODO: Move to a snippet? -->
                 <FlowButton
                     name={getActivationName(action.activation)}
@@ -80,9 +81,9 @@
                 />
                 <hr class="-widthfull">
                 {@html action.trigger || defaultPlaceholder}
-            </div>
+            </EffectBox>
             <!-- Effect -->
-            <div class="la-effectbox -roundborders-ltb">
+            <div class="la-effectbox la-brdr-repcap -bordersround-ltb -widthfull -bordersround">
                 <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0"><!--
                 --->{getLocalized("LA.mech.system.effect.label")}<!--
             --->{#if editDetails}

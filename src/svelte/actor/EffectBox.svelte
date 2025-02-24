@@ -16,7 +16,7 @@
 </script>
 
 {#if effect || children}
-<div class="la-effectbox la-bckg-card -fontsize1 -roundborders-ltb {outerStyle?.join(' ')}">
+<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -fontsize1 -bordersround-ltb {outerStyle?.join(' ')}">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0">
         {name}
     </span>

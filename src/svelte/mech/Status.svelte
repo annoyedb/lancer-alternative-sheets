@@ -20,7 +20,7 @@
 </script>
 
 
-<div class="la-status__list la-combine-v -widthfull -gap1">
+<div class="la-status__list la-combine-v -widthfull">
     <!-- Active Effects -->
     <HeaderMain
         title={getLocalized("LA.tab.status.effects.label")}
@@ -47,16 +47,16 @@
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <!-- Info -->
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-structure -fontsize6 -displayinline"></i>
+                <i class="cci cci-structure la-dropshadow -fontsize6 -displayinline"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
-                <div class="la-combine-v -divider -fontsize4 -textaligncenter">
+                <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                     <span class="la-top__span -width2ch">{system.structure.value}</span><!--
                 ---><span class="la-bottom__span">{system.structure.max}</span>
                 </div>
             </div>
             <!-- Flow/Macros -->
-            <div class="la-combine-v">
+            <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     name={getLocalized("LA.flow.structureDamage.label")}
                     uuid={actor.uuid}
@@ -71,10 +71,10 @@
         <!-- Repair -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-repair -fontsize6"></i>
+                <i class="cci cci-repair la-dropshadow -fontsize6"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
-                <div class="la-combine-v -divider -fontsize4 -textaligncenter">
-                    <input class="la-top__input -width2ch la-shadow -soft -inset"
+                <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
+                    <input class="la-top__input -width2ch la-shadow -medium -inset"
                         type="number" 
                         name="system.repairs.value"
                         data-dtype="Number" value={system.repairs.value}
@@ -82,7 +82,8 @@
                     <span class="la-bottom__span">{system.repairs.max}</span>
                 </div>
             </div>
-            <div class="la-combine-v">
+            <!-- Flow/Macros -->
+            <div class="la-combine-v la-dropshadow">
                 <FlowButton 
                     flowClass={FlowClass.Button}
                     name={getLocalized("LA.flow.stabilize.label")}
@@ -127,15 +128,16 @@
         <!-- Stress -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-reactor -fontsize6"></i>
+                <i class="cci cci-reactor la-dropshadow -fontsize6"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.stress.label")}</span>
-                <div class="la-combine-v -divider -fontsize4 -textaligncenter">
+                <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                     <span class="la-top__span -width2ch">{system.stress.value}</span>
                     <span class="la-bottom__span">{system.stress.max}</span>
                 </div>
             </div>
-            <div class="la-combine-v">
+            <!-- Flow/Macros -->
+            <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     name={getLocalized("LA.flow.reactorStress.label")}
                     uuid={actor.uuid}
@@ -150,14 +152,15 @@
         <!-- Overcharge -->
         <div class="la-structure la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-overcharge -fontsize6"></i>
-                <div class="la-combine-v -divider -fontsize4 -textaligncenter">
+                <i class="cci cci-overcharge la-dropshadow -fontsize6"></i>
+                <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
                     <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                     <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
                     <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>
                 </div>
             </div>
-            <div class="la-combine-v">
+            <!-- Flow/Macros -->
+            <div class="la-combine-v la-dropshadow">
                 <FlowButton 
                     flowClass={FlowClass.Button}
                     name={getLocalized("LA.flow.overcharge.label")}
@@ -179,12 +182,13 @@
         <!-- Burn -->
         <div class="la-structure la-brdr-primary la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
-                <i class="cci cci-burn -fontsize6"></i>
+                <i class="cci cci-burn la-dropshadow -fontsize6"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.burn.label")}</span>
                 <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                 <span class="la-value__button -fontsize4 -textaligncenter -width2ch">{system.burn}</span>
             </div>
-            <div class="la-combine-v">
+            <!-- Flow/Macros -->
+            <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     name={getLocalized("LA.flow.extinguish.label")}
                     uuid={actor.uuid}
