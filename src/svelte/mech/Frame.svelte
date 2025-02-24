@@ -54,7 +54,7 @@
         />
     </div>
     {#if frame}
-    <div class="la-generated la-combine-v -widthfull -gap2">
+    <div class="la-generated la-combine-v -widthfull -gap0">
         <!-- FRAME POWER -->
         <HeaderSecondary
             title={core.name}
