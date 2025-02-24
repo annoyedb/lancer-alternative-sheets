@@ -74,12 +74,24 @@
                 <i class="cci cci-repair -fontsize6"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
                 <div class="la-combine-v -divider -fontsize4 -textaligncenter">
-                    <input class="la-top__input -width2ch" type="number" name="system.repairs.value"
-                        data-dtype="Number" value={system.repairs.value} />
+                    <input class="la-top__input -width2ch la-shadow -soft -inset"
+                        type="number" 
+                        name="system.repairs.value"
+                        data-dtype="Number" value={system.repairs.value}
+                    />
                     <span class="la-bottom__span">{system.repairs.max}</span>
                 </div>
             </div>
             <div class="la-combine-v">
+                <FlowButton 
+                    flowClass={FlowClass.Button}
+                    name={getLocalized("LA.flow.stabilize.label")}
+                    tooltipHeader={getLocalized("LA.action.full.label")}
+                    tooltip={getLocalized("LA.flow.stabilize.tooltip")}
+                    uuid={actor.uuid}
+                    flowType="Stabilize"
+                    flowArgs={emptyObject}
+                />
                 <FlowButton
                     name={getLocalized("LA.flow.fullRepair.label")}
                     uuid={actor.uuid}
@@ -146,6 +158,15 @@
                 </div>
             </div>
             <div class="la-combine-v">
+                <FlowButton 
+                    flowClass={FlowClass.Button}
+                    name={getLocalized("LA.flow.overcharge.label")}
+                    tooltipHeader={getLocalized("LA.action.overcharge.label")}
+                    tooltip={getLocalized("LA.flow.overcharge.tooltip")}
+                    uuid={actor.uuid}
+                    flowType="Overcharge"
+                    flowArgs={emptyObject}
+                />
                 <FlowButton
                     name={getLocalized("LA.flow.overchargeReset.label")}
                     uuid={actor.uuid}
@@ -156,7 +177,7 @@
             </div>
         </div>
         <!-- Burn -->
-        <div class="la-structure la-combine-h la-bckg-card -justifybetween">
+        <div class="la-structure la-brdr-primary la-combine-h la-bckg-card -justifybetween">
             <div class="la-combine-h -aligncenter">
                 <i class="cci cci-burn -fontsize6"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.burn.label")}</span>

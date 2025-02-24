@@ -14,6 +14,7 @@
 * Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (for now --though they do give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
 * Custom counters added through the system's "Custom Counter" editable are now supported in the alternative sheets for mech weapons, mech weapon mods, and mech systems, frame cores, and frame traits
 * Added missing data path for Core Bonus option button
+* Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme
@@ -80,7 +81,7 @@ Sorry to everyone who updated within the past few hours
 # 1.0.4
 ## Changes
 * #2 - Added missing type definition for the button element in core activation, resulting in input events propagating to it unintentionally
-* Fixed 'active effects' type checking; Thanks, Bolts!
+* Fixed 'active effects' type checking; Thanks, @BoltsJ!
 
 # 1.0.3 - Don't Mind Me
 Still experimenting with GitHub CI's on the main branch. `yup.`

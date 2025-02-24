@@ -1,3 +1,5 @@
+import type { TooltipDirection } from "@/enums/TooltipDirection";
+
 export interface StatusBarProps
 {
     currentValue: number,
@@ -9,4 +11,8 @@ export interface StatusBarProps
     styleClass?: string[],
     styleClassAlt?: string[],
     clipPath?: string,
+
+    tooltip?: string;
+    tooltipHeader?: string;
+    tooltipDirection?: string | TooltipDirection;
 }

@@ -6,6 +6,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "../actor/StatComboShort.svelte";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
 
     const { 
         system,
@@ -17,6 +18,9 @@
         : getLocalized("LA.placeholder");
     let frameUUID = frame ? frame.uuid : "";
     let emptyObject = '{}';
+
+    let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"));
+    let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"));
 </script>
 
     <!-- Frame Name -->
@@ -28,19 +32,29 @@
             <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
         </div>
     </span>
-    <!-- Mech Image -->
     <div class="la-mech">
+        <!-- Size & Speed -->
         <div class="la-combine-v">
         {#if system.size < 1}
-            <i class="cci cci-size-half la-text-primary la-outl-background"></i>
+            <i class="cci cci-size-half la-text-primary la-outl-background"
+                data-tooltip={sizeTip}
+                data-tooltip-class="clipped-bot la-tooltip"
+                data-tooltip-direction="RIGHT"></i>
         {:else}
-            <i class="cci cci-size-{system.size} la-text-primary la-outl-background"></i>
+            <i class="cci cci-size-{system.size} la-text-primary la-outl-background"
+                data-tooltip={sizeTip}
+                data-tooltip-class="clipped-bot la-tooltip"
+                data-tooltip-direction="RIGHT"></i>
         {/if}
-            <div class="la-combine-h">
+            <div class="la-combine-h" 
+                data-tooltip={speedTip}
+                data-tooltip-class="clipped-bot la-tooltip"
+                data-tooltip-direction="RIGHT">
                 <i class="mdi mdi-arrow-right-bold-hexagon-outline la-text-primary la-outl-background"></i>
                 <span class="la-text-primary la-outl-background">{system.speed}</span>
             </div>
         </div>
+        <!-- Mech Image -->
         <img class="las-mech__img" 
             src="{actor.img}"
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
@@ -50,25 +64,32 @@
     </div>
     <!-- Mech Stats 1 -->
     <div class="la-stats">
-        <div class="la-shortstat la-combine-h">
-            <!-- the mdi shield is a bit larger than the cci icons -->
-            <i class="mdi mdi-shield-half-full" style="font-size: 0.75em"></i>
-            <div class="la-combine-v -divider">
-                <span class="-widthfull">{system.armor}</span>
-                <span class="">{getLocalized("LA.armor.short")}</span>
-            </div>
-        </div>
+        <StatComboShort
+            icon={"cci cci-role-defender"}
+            label={getLocalized("LA.armor.short")}
+            value={system.armor}
+            style={["-divider"]}
+
+            tooltip={getLocalized("LA.armor.tooltip")}
+            tooltipDirection="RIGHT"
+        />
         <StatComboShort
             icon={"cci cci-evasion"}
             label={getLocalized("LA.evasion.short")}
             value={system.evasion}
             style={["-divider"]}
+
+            tooltip={getLocalized("LA.evasion.tooltip")}
+            tooltipDirection="RIGHT"
         />
         <StatComboShort
             icon={"cci cci-edef"}
             label={getLocalized("LA.edefense.short")}
             value={system.edef}
             style={["-divider"]}
+
+            tooltip={getLocalized("LA.edefense.tooltip")}
+            tooltipDirection="RIGHT"
         />
     </div>
     <!-- Mech Bars -->
@@ -86,6 +107,9 @@
                     maxValueAlt={system.hp.max}
                     styleClassAlt={["la-bckg-bar-shield", "-shield"]}
                     clipPath={"clipped"}
+                    
+                    tooltip={getLocalized("LA.hitpoint.tooltip")}
+                    tooltipDirection="RIGHT"
                 />
                 <div class="la-spacer -tiny"></div>
                 <!-- STRUCTURE -->
@@ -96,6 +120,9 @@
                     maxValue={system.structure.max}
                     styleClass={["la-bckg-bar-structure"]}
                     clipPath={"clipped-alt"}
+
+                    tooltip={getLocalized("LA.structure.tooltip")}
+                    tooltipDirection="RIGHT"
                 />
             </div>
             <!-- SHIELD (VALUE) -->
@@ -105,7 +132,11 @@
                     name="system.overshield.value" 
                     data-dtype="Number"
                     value="{system.overshield.value}">
-                <span class="la-damage__span -fontsize0 -heightfull">{getLocalized("LA.overshield.short")}</span>
+                <span class="la-damage__span -fontsize0 -heightfull"
+                    data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'))}"
+                    data-tooltip-class="clipped-bot la-tooltip"
+                    data-tooltip-direction="RIGHT"
+                >{getLocalized("LA.overshield.short")}</span>
             </div>
         </div>
 
@@ -124,6 +155,9 @@
                     maxValueAlt={system.heat.max}
                     styleClassAlt={["la-bckg-bar-burn", "-burn"]}
                     clipPath={"clipped"}
+
+                    tooltip={getLocalized("LA.heat.tooltip")}
+                    tooltipDirection="RIGHT"
                 />
                 <div class="la-spacer -tiny"></div>
                 <!-- STRESS, BURN (BAR) -->
@@ -134,6 +168,9 @@
                     maxValue={system.stress.max}
                     styleClass={["la-bckg-bar-stress"]}
                     clipPath={"clipped"}
+
+                    tooltip={getLocalized("LA.stress.tooltip")}
+                    tooltipDirection="RIGHT"
                 />
             </div>
             <!-- BURN (VALUE) -->
@@ -143,7 +180,13 @@
                     name="system.burn" 
                     data-dtype="Number"
                     value="{system.burn}">
-                <span class="la-damage__span -fontsize0 -heightfull">{getLocalized("LA.burn.short")}</span>
+                <span class="la-damage__span -fontsize0 -heightfull"
+                    data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))}"
+                    data-tooltip-class="clipped-bot la-tooltip"
+                    data-tooltip-direction="RIGHT"
+                ><!--
+                --->{getLocalized("LA.burn.short")}<!--
+            ---></span>
             </div>
         </div>
     </div>
@@ -154,18 +197,27 @@
             label={getLocalized("LA.tattack.short")}
             value={system.tech_attack}
             style={["-divider"]}
+
+            tooltip={getLocalized("LA.tattack.tooltip")}
+            tooltipDirection="RIGHT"
         />
         <StatComboShort
             icon={"cci cci-save"}
             label={getLocalized("LA.save.short")}
             value={system.save}
             style={["-divider"]}
+
+            tooltip={getLocalized("LA.save.tooltip")}
+            tooltipDirection="RIGHT"
         />
         <StatComboShort
             icon={"cci cci-sensor"}
             label={getLocalized("LA.sensor.short")}
             value={system.sensor_range}
             style={["-divider"]}
+
+            tooltip={getLocalized("LA.sensor.tooltip")}
+            tooltipDirection="RIGHT"
         />
     </div>
     <!-- Macros/Flows -->

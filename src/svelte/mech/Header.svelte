@@ -24,7 +24,8 @@
         <span class="la-pilotlevel__span -upper la-text-header">LL{pilot.system.level} </span>
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.search.label")}</span><!--
     ---><span class="la-cursor la-anim-header -fadein"></span>
-    {:else}
+    {/if}
+    {#if pilot && pilot.system.active_mech.value.uuid !== actor.uuid}
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}
     </div>

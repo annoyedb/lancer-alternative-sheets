@@ -14,7 +14,8 @@
     <Mounts {...props} />
     <Systems {...props} />
     
-    {#if props.pilot}
+    {#if props.pilot && 
+        props.pilot.system.active_mech.value.uuid === props.actor.uuid}
         <CoreBonus {...props} />
         <Talents {...props} />
     {/if}

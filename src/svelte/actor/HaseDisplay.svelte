@@ -5,12 +5,14 @@
     import { FlowClass } from "@/enums/FlowClass";
 
     const {
+        pilot,
         actor,
-        system
+        system,
     }: MechSheetProps = $props();
 </script>
 
 <!-- HASE Stats -->
+{#if pilot && pilot.system.active_mech.value.uuid === actor.uuid}
 <div class="la-hase">
     <HexButton
         name={getLocalized("LA.grit.short")}
@@ -63,3 +65,4 @@
         style={["-engineering"]}
     />
 </div>
+{/if}

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { StatusBarProps } from "@/interfaces/actor/StatusBarProps";
 
 
@@ -11,14 +12,25 @@
         dataName,
         styleClass,
         styleClassAlt,
-        clipPath
+        clipPath,
+
+        tooltip,
+        tooltipHeader,
+        tooltipDirection
     } : StatusBarProps = $props();
 
+    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
 
 <div class="la-combine-h -fontsize1">
     {#if name}
-    <span class="la-damage__span -fontsize0">{name}</span>
+    <span class="la-damage__span -fontsize0"
+        data-tooltip={tip}
+        data-tooltip-class="clipped-bot la-tooltip"
+        data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
+    ><!--
+    --->{name}<!--
+---></span>
     {/if}
     <div class="la-bar-h la-bckg-bar-back -flex1 {clipPath}">
         <div class="la-bar-h-progress la-combine-h">

@@ -15,7 +15,6 @@
     } = props;
     
     let talents = pilot.itemTypes.talent;
-    console.log(pilot.itemTypes)
     let collapseID = `${pilot.uuid}_talents`;
 </script>
 

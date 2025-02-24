@@ -1,12 +1,10 @@
 import type { FlowClass } from "@/enums/FlowClass"
+import type { TooltipDirection } from "@/enums/TooltipDirection"
 
 export interface FlowButtonProps
 {
     name: string
     flowClass: FlowClass | string
-    tooltipHeader?: string,
-    tooltip?: string,
-    tooltipDirection?: "UP" | "DOWN" | "LEFT" | "RIGHT" | "CENTER" | "TOP",
     uuid?: string,
     flowType?: string, // If button class
     flowArgs?: any, // If button class
@@ -15,4 +13,8 @@ export interface FlowButtonProps
     backgroundStyle?: string
     textStyle?: string
     disableSlide?: Boolean
+    
+    tooltipHeader?: string,
+    tooltip?: string,
+    tooltipDirection?: string | TooltipDirection,
 }
