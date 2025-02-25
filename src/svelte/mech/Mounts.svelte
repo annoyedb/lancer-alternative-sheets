@@ -40,6 +40,8 @@
         
         mountOption={true}
         mountNames={aggregateMountWeaponNames(mount)}
+
+        collapseAllOption={true}
     >
     {#if mount.bracing}
         <details class="la-details -widthfull la-combine-v">

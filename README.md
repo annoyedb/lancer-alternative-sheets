@@ -60,8 +60,12 @@ It is designed to be a player-facing sheet that provides most of the functionali
   </div>
 </details>
 
+## Rendering
+This module currently uses Svelte 5 to render overtop of the Lancer system's current implementation of Application by mounting overtop of a Handlebars div. As such it does not extend from Application but from Lancer's ActorSheets, making it fully interchangeable between the Lancer included sheets.
+
 ## Building
-This module uses [Vite](https://vite.dev/guide/) to build package the module. 
+This project uses [Vite](https://vite.dev/guide/) to build and package the module and makes use of it's HMR feature for development.
+
 To set up hot-reloading, first build the module, then symlink the dist folder into your foundry data folder as `modules/lancer-alternative-sheets`. 
 Make sure your Foundry Virtual Tabletop server is running and have the ['Hot-Reload Package Files' enabled](/docs/HotReload.png) in your Foundry settings, run `yarn serve` at the module development folder and your browser will automatically open to the Vite development server.
 
@@ -76,18 +80,18 @@ Contact me if you know how. :eye::lips::eye:
 ## Installation
 This module can be installed:
 * using the Foundry module installer
+* through the latest manifest link - `https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json`
 * downloaded and installed manually (from module.zip) found in the [Releases](https://github.com/annoyedb/lancer-alternative-sheets/releases) page
-* through the manifest link - `https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json`
 
 ## Using the sheet
 To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the image above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
 
-At the moment, the sheet only provides most of the functionality --not all of it-- so it is not recommended to set this sheet as the default
+At the moment, the sheet only provides *most* of the functionality *--not all of it--* so it is not recommended to set this sheet as the default.
 
 ## Contributing
-Contributions are welcome and issues can be posted here or tagging me (`annoying`) in the Lancer Discord (AKA Pilot NET).
+Contributions are welcome and issues can be posted [here](https://github.com/annoyedb/lancer-alternative-sheets/issues/) or tagging me (`annoying`) in the Lancer Discord (AKA Pilot NET).
 
-Please take a look at the [change log](/CHANGELOG.md) to see currently the known issues first.
+Please take a look at the [change log](/CHANGELOG.md) and/or [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) to see currently the known issues first.
 
 ## Acknowledgements
 * [League of Foundry Developers](https://github.com/League-of-Foundry-Developers/foundry-vtt-types) - Type definitions for Foundry

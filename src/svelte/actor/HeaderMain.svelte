@@ -42,7 +42,7 @@
     
     let collapsing = collapse && collapseID;
     let collapsed = collapsing && startCollapsed ? "collapsed" : "";
-    let extraOptions = deleteOption || messageOption || spOption || mountOption ? true : false;
+    let extraOptions = collapseAllOption || deleteOption || messageOption || spOption || mountOption ? true : false;
     let expanding = $state(true);
     let expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
@@ -102,7 +102,7 @@
         ---><span class="la-cursor la-anim-header -fadein {cursorStyle ? cursorStyle.join(' ') : ""}"></span>
         </div>
     {#if extraOptions}
-        <div class="la-combine-h -gap1">
+        <div class="la-combine-h -gap2">
         {#if spOption}
             <div class="la-combine-h -height2">
                 <div class="{spTextStyle?.join(' ') || "-fontsize2"}">
@@ -147,7 +147,7 @@
         {#if collapseAllOption}
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
-                class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} la-text-header -fontsize2"
+                class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"
                 data-tooltip={expandTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={"RIGHT"}

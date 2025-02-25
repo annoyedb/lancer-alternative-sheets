@@ -79,14 +79,18 @@
     headerStyle={["la-bckg-system", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-system"]}
+    
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
+    
     spOption={true}
     spCurrent={system.loadout.sp.value}
     spMax={system.loadout.sp.max}
     spTextStyle={["la-text-header", "-fontsize2"]}
     spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
+    
+    collapseAllOption={true}
 >
 {#if systemComponents.length}
     <div class="la-combine-v -gap0 -widthfull">

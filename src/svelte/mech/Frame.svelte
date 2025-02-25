@@ -40,6 +40,7 @@
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
+    collapseAllOption={true}
 >
     <div class="la-combine-h clipped-alt la-bckg-pilot la-text-header -padding0 -aligncenter">
         <span class="-fontsize1"><!--

@@ -36,8 +36,7 @@
     collapseID={collapseID}
     startCollapsed={true}
 
-    spTextStyle={["la-text-header", "-fontsize2"]}
-    spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
+    collapseAllOption={true}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
