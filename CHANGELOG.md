@@ -1,8 +1,9 @@
-# 1.1.0
+# 1.1.0 - Little Big Changes
 ᕕ( ᐛ )ᕗ New `minor` version
 
 ## Changes
 * #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header
+* #?? - Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
 * Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any (negative) discrepancies are found, let me know
 * Theme changes can now be applied without having to reopen the sheets!
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
@@ -18,7 +19,6 @@
 * Compacted main collapsables more closely together
 * Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
-* Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
 * Moved core availability to the sidebar
 
 ## Known Issues
@@ -56,7 +56,7 @@ And yes I'm still testing CI `don't judge me`
 * Fixed issue where there was no element to display (e.g. tags) there would just be an empty void
 * Frame actives and passives are now collapsible `you can thank Hydra for that`
 ## Known Issues
-* #6 - I'm still seeking more information about this particular topic if anyone more knowledgable with Lancer (both game and systems) would like to take a look
+* ~~#6 - I'm still seeking more information about this particular topic if anyone more knowledgable with Lancer (both game and systems) would like to take a look~~
 
 # 1.0.10
 I swear I'm not padding my commit history
@@ -78,8 +78,8 @@ Mostly an excuse to test CI again
 ## Changes
 * Added missing profile styling
 ## Known issues
-* There is only one missing styling called 'bonuses'; if anyone encounters anything that looks odd (tiny text is the most prominent indicator) don't hesitate to notify me!
-* There is no 'frame deployable' styling; this is from frames such as the HORUS Hydra, but I can't get foundryvtt-lancer to generate the data I need to observe it. If anyone has success in generating this (or similar) frame's data, let me know
+* ~~There is only one missing styling called 'bonuses'; if anyone encounters anything that looks odd (tiny text is the most prominent indicator) don't hesitate to notify me!~~
+* ~~There is no 'frame deployable' styling; this is from frames such as the HORUS Hydra, but I can't get foundryvtt-lancer to generate the data I need to observe it. If anyone has success in generating this (or similar) frame's data, let me know~~
 
 # 1.0.5
 This is a manual release reverting changes from a recent PR due to CI issues and development pipeline issues hastily introduced
@@ -108,11 +108,11 @@ And my issues list is already bigger than my change list.
 * [PopOut!](https://github.com/League-of-Foundry-Developers/fvtt-module-popout) (and likely some others, such as printing modules) are compatible with this sheet's version of collapsible headers
 * All [COMP/CON](https://github.com/massif-press/compcon) themes are supported in this module. `foundryvtt-lancer`'s 'GMS Dark' theme is not currently supported
 ## Known Issues
-* Deleting more than one ActiveEffect without rerendering the document throws an error. Cosmetic only but nonetheless annoying --if anyone knows a fix please let me know
-* Changing themes while the sheet is open does not change fully change the sheet's theme without reopening it again. I need to hook into when Lancer changes its theme settings, so if anyone knows how to do this please let me know
-* 'editable' actions, 'bonuses', and 'weapon profiles' are not styled and frame deployables (different from system deployables) are not implemented. Not sure if they're even fully implemented in the Lancer system or what they even are
+* ~~Deleting more than one ActiveEffect without rerendering the document throws an error. Cosmetic only but nonetheless annoying --if anyone knows a fix please let me know~~
+* ~~Changing themes while the sheet is open does not change fully change the sheet's theme without reopening it again. I need to hook into when Lancer changes its theme settings, so if anyone knows how to do this please let me know~~
+* ~~'editable' actions, 'bonuses', and 'weapon profiles' are not styled and frame deployables (different from system deployables) are not implemented. Not sure if they're even fully implemented in the Lancer system or what they even are~~
 * Some things that should have input boxes in the main content (e.g. the 'status' tab: overcharge, structure, and stress) but aren't there. There is an issue where when reading a number data type in the Lancer system and there is more than one of the same uuid, it will throw an value type error. I suspect its received an array, when it expected a single value, but I haven't looked at the code
-* Activations (Full, Quick, etc) aren't mapped to use localized values. Neither are the names or descriptions of talents, weapons, mods, etc.
+* ~~Activations (Full, Quick, etc) aren't mapped to use localized values.~~ Neither are the names or descriptions of talents, weapons, mods, etc.
 * No warnings yet if your loadout is illegal (e.g. two main weapons on a flex slot)
 * Some Lancer classes, types, and functions are repackaged with this module (only used by these sheets though) and it feels wholely unnecessary. If anyone knows how to get references to the actual classes/methods/types/functions used in the Lancer module please let me know. I tried getting vite to export types from the foundryvtt-lancer codebase but it's giving me rollup issues unless they're all defined in the global namespace `and I'm not doing that by hand`
-* It's called "sheets" but there's only one sheet :eyes: `so what? you wanna fight???`
+* ~~It's called "sheets" but there's only one sheet :eyes: `so what? you wanna fight???`~~
