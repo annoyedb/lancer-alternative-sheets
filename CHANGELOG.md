@@ -25,6 +25,7 @@
 * Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window). The ones I'm searching for how to set their correct paths are: core bonuses (The Lesson of the Held Image's reaction action), deployable actions and special actions (Turret Drones)
 * Leadership die counter is tracking properly, however the activation flow from the Lancer system does not call for a rerender for some reason.
 * If you use the mech inventory system, you should reach out to me if you plan on using the sheet, otherwise you may find problems relinking your weapons to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If I find enough people use it, I will revert this fix.
+* Images themes (used in Active Effects, and the deployable image in the loadout tab) do not reflect theme color until a rerender. `it is what it is`
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme

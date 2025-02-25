@@ -49,9 +49,9 @@
         <!-- FRAME POWER -->
         <HeaderSecondary
             title={core.name}
-            headerStyle={[frameColorBckg, "clipped-bot-alt", "-margin1-b", "-padding0", "-padding3-r", "la-text-header"]}
+            headerStyle={[frameColorBckg, "clipped-bot-alt", "-padding0", "-padding3-r", "la-text-header"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
-            borderStyle={["-bordersoff"]}
+            borderStyle={["-bordersoff", "-margin1-t"]}
             collapse={collapse}
             collapseID={`${collID}_core`}
             startCollapsed={false}
