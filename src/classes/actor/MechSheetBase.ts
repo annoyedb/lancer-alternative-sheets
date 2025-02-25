@@ -94,32 +94,7 @@ export class MechSheetBase
                 super._injectHTML(html);
                 let data = await this.getData() as any;
                 
-                // (#1)
-                mount(Header,
-                {
-                    target: html.find(".la-SVELTE-HEADER")[0],
-                    props: data,
-                });
-                mount(Sidebar,
-                {
-                    target: html.find(".la-SVELTE-SIDEBAR")[0],
-                    props: data,
-                });
-                mount(Status,
-                {
-                    target: html.find(".la-SVELTE-STATUS")[0],
-                    props: data,
-                });
-                mount(Loadout,
-                {
-                    target: html.find(".la-SVELTE-LOADOUT")[0],
-                    props: data,
-                });
-                mount(HaseDisplay,
-                {
-                    target: html.find(".la-SVELTE-HASE")[0],
-                    props: data,
-                });
+                this.mountComponents(html, data);
 
                 this.activateListeners(html);
                 this.themeDirty = false;
@@ -130,6 +105,16 @@ export class MechSheetBase
                 super._replaceHTML(element, html);
                 let data = await this.getData() as any;
                 
+                this.mountComponents(html, data);
+
+                this.activateListeners(html);
+                // Saving and restoring scroll positions calls before rerender, so 
+                // restore the scroll positions after the rerender
+                this._restoreScrollPositions(html);
+            }
+
+            mountComponents(html: JQuery<HTMLElement>, data: any)
+            {
                 // (#1)
                 mount(Header,
                 {
@@ -156,11 +141,6 @@ export class MechSheetBase
                     target: html.find(".la-SVELTE-HASE")[0],
                     props: data,
                 });
-                
-                this.activateListeners(html);
-                // Saving and restoring scroll positions calls before rerender, so 
-                // restore the scroll positions after the rerender
-                this._restoreScrollPositions(html);
             }
 
             reapplyImgListener(html: JQuery<HTMLElement>)

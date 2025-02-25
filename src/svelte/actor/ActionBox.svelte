@@ -51,7 +51,6 @@
         style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
     />
 {/snippet}
-    
     <!-- Action Array -->
     <div class="la-collapsegroup la-combine-v la-effectbox la-bckg-card la-brdr-repcap -largeheader -bordersround-ltb -widthfull -bordersround">
         <div class="la-actionheader la-combine-h la-bckg-secondary la-text-header clipped -padding0
@@ -63,22 +62,22 @@
             --->{action.name?.toUpperCase() ?? getLocalized("LA.placeholder")}<!--
         ---></span>
             <div class="-flexthird la-combine-h -justifyend -height3">
-                <!-- TODO: allow edit actions -->
-                {#if edit}
-                    <button type="button"
-                        class="la-actionheader__button mdi mdi-pencil -fontsize3" 
-                        aria-label={getLocalized("LA.edit.label")}>
-                    </button>
-                    <button 
-                        class="la-actionheader__button mdi mdi-delete -fontsize3" 
-                        data-action="splice"
-                        data-uuid={uuid}
-                        data-path={path}
-                        aria-label={getLocalized("LA.delete.label")}
-                    >
-                    </button>
-                {/if}
-                <!-- ${editor} -->
+            <!-- TODO: allow edit actions -->
+            {#if edit}
+                <button type="button"
+                    class="la-actionheader__button mdi mdi-pencil -fontsize3" 
+                    aria-label={getLocalized("LA.edit.label")}>
+                </button>
+                <button 
+                    class="la-actionheader__button mdi mdi-delete -fontsize3" 
+                    data-action="splice"
+                    data-uuid={uuid}
+                    data-path={path}
+                    aria-label={getLocalized("LA.delete.label")}
+                >
+                </button>
+            {/if}
+            <!-- ${editor} -->
             </div>
         </div>
         {#if collapsing}
@@ -104,21 +103,16 @@
                 {/if}
                     {@html action.trigger || defaultPlaceholder}
                 </EffectBox>
-                <!-- Effect -->
-                <div class="la-effectbox la-brdr-repcap -bordersround-ltb -widthfull -bordersround">
-                    <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0"><!--
-                    --->{getLocalized("LA.mech.system.effect.label")}<!--
-                --->{#if editDetails}
-                        <!-- TODO: allow edit details -->
-                        <button type="button" 
-                            class="fas fa-edit popout-text-edit-button" 
-                            data-path={`${path}.detail`}
-                            aria-label={getLocalized("LA.edit.label")}>
-                        </button><!--
-                --->{/if}<!--
-                ---></span>
-                    <span class="-fontsize1">{@html action.detail || defaultPlaceholder}</span>
-                </div>
+                <!-- TODO: allow editDetails -->
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    outerStyle={["-bordersround"]}
+
+                    editOption={editDetails}
+                    editPath={`${path}.detail`}
+                >
+                    {@html action.detail || defaultPlaceholder}
+                </EffectBox>
             </div>
         {:else}
             <div class="-fontsize1">

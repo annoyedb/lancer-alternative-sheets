@@ -10,7 +10,7 @@
     // If Svelte needs to be reconciled (i.e. now that they don't have a common
     // parent), <svelte:window on:eventsomewhere={}>CONTENT HERE</svelte:window> 
     // can be used to listen for events in other mounted components, or an event 
-    // listener can be added through the activateListeners() override
+    // listener can be added through the activateListeners() override, or hooks, etc
     --}}
     <header 
         class="la-header la-bg-scroll -flex0
@@ -18,6 +18,7 @@
     >
         <div class="la-SVELTE-HEADER">
         </div>
+        {{!-- (#1) --}}
         <!-- Navigation -->
         <div class="la-nav__island">
             <nav 

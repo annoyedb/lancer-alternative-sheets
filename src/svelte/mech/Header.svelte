@@ -5,9 +5,9 @@
 
     const { actor, pilot }: MechSheetProps = $props();
 
-    function openSheetSettings()
+    async function openSheetSettings(_event: MouseEvent)
     {
-        console.log("Open settings");
+        console.log("Lancer Alternative Sheets: Unsupported for V11");
     }
 </script>
 
@@ -18,7 +18,7 @@
         <button type="button" 
             class=""
             aria-label="{getLocalized("LA.setting.customize.label")}"
-            onclick={openSheetSettings}
+            onclick={(event) => openSheetSettings(event)}
         >
             <i class="mdi mdi-cogs"></i>
         </button>
