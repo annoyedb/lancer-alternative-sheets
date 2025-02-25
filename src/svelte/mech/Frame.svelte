@@ -37,29 +37,18 @@
     title={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[frameColorBckg, "clipped-top", "-padding0-tb", "-padding3-lr"]}
     borderStyle={[frameColorBrdr]}
+
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
+
     collapseAllOption={true}
 >
-    <div class="la-combine-h clipped-alt la-bckg-pilot la-text-header -padding0 -aligncenter">
-        <span class="-fontsize1"><!--
-        --->{system.core_energy ? getLocalized("LA.mech.core.online.label") : getLocalized("LA.mech.core.offline.label")}<!--
-    ---></span>
-        <input 
-            name="system.core_energy" 
-            class="core-power-toggle mdi mdi-battery-outline la-text-repcap -fontsize5" 
-            type="checkbox" 
-            data-dtype="Boolean"
-            bind:checked={system.core_energy}
-        />
-    </div>
-    {#if frame}
+{#if frame}
     <div class="la-generated la-combine-v -widthfull -gap0">
         <!-- FRAME POWER -->
         <HeaderSecondary
             title={core.name}
-            rootStyle={["-margin0-t"]}
             headerStyle={[frameColorBckg, "clipped-bot-alt", "-margin1-b", "-padding0", "-padding3-r", "la-text-header"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
             borderStyle={["-bordersoff"]}
@@ -88,7 +77,7 @@
         </HeaderSecondary>
         <FrameTrait {...props} />
     </div>
-    {:else}
+{:else}
     <details class="la-details -widthfull la-combine-v -empty">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header">
             <div class="la-left la-combine-h">
@@ -100,5 +89,5 @@
             <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.mech.frame.empty.subLabel")}</div>
         </div>
     </details>
-    {/if}
+{/if}
 </HeaderMain>

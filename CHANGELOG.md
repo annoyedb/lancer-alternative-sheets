@@ -19,6 +19,7 @@
 * Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
 * Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
+* Moved core availability to the sidebar
 
 ## Known Issues
 * Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window). The ones I'm searching for how to set their correct paths are: core bonuses (The Lesson of the Held Image's reaction action), deployable actions and special actions (Turret Drones)

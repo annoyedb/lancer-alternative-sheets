@@ -5,8 +5,9 @@
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
-    import StatComboShort from "../actor/StatComboShort.svelte";
+    import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
 
     const { 
         system,
@@ -33,7 +34,7 @@
         </div>
     </span>
     <div class="la-mech">
-        <!-- Size & Speed -->
+        <!-- Size, Speed, & Core Availability -->
         <div class="la-combine-v">
         {#if system.size < 1}
             <i class="cci cci-size-half la-text-primary la-outl-background"
@@ -53,6 +54,7 @@
                 <i class="mdi mdi-arrow-right-bold-hexagon-outline la-text-primary la-outl-background"></i>
                 <span class="la-text-primary la-outl-background">{system.speed}</span>
             </div>
+            <CoreAvailability {system} />
         </div>
         <!-- Mech Image -->
         <img class="las-mech__img" 
