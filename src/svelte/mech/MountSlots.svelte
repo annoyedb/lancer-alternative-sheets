@@ -69,6 +69,11 @@
     {
         return `system.loadout.weapon_mounts.${mountIndex}.slots.${index}.mod.value`
     }
+    
+    function getActionCollapseID(index: number)
+    {
+        return `${mount.uuid}_action_${index}`;
+    }
 </script>
 
 {#each mount.slots as slot, index}
@@ -150,6 +155,9 @@
             <ActionBox
                 actions={slot.weapon.value.system.actions}
                 path={`system.actions`}
+                collapse={collapse}
+                collapseID={getActionCollapseID(index)}
+                startCollapsed={false}
             />
         {#if slot.size !== "Integrated"}
             <WeaponMod

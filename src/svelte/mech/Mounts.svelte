@@ -18,6 +18,12 @@
     {
         return `${actor.uuid}_mount_${index}`;
     }
+
+    function aggregateMountWeaponNames(mount: any)
+    {
+        let names = mount.slots.map((slot: any) => slot.weapon?.value.name);
+        return names.filter((name: any) => name !== undefined);
+    }
 </script>
 
 {#if system.loadout.frame && weaponMounts.length}
@@ -27,11 +33,13 @@
         headerStyle={["la-bckg-primary", "clipped-top", "-padding0-tb", "-padding3-lr"]}
         headerFontStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-brdr-primary"]}
+
         collapse={collapse}
         collapseID={getCollapseID(index)}
         startCollapsed={true}
-        spTextStyle={["la-text-header", "-fontsize2"]}
-        spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
+        
+        mountOption={true}
+        mountNames={aggregateMountWeaponNames(mount)}
     >
     {#if mount.bracing}
         <details class="la-details -widthfull la-combine-v">

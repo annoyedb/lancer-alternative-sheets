@@ -10,6 +10,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
 
     const {
+        collapse,
         source, 
         lidSource, 
     }: DeployableBoxProps = $props();
@@ -107,6 +108,9 @@
             <ActionBox
                 actions={deployable.system.actions}
                 path={`system.actions`}
+                collapse={collapse}
+                collapseID={`${deployable.uuid}_actions`}
+                startCollapsed={false}
             />
         {/if}
         </div>

@@ -16,21 +16,28 @@
     
     let talents = pilot.itemTypes.talent;
     let collapseID = `${pilot.uuid}_talents`;
+    let actionCollapseID = `${pilot.uuid}_talents_action`;
+
+    //@ts-ignore
+    function log(any: any)
+    {
+        console.log(any);
+    }
 </script>
 
 {#if talents.length}
 <HeaderMain
-title={getLocalized("LA.pilot.talent.label")}
-headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-headerFontStyle={["la-text-header", "-fontsize2"]}
-borderStyle={["la-brdr-weapon"]}
+    title={getLocalized("LA.pilot.talent.label")}
+    headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    headerFontStyle={["la-text-header", "-fontsize2"]}
+    borderStyle={["la-brdr-weapon"]}
 
-collapse={collapse}
-collapseID={collapseID}
-startCollapsed={true}
+    collapse={collapse}
+    collapseID={collapseID}
+    startCollapsed={true}
 
-spTextStyle={["la-text-header", "-fontsize2"]}
-spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
+    spTextStyle={["la-text-header", "-fontsize2"]}
+    spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
@@ -41,7 +48,7 @@ spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
             headerIconStyle={["cci", "cci-license", "-fontsize5", "-lineheight3"]}
             borderStyle={["-bordersoff"]}
             
-            rootStyle={["ref", "set"]}
+            rootStyle={["ref", "set", "lancer-talent", "submajor"]}
             uuid={talent.uuid}
             path={`system.pilot.value.itemTypes.talent.${index}`}
             collapse={collapse}
@@ -79,13 +86,13 @@ spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
                             name={counter.name}
                             usesValue={counter.value}
                             usesMax={counter.max}
-                            path={`itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
+                            path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
                         />
                     {/each}
                     {/if}
                         <BonusBox
                             bonuses={rank.bonuses}
-                            bonusPath={`itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}
+                            bonusPath={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}
                         />
                         <EffectBox
                             name={getLocalized("LA.pilot.trait.label")}
@@ -93,7 +100,11 @@ spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
                         />
                         <ActionBox
                             actions={rank.actions}
-                            path={`itemTypes.talent.${index}.system.ranks.${jndex}.actions`}
+                            uuid={talent.uuid}
+                            path={`system.ranks.${jndex}.actions`}
+                            collapse={collapse}
+                            collapseID={actionCollapseID}
+                            startCollapsed={false}
                         />
                     </div>
                 </HeaderSecondary>

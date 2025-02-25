@@ -167,7 +167,7 @@
                     currentValue={system.stress.value}
                     maxValue={system.stress.max}
                     styleClass={["la-bckg-bar-stress"]}
-                    clipPath={"clipped"}
+                    clipPath={"clipped-alt"}
 
                     tooltip={getLocalized("LA.stress.tooltip")}
                     tooltipDirection="RIGHT"

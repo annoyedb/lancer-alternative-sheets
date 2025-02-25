@@ -16,6 +16,9 @@
         mod,
         path,
     }: WeaponModProps = $props();
+
+    let collID = mod ? `${mod.uuid}_action` : "empty";
+
 </script>
 
 {#if mod}
@@ -108,6 +111,9 @@
             <ActionBox
                 actions={mod.system.actions}
                 path={`system.actions`}
+                collapse={collapse}
+                collapseID={collID}
+                startCollapsed={false}
             />
         </div>
     </HeaderSecondary>

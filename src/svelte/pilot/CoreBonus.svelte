@@ -17,21 +17,22 @@
     
     let coreBonuses = pilot.itemTypes.core_bonus;
     let collapseID = `${pilot.uuid}_corebonus`;
+    let actionCollapseID = `${pilot.uuid}_corebonus_action`;
 </script>
 
 {#if coreBonuses.length}
 <HeaderMain
-title={getLocalized("LA.pilot.coreBonus.label")}
-headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-headerFontStyle={["la-text-header", "-fontsize2"]}
-borderStyle={["la-brdr-weapon"]}
+    title={getLocalized("LA.pilot.coreBonus.label")}
+    headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    headerFontStyle={["la-text-header", "-fontsize2"]}
+    borderStyle={["la-brdr-weapon"]}
 
-collapse={collapse}
-collapseID={collapseID}
-startCollapsed={true}
+    collapse={collapse}
+    collapseID={collapseID}
+    startCollapsed={true}
 
-spTextStyle={["la-text-header", "-fontsize2"]}
-spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
+    spTextStyle={["la-text-header", "-fontsize2"]}
+    spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
@@ -73,11 +74,16 @@ spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
                 />
                 <ActionBox
                     actions={coreBonus.system.actions}
-                    path={`itemTypes.core_bonus.${index}.system.actions`}
+                    uuid={coreBonus.uuid}
+                    path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
+                    collapse={collapse}
+                    collapseID={actionCollapseID}
+                    startCollapsed={false}
                 />
                 <DeployableBox
                     source={pilot}
                     lidSource={coreBonus.system}
+                    collapse={collapse}
                 />
             </div>
         </HeaderSecondary>

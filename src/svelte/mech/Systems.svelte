@@ -9,6 +9,7 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import CounterBox from "../actor/CounterBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -22,6 +23,7 @@
     let collID = systemComponents.length
         ? `${actor.uuid}_system`
         : `${actor.uuid}_systemempty`;
+    let actionCollID = `${actor.uuid}_system_action`;
 
     function getDestroyed(component: any)
     {
@@ -64,7 +66,11 @@
             : getLocalized(SYSTEM_LOCALIZE_MAP[component.value.system.type]) || getLocalized("LA.mech.system.system.label");
     }
 
-    
+    //@ts-ignore
+    function log(any: any)
+    {
+        console.log(any);
+    }
 </script>
 
 {#if system.loadout.frame}
@@ -121,6 +127,16 @@
                     usesMax={component.value.system.uses.max}
                     path={`system.loadout.systems.${index}.value`}
                 />
+            {#if component.value.system.counters?.length}
+            {#each component.value.system.counters as counter, jndex}
+                <CounterBox
+                    name={counter.name}
+                    usesValue={counter.value}
+                    usesMax={counter.max}
+                    path={`system.loadout.systems.${index}.value.system.counters.${jndex}`}
+                />
+            {/each}
+            {/if}
                 <BonusBox
                     bonuses={component.value.system.bonuses}
                     bonusPath={`system.loadout.systems.${index}.value.system.bonuses`}
@@ -133,10 +149,14 @@
                     uuid={component.value.uuid}
                     actions={component.value.system.actions}
                     path={`system.actions`}
+                    collapse={collapse}
+                    collapseID={actionCollID}
+                    startCollapsed={false}
                 />
                 <DeployableBox
                     source={actor}
                     lidSource={component.value.system}
+                    collapse={collapse}
                 />
             </div>
         {/if}

@@ -8,12 +8,12 @@
         height: 10rem;
         position: relative;
 
-        >.la-island
+        >.la-nav__island
         {
+            position: absolute;
             z-index: 1;
             right: 0rem;
             top: 8.25rem;
-            position: absolute;
             filter: drop-shadow(-3px 3px 1px var(--shadow));
             -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
             -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
@@ -39,6 +39,19 @@
                         background-color: var(--darken-2);
                     }
                 }
+            }
+        }
+
+        .la-settings__island
+        {
+            position: absolute;
+            z-index: 1;
+            right: 0px;
+            top: 0px;
+
+            >button
+            {
+                font-size: 1.5rem;
             }
         }
 

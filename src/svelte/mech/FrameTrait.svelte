@@ -20,6 +20,10 @@
     {
         return `${actor.uuid}_${frame.id}_trait_${index}`;
     }
+    function getActionCollapseID(index: number)
+    {
+        return `${actor.uuid}_${frame.id}_trait_${index}_action`;
+    }
 </script>
 
 {#if frame.system.traits.length}
@@ -62,10 +66,14 @@
             uuid={frame.uuid}
             actions={trait.actions}
             path={`system.traits.${index}.actions`}
+            collapse={collapse}
+            collapseID={getActionCollapseID(index)}
+            startCollapsed={false}
         />
         <DeployableBox
             source={actor}
             lidSource={trait}
+            collapse={collapse}
         />
     </div>
 </HeaderSecondary>

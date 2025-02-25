@@ -33,17 +33,58 @@
         spMax,
         spTextStyle,
         spIconStyle,
+
+        mountOption,
+        mountNames,
+
+        collapseAllOption,
     }: HeaderMainProps = $props();
     
     let collapsing = collapse && collapseID;
     let collapsed = collapsing && startCollapsed ? "collapsed" : "";
-    let extraOptions = deleteOption || messageOption || spOption ? true : false;
+    let extraOptions = deleteOption || messageOption || spOption || mountOption ? true : false;
+    let expanding = $state(true);
+    let expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
+    let deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
 
     const defaultHeaderStyle = "la-bckg-primary -padding0-tb -padding3-lr"
     const defaultHeaderFontStyle = "la-text-header"
     const defaultDeleteStyle = "-glow-header -glow-primary-hover -fontsize2"
     const defaulltSPStyle = "-fontsize5 -lineheight3 -width3"
+
+    function collapseExpandAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
+    {
+        event.stopPropagation();
+
+        const collapseGroup = event.currentTarget.closest('.la-collapsegroup');
+        const triggers = collapseGroup?.querySelectorAll('[data-la-collapse-id]');
+        if (triggers && triggers.length > 0) 
+        {
+            triggers.forEach((trigger, index) => {
+                if (index <= 1) // Skip this header's pair
+                    return;
+                const id = trigger.getAttribute('data-la-collapse-id');
+                if (id) 
+                {
+                    const pair = Array.from(triggers).find(t => t !== trigger && t.getAttribute('data-la-collapse-id') === id);
+                    if (pair) 
+                    {
+                        if (expanding) 
+                        {
+                            pair.classList.remove('collapsed');
+                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "opened");
+                        } else 
+                        {
+                            pair.classList.add('collapsed');
+                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "closed");
+                        }
+                    }
+                }
+            });
+            expanding = !expanding;
+        }
+    }
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}">
@@ -61,14 +102,32 @@
         ---><span class="la-cursor la-anim-header -fadein {cursorStyle ? cursorStyle.join(' ') : ""}"></span>
         </div>
     {#if extraOptions}
-        <div class="la-combine-h">
+        <div class="la-combine-h -gap1">
+        {#if spOption}
+            <div class="la-combine-h -height2">
+                <div class="{spTextStyle?.join(' ') || "-fontsize2"}">
+                    {spCurrent} / {spMax}
+                </div>
+                <i class="cci cci-system-point {spIconStyle?.join(' ') || defaulltSPStyle}"></i>
+            </div>
+        {/if}
+        {#if mountOption && mountNames && mountNames.length}
+            <div class="la-combine-v la-text-header -gap0 -aligncenter -fontsize0 -height3 -lineheight0">
+            {#each mountNames as mountName}
+                <span class="-widthfull -textalignright">{mountName}</span>
+            {/each}
+            </div>
+        {/if}
         {#if deleteOption && deleteUUID}
             <!-- onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
                 class="la-delete {deleteStyle?.join(' ') || defaultDeleteStyle}" 
                 data-uuid="{deleteUUID}"
-                aria-label="{getLocalized("LA.delete.label")}"
+                data-tooltip={deleteTip}
+                data-tooltip-class={"clipped-bot la-tooltip"}
+                data-tooltip-direction={"RIGHT"}
+                aria-label="{getLocalized("LA.delete.tooltip")}"
                 on:click={deleteOnClick ? (event) => deleteOnClick(event) : null}
             >
                 <i class="fas fa-trash {deleteIconStyle?.join(' ')}"></i>
@@ -85,13 +144,17 @@
                 <i class="mdi mdi-message"></i>
             </button>
         {/if}
-        {#if spOption}
-            <div class="la-combine-h -height2">
-                <div class="{spTextStyle?.join(' ') || "-fontsize2"}">
-                    {spCurrent} / {spMax}
-                </div>
-                <i class="cci cci-system-point {spIconStyle?.join(' ') || defaulltSPStyle}"></i>
-            </div>
+        {#if collapseAllOption}
+            <!-- svelte-ignore event_directive_deprecated -->
+            <button type="button"
+                class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} la-text-header -fontsize2"
+                data-tooltip={expandTip}
+                data-tooltip-class={"clipped-bot la-tooltip"}
+                data-tooltip-direction={"RIGHT"}
+                aria-label={getLocalized("LA.collapseAll.tooltip")}
+                on:click={(event) => collapseExpandAll(event)}
+            >
+            </button>
         {/if}
         </div>
     {/if}

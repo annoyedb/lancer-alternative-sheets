@@ -19,6 +19,7 @@
     let frame: any = system.loadout.frame!.value;
     let core: any = frame.system.core_system;
     let collID: string = `${actor.uuid}_${frame.id}_activepower`;
+    let actionCollID: string = `${actor.uuid}_${frame.id}_activepower_action`;
     let name = core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label");
     let activationClass = `activation-${slugify(core.activation, "-")}`;
     let activationTheme = system.core_energy
@@ -49,7 +50,7 @@
     </div>
     <div class="la-combine-grid -widthfull {system.core_energy ? "la-dropshadow" : ""}">
         <button type="button"
-            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -lineheight5 {activationTheme} {system.core_energy ? "" : "-disabled"}
+            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "-disabled"}
                 activation-flow {activationClass}"
             data-uuid="{frame.uuid}" 
             data-path="system.core_system"
@@ -70,7 +71,7 @@
     <div class="
             collapse"
         data-la-collapse-id="{registerCollapse(collapse, collID, true)}">
-        <div class="la-divider-h la-bckg-primary"></div>
+        <div class="la-divider-h -margin0-tb la-bckg-primary"></div>
         <div class="la-combine-v -gap1">
             <EffectBox
                 name={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
@@ -81,10 +82,14 @@
                 uuid={frame.uuid}
                 actions={core.active_actions}
                 path={'system.core_system.active_actions'}
+                collapse={collapse}
+                collapseID={actionCollID}
+                startCollapsed={false}
             />
             <DeployableBox
                 source={actor}
                 lidSource={core}
+                collapse={collapse}
             />
         </div>
     </div>

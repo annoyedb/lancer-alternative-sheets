@@ -4,17 +4,32 @@
     import { id as moduleID } from '@/module.json';
 
     const { actor, pilot }: MechSheetProps = $props();
+
+    function openSheetSettings()
+    {
+        console.log("Open settings");
+    }
 </script>
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
+    <!-- Actor Sheet Settings -->
+    <div class="la-settings__island -padding1">
+        <button type="button" 
+            class=""
+            aria-label="{getLocalized("LA.setting.customize.label")}"
+            onclick={openSheetSettings}
+        >
+            <i class="mdi mdi-cogs"></i>
+        </button>
+    </div>
     <div class="la-names las-combine-v -margin3">
         <input 
             class="la-mechname__input la-text-header -upper -fontsize5
                 charname"
             name="name" type="text" value="{actor.name}" 
             placeholder="{getLocalized(" LA.namePlaceholder")}" />
-        <hr class="la-divider-h -large -spacemedium la-bckg-header">
+        <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
         <span class="la-pilotname__span -upper la-text-header -fontsize3
                 ref set pilot click-open"
             data-uuid="{pilot ? pilot.uuid : ""}" 

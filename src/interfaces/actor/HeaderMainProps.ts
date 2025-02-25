@@ -29,4 +29,9 @@ export interface HeaderMainProps
     spMax?: number;
     spTextStyle?: Array<string>;
     spIconStyle?: Array<string>;
+
+    mountOption?: Boolean;
+    mountNames?: Array<string>;
+
+    collapseAllOption?: Boolean;
 }

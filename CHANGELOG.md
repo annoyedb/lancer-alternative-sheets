@@ -2,26 +2,33 @@
 ᕕ( ᐛ )ᕗ New `minor` version
 
 ## Changes
+* #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header
 * Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any (negative) discrepancies are found, let me know
 * Theme changes can now be applied without having to reopen the sheets!
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
-* Added collapsibility to the status tab --that's all of them for mech sheets!
+* Added collapsibility to the status tab and individual actions --that's all of them now for mech sheets!
 * Macro/flow buttons no longer overflow into new lines, giving a more consistent UX
 * Fixed a critical error where Active Effects would never display since the value it was checking for did not exist from a patch added in 1.0.4 onwards `i am literally cascading`
 * Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed event.stopPropogation()
 * Fixed an issue where the "Full Repair" button did nothing because of an incorrect flow type definition
 * Fixed a bug where having a frame deployable would display all deployables owned by that actor, rather than just the deployables relevant to the frame `give me a scenario where Hydra isn't a pain in everyone's ass`
 * Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (for now --though they do give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
-* Custom counters added through the system's "Custom Counter" editable are now supported in the alternative sheets for mech weapons, mech weapon mods, and mech systems, frame cores, and frame traits
-* Added missing data path for Core Bonus option button
-* Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
+* Custom counters added through the system's "Custom Counter" editable are now supported in the alternative sheets for mech weapon mods, and mech systems, frame cores, and frame traits, core bonuses, and pilot talents
+* Added missing data path for Core Bonus hamburger button
 * Compacted main collapsables more closely together
 * Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
+* Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
+* Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
+
+## Known Issues
+* Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window). The ones I'm searching for how to set their correct paths are: core bonuses (The Lesson of the Held Image's reaction action), deployable actions and special actions (Turret Drones)
+* Leadership die counter is tracking properly, however the activation flow from the Lancer system does not call for a rerender for some reason.
+* If you use the mech inventory system, you should reach out to me if you plan on using the sheet, otherwise you may find problems relinking your weapons to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If I find enough people use it, I will revert this fix.
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme
 * Finished implementing mech sheet features (deployables, talents, core bonuses, etc) to display all effects, bonuses, etc
-* Externally loaded assets stop randomly going to grab milk between patches and never coming back
+* Externally loaded assets `stop randomly going to grab milk between patches and never coming back`
 * Minor styling changes to consistency and usability
 
 # 1.0.12
@@ -82,7 +89,7 @@ Sorry to everyone who updated within the past few hours
 
 # 1.0.4
 ## Changes
-* #2 - Added missing type definition for the button element in core activation, resulting in input events propagating to it unintentionally
+* #2 - Added missing type definition for the button element in core activation, resulting in input events propagating to it unintentionally. Thanks, @sealtrowitz!
 * Fixed 'active effects' type checking; Thanks, @BoltsJ!
 
 # 1.0.3 - Don't Mind Me

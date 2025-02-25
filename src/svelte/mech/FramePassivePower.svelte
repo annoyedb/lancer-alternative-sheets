@@ -17,7 +17,8 @@
     let core: any = frame.system.core_system;
     let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
     let frameColorBrdr = getManufacturerColor(frame.system.manufacturer, "brdr")
-    let collID: string = `${actor.uuid}_${frame.id}_activepower`;
+    let collID: string = `${actor.uuid}_${frame.id}_passivepower`;
+    let actionCollID: string = `${actor.uuid}_${frame.id}_passivepower_action`;
     let tip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
 </script>
 
@@ -60,6 +61,9 @@
             uuid={frame.uuid}
             actions={core.passive_actions}
             path={'system.core_system.passive_actions'}
+            collapse={collapse}
+            collapseID={actionCollID}
+            startCollapsed={false}
         />
     </div>
 </div>
