@@ -28,7 +28,7 @@
             class="la-mechname__input la-text-header -upper -fontsize5
                 charname"
             name="name" type="text" value="{actor.name}" 
-            placeholder="{getLocalized(" LA.namePlaceholder")}" />
+            placeholder="{getLocalized("LA.namePlaceholder")}" />
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
         <span class="la-pilotname__span -upper la-text-header -fontsize3
                 ref set pilot click-open"

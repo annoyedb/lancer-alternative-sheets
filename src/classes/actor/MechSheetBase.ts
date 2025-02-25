@@ -42,8 +42,6 @@ export class MechSheetBase
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
         const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
         {
-            tabMap: { [key: string]: {nav: HTMLElement, content: HTMLElement} } | null = null;
-
             private _themeDirty: boolean;
             private get themeDirty(): boolean { return this._themeDirty; }
             private set themeDirty(value: boolean) { this._themeDirty = value; }

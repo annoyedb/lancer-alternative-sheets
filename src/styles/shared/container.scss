@@ -63,14 +63,29 @@
             align-items: center;
         }
 
+        >.-flex0
+        {
+            flex: 0;
+        }
+
         >.-flex1
         {
             flex: 1;
         }
 
-        >.-flex0
+        >.-flex2
         {
-            flex: 0;
+            flex: 2;
+        }
+
+        >.-flex3
+        {
+            flex: 3;
+        }
+
+        >.-flex4
+        {
+            flex: 4;
         }
 
         >.-flexthird
