@@ -7,13 +7,20 @@
 
     async function openSheetSettings(_event: MouseEvent)
     {
-        console.log("Lancer Alternative Sheets: Unsupported for V11");
+        
+    }
+
+    function getVersion()
+    {
+        // @ts-expect-error
+        return game.release.version;
     }
 </script>
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Actor Sheet Settings -->
+    {#if getVersion() >= 12}
     <div class="la-settings__island -padding1">
         <button type="button" 
             class=""
@@ -23,6 +30,7 @@
             <i class="mdi mdi-cogs"></i>
         </button>
     </div>
+    {/if}
     <div class="la-names las-combine-v -margin3">
         <input 
             class="la-mechname__input la-text-header -upper -fontsize5

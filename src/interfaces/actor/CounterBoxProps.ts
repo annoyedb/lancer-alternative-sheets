@@ -4,5 +4,5 @@ export interface CounterBoxProps
     usesValue: number,
     usesMax: number,
     path: string,
-    onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+    onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }, ...args: any[]) => void;
 }

@@ -51,9 +51,16 @@ export class MechSheetBase
                 super(...args);
                 this._themeDirty = false;
 
-                // Force rerender when called and the system does not do it for us
-                Hooks.on("forceRerenderAlternativeSheets", (something: any, another: any, another2: any) => {
-                    console.log(something, another, another2) });
+                // Read pilot talent item updates
+                Hooks.on("preUpdateItem", (item: any, _changes: any, _options: any, _user: string) => {
+                    if (item.type !== "talent")
+                        return;
+
+                    // TODO: figure out how to rerender the sheet when pilot talents are changed
+                    // and it not return stale data
+                    // console.dir(item, changes, options, user);
+                    // this.render(false);
+                });
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () => { this.themeDirty = true });
@@ -88,10 +95,9 @@ export class MechSheetBase
                 // (#2) Super jank way of trying to overload however Foundry decided 
                 // to cache this element to apply theme settings at the Application level
                 //
-                // Only seems to need to be done once and then _injectHTML will recache it
+                // Only seems to need to be done once and then _injectHTML will recache it?
                 // That or `html` is mutable data in which case lolwhatever#JavaScript
                 if (this.themeDirty) applyThemeTarget(html);
-
                 super._injectHTML(html);
                 let data = await this.getData() as any;
                 

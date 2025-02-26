@@ -19,16 +19,14 @@
     let collapseID = `${pilot.uuid}_talents`;
     let actionCollapseID = `${pilot.uuid}_talents_action`;
 
-    function forceRerender(event: MouseEvent)
+    function forceUpdateTalent(event: MouseEvent, _talent: any)
     {
         event.stopPropagation();
-        console.log("HELLO");
         if (actor.type === "pilot")
         {
             return;
         }
-        
-        Hooks.callAll("forceRerenderAlternativeSheets", actor.type === "pilot", actor.uuid, "something else");
+        console.log(pilot.items, pilot.itemTypes, _talent);
     }
 
     //@ts-ignore
@@ -99,7 +97,7 @@
                             usesValue={counter.value}
                             usesMax={counter.max}
                             path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
-                            onClick={(event) => forceRerender(event)}
+                            onClick={(event) => forceUpdateTalent(event, talent)}
                         />
                     {/each}
                     {/if}
