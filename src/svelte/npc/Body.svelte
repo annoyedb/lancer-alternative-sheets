@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { NPCSheetProps } from "@/interfaces/actor/NPCSheetProps";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";

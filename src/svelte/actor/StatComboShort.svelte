@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-import type { StatComboProps } from "@/interfaces/actor/StatisticProps";
+import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
 
     const {
         icon,

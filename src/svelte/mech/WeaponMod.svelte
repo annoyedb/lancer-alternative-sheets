@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { WeaponModProps } from "@/interfaces/actor/WeaponModProps";
+    import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";

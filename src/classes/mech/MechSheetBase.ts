@@ -1,7 +1,7 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { LancerAlternative } from "@/enums/LancerAlternative";
-import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
+import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
 import { applyThemeTarget, getTheme } from "@/scripts/theme";
 import Header from "@/svelte/mech/Header.svelte";

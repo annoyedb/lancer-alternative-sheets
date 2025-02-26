@@ -3,7 +3,7 @@
     import { TooltipFactory } from '@/classes/TooltipFactory';
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from '@/enums/FlowClass';
-    import type { NPCSheetProps } from "@/interfaces/actor/NPCSheetProps";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import Template from "@/svelte/npc/Template.svelte";
     import HexButton from '@/svelte/actor/HexButton.svelte';
     import StatusBar from "@/svelte/actor/StatusBar.svelte";

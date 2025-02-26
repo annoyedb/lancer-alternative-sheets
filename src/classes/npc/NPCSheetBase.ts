@@ -1,5 +1,5 @@
 import { LancerAlternative } from "@/enums/LancerAlternative";
-import type { NPCSheetProps } from "@/interfaces/NPCSheetProps";
+import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
 import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
 import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";

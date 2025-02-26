@@ -2,8 +2,8 @@ import { applyTheme, getTheme } from "./theme";
 import { preloadTemplates } from "./loader";
 import { frameManufacturer, frameName, frameUUID, logData, overchargeStage as overchargeStage, randomExtension } from "./helpers";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
-import { MechSheetBase } from "@/classes/actor/MechSheetBase";
-import { NPCSheetBase } from "@/classes/actor/NPCSheetBase";
+import { MechSheetBase } from "@/classes/mech/MechSheetBase";
+import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 
 Hooks.once("init", () =>
 {
