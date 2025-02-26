@@ -181,44 +181,19 @@
         padding-right: 1rem;
     }
 
-    .-gap0
+    .-width2ch
     {
-        gap: 0.125rem;
+        width: 2ch;
     }
 
-    .-gap1
+    .-width3ch
     {
-        gap: 0.25rem;
-    }
-
-    .-gap2
-    {
-        gap: 0.5rem;
-    }
-
-    .-gap3
-    {
-        gap: 0.75rem;
-    }
-
-    .-gap4
-    {
-        gap: 1rem;
-    }
-
-    .-gap5
-    {
-        gap: 1.25rem;
+        width: 3ch;
     }
 
     .-widthfull
     {
         width: 100%;
-    }
-
-    .-width2ch
-    {
-        width: 2ch;
     }
 
     .-width2

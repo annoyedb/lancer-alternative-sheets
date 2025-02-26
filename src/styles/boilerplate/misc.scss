@@ -54,6 +54,20 @@
     -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
 }
 
+.-glow-shield
+{
+    filter: drop-shadow(0px 0px 5px var(--bar-shield));
+    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+    -moz-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+}
+
+.-glow-burn
+{
+    filter: drop-shadow(0px 0px 5px var(--bar-burn));
+    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+    -moz-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+}
+
 // TODO: probably generate these in the mixin
 .-glow-kinetic
 {

@@ -22,9 +22,9 @@
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
 
-<div class="la-combine-h -fontsize1">
+<div class="la-statusbar la-combine-h -fontsize1 -gap2">
     {#if name}
-    <span class="la-damage__span -fontsize0"
+    <span class="la-damage__span -fontsize0 -flexbasis13 -textalignright"
         data-tooltip={tip}
         data-tooltip-class="clipped-bot la-tooltip"
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }

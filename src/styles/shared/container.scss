@@ -16,6 +16,18 @@
         border-style: solid;
     }
 
+    .-bordersround-lrt
+    {
+        border-radius: 8px 8px 0px 0px;
+        border-width: 1px 1px 1px 0px;
+        border-style: solid;
+
+        &.-small
+        {
+            border-radius: 4px 4px 0px 0px;
+        }
+    }
+
     .-bordersround
     {
         border-radius: 8px;
@@ -68,6 +80,36 @@
             align-items: center;
         }
 
+        &.-gap0
+        {
+            gap: 0.125rem;
+        }
+
+        &.-gap1
+        {
+            gap: 0.25rem;
+        }
+
+        &.-gap2
+        {
+            gap: 0.5rem;
+        }
+
+        &.-gap3
+        {
+            gap: 0.75rem;
+        }
+
+        &.-gap4
+        {
+            gap: 1rem;
+        }
+
+        &.-gap5
+        {
+            gap: 1.25rem;
+        }
+
         >.-flex0
         {
             flex: 0;
@@ -93,6 +135,16 @@
             flex: 4;
         }
 
+        >.-flex5
+        {
+            flex: 5;
+        }
+
+        >.-flexbasis13
+        {
+            flex-basis: 3.25rem;
+        }
+
         >.-flexthird
         {
             flex: 1 1 33.3333%;
@@ -111,7 +163,6 @@
             >*:not(:last-child)
             {
                 border-bottom: var(--thickness, 2px) solid var(--color);
-                border-radius: unset;
             }
         }
     }
@@ -230,6 +281,29 @@
                         -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
                     }
                 }
+            }
+        }
+    }
+
+    .la-statusbar
+    {
+        >.la-bar-h>.la-tempvalue
+        {
+            height: 0.3em;
+            top: 0.15em;
+
+            &.-shield
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+            }
+
+            &.-burn
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
             }
         }
     }
