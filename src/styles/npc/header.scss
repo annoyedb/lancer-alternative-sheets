@@ -1,0 +1,26 @@
+.la-npc
+{
+    .la-SVELTE-HEADER
+    {
+        flex-basis: 18rem;
+
+        .la-npc__img
+        {
+            max-height: 12rem;
+            min-height: 12rem;
+            max-width: 12rem;
+            min-width: 12rem;
+            object-fit: cover;
+        }
+
+        .la-hase>.la-attribute>.la-combine-v>.la-label__span
+        {
+            top: -0.5rem;
+        }
+
+        .la-stat__island
+        {
+            z-index: 1;;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 {
 	"LA.SHEET.mech.label": "Alternative Mech Sheet",
+	"LA.SHEET.npc.label": "Alternative NPC Sheet",
 	"LA.SETTINGS.mech.ratio.label": "Sidebar to Content Body Ratio",
 	"LA.SETTINGS.mech.ratio.tooltip": "Adjust the ratio of the sidebar to the content body",
 	"LA.placeholder": "UNKNOWN",
@@ -8,6 +9,8 @@
 	"LA.pilotPlaceholder": "Pilot: UNKNOWN",
 	"LA.setting.customize.label": "Customize",
 	"LA.use.label": "USE",
+	"LA.add.label": "Add",
+	"LA.subtract.label": "Subtract",
 	"LA.delete.label": "DELETE",
 	"LA.delete.tooltip": "Delete this item",
 	"LA.edit.label": "EDIT",
@@ -15,6 +18,7 @@
 	"LA.edit.tooltip": "Edit this item",
 	"LA.chat.tooltip": "Send a card representing this item to the chat",
 	"LA.activate.label": "ACTIVATE",
+	"LA.activate.tooltip": "The amount of activations this character has per round",
 	"LA.trigger.label": "TRIGGER",
 	"LA.limited.label": "USES",
 	"LA.armor.short": "ARMR",
@@ -167,5 +171,8 @@
 	"LA.action.endofturn.label": "END OF TURN",
 	"LA.pilot.talent.label": "PILOT TALENTS",
 	"LA.pilot.trait.label": "TALENT TRAIT",
-	"LA.pilot.coreBonus.label": "CORE BONUSES"
+	"LA.pilot.coreBonus.label": "CORE BONUSES",
+	"LA.npc.tier.tooltip": "The current tier of this character",
+	"LA.npc.tier.set.tooltip": "Set the current tier of this character",
+	"LA.npc.notes.label": "NOTES"
 }

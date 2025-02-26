@@ -2,9 +2,10 @@
 ᕕ( ᐛ )ᕗ New `minor` version
 
 ## Changes
-* #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header
+* #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header, as well as the active effects header in the status tab
 * #?? - Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
-* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any (negative) discrepancies are found, let me know
+* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any `negative` discrepancies are found, let me know
+* Added an NPC sheet designed to be as compact as possible. I hope it helps you GMs run those sitreps with 4 different grunts, the ultra, and the damageable McGuffin `and finally a sheet i'll actually use`
 * Theme changes can now be applied without having to reopen the sheets!
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
 * Added collapsibility to the status tab and individual actions --that's all of them now for mech sheets!

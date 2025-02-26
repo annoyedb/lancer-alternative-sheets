@@ -1,0 +1,11 @@
+.la-root.la-npc
+{
+    .LA_SCROLL_BODY
+    {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-primary) transparent;
+        padding-left: 7px;
+    }
+}
