@@ -201,6 +201,16 @@
         gap: 0.75rem;
     }
 
+    .-gap4
+    {
+        gap: 1rem;
+    }
+
+    .-gap5
+    {
+        gap: 1.25rem;
+    }
+
     .-widthfull
     {
         width: 100%;
@@ -209,6 +219,11 @@
     .-width2ch
     {
         width: 2ch;
+    }
+
+    .-width2
+    {
+        width: 1.25rem;
     }
 
     .-width3
@@ -289,6 +304,11 @@
     .-lineheight8
     {
         line-height: 3rem;
+    }
+
+    .-lineheight9
+    {
+        line-height: 3.5rem;
     }
 
     .-lineheight10

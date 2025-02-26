@@ -193,4 +193,27 @@
     {
         margin: unset;
     }
+
+    .clicker-minus-button,
+    .clicker-plus-button
+    {
+        min-width: unset;
+        width: unset;
+        height: unset;
+        background-color: unset;
+        color: unset;
+        border: unset;
+        box-shadow: unset;
+        line-height: unset;
+    }
+
+    .profile-img
+    {
+        font-size: unset;
+        min-width: unset;
+        max-width: unset;
+        min-height: unset;
+        max-height: unset;
+        object-fit: unset;
+    }
 }

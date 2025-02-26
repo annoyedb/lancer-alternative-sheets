@@ -13,19 +13,23 @@
         flowClass,
         dataPath,
         sign,
+
         style,
-        textStyle
+        innerStyle,
+        outerTextStyle,
+        innerTextStyle,
+        buttonStyle,
     }: HexButtonProps = $props();
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
-<div class="la-attribute la-text-secondary mdi mdi-hexagon {style}">
-    <div class="la-combine-v -divider la-text-header -widthfull -heightfull {style}">
-        <span class="la-label__span">
+<div class="la-attribute la-text-secondary mdi mdi-hexagon {style?.join(' ')}">
+    <div class="la-combine-v -divider -widthfull -heightfull {innerStyle?.join(' ')}">
+        <span class="la-label__span {outerTextStyle?.join(' ')}">
             {name}
         </span>
         <button type="button" 
-            class="la-value__button
+            class="la-value__button {buttonStyle?.join(' ')}
                 {flowClass.toString()}" 
             data-uuid="{uuid}" 
             data-flow-type="{flowType}" 
@@ -35,7 +39,7 @@
             data-path="{dataPath}"
             aria-label="{name}"
         >
-            <span class="la-value__span {textStyle?.join(' ')}"><!--
+            <span class="la-value__span {innerTextStyle?.join(' ')}"><!--
         --->{#if sign && value > 0}<!--
             --->+<!--
         --->{:else if sign && value < 0}<!--

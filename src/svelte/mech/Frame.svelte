@@ -36,6 +36,7 @@
 <HeaderMain
     title={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[frameColorBckg, "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    headerFontStyle={["la-text-header", "-fontsize2"]}
     borderStyle={[frameColorBrdr]}
 
     collapse={collapse}

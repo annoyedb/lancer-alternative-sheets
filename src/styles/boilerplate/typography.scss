@@ -100,6 +100,16 @@
         }
     }
 
+    .-fontsize8
+    {
+        font-size: 2.75rem;
+
+        >.la-extension
+        {
+            font-size: 0.27em;
+        }
+    }
+
     .-fontsize9
     {
         font-size: 3rem;
@@ -111,6 +121,16 @@
     }
 
     .-fontsize10
+    {
+        font-size: 4rem;
+
+        >.la-extension
+        {
+            font-size: 0.22em;
+        }
+    }
+
+    .-fontsize11
     {
         font-size: 5rem;
 

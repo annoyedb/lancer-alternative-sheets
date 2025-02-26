@@ -6,7 +6,8 @@ import type { StatisticProps } from "@/interfaces/actor/StatisticProps";
         icon,
         label,
         value,
-        style,
+        outerStyle,
+        innerStyle,
 
         tooltip,
         tooltipHeader,
@@ -16,10 +17,10 @@ import type { StatisticProps } from "@/interfaces/actor/StatisticProps";
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
 
-<div class="la-shortstat la-combine-h">
+<div class="la-shortstat la-combine-h {outerStyle?.join(' ')}">
     <!-- the mdi shield is a bit larger than the cci icons -->
     <i class="{icon}"></i>
-    <div class="la-combine-v {style?.join(' ')}"
+    <div class="la-combine-v {innerStyle?.join(' ')}"
         data-tooltip={tip}
         data-tooltip-class="clipped-bot la-tooltip"
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }

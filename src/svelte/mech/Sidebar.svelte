@@ -2,11 +2,11 @@
     import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { id as moduleID } from '@/module.json';
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
+    import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
 
     const { 
@@ -20,8 +20,8 @@
     let frameUUID = frame ? frame.uuid : "";
     let emptyObject = '{}';
 
-    let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"));
-    let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"));
+    let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
+    let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
 </script>
 
     <!-- Frame Name -->
@@ -47,7 +47,7 @@
                 data-tooltip-class="clipped-bot la-tooltip"
                 data-tooltip-direction="RIGHT"></i>
         {/if}
-            <div class="la-combine-h" 
+            <div class="la-combine-h -fontsize7" 
                 data-tooltip={speedTip}
                 data-tooltip-class="clipped-bot la-tooltip"
                 data-tooltip-direction="RIGHT">
@@ -57,7 +57,7 @@
             <CoreAvailability {system} />
         </div>
         <!-- Mech Image -->
-        <img class="las-mech__img" 
+        <img class="la-mech__img" 
             src="{actor.img}"
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
             data-edit="img" 
@@ -70,7 +70,8 @@
             icon={"cci cci-role-defender"}
             label={getLocalized("LA.armor.short")}
             value={system.armor}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.armor.tooltip")}
             tooltipDirection="RIGHT"
@@ -79,7 +80,8 @@
             icon={"cci cci-evasion"}
             label={getLocalized("LA.evasion.short")}
             value={system.evasion}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.evasion.tooltip")}
             tooltipDirection="RIGHT"
@@ -88,7 +90,8 @@
             icon={"cci cci-edef"}
             label={getLocalized("LA.edefense.short")}
             value={system.edef}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.edefense.tooltip")}
             tooltipDirection="RIGHT"
@@ -198,7 +201,8 @@
             icon={"cci cci-tech-full"}
             label={getLocalized("LA.tattack.short")}
             value={system.tech_attack}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.tattack.tooltip")}
             tooltipDirection="RIGHT"
@@ -207,7 +211,8 @@
             icon={"cci cci-save"}
             label={getLocalized("LA.save.short")}
             value={system.save}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.save.tooltip")}
             tooltipDirection="RIGHT"
@@ -216,7 +221,8 @@
             icon={"cci cci-sensor"}
             label={getLocalized("LA.sensor.short")}
             value={system.sensor_range}
-            style={["-divider"]}
+            outerStyle={["-fontsize5"]}
+            innerStyle={["-divider"]}
 
             tooltip={getLocalized("LA.sensor.tooltip")}
             tooltipDirection="RIGHT"

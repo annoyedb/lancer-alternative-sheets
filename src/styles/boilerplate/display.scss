@@ -29,4 +29,34 @@
     {
         float: left;
     }
+    
+    .-positionabsolute
+    {
+        position: absolute;
+
+        &.-top0
+        {
+            top: 0;
+        }
+
+        &.-right0
+        {
+            right: 0;
+        }
+
+        &.-bottom0
+        {
+            bottom: 0;
+        }
+
+        &.-left0
+        {
+            left: 0;
+        }
+    }
+
+    .-positionrelative
+    {
+        position: relative;
+    }
 }

@@ -23,7 +23,9 @@
         dataPath={"system.grit"}
         sign={true}
         style={["-grit"]}
-        textStyle={["-glow-header"]}
+        innerStyle={["-grit"]}
+        outerTextStyle={["la-text-header"]}
+        innerTextStyle={["-glow-header", "la-text-header"]}
     />
     <HexButton
         name={getLocalized("LA.hull.short")}
@@ -34,7 +36,9 @@
         dataPath={"system.hull"}
         sign={false}
         style={["-hull"]}
-        textStyle={["-glow-header"]}
+        innerStyle={["-hull"]}
+        outerTextStyle={["la-text-header"]}
+        innerTextStyle={["-glow-header", "la-text-header"]}
     />
     <HexButton
         name={getLocalized("LA.agility.short")}
@@ -45,7 +49,9 @@
         dataPath={"system.agi"}
         sign={false}
         style={["-agility"]}
-        textStyle={["-glow-header"]}
+        innerStyle={["-agility"]}
+        outerTextStyle={["la-text-header"]}
+        innerTextStyle={["-glow-header", "la-text-header"]}
     />
     <HexButton
         name={getLocalized("LA.systems.short")}
@@ -56,7 +62,9 @@
         dataPath={"system.sys"}
         sign={false}
         style={["-systems"]}
-        textStyle={["-glow-header"]}
+        innerStyle={["-systems"]}
+        outerTextStyle={["la-text-header"]}
+        innerTextStyle={["-glow-header", "la-text-header"]}
     />
     <HexButton
         name={getLocalized("LA.engineering.short")}
@@ -67,7 +75,9 @@
         dataPath={"system.eng"}
         sign={false}
         style={["-engineering"]}
-        textStyle={["-glow-header"]}
+        innerStyle={["-engineering"]}
+        outerTextStyle={["la-text-header"]}
+        innerTextStyle={["-glow-header", "la-text-header"]}
     />
 </div>
 {/if}

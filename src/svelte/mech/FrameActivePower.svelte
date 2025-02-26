@@ -50,7 +50,7 @@
     </div>
     <div class="la-combine-grid -widthfull {system.core_energy ? "la-dropshadow" : ""}">
         <button type="button"
-            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "-disabled"}
+            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "-disabled"}
                 activation-flow {activationClass}"
             data-uuid="{frame.uuid}" 
             data-path="system.core_system"
@@ -60,7 +60,7 @@
             aria-label="{name}"
             disabled={!system.core_energy}
         >
-            <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize10"></i>
+            <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize11"></i>
             <span class="la-corepower__span la-dropshadow -upper -flexthird -textwrapnowrap"><!--
             --->{name}<!--
         ---></span>

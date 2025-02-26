@@ -16,7 +16,11 @@ import "@/styles/mech/header.scss";
 import "@/styles/mech/sidebar.scss";
 import "@/styles/mech/status.scss";
 import "@/styles/mech/loadout.scss";
+
 import "@/styles/pilot/loadout.scss";
+
+import "@/styles/npc/header.scss";
+import "@/styles/npc/body.scss";
 
 import "@/styles/color/la-colors.scss";
 import "@/styles/color/open-color.scss";

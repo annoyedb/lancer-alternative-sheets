@@ -8,6 +8,7 @@ export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
     effects: Array<any>,
     itemTypes: any,
     items: Array<any>,
+    
     pilot: any,
     system: any,
 
