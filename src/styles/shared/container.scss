@@ -160,7 +160,7 @@
 
         &.-divider
         {
-            >*:not(:last-child)
+            >*:first-child 
             {
                 border-bottom: var(--thickness, 2px) solid var(--color);
             }

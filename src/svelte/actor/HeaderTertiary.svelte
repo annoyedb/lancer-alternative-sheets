@@ -85,7 +85,7 @@
                 aria-label="{getLocalized("LA.flow.rollAttack.label")}"
                 disabled={weaponDestroyed || false}
             >
-                <i class="roll-attack__bckg mdi mdi-hexagon la-text-scrollbar-secondary"></i>
+                <i class="roll-attack__bckg fal fa-dice-d20 la-text-scrollbar-secondary"></i>
                 <i class="roll-attack__icon cci cci-weapon -glow-header -glow-primary-hover {rollAttackStyle?.join(' ')}"></i>
             </button>
         {:else}
@@ -127,6 +127,7 @@
                     style={["-glow-header"]}
                 />
                 {/if}
+                <i class="fal fa-dice-d20 -positionabsolute -fontsize9 la-text-scrollbar-secondary" style="z-index: -1;"></i>
             </button>
         {/if}
             <div class="la-combine-v -margin3-lr">
