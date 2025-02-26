@@ -52,9 +52,11 @@
         cursorStyle={["la-anim-header-anti"]}
         borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
+        
         collapse={collapse}
         collapseID={`${actor.uuid}_status_activeeffects_effect`}
         startCollapsed={true}
+
         deleteOption={true}
         deleteStyle={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
         deleteIconStyle={["-fontsize2"]}

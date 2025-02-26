@@ -119,7 +119,7 @@
             </div>
         {/if}
         {#if deleteOption && deleteUUID}
-            <!-- onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
+            <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
                 class="la-delete {deleteStyle?.join(' ') || defaultDeleteStyle}" 

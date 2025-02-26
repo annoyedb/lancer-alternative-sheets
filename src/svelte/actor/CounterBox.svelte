@@ -5,7 +5,7 @@
  Uniquely from limited, it can also be named anything
 -->
 <script lang="ts">
-    import type { CounterBox } from "@/interfaces/actor/CounterBox";
+    import type { CounterBoxProps } from "@/interfaces/actor/CounterBoxProps";
     import { getLocalized } from "@/scripts/helpers";
 
     const {
@@ -13,7 +13,13 @@
         usesValue,
         usesMax,
         path,
-    }: CounterBox = $props();
+        onClick,
+    }: CounterBoxProps = $props();
+
+    //@ts-ignore
+    function log(any: any) {
+        console.log(any);
+    }
 </script>
 
 {#if usesMax}
@@ -23,15 +29,14 @@
         {name}
     </span>
 {#each {length: usesMax} as _, index}
-    <button type="button" 
-        class="-glow-header -glow-primary-hover -fontsize5"
-        aria-label={`${getLocalized("LA.use.label")} ${name}`}
-    >
-        <i class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}
-                counter-hex" 
-            data-available="{index < usesValue}" 
-            data-path="{path}">
-        </i>
+    <!-- (#2) -->
+    <!-- svelte-ignore event_directive_deprecated -->
+    <button class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} -glow-header -glow-primary-hover -fontsize5 
+            counter-hex" 
+        data-available="{index < usesValue}" 
+        data-path="{path}"
+        on:click={onClick ? (event) => onClick(event) : null}
+        aria-label={`${getLocalized("LA.use.label")} ${name}`}>
     </button>
 {/each}
 </div>

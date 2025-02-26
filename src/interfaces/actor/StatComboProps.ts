@@ -1,6 +1,6 @@
 import type { TooltipDirection } from "@/enums/TooltipDirection";
 
-export interface StatisticProps
+export interface StatComboProps
 {
     icon: string;
     label: string;

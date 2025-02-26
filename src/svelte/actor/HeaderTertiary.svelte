@@ -124,6 +124,7 @@
                 {#if weaponDamage}
                 <DamageArray
                     damages={weaponDamage}
+                    style={["-glow-header"]}
                 />
                 {/if}
             </button>

@@ -1,5 +1,5 @@
 import { LancerAlternative } from "@/enums/LancerAlternative";
-import type { NPCSheetProps } from "@/interfaces/actor/NPCSheetProps";
+import type { NPCSheetProps } from "@/interfaces/NPCSheetProps";
 import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
 import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
@@ -37,6 +37,8 @@ export class NPCSheetBase
                 super(...args);
                 this._themeDirty = false;
 
+                // Force rerender when called and the system does not do it for us
+                Hooks.on("forceRerenderAlternativeSheets", () => { this.render(true) });
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () => { this.themeDirty = true });

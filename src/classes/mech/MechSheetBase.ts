@@ -51,6 +51,9 @@ export class MechSheetBase
                 super(...args);
                 this._themeDirty = false;
 
+                // Force rerender when called and the system does not do it for us
+                Hooks.on("forceRerenderAlternativeSheets", (something: any, another: any, another2: any) => {
+                    console.log(something, another, another2) });
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () => { this.themeDirty = true });
