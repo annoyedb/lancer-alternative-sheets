@@ -6,6 +6,7 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import { getLocalized } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
 
     const {
         actor,
@@ -16,6 +17,13 @@
     
     const tier = system.tier;
     const collID = `${actor.uuid}_weapons`;
+    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.accuracy.tooltip"));
+    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.attackBonus.tooltip"));
+
+    function hasWeaponSpecial(weapon: any)
+    {
+        return weapon.system.uses.max || weapon.system.loaded || hasAccuracyBonus(weapon) || hasAttackBonus(weapon);
+    }
 
     function hasAccuracyBonus(weapon: any)
     {
@@ -68,8 +76,28 @@
     collapseAllOption={true}
 >
 {#each weapons as weapon}
-{#snippet limitedUses()}
-    <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+{#snippet weaponSpecial()}
+    <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+    {#if hasAccuracyBonus(weapon)}
+        <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+            data-tooltip={accuracyTip}
+            data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-direction={"DOWN"}
+        >
+            {weapon.system.accuracy[tier - 1]}
+            <i class="cci cci-accuracy -fontsize4"></i>
+        </span>
+    {/if}
+    {#if hasAttackBonus(weapon)}
+        <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+            data-tooltip={attackTip}
+            data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-direction={"DOWN"}
+        >
+            {weapon.system.attack_bonus[tier - 1]}
+            <i class="cci cci-reticule -fontsize2"></i>
+        </span>
+    {/if}
         <LoadedBox
             item={weapon}
         />
@@ -84,22 +112,24 @@
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
         headerFontStyle={[getHeaderStyle(weapon), "-fontsize1"]}
         
-        subTitle={weapon.system.weapon_type}
+        subTitle={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
         subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
 
         itemID={weapon.id}
         uuid={weapon.uuid}
         path={`itemTypes.npc_feature.${weapon.index}`}
-        acceptTypes={""}
+        acceptTypes={"npc_feature"}
         
         collapse={collapse}
         collapseID={weapon}
         startCollapsed={false}
-        renderOutsideCollapse={weapon.system.uses.max || weapon.system.loaded ? limitedUses : undefined}
+        renderOutsideCollapse={hasWeaponSpecial(weapon) ? weaponSpecial : undefined}
 
         rollAttackOption={true}
         rollAttackStyle={[getRollStyle(weapon)]}
+        rollAttackTooltip={weapon.system.effect || getLocalized("LA.flow.rollAttack.tooltip")}
+        rollAttackTooltipDirection={"UP"}
         weaponOption={true}
         weaponDestroyed={weapon.system.destroyed}
         weaponRange={weapon.system.range}
@@ -108,29 +138,6 @@
         editOption={true}
         messageOption={true}
     >
-    {#if hasAttackBonus(weapon) || hasAccuracyBonus(weapon)}
-        <div class="la-combine-h -gap0 -widthfull">
-            <EffectBox
-                name={getLocalized("LA.npc.tier.attackBonus.label")}
-                outerStyle={[
-                    `${hasAccuracyBonus(weapon) ? "-bordersround" : "-bordersround-ltb"}`, 
-                ]}
-            >
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                    {weapon.system.attack_bonus[tier - 1]}
-                    <i class="cci cci-reticule -fontsize2"></i>
-                </span>
-            </EffectBox>
-            <EffectBox
-                name={getLocalized("LA.npc.tier.accuracy.label")}
-            >
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                    {weapon.system.accuracy[tier - 1]}
-                    <i class="cci cci-accuracy -fontsize4"></i>
-                </span>
-            </EffectBox>
-        </div>
-    {/if}
         <EffectBox
             name={getLocalized("LA.mech.system.effect.label")}
             effect={weapon.system.effect}

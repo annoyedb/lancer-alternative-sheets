@@ -1,3 +1,4 @@
+import type { TooltipDirection } from "@/enums/TooltipDirection";
 import type { Snippet } from "svelte";
 
 export interface HeaderSecondaryProps
@@ -40,4 +41,10 @@ export interface HeaderSecondaryProps
     editOption?: Boolean;
     editStyle?: Array<string>;
     editIconStyle?: Array<string>;
+
+    useEffectOption?: Boolean;
+    useEffectTooltip?: string;
+    useEffectTooltipDirection?: string | TooltipDirection;
+    useEffectStyle?: Array<string>;
+    useEffectBackgroundStyle?: Array<string>;
 }

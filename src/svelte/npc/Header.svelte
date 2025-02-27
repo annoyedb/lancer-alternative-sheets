@@ -127,8 +127,8 @@
                     data-edit="img" 
                     data-uuid="{actor.uuid}"
                 />
-                <!-- Floating Overlay Bottom -->
-                <div class="la-combine-h">
+                <!-- Floating Overlay Bottom (HASE) -->
+                <!-- <div class="la-combine-h">
                     <div class="la-hase">
                         <HexButton
                             name={getLocalized("LA.hull.short")}
@@ -185,7 +185,7 @@
                             innerTextStyle={["-glow-header", "-glow-primary-hover", "-fontsize3", "-lineheight9", "la-text-header"]}
                         />
                     </div>
-                </div>
+                </div> -->
             </div>
         <!-- Right Side -->
             <div class="la-combine-v -flex1">

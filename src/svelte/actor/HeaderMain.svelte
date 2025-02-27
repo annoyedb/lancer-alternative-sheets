@@ -126,7 +126,7 @@
                 data-uuid="{deleteUUID}"
                 data-tooltip={deleteTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
+                data-tooltip-direction={"UP"}
                 aria-label="{getLocalized("LA.delete.tooltip")}"
                 on:click={deleteOnClick ? (event) => deleteOnClick(event) : null}
             >
@@ -139,7 +139,7 @@
                 data-uuid="{messageUUID}"
                 data-tooltip={chatTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
+                data-tooltip-direction={"UP"}
                 aria-label="{getLocalized("LA.chat.tooltip")}">
                 <i class="mdi mdi-message"></i>
             </button>
@@ -150,7 +150,7 @@
                 class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"
                 data-tooltip={expandTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
+                data-tooltip-direction={"UP"}
                 aria-label={getLocalized("LA.collapseAll.tooltip")}
                 on:click={(event) => collapseExpandAll(event)}
             >

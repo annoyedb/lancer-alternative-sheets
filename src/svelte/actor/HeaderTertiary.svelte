@@ -45,10 +45,12 @@
         weaponDestroyed,
         weaponRange,
         weaponDamage,
+        weaponTooltipDirection,
 
         rollAttackOption,
         rollAttackStyle,
         rollAttackTooltipDirection,
+        rollAttackTooltip,
     }: HeaderTertiaryProps = $props();
     
     let collapsing = collapse && collapseID;
@@ -56,8 +58,9 @@
     let extraOptions = editOption || messageOption || spOption || weaponOption ? true : false;
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
-    let rollAttackTip = TooltipFactory.buildTooltip(getLocalized("LA.flow.rollAttack.tooltip"));
+    let rollAttackTip = TooltipFactory.buildTooltip(rollAttackTooltip || getLocalized("LA.flow.rollAttack.tooltip"));
     let rollDamageTip = TooltipFactory.buildTooltip(getLocalized("LA.flow.rollDamage.tooltip"));
+    const hasAllWeaponProperties = (weaponDamage && weaponDamage.length > 0) && (weaponRange && weaponRange.length > 0);
     const defaultHeaderStyle = "la-bckg-primary -padding0-tb -padding3-lr"
     const defaultRightOptionStyle = "-glow-header -glow-primary-hover -fontsize2"
 </script>
@@ -110,12 +113,12 @@
         {#if weaponOption}
             <button type="button"
                 class="la-properties la-combine-v -fontsize3 la-anim-accent
-                    {weaponDamage && weaponRange ? "-divider" : ""} {weaponStyle?.join(' ')}
+                    {hasAllWeaponProperties ? "-divider" : ""} {weaponStyle?.join(' ')}
                     compact-damage roll-damage"
-                data-tooltip={rollDamageTip}
+                data-tooltip={weaponDamage && weaponDamage.length > 0 ? rollDamageTip : ""}
                 data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction="RIGHT"
-                disabled={weaponDestroyed || false}>
+                data-tooltip-direction={weaponTooltipDirection || "UP"}
+                disabled={weaponDestroyed || !(weaponDamage && weaponDamage.length > 0)}>
                 <!-- Generated Range -->
                 {#if weaponRange}
                 <RangeArray
@@ -129,7 +132,9 @@
                     style={["-glow-header"]}
                 />
                 {/if}
+                {#if weaponDamage && weaponDamage.length > 0}
                 <i class="fal fa-dice-d20 -positionabsolute -fontsize9 la-text-scrollbar-secondary" style="z-index: -1;"></i>
+                {/if}
             </button>
         {/if}
             <div class="la-combine-v -margin3-lr">
@@ -140,7 +145,7 @@
                     data-uuid={uuid}
                     data-tooltip={chatTip}
                     data-tooltip-class={"clipped-bot la-tooltip"}
-                    data-tooltip-direction={"RIGHT"}
+                    data-tooltip-direction={"UP"}
                     aria-label="{getLocalized("LA.chat.tooltip")}">
                     <i class="mdi mdi-message {messageIconStyle?.join(' ')}"></i>
                 </button>
@@ -152,7 +157,7 @@
                     data-path={path}
                     data-tooltip={editTip}
                     data-tooltip-class={"clipped-bot la-tooltip"}
-                    data-tooltip-direction={"RIGHT"}
+                    data-tooltip-direction={"DOWN"}
                     aria-label="{getLocalized("LA.edit.label")}">
                     <i class="fas fa-ellipsis-v {editIconStyle?.join(' ')}"></i>
                 </button>

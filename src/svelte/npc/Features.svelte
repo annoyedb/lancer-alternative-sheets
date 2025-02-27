@@ -12,7 +12,9 @@
     const systems: Array<any> = [];
     const reactions: Array<any> = [];
     const weapons: Array<any> = [];
-    itemTypes.npc_feature.forEach((feature: { system: { type: any; }; }) => {
+    itemTypes.npc_feature.forEach((feature: { system: { type: any; }; }, index: number) => {
+        // @ts-expect-error Add index to the npc feature so that it can be used to resolve the correct path
+        feature.index = index;
         switch (feature.system.type) {
             case "Trait":
                 traits.push(feature);

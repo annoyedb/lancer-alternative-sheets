@@ -43,6 +43,12 @@
         editOption,
         editStyle,
         editIconStyle,
+
+        useEffectOption,
+        useEffectStyle,
+        useEffectTooltipDirection,
+        useEffectTooltip,
+        useEffectBackgroundStyle,
     }: HeaderSecondaryProps = $props();
     
     let collapsing = collapse && collapseID;
@@ -50,6 +56,7 @@
     let extraOptions = deleteOption || messageOption || spOption || editOption ? true : false;
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
+    let effectTip = TooltipFactory.buildTooltip(useEffectTooltip || getLocalized("LA.effect.tooltip"));
 
     const defaultHeaderStyle = "la-bckg-primary -padding0 -padding3-r";
     const defaultHeaderIconStyle = "-fontsize5 -lineheight3"
@@ -68,10 +75,25 @@
                 -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || defaultHeaderStyle}
             {collapsing ? "collapse-trigger" : ""}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">
+        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}"
+    >
         <!-- Icon, Name -->
-        <div class="la-left la-summary-label">
+        <div class="la-left la-combine-h -aligncenter -gap1 la-summary-label">
+        {#if useEffectOption}
+            <button type="button"
+                class="{useEffectStyle?.join(' ')}
+                    effect-flow"
+                data-path={path}
+                data-tooltip={effectTip}
+                data-tooltip-class={"clipped-bot la-tooltip"}
+                data-tooltip-direction={useEffectTooltipDirection}
+                aria-label={useEffectTooltip}>
+                <i class="{headerIconStyle?.join(' ') || defaultHeaderIconStyle}"></i>
+                <i class="fal fa-dice-d20 -positionabsolute -left0 {useEffectBackgroundStyle?.join(' ')}" style="z-index: -1;"></i>
+            </button>
+        {:else}
             <i class="la-icon {headerIconStyle?.join(' ') || defaultHeaderIconStyle} "></i>
+        {/if}
             <span class="la-name__span {headerFontStyle?.join(' ') || "-fontsize2"}">{title}</span>
         </div>
     {#if extraOptions}
@@ -102,7 +124,7 @@
                 data-uuid="{messageUUID}"
                 data-tooltip={chatTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
+                data-tooltip-direction={"UP"}
                 data-type={messageType}
                 data-index={messageIndex}
                 data-rank={messageType === "rank" ? messageIndex : ""}
@@ -117,7 +139,7 @@
                 data-path={path}
                 data-tooltip={editTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
+                data-tooltip-direction={"UP"}
                 aria-label="{getLocalized("LA.edit.label")}">
                 <i class="fas fa-ellipsis-v {editIconStyle?.join(' ')}"></i>
             </button>

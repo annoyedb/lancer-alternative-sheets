@@ -41,8 +41,10 @@ export interface HeaderTertiaryProps
     weaponStyle?: Array<string>;
     weaponDamage?: Array<any>;
     weaponRange?: Array<any>;
+    weaponTooltipDirection?: string | TooltipDirection;
 
     rollAttackOption?: Boolean;
     rollAttackStyle?: Array<string>;
     rollAttackTooltipDirection?: string | TooltipDirection;
+    rollAttackTooltip?: string;
 }

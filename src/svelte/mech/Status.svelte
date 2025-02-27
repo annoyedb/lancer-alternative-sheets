@@ -65,6 +65,7 @@
                     uuid={actor.uuid}
                     flowClass={FlowClass.Button}
                     tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
+                    tooltipDirection={"LEFT"}
                     flowType={"Structure"}
                     flowArgs={emptyObject}
                 />
@@ -91,6 +92,7 @@
                     name={getLocalized("LA.flow.stabilize.label")}
                     tooltipHeader={getLocalized("LA.action.full.label")}
                     tooltip={getLocalized("LA.flow.stabilize.tooltip")}
+                    tooltipDirection={"LEFT"}
                     uuid={actor.uuid}
                     flowType="Stabilize"
                     flowArgs={emptyObject}
@@ -100,6 +102,7 @@
                     uuid={actor.uuid}
                     flowClass={FlowClass.Button}
                     tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
+                    tooltipDirection={"LEFT"}
                     flowType={"FullRepair"}
                     flowArgs={emptyObject}
                 />
@@ -144,6 +147,7 @@
                     uuid={actor.uuid}
                     flowClass={FlowClass.Button}
                     tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
+                    tooltipDirection={"LEFT"}
                     flowType={"Overheat"}
                     flowArgs={emptyObject}
                 />
@@ -166,6 +170,7 @@
                     name={getLocalized("LA.flow.overcharge.label")}
                     tooltipHeader={getLocalized("LA.action.overcharge.label")}
                     tooltip={getLocalized("LA.flow.overcharge.tooltip")}
+                    tooltipDirection={"LEFT"}
                     uuid={actor.uuid}
                     flowType="Overcharge"
                     flowArgs={emptyObject}
@@ -175,6 +180,7 @@
                     uuid={actor.uuid}
                     flowClass={FlowClass.OverchargeReset}
                     tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
+                    tooltipDirection={"LEFT"}
                 />
             </div>
         </div>
@@ -194,6 +200,7 @@
                     flowClass={FlowClass.Button}
                     tooltipHeader={getLocalized("LA.action.endofturn.label")}
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}
+                    tooltipDirection={"LEFT"}
                     flowType={"Burn"}
                     flowArgs={emptyObject}
                 />
