@@ -4,9 +4,10 @@
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
     import { getLocalized } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import FlowButton from "../actor/FlowButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
 
     const {
@@ -57,85 +58,91 @@
 
     collapseAllOption={true}
 >
-{#each systems as component}
-{#snippet limitedUses()}
-    <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
-        <LoadedBox
-            item={component}
-        />
-        <LimitedBox
-            usesValue={component.system.uses.value}
-            usesMax={component.system.uses.max}
-        />
-    </div>
-{/snippet}
-    <HeaderSecondary
-        title={component.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={[getHeaderStyle(component), "-fontsize1"]}
-        headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
-        borderStyle={["-bordersoff"]}
-
-        itemID={component.id}
-        uuid={component.uuid}
-        path={`itemTypes.npc_feature.${component.index}`}
-        acceptTypes={"npc_feature"}
-        
-        collapse={collapse}
-        collapseID={component}
-        startCollapsed={false}
-        renderOutsideCollapse={component.system.uses.max || component.system.loaded ? limitedUses : undefined}
-
-        editOption={true}
-        editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-        messageOption={true}
-        messageUUID={component.uuid}
-        messageStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-
-        useEffectOption={true}
-        useEffectTooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-        useEffectTooltipDirection={"UP"}
-        useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
-    >
-    {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
-        <div class="la-combine-h -gap0 -widthfull">
-            <EffectBox
-                name={getLocalized("LA.npc.attackBonus.label")}
-                outerStyle={[
-                    `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
-                ]}
-            >
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                    {component.system.attack_bonus[tier - 1]}
-                    <i class="cci cci-reticule -fontsize2"></i>
-                </span>
-            </EffectBox>
-            <EffectBox
-                name={getLocalized("LA.npc.accuracy.label")}
-            >
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                    {component.system.accuracy[tier - 1]}
-                    <i class="cci cci-accuracy -fontsize4"></i>
-                </span>
-            </EffectBox>
-        </div>
-    {/if}
-        <EffectBox
-            name={getLocalized("LA.mech.system.effect.label")}
-        >
-            <FlowButton
-                name={getLocalized("LA.use.label")}
-                flowClass={FlowClass.Effect}
-                style={["clipped-bot", "la-bckg-secondary"]}
+    <div class="la-combine-v -gap0">
+    {#each systems as component}
+    {#snippet limitedUses()}
+        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+            <LoadedBox
+                item={component}
             />
-            <hr>
-            {@html component.system.effect}
-        </EffectBox>
-        <EffectBox
-            name={getLocalized("LA.effect.hit.label")}
-            effect={component.system.on_hit}
-        />
-    </HeaderSecondary>
-{/each}
+            <LimitedBox
+                usesValue={component.system.uses.value}
+                usesMax={component.system.uses.max}
+            />
+        </div>
+    {/snippet}
+        <HeaderSecondary
+            title={component.name}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+            headerFontStyle={[getHeaderStyle(component), "-fontsize1"]}
+            headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
+            borderStyle={["-bordersoff"]}
+
+            itemID={component.id}
+            uuid={component.uuid}
+            path={`itemTypes.npc_feature.${component.index}`}
+            acceptTypes={"npc_feature"}
+            
+            collapse={collapse}
+            collapseID={component}
+            startCollapsed={false}
+            renderOutsideCollapse={component.system.uses.max || component.system.loaded ? limitedUses : undefined}
+
+            editOption={true}
+            editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
+            messageOption={true}
+            messageUUID={component.uuid}
+            messageStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
+
+            useEffectOption={true}
+            useEffectTooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+            useEffectTooltipDirection={"UP"}
+            useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
+        >
+        {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
+            <div class="la-combine-h -gap0 -widthfull">
+                <EffectBox
+                    name={getLocalized("LA.npc.attackBonus.label")}
+                    outerStyle={[
+                        `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
+                    ]}
+                >
+                    <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
+                        {component.system.attack_bonus[tier - 1]}
+                        <i class="cci cci-reticule -fontsize2"></i>
+                    </span>
+                </EffectBox>
+                <EffectBox
+                    name={getLocalized("LA.npc.accuracy.label")}
+                >
+                    <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
+                        {component.system.accuracy[tier - 1]}
+                        <i class="cci cci-accuracy -fontsize4"></i>
+                    </span>
+                </EffectBox>
+            </div>
+        {/if}
+            <EffectBox
+                name={getLocalized("LA.mech.system.effect.label")}
+            >
+                <FlowButton
+                    name={getLocalized("LA.use.label")}
+                    flowClass={FlowClass.Effect}
+                    style={["clipped-bot", "la-bckg-secondary"]}
+                />
+                <hr>
+                {@html component.system.effect}
+            </EffectBox>
+            <EffectBox
+                name={getLocalized("LA.effect.hit.label")}
+                effect={component.system.on_hit}
+            />
+            <TagArray
+                tags={component.system.tags}
+                path={`itemTypes.npc_feature.${component.index}.system.tags`}
+            />
+        </HeaderSecondary>
+    {/each}
+    </div>
 </HeaderMain>
 {/if}

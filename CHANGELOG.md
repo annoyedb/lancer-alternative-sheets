@@ -1,5 +1,5 @@
 # 1.1.0 - Little Big Changes
-ᕕ( ᐛ )ᕗ New `minor` version
+ᕕ( ᐛ )ᕗ New 'minor' version, new sheet, `new me` 
 
 ## Changes
 * #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header, as well as the active effects header in the status tab
@@ -21,6 +21,7 @@
 * Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
 * Moved core availability to the sidebar
+* Minor changes to GALSIM and Harrison Armory themes from original COMP/CON imports. The intent is to keep the feel `but with less eye-searing pain`
 
 ## Known Issues
 * Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)
