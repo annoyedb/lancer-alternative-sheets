@@ -72,7 +72,7 @@
     <HeaderSecondary
         title={component.name}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={[getHeaderStyle(component), "-fontsize2"]}
+        headerFontStyle={[getHeaderStyle(component), "-fontsize1"]}
         headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
         borderStyle={["-bordersoff"]}
 
@@ -129,7 +129,7 @@
                 style={["clipped-bot", "la-bckg-secondary"]}
             />
             <hr>
-            {component.system.effect}
+            {@html component.system.effect}
         </EffectBox>
         <EffectBox
             name={getLocalized("LA.effect.hit.label")}

@@ -59,7 +59,7 @@
     <HeaderSecondary
         title={trait.name}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={[getHeaderStyle(trait), "-fontsize2"]}
+        headerFontStyle={[getHeaderStyle(trait), "-fontsize1"]}
         headerIconStyle={["cci", "cci-trait", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
         borderStyle={["-bordersoff"]}
 
@@ -93,7 +93,7 @@
                 style={["clipped-bot", "la-bckg-secondary"]}
             />
             <hr>
-            {trait.system.effect}
+            {@html trait.system.effect}
         </EffectBox>
         <EffectBox
             name={getLocalized("LA.effect.hit.label")}
