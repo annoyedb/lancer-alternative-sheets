@@ -47,6 +47,7 @@
 
         rollAttackOption,
         rollAttackStyle,
+        rollAttackTooltipDirection,
     }: HeaderTertiaryProps = $props();
     
     let collapsing = collapse && collapseID;
@@ -80,7 +81,7 @@
                 class="roll-attack la-text-header -fontsize9 -lineheight8"
                 data-tooltip={rollAttackTip}
                 data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction="LEFT"
+                data-tooltip-direction={rollAttackTooltipDirection ?? "LEFT"}
                 draggable="true"
                 aria-label="{getLocalized("LA.flow.rollAttack.label")}"
                 disabled={weaponDestroyed || false}

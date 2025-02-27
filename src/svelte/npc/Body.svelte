@@ -3,6 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import Features from "@/svelte/npc/Features.svelte";
 
 
     const props = $props();
@@ -26,3 +27,4 @@
     >
     <ActiveEffects {...props} />
 </HeaderMain>
+<Features {...props} />

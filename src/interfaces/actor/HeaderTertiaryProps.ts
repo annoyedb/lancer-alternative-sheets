@@ -1,3 +1,5 @@
+import type { TooltipDirection } from "@/enums/TooltipDirection";
+
 export interface HeaderTertiaryProps
 {
     children?: any;
@@ -40,4 +42,5 @@ export interface HeaderTertiaryProps
 
     rollAttackOption?: Boolean;
     rollAttackStyle?: Array<string>;
+    rollAttackTooltipDirection?: string | TooltipDirection;
 }

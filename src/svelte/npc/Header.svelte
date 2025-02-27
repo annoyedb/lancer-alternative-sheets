@@ -26,7 +26,7 @@
 
 <div class="la-combine-v -widthfull -heightfull">
     <div class="la-bckg-primary la-bg-scroll -widthfull -height10">
-        <div class="la-combine-v -divider la-anim-header -widthfull -heightfull -padding1-lr">
+        <div class="la-combine-v -widthfull -heightfull -padding1-lr">
             <input 
                 class="la-mechname__input la-text-header -upper -fontsize4 -textaligncenter"
                 name="name" type="text" value="{actor.name}" 
