@@ -24,7 +24,7 @@
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {style?.join(' ')}">
-    <div class="la-combine-v -divider -widthfull -heightfull {innerStyle?.join(' ')}">
+    <div class="la-combine-v -widthfull -heightfull {innerStyle?.join(' ')}">
         <span class="la-label__span {outerTextStyle?.join(' ')}">
             {name}
         </span>

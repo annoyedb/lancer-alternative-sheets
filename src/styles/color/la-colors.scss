@@ -11,7 +11,7 @@
 
 :root
 {
-    --size: .2px;
+    --size: 1px;
 }
 
 .la-brdr-transparent
@@ -24,9 +24,29 @@
     color: var(--dark-text)
 }
 
+.lancer-bckg-dark
+{
+    background-color: var(--dark-text)
+}
+
+.lancer-brdr-dark
+{
+    border-color: var(--dark-text)
+}
+
 .lancer-text-light
 {
     color: var(--light-text)
+}
+
+.lancer-bckg-light
+{
+    background-color: var(--light-text)
+}
+
+.lancer-brdr-light
+{
+    border-color: var(--light-text)
 }
 
 // Themes

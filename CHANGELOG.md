@@ -6,7 +6,7 @@
 * #?? - Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
 * Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any `negative` discrepancies are found, let me know
 * Added an NPC sheet designed to be as compact as possible. I hope it helps you GMs run those sitreps with 4 different grunts, the ultra, and the damageable McGuffin `and finally a sheet i'll actually use`
-* Theme changes can now be applied without having to reopen the sheets!
+* Theme changes can now be (mostly) applied without having to reopen the sheets! (See known issues for more details)
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
 * Added collapsibility to the status tab and individual actions --that's all of them now for mech sheets!
 * Macro/flow buttons no longer overflow into new lines, giving a more consistent UX
@@ -26,7 +26,7 @@
 * Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)
 * Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at the latter but still nothing; you can see my attempt in MechSheetBase.ts)
 * If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know
-* Images themes (used in Active Effects, and the deployable image in the loadout tab) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`
+* Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme

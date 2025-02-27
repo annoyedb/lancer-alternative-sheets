@@ -23,7 +23,7 @@
         dataPath={"system.grit"}
         sign={true}
         style={["-grit"]}
-        innerStyle={["-grit"]}
+        innerStyle={["-grit", "-divider"]}
         outerTextStyle={["la-text-header"]}
         innerTextStyle={["-glow-header", "la-text-header"]}
     />
@@ -36,7 +36,7 @@
         dataPath={"system.hull"}
         sign={false}
         style={["-hull"]}
-        innerStyle={["-hull"]}
+        innerStyle={["-hull", "-divider"]}
         outerTextStyle={["la-text-header"]}
         innerTextStyle={["-glow-header", "la-text-header"]}
     />
@@ -49,7 +49,7 @@
         dataPath={"system.agi"}
         sign={false}
         style={["-agility"]}
-        innerStyle={["-agility"]}
+        innerStyle={["-agility", "-divider"]}
         outerTextStyle={["la-text-header"]}
         innerTextStyle={["-glow-header", "la-text-header"]}
     />
@@ -62,7 +62,7 @@
         dataPath={"system.sys"}
         sign={false}
         style={["-systems"]}
-        innerStyle={["-systems"]}
+        innerStyle={["-systems", "-divider"]}
         outerTextStyle={["la-text-header"]}
         innerTextStyle={["-glow-header", "la-text-header"]}
     />
@@ -75,7 +75,7 @@
         dataPath={"system.eng"}
         sign={false}
         style={["-engineering"]}
-        innerStyle={["-engineering"]}
+        innerStyle={["-engineering", "-divider"]}
         outerTextStyle={["la-text-header"]}
         innerTextStyle={["-glow-header", "la-text-header"]}
     />

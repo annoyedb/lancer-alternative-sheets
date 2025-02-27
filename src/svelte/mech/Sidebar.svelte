@@ -8,6 +8,7 @@
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
+    import { getSidebarImageTheme } from "@/scripts/theme";
 
     const { 
         system,
@@ -37,12 +38,12 @@
     <!-- Size, Speed, & Core Availability -->
     <div class="la-combine-v">
     {#if system.size < 1}
-        <i class="cci cci-size-half la-text-primary la-outl-background"
+        <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction="RIGHT"></i>
     {:else}
-        <i class="cci cci-size-{system.size} la-text-primary la-outl-background"
+        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction="RIGHT"></i>
@@ -51,8 +52,8 @@
             data-tooltip={speedTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction="RIGHT">
-            <i class="mdi mdi-arrow-right-bold-hexagon-outline la-text-primary la-outl-background"></i>
-            <span class="la-text-primary la-outl-background">{system.speed}</span>
+            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow"></i>
+            <span class="{getSidebarImageTheme("text")} la-outl-shadow">{system.speed}</span>
         </div>
         <CoreAvailability {system} />
     </div>

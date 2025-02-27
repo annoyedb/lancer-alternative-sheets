@@ -44,7 +44,8 @@ function registerHandlebarsHelpers()
 
 function registerSettings()
 {
-    registerMechSheetSettings();
+    // TODO: add settings in v12
+    // registerMechSheetSettings();
 }
 
 function setupSheets()

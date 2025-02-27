@@ -63,6 +63,19 @@ export function getTheme()
     return THEME_MAP[currentTheme];
 }
 
+// Yes, this is basically just a theme picker for the sidebar
+// No, it does not deal with the dark themes, because they apparently already have good contrasting colors
+// Yes, this is biased
+// No, I'm not sorry
+export function getSidebarImageTheme(type: "bckg" | "text" | "brdr")
+{
+    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
+    if (LIGHT_MAP[currentTheme] === "light")
+        return `la-${type}-primary`
+    else
+        return `lancer-${type}-dark`;
+}
+
 export function applyThemeTarget(html: JQuery<HTMLElement>)
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;

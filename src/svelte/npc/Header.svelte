@@ -8,6 +8,7 @@
     import HexButton from '@/svelte/actor/HexButton.svelte';
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
+    import { getSidebarImageTheme } from '@/scripts/theme';
 
     const props = $props();
     const {
@@ -52,17 +53,17 @@
         <!-- Left Side Floating Stats -->
         <div class="la-stat__island -positionrelative la-dropshadow">
             <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
-                <i class="cci cci-npc-tier-{system.tier} la-text-primary la-outl-background"
+                <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text")} la-outl-shadow"
                     data-tooltip={tierTip}
                     data-tooltip-class="clipped-bot la-tooltip"
                     data-tooltip-direction="RIGHT"></i>
             {#if system.size < 1}
-                <i class="cci cci-size-half la-text-primary la-outl-background"
+                <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
                     data-tooltip={sizeTip}
                     data-tooltip-class="clipped-bot la-tooltip"
                     data-tooltip-direction="RIGHT"></i>
             {:else}
-                <i class="cci cci-size-{system.size} la-text-primary la-outl-background"
+                <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
                     data-tooltip={sizeTip}
                     data-tooltip-class="clipped-bot la-tooltip"
                     data-tooltip-direction="RIGHT"></i>
@@ -71,15 +72,15 @@
                     data-tooltip={speedTip}
                     data-tooltip-class="clipped-bot la-tooltip"
                     data-tooltip-direction="RIGHT">
-                    <i class="mdi mdi-arrow-right-bold-hexagon-outline la-text-primary la-outl-background -fontsize6"></i>
-                    <span class="la-text-primary la-outl-background -fontsize6 -bold">{system.speed}</span>
+                    <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
+                    <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
                 </div>
                 <div class="la-combine-h -aligncenter" 
                     data-tooltip={activTip}
                     data-tooltip-class="clipped-bot la-tooltip"
                     data-tooltip-direction="RIGHT">
-                    <i class="cci cci-activate la-text-primary la-outl-background -fontsize6"></i>
-                    <span class="la-text-primary la-outl-background -fontsize6 -bold">{system.activations}</span>
+                    <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
+                    <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
                 </div>
             </div>
         </div>
