@@ -6,8 +6,11 @@
 
     const {
         children,
+        renderOutsideCollapse,
 
         title,
+
+        itemID,
         uuid,
         path,
         acceptTypes,
@@ -53,11 +56,14 @@
     const buttonDefaultStyle = "-glow-header -glow-primary-hover -fontsize2"
 </script>
 
-<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}"
-    data-uuid="{uuid}"
-    data-path="{path}"
-    data-accept-types="{acceptTypes}"
-    draggable="true">
+<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
+        ref set drop-settable {acceptTypes}"
+    data-item-id={itemID}
+    data-uuid={uuid}
+    data-path={path}
+    data-accept-types={acceptTypes}
+    draggable="true"
+>
     <div class="la-summary la-combine-h la-dropshadow 
                 -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || defaultHeaderStyle}
@@ -119,6 +125,9 @@
         </div>
     {/if}
     </div>
+    {#if renderOutsideCollapse}
+        {@render renderOutsideCollapse()}
+    {/if}
     <div class="la-collapsegroup__wrapper
             {collapsing ? "collapse" : ""} {collapsed}"
         data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"

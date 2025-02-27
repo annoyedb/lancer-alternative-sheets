@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import Weapons from "./Weapons.svelte";
+    import Weapons from "@/svelte/npc/Weapons.svelte";
+    import Systems from "@/svelte/npc/Systems.svelte";
 
     const props = $props();
     const {
@@ -38,6 +39,10 @@
 {#if itemTypes.npc_feature.length}
 <Weapons 
     weapons={weapons}
+    {...props}
+/>
+<Systems 
+    systems={systems}
     {...props}
 />
 {/if}

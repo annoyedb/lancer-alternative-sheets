@@ -11,7 +11,7 @@
 
 {#if usesMax}
 <div class="la-limited la-combine-h la-text-header 
-        -flex1 -aligncenter -padding1-lr">
+        -aligncenter -padding1-lr">
     <span class="la-hexarray__span -fontsize1">
         {getLocalized("LA.limited.label")}
     </span>

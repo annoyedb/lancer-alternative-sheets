@@ -21,6 +21,7 @@
     {
         return weapon.system.accuracy.some((accuracy: number) => accuracy !== 0);
     }
+
     function hasAttackBonus(weapon: any)
     {
         return weapon.system.attack_bonus.some((bonus: number) => bonus !== 0);
@@ -87,9 +88,9 @@
         subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
 
-        itemID={weapon.uuid}
+        itemID={weapon.id}
         uuid={weapon.uuid}
-        path={""}
+        path={`itemTypes.npc_feature.${weapon.index}`}
         acceptTypes={""}
         
         collapse={collapse}

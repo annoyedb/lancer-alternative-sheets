@@ -1,9 +1,13 @@
+import type { Snippet } from "svelte";
+
 export interface HeaderSecondaryProps
 {
     children?: any;
+    renderOutsideCollapse?: Snippet;
     
     title: string;
 
+    itemID?: string;
     uuid?: string;
     path?: string;
     acceptTypes?: string;

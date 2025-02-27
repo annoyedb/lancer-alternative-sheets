@@ -126,11 +126,15 @@
         >
         {#if !getDestroyed(component)}
             <div class="la-generated -widthfull -gap2 la-combine-v">
-                <LimitedBox
-                    usesValue={component.value.system.uses.value}
-                    usesMax={component.value.system.uses.max}
-                    path={`system.loadout.systems.${index}.value`}
-                />
+            {#if component.value.system.uses.max}
+                <div class="la-combine-h clipped-alt la-bckg-header-anti -margin2-l">
+                    <LimitedBox
+                        usesValue={component.value.system.uses.value}
+                        usesMax={component.value.system.uses.max}
+                        path={`system.loadout.systems.${index}.value`}
+                    />
+                </div>
+            {/if}
             {#if component.value.system.counters?.length}
             {#each component.value.system.counters as counter, jndex}
                 <CounterBox

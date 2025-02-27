@@ -63,13 +63,13 @@
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
-        ref set drop-settable mech_system"
+        ref set drop-settable {acceptTypes}"
     data-item-id={itemID}
     data-uuid={uuid}
     data-path={path}
     data-accept-types={acceptTypes}
     draggable="true"
-    >
+>
     <div class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull
             {headerStyle?.join(' ') || defaultHeaderStyle}
