@@ -49,11 +49,13 @@
         {#if !!(mod.system.uses.max || mod.system.counters.length)}
             <div class="la-combine-h">
             {#if mod.system.uses.max}
-                <LimitedBox
-                    usesValue={mod.system.uses.value}
-                    usesMax={mod.system.uses.max}
-                    path={path}
-                />
+                <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+                    <LimitedBox
+                        usesValue={mod.system.uses.value}
+                        usesMax={mod.system.uses.max}
+                        path={path}
+                    />
+                </div>
             {/if}
             {#if mod.system.counters.length}
             {#each mod.system.counters as counter, index}
