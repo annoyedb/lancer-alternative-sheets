@@ -2,6 +2,7 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import Weapons from "@/svelte/npc/Weapons.svelte";
     import Systems from "@/svelte/npc/Systems.svelte";
+    import Traits from "@/svelte/npc/Traits.svelte";
 
     const props = $props();
     const {
@@ -45,6 +46,10 @@
 />
 <Systems 
     systems={systems}
+    {...props}
+/>
+<Traits
+    traits={traits}
     {...props}
 />
 {/if}

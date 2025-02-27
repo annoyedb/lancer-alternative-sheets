@@ -176,9 +176,10 @@
 	"LA.pilot.coreBonus.label": "CORE BONUSES",
 	"LA.npc.tier.tooltip": "The current tier of this character",
 	"LA.npc.tier.set.tooltip": "Set the current tier of this character",
-	"LA.npc.tier.accuracy.label": "INNATE ACCURACY",
-	"LA.npc.tier.accuracy.tooltip": "The innate Accuracy bonus of this weapon",
-	"LA.npc.tier.attackBonus.label": "ADDED ATTACK BONUS",
-	"LA.npc.tier.attackBonus.tooltip": "The flat bonus added to attack rolls with this weapon",
-	"LA.npc.notes.label": "NOTES"
+	"LA.npc.accuracy.label": "INNATE ACCURACY",
+	"LA.npc.accuracy.tooltip": "The innate Accuracy bonus of this weapon",
+	"LA.npc.attackBonus.label": "ADDED ATTACK BONUS",
+	"LA.npc.attackBonus.tooltip": "The flat bonus added to attack rolls with this weapon",
+	"LA.npc.notes.label": "NOTES",
+	"LA.npc.traits.label": "TRAITS"
 }

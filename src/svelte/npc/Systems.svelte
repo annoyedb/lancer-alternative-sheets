@@ -100,7 +100,7 @@
     {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
         <div class="la-combine-h -gap0 -widthfull">
             <EffectBox
-                name={getLocalized("LA.npc.tier.attackBonus.label")}
+                name={getLocalized("LA.npc.attackBonus.label")}
                 outerStyle={[
                     `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
                 ]}
@@ -111,7 +111,7 @@
                 </span>
             </EffectBox>
             <EffectBox
-                name={getLocalized("LA.npc.tier.accuracy.label")}
+                name={getLocalized("LA.npc.accuracy.label")}
             >
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
                     {component.system.accuracy[tier - 1]}

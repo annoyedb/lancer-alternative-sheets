@@ -17,8 +17,8 @@
     
     const tier = system.tier;
     const collID = `${actor.uuid}_weapons`;
-    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.accuracy.tooltip"));
-    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.attackBonus.tooltip"));
+    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
+    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
 
     function hasWeaponSpecial(weapon: any)
     {
