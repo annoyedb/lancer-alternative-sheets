@@ -4,10 +4,10 @@
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
-    import BonusBox from "../actor/BonusBox.svelte";
-    import EffectBox from "../actor/EffectBox.svelte";
-    import ActionBox from "../actor/ActionBox.svelte";
-    import DeployableBox from "../actor/DeployableBox.svelte";
+    import BonusBox from "@/svelte/actor/BonusBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -23,9 +23,9 @@
 {#if coreBonuses.length}
 <HeaderMain
     title={getLocalized("LA.pilot.coreBonus.label")}
-    headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
-    borderStyle={["la-brdr-weapon"]}
+    borderStyle={["la-brdr-action--downtime"]}
 
     collapse={collapse}
     collapseID={collapseID}
@@ -37,7 +37,7 @@
     {#each coreBonuses as coreBonus, index}
         <HeaderSecondary
             title={coreBonus.name}
-            headerStyle={["la-bckg-action--downtime", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
             headerFontStyle={["-fontsize2"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
             borderStyle={["-bordersoff"]}

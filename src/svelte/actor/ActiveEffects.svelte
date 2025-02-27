@@ -59,7 +59,7 @@
 
         deleteOption={true}
         deleteStyle={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
-        deleteIconStyle={["-fontsize2"]}
+        deleteIconStyle={["-fontsize2", "la-text-header-anti"]}
         deleteUUID={effect._id}
         deleteOnClick={deleteActiveEffect}
     >

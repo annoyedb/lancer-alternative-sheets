@@ -89,7 +89,7 @@
     title={getLocalized("LA.weapons.label")}
     headerStyle={["la-bckg-mech-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
-    borderStyle={["la-brdr-mech-weapon"]}
+    borderStyle={["la-brdr-mech-weapon", "-gap0"]}
     
     collapse={collapse}
     collapseID={weaponCollID}
@@ -98,11 +98,21 @@
     collapseAllOption={true}
 >
 {#each weapons as weapon}
-{log(weapon)}
+{#snippet limitedUses()}
+    <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        <LoadedBox
+            item={weapon}
+        />
+        <LimitedBox
+            usesValue={weapon.system.uses.value}
+            usesMax={weapon.system.uses.max}
+        />
+    </div>
+{/snippet}
     <HeaderTertiary
         title={weapon.name}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-        headerFontStyle={[getHeaderStyle(weapon), "-fontsize3"]}
+        headerFontStyle={[getHeaderStyle(weapon), "-fontsize1"]}
         
         subTitle={weapon.system.weapon_type}
         subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
@@ -116,6 +126,7 @@
         collapse={collapse}
         collapseID={weapon}
         startCollapsed={false}
+        renderOutsideCollapse={weapon.system.uses.max || weapon.system.loaded ? limitedUses : undefined}
 
         rollAttackOption={true}
         rollAttackStyle={[getRollStyle(weapon)]}
@@ -127,18 +138,7 @@
         editOption={true}
         messageOption={true}
     >
-        {#if weapon.system.uses.max || weapon.system.loaded}
-        <div class="la-combine-h -gap0 -widthfull">
-            <LoadedBox
-                item={weapon}
-            />
-            <LimitedBox
-                usesValue={weapon.system.uses.value}
-                usesMax={weapon.system.uses.max}
-            />
-        </div>
-        {/if}
-        {#if hasAttackBonus(weapon) || hasAccuracyBonus(weapon)}
+    {#if hasAttackBonus(weapon) || hasAccuracyBonus(weapon)}
         <div class="la-combine-h -gap0 -widthfull">
             <EffectBox
                 name={getLocalized("LA.npc.tier.attackBonus.label")}
@@ -160,7 +160,7 @@
                 </span>
             </EffectBox>
         </div>
-        {/if}
+    {/if}
         <EffectBox
             name={getLocalized("LA.mech.system.effect.label")}
             effect={weapon.system.effect}

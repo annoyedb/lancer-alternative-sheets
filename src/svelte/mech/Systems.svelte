@@ -103,7 +103,7 @@
 
             title={component.value.name}
             headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-            headerFontStyle={[getTitleStyle(component), "-fontsize3"]}
+            headerFontStyle={[getTitleStyle(component), "-fontsize2"]}
 
             subTitle={getSubtitle(component)}
             subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}

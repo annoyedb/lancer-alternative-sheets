@@ -8,6 +8,7 @@
 
     const {
         children,
+        renderOutsideCollapse,
 
         title,
         subTitle,
@@ -70,7 +71,7 @@
     draggable="true"
     >
     <div class="la-summary la-combine-h la-dropshadow 
-            -justifybetween -widthfull -whitespacenowrap 
+            -justifybetween -widthfull
             {headerStyle?.join(' ') || defaultHeaderStyle}
             {collapsing ? "collapse-trigger" : ""}"
         data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">
@@ -160,6 +161,9 @@
         {/if}
         </div>
     </div>
+    {#if renderOutsideCollapse}
+        {@render renderOutsideCollapse()}
+    {/if}
     <div class="la-collapsegroup__wrapper
             {collapsing ? "collapse" : ""} {collapsed}"
         data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"

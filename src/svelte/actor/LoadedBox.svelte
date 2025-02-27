@@ -14,10 +14,10 @@
 {#if item.type === "mech_weapon" || 
     item.type === "pilot_weapon" || 
     (item.type === "npc_feature" && item.system.type === "Weapon")}
-<div class="la-limited la-combine-h clipped-alt la-bckg-pilot la-text-header 
+<div class="la-limited la-combine-h la-text-header 
         -flex1 -aligncenter -padding1-lr">
     <span class="la-hexarray__span -fontsize1">
-        {getLocalized("LA.limited.label")}
+        {getLocalized("LA.loaded.label")}
     </span>
 {#each {length: usesMax} as _, index}
     <button type="button" 

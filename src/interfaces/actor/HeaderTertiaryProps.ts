@@ -1,8 +1,10 @@
 import type { TooltipDirection } from "@/enums/TooltipDirection";
+import type { Snippet } from "svelte";
 
 export interface HeaderTertiaryProps
 {
     children?: any;
+    renderOutsideCollapse?: Snippet; 
     
     title: string;
     subTitle: string;

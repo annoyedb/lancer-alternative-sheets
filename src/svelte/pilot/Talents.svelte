@@ -39,9 +39,9 @@
 {#if talents.length}
 <HeaderMain
     title={getLocalized("LA.pilot.talent.label")}
-    headerStyle={["la-bckg-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
-    borderStyle={["la-brdr-weapon"]}
+    borderStyle={["la-brdr-action--downtime"]}
 
     collapse={collapse}
     collapseID={collapseID}
@@ -53,7 +53,7 @@
     {#each talents as talent, index}
         <HeaderSecondary
             title={`${talent.name} ${talent.system.curr_rank}`}
-            headerStyle={["la-bckg-action--downtime", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
             headerFontStyle={["-fontsize2"]}
             headerIconStyle={["cci", "cci-license", "-fontsize5", "-lineheight3"]}
             borderStyle={["-bordersoff"]}
@@ -73,10 +73,10 @@
             {#if jndex < talent.system.curr_rank}
                 <HeaderSecondary
                     title={rank.name}
-                    headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
+                    headerStyle={["la-bckg-header-anti", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
                     headerFontStyle={["-fontsize2"]}
                     headerIconStyle={["cci", "cci-talent", "-fontsize5", "-lineheight3"]}
-                    borderStyle={["la-brdr-pilot"]}
+                    borderStyle={["la-brdr-header-anti"]}
 
                     rootStyle={["ref", "set"]}
                     uuid={talent.uuid}

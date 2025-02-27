@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { MountSlotProps } from "@/interfaces/actor/MountSlotProps";
+    import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import { getLocalized } from "@/scripts/helpers";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
-    import HeaderTertiary from "../actor/HeaderTertiary.svelte";
+    import HeaderTertiary from "@/svelte/actor/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
@@ -74,10 +74,45 @@
     {
         return `${mount.uuid}_action_${index}`;
     }
+
+    function renderLimited(weapon: any)
+    {
+        return (
+            weapon.system.sp || 
+            weapon.system.all_tags.some((t: {is_loading: boolean;}) => t.is_loading) ||
+            weapon.isLimited()
+        );
+    }
 </script>
 
 {#each mount.slots as slot, index}
 {#if slot.weapon?.value}
+
+<!-- Snippets -->
+{#snippet costSP()}
+    {#if slot.weapon.value.system.sp}
+    <div class="la-loading la-hexarray la-combine-h -flex1 -aligncenter la-text-header -fontsize5">
+        <span class="la-hexarray__span -fontsize4">{slot.weapon.value.system.sp}</span>
+        <i class="cci cci-system-point"></i>
+    </div>
+    {/if}
+{/snippet}
+{#snippet limitedUses()}
+    <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        <LoadedBox
+            item={slot.weapon.value}
+            path={getWeaponPath(index)}
+        />
+        <LimitedBox
+            usesValue={slot.weapon.value.system.uses.value}
+            usesMax={slot.weapon.value.system.uses.max}
+            path={getWeaponPath(index)}
+        />
+        {@render costSP()}
+    </div>
+{/snippet}
+<!-- /Snippets -->
+
     <!-- Weapon -->
     <HeaderTertiary
         itemID={slot.weapon.value.id}
@@ -87,7 +122,7 @@
 
         title={slot.weapon.value.name}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-        headerFontStyle={[getHeaderStyle(slot.weapon.value), "-fontsize3"]}
+        headerFontStyle={[getHeaderStyle(slot.weapon.value), "-fontsize2"]}
 
         subTitle={getSubtitle(slot.weapon.value)}
         subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
@@ -96,6 +131,7 @@
         collapse={collapse}
         collapseID={slot.weapon.value}
         startCollapsed={false}
+        renderOutsideCollapse={renderLimited(slot.weapon.value) ? limitedUses : undefined}
 
         rollAttackOption={true}
         rollAttackStyle={[getRollStyle(slot.weapon.value)]}
@@ -115,27 +151,6 @@
             weapon={slot.weapon.value}
             path={`${getWeaponPath(index)}.system.selected_profile_index`}
         />
-        {#if slot.weapon.value.system.sp || 
-            slot.weapon.value.system.all_tags.some((t: {is_loading: boolean;}) => t.is_loading) ||
-            slot.weapon.value.isLimited()}
-            <div class="la-resource la-combine-h -widthfull">
-                <LoadedBox
-                    item={slot.weapon.value}
-                    path={getWeaponPath(index)}
-                />
-                <LimitedBox
-                    usesValue={slot.weapon.value.system.uses.value}
-                    usesMax={slot.weapon.value.system.uses.max}
-                    path={getWeaponPath(index)}
-                />
-            {#if slot.weapon.value.system.sp}
-                <div class="la-loading la-hexarray la-combine-h clipped-alt la-bckg-pilot la-text-header -flex1 -fontsize5">
-                    <span class="la-hexarray__span -fontsize4">{slot.weapon.value.system.sp}</span>
-                    <i class="cci cci-system-point"></i>
-                </div>
-            {/if}
-            </div>
-        {/if}
             <EffectBox
                 name={getLocalized("LA.mech.mod.effect.label")}
                 effect={slot.weapon.value.system.active_profile.effect}

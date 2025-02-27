@@ -21,6 +21,7 @@
 	"LA.activate.tooltip": "The amount of activations this character has per round",
 	"LA.trigger.label": "TRIGGER",
 	"LA.limited.label": "USES",
+	"LA.loaded.label": "LOADED",
 	"LA.armor.short": "ARMR",
 	"LA.armor.tooltip": "Armor reduces all incoming damage to HP from a single source by an amount equal to its rating, unless stated otherwise (such as Burn and AP)<br><br>Armor can reduce damage to 0, has a limit of 4, and resolves after the Exposed status and before Resistance.",
 	"LA.edefense.short": "E-DEF",
