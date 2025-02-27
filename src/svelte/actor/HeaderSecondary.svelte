@@ -57,7 +57,7 @@
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
-        ref set drop-settable {acceptTypes}"
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}"
     data-item-id={itemID}
     data-uuid={uuid}
     data-path={path}

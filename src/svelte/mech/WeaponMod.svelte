@@ -28,7 +28,6 @@
         headerFontStyle={["-fontsize2"]}
         headerIconStyle={["cci", "cci-weaponmod", "-fontsize5", "-lineheight3"]}
         
-        rootStyle={["ref", "set", "drop-settable", "weapon_mod"]}
         uuid={mod.uuid}
         path={path}
         acceptTypes={"weapon_mod"}
