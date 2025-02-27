@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
+    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getManufacturerColor } from "@/scripts/theme";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
+    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import Frame from "@/svelte/mech/Frame.svelte";
     import Systems from "@/svelte/mech/Systems.svelte";
     import Mounts from "@/svelte/mech/Mounts.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
+    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";

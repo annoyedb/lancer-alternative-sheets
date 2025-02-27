@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/actor/MechSheetProps";
+    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getManufacturerColor } from "@/scripts/theme";
     import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
     import { slugify } from "@/scripts/lancer/util/lid";
