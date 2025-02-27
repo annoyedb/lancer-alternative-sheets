@@ -47,6 +47,7 @@
         useEffectOption,
         useEffectStyle,
         useEffectTooltipDirection,
+        useEffectTooltipHeader,
         useEffectTooltip,
         useEffectBackgroundStyle,
     }: HeaderSecondaryProps = $props();
@@ -56,7 +57,7 @@
     let extraOptions = deleteOption || messageOption || spOption || editOption ? true : false;
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
-    let effectTip = TooltipFactory.buildTooltip(useEffectTooltip || getLocalized("LA.effect.tooltip"));
+    let effectTip = TooltipFactory.buildTooltip(useEffectTooltip || getLocalized("LA.effect.tooltip"), useEffectTooltipHeader);
 
     const defaultHeaderStyle = "la-bckg-primary -padding0 -padding3-r";
     const defaultHeaderIconStyle = "-fontsize5 -lineheight3"

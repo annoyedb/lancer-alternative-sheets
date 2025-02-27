@@ -181,5 +181,6 @@
 	"LA.npc.attackBonus.label": "ADDED ATTACK BONUS",
 	"LA.npc.attackBonus.tooltip": "The flat bonus added to attack rolls with this weapon",
 	"LA.npc.notes.label": "NOTES",
-	"LA.npc.traits.label": "TRAITS"
+	"LA.npc.traits.label": "TRAITS",
+	"LA.npc.traits.tooltip": "REACTIONS"
 }

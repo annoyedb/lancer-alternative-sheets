@@ -3,6 +3,7 @@
     import Weapons from "@/svelte/npc/Weapons.svelte";
     import Systems from "@/svelte/npc/Systems.svelte";
     import Traits from "@/svelte/npc/Traits.svelte";
+    import Reactions from "./Reactions.svelte";
 
     const props = $props();
     const {
@@ -42,6 +43,10 @@
 {#if itemTypes.npc_feature.length}
 <Weapons 
     weapons={weapons}
+    {...props}
+/>
+<Reactions
+    reactions={reactions}
     {...props}
 />
 <Systems 

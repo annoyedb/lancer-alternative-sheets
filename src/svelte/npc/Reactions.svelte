@@ -14,11 +14,19 @@
         actor,
         collapse,
         system,
-        systems,
-    }: NPCSheetProps & {systems : Array<any>} = $props();
+        reactions,
+    }: NPCSheetProps & {reactions : Array<any>} = $props();
 
     const tier = system.tier;
-    let collID = `${actor.uuid}_systems`;
+    let collID = `${actor.uuid}_reactions`;
+    
+    function getReactionTooltip(reaction: any)
+    {
+        if (!reaction.system.effect)
+            return getLocalized("LA.action.reaction.tooltip");
+
+        return `${reaction.system.trigger}<br><br>${reaction.system.effect}`;
+    }
 
     function hasAccuracyBonus(weapon: any)
     {
@@ -43,12 +51,12 @@
     }
 </script>
 
-{#if systems.length}
+{#if reactions.length}
 <HeaderMain
-    title={getLocalized("LA.systems.label")}
-    headerStyle={["la-bckg-system", "clipped-top", "-padding0-tb", "-padding3-lr"]}
+    title={getLocalized("LA.npc.traits.tooltip")}
+    headerStyle={["la-bckg-action--reaction", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
-    borderStyle={["la-brdr-system", "-gap0"]}
+    borderStyle={["la-brdr-action--reaction", "-gap0"]}
     
     collapse={collapse}
     collapseID={collID}
@@ -57,56 +65,57 @@
     collapseAllOption={true}
 >
     <div class="la-combine-v -gap0">
-    {#each systems as component}
+    {#each reactions as reaction}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
             <LoadedBox
-                item={component}
+                item={reaction}
             />
             <LimitedBox
-                usesValue={component.system.uses.value}
-                usesMax={component.system.uses.max}
+                usesValue={reaction.system.uses.value}
+                usesMax={reaction.system.uses.max}
             />
         </div>
     {/snippet}
         <HeaderSecondary
-            title={component.name}
+            title={reaction.name}
             headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-            headerFontStyle={[getHeaderStyle(component), "-fontsize1"]}
+            headerFontStyle={[getHeaderStyle(reaction), "-fontsize1"]}
             headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
             borderStyle={["-bordersoff"]}
 
-            itemID={component.id}
-            uuid={component.uuid}
-            path={`itemTypes.npc_feature.${component.index}`}
+            itemID={reaction.id}
+            uuid={reaction.uuid}
+            path={`itemTypes.npc_feature.${reaction.index}`}
             acceptTypes={"npc_feature"}
             
             collapse={collapse}
-            collapseID={component}
+            collapseID={reaction}
             startCollapsed={false}
-            renderOutsideCollapse={component.system.uses.max || component.system.loaded ? limitedUses : undefined}
+            renderOutsideCollapse={reaction.system.uses.max || reaction.system.loaded ? limitedUses : undefined}
 
             editOption={true}
             editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
             messageOption={true}
-            messageUUID={component.uuid}
+            messageUUID={reaction.uuid}
             messageStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
 
             useEffectOption={true}
-            useEffectTooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+            useEffectTooltip={getReactionTooltip(reaction)}
+            useEffectTooltipHeader={getLocalized("LA.action.reaction.label")}
             useEffectTooltipDirection={"UP"}
             useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
         >
-        {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
+        {#if hasAttackBonus(reaction) || hasAccuracyBonus(reaction)}
             <div class="la-combine-h -gap0 -widthfull">
                 <EffectBox
                     name={getLocalized("LA.npc.attackBonus.label")}
                     outerStyle={[
-                        `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
+                        `${hasAccuracyBonus(reaction) ? "-bordersround" : "-bordersround-ltb"}`, 
                     ]}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                        {component.system.attack_bonus[tier - 1]}
+                        {reaction.system.attack_bonus[tier - 1]}
                         <i class="cci cci-reticule -fontsize2"></i>
                     </span>
                 </EffectBox>
@@ -114,14 +123,14 @@
                     name={getLocalized("LA.npc.accuracy.label")}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
-                        {component.system.accuracy[tier - 1]}
+                        {reaction.system.accuracy[tier - 1]}
                         <i class="cci cci-accuracy -fontsize4"></i>
                     </span>
                 </EffectBox>
             </div>
         {/if}
             <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
+                name={getLocalized("LA.trigger.label")}
             >
                 <FlowButton
                     name={getLocalized("LA.use.label")}
@@ -129,15 +138,19 @@
                     style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>
-                {@html component.system.effect}
+                {@html reaction.system.trigger}
             </EffectBox>
             <EffectBox
+                name={getLocalized("LA.mech.system.effect.label")}
+                effect={reaction.system.effect}
+            />
+            <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
-                effect={component.system.on_hit}
+                effect={reaction.system.on_hit}
             />
             <TagArray
-                tags={component.system.tags}
-                path={`itemTypes.npc_feature.${component.index}.system.tags`}
+                tags={reaction.system.tags}
+                path={`itemTypes.npc_feature.${reaction.index}.system.tags`}
                 justify={"start"}
             />
         </HeaderSecondary>

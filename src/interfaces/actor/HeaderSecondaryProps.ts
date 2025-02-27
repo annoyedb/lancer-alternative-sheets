@@ -43,6 +43,7 @@ export interface HeaderSecondaryProps
     editIconStyle?: Array<string>;
 
     useEffectOption?: Boolean;
+    useEffectTooltipHeader?: string;
     useEffectTooltip?: string;
     useEffectTooltipDirection?: string | TooltipDirection;
     useEffectStyle?: Array<string>;
