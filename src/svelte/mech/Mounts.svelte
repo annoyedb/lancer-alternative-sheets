@@ -3,7 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
-    import MountSlots from "@/svelte/mech/MountSlots.svelte";
+    import Weapon from "@/svelte/mech/Weapon.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -57,7 +57,7 @@
         </details>
     {:else}
         <div class="la-combine-v -gap0 -widthfull">
-            <MountSlots
+            <Weapon
                 mount={mount}
                 mountIndex={index}
                 collapse={collapse}
