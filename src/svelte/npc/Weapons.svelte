@@ -75,7 +75,7 @@
 
     collapseAllOption={true}
 >
-    <div class="la-combine-v -gap0">
+    <div class="la-combine-v -gap0 -widthfull">
     {#each weapons as weapon}
     {#snippet weaponSpecial()}
         <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
@@ -129,7 +129,9 @@
 
             rollAttackOption={true}
             rollAttackStyle={[getRollStyle(weapon)]}
-            rollAttackTooltip={weapon.system.effect || getLocalized("LA.flow.rollAttack.tooltip")}
+            rollAttackTooltip={ weapon.system.effect
+                ? `${getLocalized("LA.flow.rollAttack.tooltip")}<br><br>${weapon.system.effect}` 
+                : getLocalized("LA.flow.rollAttack.tooltip")}
             rollAttackTooltipDirection={"UP"}
             weaponOption={true}
             weaponDestroyed={weapon.system.destroyed}

@@ -45,7 +45,7 @@
 
     collapseAllOption={true}
 >
-    <div class="la-combine-v -gap0">
+    <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">

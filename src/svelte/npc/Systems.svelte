@@ -56,7 +56,7 @@
 
     collapseAllOption={true}
 >
-    <div class="la-combine-v -gap0">
+    <div class="la-combine-v -gap0 -widthfull">
     {#each systems as component}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
