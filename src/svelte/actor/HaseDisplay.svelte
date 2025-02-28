@@ -14,7 +14,7 @@
 <!-- HASE Stats -->
 {#if pilot && pilot.system.active_mech.value.uuid === actor.uuid}
 <div class="la-hasegroup la-combine-v -positionabsolute -widthnone">
-    <div class="la-hase">
+    <div class="la-hase -heightnone">
         <HexButton
             name={getLocalized("LA.grit.short")}
             value={system.grit}

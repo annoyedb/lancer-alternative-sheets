@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, isLoading } from "@/scripts/helpers";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import HeaderTertiary from "@/svelte/actor/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
@@ -78,9 +78,7 @@
     function renderLimited(weapon: any)
     {
         return (
-            weapon.system.sp || 
-            weapon.system.all_tags.some((t: {is_loading: boolean;}) => t.is_loading) ||
-            weapon.isLimited()
+            weapon.system.sp || isLoading(weapon) || weapon.isLimited()
         );
     }
 </script>

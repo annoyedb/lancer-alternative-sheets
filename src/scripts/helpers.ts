@@ -60,3 +60,9 @@ export function logData(path: string, options: HelperOptions)
     const data = resolveHelperDotpath(options, path);
     console.log(data);
 }
+
+export function isLoading(item: any): boolean
+{
+    return item.system.all_tags?.some((t: {is_loading: boolean;}) => t.is_loading) 
+        || item.system.tags?.some((t: {is_loading: boolean;}) => t.is_loading);
+}

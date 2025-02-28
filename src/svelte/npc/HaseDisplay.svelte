@@ -20,11 +20,11 @@
             uuid={actor.uuid}
             flowClass={FlowClass.Roll}
             dataPath={"system.hull"}
-            style={["-positionrelative", "-hull", "-fontsize10", "-bold"]}
+            style={["-positionrelative", "-hull", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
         />
     </div>
     <div class="la-hase">
@@ -35,11 +35,11 @@
             uuid={actor.uuid}
             flowClass={FlowClass.Roll}
             dataPath={"system.agi"}
-            style={["-positionrelative", "-agility", "-fontsize10", "-bold"]}
+            style={["-positionrelative", "-agility", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
         />
     </div>
     <div class="la-hase">
@@ -50,11 +50,11 @@
             uuid={actor.uuid}
             flowClass={FlowClass.Roll}
             dataPath={"system.sys"}
-            style={["-positionrelative", "-systems", "-fontsize10", "-bold"]}
+            style={["-positionrelative", "-systems", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
         />
     </div>
     <div class="la-hase">
@@ -65,11 +65,11 @@
             uuid={actor.uuid}
             flowClass={FlowClass.Roll}
             dataPath={"system.eng"}
-            style={["-positionrelative", "-engineering", "-fontsize10", "-bold"]}
+            style={["-positionrelative", "-engineering", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
         />
     </div>
 </div>

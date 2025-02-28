@@ -60,11 +60,9 @@
     {#each systems as component}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
-        {#if component.system.tags.some((tag: any) => tag.lid === "tg_loading")}
             <LoadedBox
                 item={component}
             />
-        {/if}
             <LimitedBox
                 usesValue={component.system.uses.value}
                 usesMax={component.system.uses.max}
