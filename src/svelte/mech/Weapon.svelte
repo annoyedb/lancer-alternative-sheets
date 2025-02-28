@@ -145,14 +145,14 @@
     >
     {#if !slot.weapon.value.system.destroyed}
         <div class="la-generated -widthfull -gap2 la-combine-v">
-        <!-- Generated Content -->
-        <ProfileBox
-            profiles={slot.weapon.value.system.profiles}
-            weapon={slot.weapon.value}
-            path={`${getWeaponPath(index)}.system.selected_profile_index`}
-        />
+            <!-- Generated Content -->
+            <ProfileBox
+                profiles={slot.weapon.value.system.profiles}
+                weapon={slot.weapon.value}
+                path={`${getWeaponPath(index)}.system.selected_profile_index`}
+            />
             <EffectBox
-                name={getLocalized("LA.mech.mod.effect.label")}
+                name={getLocalized("LA.mech.system.effect.label")}
                 effect={slot.weapon.value.system.active_profile.effect}
             />
             <EffectBox
