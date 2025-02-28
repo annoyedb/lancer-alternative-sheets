@@ -19,6 +19,7 @@
     let activTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
     let tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
     let setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
+    let rechargeTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.recharge.tooltip"), getLocalized("LA.action.startofturn.label"));
 </script>
 
 <div class="la-bckg-background la-shadow -medium -inset la-bg-scroll -widthfull -heightfull">
@@ -53,6 +54,17 @@
                 data-tooltip-direction="RIGHT">
                 <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
                 <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
+            </div>
+            <div class="la-recharge -lineheight3 -width6 -height6 -glow-primary-hover">
+                <button type="button"
+                    class="mdi mdi-refresh-circle la-text-secondary -fontsize6
+                        charge-macro"
+                    data-tooltip={rechargeTip}
+                    data-tooltip-class="clipped-bot la-tooltip"
+                    data-tooltip-direction="RIGHT"
+                    aria-label={getLocalized("LA.npc.recharge.tooltip")}
+                >
+                </button>
             </div>
         </div>
     </div>
@@ -104,7 +116,17 @@
         <!-- Right Side -->
         <div class="la-combine-h">
             <div class="la-combine-v -flex1">
-                <div class="la-combine-h -height2 -justifyend -widthfull">
+                <div class="la-combine-h -height2 -justifyend -gap1 -widthfull">
+                    <button type=button
+                        class="mdi mdi-note-edit -fontsize2
+                            popout-text-edit-button"
+                        data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"))}
+                        data-tooltip-class="clipped-bot la-tooltip"
+                        data-tooltip-direction="UP"
+                        aria-label={getLocalized("LA.npc.notes.tooltip")}
+                        data-path={`system.notes`}
+                    >
+                    </button>
                     <i class="mdi mdi-information -fontsize2"
                         data-tooltip={TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"))}
                         data-tooltip-class="clipped-bot la-tooltip"

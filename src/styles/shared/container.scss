@@ -114,6 +114,11 @@
         {
             gap: 1.25rem;
         }
+        
+        &.-wrapwrap
+        {
+            flex-wrap: wrap;
+        }
 
         >.-flex0
         {
@@ -188,6 +193,21 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+    }
+
+    .la-combine-grid
+    {
+        display: grid;
+
+        &.-horizontal2
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.-horizontal3
+        {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     // Dropdowns for Effect, Weapons, Systems, etc

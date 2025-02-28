@@ -179,6 +179,7 @@
 	"LA.action.overcharge.label": "OVERCHARGE",
 	"LA.action.move.label": "MOVE",
 	"LA.action.endofturn.label": "END OF TURN",
+	"LA.action.startofturn.label": "START OF TURN",
 	"LA.pilot.talent.label": "PILOT TALENTS",
 	"LA.pilot.trait.label": "TALENT TRAIT",
 	"LA.pilot.coreBonus.label": "CORE BONUSES",
@@ -189,6 +190,12 @@
 	"LA.npc.attackBonus.label": "ADDED ATTACK BONUS",
 	"LA.npc.attackBonus.tooltip": "The flat bonus added to attack rolls with this weapon",
 	"LA.npc.notes.label": "NOTES",
+	"LA.npc.notes.tooltip": "Edit the notes for this sheet",
 	"LA.npc.traits.label": "TRAITS",
-	"LA.npc.traits.tooltip": "REACTIONS"
+	"LA.npc.reactions.label": "REACTIONS",
+	"LA.npc.utilities.label": "COMBAT UTILITIES",
+	"LA.npc.recharge.label": "RECHARGE FEATURES",
+	"LA.npc.recharge.tooltip": "Make an individual roll for every feature to recharge them at the start of the turn",
+	"LA.npc.empty.label": "NO CLASS",
+	"LA.npc.empty.subLabel": "NO CLASS DETECTED"
 }

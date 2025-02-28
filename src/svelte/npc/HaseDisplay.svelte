@@ -24,7 +24,7 @@
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -39,7 +39,7 @@
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -54,7 +54,7 @@
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -69,7 +69,7 @@
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header", "-bold"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
 </div>

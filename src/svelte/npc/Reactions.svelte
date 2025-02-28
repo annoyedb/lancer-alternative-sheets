@@ -53,7 +53,7 @@
 
 {#if reactions.length}
 <HeaderMain
-    title={getLocalized("LA.npc.traits.tooltip")}
+    title={getLocalized("LA.npc.reactions.label")}
     headerStyle={["la-bckg-action--reaction", "clipped-top", "-padding0-tb", "-padding3-lr"]}
     headerFontStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-action--reaction", "-gap0"]}

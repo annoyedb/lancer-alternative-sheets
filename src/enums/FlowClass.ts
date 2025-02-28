@@ -7,4 +7,5 @@ export enum FlowClass
     OverchargeReset = "overcharge-reset",
     Activation = "activation-flow",
     Effect = "effect-flow",
+    RechargeFeatures = "charge-macro",
 }
