@@ -2,7 +2,8 @@
 {
     .la-loadout.la-tab
     {
-        // Indicate what is being rolled when the button element is rolled
+        // Make only the damage glow on hovering the button
+        // to indicate what is actually being rolled
         .la-properties:hover>.la-damage>.la-number__span
         {
             filter: drop-shadow(0px 0px 5px var(--primary));
