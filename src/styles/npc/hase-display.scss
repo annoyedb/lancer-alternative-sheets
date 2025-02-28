@@ -1,0 +1,33 @@
+.la-hasegroup
+{
+    >.la-hase>.la-attribute
+    {
+        &.-hull
+        {
+            right: 0.6rem;
+        }
+
+        &.-agility
+        {
+            left: 0.6rem;
+            top: -1.5rem;
+        }
+
+        &.-systems
+        {
+            right: 0.6rem;
+            top: -3rem;
+        }
+
+        &.-engineering
+        {
+            left: 0.6rem;
+            top: -4.5rem;
+        }
+
+        .la-label__span
+        {
+            font-size: 0.5rem;
+        }
+    }
+}

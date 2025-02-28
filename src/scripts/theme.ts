@@ -21,6 +21,7 @@ import "@/styles/pilot/loadout.scss";
 
 import "@/styles/npc/header.scss";
 import "@/styles/npc/body.scss";
+import "@/styles/npc/hase-display.scss"
 
 import "@/styles/color/la-colors.scss";
 import "@/styles/color/open-color.scss";
