@@ -43,7 +43,6 @@
     let collapsing = collapse && collapseID;
     let collapsed = collapsing && startCollapsed ? "collapsed" : "";
     let extraOptions = collapseAllOption || deleteOption || messageOption || spOption || mountOption ? true : false;
-    let expanding = $state(true);
     let expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
@@ -52,7 +51,9 @@
     const defaultHeaderFontStyle = "la-text-header"
     const defaultDeleteStyle = "-glow-header -glow-primary-hover -fontsize2"
     const defaulltSPStyle = "-fontsize5 -lineheight3 -width3"
-
+    
+    // TODO: Refactor this into a reuseable function/component
+    let expanding = $state(true);
     function collapseExpandAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
     {
         event.stopPropagation();
@@ -145,6 +146,7 @@
             </button>
         {/if}
         {#if collapseAllOption}
+            <!-- (#2) -->
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
                 class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"

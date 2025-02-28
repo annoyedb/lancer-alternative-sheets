@@ -48,4 +48,6 @@ export interface HeaderSecondaryProps
     useEffectTooltipDirection?: string | TooltipDirection;
     useEffectStyle?: Array<string>;
     useEffectBackgroundStyle?: Array<string>;
+    
+    collapseAllOption?: Boolean;
 }

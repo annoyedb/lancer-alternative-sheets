@@ -50,6 +50,8 @@
         useEffectTooltipHeader,
         useEffectTooltip,
         useEffectBackgroundStyle,
+
+        collapseAllOption,
     }: HeaderSecondaryProps = $props();
     
     let collapsing = collapse && collapseID;
@@ -58,10 +60,46 @@
     let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
     let effectTip = TooltipFactory.buildTooltip(useEffectTooltip || getLocalized("LA.effect.tooltip"), useEffectTooltipHeader);
+    let expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
 
     const defaultHeaderStyle = "la-bckg-primary -padding0 -padding3-r";
     const defaultHeaderIconStyle = "-fontsize5 -lineheight3"
     const buttonDefaultStyle = "-glow-header -glow-primary-hover -fontsize2"
+
+    // TODO: Refactor this into a reuseable function/component
+    let expanding = $state(true);
+    function collapseExpandAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
+    {
+        event.stopPropagation();
+
+        const collapseGroup = event.currentTarget.closest('.la-collapsegroup');
+        const triggers = collapseGroup?.querySelectorAll('[data-la-collapse-id]');
+        if (triggers && triggers.length > 0) 
+        {
+            triggers.forEach((trigger, index) => {
+                if (index <= 1) // Skip this header's pair
+                    return;
+                const id = trigger.getAttribute('data-la-collapse-id');
+                if (id) 
+                {
+                    const pair = Array.from(triggers).find(t => t !== trigger && t.getAttribute('data-la-collapse-id') === id);
+                    if (pair) 
+                    {
+                        if (expanding) 
+                        {
+                            pair.classList.remove('collapsed');
+                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "opened");
+                        } else 
+                        {
+                            pair.classList.add('collapsed');
+                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "closed");
+                        }
+                    }
+                }
+            });
+            expanding = !expanding;
+        }
+    }
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
@@ -143,6 +181,19 @@
                 data-tooltip-direction={"UP"}
                 aria-label="{getLocalized("LA.edit.label")}">
                 <i class="fas fa-ellipsis-v {editIconStyle?.join(' ')}"></i>
+            </button>
+        {/if}
+        {#if collapseAllOption}
+            <!-- (#2) -->
+            <!-- svelte-ignore event_directive_deprecated -->
+            <button type="button"
+                class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"
+                data-tooltip={expandTip}
+                data-tooltip-class={"clipped-bot la-tooltip"}
+                data-tooltip-direction={"UP"}
+                aria-label={getLocalized("LA.collapseAll.tooltip")}
+                on:click={(event) => collapseExpandAll(event)}
+            >
             </button>
         {/if}
         </div>
