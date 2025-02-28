@@ -10,6 +10,8 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
+    import { FlowClass } from "@/enums/FlowClass";
+    import FlowButton from "../actor/FlowButton.svelte";
 
     const {
         collapse,
@@ -32,7 +34,7 @@
         title={mod.name}
         headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
         headerFontStyle={["-fontsize2"]}
-        headerIconStyle={["cci", "cci-weaponmod", "-fontsize5", "-lineheight3"]}
+        headerIconStyle={["cci", "cci-weaponmod", "-fontsize5", "-lineheight3", "-glow-primary-hover", "-glow-header"]}
         
         uuid={mod.uuid}
         path={path}
@@ -48,6 +50,11 @@
 
         editOption={true}
         editIconStyle={["-lineheight3"]}
+
+        useEffectOption={true}
+        useEffectTooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+        useEffectTooltipDirection={"LEFT"}
+        useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
     >
         <div class="la-generated -widthfull -gap2 la-combine-v">
             <!-- Generated Content -->
@@ -117,8 +124,15 @@
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.mech.mod.effect.label")}
-                effect={mod.system.effect}
-            />
+            >
+                <FlowButton
+                    name={getLocalized("LA.use.label")}
+                    flowClass={FlowClass.Effect}
+                    style={["clipped-bot", "la-bckg-secondary"]}
+                />
+                <hr>
+                {@html mod.system.effect}
+            </EffectBox>
             <ActionBox
                 actions={mod.system.actions}
                 uuid={mod.uuid}

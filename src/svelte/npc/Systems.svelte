@@ -75,7 +75,7 @@
             title={component.name}
             headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
             headerFontStyle={[getHeaderStyle(component), "-fontsize1"]}
-            headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover"]}
+            headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover", "-glow-header"]}
             borderStyle={["-bordersoff"]}
 
             itemID={component.id}
