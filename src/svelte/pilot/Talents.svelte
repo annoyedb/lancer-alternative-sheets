@@ -67,6 +67,8 @@
 
             editOption={true}
             editIconStyle={["-lineheight3"]}
+
+            collapseAllOption={true}
         >
             <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
