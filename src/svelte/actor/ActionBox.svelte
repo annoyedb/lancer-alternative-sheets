@@ -32,6 +32,11 @@
     {
         return `${getLocalized("LA.use.label")} ${getLocalized(ACTIVATION_LOCALIZE_MAP[activation])}`;
     }
+    //@ts-ignore
+    function log(any: any)
+    {
+        console.log(any);
+    }
 </script>
 
 {#if actions.length > 0}

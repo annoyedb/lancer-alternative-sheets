@@ -49,9 +49,11 @@
     {#each traits as trait}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        {#if trait.system.tags.some((tag: any) => tag.lid === "tg_loading")}
             <LoadedBox
                 item={trait}
             />
+        {/if}
             <LimitedBox
                 usesValue={trait.system.uses.value}
                 usesMax={trait.system.uses.max}

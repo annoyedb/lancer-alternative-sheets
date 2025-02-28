@@ -19,6 +19,12 @@
 
     let collID = mod ? `${mod.uuid}_action` : "empty";
 
+    //@ts-ignore
+    function log(any: any)
+    {
+        console.log(any);
+    }
+
 </script>
 
 {#if mod}
@@ -32,7 +38,7 @@
         path={path}
         acceptTypes={"weapon_mod"}
         collapse={collapse}
-        collapseID={mod}
+        collapseID={mod.uuid}
         startCollapsed={false}
         
         spOption={true}
@@ -104,6 +110,10 @@
                     tags={mod.system.added_tags}
                     path={`${path}.system.added_tags`}
                 />
+                <TagArray
+                    tags={mod.system.tags}
+                    path={`${path}.system.tags`}
+                />
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.mech.mod.effect.label")}
@@ -111,6 +121,7 @@
             />
             <ActionBox
                 actions={mod.system.actions}
+                uuid={mod.uuid}
                 path={`system.actions`}
                 collapse={collapse}
                 collapseID={collID}

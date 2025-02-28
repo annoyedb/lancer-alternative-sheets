@@ -169,6 +169,7 @@
             />
             <ActionBox
                 actions={slot.weapon.value.system.actions}
+                uuid={slot.weapon.value.uuid}
                 path={`system.actions`}
                 collapse={collapse}
                 collapseID={getActionCollapseID(index)}

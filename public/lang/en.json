@@ -71,6 +71,8 @@
 	"LA.weapons.label": "WEAPONS",
 	"LA.tab.status.label": "STATUS",
 	"LA.tab.status.effects.label": "ACTIVE EFFECTS",
+	"LA.tab.status.effects.none.label": "NO EFFECTS TO DISPLAY",
+	"LA.tab.status.effects.none.subLabel": "ALL SYSTEMS NOMINAL",
 	"LA.tab.status.structure.label": "STRUCTURE",
 	"LA.tab.status.reactor.label": "REACTOR",
 	"LA.tab.loadout.label": "LOADOUT",

@@ -99,9 +99,11 @@
                 <i class="cci cci-reticule -fontsize2"></i>
             </span>
         {/if}
+        {#if weapon.system.tags.some((tag: any) => tag.lid === "tg_loading")}
             <LoadedBox
                 item={weapon}
             />
+        {/if}
             <LimitedBox
                 usesValue={weapon.system.uses.value}
                 usesMax={weapon.system.uses.max}

@@ -68,9 +68,11 @@
     {#each reactions as reaction}
     {#snippet limitedUses()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        {#if reaction.system.tags.some((tag: any) => tag.lid === "tg_loading")}
             <LoadedBox
                 item={reaction}
             />
+        {/if}
             <LimitedBox
                 usesValue={reaction.system.uses.value}
                 usesMax={reaction.system.uses.max}
