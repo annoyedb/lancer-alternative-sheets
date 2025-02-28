@@ -93,7 +93,7 @@
             
             collapse={collapse}
             collapseID={reaction}
-            startCollapsed={false}
+            startCollapsed={true}
             renderOutsideCollapse={reaction.system.uses.max || reaction.system.loaded ? limitedUses : undefined}
 
             editOption={true}

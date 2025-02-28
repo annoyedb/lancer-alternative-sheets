@@ -74,7 +74,7 @@
             
             collapse={collapse}
             collapseID={trait}
-            startCollapsed={false}
+            startCollapsed={true}
             renderOutsideCollapse={trait.system.uses.max || trait.system.loaded ? limitedUses : undefined}
 
             editOption={true}

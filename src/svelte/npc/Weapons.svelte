@@ -126,7 +126,7 @@
             
             collapse={collapse}
             collapseID={weapon}
-            startCollapsed={false}
+            startCollapsed={true}
             renderOutsideCollapse={hasWeaponSpecial(weapon) ? weaponSpecial : undefined}
 
             rollAttackOption={true}

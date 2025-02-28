@@ -85,7 +85,7 @@
             
             collapse={collapse}
             collapseID={component}
-            startCollapsed={false}
+            startCollapsed={true}
             renderOutsideCollapse={component.system.uses.max || component.system.loaded ? limitedUses : undefined}
 
             editOption={true}
