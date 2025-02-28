@@ -1,33 +1,40 @@
-.la-hasegroup
+.la-npc
 {
-    >.la-hase>.la-attribute
+    .la-hasegroup
     {
-        &.-hull
-        {
-            right: 0.6rem;
-        }
 
-        &.-agility
+        // HASE hexagons
+        >.la-hase>.la-attribute
         {
-            left: 0.6rem;
-            top: -1.5rem;
-        }
+            &.-hull
+            {
+                right: 0.6rem;
+            }
 
-        &.-systems
-        {
-            right: 0.6rem;
-            top: -3rem;
-        }
+            &.-agility
+            {
+                left: 0.6rem;
+                top: -1.5rem;
+            }
 
-        &.-engineering
-        {
-            left: 0.6rem;
-            top: -4.5rem;
-        }
+            &.-systems
+            {
+                right: 0.6rem;
+                top: -3rem;
+            }
 
-        .la-label__span
-        {
-            font-size: 0.5rem;
+            &.-engineering
+            {
+                left: 0.6rem;
+                top: -4.5rem;
+            }
+
+            // Override the HASE short labels
+            >.la-combine-v>.la-label__span
+            {
+                font-size: 0.5rem;
+                top: -0.5rem;
+            }
         }
     }
 }

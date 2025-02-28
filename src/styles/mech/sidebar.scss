@@ -9,10 +9,6 @@
         overflow-y: scroll;
         overflow-x: hidden;
 
-        filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
-        -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
-
         // Frame Name
         >.la-framename
         {
@@ -24,26 +20,9 @@
         // Image
         >.la-mech
         {
-            position: relative;
-            text-align: center;
+            min-height: 12rem;
 
-            filter: inherit;
-            -webkit-filter: inherit;
-            -moz-filter: inherit;
-
-            >.la-combine-v
-            {
-                position: absolute;
-                left: 0px;
-                font-size: 5rem;
-
-                >.la-combine-h
-                {
-                    font-weight: bolder;
-                }
-            }
-
-            >.la-mech__img
+            .la-mech__img
             {
                 max-height: 25rem;
             }
@@ -52,12 +31,6 @@
         // Macros/Flows
         .la-macroflows
         {
-            align-items: flex-end;
-
-            filter: inherit;
-            -webkit-filter: inherit;
-            -moz-filter: inherit;
-
             >.la-flow
             {
                 width: calc(100% - 2rem);

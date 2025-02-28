@@ -22,9 +22,9 @@
             dataPath={"system.hull"}
             style={["-positionrelative", "-hull", "-fontsize10", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5"]}
+            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-glow-primary-hover", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -37,9 +37,9 @@
             dataPath={"system.agi"}
             style={["-positionrelative", "-agility", "-fontsize10", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5"]}
+            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-glow-primary-hover", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -52,9 +52,9 @@
             dataPath={"system.sys"}
             style={["-positionrelative", "-systems", "-fontsize10", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5"]}
+            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-glow-primary-hover", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
     <div class="la-hase">
@@ -67,9 +67,9 @@
             dataPath={"system.eng"}
             style={["-positionrelative", "-engineering", "-fontsize10", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5"]}
+            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-glow-primary-hover", "-fontsize3", "la-text-header"]}
+            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
         />
     </div>
 </div>

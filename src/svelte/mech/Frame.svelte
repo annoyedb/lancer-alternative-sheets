@@ -80,7 +80,7 @@
     </div>
 {:else}
     <details class="la-details -widthfull la-combine-v -empty">
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header">
+        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -widthfull">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2"></i>
                 <span class="la-name__span -fontsize2">{getLocalized("LA.mech.frame.empty.label")}</span>

@@ -80,7 +80,7 @@
             <div class="-fontsize1">
                 <!-- Deployable Actions -->
                 <div class="la-effectbox-buttons la-combine-h -justifybetween">
-                    <div class="la-combine-v -alignleft">
+                    <div class="la-combine-v -alignstart">
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton
                             name={getLocalized(action.label)}

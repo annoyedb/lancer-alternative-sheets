@@ -1,17 +1,24 @@
 # 1.1.0 - Little Big Changes
-ᕕ( ᐛ )ᕗ New 'minor' version, new sheet, `new me` 
+ᕕ( ᐛ )ᕗ New `minor` version, new sheet, `new me`
+
+NPC sheets have been added. This minor version (1.1.x) will be the last minor version for v11. Patches will still be released fixing major bugs as they are found and minor bugs if I find the time. 
+
+Major bugs are anything preventing use of a feature on a sheet. (e.g. the first three points of the Known Bugs section)
+Minor bugs are anything has accessible and immediate work-arounds.
+
+Disclaimer that I still have an active campaign on V11, so this is likely where this sheet will 'officially' be for a little bit
 
 ## Changes
 * #10 - Added a collapse/expand-all button to the side of main headers in the loadout tab (each mount, systems, frame, etc) which toggle between the two states on all children of the header, as well as the active effects header in the status tab
 * #?? - Added weapon names to the side of weapon mounts to account for cases where a Lancer may have 4 integrated mounts to better distinguish mounts from another `achieving peace through patience, understanding, and these four guns i found`
-* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any `negative` discrepancies are found, let me know
+* Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any `negative` discrepancies are found to existing features, let me know
 * Added an NPC sheet designed to be as compact as possible. I hope it helps you GMs run those sitreps with 4 different grunts, the ultra, and the damageable McGuffin `and finally a sheet i'll actually use`
 * Theme changes can now be (mostly) applied without having to reopen the sheets! (See known issues for more details)
 * Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc) or some relevant Lancer-system keyword
 * Added collapsibility to the status tab and individual actions --that's all of them now for mech sheets!
 * Macro/flow buttons no longer overflow into new lines, giving a more consistent UX
 * Fixed a critical error where Active Effects would never display since the value it was checking for did not exist from a patch added in 1.0.4 onwards `i am literally cascading`
-* Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed `event.stopPropogation()`
+* Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed `event.stopPropogation()` or maybe it wasn't. `i don't know and it's not my problem anymore`
 * Fixed an issue where the "Full Repair" button did nothing because of an incorrect flow type definition
 * Fixed a bug where having a frame deployable would display all deployables owned by that actor, rather than just the deployables relevant to the frame `give me a scenario where Hydra isn't a pain in everyone's ass`
 * Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (for now --though they do give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
@@ -23,6 +30,7 @@
 * Moved core availability to the sidebar
 * Added repair stocks and current overcharge to sidebar
 * Minor changes to GALSIM and Harrison Armory themes from original COMP/CON imports. The intent is to keep the feel `but with less eye-searing pain`
+* Accounted for nuances between styling on Chrome vs FireFox (this affects only HASE stats for Chrome users)
 
 ## Known Issues
 * If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know

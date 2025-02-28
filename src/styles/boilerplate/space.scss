@@ -201,6 +201,11 @@
         width: 100%;
     }
 
+    .-widthnone
+    {
+        width: 0px;
+    }
+
     .-width2
     {
         width: 1.25rem;
@@ -219,6 +224,21 @@
     .-width5
     {
         width: 2rem;
+    }
+
+    .-width6
+    {
+        width: 2.25rem;
+    }
+
+    .-width7
+    {
+        width: 2.5rem;
+    }
+
+    .-width10
+    {
+        width: 4rem;
     }
 
     .-height0
@@ -249,6 +269,16 @@
     .-height5
     {
         height: 2rem;
+    }
+
+    .-height6
+    {
+        height: 2.25rem;
+    }
+
+    .-height7
+    {
+        height: 2.5rem;
     }
 
     .-height10
@@ -298,7 +328,7 @@
 
     .-lineheight9
     {
-        line-height: 3.5rem;
+        line-height: 3.25rem;
     }
 
     .-lineheight10

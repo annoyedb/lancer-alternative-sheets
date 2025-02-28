@@ -70,9 +70,14 @@
             justify-content: flex-end;
         }
         
-        &.-alignleft
+        &.-alignstart
         {
             align-items: flex-start;
+        }
+
+        &.-alignend
+        {
+            align-items: flex-end;
         }
 
         &.-aligncenter
@@ -151,6 +156,11 @@
         }
     }
 
+    .-aligncontentcenter
+    {
+        align-content: center;
+    }
+
     // Vertical flexbox
     .la-combine-v
     {
@@ -163,6 +173,11 @@
             >*:first-child 
             {
                 border-bottom: var(--thickness, 2px) solid var(--color);
+            }
+
+            &.-thickness1
+            {
+                --thickness: 1px;
             }
         }
     }

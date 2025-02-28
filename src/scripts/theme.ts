@@ -16,6 +16,7 @@ import "@/styles/mech/header.scss";
 import "@/styles/mech/sidebar.scss";
 import "@/styles/mech/status.scss";
 import "@/styles/mech/loadout.scss";
+import "@/styles/mech/hase-display.scss";
 
 import "@/styles/pilot/loadout.scss";
 

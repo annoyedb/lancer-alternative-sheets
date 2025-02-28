@@ -29,16 +29,16 @@
 
 <!-- Frame Name -->
 <span class="la-framename -overflowhidden">
-    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
+    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header la-dropshadow clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-terminal la-text-header -fadein">>//: </span>
         {frameName}
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
 </span>
-<div class="la-mech">
+<div class="la-mech la-dropshadow -aligncontentcenter">
     <!-- Size, Speed, & Core Availability -->
-    <div class="la-combine-v">
+    <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
         <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
             data-tooltip={sizeTip}
@@ -55,17 +55,19 @@
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction="RIGHT">
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow"></i>
-            <span class="{getSidebarImageTheme("text")} la-outl-shadow">{system.speed}</span>
+            <span class="{getSidebarImageTheme("text")} la-outl-shadow -bold">{system.speed}</span>
         </div>
         <CoreAvailability {system} />
     </div>
-    <!-- Mech Image -->
-    <img class="la-mech__img" 
-        src="{actor.img}"
-        alt={`modules/${moduleID}/assets/assets/nodata.png`}
-        data-edit="img" 
-        data-uuid="{actor.uuid}"
-    />
+    <div class="la-combine-h">
+        <!-- Mech Image -->
+        <img class="la-mech__img" 
+            src="{actor.img}"
+            alt={`modules/${moduleID}/assets/assets/nodata.png`}
+            data-edit="img" 
+            data-uuid="{actor.uuid}"
+        />
+    </div>
 </div>
 <!-- Mech Stats 1 -->
 <div class="la-stats la-combine-h -justifyevenly">
@@ -258,7 +260,7 @@
 </div>
 <!-- Macros/Flows -->
 <div class="la-spacer -large"></div>
-<div class="la-macroflows la-combine-v -widthfull">
+<div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull">
     <FlowButton 
         flowClass={FlowClass.Button}
         name={getLocalized("LA.flow.stabilize.label")}

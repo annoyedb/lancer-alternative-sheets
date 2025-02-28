@@ -1,0 +1,83 @@
+.la-mech
+{
+    .la-hasegroup>.la-hase
+    {
+        translate: -0.5rem;
+        
+        >.la-attribute
+        {
+            &.-grit
+            {
+                top: 0.2rem;
+            }
+
+            &.-hull
+            {
+                // Everything else
+                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                {
+                    top: -2rem;
+                }
+                // Firefox
+                @supports(-moz-appearance: none)
+                {
+                    top: -1.9rem;
+                }
+                left: 1.6rem;
+            }
+
+            &.-systems
+            {
+                // Everything else
+                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                {
+                    top: -4rem;
+                }
+                // Firefox
+                @supports(-moz-appearance: none)
+                {
+                    top: -3.9rem;
+                }
+                left: 0;
+            }
+
+            &.-engineering
+            {
+                // Everything else
+                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                {
+                    top: -6rem;
+                }
+                // Firefox
+                @supports(-moz-appearance: none)
+                {
+                    top: -5.9rem;
+                }
+                left: 1.6rem;
+            }
+
+            &.-agility 
+            {
+                // Everything else
+                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                {
+                    top: -15.85rem;
+                }
+                // Firefox
+                @supports(-moz-appearance: none)
+                {
+                    top: -15.95rem;
+                }
+
+                right: 1.6rem;
+            }
+
+            // Override text size
+            >.la-combine-v>.la-label__span
+            {
+                font-size: 0.65rem;
+                line-height: 0.7rem;
+            }
+        }
+    }
+}

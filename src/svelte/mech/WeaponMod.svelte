@@ -148,7 +148,7 @@
             ref set drop-settable weapon_mod"
         data-accept-types="weapon_mod"
         data-path={path}>
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l">
+        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
                 <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mod.empty.label")}</span>
