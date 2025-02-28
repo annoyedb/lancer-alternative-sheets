@@ -91,7 +91,7 @@
 <!-- Snippets -->
 {#snippet costSP()}
     {#if slot.weapon.value.system.sp}
-    <div class="la-loading la-hexarray la-combine-h -flex1 -aligncenter la-text-header -fontsize5">
+    <div class="la-loading la-hexarray la-combine-h -aligncenter la-text-header -fontsize5">
         <span class="la-hexarray__span -fontsize4">{slot.weapon.value.system.sp}</span>
         <i class="cci cci-system-point"></i>
     </div>
