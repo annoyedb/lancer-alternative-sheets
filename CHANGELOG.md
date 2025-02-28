@@ -7,11 +7,11 @@
 * Added Svelte framework to dependency requirements and reimplemented the mech sheet using Svelte. On the surface, it appears like the mech sheet hardly changed, and it should! If any `negative` discrepancies are found, let me know
 * Added an NPC sheet designed to be as compact as possible. I hope it helps you GMs run those sitreps with 4 different grunts, the ultra, and the damageable McGuffin `and finally a sheet i'll actually use`
 * Theme changes can now be (mostly) applied without having to reopen the sheets! (See known issues for more details)
-* Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc)
+* Tooltips have received a face-lift! And where applicable display the type of action (e.g. Full Action, Quick Action, etc) or some relevant Lancer-system keyword
 * Added collapsibility to the status tab and individual actions --that's all of them now for mech sheets!
 * Macro/flow buttons no longer overflow into new lines, giving a more consistent UX
 * Fixed a critical error where Active Effects would never display since the value it was checking for did not exist from a patch added in 1.0.4 onwards `i am literally cascading`
-* Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed event.stopPropogation()
+* Indirectly fixed thrown error when deleting Active Effects from moving to Svelte; was likely because of a missed `event.stopPropogation()`
 * Fixed an issue where the "Full Repair" button did nothing because of an incorrect flow type definition
 * Fixed a bug where having a frame deployable would display all deployables owned by that actor, rather than just the deployables relevant to the frame `give me a scenario where Hydra isn't a pain in everyone's ass`
 * Deployables are not items, so they can't be linked to preexisting flows (e.g. chat-activation-flow); deployable actions now reflect that and don't do anything (for now --though they do give a hover-over tooltip). But deployable icon can be dragged to the map to place it! A glow and tooltip has been added to assist in relaying this utility
@@ -28,6 +28,7 @@
 * Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at the latter but still nothing; you can see my attempt in MechSheetBase.ts)
 * If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know
 * Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`
+* Pressing enter on an NPC sheet's input box activates the on-click event for templates/classes. Genuinely have no idea, but Lancer/Foundry's input boxes in general seem kind of cursed
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme
