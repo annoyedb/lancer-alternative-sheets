@@ -113,6 +113,7 @@
 
             collapse={collapse}
             collapseID={component?.value.uuid}
+            startCollapsed={true}
 
             spOption={true}
             spValue={component.value.system.sp}

@@ -74,7 +74,7 @@
     draggable="true"
 >
     <div class="la-summary la-combine-h la-dropshadow 
-            -justifybetween -widthfull
+                -justifybetween -widthfull
             {headerStyle?.join(' ') || defaultHeaderStyle}
             {collapsing ? "collapse-trigger" : ""}"
         data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">

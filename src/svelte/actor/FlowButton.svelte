@@ -22,7 +22,10 @@
 
 <button 
     type="button"
-    class="{disableSlide ? "" : "la-flow"} {style ? style?.join(' ') : "clipped-bot-alt la-bckg-secondary"} {flowClass.toString()}"
+    class="
+        {disableSlide ? "" : "la-flow"} 
+        {style ? style?.join(' ') : "clipped-bot-alt la-bckg-secondary"} 
+        {flowClass.toString()}"
     data-uuid="{uuid}" 
     data-flow-type="{flowType}" 
     data-flow-args="{flowArgs}"

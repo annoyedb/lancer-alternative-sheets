@@ -24,14 +24,16 @@
 
 {#if usesMax}
 <div class="la-limited la-combine-h clipped-alt la-bckg-header-anti la-text-header 
-        -aligncenter -padding1-lr">
+        -aligncenter -padding1-lr"
+>
     <span class="la-hexarray__span -fontsize1">
         {name}
     </span>
 {#each {length: usesMax} as _, index}
     <!-- (#2) -->
     <!-- svelte-ignore event_directive_deprecated -->
-    <button class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} -glow-header -glow-primary-hover -fontsize5 
+    <button 
+        class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} -glow-header -glow-primary-hover -fontsize5 
             counter-hex" 
         data-available="{index < usesValue}" 
         data-path="{path}"

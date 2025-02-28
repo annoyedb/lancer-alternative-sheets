@@ -130,7 +130,7 @@
         
         collapse={collapse}
         collapseID={slot.weapon.value}
-        startCollapsed={false}
+        startCollapsed={true}
         renderOutsideCollapse={renderLimited(slot.weapon.value) ? limitedUses : undefined}
 
         rollAttackOption={true}

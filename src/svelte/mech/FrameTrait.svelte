@@ -40,7 +40,7 @@
     messageUUID={frame.uuid}
     messageType="trait"
     messageIndex={index}
-    startCollapsed={false}
+    startCollapsed={true}
 >
     <div class="la-generated -widthfull -gap2 la-combine-v">
         <EffectBox

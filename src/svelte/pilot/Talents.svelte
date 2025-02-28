@@ -63,7 +63,7 @@
             path={`system.pilot.value.itemTypes.talent.${index}`}
             collapse={collapse}
             collapseID={talent}
-            startCollapsed={false}
+            startCollapsed={true}
 
             editOption={true}
             editIconStyle={["-lineheight3"]}

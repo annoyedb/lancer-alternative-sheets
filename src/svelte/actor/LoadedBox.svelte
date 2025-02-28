@@ -25,7 +25,7 @@
         aria-label={getLocalized("LA.use.label")}
     >
         <i class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}
-            loaded-hex" 
+                loaded-hex" 
             data-available="{index < usesValue}" 
             data-path="{path}">
         </i>

@@ -13,7 +13,7 @@
 {#each profiles as profile, index}
     <button type="button" 
         class="-glow-primary-hover -height5
-        gen-control {index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
+            gen-control {index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
         data-action="set" data-action-value="(int){index}"
         data-path={path}>
         <span class="-padding1-lr -fontsize1 {index === weapon.system.selected_profile_index ? "-glow-header -bold" : ""}">{profile.name.toUpperCase()}</span>

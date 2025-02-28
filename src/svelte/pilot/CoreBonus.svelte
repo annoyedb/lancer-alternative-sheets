@@ -47,7 +47,7 @@
             path={`system.pilot.value.itemTypes.core_bonus.${index}`}
             collapse={collapse}
             collapseID={coreBonus}
-            startCollapsed={false}
+            startCollapsed={true}
 
             editOption={true}
             editIconStyle={["-lineheight3"]}

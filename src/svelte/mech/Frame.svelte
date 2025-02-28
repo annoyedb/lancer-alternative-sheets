@@ -55,7 +55,7 @@
             borderStyle={["-bordersoff", "-margin1-t"]}
             collapse={collapse}
             collapseID={`${collID}_core`}
-            startCollapsed={false}
+            startCollapsed={true}
         >
         {#if core.counters?.length}
         {#each core.counters as counter, index}

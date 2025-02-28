@@ -67,10 +67,12 @@
     {#if lidSourceHasDeployable(deployable)}
     <!-- Deployable -->
     <div class="la-effectbox -descriptive la-bckg-card la-brdr-repcap -widthful -bordersround-ltb
-        ref set"
-        data-uuid="{deployable.uuid}">
+            ref set"
+        data-uuid="{deployable.uuid}"
+    >
         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0
-            click-open"><!--
+                click-open"
+        ><!--
         --->{deployable.name ? deployable.name.toUpperCase() : ""}<!--
     ---></span>
         <!-- Generated Content -->
