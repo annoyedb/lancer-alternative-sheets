@@ -21,6 +21,7 @@
 * Added hex background to roll-attacks/glow to HASE rolls for design consistency and hopefully suggest rollability right-away :eyes:
 * Restyled Pilot Talents to be a little more distinguishable between talents and their respective ranks
 * Moved core availability to the sidebar
+* Added repair stocks and current overcharge to sidebar
 * Minor changes to GALSIM and Harrison Armory themes from original COMP/CON imports. The intent is to keep the feel `but with less eye-searing pain`
 
 ## Known Issues

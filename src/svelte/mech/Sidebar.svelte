@@ -19,6 +19,8 @@
         ? `${frame.system.manufacturer} ${frame.name}`
         : getLocalized("LA.placeholder");
     let frameUUID = frame ? frame.uuid : "";
+    let overchargeSequence = actor.system.overcharge_sequence.split(",");
+    let overchargeStage = actor.system.overcharge;
     let emptyObject = '{}';
 
     let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
@@ -228,6 +230,29 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.sensor.tooltip")}
+        tooltipDirection="RIGHT"
+    />
+</div>
+<!-- Mech Stats 3 -->
+<div class="la-stats la-combine-h -justifyevenly -margin1-t">
+    <StatComboShort
+        icon={"cci cci-overcharge"}
+        label={getLocalized("LA.overcharge.short")}
+        value={overchargeSequence[overchargeStage]}
+        outerStyle={["-fontsize5"]}
+        innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+
+        tooltip={getLocalized("LA.overcharge.tooltip")}
+        tooltipDirection="RIGHT"
+    />
+    <StatComboShort
+        icon={"cci cci-repair"}
+        label={getLocalized("LA.repair.short")}
+        value={system.repairs.value}
+        outerStyle={["-fontsize5"]}
+        innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+
+        tooltip={getLocalized("LA.repair.tooltip")}
         tooltipDirection="RIGHT"
     />
 </div>
