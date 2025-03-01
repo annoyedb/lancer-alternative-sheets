@@ -13,6 +13,8 @@
 
             &.-hull
             {
+                left: 1.6rem;
+
                 // Everything else
                 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
                 {
@@ -23,11 +25,12 @@
                 {
                     top: -1.9rem;
                 }
-                left: 1.6rem;
             }
 
             &.-systems
             {
+                left: 0;
+
                 // Everything else
                 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
                 {
@@ -38,11 +41,12 @@
                 {
                     top: -3.9rem;
                 }
-                left: 0;
             }
 
             &.-engineering
             {
+                left: 1.6rem;
+
                 // Everything else
                 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
                 {
@@ -53,11 +57,12 @@
                 {
                     top: -5.9rem;
                 }
-                left: 1.6rem;
             }
 
             &.-agility 
             {
+                right: 1.6rem;
+
                 // Everything else
                 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
                 {
@@ -68,8 +73,6 @@
                 {
                     top: -15.95rem;
                 }
-
-                right: 1.6rem;
             }
 
             // Override text size
