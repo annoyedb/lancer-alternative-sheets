@@ -1,0 +1,107 @@
+@use 'themes/gms' as gms;
+@use 'themes/gmsdark' as gmsdark;
+@use 'themes/ipsn' as ipsn;
+@use 'themes/ssc' as ssc;
+@use 'themes/horus' as horus;
+@use 'themes/ha' as ha;
+@use 'themes/galsim' as galsim;
+@use 'themes/msmc' as msmc;
+@use 'themes/common' as common;
+@use '../mixins' as *;
+
+:root
+{
+    --size: 1px;
+}
+
+.la-brdr-transparent
+{
+    border-color: transparent;
+}
+
+.lancer-text-dark
+{
+    color: var(--dark-text)
+}
+
+.lancer-bckg-dark
+{
+    background-color: var(--dark-text)
+}
+
+.lancer-brdr-dark
+{
+    border-color: var(--dark-text)
+}
+
+.lancer-text-light
+{
+    color: var(--light-text)
+}
+
+.lancer-bckg-light
+{
+    background-color: var(--light-text)
+}
+
+.lancer-brdr-light
+{
+    border-color: var(--light-text)
+}
+
+// Themes
+.la-gms
+{
+    @include theme(gms.$gms-theme);
+}
+
+.la-gmsdark
+{
+    @include theme(gmsdark.$gmsdark-theme);
+}
+
+.la-ipsn
+{
+    @include theme(ipsn.$ipsn-theme);
+}
+
+.la-ssc
+{
+    @include theme(ssc.$ssc-theme);
+}
+
+.la-horus
+{
+    @include theme(horus.$horus-theme);
+}
+
+.la-ha
+{
+    @include theme(ha.$ha-theme);
+}
+
+.la-galsim
+{
+    @include theme(galsim.$galsim-theme);
+}
+
+.la-msmc
+{
+    @include theme(msmc.$msmc-theme);
+}
+
+.la-common
+{
+    @include theme(common.$common-theme);
+
+    @include generate-manufacturer-class(gms.$gms-theme);
+    @include generate-manufacturer-class(ipsn.$ipsn-theme);
+    @include generate-manufacturer-class(ssc.$ssc-theme);
+    @include generate-manufacturer-class(horus.$horus-theme);
+    @include generate-manufacturer-class(ha.$ha-theme);
+    @include generate-manufacturer-class(galsim.$galsim-theme);
+    @include generate-manufacturer-class(msmc.$msmc-theme);
+}
+
+@include generate-lancer-classes(common.$common-theme);
+@include generate-lancer-classes(gms.$gms-theme);

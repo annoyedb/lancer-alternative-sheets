@@ -47,3 +47,8 @@ export function initializeCollapses(html: JQuery)
         }
     });
 }
+
+export function isCollapsed(id: string): boolean
+{
+    return sessionStorage.getItem(`lancer-alternative-collapse-${id}`) == "closed";
+}

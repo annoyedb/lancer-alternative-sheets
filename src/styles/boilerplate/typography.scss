@@ -1,0 +1,193 @@
+.la-root
+{
+    .-writingmode-v
+    {
+        writing-mode: vertical-rl;
+    }
+
+    .-writingmode-h
+    {
+        writing-mode: horizontal-tb;
+    }
+
+    .-whitespacenowrap
+    {
+        white-space: nowrap;
+    }
+
+    .-whitespacenormal
+    {
+        white-space: normal;
+    }
+
+    .-upper
+    {
+        text-transform: uppercase;
+    }
+
+    .-lower
+    {
+        text-transform: lowercase;
+    }
+
+    .-fontsizeinherit
+    {
+        font-size: inherit;
+    }
+
+    .-fontsize0
+    {
+        font-size: 0.75rem;
+    }
+
+    .-fontsize1
+    {
+        font-size: 0.9rem;
+    }
+
+    .-fontsize2
+    {
+        font-size: 1.25rem;
+
+        >.la-extension
+        {
+            font-size: 0.66em;
+        }
+    }
+
+    .-fontsize3
+    {
+        font-size: 1.5rem;
+
+        >.la-extension
+        {
+            font-size: 0.5em;
+        }
+    }
+
+    .-fontsize4
+    {
+        font-size: 1.75rem;
+
+        >.la-extension
+        {
+            font-size: 0.4em;
+        }
+    }
+
+    .-fontsize5
+    {
+        font-size: 2rem;
+
+        >.la-extension
+        {
+            font-size: 0.33em;
+        }
+    }
+
+    .-fontsize6
+    {
+        font-size: 2.25rem;
+
+        >.la-extension
+        {
+            font-size: 0.3em;
+        }
+    }
+
+    .-fontsize7
+    {
+        font-size: 2.5rem;
+
+        >.la-extension
+        {
+            font-size: 0.28em;
+        }
+    }
+
+    .-fontsize8
+    {
+        font-size: 2.75rem;
+
+        >.la-extension
+        {
+            font-size: 0.27em;
+        }
+    }
+
+    .-fontsize9
+    {
+        font-size: 3rem;
+        
+        >.la-extension
+        {
+            font-size: 0.25em;
+        }
+    }
+
+    .-fontsize10
+    {
+        font-size: 3.5rem;
+
+        >.la-extension
+        {
+            font-size: 0.22em;
+        }
+    }
+
+    .-fontsize11
+    {
+        font-size: 4rem;
+
+        >.la-extension
+        {
+            font-size: 0.2em;
+        }
+    }
+
+    .-fontsize13
+    {
+        font-size: 5rem;
+
+        >.la-extension
+        {
+            font-size: 0.2em;
+        }
+    }
+
+    .-strikethrough
+    {
+        text-decoration: line-through;
+    }
+
+    .-textaligncenter
+    {
+        text-align: center;
+    }
+
+    .-textalignright
+    {
+        text-align: right;
+    }
+
+    .-textalignleft
+    {
+        text-align: left;
+    }
+
+    .-textwrapnowrap
+    {
+        white-space: nowrap;
+        text-wrap: nowrap;
+    }
+
+    .-bold
+    {
+        font-weight: bold;
+    }
+
+    .-letterspacing0
+    {
+        letter-spacing: 0.1rem;
+    }
+}

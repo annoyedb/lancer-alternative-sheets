@@ -1,7 +1,6 @@
 import { MechSheetSettings } from "../../classes/settings/MechSheetSettings";
 import { LancerAlternative } from "../../enums/LancerAlternative";
-import { MechSheetSettingsData } from "../../interfaces/settings/MechSheetSettingsData";
-import { getLocalized } from "../helpers";
+import type { MechSheetSettingsData } from "../../interfaces/settings/MechSheetSettingsData";
 
 export function registerMechSheetSettings()
 {
@@ -28,13 +27,13 @@ export function registerMechSheetSettings()
     } as ClientSettings.PartialSetting<MechSheetSettingsData>);
 }
 
-// There's problems in AppV2 with adding to window headers; or more specifically it is cumbersome
-// Trying to get ahead of it by making use of the massive header space in the sheet
-// This way it also stays with Lancer Alternative Sheets only
-export function addSettingToSheetHeader(html : JQuery<HTMLElement>)
-{
-    let text = getLocalized("LA.SHEET.setting.label");
-    html.find(".la-header").append(
+// // There's problems in AppV2 with adding to window headers; or more specifically it is cumbersome
+// // Trying to get ahead of it by making use of the massive header space in the sheet
+// // This way it also stays with Lancer Alternative Sheets only
+// export function addSettingToSheetHeader(html : JQuery<HTMLElement>)
+// {
+//     let text = getLocalized("LA.SHEET.setting.label");
+//     html.find(".la-header").append(
         
-    );
-}
+//     );
+// }

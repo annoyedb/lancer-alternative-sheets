@@ -1,7 +1,12 @@
 {
+    "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"]
+        },
         "types": [
-            "@league-of-foundry-developers/foundry-vtt-types"
+            "@league-of-foundry-developers/foundry-vtt-types",
+            "svelte"
         ],
         "target": "ESNext",
         "useDefineForClassFields": true,
@@ -28,6 +33,7 @@
     },
     "include": [
         "src/**/*.ts",
-        "src/**/*.d.ts"
+        "src/**/*.d.ts",
+        "src/**/*.svelte"
     ]
 }

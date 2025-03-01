@@ -1,11 +1,9 @@
-import { getTheme } from "./theme";
-import { deleteActiveEffect, LASMechSheetBase, renderActiveEffects, renderMechFrame, renderSystemMounts, renderWeaponMounts } from "./actor/mech-sheet";
+import { applyTheme, getTheme } from "./theme";
 import { preloadTemplates } from "./loader";
-import { frameManufacturer, frameName, frameUUID, overchargeStage as overchargeStage, randomExtension } from "./helpers";
-import { applyCollapseListeners, initializeCollapses} from "./collapse";
-import { renderCoreBonuses, renderTalents } from "./actor/pilot-sheet";
+import { frameManufacturer, frameName, frameUUID, logData, overchargeStage as overchargeStage, randomExtension } from "./helpers";
 import { registerMechSheetSettings } from "./settings/mech-sheet";
-import { LancerAlternative } from "../enums/LancerAlternative";
+import { MechSheetBase } from "@/classes/mech/MechSheetBase";
+import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 
 Hooks.once("init", () =>
 {
@@ -23,6 +21,7 @@ Hooks.once("setup", async () =>
 
 function registerHandlebarsHelpers()
 {
+    Handlebars.registerHelper("log", logData);
     Handlebars.registerHelper("print", function (value) { console.log(value); });
     Handlebars.registerHelper("gt", function (this: any, a, b, options)
     {
@@ -41,46 +40,24 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("getFrameUUID", frameUUID);
     Handlebars.registerHelper("overchargeStage", overchargeStage);
     Handlebars.registerHelper("randomExtension", randomExtension);
-    Handlebars.registerHelper("renderActiveEffects", renderActiveEffects);
-    Handlebars.registerHelper("renderWeaponMounts", renderWeaponMounts);
-    Handlebars.registerHelper("renderSystemMounts", renderSystemMounts);
-    Handlebars.registerHelper("renderMechFrame", renderMechFrame);
-    Handlebars.registerHelper("renderTalents", renderTalents);
-    Handlebars.registerHelper("renderCoreBonuses", renderCoreBonuses);
 }
 
 function registerSettings()
 {
-    registerMechSheetSettings();
+    // TODO: add settings in v12
+    // registerMechSheetSettings();
 }
 
 function setupSheets()
 {
     // Declare extension classes at runtime since they're only defined at that point
-    const LASMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
-    {        
-        static override get defaultOptions()
-        {
-            return mergeObject(super.defaultOptions, LASMechSheetBase.mergeOptions);
-        }
-
-        override activateListeners(html: JQuery<HTMLElement>)
-        {
-            super.activateListeners(html);
-            // PopOut! compatibility
-            initializeCollapses(html);
-            applyCollapseListeners(html);
-        }
-    }
-
-    Actors.registerSheet(LancerAlternative.Name, LASMechSheet, {
-        types: ["mech"], 
-        label: "LA.SHEET.mech.label",
-        makeDefault: false
-    });
+    MechSheetBase.setupSheet();
+    NPCSheetBase.setupSheet();
 }
 
 function setupEventListeners()
 {
-    Hooks.on("renderLASMechSheet", deleteActiveEffect);
+    // TODO: Until a Lancer settings/theme hook is available, 
+    // this blasts on every single time the settings close
+    Hooks.on("closeSettingsConfig", applyTheme);
 }

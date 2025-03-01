@@ -1,5 +1,5 @@
 // Bridge module and foundryvtt-lancer system
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { resolveHelperDotpath } from './lancer/helpers/common';
 
 export function frameName(framePath: string, options: HelperOptions): string
@@ -53,4 +53,16 @@ export function randomExtension(): string
     const extensions = [".exe", ".bat", ".cmd", ".sh", ".bash", ".zsh", ".ksh", ".csh"];
     const randomIndex = Math.floor(Math.random() * extensions.length);
     return extensions[randomIndex];
+}
+
+export function logData(path: string, options: HelperOptions)
+{
+    const data = resolveHelperDotpath(options, path);
+    console.log(data);
+}
+
+export function isLoading(item: any): boolean
+{
+    return item.system.all_tags?.some((t: {is_loading: boolean;}) => t.is_loading) 
+        || item.system.tags?.some((t: {is_loading: boolean;}) => t.is_loading);
 }

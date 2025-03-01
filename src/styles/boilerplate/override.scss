@@ -1,0 +1,219 @@
+// Overrides for Foundry and Lancer
+.la-svelte
+{
+    height: inherit;
+    display: inherit;
+    flex-direction: inherit;
+}
+
+// Use default theme colors for the tooltip, since for some reason var() 
+// does not work when data-tooltip-class is used on a var that's defined 
+// at the sheet level
+#tooltip.la-tooltip
+{
+    padding: unset;
+    border-color: var(--primary-color);
+    background-color: var(--invade-color);
+    text-align: left;
+        
+    >div
+    {    
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    >h3
+    {    
+        margin: unset;
+        border: unset;
+        background-color: var(--primary-color);
+        box-shadow: inset 0px 0px 2px 0px var(--background-color);
+        text-transform: uppercase;
+        padding: 5px;
+    }
+}
+
+// Depreciated
+.la-header__override
+{
+    >.window-header
+    {
+        background-color: var(--primary-color); // Pray that the original sheet's primary color theme is the same
+        border-bottom: unset;
+    }
+}
+
+.la-override__header
+{
+    >.window-header
+    {
+        background-color: var(--primary);
+        border-bottom: unset;
+    }
+}
+
+.window-content:has(>.la-root)
+{
+    padding: inherit;
+    overflow: hidden;
+}
+
+.lancer.sheet header:not(.window-header).la-header
+{
+    margin: unset;
+    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
+    background-color: var(--primary); // Since this is above the actual sheets, it needs to be hard coded here
+}
+
+.lancer.sheet body:not(.window-body).la-body
+{
+    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
+    background-color: var(--background);
+}
+
+.la-root
+{
+    height: 100%;
+
+    img
+    {
+        border: unset;
+    }
+
+    input
+    {
+        border: unset;
+        padding: unset;
+        background: unset;
+        clip-path: unset;
+        -webkit-clip-path: unset;
+    }
+
+    button
+    {
+        width: unset;
+        border: unset;
+        border-radius: unset;
+        padding: unset;
+        background: unset;
+        box-shadow: unset;
+        line-height: unset;
+        color: unset;
+        margin: unset;
+
+        &:hover
+        {
+            box-shadow: unset;
+        }
+
+        i
+        {
+            margin-right: unset;
+            vertical-align: middle;
+        }
+    }
+
+    h1
+    {
+        border-bottom: unset;
+        margin: unset;
+        font-weight: unset;
+    }
+
+    i
+    {
+        // font-size: inherit;
+        vertical-align: middle;
+    }
+
+    // Lancer overrides under this sheet
+    .roll-attack
+    {
+        flex-direction: unset;
+        justify-content: unset;
+        align-items: unset;
+        flex-grow: unset;
+        margin: unset;
+        min-width: unset;
+        min-width: unset;
+        height: unset;
+        border: unset;
+        border-radius: unset;
+        box-shadow: unset;
+        position: relative;
+
+        .roll-attack__bckg
+        {
+            position: absolute;
+            z-index: -1;
+        }
+    }
+
+    .roll-damage
+    {
+        margin: unset;
+    }
+
+    .compact-damage
+    {
+        margin: unset;
+    }
+
+    .core-power-toggle
+    {
+        cursor: pointer;
+        margin: unset !important;
+        width: unset;
+        height: unset;
+
+        &:checked::before
+        {
+            content: "\F12A3";
+        }
+
+        &:not(:checked)::before
+        {
+            content: "\F125E";
+            color: currentColor;
+        }
+    }
+
+    .loaded-hex,
+    .uses-hex,
+    .power-uses-hex,
+    .counter-hex,
+    .charged-hex
+    {
+        font-size: unset;
+        color: unset;
+    }
+
+    .compact-tag-row
+    {
+        margin: unset;
+    }
+
+    .clicker-minus-button,
+    .clicker-plus-button
+    {
+        min-width: unset;
+        width: unset;
+        height: unset;
+        background-color: unset;
+        color: unset;
+        border: unset;
+        box-shadow: unset;
+        line-height: unset;
+    }
+
+    .profile-img
+    {
+        font-size: unset;
+        min-width: unset;
+        max-width: unset;
+        min-height: unset;
+        max-height: unset;
+        object-fit: unset;
+    }
+}

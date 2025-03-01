@@ -1,0 +1,95 @@
+.la-root
+{
+    // Wide 'command'-style flow buttons
+    .la-flow
+    {
+        animation: decrease-padding .5s forwards;
+        -webkit-animation: decrease-padding .5s forwards;
+        -moz-animation: decrease-padding .5s forwards;
+
+        &:hover
+        {
+            animation: increase-padding .5s forwards;
+            -webkit-animation: increase-padding .5s forwards;
+            -moz-animation: increase-padding .5s forwards;
+        }
+
+        @keyframes increase-padding
+        {
+            from
+            {
+                padding-left: 0rem;
+            }
+
+            to
+            {
+                padding-left: 1rem;
+            }
+        }
+
+        @-webkit-keyframes increase-padding
+        {
+            from
+            {
+                padding-left: 0rem;
+            }
+
+            to
+            {
+                padding-left: 1rem;
+            }
+        }
+
+        @-moz-keyframes increase-padding
+        {
+            from
+            {
+                padding-left: 0rem;
+            }
+
+            to
+            {
+                padding-left: 1rem;
+            }
+        }
+
+        @keyframes decrease-padding
+        {
+            from
+            {
+                padding-left: 1rem;
+            }
+
+            to
+            {
+                padding-left: 0rem;
+            }
+        }
+
+        @-webkit-keyframes decrease-padding
+        {
+            from
+            {
+                padding-left: 1rem;
+            }
+
+            to
+            {
+                padding-left: 0rem;
+            }
+        }
+
+        @-moz-keyframes decrease-padding
+        {
+            from
+            {
+                padding-left: 1rem;
+            }
+
+            to
+            {
+                padding-left: 0rem;
+            }
+        }
+    }
+}

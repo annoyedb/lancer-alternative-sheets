@@ -1,0 +1,444 @@
+@mixin hoverFadeOut
+{
+    &.-fadein
+    {
+        visibility: hidden;
+    }
+
+    &
+    {
+        animation: fadeOut 0.25s forwards;
+        -webkit-animation: fadeOut 0.25s forwards;
+        -moz-animation: fadeOut 0.25s forwards;
+    }
+
+    @keyframes fadeOut
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes fadeOut
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-moz-keyframes fadeOut
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+}
+
+@mixin hoverFadeIn
+{
+    &.-fadein
+    {
+        visibility: visible;
+    }
+
+    &
+    {
+        animation: fadeIn 0.25s forwards;
+        -webkit-animation: fadeIn 0.25s forwards;
+        -moz-animation: fadeIn 0.25s forwards;
+    }
+
+    @keyframes fadeIn
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fadeIn
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-moz-keyframes fadeIn
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin blinking
+{
+    @keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--color);
+        }
+    }
+
+    @-webkit-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--color);
+        }
+    }
+
+    @-moz-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--color);
+        }
+    }
+}
+
+.la-root
+{
+
+    // General
+    .la-shadow
+    {
+        &.-xsoft
+        {
+            box-shadow: 0px 2px 8px 0px rgba(99, 99, 99, 0.2);
+
+            &.-inset
+            {
+                box-shadow: inset 0px 2px 8px 0px rgba(99, 99, 99, 0.2);
+            }
+        }
+
+        &.-soft
+        {
+            box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+
+            &.-inset
+            {
+                box-shadow: inset 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+            }
+        }
+
+        &.-medium
+        {
+            &.-inset
+            {
+                box-shadow: rgba(50, 50, 93, 0.25) -3px 3px 3px 1px inset, rgba(50, 50, 93, 0.2) 2px 0px 2px 0px inset;
+            }
+        }
+    }
+
+    .la-dropshadow
+    {
+        filter: drop-shadow(-3px 3px 1px var(--shadow));
+        -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
+        -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
+    }
+
+    .la-divider-h
+    {
+        border: none;
+        height: 0.15rem;
+
+        &.-tiny
+        {
+            height: 1px;
+        }
+
+        &.-medium
+        {
+            height: 0.15rem;
+        }
+
+        &.-large
+        {
+            height: 0.25rem;
+        }
+    }
+
+    .la-divider-v
+    {
+        height: 1em;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        width: 2px;
+    }
+
+    .la-spacer
+    {
+        height: 0.5rem;
+
+        &.-tiny
+        {
+            height: 0.15rem;
+        }
+
+        &.-small
+        {
+            height: 0.25rem;
+        }
+
+        &.-medium
+        {
+            height: 0.5rem;
+        }
+
+        &.-large
+        {
+            height: 1rem;
+        }
+    }
+
+    .la-bar-h
+    {
+        position: relative;
+        width: 100%;
+        height: 1rem;
+        overflow: hidden;
+
+        >.la-bar-h-piece
+        {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            letter-spacing: 0.1rem;
+            font-size: 0.9rem;
+            font-weight: bolder;
+        }
+
+        >.la-bar-h-current
+        {
+            width: var(--percent);
+        }
+    }
+
+    .la-bg-scroll
+    {
+        background: url(/assets/grid.png);
+        animation: 400s scroll infinite linear;
+        -webkit-animation: 400s scroll infinite linear;
+        -moz-animation: 400s scroll infinite linear;
+
+        @keyframes scroll
+        {
+            100%
+            {
+                background-position: -3000px -3000px;
+            }
+        }
+
+        @-webkit-keyframes scroll
+        {
+            100%
+            {
+                background-position: -3000px -3000px;
+            }
+        }
+
+        @-moz-keyframes scroll
+        {
+            100%
+            {
+                background-position: -3000px -3000px;
+            }
+        }
+    }
+
+    .la-ruler
+    {
+        width: 1rem;
+        height: 100%;
+        background-image: url(/assets/scale_1.png);
+        background-repeat: repeat-y;
+        animation: scroll-up 600s infinite linear;
+        -webkit-animation: scroll-up 600s infinite linear;
+        -moz-animation: scroll-up 600s infinite linear;
+
+        @keyframes scroll-up
+        {
+            from
+            {
+                background-position: 0 3000px;
+            }
+
+            to
+            {
+                background-position: 0 -3000px;
+            }
+        }
+
+        @-webkit-keyframes scroll-up
+        {
+            from
+            {
+                background-position: 0 3000px;
+            }
+
+            to
+            {
+                background-position: 0 -3000px;
+            }
+        }
+
+        @-moz-keyframes scroll-up
+        {
+            from
+            {
+                background-position: 0 3000px;
+            }
+
+            to
+            {
+                background-position: 0 -3000px;
+            }
+        }
+    }
+
+    .la-terminal
+    {
+        font-weight: bold;
+    }
+
+    .la-terminal,
+    .la-extension
+    {
+        @include hoverFadeOut;
+
+        &
+        {
+            display: inline;
+        }
+    }
+
+    *:hover>.la-terminal,
+    *:hover>.la-extension
+    {
+        @include hoverFadeIn;
+    }
+
+    .la-cursor
+    {
+        display: inline-block;
+        width: 1ch;
+        height: 2px;
+        animation: blink 1s step-end infinite;
+        vertical-align: bottom;
+
+        @include blinking;
+        @include hoverFadeOut;
+    }
+
+    *:hover>.la-cursor
+    {
+        @include blinking;
+        @include hoverFadeIn;
+
+        &
+        {
+            animation: fadeIn 0.25s, blink 1s step-end infinite;
+            -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+            -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+        }
+    }
+
+    .la-extension
+    {
+        display: inline-block;
+        font-size: .75em;
+    }
+
+
+    .la-bar-h
+    {
+        position: relative;
+
+        >.la-bar-h-current
+        {
+            position: absolute;
+            top: 0;
+        }
+
+        >.la-bar-h-progress
+        {
+            font-size: 0.9rem;
+            height: 100%;
+
+            >.la-bar-h-progress__span
+            {
+                z-index: 3;
+                font-weight: normal;
+                text-align: left;
+                height: 100%;
+            }
+
+            >.la-bar-h-progress__input
+            {
+                z-index: 3;
+                text-align: right;
+                height: 100%;
+                width: 2ch;
+            }
+        }
+    }
+}

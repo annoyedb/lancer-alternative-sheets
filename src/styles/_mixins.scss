@@ -28,7 +28,7 @@
 
         .la-brdr-#{$name}
         {
-            border-color: var(--#{$name}) !important;
+            border-color: var(--#{$name});
         }
 
         .la-anim-#{$name}

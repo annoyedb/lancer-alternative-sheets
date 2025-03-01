@@ -1,0 +1,348 @@
+.la-root
+{
+    .-margin0-lr
+    {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+
+    .-margin0-t
+    {
+        margin-top: 0.25rem;
+    }
+
+    .-margin0-b
+    {
+        margin-bottom: 0.25rem;
+    }
+
+    .-margin0-tb
+    {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .-margin1-l
+    {
+        margin-left: 0.5rem;
+    }
+
+    .-margin1-t
+    {
+        margin-top: 0.5rem;
+    }
+
+    .-margin1-b
+    {
+        margin-bottom: 0.5rem;
+    }
+
+    .-margin1-tb
+    {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .-margin1-lr
+    {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .-margin2-b
+    {
+        margin-bottom: 0.75rem;
+    }
+
+    .-margin2-l
+    {
+        margin-left: 0.75rem;
+    }
+
+    .-margin2-t
+    {
+        margin-top: 0.75rem;
+    }
+
+    .-margin2-tb
+    {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .-margin3
+    {
+        margin: 1rem;
+    }
+
+    .-margin3-r
+    {
+        margin-right: 1rem;
+    }
+
+    .-margin3-lr
+    {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .-margin3-t
+    {
+        margin-top: 1rem;
+    }
+
+    .-margin3-b
+    {
+        margin-bottom: 1rem;
+    }
+
+    .-margin5-t
+    {
+        margin-top: 2rem;
+    }
+
+    .-margin3-tb
+    {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .-padding0
+    {
+        padding: 0.25rem;
+    }
+
+    .-padding0-l
+    {
+        padding-left: 0.25rem;
+    }
+
+    .-padding0-r
+    {
+        padding-right: 0.25rem;
+    }
+
+    .-padding0-b
+    {
+        padding-bottom: 0.25rem;
+    }
+
+    .-padding0-lr
+    {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+
+    .-padding0-tb
+    {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .-padding1
+    {
+        padding: 0.5rem;
+    }
+
+    .-padding1-r
+    {
+        padding-right: 0.5rem;
+    }
+
+    .-padding1-l
+    {
+        padding-left: 0.5rem;
+    }
+
+    .-padding1-lr
+    {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .-padding2
+    {
+        padding: 0.75rem;
+    }
+
+    .-padding2-r
+    {
+        padding-right: 0.75rem;
+    }
+
+    .-padding3
+    {
+        padding: 1rem;
+    }
+
+    .-padding3-r
+    {
+        padding-right: 1rem;
+    }
+
+    .-padding3-l
+    {
+        padding-left: 1rem;
+    }
+
+    .-padding3-lr
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .-width2ch
+    {
+        width: 2ch;
+    }
+
+    .-width3ch
+    {
+        width: 3ch;
+    }
+
+    .-widthfull
+    {
+        width: 100%;
+    }
+
+    .-widthnone
+    {
+        width: 0px;
+    }
+
+    .-width2
+    {
+        width: 1.25rem;
+    }
+
+    .-width3
+    {
+        width: 1.5rem;
+    }
+
+    .-width4
+    {
+        width: 1.75rem;
+    }
+
+    .-width5
+    {
+        width: 2rem;
+    }
+
+    .-width6
+    {
+        width: 2.25rem;
+    }
+
+    .-width7
+    {
+        width: 2.5rem;
+    }
+
+    .-width10
+    {
+        width: 4rem;
+    }
+
+    .-height0
+    {
+        height: 0.75rem;
+    }
+
+    .-height1
+    {
+        height: 1rem;
+    }
+
+    .-height2
+    {
+        height: 1.25rem;
+    }
+
+    .-height3
+    {
+        height: 1.5rem;
+    }
+
+    .-height4
+    {
+        height: 1.75rem;
+    }
+
+    .-height5
+    {
+        height: 2rem;
+    }
+
+    .-height6
+    {
+        height: 2.25rem;
+    }
+
+    .-height7
+    {
+        height: 2.5rem;
+    }
+
+    .-height10
+    {
+        height: 4rem;
+    }
+
+    .-heightfull
+    {
+        height: 100%;
+    }
+
+    .-heightnone
+    {
+        height: 0px;
+    }
+
+    .-lineheight0
+    {
+        line-height: 0.75rem;
+    }
+
+    .-lineheight1
+    {
+        line-height: 1rem;
+    }
+
+    .-lineheight2
+    {
+        line-height: 1.25rem;
+    }
+
+    .-lineheight3
+    {
+        line-height: 1.5rem;
+    }
+
+    .-lineheight4
+    {
+        line-height: 1.75rem;
+    }
+
+    .-lineheight5
+    {
+        line-height: 2rem;
+    }
+
+    .-lineheight8
+    {
+        line-height: 3rem;
+    }
+
+    .-lineheight9
+    {
+        line-height: 3.25rem;
+    }
+
+    .-lineheight10
+    {
+        line-height: 4rem;
+    }
+}

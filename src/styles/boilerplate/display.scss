@@ -1,0 +1,87 @@
+.la-root
+{
+    .-overflowhidden
+    {
+        overflow: hidden;
+    }
+
+    .-displayinline
+    {
+        display: inline;
+    }
+
+    .-displayflex
+    {
+        display: flex;
+
+        &.-direction-column
+        {
+            flex-direction: column;
+        }
+
+        &.-direction-row
+        {
+            flex-direction: row;
+        }
+    }
+
+    .-float-l
+    {
+        float: left;
+    }
+    
+    .-positionabsolute
+    {
+        position: absolute;
+    }
+
+    .-positionrelative
+    {
+        position: relative;
+    }
+
+    .-top0
+    {
+        top: 0;
+    }
+
+    .-top4
+    {
+        top: 1rem;
+    }
+
+    .-top5
+    {
+        top: 1.25rem;
+    }
+
+    .-top6
+    {
+        top: 1.5rem;
+    }
+
+    .-top8
+    {
+        top: 2rem;
+    }
+
+    .-right0
+    {
+        right: 0;
+    }
+
+    .-right2
+    {
+        right: 0.5rem;
+    }
+
+    .-bottom0
+    {
+        bottom: 0;
+    }
+
+    .-left0
+    {
+        left: 0;
+    }
+}
