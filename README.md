@@ -13,6 +13,14 @@ It is designed to be a player-facing sheet that provides most of the functionali
 </details>
 <details markdown="1">
   <summary>
+    <h4>General Massive Systems Dark (GMS-Dark)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GMS-Dark.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
     <h4>IPS-Northstar (IPS-N)</h4>
   </summary>
   <div align="center">
@@ -57,6 +65,14 @@ It is designed to be a player-facing sheet that provides most of the functionali
   </summary>
   <div align="center">
     <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GALSIM.png"/>
+  </div>
+</details>
+<details markdown="1">
+  <summary>
+    <h4>NPC Sheets (GMS)</h4>
+  </summary>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/NPC.png"/>
   </div>
 </details>
 
