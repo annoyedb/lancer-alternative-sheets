@@ -5,8 +5,8 @@
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
-    import BonusBox from "../actor/BonusBox.svelte";
-    import EffectBox from "../actor/EffectBox.svelte";
+    import BonusBox from "@/svelte/actor/BonusBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
 
     const {
         actor,

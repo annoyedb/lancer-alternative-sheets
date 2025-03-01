@@ -1,6 +1,6 @@
-import { MechSheetSettings } from "../../classes/settings/MechSheetSettings";
-import { LancerAlternative } from "../../enums/LancerAlternative";
-import type { MechSheetSettingsData } from "../../interfaces/settings/MechSheetSettingsData";
+import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
+import { LancerAlternative } from "@/enums/LancerAlternative";
+import type { MechSheetSettingsData } from "@/interfaces/settings/MechSheetSettingsData";
 
 export function registerMechSheetSettings()
 {

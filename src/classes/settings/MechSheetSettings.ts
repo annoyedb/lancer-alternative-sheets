@@ -1,4 +1,4 @@
-import type { MechSheetSettingsData } from "../../interfaces/settings/MechSheetSettingsData";
+import type { MechSheetSettingsData } from "@/interfaces/settings/MechSheetSettingsData";
 
 export class MechSheetSettings implements MechSheetSettingsData
 {

@@ -5,7 +5,7 @@
     import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import EffectBox from "../actor/EffectBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
 
     const {
         actor,

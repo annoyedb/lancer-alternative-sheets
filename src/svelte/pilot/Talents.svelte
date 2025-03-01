@@ -4,9 +4,9 @@
     import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
-    import BonusBox from "../actor/BonusBox.svelte";
-    import EffectBox from "../actor/EffectBox.svelte";
-    import ActionBox from "../actor/ActionBox.svelte";
+    import BonusBox from "@/svelte/actor/BonusBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
 
     const props: MechSheetProps = $props();
     const {

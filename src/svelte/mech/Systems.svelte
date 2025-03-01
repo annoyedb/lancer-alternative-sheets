@@ -9,7 +9,7 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
-    import CounterBox from "../actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/CounterBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {

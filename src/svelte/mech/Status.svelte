@@ -4,7 +4,7 @@
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
-    import ActiveEffects from "../actor/ActiveEffects.svelte";
+    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
 
     const props: MechSheetProps = $props();
     const {

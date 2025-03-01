@@ -8,7 +8,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import EffectBox from "../actor/EffectBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
 
     const {
         actor,
