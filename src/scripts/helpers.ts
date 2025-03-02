@@ -66,3 +66,9 @@ export function isLoading(item: any): boolean
     return item.system.all_tags?.some((t: {is_loading: boolean;}) => t.is_loading) 
         || item.system.tags?.some((t: {is_loading: boolean;}) => t.is_loading);
 }
+
+export function isRecharge(item: any): boolean
+{
+    return item.system.all_tags?.some((t: {is_recharge: boolean;}) => t.is_recharge) 
+        || item.system.tags?.some((t: {is_recharge: boolean;}) => t.is_recharge);
+}

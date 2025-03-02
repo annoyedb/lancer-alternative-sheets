@@ -4,7 +4,8 @@
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import { getLocalized } from "@/scripts/helpers";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { TooltipFactory } from "@/classes/TooltipFactory";
 
@@ -22,7 +23,7 @@
 
     function hasWeaponSpecial(weapon: any)
     {
-        return weapon.system.uses.max || weapon.system.loaded || hasAccuracyBonus(weapon) || hasAttackBonus(weapon);
+        return isRecharge(weapon) || weapon.system.uses.max || isLoading(weapon) || hasAccuracyBonus(weapon) || hasAttackBonus(weapon);
     }
 
     function hasAccuracyBonus(weapon: any)
@@ -99,6 +100,9 @@
                 <i class="cci cci-reticule -fontsize2"></i>
             </span>
         {/if}
+            <ChargedBox
+                item={weapon}
+            />
             <LoadedBox
                 item={weapon}
             />

@@ -1,3 +1,9 @@
+# 1.1.1
+## Changes
+* Added missing techs section for NPC sheets
+* Added missing charge tag check
+* Fixed loading tag check
+
 # 1.1.0 - Little Big Changes
 ᕕ( ᐛ )ᕗ New `minor` version, new sheet, `new me`
 

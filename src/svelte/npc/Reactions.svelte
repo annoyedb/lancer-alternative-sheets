@@ -6,7 +6,8 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
-    import { getLocalized } from "@/scripts/helpers";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
 
@@ -28,24 +29,29 @@
         return `${reaction.system.trigger}<br><br>${reaction.system.effect}`;
     }
 
-    function hasAccuracyBonus(weapon: any)
+    function hasReactionSpecial(reaction: any)
     {
-        return weapon.system.accuracy.some((accuracy: number) => accuracy !== 0);
+        return reaction.system.uses.max || isLoading(reaction) || isRecharge(reaction);
     }
 
-    function hasAttackBonus(weapon: any)
+    function hasAccuracyBonus(reaction: any)
     {
-        return weapon.system.attack_bonus.some((bonus: number) => bonus !== 0);
+        return reaction.system.accuracy.some((accuracy: number) => accuracy !== 0);
+    }
+
+    function hasAttackBonus(reaction: any)
+    {
+        return reaction.system.attack_bonus.some((bonus: number) => bonus !== 0);
     } 
 
-    function isDestroyed(component: any)
+    function isDestroyed(reaction: any)
     {
-        return component.system.destroyed;
+        return reaction.system.destroyed;
     }
 
-    function getHeaderStyle(component: any)
+    function getHeaderStyle(reaction: any)
     {
-        return isDestroyed(component)
+        return isDestroyed(reaction)
             ? "la-text-error horus--very--subtle -strikethrough"
             : "la-text-header";
     }
@@ -67,7 +73,10 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each reactions as reaction}
     {#snippet limitedUses()}
-        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+            <ChargedBox
+                item={reaction}
+            />
             <LoadedBox
                 item={reaction}
             />
@@ -92,7 +101,7 @@
             collapse={collapse}
             collapseID={reaction}
             startCollapsed={true}
-            renderOutsideCollapse={reaction.system.uses.max || reaction.system.loaded ? limitedUses : undefined}
+            renderOutsideCollapse={hasReactionSpecial(reaction) ? limitedUses : undefined}
 
             editOption={true}
             editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}

@@ -6,7 +6,8 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
-    import { getLocalized } from "@/scripts/helpers";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
 
@@ -20,14 +21,19 @@
     const tier = system.tier;
     let collID = `${actor.uuid}_systems`;
 
-    function hasAccuracyBonus(weapon: any)
+    function hasComponentSpecial(component: any)
     {
-        return weapon.system.accuracy.some((accuracy: number) => accuracy !== 0);
+        return component.system.uses.max || isLoading(component) || isRecharge(component)
     }
 
-    function hasAttackBonus(weapon: any)
+    function hasAccuracyBonus(component: any)
     {
-        return weapon.system.attack_bonus.some((bonus: number) => bonus !== 0);
+        return component.system.accuracy.some((accuracy: number) => accuracy !== 0);
+    }
+
+    function hasAttackBonus(component: any)
+    {
+        return component.system.attack_bonus.some((bonus: number) => bonus !== 0);
     } 
 
     function isDestroyed(component: any)
@@ -59,7 +65,10 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each systems as component}
     {#snippet limitedUses()}
-        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+            <ChargedBox
+                item={component}
+            />
             <LoadedBox
                 item={component}
             />
@@ -84,7 +93,7 @@
             collapse={collapse}
             collapseID={component}
             startCollapsed={true}
-            renderOutsideCollapse={component.system.uses.max || component.system.loaded ? limitedUses : undefined}
+            renderOutsideCollapse={hasComponentSpecial(component) ? limitedUses : undefined}
 
             editOption={true}
             editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}

@@ -50,6 +50,7 @@
         useEffectTooltipHeader,
         useEffectTooltip,
         useEffectBackgroundStyle,
+        useEffectClass,
 
         collapseAllOption,
     }: HeaderSecondaryProps = $props();
@@ -121,7 +122,7 @@
         {#if useEffectOption}
             <button type="button"
                 class="{useEffectStyle?.join(' ')}
-                    effect-flow"
+                    {useEffectClass || "effect-flow"}"
                 data-path={path}
                 data-tooltip={effectTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}

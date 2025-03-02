@@ -128,7 +128,8 @@
     }
 
     // Lancer overrides under this sheet
-    .roll-attack
+    .roll-attack,
+    .roll-tech
     {
         flex-direction: unset;
         justify-content: unset;
@@ -136,12 +137,11 @@
         flex-grow: unset;
         margin: unset;
         min-width: unset;
-        min-width: unset;
         height: unset;
         border: unset;
         border-radius: unset;
         box-shadow: unset;
-        position: relative;
+        position: unset;
 
         .roll-attack__bckg
         {

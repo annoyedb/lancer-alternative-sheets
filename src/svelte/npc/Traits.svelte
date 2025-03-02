@@ -6,7 +6,8 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import FlowButton from "@/svelte/actor/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
-    import { getLocalized } from "@/scripts/helpers";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
 
@@ -17,16 +18,20 @@
     }: NPCSheetProps & {traits : Array<any>} = $props();
 
     let collID = `${actor.uuid}_traits`;
-// let reactionCollID = `${actor.uuid}_reactions`;
 
-    function isDestroyed(component: any)
+    function hasTraitSpecial(trait: any)
     {
-        return component.system.destroyed;
+        return trait.system.uses.max || isLoading(trait) || isRecharge(trait);
     }
 
-    function getHeaderStyle(component: any)
+    function isDestroyed(trait: any)
     {
-        return isDestroyed(component)
+        return trait.system.destroyed;
+    }
+
+    function getHeaderStyle(trait: any)
+    {
+        return isDestroyed(trait)
             ? "la-text-error horus--very--subtle -strikethrough"
             : "la-text-header";
     }
@@ -48,7 +53,10 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}
     {#snippet limitedUses()}
-        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+            <ChargedBox
+                item={trait}
+            />
             <LoadedBox
                 item={trait}
             />
@@ -73,7 +81,7 @@
             collapse={collapse}
             collapseID={trait}
             startCollapsed={true}
-            renderOutsideCollapse={trait.system.uses.max || trait.system.loaded ? limitedUses : undefined}
+            renderOutsideCollapse={hasTraitSpecial(trait) ? limitedUses : undefined}
 
             editOption={true}
             editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}

@@ -1,3 +1,4 @@
+import type { FlowClass } from "@/enums/FlowClass";
 import type { TooltipDirection } from "@/enums/TooltipDirection";
 import type { Snippet } from "svelte";
 
@@ -48,6 +49,7 @@ export interface HeaderSecondaryProps
     useEffectTooltipDirection?: string | TooltipDirection;
     useEffectStyle?: Array<string>;
     useEffectBackgroundStyle?: Array<string>;
+    useEffectClass?: FlowClass | string;
     
     collapseAllOption?: Boolean;
 }

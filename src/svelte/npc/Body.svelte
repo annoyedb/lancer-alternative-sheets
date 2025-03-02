@@ -5,6 +5,7 @@
     import Traits from "@/svelte/npc/Traits.svelte";
     import Reactions from "./Reactions.svelte";
     import { getLocalized } from "@/scripts/helpers";
+    import TechAttack from "./TechAttack.svelte";
 
 
     const props = $props();
@@ -17,6 +18,7 @@
     const systems: Array<any> = [];
     const reactions: Array<any> = [];
     const weapons: Array<any> = [];
+    const techs: Array<any> = [];
     itemTypes.npc_feature.forEach((feature: { system: { type: any; }; }, index: number) => {
         // @ts-expect-error Add index to the npc feature so that it can be used to resolve the correct path
         feature.index = index;
@@ -32,6 +34,9 @@
                 break;
             case "Weapon":
                 weapons.push(feature);
+                break;
+            case "Tech":
+                techs.push(feature);
                 break;
         }
     });
@@ -60,6 +65,10 @@
 <div class="la-combine-v -widthfull">
     <Weapons 
         weapons={weapons}
+        {...props}
+    />
+    <TechAttack
+        techs={techs}
         {...props}
     />
     <Reactions

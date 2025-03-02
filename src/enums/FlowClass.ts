@@ -8,4 +8,5 @@ export enum FlowClass
     Activation = "activation-flow",
     Effect = "effect-flow",
     RechargeFeatures = "charge-macro",
+    Tech = "roll-tech",
 }
