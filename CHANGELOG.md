@@ -1,3 +1,8 @@
+# 1.1.2
+## Changes
+* #13 - Fixed paths on Frames leading to incorrect type defaulting to LancerActor type rather than LancerItem type for counters and tags when drilldownDocument is called. Thanks @Hexling4!
+* Removed remnants of old styling references from deployables and frames on mech sheets. Mech sheets should now be fully homogeneous in stylings with one another
+
 # 1.1.1
 ## Changes
 * Added missing techs section for NPC sheets
