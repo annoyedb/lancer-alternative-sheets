@@ -24,8 +24,7 @@
 
 {#if core.passive_effect !== "" || core.passive_actions.length || core.passive_bonuses.length}
 <!-- Frame Passive -->
-<div class="la-spacer -medium"></div>
-<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -descriptive -bordersround-ltb {frameColorBrdr}">
+<div class="la-effectbox -largeheader la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">

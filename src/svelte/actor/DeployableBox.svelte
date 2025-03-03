@@ -66,7 +66,7 @@
 {#each globallyOwnedDeployables as deployable}
     {#if lidSourceHasDeployable(deployable)}
     <!-- Deployable -->
-    <div class="la-effectbox -descriptive la-bckg-card la-brdr-repcap -widthful -bordersround-ltb
+    <div class="la-effectbox la-bckg-card la-brdr-repcap -widthful -bordersround-ltb
             ref set"
         data-uuid="{deployable.uuid}"
     >

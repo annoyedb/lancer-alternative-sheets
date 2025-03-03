@@ -31,6 +31,12 @@
     let collID = frame
         ? `${actor.uuid}_${frame.id}`
         : `${actor.uuid}_frameempty`;
+
+    //@ts-ignore
+    function log(...args: any[])
+    {
+        console.log(args);
+    }
 </script>
 
 <HeaderMain
@@ -52,29 +58,31 @@
             title={core.name}
             headerStyle={[frameColorBckg, "clipped-bot-alt", "-padding0", "-padding3-r", "la-text-header"]}
             headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
-            borderStyle={["-bordersoff", "-margin1-t"]}
+            borderStyle={["-bordersoff"]}
             collapse={collapse}
             collapseID={`${collID}_core`}
             startCollapsed={true}
         >
-        {#if core.counters?.length}
-        {#each core.counters as counter, index}
-            <CounterBox
-                name={counter.name}
-                usesValue={counter.value}
-                usesMax={counter.max}
-                path={`system.core_system.counters.${index}`}
-            />
-        {/each}
-        {/if}
-            <FrameActivePower {...props} />
-            <FramePassivePower {...props} />
-        {#if core.tags?.length}
-            <TagArray 
-                tags={core.tags}
-                path={"system.core_system.tags"}
-            />
-        {/if}
+            <div class="la-generated la-combine-v -widthfull -gap0">
+            {#if core.counters?.length}
+            {#each core.counters as counter, index}
+                <CounterBox
+                    name={counter.name}
+                    usesValue={counter.value}
+                    usesMax={counter.max}
+                    path={`system.loadout.frame.value.system.core_system.counters.${index}`}
+                />
+            {/each}
+            {/if}
+                <FrameActivePower {...props} />
+                <FramePassivePower {...props} />
+            {#if core.tags?.length}
+                <TagArray 
+                    tags={core.tags}
+                    path={"system.loadout.frame.value.system.core_system.tags"}
+                />
+            {/if}
+            </div>
         </HeaderSecondary>
         <FrameTrait {...props} />
     </div>

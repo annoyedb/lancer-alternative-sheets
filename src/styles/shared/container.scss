@@ -240,21 +240,6 @@
         padding: 0.5rem;
         padding-top: 1rem;
         padding-bottom: 0.5em;
-        
-        &.-descriptive
-        {
-            padding: 0.5rem;
-            padding-top: 1.5rem;
-            padding-bottom: 1rem;
-
-            .la-flow
-            {
-                min-width: 12em;
-                width: auto;
-                float: left;
-                margin-right: 1rem;
-            }
-        }
 
         &.-largeheader
         {

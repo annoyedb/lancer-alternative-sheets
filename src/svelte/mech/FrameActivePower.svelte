@@ -37,7 +37,7 @@
 </script>
 
 <!-- Frame Active -->
-<div class="la-effectbox -descriptive la-bckg-card la-brdr-repcap -widthfull -margin3-t -bordersround-ltb {frameColorBrdr}">
+<div class="la-effectbox -largeheader la-bckg-card la-brdr-repcap -widthfull -margin3-t -bordersround-ltb {frameColorBrdr}">
     <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
             collapse-trigger"
         data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
@@ -48,7 +48,7 @@
         <div class="-flexthird">
         </div>
     </div>
-    <div class="la-combine-grid -widthfull {system.core_energy ? "la-dropshadow" : ""}">
+    <div class="la-combine-h -widthfull {system.core_energy ? "la-dropshadow" : ""}">
         <button type="button"
             class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "-disabled"}
                 activation-flow {activationClass}"
