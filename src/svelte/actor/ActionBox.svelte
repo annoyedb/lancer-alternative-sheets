@@ -9,6 +9,9 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
 
     const {
+        children,
+        flowButton,
+
         actions,
         path,
         uuid,
@@ -41,7 +44,7 @@
 
 {#if actions.length > 0}
 {#each actions as action, index}
-{#snippet flowButton()}
+{#snippet defaultFlowButton()}
     <FlowButton
         name={getActivationName(action.activation)}
         flowClass={action && uuid && path 
@@ -85,11 +88,15 @@
             <!-- ${editor} -->
             </div>
         </div>
-        {#if collapsing}
-        <div class="-padding0-t -widthfull">
-            {@render flowButton()}
-        </div>
+    {#if collapsing}
+        {#if flowButton}
+            {@html flowButton()}
+        {:else}
+            <div class="-padding0-t -widthfull">
+                {@render defaultFlowButton()}
+            </div>
         {/if}
+    {/if}
         <div class="la-collapsegroup__wrapper -widthfull
                 {collapsing ? "collapse" : ""} {collapsed}"
             data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"
@@ -103,7 +110,7 @@
                     outerStyle={["-bordersround"]}
                 >
                 {#if !collapsing}
-                    {@render flowButton()}
+                    {@render defaultFlowButton()}
                     <hr class="-widthfull">
                 {/if}
                     {@html action.trigger || defaultPlaceholder}
@@ -118,12 +125,15 @@
                 >
                     {@html action.detail || defaultPlaceholder}
                 </EffectBox>
+            {#if children}
+                {@render children()}
+            {/if}
             </div>
         {:else}
             <div class="-fontsize1">
                 <div class="la-divider-h la-bckg-primary -margin0-tb -margin2-b"></div>
                 {#if !collapsing}
-                    {@render flowButton()}
+                    {@render defaultFlowButton()}
                     <hr class="-widthfull">
                 {/if}
                 <EffectBox
@@ -132,6 +142,9 @@
                 >
                     {@html action.detail || defaultPlaceholder}
                 </EffectBox>
+            {#if children}
+                {@render children()}
+            {/if}
             </div>
         {/if}
     <!-- The original source reference opened the potential for tags to appear here,
