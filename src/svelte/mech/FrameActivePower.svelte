@@ -25,9 +25,7 @@
     let activationTheme = system.core_energy
         ? ACTIVATION_COLOR_MAP[core.activation]
         : "la-bckg-repcap";
-    let frameColorBckg = system.core_energy 
-        ? getManufacturerColor(frame.system.manufacturer, "bckg")
-        : "la-bckg-repcap";
+    let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
     let frameColorBrdr = system.core_energy
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
         : "la-brdr-repcap";
@@ -48,9 +46,9 @@
         <div class="-flexthird">
         </div>
     </div>
-    <div class="la-combine-h -widthfull {system.core_energy ? "la-dropshadow" : ""}">
+    <div class="la-combine-h -widthfull -margin0-t">
         <button type="button"
-            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "-disabled"}
+            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"}
                 activation-flow {activationClass}"
             data-uuid="{frame.uuid}" 
             data-path="system.core_system"
