@@ -1,10 +1,10 @@
 <script lang="ts">
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";

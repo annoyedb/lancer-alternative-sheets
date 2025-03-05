@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getBrightness } from "@/scripts/theme";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import { getLocalized } from "@/scripts/helpers";
 
     const {

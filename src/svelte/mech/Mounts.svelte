@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
 
     const props: MechSheetProps = $props();  

@@ -2,11 +2,11 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getManufacturerColor } from "@/scripts/theme";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "./FramePassivePower.svelte";
     import FrameTrait from "./FrameTrait.svelte";
-    import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
+    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
 

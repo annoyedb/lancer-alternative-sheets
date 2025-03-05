@@ -4,7 +4,7 @@
     import { id as moduleID } from '@/module.json';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";

@@ -1,10 +1,10 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import type { HeaderTertiaryProps } from "@/interfaces/actor/HeaderTertiaryProps";
+    import type { HeaderTertiaryProps } from "@/interfaces/actor/header/HeaderTertiaryProps";
     import { getLocalized } from "@/scripts/helpers";
     import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
-    import DamageArray from "./DamageArray.svelte";
-    import RangeArray from "./RangeArray.svelte";
+    import DamageArray from "@/svelte/actor/DamageArray.svelte";
+    import RangeArray from "@/svelte/actor/RangeArray.svelte";
 
     const {
         children,

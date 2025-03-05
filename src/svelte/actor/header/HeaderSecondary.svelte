@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import type { HeaderSecondaryProps } from "@/interfaces/actor/HeaderSecondaryProps";
+    import type { HeaderSecondaryProps } from "@/interfaces/actor/header/HeaderSecondaryProps";
     import { getLocalized } from "@/scripts/helpers";
     import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
 

@@ -11,7 +11,7 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import { FlowClass } from "@/enums/FlowClass";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
 
     const {
         collapse,

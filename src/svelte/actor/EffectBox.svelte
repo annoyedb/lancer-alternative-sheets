@@ -2,7 +2,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import type { EffectBoxProps } from "@/interfaces/actor/EffectBoxProps";
     import { getLocalized } from "@/scripts/helpers";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
 
     const {
         children,

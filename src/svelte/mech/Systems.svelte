@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary from "@/svelte/actor/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";

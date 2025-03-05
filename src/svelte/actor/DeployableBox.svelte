@@ -4,7 +4,7 @@
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import ActionBox from "./ActionBox.svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";

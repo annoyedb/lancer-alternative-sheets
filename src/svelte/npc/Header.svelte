@@ -4,8 +4,8 @@
     import Template from "@/svelte/npc/Template.svelte";
     import Stats from "@/svelte/npc/Stats.svelte";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
 
     const props = $props();

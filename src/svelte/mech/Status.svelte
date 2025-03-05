@@ -1,10 +1,11 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import HeaderMain from "@/svelte/actor/HeaderMain.svelte";
-    import FlowButton from "@/svelte/actor/FlowButton.svelte";
+    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const props: MechSheetProps = $props();
     const {
@@ -61,11 +62,12 @@
             <!-- Flow/Macros -->
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
-                    name={getLocalized("LA.flow.structureDamage.label")}
+                    text={getLocalized("LA.flow.structureDamage.label")}
+                    tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
-                    tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
-                    tooltipDirection={"LEFT"}
                     flowType={"Structure"}
                     flowArgs={emptyObject}
                 />
@@ -88,35 +90,27 @@
             <!-- Flow/Macros -->
             <div class="la-combine-v la-dropshadow">
                 <FlowButton 
-                    flowClass={FlowClass.Standard}
-                    name={getLocalized("LA.flow.stabilize.label")}
+                    text={getLocalized("LA.flow.stabilize.label")}
                     tooltipHeader={getLocalized("LA.action.full.label")}
                     tooltip={getLocalized("LA.flow.stabilize.tooltip")}
-                    tooltipDirection={"LEFT"}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    
                     uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
                     flowType="Stabilize"
                     flowArgs={emptyObject}
                 />
                 <FlowButton
-                    name={getLocalized("LA.flow.fullRepair.label")}
+                    text={getLocalized("LA.flow.fullRepair.label")}
+                    tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
-                    tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
-                    tooltipDirection={"LEFT"}
                     flowType={"FullRepair"}
                     flowArgs={emptyObject}
                 />
                 <!-- TODO: make a flow for partial repair -->
-                <!-- <button type="button"
-                    class="la-flow -textalignleft -letterspacing0 -padding0 la-bckg-secondary la-text-header clipped-bot-alt 
-                        lancer-flow-button"
-                    data-flow-type="FullRepair.label" data-flow-args="{}"
-                    data-tooltip="{getLocalized("LA.flow.repair.tooltip")}">
-                    <span class="la-terminal la-text-header -fadein">>//: </span>
-                    <span>{getLocalized("LA.flow.repair.label")}</span><span
-                        class="la-extension la-text-header -lower -fadein">{randomExtension}</span><span
-                        class="la-cursor la-anim-header -fadein" />
-                </button> -->
             </div>
         </div>
     </HeaderMain>
@@ -143,11 +137,12 @@
             <!-- Flow/Macros -->
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
-                    name={getLocalized("LA.flow.reactorStress.label")}
+                    text={getLocalized("LA.flow.reactorStress.label")}
+                    tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
-                    tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
-                    tooltipDirection={"LEFT"}
                     flowType={"Overheat"}
                     flowArgs={emptyObject}
                 />
@@ -166,21 +161,23 @@
             <!-- Flow/Macros -->
             <div class="la-combine-v la-dropshadow">
                 <FlowButton 
-                    flowClass={FlowClass.Standard}
-                    name={getLocalized("LA.flow.overcharge.label")}
+                    text={getLocalized("LA.flow.overcharge.label")}
                     tooltipHeader={getLocalized("LA.action.overcharge.label")}
                     tooltip={getLocalized("LA.flow.overcharge.tooltip")}
-                    tooltipDirection={"LEFT"}
+                    tooltipDirection={TooltipDirection.LEFT}
+
                     uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
                     flowType="Overcharge"
                     flowArgs={emptyObject}
                 />
                 <FlowButton
-                    name={getLocalized("LA.flow.overchargeReset.label")}
+                    text={getLocalized("LA.flow.overchargeReset.label")}
+                    tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+
                     uuid={actor.uuid}
                     flowClass={FlowClass.OverchargeReset}
-                    tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
-                    tooltipDirection={"LEFT"}
                 />
             </div>
         </div>
@@ -195,12 +192,13 @@
             <!-- Flow/Macros -->
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
-                    name={getLocalized("LA.flow.extinguish.label")}
-                    uuid={actor.uuid}
-                    flowClass={FlowClass.Standard}
+                    text={getLocalized("LA.flow.extinguish.label")}
                     tooltipHeader={getLocalized("LA.action.endofturn.label")}
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}
-                    tooltipDirection={"LEFT"}
+                    tooltipDirection={TooltipDirection.LEFT}
+
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
                     flowType={"Burn"}
                     flowArgs={emptyObject}
                 />
