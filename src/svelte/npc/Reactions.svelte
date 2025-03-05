@@ -142,9 +142,9 @@
                 name={getLocalized("LA.trigger.label")}
             >
                 <FlowButton
-                    name={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.Effect}
-                    style={["clipped-bot", "la-bckg-secondary"]}
+                    text={getLocalized("LA.use.label")}
+                    flowClass={FlowClass.SendToChatEffect}
+                    textStyle={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>
                 {@html reaction.system.trigger}

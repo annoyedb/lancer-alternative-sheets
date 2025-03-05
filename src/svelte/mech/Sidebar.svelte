@@ -262,8 +262,8 @@
 <div class="la-spacer -large"></div>
 <div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull">
     <FlowButton 
-        flowClass={FlowClass.Button}
-        name={getLocalized("LA.flow.stabilize.label")}
+        flowClass={FlowClass.Standard}
+        text={getLocalized("LA.flow.stabilize.label")}
         tooltipHeader={getLocalized("LA.action.full.label")}
         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
         uuid={actor.uuid}
@@ -271,8 +271,8 @@
         flowArgs={emptyObject}
     />
     <FlowButton 
-        flowClass={FlowClass.Button}
-        name={getLocalized("LA.flow.overcharge.label")}
+        flowClass={FlowClass.Standard}
+        text={getLocalized("LA.flow.overcharge.label")}
         tooltipHeader={getLocalized("LA.action.overcharge.label")}
         tooltip={getLocalized("LA.flow.overcharge.tooltip")}
         uuid={actor.uuid}
@@ -280,31 +280,31 @@
         flowArgs={emptyObject}
     />
     <FlowButton 
-        flowClass={FlowClass.Roll}
-        name={getLocalized("LA.grit.label")}
+        flowClass={FlowClass.RollStat}
+        text={getLocalized("LA.grit.label")}
         tooltip={getLocalized("LA.grit.tooltip")}
         uuid={actor.uuid}
-        dataPath={"system.grit"}
+        path={"system.grit"}
     />
     <FlowButton 
-        flowClass={FlowClass.Button}
-        name={getLocalized("LA.flow.rollAttack.label")}
+        flowClass={FlowClass.Standard}
+        text={getLocalized("LA.flow.rollAttack.label")}
         tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
         uuid={actor.uuid}
         flowType="BasicAttack"
         flowArgs={emptyObject}
     />
     <FlowButton 
-        flowClass={FlowClass.Button}
-        name={getLocalized("LA.flow.rollDamage.label")}
+        flowClass={FlowClass.Standard}
+        text={getLocalized("LA.flow.rollDamage.label")}
         tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
         uuid={actor.uuid}
         flowType="Damage"
         flowArgs={emptyObject}
     />
     <FlowButton 
-        flowClass={FlowClass.Button}
-        name={getLocalized("LA.flow.rollTechAttack.label")}
+        flowClass={FlowClass.Standard}
+        text={getLocalized("LA.flow.rollTechAttack.label")}
         tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
         uuid={actor.uuid}
         flowType="TechAttack"

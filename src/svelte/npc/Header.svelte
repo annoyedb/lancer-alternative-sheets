@@ -73,7 +73,7 @@
         />
         <div class="la-combine-grid -horizontal2 -widthfull -gap0">
             <FlowButton 
-                flowClass={FlowClass.Button}
+                flowClass={FlowClass.Standard}
                 name={getLocalized("LA.flow.rollAttack.label")}
                 tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                 tooltipDirection={"UP"}
@@ -82,7 +82,7 @@
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />
             <FlowButton 
-                flowClass={FlowClass.Button}
+                flowClass={FlowClass.Standard}
                 name={getLocalized("LA.flow.rollDamage.label")}
                 tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                 tooltipDirection={"UP"}
@@ -91,7 +91,7 @@
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />
             <FlowButton 
-                flowClass={FlowClass.Button}
+                flowClass={FlowClass.Standard}
                 name={getLocalized("LA.flow.rollTechAttack.label")}
                 tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                 tooltipDirection={"UP"}
@@ -102,7 +102,7 @@
             <FlowButton
                 name={getLocalized("LA.flow.extinguish.label")}
                 uuid={actor.uuid}
-                flowClass={FlowClass.Button}
+                flowClass={FlowClass.Standard}
                 tooltipHeader={getLocalized("LA.action.endofturn.label")}
                 tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                 tooltipDirection={"UP"}

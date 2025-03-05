@@ -8,6 +8,7 @@
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import ActionBox from "./ActionBox.svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         collapse,
@@ -83,13 +84,13 @@
                     <div class="la-combine-v -alignstart">
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton
-                            name={getLocalized(action.label)}
+                            text={getLocalized(action.label)}
                             flowClass={""}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction]).toUpperCase()}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
-                            tooltipDirection={"LEFT"}
+                            tooltipDirection={TooltipDirection.LEFT}
                             uuid={deployable.uuid}
-                            dataPath={`deployables.${deployable.system.lid}`}
+                            path={`deployables.${deployable.system.lid}`}
                             style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
                         />
                     {/each}
@@ -99,7 +100,7 @@
                         alt={getLocalized("LA.placeholder")}
                         data-tooltip={tip}
                         data-tooltip-class="clipped-bot la-tooltip"
-                        data-tooltip-direction="LEFT"
+                        data-tooltip-direction={TooltipDirection.LEFT}
                     />
                 </div>
                 <hr>

@@ -141,15 +141,15 @@
             useEffectTooltipHeader={getTechTipHeader(tech)}
             useEffectTooltipDirection={"UP"}
             useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
-            useEffectClass={FlowClass.Tech}
+            useEffectClass={FlowClass.RollTech}
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
             >
                 <FlowButton
-                    name={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.Effect}
-                    style={["clipped-bot", "la-bckg-secondary"]}
+                    text={getLocalized("LA.use.label")}
+                    flowClass={FlowClass.SendToChatEffect}
+                    textStyle={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>
                 {@html tech.system.effect}

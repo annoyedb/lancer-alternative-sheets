@@ -46,16 +46,16 @@
 {#each actions as action, index}
 {#snippet defaultFlowButton()}
     <FlowButton
-        name={getActivationName(action.activation)}
+        text={getActivationName(action.activation)}
         flowClass={action && uuid && path 
-            ? `${FlowClass.Activation} ${getActivationClass(action.activation)}`
+            ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
             : getActivationClass(action.activation)
         }
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
-        tooltip={`${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`}
-        tooltipDirection={"LEFT"}
+        tooltip={getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}
+        tooltipDirection={undefined}
         uuid={uuid}
-        dataPath={`${path}.${index}`}
+        path={`${path}.${index}`}
         style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
     />
 {/snippet}

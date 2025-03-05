@@ -33,8 +33,8 @@
 ---></span>
     {#if hasFlow}
         <FlowButton
-            name={getLocalized("LA.use.label")}
-            flowClass={FlowClass.Effect}
+            text={getLocalized("LA.use.label")}
+            flowClass={FlowClass.SendToChatEffect}
         />
     {/if}
     <span

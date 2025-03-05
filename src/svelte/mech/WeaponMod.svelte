@@ -126,9 +126,9 @@
                 name={getLocalized("LA.mech.mod.effect.label")}
             >
                 <FlowButton
-                    name={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.Effect}
-                    style={["clipped-bot", "la-bckg-secondary"]}
+                    text={getLocalized("LA.use.label")}
+                    flowClass={FlowClass.SendToChatEffect}
+                    textStyle={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>
                 {@html mod.system.effect}

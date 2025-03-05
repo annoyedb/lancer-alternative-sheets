@@ -1,12 +1,12 @@
 export enum FlowClass
 {
-    Button = "lancer-flow-button",
-    Roll = "roll-stat",
-    Chat = "chat-flow-button",
-    HASE = "roll-stat hase",
+    Standard = "lancer-flow-button",
+    RollStat = "roll-stat",
+    RollHASE = "roll-stat hase",
+    RollTech = "roll-tech",
+    SendToChat = "chat-flow-button",
+    SendToChatEffect = "effect-flow",
     OverchargeReset = "overcharge-reset",
-    Activation = "activation-flow",
-    Effect = "effect-flow",
+    CoreActivation = "activation-flow",
     RechargeFeatures = "charge-macro",
-    Tech = "roll-tech",
 }

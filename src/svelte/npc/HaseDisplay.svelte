@@ -18,8 +18,8 @@
             value={system.hull}
             tooltip={getLocalized("LA.hull.tooltip")}
             uuid={actor.uuid}
-            flowClass={FlowClass.Roll}
-            dataPath={"system.hull"}
+            flowClass={FlowClass.RollStat}
+            path={"system.hull"}
             style={["-positionrelative", "-hull", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
@@ -33,8 +33,8 @@
             value={system.agi}
             tooltip={getLocalized("LA.agility.tooltip")}
             uuid={actor.uuid}
-            flowClass={FlowClass.Roll}
-            dataPath={"system.agi"}
+            flowClass={FlowClass.RollStat}
+            path={"system.agi"}
             style={["-positionrelative", "-agility", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
@@ -48,8 +48,8 @@
             value={system.sys}
             tooltip={getLocalized("LA.systems.tooltip")}
             uuid={actor.uuid}
-            flowClass={FlowClass.Roll}
-            dataPath={"system.sys"}
+            flowClass={FlowClass.RollStat}
+            path={"system.sys"}
             style={["-positionrelative", "-systems", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
@@ -63,8 +63,8 @@
             value={system.eng}
             tooltip={getLocalized("LA.engineering.tooltip")}
             uuid={actor.uuid}
-            flowClass={FlowClass.Roll}
-            dataPath={"system.eng"}
+            flowClass={FlowClass.RollStat}
+            path={"system.eng"}
             style={["-positionrelative", "-engineering", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
