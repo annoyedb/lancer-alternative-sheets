@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderSecondary from "@/svelte/actor/HeaderSecondary.svelte";
+    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";

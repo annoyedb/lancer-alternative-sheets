@@ -2,7 +2,7 @@
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import { getLocalized, isLoading } from "@/scripts/helpers";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
-    import HeaderTertiary from "@/svelte/actor/HeaderTertiary.svelte";
+    import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";

@@ -7,6 +7,7 @@
     import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const props = $props();
     const {
@@ -65,47 +66,47 @@
     >
         <FlowButton 
             flowClass={FlowClass.RechargeFeatures}
-            name={getLocalized("LA.npc.recharge.label")}
+            text={getLocalized("LA.npc.recharge.label")}
             tooltip={getLocalized("LA.npc.recharge.tooltip")}
             tooltipHeader={getLocalized("LA.action.startofturn.label")}
-            tooltipDirection={"UP"}
+            tooltipDirection={TooltipDirection.UP}
             style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden", "-widthfull", "-margin0-b"]}
         />
         <div class="la-combine-grid -horizontal2 -widthfull -gap0">
             <FlowButton 
                 flowClass={FlowClass.Standard}
-                name={getLocalized("LA.flow.rollAttack.label")}
+                text={getLocalized("LA.flow.rollAttack.label")}
                 tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
-                tooltipDirection={"UP"}
+                tooltipDirection={TooltipDirection.UP}
                 uuid={actor.uuid}
                 flowType="BasicAttack"
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />
             <FlowButton 
                 flowClass={FlowClass.Standard}
-                name={getLocalized("LA.flow.rollDamage.label")}
+                text={getLocalized("LA.flow.rollDamage.label")}
                 tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
-                tooltipDirection={"UP"}
+                tooltipDirection={TooltipDirection.UP}
                 uuid={actor.uuid}
                 flowType="Damage"
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />
             <FlowButton 
                 flowClass={FlowClass.Standard}
-                name={getLocalized("LA.flow.rollTechAttack.label")}
+                text={getLocalized("LA.flow.rollTechAttack.label")}
                 tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
-                tooltipDirection={"UP"}
+                tooltipDirection={TooltipDirection.UP}
                 uuid={actor.uuid}
                 flowType="TechAttack"
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />
             <FlowButton
-                name={getLocalized("LA.flow.extinguish.label")}
+                text={getLocalized("LA.flow.extinguish.label")}
                 uuid={actor.uuid}
                 flowClass={FlowClass.Standard}
                 tooltipHeader={getLocalized("LA.action.endofturn.label")}
                 tooltip={getLocalized("LA.flow.extinguish.tooltip")}
-                tooltipDirection={"UP"}
+                tooltipDirection={TooltipDirection.UP}
                 flowType={"Burn"}
                 style={["clipped", "la-bckg-secondary", "-flex1", "-overflowhidden"]}
             />

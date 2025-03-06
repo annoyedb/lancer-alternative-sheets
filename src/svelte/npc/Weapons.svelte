@@ -1,6 +1,6 @@
 <script lang="ts">
     import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary from "@/svelte/actor/HeaderTertiary.svelte";
+    import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
