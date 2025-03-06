@@ -23,7 +23,7 @@
 
     const defaultStyle = "clipped-bot-alt la-bckg-secondary";
     const defaultTextStyle = "la-text-header la-anim-header";
-    const tip = tooltip || TooltipFactory.buildTooltip(tooltip!, tooltipHeader);
+    const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 </script>
 
 <button 

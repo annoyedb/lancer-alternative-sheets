@@ -144,7 +144,7 @@
                 <FlowButton
                     text={getLocalized("LA.use.label")}
                     flowClass={FlowClass.SendToChatEffect}
-                    textStyle={["clipped-bot", "la-bckg-secondary"]}
+                    style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>
                 {@html reaction.system.trigger}

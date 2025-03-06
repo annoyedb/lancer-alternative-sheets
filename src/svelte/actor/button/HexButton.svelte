@@ -23,13 +23,13 @@
         buttonStyle,
     }: HexButtonProps = $props();
 
-    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
+    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
     let parsedValue = value 
         ? sign ? (value > 0 ? `+${value}` : value) : value
-        : "";
+        : value;
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {style?.join(' ')}">
-    <div class="la-combine-v -widthfull -heightfull {innerStyle?.join(' ')}">
+    <div class="la-combine-v {innerStyle?.join(' ')}">
         <span class="la-label__span {outerTextStyle?.join(' ')}">
             {text}
         </span>
