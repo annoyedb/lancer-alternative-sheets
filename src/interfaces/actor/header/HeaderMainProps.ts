@@ -12,26 +12,26 @@ export interface HeaderMainProps
     rootStyle?: Array<string>;
     collapseID?: string;
     collapse?: any;
-    startCollapsed?: Boolean;
+    startCollapsed?: boolean;
     extensionText?: string;
 
-    deleteOption?: Boolean;
+    deleteOption?: boolean;
     deleteStyle?: Array<string>;
     deleteIconStyle?: Array<string>;
     deleteUUID?: string,
     deleteOnClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
     
-    messageOption?: Boolean;
+    messageOption?: boolean;
     messageUUID?: string,
 
-    spOption?: Boolean;
+    spOption?: boolean;
     spCurrent?: number;
     spMax?: number;
     spTextStyle?: Array<string>;
     spIconStyle?: Array<string>;
 
-    mountOption?: Boolean;
+    mountOption?: boolean;
     mountNames?: Array<string>;
 
-    collapseAllOption?: Boolean;
+    collapseAllOption?: boolean;
 }

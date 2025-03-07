@@ -1,15 +1,15 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
+import { applyThemeTarget, getTheme } from "@/scripts/theme";
+import { getLocalized } from "@/scripts/helpers";
+import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
-import { applyThemeTarget, getTheme } from "@/scripts/theme";
 import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
-import { getLocalized } from "@/scripts/helpers";
 
 export class MechSheetBase
 {
@@ -76,8 +76,8 @@ export class MechSheetBase
                 super.activateListeners(html);
 
                 this.reapplyImgListener(html);
-                initializeCollapses(html); // PopOut! compatibility override
-                applyCollapseListeners(html); // PopOut! compatibility override
+                // initializeCollapses(html); // PopOut! compatibility override
+                // applyCollapseListeners(html); // PopOut! compatibility override
             }
 
             override async getData(): Promise<MechSheetProps>

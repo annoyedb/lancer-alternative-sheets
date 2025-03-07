@@ -34,16 +34,6 @@
     }
 }
 
-// Depreciated
-.la-header__override
-{
-    >.window-header
-    {
-        background-color: var(--primary-color); // Pray that the original sheet's primary color theme is the same
-        border-bottom: unset;
-    }
-}
-
 .la-override__header
 {
     >.window-header

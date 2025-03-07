@@ -1,8 +1,9 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { HeaderMainProps } from "@/interfaces/actor/header/HeaderMainProps";
+    import { collapseStates, handleCollapseAllToggle, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
     import { getLocalized } from "@/scripts/helpers";
-    import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
+    import { onMount } from "svelte";
 
     const {
         children,
@@ -14,7 +15,7 @@
         cursorStyle,
         borderStyle,
         rootStyle,
-        collapse,
+
         collapseID,
         startCollapsed,
         extensionText,
@@ -40,60 +41,55 @@
         collapseAllOption,
     }: HeaderMainProps = $props();
     
-    let collapsing = collapse && collapseID;
-    let collapsed = collapsing && startCollapsed ? "collapsed" : "";
-    let extraOptions = collapseAllOption || deleteOption || messageOption || spOption || mountOption ? true : false;
-    let expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
-    let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
-    let deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
+    let isCollapsed = $derived.by(() => {
+        if (collapseID && $collapseStates[collapseID])
+            return $collapseStates[collapseID].collapsed;
+        return false;
+    });
+    let isExpanding = $derived(!isCollapsed);
 
+    const extraOptions = collapseAllOption || deleteOption || messageOption || spOption || mountOption ? true : false;
+    const expandTip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
+    const chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
+    const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
     const defaultHeaderStyle = "la-bckg-primary -padding0-tb -padding3-lr"
     const defaultHeaderFontStyle = "la-text-header"
     const defaultDeleteStyle = "-glow-header -glow-primary-hover -fontsize2"
     const defaulltSPStyle = "-fontsize5 -lineheight3 -width3"
-    
-    // TODO: Refactor this into a reuseable function/component
-    let expanding = $state(true);
-    function collapseExpandAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
-    {
-        event.stopPropagation();
 
-        const collapseGroup = event.currentTarget.closest('.la-collapsegroup');
-        const triggers = collapseGroup?.querySelectorAll('[data-la-collapse-id]');
-        if (triggers && triggers.length > 0) 
+    onMount(() => 
+    {
+        if (collapseID)
         {
-            triggers.forEach((trigger, index) => {
-                if (index <= 1) // Skip this header's pair
-                    return;
-                const id = trigger.getAttribute('data-la-collapse-id');
-                if (id) 
-                {
-                    const pair = Array.from(triggers).find(t => t !== trigger && t.getAttribute('data-la-collapse-id') === id);
-                    if (pair) 
-                    {
-                        if (expanding) 
-                        {
-                            pair.classList.remove('collapsed');
-                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "opened");
-                        } else 
-                        {
-                            pair.classList.add('collapsed');
-                            sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "closed");
-                        }
-                    }
-                }
-            });
-            expanding = !expanding;
+            initializeCollapseStates(collapseID, startCollapsed);
         }
+    });
+
+    function toggleCollapse(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    {
+        if (collapseID)
+            handleCollapseToggle(event, collapseID);
+    }
+
+    function toggleCollapseAll(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    {
+        if (collapseID)
+            handleCollapseAllToggle(event, collapseID);
     }
 </script>
 
-<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}">
+<div class="la-collapsegroup -widthfull {rootStyle?.join(' ')}
+        {collapseID ? "collapse-trigger" : ""}"
+>
+    <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+    <!-- (#2) -->
+    <!-- svelte-ignore event_directive_deprecated -->
     <h1 class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
-            {headerStyle?.join(' ') || defaultHeaderStyle}
-            {collapsing ? "collapse-trigger" : ""}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">
+            {headerStyle?.join(' ') || defaultHeaderStyle}"
+        on:click={(event) => toggleCollapse(event)}
+    >
+        <!-- Header Label -->
         <div class="la-summary-label {headerFontStyle?.join(' ') || defaultHeaderFontStyle}">
             <span class="la-terminal -fadein {headerFontStyle?.join(' ') || defaultHeaderFontStyle}">>//: </span><!--
         ---><span>{title} </span>
@@ -102,6 +98,7 @@
         ---></span><!--
         ---><span class="la-cursor la-anim-header -fadein {cursorStyle ? cursorStyle.join(' ') : ""}"></span>
         </div>
+        <!-- Header Options -->
     {#if extraOptions}
         <div class="la-combine-h -gap2">
         {#if spOption}
@@ -149,12 +146,12 @@
             <!-- (#2) -->
             <!-- svelte-ignore event_directive_deprecated -->
             <button type="button"
-                class="mdi {expanding ? "mdi-arrow-expand-all" : "mdi-arrow-collapse-all"} -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"
+                class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" } -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight3"
                 data-tooltip={expandTip}
                 data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={"UP"}
                 aria-label={getLocalized("LA.collapseAll.tooltip")}
-                on:click={(event) => collapseExpandAll(event)}
+                on:click={(event) => toggleCollapseAll(event)}
             >
             </button>
         {/if}
@@ -162,8 +159,8 @@
     {/if}
     </h1>
     <div class="la-collapsegroup__wrapper
-            {collapsing ? "collapse" : ""} {collapsed}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"
+            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+        data-la-collapse-id={collapseID}
     >
         <div class="la-collapsecontent la-dropshadow 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
