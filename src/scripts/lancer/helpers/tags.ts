@@ -1,6 +1,6 @@
 // Reimplementation of bare-minimum foundryvtt-lancer functionality
 
-import { HelperOptions } from "handlebars";
+import type { HelperOptions } from "handlebars";
 import { resolveHelperDotpath } from "./common";
 
 // The above, but on an array, filtering out hidden as appropriate
