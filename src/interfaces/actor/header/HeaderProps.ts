@@ -1,79 +1,46 @@
-import type { FlowClass } from "@/enums/FlowClass";
-import type { TooltipDirection } from "@/enums/TooltipDirection";
 import type { Snippet } from "svelte";
 
-export interface HeaderProps
-{
-    title: string;
+/**
+ * Properties for the Header component.
+ */
+export interface HeaderProps {
+    /**
+     * Optional children component or element.
+     */
+    children?: Snippet;
 
+    /**
+     * Identifier for the item. Only used for NPC features and seems to typically expect an item's LID.
+     */
     itemID?: string;
+
+    /**
+     * Universally unique identifier. Required for `ref set drop-settable` when `acceptTypes` is set.
+     */
     uuid?: string;
+
+    /**
+     * Path to the resource. Required for `ref set drop-settable` when `acceptTypes` is set but when it does not have an initial UUID set.
+     */
     path?: string;
+
+    /**
+     * Accepted types for the component. Expects a space-separated list of Lancer System `EntryType`s.
+     */
     acceptTypes?: string;
 
-    rootStyle?: Array<string>;
-
-    headerStyle?: Array<string>;
-    headerFontStyle?: Array<string>;
-    headerIconStyle?: Array<string>;
-    headerCursorStyle?: Array<string>;
-
-    outerContent?: Snippet;
-    outerContentWrapperStyle?: Array<string>;
-    innerContent?: Snippet;
-    innerContentWrapperStyle?: Array<string>;
-
-    collapse?: any;
+    /**
+     * Identifier for the collapsible section.
+     */
     collapseID?: string;
+
+    /**
+     * Determines if the section should start collapsed.
+     */
     startCollapsed?: boolean;
-    
-    collapseAllOption?: boolean;
 
-    deleteOption?: boolean;
-    deleteStyle?: Array<string>;
-    deleteIconStyle?: Array<string>;
-    deleteUUID?: string;
-    deleteOnClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
-
-    messageOption?: boolean;
-    messageStyle?: Array<string>;
-    messageIconStyle?: Array<string>;
-    messageUUID?: string;
-    messageType?: string;
-    messageIndex?: number;
-
-    spOption?: boolean;
-    spStyle?: Array<string>;
-    spIconStyle?: Array<string>;
-    spCurrent?: number;
-    spMax?: number;
-
-    mountOption?: boolean;
-    mountNames?: Array<string>;
-
-    editOption?: boolean;
-    editStyle?: Array<string>;
-    editIconStyle?: Array<string>;
-
-    useEffectOption?: boolean;
-    useEffectStyle?: Array<string>;
-    useEffectTooltip?: string;
-    useEffectTooltipHeader?: string;
-    useEffectTooltipDirection?: TooltipDirection;
-    useEffectBackgroundStyle?: Array<string>;
-    useEffectClass?: FlowClass | string;
-
-    rollDamage?: boolean;
-    rollDamageStyle?: Array<string>;
-    rollDamageValues?: Array<any>;
-    rollDamageRanges?: Array<any>;
-    rollDamageTooltip?: string;
-    rollDamageTooltipHeader?: string;
-    rollDamageTooltipDirection?: TooltipDirection;
-
-    rollAttackOption?: boolean;
-    rollAttackStyle?: Array<string>;
-    rollAttackTooltip?: string;
-    rollAttackTooltipHeader?: string;
-    rollAttackTooltipDirection?: TooltipDirection;
+    /**
+     * Array of styles to be applied to the root element.
+     */
+    rootStyle?: Array<string>;
 }

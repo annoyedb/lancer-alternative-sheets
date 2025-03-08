@@ -5,22 +5,29 @@
     import { getLocalized } from "@/scripts/helpers";
     import { onMount } from "svelte";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
+    import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
 
     const {
         children,
+        rootStyle,
+        collapseID,
+        startCollapsed,
+        
+        itemID,
+        uuid,
+        path,
+        acceptTypes,
+
         headerContent,
 
-        rootStyle,
         headerStyle,
         borderStyle,
 
-        collapseID,
-        startCollapsed,
         extensionText,
 
         text,
         textStyle,
-    }: HeaderMainProps & TerminalTextProps = $props();
+    }: HeaderProps & HeaderMainProps & TerminalTextProps = $props();
     
     let isCollapsed = $derived.by(() => {
         if (collapseID && $collapseStates[collapseID])
@@ -29,7 +36,6 @@
     });
 
     const extraOptions = headerContent ? true : false;
-
 
     onMount(() => 
     {
@@ -62,7 +68,12 @@
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle?.join(' ')}
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
         {collapseID ? "collapse-trigger" : ""}"
+    data-item-id={itemID}
+    data-uuid={uuid}
+    data-path={path}
+    data-accept-types={acceptTypes}
 >
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
     <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
