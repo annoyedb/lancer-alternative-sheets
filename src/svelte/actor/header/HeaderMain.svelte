@@ -10,16 +10,16 @@
         children,
         headerContent,
 
-        text,
-
-        headerStyle,
-        textStyle,
-        borderStyle,
         rootStyle,
+        headerStyle,
+        borderStyle,
 
         collapseID,
         startCollapsed,
         extensionText,
+
+        text,
+        textStyle,
     }: HeaderMainProps & TerminalTextProps = $props();
     
     let isCollapsed = $derived.by(() => {

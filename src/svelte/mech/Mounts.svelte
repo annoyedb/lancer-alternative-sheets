@@ -38,13 +38,12 @@
         collapseID={getCollapseID(index)}
     />
     {/snippet}
-    <HeaderMain
+    <HeaderMain 
         text={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-brdr-primary"]}
 
-        collapse={collapse}
         collapseID={getCollapseID(index)}
         startCollapsed={true}
 

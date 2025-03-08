@@ -9,7 +9,6 @@
     const {
         effects,
         actor,
-        collapse,
         isOwner,
     }: ActiveEffectsProps = $props();
 
@@ -56,14 +55,13 @@
         iconStyle={["-fontsize2", "la-text-header-anti"]}
     />
     {/snippet}
-    <HeaderMain
+    <HeaderMain 
         text={effect.name}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning", "clipped-bot-alt"]}
         textStyle={["la-text-header-anti", "la-anim-header-anti", "-fontsize1", "-lineheight2"]}
         borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         
-        collapse={collapse}
         collapseID={`${actor.uuid}_status_activeeffects_effect`}
         startCollapsed={true}
 

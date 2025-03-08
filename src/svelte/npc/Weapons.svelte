@@ -77,7 +77,6 @@
     textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-mech-weapon", "-gap0"]}
     
-    collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
 

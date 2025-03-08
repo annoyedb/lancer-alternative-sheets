@@ -63,7 +63,6 @@
     textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-system", "-gap0"]}
     
-    collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
 

@@ -52,7 +52,6 @@
     textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={[frameColorBrdr]}
 
-    collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
 

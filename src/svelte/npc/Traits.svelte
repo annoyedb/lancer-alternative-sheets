@@ -51,7 +51,6 @@
     textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-action--downtime"]}
     
-    collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
     

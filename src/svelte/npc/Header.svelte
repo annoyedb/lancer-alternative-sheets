@@ -13,7 +13,6 @@
     const props = $props();
     const {
         actor,
-        collapse,
         system,
         itemTypes,
     }: NPCSheetProps = props;
@@ -56,13 +55,12 @@
 
     <Stats {...props} />
     
-    <HeaderMain
+    <HeaderMain 
         text={getLocalized("LA.npc.utilities.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt", "-padding0-r"]}
 
-        collapse={collapse}
         collapseID={`${actor.uuid}.status.utilities`}
         startCollapsed={false}
     >
@@ -120,13 +118,12 @@
         collapseID={activeEffectsCollID}
     />
     {/snippet}
-    <HeaderMain
+    <HeaderMain 
         text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
-        collapse={collapse}
         collapseID={activeEffectsCollID}
         startCollapsed={false}
 
