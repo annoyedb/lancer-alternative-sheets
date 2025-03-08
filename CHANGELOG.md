@@ -1,3 +1,8 @@
+# 1.1.3
+* Collapsing headers should be a little more obvious now that the "extension" will state what it does when you hover over it --suggested by one of my players!
+* As a result of some confusion over the current expand/collapse all button, expanding/collapsing all now affects the main header it is attached to --hopefully this will be more intuitive to everyone!
+* Minor adjustments to styling: adjusted header thickness and spacing between header and Core Power activation button
+
 # 1.1.2
 ## Changes
 * #13 - Fixed paths on Frames leading to incorrect type defaulting to LancerActor type rather than LancerItem type for counters and tags when drilldownDocument is called. Thanks @Hexling4!

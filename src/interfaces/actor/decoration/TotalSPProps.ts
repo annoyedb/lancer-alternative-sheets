@@ -5,4 +5,5 @@ export interface TotalSPProps
     style?: Array<string>;
     textStyle?: Array<string>;
     iconStyle?: Array<string>;
+    tooltipDirection?: string;
 }
