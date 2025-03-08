@@ -79,16 +79,16 @@ export function handleCollapseToggle(event: MouseEvent & { currentTarget: EventT
  * @param id - The identifier of the element whose collapse state is being toggled.
  * 
  * @remarks
- * The function requires the presence of a parent element with the class `collapse-trigger` to group collapsible elements.
+ * The function requires the presence of a parent element with the class `collapse-group` to group collapsible elements.
  * Each collapsible element within this group should have a 'data-la-collapse-id' attribute to identify it.
  * 
- * The function will toggle the collapse state of all elements within the same `collapse-trigger` as the event's current target.
+ * The function will toggle the collapse state of all elements within the same `collapse-group` as the event's current target.
  */
 export function handleCollapseAllToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, id: string)
 {
     event.stopPropagation();
     const collapse = get(collapseStates)[id].collapsed;
-    const collapseGroup = event.currentTarget.closest('.collapse-trigger');
+    const collapseGroup = event.currentTarget.closest('.collapse-group');
     if (collapseGroup)
     {
         const triggers = collapseGroup.querySelectorAll('[data-la-collapse-id]');

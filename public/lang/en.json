@@ -198,7 +198,7 @@
 	"LA.npc.utilities.label": "COMBAT UTILITIES",
 	"LA.npc.charged.label": "CHARGED",
 	"LA.npc.recharge.label": "RECHARGE FEATURES",
-	"LA.npc.recharge.tooltip": "Make an individual roll for every feature to recharge them at the start of the turn",
+	"LA.npc.recharge.tooltip": "Make a roll to recharge all features at the start of the turn",
 	"LA.npc.empty.label": "NO CLASS",
 	"LA.npc.empty.subLabel": "NO CLASS DETECTED"
 }

@@ -9,6 +9,7 @@
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
     import { getSidebarImageTheme } from "@/scripts/theme";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const { 
         system,
@@ -43,17 +44,17 @@
         <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
-            data-tooltip-direction="RIGHT"></i>
+            data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
         <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
-            data-tooltip-direction="RIGHT"></i>
+            data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
         <div class="la-combine-h -fontsize7" 
             data-tooltip={speedTip}
             data-tooltip-class="clipped-bot la-tooltip"
-            data-tooltip-direction="RIGHT">
+            data-tooltip-direction={TooltipDirection.RIGHT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow"></i>
             <span class="{getSidebarImageTheme("text")} la-outl-shadow -bold">{system.speed}</span>
         </div>
@@ -79,7 +80,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.armor.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
         icon={"cci cci-evasion"}
@@ -89,7 +90,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.evasion.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
         icon={"cci cci-edef"}
@@ -99,7 +100,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.edefense.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
 </div>
 <!-- Mech Bars -->
@@ -119,8 +120,8 @@
                 clipPath={"clipped"}
                 
                 tooltip={getLocalized("LA.hitpoint.tooltip")}
-                tooltipDirection="RIGHT"
-            />
+                tooltipDirection={TooltipDirection.RIGHT}
+                />
             <div class="la-spacer -tiny"></div>
             <!-- STRUCTURE -->
             <StatusBar
@@ -132,8 +133,8 @@
                 clipPath={"clipped-alt"}
 
                 tooltip={getLocalized("LA.structure.tooltip")}
-                tooltipDirection="RIGHT"
-            />
+                tooltipDirection={TooltipDirection.RIGHT}
+                />
         </div>
         <!-- SHIELD (VALUE) -->
         <div class="la-combine-v -divider la-anim-bar-shield -flex0 -width3ch -textaligncenter -glow-shield">
@@ -145,7 +146,7 @@
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'))}"
                 data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction="RIGHT"
+                data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
         ---></span>
@@ -169,8 +170,8 @@
                 clipPath={"clipped"}
 
                 tooltip={getLocalized("LA.heat.tooltip")}
-                tooltipDirection="RIGHT"
-            />
+                tooltipDirection={TooltipDirection.RIGHT}
+                />
             <div class="la-spacer -tiny"></div>
             <!-- STRESS, BURN (BAR) -->
             <StatusBar
@@ -182,8 +183,8 @@
                 clipPath={"clipped-alt"}
 
                 tooltip={getLocalized("LA.stress.tooltip")}
-                tooltipDirection="RIGHT"
-            />
+                tooltipDirection={TooltipDirection.RIGHT}
+                />
         </div>
         <!-- BURN (VALUE) -->
         <div class="la-combine-v -divider la-anim-bar-burn -flex0 -width3ch -textaligncenter -glow-burn">
@@ -195,7 +196,7 @@
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))}"
                 data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction="RIGHT"
+                data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.burn.short")}<!--
         ---></span>
@@ -212,7 +213,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.tattack.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
         icon={"cci cci-save"}
@@ -222,7 +223,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.save.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
         icon={"cci cci-sensor"}
@@ -232,7 +233,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.sensor.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
 </div>
 <!-- Mech Stats 3 -->
@@ -245,7 +246,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.overcharge.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
         icon={"cci cci-repair"}
@@ -255,7 +256,7 @@
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.repair.tooltip")}
-        tooltipDirection="RIGHT"
+        tooltipDirection={TooltipDirection.RIGHT}
     />
 </div>
 <!-- Macros/Flows -->

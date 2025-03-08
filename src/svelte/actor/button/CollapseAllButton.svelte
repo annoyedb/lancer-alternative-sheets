@@ -3,6 +3,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { CollapseAllButtonProps } from "@/interfaces/actor/button/CollapseAllButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { collapseStates, handleCollapseAllToggle } from "@/scripts/collapse";
     import { getLocalized } from "@/scripts/helpers";
 
@@ -12,7 +13,7 @@
         style,
         iconStyle,
         tooltipDirection,
-    }: IconButtonProps & CollapseAllButtonProps = $props();
+    }: IconButtonProps & CollapseAllButtonProps & TooltipProps = $props();
     let isExpanding = $derived.by(() => {
         if (collapseID && $collapseStates[collapseID])
             return !$collapseStates[collapseID].collapsed;

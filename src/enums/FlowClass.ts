@@ -10,4 +10,5 @@ export enum FlowClass
     CoreActivation = "activation-flow",
     RechargeFeatures = "charge-macro",
     DeleteActiveEffect = "", // No flow class for this
+    ContextMenu= "lancer-context-menu",
 }
