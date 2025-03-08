@@ -158,7 +158,7 @@
             path={`itemTypes.npc_feature.${tech.index}`}
             acceptTypes={"npc_feature"}
             
-            collapseID={tech}
+            collapseID={tech.uuid}
             startCollapsed={true}
             renderOutsideCollapse={hasTechSpecial(tech) ? techSpecial : undefined}
 

@@ -131,7 +131,7 @@
             path={`itemTypes.npc_feature.${reaction.index}`}
             acceptTypes={"npc_feature"}
             
-            collapseID={reaction}
+            collapseID={reaction.uuid}
             startCollapsed={true}
             renderOutsideCollapse={hasReactionSpecial(reaction) ? limitedUses : undefined}
 

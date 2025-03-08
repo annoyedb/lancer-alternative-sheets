@@ -83,7 +83,6 @@
             path={`itemTypes.npc_feature.${trait.index}`}
 
             tooltip={trait.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-            tooltipHeader={getLocalized("LA.action.reaction.label")}
             tooltipDirection={TooltipDirection.UP}
         />
     {/snippet}
@@ -111,7 +110,7 @@
             path={`itemTypes.npc_feature.${trait.index}`}
             acceptTypes={"npc_feature"}
             
-            collapseID={trait}
+            collapseID={trait.uuid}
             startCollapsed={true}
             renderOutsideCollapse={hasTraitSpecial(trait) ? limitedUses : undefined}
 

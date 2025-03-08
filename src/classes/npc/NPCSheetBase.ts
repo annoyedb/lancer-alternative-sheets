@@ -1,6 +1,5 @@
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-import { applyCollapseListeners, initializeCollapses } from "@/scripts/collapse";
 import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTarget, getTheme } from "@/scripts/theme";
@@ -61,8 +60,6 @@ export class NPCSheetBase
                 super.activateListeners(html);
 
                 this.reapplyImgListener(html);
-                initializeCollapses(html); // PopOut! compatibility override
-                applyCollapseListeners(html); // PopOut! compatibility override
             }
             
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>

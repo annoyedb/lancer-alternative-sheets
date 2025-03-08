@@ -95,7 +95,6 @@
             path={`itemTypes.npc_feature.${component.index}`}
 
             tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-            tooltipHeader={getLocalized("LA.action.reaction.label")}
             tooltipDirection={TooltipDirection.UP}
         />
     {/snippet}
@@ -123,7 +122,7 @@
             path={`itemTypes.npc_feature.${component.index}`}
             acceptTypes={"npc_feature"}
             
-            collapseID={component}
+            collapseID={component.uuid}
             startCollapsed={true}
             renderOutsideCollapse={hasComponentSpecial(component) ? limitedUses : undefined}
 
