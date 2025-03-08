@@ -3,6 +3,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
 
     const {
@@ -10,9 +11,10 @@
 
         style,
         iconStyle,
-        tooltipDirection,
         onClick,
-    }: IconButtonProps & ButtonProps = $props();
+
+        tooltipDirection,
+    }: IconButtonProps & ButtonProps & TooltipProps = $props();
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
     const defaultStyle = "-glow-header -glow-primary-hover -fontsize2";

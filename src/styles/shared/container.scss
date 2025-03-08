@@ -298,13 +298,13 @@
         {
             &:hover
             {
-                >.la-summary-label>.la-terminal,
-                >.la-summary-label>.la-extension
+                .la-terminaltext>.la-cmdline,
+                .la-terminaltext>.la-extension
                 {
                     @include hoverFadeIn;
                 }
 
-                >.la-summary-label>.la-cursor
+                .la-terminaltext>.la-cursor
                 {
                     @include blinking;
                     @include hoverFadeIn;

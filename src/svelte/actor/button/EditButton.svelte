@@ -7,34 +7,30 @@
     import { getLocalized } from "@/scripts/helpers";
 
     const {
-        uuid,
-        type,
-        index,
         flowClass,
-        rank,
+        path,
+
+        tooltipDirection,
 
         style,
         iconStyle,
-        onClick,
-        
-        tooltipDirection,
     }: IconButtonProps & ButtonProps & TooltipProps = $props();
 
-    const tip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     const defaultStyle = "-glow-header -glow-primary-hover -fontsize2";
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
+</script>
+<script lang="ts" module>
+    export const HEADER_SECONDARY_STYLE = "-glow-header -glow-primary-hover -fontsize2";
 </script>
 
 <button type="button"
-    class="{flowClass} {style?.join(' ') || defaultStyle}"
-    data-uuid={uuid}
-    data-type={type}
-    data-index={index}
+    class="{style?.join(' ') || defaultStyle}
+        {flowClass || 'lancer-context-menu'}"
+    data-path={path}
     data-tooltip={tip}
-    data-rank={rank}
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    aria-label={getLocalized("LA.delete.tooltip")}
-    onclick={onClick ? (event) => onClick(event) : null}
+    aria-label={getLocalized("LA.edit.tooltip")}
 >
-    <i class="mdi mdi-message {iconStyle?.join(' ')}"></i>
+<i class="fas fa-ellipsis-v {iconStyle?.join(' ')}"></i>
 </button>

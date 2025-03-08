@@ -43,9 +43,9 @@
 
 <!-- TODO: effect.name needs a localization map -->
 <!-- TODO: effect.description needs a localization map-->
-<div class="la-combine-v -gap1 -widthfull">
+<div class="la-combine-v -gap0 -widthfull">
 {#if effects.length}
-{#each effects as effect}
+{#each effects as effect, index}
     {#snippet headerOptions()}
     <DeleteButton
         uuid={effect._id}
@@ -62,7 +62,7 @@
         borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         
-        collapseID={`${actor.uuid}_status_activeeffects_effect`}
+        collapseID={`${actor.uuid}.status.activeEffects.${index}`}
         startCollapsed={true}
 
         headerContent={headerOptions}

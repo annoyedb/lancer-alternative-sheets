@@ -22,10 +22,9 @@
         headerStyle,
         borderStyle,
 
-        extensionText,
-
         text,
         textStyle,
+        extensionText,
     }: HeaderProps & HeaderMainProps & TerminalTextProps = $props();
     
     let isCollapsed = $derived.by(() => {
@@ -58,8 +57,7 @@
             return isCollapsed
                 ? `--${getLocalized("LA.expand.label")}`
                 : `--${getLocalized("LA.collapse.label")}`;
-
-        return `--${getLocalized("LA.scan.label")}`;
+        return undefined;
     }
 </script>
 <script lang="ts" module>
@@ -68,7 +66,7 @@
 
 <div class="la-collapsegroup -widthfull {rootStyle?.join(' ')}
         {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
-        {collapseID ? "collapse-trigger" : ""}"
+        collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
     data-path={path}
@@ -79,13 +77,14 @@
     <!-- svelte-ignore event_directive_deprecated -->
     <h1 class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
-            {headerStyle?.join(' ') || MAIN_HEADER_STYLE}"
+            {headerStyle?.join(' ') || MAIN_HEADER_STYLE}
+            {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Header Label -->
         <TerminalText
             text={collapseID || !extensionText ? `${text} ` : text}
-            textStyle={["la-summary-label", ...(textStyle || [])]}
+            textStyle={textStyle}
             extensionText={getExtensionText()}
         />
         <!-- Header Options -->

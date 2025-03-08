@@ -355,12 +355,12 @@
         }
     }
 
-    .la-terminal
+    .la-cmdline
     {
         font-weight: bold;
     }
 
-    .la-terminal,
+    .la-cmdline,
     .la-extension
     {
         @include hoverFadeOut;
@@ -371,7 +371,7 @@
         }
     }
 
-    *:hover>.la-terminal,
+    *:hover>.la-cmdline,
     *:hover>.la-extension
     {
         @include hoverFadeIn;

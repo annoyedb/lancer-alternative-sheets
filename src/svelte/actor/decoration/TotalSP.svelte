@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { TotalSPProps } from "@/interfaces/actor/decoration/TotalSPProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
 
     const {
@@ -11,7 +12,7 @@
         textStyle,
         iconStyle,
         tooltipDirection,
-    }: TotalSPProps = $props();
+    }: TotalSPProps & TooltipProps = $props();
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.points.total.tooltip"))
 </script>
@@ -26,7 +27,11 @@
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
 >
     <div class="{textStyle?.join(' ') || "-fontsize2"}">
+    {#if max}
         {value} / {max}
+    {:else}
+        {value}
+    {/if}
     </div>
     <i class="cci cci-system-point {iconStyle?.join(' ') || MAIN_HEADER_ICON_STYLE}"></i>
 </div>

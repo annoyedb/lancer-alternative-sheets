@@ -96,7 +96,7 @@
         {:else}
             <i class="la-icon {iconStyle?.join(' ') || "-fontsize9 -lineheight8"}"></i>
         {/if}
-            <div class="la-summary-label la-combine-v la-anim-accent -alignstart -justifycenter -divider">
+            <div class="la-terminaltext la-combine-v la-anim-accent -alignstart -justifycenter -divider">
                 <span class="la-top__span -widthfull {headerFontStyle?.join(' ') || "-fontsize3"}">{title}</span>
                 <span class="la-bottom__span {subHeaderFontStyle?.join(' ') || "-fontsize0"}">{subTitle}</span>
             </div>

@@ -23,7 +23,7 @@
     let name = core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label");
     let activationClass = `activation-${slugify(core.activation, "-")}`;
     let activationTheme = system.core_energy
-        ? ACTIVATION_COLOR_MAP[core.activation]
+        ? `${ACTIVATION_COLOR_MAP[core.activation]}`
         : "la-bckg-repcap";
     let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
     let frameColorBrdr = system.core_energy
@@ -48,7 +48,8 @@
     </div>
     <div class="la-combine-h -widthfull -margin0-t">
         <button type="button"
-            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"}
+            class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull 
+                {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"} 
                 activation-flow {activationClass}"
             data-uuid="{frame.uuid}" 
             data-path="system.core_system"
@@ -59,7 +60,7 @@
             disabled={!system.core_energy}
         >
             <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize13"></i>
-            <span class="la-corepower__span la-dropshadow -upper -flexthird -textwrapnowrap"><!--
+            <span class="la-corepower__span {system.core_energy ? "-glow-header -glow-primary-hover" : "la-dropshadow"} -upper -flexthird -textwrapnowrap"><!--
             --->{name}<!--
         ---></span>
             <div class="-flexthird">

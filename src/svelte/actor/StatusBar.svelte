@@ -1,6 +1,7 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { StatusBarProps } from "@/interfaces/actor/StatusBarProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
 
 
     const {
@@ -17,7 +18,7 @@
         tooltip,
         tooltipHeader,
         tooltipDirection
-    } : StatusBarProps = $props();
+    } : StatusBarProps & TooltipProps = $props();
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>

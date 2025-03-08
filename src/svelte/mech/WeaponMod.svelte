@@ -1,7 +1,9 @@
 <script lang="ts">
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";
@@ -10,8 +12,10 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import { FlowClass } from "@/enums/FlowClass";
+    import TotalSp from "@/svelte/actor/decoration/TotalSP.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
 
     const {
         collapse,
@@ -30,16 +34,35 @@
 </script>
 
 {#if mod}
+    {#snippet headerSecondaryLeftOptions()}
+    <EffectButton
+        iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-weaponmod"]}
+
+        flowClass={FlowClass.SendToChatEffect}
+        path={path}
+
+        tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+        tooltipDirection={TooltipDirection.LEFT}
+    />
+    {/snippet}
+
+    {#snippet headerSecondaryRightOptions()}
+    <TotalSp
+        value={mod.system.sp}
+    />
+    <EditButton
+        flowClass={FlowClass.ContextMenu}
+    />
+    {/snippet}
+
     <HeaderSecondary
-        title={mod.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-        headerFontStyle={["-fontsize2"]}
-        headerIconStyle={["cci", "cci-weaponmod", "-fontsize5", "-lineheight3", "-glow-primary-hover", "-glow-header"]}
+        text={mod.name}
+        headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-header-anti"]}
+        textStyle={["-fontsize2"]}
         
         uuid={mod.uuid}
         path={path}
         acceptTypes={"weapon_mod"}
-        collapse={collapse}
         collapseID={mod.uuid}
         startCollapsed={false}
         
@@ -51,10 +74,8 @@
         editOption={true}
         editIconStyle={["-lineheight3"]}
 
-        useEffectOption={true}
-        useEffectTooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-        useEffectTooltipDirection={"LEFT"}
-        useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
+        headerContentLeft={headerSecondaryLeftOptions}
+        headerContentRight={headerSecondaryRightOptions}
     >
         <div class="la-generated -widthfull -gap2 la-combine-v">
             <!-- Generated Content -->

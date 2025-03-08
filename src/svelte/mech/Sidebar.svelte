@@ -31,7 +31,7 @@
 <span class="la-framename -overflowhidden">
     <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header la-dropshadow clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
         data-uuid="{frameUUID}">
-        <span class="la-terminal la-text-header -fadein">>//: </span>
+        <span class="la-cmdline la-text-header -fadein">>//: </span>
         {frameName}
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>

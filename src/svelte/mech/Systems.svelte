@@ -121,7 +121,7 @@
             borderStyle={["-bordersoff"]}
 
             collapse={collapse}
-            collapseID={component?.value.uuid}
+            collapseID={component.value.uuid}
             startCollapsed={true}
 
             spOption={true}
@@ -185,7 +185,7 @@
     <details class="la-details -widthfull la-combine-v
             ref set drop-settable mech_system"
         data-accept-types="mech_system"
-        data-path="system.loadout.systems">
+        data-path="system.loadout.systems.0.value">
         <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
             <div class="la-left la-combine-h">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
+    import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
 
     const {
         icon,
@@ -12,7 +13,7 @@ import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
         tooltip,
         tooltipHeader,
         tooltipDirection
-    }: StatComboProps = $props()
+    }: StatComboProps & TooltipProps = $props()
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>

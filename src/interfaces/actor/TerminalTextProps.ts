@@ -20,9 +20,9 @@ export interface TerminalTextProps
     textStyle?: Array<string>;
 
     /**
-     * Optional flag to disable the terminal display of the button.
+     * Optional flag to disable the command line display of the button.
      */
-    disableTerminal?: boolean;
+    disableCmdline?: boolean;
 
     /**
      * Optional flag to disable the slide display of the button.

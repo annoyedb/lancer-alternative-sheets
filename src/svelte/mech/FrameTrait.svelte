@@ -2,11 +2,13 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import { FlowClass } from "@/enums/FlowClass";
 
     const {
         actor,
@@ -28,19 +30,31 @@
 
 {#if frame.system.traits.length}
 {#each frame.system.traits as trait, index}
+
+{#snippet headerSecondaryLeftOptions()}
+<i class="{SECONDARY_ICON_STYLE} cci cci-frame"></i>
+{/snippet}
+{#snippet headerSecondaryRightOptions()}
+<MessageButton
+    flowClass={FlowClass.SendToChat}
+    uuid={frame.uuid}
+    type="trait"
+    index={index}
+/>
+{/snippet}
+
 <!-- Frame Traits -->
 <HeaderSecondary
-    title={trait.name}
-    headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-justifybetween", "-padding0", "-padding3-r", "la-text-header"]}
-    headerIconStyle={["cci", "cci-frame", "-fontsize5", "-lineheight3"]}
+    text={trait.name}
+    headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot", "la-anim-header"]}
+    textStyle={["-fontsize2"]}
     borderStyle={["-bordersoff"]}
-    collapse={collapse}
+    
     collapseID={getCollapseID(index)}
-    messageOption={true}
-    messageUUID={frame.uuid}
-    messageType="trait"
-    messageIndex={index}
     startCollapsed={true}
+
+    headerContentLeft={headerSecondaryLeftOptions}
+    headerContentRight={headerSecondaryRightOptions}
 >
     <div class="la-generated -widthfull -gap2 la-combine-v">
         <EffectBox

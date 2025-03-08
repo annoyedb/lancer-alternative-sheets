@@ -1,13 +1,16 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import MessageButton from "../actor/button/MessageButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -66,45 +69,61 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
+        {#snippet headerSecondaryTalentLeftOptions()}
+        <i class="{SECONDARY_ICON_STYLE} cci cci-license"></i>
+        {/snippet}
+        {#snippet headerSecondaryTalentRightOptions()}
+        <EditButton
+            flowClass={FlowClass.ContextMenu}
+            iconStyle={["-lineheight3"]}
+            path={`system.pilot.value.itemTypes.talent.${index}`}
+        />
+        <CollapseAllButton
+            collapseID={getTalentCollID(index)}
+        />
+        {/snippet}
         <HeaderSecondary
-            title={`${talent.name} ${talent.system.curr_rank}`}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-            headerFontStyle={["-fontsize2"]}
-            headerIconStyle={["cci", "cci-license", "-fontsize5", "-lineheight3"]}
+            text={`${talent.name} ${talent.system.curr_rank}`}
+            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
             
             rootStyle={["ref", "set", "lancer-talent", "submajor"]}
             uuid={talent.uuid}
             path={`system.pilot.value.itemTypes.talent.${index}`}
-            collapse={collapse}
+
             collapseID={getTalentCollID(index)}
             startCollapsed={true}
 
-            editOption={true}
-            editIconStyle={["-lineheight3"]}
-
-            collapseAllOption={true}
+            headerContentLeft={headerSecondaryTalentLeftOptions}
+            headerContentRight={headerSecondaryTalentRightOptions}
         >
             <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
             {#if jndex < talent.system.curr_rank}
+                {#snippet headerSecondaryRankLeftOptions()}
+                <i class="{SECONDARY_ICON_STYLE} cci cci-talent"></i>
+                {/snippet}
+                {#snippet headerSecondaryRankRightOptions()}
+                <MessageButton
+                    flowClass={FlowClass.SendToChat}
+                    uuid={talent.uuid}
+                    rank={jndex}
+                />
+                {/snippet}
                 <HeaderSecondary
-                    title={rank.name}
-                    headerStyle={["la-bckg-header-anti", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-                    headerFontStyle={["-fontsize2"]}
-                    headerIconStyle={["cci", "cci-talent", "-fontsize5", "-lineheight3"]}
+                    text={rank.name}
+                    headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-header-anti"]}
+                    textStyle={["-fontsize2"]}
                     borderStyle={["la-brdr-header-anti"]}
 
                     rootStyle={["ref", "set"]}
                     uuid={talent.uuid}
-                    collapse={collapse}
                     collapseID={rank}
                     startCollapsed={false}
-
-                    messageOption={true}
-                    messageType="rank"
-                    messageIndex={jndex}
-                    messageUUID={talent.uuid}
+                    
+                    headerContentLeft={headerSecondaryRankLeftOptions}
+                    headerContentRight={headerSecondaryRankRightOptions}
                 >
                     <div class="la-generated -widthfull -gap2 la-combine-v">
                     {#if rank.counters.length}

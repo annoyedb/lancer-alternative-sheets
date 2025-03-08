@@ -6,7 +6,7 @@
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "./FramePassivePower.svelte";
     import FrameTrait from "./FrameTrait.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
@@ -14,7 +14,6 @@
     const props: MechSheetProps = $props();  
     const {
         actor,
-        collapse,
         system,
     } = props;
 
@@ -45,11 +44,14 @@
         collapseID={collID}
     />
 {/snippet}
+{#snippet headerSecondaryLeftOptions()}
+    <i class="-fontsize5 -lineheight3 cci cci-corebonus"></i>
+{/snippet}
 
 <HeaderMain
     text={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[MAIN_HEADER_STYLE, frameColorBckg]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["-fontsize2"]}
     borderStyle={[frameColorBrdr]}
 
     collapseID={collID}
@@ -61,13 +63,15 @@
     <div class="la-generated la-combine-v -widthfull -gap0">
         <!-- FRAME POWER -->
         <HeaderSecondary
-            title={core.name}
-            headerStyle={[frameColorBckg, "clipped-bot-alt", "-padding0", "-padding3-r", "la-text-header"]}
-            headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
+            text={core.name}
+            headerStyle={[SECONDARY_HEADER_STYLE, frameColorBckg, "la-anim-header"]}
+            textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
-            collapse={collapse}
-            collapseID={`${collID}_core`}
+
+            collapseID={`${collID}.core`}
             startCollapsed={true}
+
+            headerContentLeft={headerSecondaryLeftOptions}
         >
             <div class="la-generated la-combine-v -widthfull -gap0">
             {#if core.counters?.length}

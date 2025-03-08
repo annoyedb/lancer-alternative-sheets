@@ -1,5 +1,5 @@
 import type { FlowClass } from '@/enums/FlowClass';
-import { TooltipDirection } from '@/enums/TooltipDirection';
+
 /**
  * Interface representing the properties of a typical Lancer Alternative Sheets button.
  */
@@ -21,26 +21,6 @@ export interface ButtonProps
     flowArgs?: string;
 
     /**
-     * Optional tooltip text to be displayed when hovering over the button. Used in `data-tooltip` attribute.
-     */
-    tooltip?: string;
-
-    /**
-     * Optional header text for the tooltip. Used in `data-tooltip` attribute.
-     */
-    tooltipHeader?: string;
-
-    /**
-     * Optional direction in which the tooltip should be displayed. Used in `data-tooltip-direction` attribute.
-     */
-    tooltipDirection?: TooltipDirection;
-
-    /**
-     * Optional tooltip style class. Used in `data-tooltip-class` attribute in addition to default styles.
-     */
-    tooltipClass?: string;
-
-    /**
      * Optional unique identifier for the button. Used in `data-uuid` attribute.
      */
     uuid?: string;
@@ -54,4 +34,19 @@ export interface ButtonProps
      * Optional path associated with the button. Used in `data-path` attribute.
      */
     path?: string;
+
+    /**
+     * Optional data type for the button. Used in `data-type` attribute.
+     */
+    type?: string;
+
+    /**
+     * Option data index for the button. Used in `data-index` attribute.
+     */
+    index?: number;
+
+    /**
+     * Optional data rank for the button. Used in `data-rank` attribute. Only known use is in Pilot Talents.
+     */
+    rank?: number;
 }

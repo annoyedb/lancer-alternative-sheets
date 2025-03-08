@@ -1,14 +1,16 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -45,22 +47,29 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
+        {#snippet headerSecondaryLeftOptions()}
+        <i class="{SECONDARY_ICON_STYLE} cci cci-corebonus"></i>
+        {/snippet}
+        {#snippet headerSecondaryRightOptions()}
+        <EditButton
+            flowClass={FlowClass.ContextMenu}
+            path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+        />
+        {/snippet}
         <HeaderSecondary
-            title={coreBonus.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-            headerFontStyle={["-fontsize2"]}
-            headerIconStyle={["cci", "cci-corebonus", "-fontsize5", "-lineheight3"]}
+            text={coreBonus.name}
+            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
             
             rootStyle={["ref", "set"]}
             uuid={coreBonus.uuid}
             path={`system.pilot.value.itemTypes.core_bonus.${index}`}
-            collapse={collapse}
-            collapseID={coreBonus}
+            collapseID={`${collID}.${index}`}
             startCollapsed={true}
 
-            editOption={true}
-            editIconStyle={["-lineheight3"]}
+            headerContentLeft={headerSecondaryLeftOptions}
+            headerContentRight={headerSecondaryRightOptions}
         >
             <div class="la-generated -widthfull -gap2 la-combine-v">
             {#if coreBonus.system.counters.length}

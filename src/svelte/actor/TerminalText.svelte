@@ -1,11 +1,12 @@
 <script lang="ts">
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import { getLocalized } from "@/scripts/helpers";
 
     const {
         text,
         extensionText,
         textStyle,
-        disableTerminal,
+        disableCmdline,
         disableExtension,
         disableCursor
     }: TerminalTextProps = $props();
@@ -16,9 +17,9 @@
     export const FLOW_BUTTON_STYLE: string = " -padding1-r -padding0-tb -height3 -letterspacing0 la-text-header la-anim-header ";
 </script>
 
-<div class="-whitespacenowrap -textalignleft {textStyle?.join(' ')}"><!--
---->{#if !disableTerminal}<span class="la-terminal -fadein">>//: </span>{/if}<!--
+<div class="la-terminaltext -whitespacenowrap -textalignleft {textStyle?.join(' ')}"><!--
+--->{#if !disableCmdline}<span class="la-cmdline -fadein">>//: </span>{/if}<!--
 ---><span class="">{text}</span><!--
---->{#if !disableExtension}<span class="la-extension -lower -fadein">{extensionText}</span>{/if}<!--
+--->{#if !disableExtension}<span class="la-extension -lower -fadein">{extensionText || `--${getLocalized("LA.scan.label")}`}</span>{/if}<!--
 --->{#if !disableCursor}<span class="la-cursor -fadein"></span>{/if}
 </div>

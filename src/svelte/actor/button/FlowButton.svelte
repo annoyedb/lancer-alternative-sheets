@@ -5,24 +5,28 @@
     import TerminalText, { FLOW_BUTTON_STYLE } from "@/svelte/actor/TerminalText.svelte";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
 
     const {
         text,
-        tooltipHeader,
-        tooltip,
-        tooltipDirection,
         uuid,
         flowType,
         flowArgs,
         flowClass,
         path,
+        
         style,
         textStyle,
+
+        tooltipHeader,
+        tooltip,
+        tooltipDirection,
+
         disableSlide,
-        disableTerminal,
+        disableCmdline: disableTerminal,
         disableExtension,
         disableCursor,
-    } : FlowButtonProps & ButtonProps & TerminalTextProps = $props();
+    } : FlowButtonProps & ButtonProps & TooltipProps & TerminalTextProps = $props();
 
     const defaultStyle = "clipped-bot-alt la-bckg-secondary";
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
@@ -47,7 +51,7 @@
         text={text}
         extensionText={randomExtension()}
         textStyle={textStyle || [FLOW_BUTTON_STYLE]}
-        disableTerminal={disableTerminal}
+        disableCmdline={disableTerminal}
         disableExtension={disableExtension}
         disableCursor={disableCursor}
     />

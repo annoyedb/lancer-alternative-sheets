@@ -1,20 +1,23 @@
 <script lang="ts">
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "../actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
-        collapse,
         system,
         reactions,
     }: NPCSheetProps & {reactions : Array<any>} = $props();
@@ -92,11 +95,35 @@
             />
         </div>
     {/snippet}
+    {#snippet headerSecondaryLeftOptions()}
+        <EffectButton
+            iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-reaction"]}
+
+            flowClass={FlowClass.SendToChatEffect}
+            path={`itemTypes.npc_feature.${reaction.index}`}
+
+            tooltip={getReactionTooltip(reaction)}
+            tooltipHeader={getLocalized("LA.action.reaction.label")}
+            tooltipDirection={TooltipDirection.UP}
+        />
+    {/snippet}
+    {#snippet headerSecondaryRightOptions()}
+        <EditButton
+            flowClass={FlowClass.ContextMenu}
+
+            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+        />
+        <MessageButton
+            flowClass={FlowClass.SendToChat}
+            uuid={reaction.uuid}
+
+            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+        />
+    {/snippet}
         <HeaderSecondary
-            title={reaction.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-            headerFontStyle={[getHeaderStyle(reaction), "-fontsize1"]}
-            headerIconStyle={["cci", "cci-system", "-fontsize5", "-lineheight3", "-glow-primary-hover", "-glow-header"]}
+            text={reaction.name}
+            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            textStyle={[getHeaderStyle(reaction), "-fontsize1"]}
             borderStyle={["-bordersoff"]}
 
             itemID={reaction.id}
@@ -104,22 +131,12 @@
             path={`itemTypes.npc_feature.${reaction.index}`}
             acceptTypes={"npc_feature"}
             
-            collapse={collapse}
             collapseID={reaction}
             startCollapsed={true}
             renderOutsideCollapse={hasReactionSpecial(reaction) ? limitedUses : undefined}
 
-            editOption={true}
-            editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-            messageOption={true}
-            messageUUID={reaction.uuid}
-            messageStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-
-            useEffectOption={true}
-            useEffectTooltip={getReactionTooltip(reaction)}
-            useEffectTooltipHeader={getLocalized("LA.action.reaction.label")}
-            useEffectTooltipDirection={"UP"}
-            useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
+            headerContentLeft={headerSecondaryLeftOptions}
+            headerContentRight={headerSecondaryRightOptions}
         >
         {#if hasAttackBonus(reaction) || hasAccuracyBonus(reaction)}
             <div class="la-combine-h -gap0 -widthfull">

@@ -3,6 +3,7 @@
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
 
     const {
         text,
@@ -12,18 +13,19 @@
         flowArgs,
         flowClass,
 
-        tooltipHeader,
-        tooltip,
         uuid,
         path,
         sign,
+
+        tooltipHeader,
+        tooltip,
 
         outerStyle,
         innerStyle,
         outerTextStyle,
         innerTextStyle,
         buttonStyle,
-    }: HexButtonProps & ButtonProps & TerminalTextProps = $props();
+    }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps = $props();
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
     let parsedValue = value 

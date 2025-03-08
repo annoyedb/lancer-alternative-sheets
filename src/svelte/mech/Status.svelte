@@ -46,6 +46,7 @@
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        
         collapseID={`${actor.uuid}_status_structure`}
         startCollapsed={false}
     >
@@ -120,6 +121,7 @@
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        
         collapseID={`${actor.uuid}_status_reactor`}
         startCollapsed={false}
     >

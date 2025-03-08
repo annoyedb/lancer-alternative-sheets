@@ -1,21 +1,24 @@
 <script lang="ts">
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "../actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
-        collapse,
         system,
         techs,
     }: NPCSheetProps & {techs : Array<any>} = $props();
@@ -119,11 +122,35 @@
             />
         </div>
     {/snippet}
+    {#snippet headerSecondaryLeftOptions()}
+        <EffectButton
+            iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", getTechIcon(tech)]}
+
+            flowClass={FlowClass.RollTech}
+            path={`itemTypes.npc_feature.${tech.index}`}
+
+            tooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+            tooltipHeader={getTechTipHeader(tech)}
+            tooltipDirection={TooltipDirection.UP}
+        />
+    {/snippet}
+    {#snippet headerSecondaryRightOptions()}
+        <EditButton
+            flowClass={FlowClass.ContextMenu}
+
+            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+        />
+        <MessageButton
+            flowClass={FlowClass.SendToChat}
+            uuid={tech.uuid}
+
+            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+        />
+    {/snippet}
         <HeaderSecondary
-            title={tech.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0", "la-text-header", "-padding3-r"]}
-            headerFontStyle={[getHeaderStyle(tech), "-fontsize1"]}
-            headerIconStyle={["cci", getTechIcon(tech), "-fontsize5", "-lineheight3", "-glow-primary-hover", "-glow-header"]}
+            text={tech.name}
+            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            textStyle={[getHeaderStyle(tech), "-fontsize1"]}
             borderStyle={["-bordersoff"]}
 
             itemID={tech.id}
@@ -131,23 +158,12 @@
             path={`itemTypes.npc_feature.${tech.index}`}
             acceptTypes={"npc_feature"}
             
-            collapse={collapse}
             collapseID={tech}
             startCollapsed={true}
             renderOutsideCollapse={hasTechSpecial(tech) ? techSpecial : undefined}
 
-            editOption={true}
-            editStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-            messageOption={true}
-            messageUUID={tech.uuid}
-            messageStyle={["-glow-header", "-glow-primary-hover", "-fontsize2", "-padding0-lr"]}
-
-            useEffectOption={true}
-            useEffectTooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-            useEffectTooltipHeader={getTechTipHeader(tech)}
-            useEffectTooltipDirection={"UP"}
-            useEffectBackgroundStyle={["-fontsize5", "-lineheight3", "la-text-scrollbar-secondary", "-padding0-l"]}
-            useEffectClass={FlowClass.RollTech}
+            headerContentLeft={headerSecondaryLeftOptions}
+            headerContentRight={headerSecondaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
