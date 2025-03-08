@@ -6,6 +6,8 @@ This mainly major refactors to primary Svelte components for a little better reu
 * As a result of some confusion over the current expand/collapse all button, expanding/collapsing all now affects the main header it is attached to --hopefully this will be more intuitive to everyone!
 * Minor adjustments to styling: adjusted header thickness and spacing between header and Core Power activation button
 * Reworded the tooltip for recharging NPC abilities for how it is actually rolled
+* Reactions on the NPC sheet use the Reaction icon now `oop`
+* Overcharge tooltip now also states the overcharge stage
 
 # 1.1.2
 ## Changes

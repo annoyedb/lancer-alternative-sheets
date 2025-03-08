@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import { getLocalized } from "@/scripts/helpers";
+    import { formatString, getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -18,6 +18,8 @@
 
     let overchargeSequence = actor.system.overcharge_sequence.split(",");
     let overchargeStage = actor.system.overcharge;
+    let overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
+
     let collID = `${actor.uuid}.status.activeEffects`;
 </script>
 
@@ -165,7 +167,7 @@
                 <FlowButton 
                     text={getLocalized("LA.flow.overcharge.label")}
                     tooltipHeader={getLocalized("LA.action.overcharge.label")}
-                    tooltip={getLocalized("LA.flow.overcharge.tooltip")}
+                    tooltip={overchargeText}
                     tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}

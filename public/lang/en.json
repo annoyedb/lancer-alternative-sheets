@@ -85,7 +85,7 @@
 	"LA.flow.stabilize.label": "STABILIZE",
 	"LA.flow.stabilize.tooltip": "Clear all heat and Exposed or consume a Repair to fully restore current HP<br><br>Additionally choose between: clearing an externally inflicted condition from self or an adjacent ally, clearing burn from self, or reloading all Loading weapons",
 	"LA.flow.overcharge.label": "OVERCHARGE",
-	"LA.flow.overcharge.tooltip": "Make an extra quick action at the cost of some heat",
+	"LA.flow.overcharge.tooltip": "Make an extra quick action for the cost of {0} heat",
 	"LA.flow.overchargeReset.label": "RESET",
 	"LA.flow.overchargeReset.tooltip": "Reset overcharge stage",
 	"LA.flow.structureDamage.label": "EVALUATE",

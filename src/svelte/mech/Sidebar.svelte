@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { formatString, getLocalized } from "@/scripts/helpers";
     import { id as moduleID } from '@/module.json';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
@@ -26,6 +26,7 @@
 
     let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
+    let overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
 </script>
 
 <!-- Frame Name -->
@@ -275,7 +276,7 @@
         flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.overcharge.label")}
         tooltipHeader={getLocalized("LA.action.overcharge.label")}
-        tooltip={getLocalized("LA.flow.overcharge.tooltip")}
+        tooltip={overchargeText}
         uuid={actor.uuid}
         flowType="Overcharge"
         flowArgs={emptyObject}

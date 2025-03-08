@@ -72,3 +72,11 @@ export function isRecharge(item: any): boolean
     return item.system.all_tags?.some((t: {is_recharge: boolean;}) => t.is_recharge) 
         || item.system.tags?.some((t: {is_recharge: boolean;}) => t.is_recharge);
 }
+
+export function formatString(template: string, ...values: string[]): string
+{
+    return template.replace(/{(\d+)}/g, (match, number) =>
+    {
+        return typeof values[number] !== 'undefined' ? values[number] : match;
+    });
+}
