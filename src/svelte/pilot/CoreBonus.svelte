@@ -54,6 +54,7 @@
         <EditButton
             flowClass={FlowClass.ContextMenu}
             path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+            iconStyle={["-lineheight3"]}
         />
         {/snippet}
         <HeaderSecondary
