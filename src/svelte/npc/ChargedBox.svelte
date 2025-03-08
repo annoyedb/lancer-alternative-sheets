@@ -9,8 +9,6 @@
     let charged = item.system.charged;
     let usesValue = charged ? 1 : 0;
     let usesMax = 1;
-
-    console.log(item.name, isRecharge(item));
 </script>
 
 {#if isRecharge(item)}
