@@ -1,6 +1,8 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
+    import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
 
     const {
         text,
@@ -16,19 +18,19 @@
         path,
         sign,
 
-        style,
+        outerStyle,
         innerStyle,
         outerTextStyle,
         innerTextStyle,
         buttonStyle,
-    }: HexButtonProps = $props();
+    }: HexButtonProps & ButtonProps & TerminalTextProps = $props();
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
     let parsedValue = value 
         ? sign ? (value > 0 ? `+${value}` : value) : value
         : value;
 </script>
-<div class="la-attribute la-text-secondary mdi mdi-hexagon {style?.join(' ')}">
+<div class="la-attribute la-text-secondary mdi mdi-hexagon {outerStyle?.join(' ')}">
     <div class="la-combine-v {innerStyle?.join(' ')}">
         <span class="la-label__span {outerTextStyle?.join(' ')}">
             {text}

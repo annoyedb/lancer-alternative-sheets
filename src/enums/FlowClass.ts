@@ -9,4 +9,5 @@ export enum FlowClass
     OverchargeReset = "overcharge-reset",
     CoreActivation = "activation-flow",
     RechargeFeatures = "charge-macro",
+    DeleteActiveEffect = "", // No flow class for this
 }

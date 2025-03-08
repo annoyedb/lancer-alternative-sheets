@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -10,6 +10,8 @@
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -21,9 +23,13 @@
     // Unlinking leaves an array with null values; unsure if it's intended but it specifically breaks this sheet, and doesn't seem intended
     let systemComponents = system.loadout.systems.filter((item: any) => item !== null);
     let collID = systemComponents.length
-        ? `${actor.uuid}_system`
-        : `${actor.uuid}_systemempty`;
-    let actionCollID = `${actor.uuid}_system_action`;
+        ? `${actor.uuid}.systems`
+        : `${actor.uuid}.systems.empty`;
+    
+    function getActionCollID(index: number)
+    {
+        return `${actor.uuid}.systems.${index}.action`;
+    }
 
     function getDestroyed(component: any)
     {
@@ -73,24 +79,28 @@
     }
 </script>
 
+{#snippet headerOptions()}
+<TotalSP
+    value={system.loadout.sp.value}
+    max={system.loadout.sp.max}
+/>
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
+
 {#if system.loadout.frame}
 <HeaderMain
-    title={getLocalized("LA.mech.system.label")}
-    headerStyle={["la-bckg-system", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={getLocalized("LA.mech.system.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-system"]}
     
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
-    
-    spOption={true}
-    spCurrent={system.loadout.sp.value}
-    spMax={system.loadout.sp.max}
-    spTextStyle={["la-text-header", "-fontsize2"]}
-    spIconStyle={["la-text-header", "-fontsize5", "-lineheight3", "-width3"]}
-    
-    collapseAllOption={true}
+
+    headerContent={headerOptions}
 >
 {#if systemComponents.length}
     <div class="la-combine-v -gap0 -widthfull">
@@ -159,7 +169,7 @@
                     actions={component.value.system.actions}
                     path={`system.actions`}
                     collapse={collapse}
-                    collapseID={actionCollID}
+                    collapseID={getActionCollID(index)}
                     startCollapsed={false}
                 />
                 <DeployableBox

@@ -1,8 +1,10 @@
 <script lang="ts">
     import { getBrightness } from "@/scripts/theme";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import { getLocalized } from "@/scripts/helpers";
+    import { FlowClass } from "@/enums/FlowClass";
+    import DeleteButton from "@/svelte/actor/button/DeleteButton.svelte";
 
     const {
         effects,
@@ -45,11 +47,19 @@
 <div class="la-combine-v -gap1 -widthfull">
 {#if effects.length}
 {#each effects as effect}
+    {#snippet headerOptions()}
+    <DeleteButton
+        uuid={effect._id}
+        flowClass={FlowClass.DeleteActiveEffect}
+        onClick={deleteActiveEffect}
+        style={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
+        iconStyle={["-fontsize2", "la-text-header-anti"]}
+    />
+    {/snippet}
     <HeaderMain
-        title={effect.name}
-        headerStyle={["la-bckg-warning", "clipped-bot-alt", "-padding0-tb", "-padding3-lr"]}
-        headerFontStyle={["la-text-header-anti", "-fontsize1", "-lineheight2"]}
-        cursorStyle={["la-anim-header-anti"]}
+        text={effect.name}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning", "clipped-bot-alt"]}
+        textStyle={["la-text-header-anti", "la-anim-header-anti", "-fontsize1", "-lineheight2"]}
         borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         
@@ -57,11 +67,7 @@
         collapseID={`${actor.uuid}_status_activeeffects_effect`}
         startCollapsed={true}
 
-        deleteOption={true}
-        deleteStyle={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
-        deleteIconStyle={["-fontsize2", "la-text-header-anti"]}
-        deleteUUID={effect._id}
-        deleteOnClick={deleteActiveEffect}
+        headerContent={headerOptions}
     >
         <span class="la-activeeffect">
             <img 

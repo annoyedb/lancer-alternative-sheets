@@ -1,13 +1,11 @@
+import type { Snippet } from "svelte";
+
 export interface HeaderMainProps
 {
     children?: any;
+    headerContent?: Snippet;
     
-    title: string;
-
     headerStyle?: Array<string>;
-    headerFontStyle?: Array<string>;
-
-    cursorStyle?: Array<string>;
     borderStyle?: Array<string>;
     rootStyle?: Array<string>;
     collapseID?: string;

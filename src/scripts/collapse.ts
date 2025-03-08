@@ -7,6 +7,13 @@ export const collapseStates = writable<{
     }
 }>({});
 
+/**
+ * Initializes the collapse state for a given element by its ID.
+ * The state is either retrieved from session storage or set to a default value.
+ *
+ * @param id - The unique identifier for the element whose collapse state is being initialized.
+ * @param startCollapsed - Optional. The initial collapse state if no state is found in session storage. Defaults to `false`.
+ */
 export function initializeCollapseStates(id: string, startCollapsed: boolean = false)
 {
     const storage = sessionStorage.getItem(`la-collapse-${id}`);
@@ -28,6 +35,13 @@ export function initializeCollapseStates(id: string, startCollapsed: boolean = f
     });
 }
 
+/**
+ * Sets the collapse state for a given element by its ID.
+ * Updates the internal collapse state and stores the state in session storage.
+ *
+ * @param id - The unique identifier of the element.
+ * @param state - The collapse state to set. `true` for collapsed, `false` for expanded.
+ */
 export function setCollapseState(id: string, state: boolean)
 {
     collapseStates.update(states =>
@@ -41,9 +55,15 @@ export function setCollapseState(id: string, state: boolean)
     sessionStorage.setItem(`la-collapse-${id}`, state ? CollapseState.Closed : CollapseState.Opened);
 }
 
+
+/**
+ * Handles the toggle action for collapsing or expanding an element.
+ * 
+ * @param event - The mouse event triggered by the user interaction. It includes the current target element.
+ * @param id - The unique identifier for the element whose collapse state is being toggled.
+ */
 export function handleCollapseToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, id: string)
 {
-    console.log("Handling collapse toggle");
     event.stopPropagation();
     const currentState = get(collapseStates)[id];
     setCollapseState(id, !currentState.collapsed);
@@ -133,37 +153,3 @@ export function initializeCollapses(html: JQuery)
         }
     });
 }
-
-// TODO: move to data stores
-// function handleCollapseExpandAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
-// {
-//     event.stopPropagation();
-
-//     const collapseGroup = event.currentTarget.closest('.la-collapsegroup');
-//     const triggers = collapseGroup?.querySelectorAll('[data-la-collapse-id]');
-//     if (triggers && triggers.length > 0)
-//     {
-//         triggers.forEach((trigger, index) => {
-//             if (index <= 1) // Skip this header's pair
-//                 return;
-//             const id = trigger.getAttribute('data-la-collapse-id');
-//             if (id)
-//             {
-//                 const pair = Array.from(triggers).find(t => t !== trigger && t.getAttribute('data-la-collapse-id') === id);
-//                 if (pair)
-//                 {
-//                     if (expanding)
-//                     {
-//                         pair.classList.remove('collapsed');
-//                         sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "opened");
-//                     } else
-//                     {
-//                         pair.classList.add('collapsed');
-//                         sessionStorage.setItem(`lancer-alternative-collapse-${id}`, "closed");
-//                     }
-//                 }
-//             }
-//         });
-//         expanding = !expanding;
-//     }
-// }

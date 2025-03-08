@@ -9,6 +9,11 @@ export interface TerminalTextProps
     text: string;
 
     /**
+     * The text that appears after the text
+     */
+    extensionText?: string;
+
+    /**
      * Optional array of style class names to apply to the button's icon, text, and cursor.
      * Use `anim` prefixed color classes to apply the `--color` CSS attribute.
      */

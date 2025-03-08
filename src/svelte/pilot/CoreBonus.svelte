@@ -1,13 +1,14 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -16,22 +17,32 @@
     } = props;
     
     let coreBonuses = pilot.itemTypes.core_bonus;
-    let collapseID = `${pilot.uuid}_corebonus`;
-    let actionCollapseID = `${pilot.uuid}_corebonus_action`;
+    let collID = `${pilot.uuid}.coreBonus`;
+    
+    function getActionCollID(index: number)
+    {
+        return `${pilot.uuid}.coreBonus.${index}.action`;
+    }
 </script>
+
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
 
 {#if coreBonuses.length}
 <HeaderMain
-    title={getLocalized("LA.pilot.coreBonus.label")}
-    headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={getLocalized("LA.pilot.coreBonus.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-action--downtime"]}
 
     collapse={collapse}
-    collapseID={collapseID}
+    collapseID={collID}
     startCollapsed={true}
 
-    collapseAllOption={true}
+    headerContent={headerOptions}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
@@ -76,7 +87,7 @@
                     uuid={coreBonus.uuid}
                     path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
                     collapse={collapse}
-                    collapseID={actionCollapseID}
+                    collapseID={getActionCollID(index)}
                     startCollapsed={false}
                 />
                 <DeployableBox

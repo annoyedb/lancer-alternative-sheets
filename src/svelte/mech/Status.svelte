@@ -1,11 +1,12 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -18,30 +19,36 @@
 
     let overchargeSequence = actor.system.overcharge_sequence.split(",");
     let overchargeStage = actor.system.overcharge;
+    let collID = `${actor.uuid}.status.activeEffects`;
 </script>
 
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
 
 <div class="la-status__list la-combine-v -widthfull">
     <!-- Active Effects -->
     <HeaderMain
-        title={getLocalized("LA.tab.status.effects.label")}
-        headerStyle={["la-bckg-primary", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-        headerFontStyle={["la-text-header", "-fontsize2"]}
+        text={getLocalized("LA.tab.status.effects.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
         collapse={collapse}
-        collapseID={`${actor.uuid}_status_activeeffects`}
+        collapseID={collID}
         startCollapsed={false}
 
-        collapseAllOption={true}
+        headerContent={headerOptions}
     >
         <ActiveEffects {...props} />
     </HeaderMain>
     <!-- Integrity -->
     <HeaderMain
-        title={getLocalized("LA.tab.status.structure.label")}
-        headerStyle={["la-bckg-primary", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-        headerFontStyle={["la-text-header", "-fontsize2"]}
+        text={getLocalized("LA.tab.status.structure.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         collapse={collapse}
         collapseID={`${actor.uuid}_status_structure`}
@@ -115,9 +122,9 @@
         </div>
     </HeaderMain>
     <HeaderMain
-        title={getLocalized("LA.tab.status.reactor.label")}
-        headerStyle={["la-bckg-primary", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-        headerFontStyle={["la-text-header", "-fontsize2"]}
+        text={getLocalized("LA.tab.status.reactor.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         collapse={collapse}
         collapseID={`${actor.uuid}_status_reactor`}

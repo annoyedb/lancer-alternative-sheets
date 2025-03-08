@@ -1,5 +1,5 @@
 <script lang="ts">
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
@@ -10,6 +10,7 @@
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const {
         actor,
@@ -17,7 +18,7 @@
         traits,
     }: NPCSheetProps & {traits : Array<any>} = $props();
 
-    let collID = `${actor.uuid}_traits`;
+    let collID = `${actor.uuid}.traits`;
 
     function hasTraitSpecial(trait: any)
     {
@@ -37,18 +38,24 @@
     }
 </script>
 
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
+
 {#if traits.length}
 <HeaderMain
-    title={getLocalized("LA.npc.traits.label")}
-    headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={getLocalized("LA.npc.traits.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-action--downtime"]}
     
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
-
-    collapseAllOption={true}
+    
+    headerContent={headerOptions}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}

@@ -1,10 +1,13 @@
 <script lang="ts">
+    import { randomExtension } from "@/scripts/helpers";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
-    import TerminalText from "@/svelte/actor/TerminalText.svelte";
+    import TerminalText, { FLOW_BUTTON_STYLE } from "@/svelte/actor/TerminalText.svelte";
+    import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
+    import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
 
     const {
-        text: name,
+        text,
         tooltipHeader,
         tooltip,
         tooltipDirection,
@@ -19,10 +22,9 @@
         disableTerminal,
         disableExtension,
         disableCursor,
-    } : FlowButtonProps = $props();
+    } : FlowButtonProps & ButtonProps & TerminalTextProps = $props();
 
     const defaultStyle = "clipped-bot-alt la-bckg-secondary";
-    const defaultTextStyle = "la-text-header la-anim-header";
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 </script>
 
@@ -39,11 +41,12 @@
     data-tooltip-class="clipped-bot la-tooltip"
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
     data-path={path}
-    aria-label={name}
+    aria-label={text}
 >
     <TerminalText
-        text={name}
-        textStyle={textStyle || [defaultTextStyle]}
+        text={text}
+        extensionText={randomExtension()}
+        textStyle={textStyle || [FLOW_BUTTON_STYLE]}
         disableTerminal={disableTerminal}
         disableExtension={disableExtension}
         disableCursor={disableCursor}

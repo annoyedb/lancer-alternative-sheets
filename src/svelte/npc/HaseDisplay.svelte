@@ -22,7 +22,7 @@
             flowClass={FlowClass.RollStat}
             path={"system.hull"}
 
-            style={["-positionrelative", "-hull", "-fontsize10"]}
+            outerStyle={["-positionrelative", "-hull", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
@@ -39,7 +39,7 @@
             flowClass={FlowClass.RollStat}
             path={"system.agi"}
 
-            style={["-positionrelative", "-agility", "-fontsize10"]}
+            outerStyle={["-positionrelative", "-agility", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
@@ -56,7 +56,7 @@
             flowClass={FlowClass.RollStat}
             path={"system.sys"}
 
-            style={["-positionrelative", "-systems", "-fontsize10"]}
+            outerStyle={["-positionrelative", "-systems", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
@@ -73,7 +73,7 @@
             flowClass={FlowClass.RollStat}
             path={"system.eng"}
             
-            style={["-positionrelative", "-engineering", "-fontsize10"]}
+            outerStyle={["-positionrelative", "-engineering", "-fontsize10"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
             buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}

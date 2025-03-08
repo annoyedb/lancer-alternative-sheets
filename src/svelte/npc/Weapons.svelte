@@ -1,5 +1,5 @@
 <script lang="ts">
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
@@ -8,6 +8,7 @@
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const {
         actor,
@@ -17,7 +18,7 @@
     }: NPCSheetProps & {weapons : Array<any>} = $props();
     
     const tier = system.tier;
-    const collID = `${actor.uuid}_weapons`;
+    const collID = `${actor.uuid}.weapons`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
     const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
 
@@ -63,18 +64,24 @@
     }
 </script>
 
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
+
 {#if weapons.length}
 <HeaderMain
-    title={getLocalized("LA.weapons.label")}
-    headerStyle={["la-bckg-mech-weapon", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={getLocalized("LA.weapons.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-mech-weapon"]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-mech-weapon", "-gap0"]}
     
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
 
-    collapseAllOption={true}
+    headerContent={headerOptions}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each weapons as weapon}

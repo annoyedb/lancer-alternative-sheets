@@ -25,7 +25,7 @@
             path={"system.grit"}
             sign={true}
             
-            style={["-positionrelative", "-grit", "-fontsize13", "bold", "-right2"]}
+            outerStyle={["-positionrelative", "-grit", "-fontsize13", "bold", "-right2"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight0", "la-text-header", "la-text-header", "-width7", "-textaligncenter"]}
@@ -40,7 +40,7 @@
             flowClass={FlowClass.RollHASE}
             path={"system.hull"}
 
-            style={["-positionrelative", "-hull", "-fontsize11", "-bold"]}
+            outerStyle={["-positionrelative", "-hull", "-fontsize11", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top4", "-width10", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-positionabsolute", "la-text-header", "-width6", "-textaligncenter"]}
@@ -55,7 +55,7 @@
             flowClass={FlowClass.RollHASE}
             path={"system.sys"}
 
-            style={["-positionrelative", "-systems", "-fontsize11", "-bold"]}
+            outerStyle={["-positionrelative", "-systems", "-fontsize11", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top4", "-width10", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-positionabsolute", "la-text-header", "-width6", "-textaligncenter"]}
@@ -70,7 +70,7 @@
             flowClass={FlowClass.RollHASE}
             path={"system.eng"}
 
-            style={["-positionrelative", "-engineering", "-fontsize11", "-bold"]}
+            outerStyle={["-positionrelative", "-engineering", "-fontsize11", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top4", "-width10", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-positionabsolute", "la-text-header", "-width6", "-textaligncenter"]}
@@ -85,7 +85,7 @@
             flowClass={FlowClass.RollHASE}
             path={"system.agi"}
 
-            style={["-positionrelative", "-agility", "-fontsize11", "-bold"]}
+            outerStyle={["-positionrelative", "-agility", "-fontsize11", "-bold"]}
             innerStyle={["-positionabsolute", "-left0", "-top4", "-width10", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-positionabsolute", "la-text-header", "-width6", "-textaligncenter"]}

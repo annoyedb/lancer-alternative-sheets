@@ -1,12 +1,13 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -16,8 +17,17 @@
     } = props;
     
     let talents = pilot.itemTypes.talent;
-    let collapseID = `${pilot.uuid}_talents`;
-    let actionCollapseID = `${pilot.uuid}_talents_action`;
+    let collID = `${pilot.uuid}.talents`;
+    
+    function getActionCollID(talentIndex: number, rankIndex: number)
+    {
+        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
+    }
+
+    function getTalentCollID(talentIndex: number)
+    {
+        return `${pilot.uuid}.talents.${talentIndex}`;
+    }
 
     function forceUpdateTalent(event: MouseEvent, _talent: any)
     {
@@ -36,18 +46,24 @@
     }
 </script>
 
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={collID}
+/>
+{/snippet}
+
 {#if talents.length}
 <HeaderMain
-    title={getLocalized("LA.pilot.talent.label")}
-    headerStyle={["la-bckg-action--downtime", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={getLocalized("LA.pilot.talent.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={["la-brdr-action--downtime"]}
 
     collapse={collapse}
-    collapseID={collapseID}
+    collapseID={collID}
     startCollapsed={true}
-
-    collapseAllOption={true}
+    
+    headerContent={headerOptions}
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
@@ -62,7 +78,7 @@
             uuid={talent.uuid}
             path={`system.pilot.value.itemTypes.talent.${index}`}
             collapse={collapse}
-            collapseID={talent}
+            collapseID={getTalentCollID(index)}
             startCollapsed={true}
 
             editOption={true}
@@ -116,7 +132,7 @@
                             uuid={talent.uuid}
                             path={`system.ranks.${jndex}.actions`}
                             collapse={collapse}
-                            collapseID={actionCollapseID}
+                            collapseID={getActionCollID(index, jndex)}
                             startCollapsed={false}
                         />
                     </div>

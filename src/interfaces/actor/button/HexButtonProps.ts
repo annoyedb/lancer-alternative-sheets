@@ -1,9 +1,7 @@
-import type { FlowButtonProps } from "./FlowButtonProps";
-
 /**
  * Interface representing the properties button in a hex with a value
  */
-export interface HexButtonProps extends FlowButtonProps
+export interface HexButtonProps
 {
     /**
      * The number value of the property name.
@@ -27,6 +25,11 @@ export interface HexButtonProps extends FlowButtonProps
      */
     innerTextStyle?: Array<string>;
     
+    /**
+     * Optional array of style class names to apply to the wrapper the entire element.
+     */
+    outerStyle?: Array<string>;
+
     /**
      * Optional array of style class names to apply to the wrapper of the button and outer text span.
      */

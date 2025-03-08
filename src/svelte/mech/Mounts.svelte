@@ -2,8 +2,10 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import MountNames from "../actor/decoration/MountNames.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -16,7 +18,7 @@
     
     function getCollapseID(index: number)
     {
-        return `${actor.uuid}_mount_${index}`;
+        return `${actor.uuid}.mount.${index}`;
     }
 
     function aggregateMountWeaponNames(mount: any)
@@ -28,20 +30,25 @@
 
 {#if system.loadout.frame && weaponMounts.length}
 {#each weaponMounts as mount, index}
+    {#snippet headerOptions()}
+    <MountNames
+        mountNames={aggregateMountWeaponNames(mount)}
+    />
+    <CollapseAllButton
+        collapseID={getCollapseID(index)}
+    />
+    {/snippet}
     <HeaderMain
-        title={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
-        headerStyle={["la-bckg-primary", "clipped-top", "-padding0-tb", "-padding3-lr"]}
-        headerFontStyle={["la-text-header", "-fontsize2"]}
+        text={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2"]}
         borderStyle={["la-brdr-primary"]}
 
         collapse={collapse}
         collapseID={getCollapseID(index)}
         startCollapsed={true}
-        
-        mountOption={true}
-        mountNames={aggregateMountWeaponNames(mount)}
 
-        collapseAllOption={true}
+        headerContent={headerOptions}
     >
     {#if mount.bracing}
         <details class="la-details -widthfull la-combine-v">

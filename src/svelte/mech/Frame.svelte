@@ -2,13 +2,14 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getManufacturerColor } from "@/scripts/theme";
-    import HeaderMain from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "./FramePassivePower.svelte";
     import FrameTrait from "./FrameTrait.svelte";
     import HeaderSecondary from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -29,8 +30,8 @@
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
         : "la-brdr-frame";
     let collID = frame
-        ? `${actor.uuid}_${frame.id}`
-        : `${actor.uuid}_frameempty`;
+        ? `${actor.uuid}.frame.${frame.id}`
+        : `${actor.uuid}.frame.empty`;
 
     //@ts-ignore
     function log(...args: any[])
@@ -39,17 +40,23 @@
     }
 </script>
 
+{#snippet headerOptions()}
+    <CollapseAllButton
+        collapseID={collID}
+    />
+{/snippet}
+
 <HeaderMain
-    title={frame ? frameName : getLocalized("LA.placeholder")}
-    headerStyle={[frameColorBckg, "clipped-top", "-padding0-tb", "-padding3-lr"]}
-    headerFontStyle={["la-text-header", "-fontsize2"]}
+    text={frame ? frameName : getLocalized("LA.placeholder")}
+    headerStyle={[MAIN_HEADER_STYLE, frameColorBckg]}
+    textStyle={["la-text-header", "-fontsize2"]}
     borderStyle={[frameColorBrdr]}
 
     collapse={collapse}
     collapseID={collID}
     startCollapsed={true}
 
-    collapseAllOption={true}
+    headerContent={headerOptions}
 >
 {#if frame}
     <div class="la-generated la-combine-v -widthfull -gap0">
