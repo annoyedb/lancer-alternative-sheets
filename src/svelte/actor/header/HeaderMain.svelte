@@ -10,13 +10,12 @@
     const {
         children,
         rootStyle,
-        collapseID,
-        startCollapsed,
-        
         itemID,
         uuid,
         path,
         acceptTypes,
+        collapseID,
+        startCollapsed,
 
         headerContent,
 
