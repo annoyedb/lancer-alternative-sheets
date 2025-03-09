@@ -59,7 +59,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.talent.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
 
     collapseID={collID}

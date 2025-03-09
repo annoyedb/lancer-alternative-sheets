@@ -33,7 +33,7 @@
     <!-- Active Effects -->
     <HeaderMain text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
         collapseID={collID}
@@ -46,7 +46,7 @@
     <!-- Integrity -->
     <HeaderMain text={getLocalized("LA.tab.status.structure.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         
         collapseID={`${actor.uuid}_status_structure`}
@@ -121,7 +121,7 @@
     </HeaderMain>
     <HeaderMain text={getLocalized("LA.tab.status.reactor.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         
         collapseID={`${actor.uuid}_status_reactor`}
@@ -181,7 +181,7 @@
                     tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
-                    flowClass={FlowClass.OverchargeReset}
+                    flowClass={FlowClass.ResetOvercharge}
                 />
             </div>
         </div>

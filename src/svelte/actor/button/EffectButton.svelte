@@ -9,6 +9,7 @@
     const {
         style,
         iconStyle,
+        iconBackgroundStyle,
 
         flowClass,
         path,
@@ -17,8 +18,7 @@
         tooltipHeader,
         tooltipDirection,
 
-        iconBackgroundStyle,
-    } : IconButtonProps & ButtonProps & TooltipProps & { iconBackgroundStyle?: Array<string> } = $props();
+    } : IconButtonProps & ButtonProps & TooltipProps= $props();
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.effect.tooltip"), tooltipHeader);
     const defaultIconBackgroundStyle = "-fontsize5 -lineheight3 la-text-scrollbar-secondary -padding0-l"
@@ -27,17 +27,6 @@
     export const HEADER_SECONDARY_STYLE = "-fontsize5 -lineheight3 -glow-primary-hover -glow-header";
 </script>
 
-            <!-- <button type="button"
-                class="{useEffectStyle?.join(' ')}
-                    {useEffectClass || "effect-flow"}"
-                data-path={path}
-                data-tooltip={effectTip}
-                data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={useEffectTooltipDirection}
-                aria-label={useEffectTooltip}>
-                <i class="{headerIconStyle?.join(' ') || defaultHeaderIconStyle}"></i>
-                <i class="fal fa-dice-d20 -positionabsolute -left0 {useEffectBackgroundStyle?.join(' ')}" style="z-index: -1;"></i>
-            </button> -->
 <button type="button"
     class="{style?.join(' ')}
         {flowClass || "effect-flow"}"

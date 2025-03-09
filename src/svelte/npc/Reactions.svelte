@@ -71,7 +71,7 @@
 <HeaderMain
     text={getLocalized("LA.npc.reactions.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--reaction"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--reaction", "-gap0"]}
     
     collapseID={collID}
@@ -99,7 +99,7 @@
         <EffectButton
             iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-reaction"]}
 
-            flowClass={FlowClass.SendToChatEffect}
+            flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${reaction.index}`}
 
             tooltip={getReactionTooltip(reaction)}
@@ -110,6 +110,7 @@
     {#snippet headerSecondaryRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
+            path={`itemTypes.npc_feature.${reaction.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
         />
@@ -166,7 +167,7 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendToChatEffect}
+                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>

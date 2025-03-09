@@ -5,6 +5,7 @@ import type { FlowClass } from '@/enums/FlowClass';
  */
 export interface ButtonProps
 {
+
     /**
      * Lancer system flow class for the button.
      */
@@ -26,14 +27,21 @@ export interface ButtonProps
     uuid?: string;
 
     /**
-     * Optional identifier for the item associated with the button. Used in `data-item-id` attribute.
-     */
-    itemID?: string;
-
-    /**
      * Optional path associated with the button. Used in `data-path` attribute.
      */
     path?: string;
+
+    /**
+     * Whether this button is disabled.
+     */
+    disabled?: boolean;
+
+    //---- stuff below here is mostly one-off stuff that seems to be technical debt?
+
+    /**
+     * Optional identifier for the item associated with the button. Used in `data-item-id` attribute; often LIDs?
+     */
+    itemID?: string;
 
     /**
      * Optional data type for the button. Used in `data-type` attribute.

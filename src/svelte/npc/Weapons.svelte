@@ -1,18 +1,23 @@
 <script lang="ts">
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
+    import HeaderTertiary, { HEADER_TERTIARY_ICON_BUTTON_STYLE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
+    import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
 
     const {
         actor,
-        collapse,
         system,
         weapons,
     }: NPCSheetProps & {weapons : Array<any>} = $props();
@@ -42,7 +47,7 @@
         return weapon.system.destroyed;
     }
 
-    function getHeaderStyle(weapon: any)
+    function getTitleStyle(weapon: any)
     {
         return isDestroyed(weapon)
             ? "la-text-repcap -strikethrough"
@@ -74,7 +79,7 @@
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-mech-weapon"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-mech-weapon", "-gap0"]}
     
     collapseID={collID}
@@ -83,7 +88,7 @@
     headerContent={headerOptions}
 >
     <div class="la-combine-v -gap0 -widthfull">
-    {#each weapons as weapon}
+    {#each weapons as weapon, index}
     {#snippet weaponSpecial()}
         <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
         {#if hasAccuracyBonus(weapon)}
@@ -118,38 +123,59 @@
             />
         </div>
     {/snippet}
-        <HeaderTertiary
-            title={weapon.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-            headerFontStyle={[getHeaderStyle(weapon), "-fontsize1"]}
-            
-            subTitle={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
-            subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
-            borderStyle={["-bordersoff"]}
+    {#snippet headerTertiaryLeftOptions()}
+        <AttackButton
+            flowClass={FlowClass.RollAttack}
+            iconStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "cci", "cci-weapon", "-glow-header", "-glow-primary-hover"]}
+            iconBackgroundStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "la-text-scrollbar-secondary"]}
+            path={`system.loadout.weapon_mounts.${index}`}
 
+            tooltip={ weapon.system.effect
+                ? `${getLocalized("LA.flow.rollAttack.tooltip")}<br><br>${weapon.system.effect}` 
+                : getLocalized("LA.flow.rollAttack.tooltip")}
+            tooltipDirection={TooltipDirection.UP}
+        />
+    {/snippet}
+    {#snippet headerTertiaryRightOptions()}
+        <DamageButton
+            textStyle={[getRollStyle(weapon)]}
+            
+            flowClass={FlowClass.RollDamage}
+            range={weapon.system.range}
+            damage={weapon.system.damage[tier - 1]}
+
+            tooltipDirection={TooltipDirection.UP}
+        />
+        <div class="la-combine-v -margin3-lr">
+            <MessageButton
+                flowClass={FlowClass.SendToChat}
+                uuid={weapon.uuid}
+            />
+            <EditButton
+                flowClass={FlowClass.ContextMenu}
+                path={`itemTypes.npc_feature.${weapon.index}`}
+            />
+        </div>
+    {/snippet}
+        <HeaderTertiary
             itemID={weapon.id}
             uuid={weapon.uuid}
             path={`itemTypes.npc_feature.${weapon.index}`}
             acceptTypes={"npc_feature"}
-            
-            collapse={collapse}
-            collapseID={weapon}
+            collapseID={weapon.uuid}
             startCollapsed={true}
+
+            text={weapon.name}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header", "la-anim-accent"]}
+            headerFontStyle={[getTitleStyle(weapon), "-fontsize1"]}
+
+            subText={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
+            subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0", "la-anim-header"]}
+            borderStyle={["-bordersoff"]}
+
             renderOutsideCollapse={hasWeaponSpecial(weapon) ? weaponSpecial : undefined}
-
-            rollAttackOption={true}
-            rollAttackStyle={[getRollStyle(weapon)]}
-            rollAttackTooltip={ weapon.system.effect
-                ? `${getLocalized("LA.flow.rollAttack.tooltip")}<br><br>${weapon.system.effect}` 
-                : getLocalized("LA.flow.rollAttack.tooltip")}
-            rollAttackTooltipDirection={"UP"}
-            weaponOption={true}
-            weaponDestroyed={weapon.system.destroyed}
-            weaponRange={weapon.system.range}
-            weaponDamage={weapon.system.damage[tier - 1]}
-
-            editOption={true}
-            messageOption={true}
+            headerContentLeft={headerTertiaryLeftOptions}
+            headerContentRight={headerTertiaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}

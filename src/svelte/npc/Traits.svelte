@@ -51,7 +51,7 @@
 <HeaderMain
     text={getLocalized("LA.npc.traits.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     
     collapseID={collID}
@@ -79,7 +79,7 @@
         <EffectButton
             iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-trait"]}
 
-            flowClass={FlowClass.SendToChatEffect}
+            flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}
 
             tooltip={trait.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
@@ -89,6 +89,7 @@
     {#snippet headerSecondaryRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
+            path={`itemTypes.npc_feature.${trait.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
         />
@@ -102,7 +103,7 @@
         <HeaderSecondary
             text={trait.name}
             headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(trait), "-fontsize1"]}
+            textStyle={[getHeaderStyle(trait), "-fontsize1", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
 
             itemID={trait.lid}
@@ -122,7 +123,7 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendToChatEffect}
+                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>

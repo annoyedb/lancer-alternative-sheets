@@ -12,7 +12,7 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import TotalSp from "@/svelte/actor/decoration/TotalSP.svelte";
+    import TotalSp, { MAIN_HEADER_STYLE } from "@/svelte/actor/decoration/TotalSP.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
@@ -38,7 +38,7 @@
     <EffectButton
         iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-weaponmod"]}
 
-        flowClass={FlowClass.SendToChatEffect}
+        flowClass={FlowClass.SendEffectToChat}
         path={path}
 
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
@@ -49,30 +49,25 @@
     {#snippet headerSecondaryRightOptions()}
     <TotalSp
         value={mod.system.sp}
+        style={[MAIN_HEADER_STYLE, "-margin1-r"]}
+        tooltip={getLocalized("LA.mech.system.points.tooltip")}
     />
     <EditButton
         flowClass={FlowClass.ContextMenu}
+        path={path}
     />
     {/snippet}
 
     <HeaderSecondary
+        uuid={mod.uuid}
+        path={path}
+        acceptTypes={"weapon_mod"}
         text={mod.name}
         headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-header-anti"]}
         textStyle={["-fontsize2"]}
         
-        uuid={mod.uuid}
-        path={path}
-        acceptTypes={"weapon_mod"}
         collapseID={mod.uuid}
         startCollapsed={false}
-        
-        spOption={true}
-        spValue={mod.system.sp}
-        spTextStyle={["-fontsize2"]}
-        spIconStyle={["-fontsize5", "-lineheight3", "-padding3-r"]}
-
-        editOption={true}
-        editIconStyle={["-lineheight3"]}
 
         headerContentLeft={headerSecondaryLeftOptions}
         headerContentRight={headerSecondaryRightOptions}
@@ -148,8 +143,7 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendToChatEffect}
-                    textStyle={["clipped-bot", "la-bckg-secondary"]}
+                    flowClass={FlowClass.SendEffectToChat}
                 />
                 <hr>
                 {@html mod.system.effect}

@@ -1,177 +1,122 @@
 <script lang="ts">
-    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
     import type { HeaderTertiaryProps } from "@/interfaces/actor/header/HeaderTertiaryProps";
+    import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
-    import DamageArray from "@/svelte/actor/DamageArray.svelte";
-    import RangeArray from "@/svelte/actor/RangeArray.svelte";
+    import { collapseStates, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
+    import { onMount } from "svelte";
+    import TerminalText from "../TerminalText.svelte";
 
     const {
         children,
-        renderOutsideCollapse,
-
-        title,
-        subTitle,
+        rootStyle,
         itemID,
         uuid,
         path,
         acceptTypes,
+        collapseID,
+        startCollapsed,
+        
+        headerContentLeft,
+        headerContentRight,
+        renderOutsideCollapse,
+        subText,
 
         headerStyle,
         headerFontStyle,
         subHeaderFontStyle,
-        iconStyle,
         borderStyle,
-        rootStyle,
-        collapse,
-        collapseID,
-        startCollapsed,
 
-        editOption,
-        editStyle,
-        editIconStyle,
-
-        messageOption,
-        messageStyle,
-        messageIconStyle,
-
-        spOption,
-        spValue,
-        spTextStyle,
-        spIconStyle,
-
-        weaponOption,
-        weaponStyle,
-        weaponDestroyed,
-        weaponRange,
-        weaponDamage,
-        weaponTooltipDirection,
-
-        rollAttackOption,
-        rollAttackStyle,
-        rollAttackTooltipDirection,
-        rollAttackTooltip,
-    }: HeaderTertiaryProps = $props();
+        text,
+        extensionText,
+    }: HeaderProps & HeaderTertiaryProps & TerminalTextProps = $props();
     
-    let collapsing = collapse && collapseID;
-    let collapsed = collapsing && startCollapsed ? "collapsed" : "";
-    let extraOptions = editOption || messageOption || spOption || weaponOption ? true : false;
-    let chatTip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
-    let editTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
-    let rollAttackTip = TooltipFactory.buildTooltip(rollAttackTooltip || getLocalized("LA.flow.rollAttack.tooltip"));
-    let rollDamageTip = TooltipFactory.buildTooltip(getLocalized("LA.flow.rollDamage.tooltip"));
-    const hasAllWeaponProperties = (weaponDamage && weaponDamage.length > 0) && (weaponRange && weaponRange.length > 0);
+    let isCollapsed = $derived.by(() => {
+        if (collapseID && $collapseStates[collapseID])
+            return $collapseStates[collapseID].collapsed;
+        return false;
+    });
+
+    const extraOptions = headerContentRight ? true : false;
     const defaultHeaderStyle = "la-bckg-primary -padding0-tb -padding3-lr"
-    const defaultRightOptionStyle = "-glow-header -glow-primary-hover -fontsize2"
+    
+    onMount(() => 
+    {
+        if (collapseID)
+        {
+            initializeCollapseStates(collapseID, startCollapsed);
+        }
+    });
+
+    function toggleCollapse(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    {
+        if (collapseID)
+            handleCollapseToggle(event, collapseID);
+    }
+
+    function getExtensionText()
+    {
+        if (extensionText)
+            return extensionText;
+        if (collapseID)
+            return isCollapsed
+                ? `--${getLocalized("LA.expand.label")}`
+                : `--${getLocalized("LA.collapse.label")}`;
+        return undefined;
+    }
+</script>
+<script lang="ts" module>
+    export const HEADER_TERTIARY_ICON_BUTTON_STYLE: string = "-fontsize7";
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}"
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
+        collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
     data-path={path}
     data-accept-types={acceptTypes}
     draggable="true"
 >
+    <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+    <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
+    <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-summary la-combine-h la-dropshadow 
-                -justifybetween -widthfull
+            -justifybetween -widthfull
             {headerStyle?.join(' ') || defaultHeaderStyle}
-            {collapsing ? "collapse-trigger" : ""}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, false) : ""}">
+            {collapseID ? "collapse-trigger" : ""}"
+        on:click={(event) => toggleCollapse(event)}
+    >
         <!-- Icon, Name -->
-        <div class="la-left la-combine-h">
-        {#if rollAttackOption}
-            <button type="button" 
-                class="roll-attack la-text-header -fontsize9 -lineheight8"
-                data-tooltip={rollAttackTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={rollAttackTooltipDirection ?? "LEFT"}
-                draggable="true"
-                aria-label="{getLocalized("LA.flow.rollAttack.label")}"
-                disabled={weaponDestroyed || false}
-            >
-                <i class="roll-attack__bckg fal fa-dice-d20 la-text-scrollbar-secondary"></i>
-                <i class="roll-attack__icon cci cci-weapon -glow-header -glow-primary-hover {rollAttackStyle?.join(' ')}"></i>
-            </button>
-        {:else}
-            <i class="la-icon {iconStyle?.join(' ') || "-fontsize9 -lineheight8"}"></i>
+        <div class="la-left la-combine-h -aligncenter">
+        {#if headerContentLeft}
+            {@render headerContentLeft()}
         {/if}
-            <div class="la-terminaltext la-combine-v la-anim-accent -alignstart -justifycenter -divider">
-                <span class="la-top__span -widthfull {headerFontStyle?.join(' ') || "-fontsize3"}">{title}</span>
-                <span class="la-bottom__span {subHeaderFontStyle?.join(' ') || "-fontsize0"}">{subTitle}</span>
+            <div class="la-combine-v -alignstart -justifycenter -divider">
+                <span class="la-top__span {headerFontStyle?.join(' ') || "-fontsize3"}">{text}</span>
+                <TerminalText
+                    text={collapseID || !extensionText ? `${subText} ` : subText}
+                    textStyle={subHeaderFontStyle || ["-fontsize0"]}
+                    extensionText={getExtensionText()}
+                    disableCmdline={true}
+                />
             </div>
         </div>
         <!-- Options -->
-        <div class="la-right la-combine-h">
-        {#if extraOptions}
-        {#if spOption && spValue}
-            <div class="la-systempoints la-combine-h -aligncenter">
-                <span class="{spTextStyle?.join(' ') || "-fontsize4"}">{spValue}</span>
-                <i class="cci cci-system-point {spIconStyle?.join(' ') || "-fontsize4"}"></i>
-            </div>
-        {/if}
-        {#if weaponOption}
-            <button type="button"
-                class="la-properties la-combine-v -fontsize3 la-anim-accent
-                    {hasAllWeaponProperties ? "-divider" : ""} {weaponStyle?.join(' ')}
-                    compact-damage roll-damage"
-                data-tooltip={weaponDamage && weaponDamage.length > 0 ? rollDamageTip : ""}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={weaponTooltipDirection || "UP"}
-                disabled={weaponDestroyed || !(weaponDamage && weaponDamage.length > 0)}>
-                <!-- Generated Range -->
-                {#if weaponRange}
-                <RangeArray
-                    ranges={weaponRange}
-                />
-                {/if}
-                <!-- Generated Damage -->
-                {#if weaponDamage}
-                <DamageArray
-                    damages={weaponDamage}
-                    style={["-glow-header"]}
-                />
-                {/if}
-                {#if weaponDamage && weaponDamage.length > 0}
-                <i class="fal fa-dice-d20 -positionabsolute -fontsize9 la-text-scrollbar-secondary" style="z-index: -1;"></i>
-                {/if}
-            </button>
-        {/if}
-            <div class="la-combine-v -margin3-lr">
-            {#if messageOption}
-                <button type="button"
-                    class="{messageStyle?.join(' ') || defaultRightOptionStyle}
-                        chat-flow-button"
-                    data-uuid={uuid}
-                    data-tooltip={chatTip}
-                    data-tooltip-class={"clipped-bot la-tooltip"}
-                    data-tooltip-direction={"UP"}
-                    aria-label="{getLocalized("LA.chat.tooltip")}">
-                    <i class="mdi mdi-message {messageIconStyle?.join(' ')}"></i>
-                </button>
-            {/if}
-            {#if editOption}
-                <button type="button"
-                    class="{editStyle?.join(' ') || defaultRightOptionStyle}
-                        lancer-context-menu"
-                    data-path={path}
-                    data-tooltip={editTip}
-                    data-tooltip-class={"clipped-bot la-tooltip"}
-                    data-tooltip-direction={"DOWN"}
-                    aria-label="{getLocalized("LA.edit.label")}">
-                    <i class="fas fa-ellipsis-v {editIconStyle?.join(' ')}"></i>
-                </button>
-            {/if}
-            </div>
+    {#if extraOptions}
+        <div class="la-right la-combine-h -aligncenter">
+        {#if headerContentRight}
+            {@render headerContentRight()}
         {/if}
         </div>
+    {/if}
     </div>
     {#if renderOutsideCollapse}
         {@render renderOutsideCollapse()}
     {/if}
     <div class="la-collapsegroup__wrapper
-            {collapsing ? "collapse" : ""} {collapsed}"
-        data-la-collapse-id="{collapsing ? registerCollapse(collapse, collapseID, true) : ""}"
+            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+        data-la-collapse-id={collapseID}
     >
         <div class="la-collapsecontent la-dropshadow 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull

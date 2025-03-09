@@ -24,7 +24,7 @@
 </script>
 
 <button type="button"
-    class="{style?.join(' ') || defaultStyle}
+    class="la-combine-v {style?.join(' ') || defaultStyle}
         {flowClass || 'lancer-context-menu'}"
     data-path={path}
     data-tooltip={tip}

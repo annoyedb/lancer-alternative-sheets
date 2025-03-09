@@ -63,7 +63,7 @@
 <HeaderMain
     text={getLocalized("LA.systems.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-system", "-gap0"]}
     
     collapseID={collID}
@@ -91,7 +91,7 @@
         <EffectButton
             iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-system"]}
 
-            flowClass={FlowClass.SendToChatEffect}
+            flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${component.index}`}
 
             tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
@@ -101,6 +101,7 @@
     {#snippet headerSecondaryRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
+            path={`itemTypes.npc_feature.${component.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
         />
@@ -157,7 +158,7 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendToChatEffect}
+                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>

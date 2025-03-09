@@ -51,7 +51,7 @@
 <HeaderMain
     text={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[MAIN_HEADER_STYLE, frameColorBckg]}
-    textStyle={["-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={[frameColorBrdr]}
 
     collapseID={collID}

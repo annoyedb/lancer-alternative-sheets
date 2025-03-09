@@ -41,7 +41,7 @@
     <HeaderMain 
         text={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-brdr-primary"]}
 
         collapseID={getCollapseID(index)}

@@ -83,13 +83,13 @@
     <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
     <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-summary la-combine-h la-dropshadow 
-                -justifybetween -widthfull -whitespacenowrap 
+            -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || SECONDARY_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Icon, Name -->
-        <div class="la-left la-combine-h -aligncenter -gap1 la-terminaltext">
+        <div class="la-left la-combine-h -justifystart -aligncenter -gap1 -widthfull -overflowhidden">
             {#if headerContentLeft}
                 {@render headerContentLeft()}
             {/if}
@@ -103,7 +103,7 @@
         </div>
     {#if extraOptions}
         <!-- Options -->
-        <div class="la-right la-combine-h">
+        <div class="la-right la-combine-h -aligncenter">
         {#if headerContentRight}
             {@render headerContentRight()}
         {/if}

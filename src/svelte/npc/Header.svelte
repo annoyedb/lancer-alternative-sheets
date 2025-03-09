@@ -58,7 +58,7 @@
     <HeaderMain 
         text={getLocalized("LA.npc.utilities.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt", "-padding0-r"]}
 
         collapseID={`${actor.uuid}.status.utilities`}
@@ -121,7 +121,7 @@
     <HeaderMain 
         text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
         collapseID={activeEffectsCollID}

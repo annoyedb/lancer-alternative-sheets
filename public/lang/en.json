@@ -153,6 +153,7 @@
     "LA.mech.system.system.label": "SYSTEM",
     "LA.mech.system.tech.label": "TECH",
 	"LA.mech.system.points.total.tooltip": "The amount of used/available system points on this frame",
+	"LA.mech.system.points.tooltip": "The amount of system points this costs",
 	"LA.mech.frame.empty.label": "NO FRAME",
 	"LA.mech.frame.empty.subLabel": "// FRAME NOT DETECTED //",
 	"LA.mech.frame.trait.label": "FRAME TRAIT",

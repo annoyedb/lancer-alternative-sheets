@@ -78,7 +78,7 @@
 <HeaderMain
     text={getLocalized("LA.npc.techAttacks.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--tech"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--tech", "-gap0"]}
     
     collapseID={collID}
@@ -137,6 +137,7 @@
     {#snippet headerSecondaryRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
+            path={`itemTypes.npc_feature.${tech.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
         />
@@ -170,7 +171,7 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendToChatEffect}
+                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
                 />
                 <hr>

@@ -2,14 +2,20 @@
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import { getLocalized, isLoading } from "@/scripts/helpers";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
-    import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import HeaderTertiary, { HEADER_TERTIARY_ICON_BUTTON_STYLE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
-    import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
+    import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
+    import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
 
     const {
         mount,
@@ -109,6 +115,38 @@
         {@render costSP()}
     </div>
 {/snippet}
+{#snippet headerTertiaryLeftOptions()}
+    <AttackButton
+        flowClass={FlowClass.RollAttack}
+        iconStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "cci", "cci-weapon", "-glow-header", "-glow-primary-hover"]}
+        iconBackgroundStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "la-text-scrollbar-secondary"]}
+        path={`system.loadout.weapon_mounts.${index}`}
+
+        tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+        tooltipDirection={TooltipDirection.LEFT}
+    />
+{/snippet}
+{#snippet headerTertiaryRightOptions()}
+    <DamageButton
+        textStyle={[getRollStyle(slot.weapon.value)]}
+        
+        flowClass={FlowClass.RollDamage}
+        range={slot.weapon.value.system.active_profile.all_range}
+        damage={slot.weapon.value.system.active_profile.all_damage}
+
+        tooltipDirection={TooltipDirection.UP}
+    />
+    <div class="la-combine-v -margin3-lr">
+        <MessageButton
+            flowClass={FlowClass.SendToChat}
+            uuid={slot.weapon.value.uuid}
+        />
+        <EditButton
+            flowClass={FlowClass.ContextMenu}
+            path={getWeaponPath(index)}
+        />
+    </div>
+{/snippet}
 <!-- /Snippets -->
 
     <!-- Weapon -->
@@ -117,29 +155,20 @@
         uuid={slot.weapon.value.uuid}
         path={getWeaponPath(index)}
         acceptTypes={"mech_weapon"}
+        collapseID={slot.weapon.value.uuid}
+        startCollapsed={true}
 
-        title={slot.weapon.value.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
+        text={slot.weapon.value.name}
+        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header", "la-anim-accent"]}
         headerFontStyle={[getHeaderStyle(slot.weapon.value), "-fontsize2"]}
 
-        subTitle={getSubtitle(slot.weapon.value)}
-        subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
+        subText={getSubtitle(slot.weapon.value)}
+        subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0", "la-anim-header"]}
         borderStyle={["-bordersoff"]}
         
-        collapse={collapse}
-        collapseID={slot.weapon.value}
-        startCollapsed={true}
         renderOutsideCollapse={renderLimited(slot.weapon.value) ? limitedUses : undefined}
-
-        rollAttackOption={true}
-        rollAttackStyle={[getRollStyle(slot.weapon.value)]}
-        weaponOption={true}
-        weaponDestroyed={isDestroyed(slot.weapon.value)}
-        weaponDamage={slot.weapon.value.system.active_profile.all_damage}
-        weaponRange={slot.weapon.value.system.active_profile.all_range}
-
-        messageOption={true}
-        editOption={true}
+        headerContentLeft={headerTertiaryLeftOptions}
+        headerContentRight={headerTertiaryRightOptions}
     >
     {#if !slot.weapon.value.system.destroyed}
         <div class="la-generated -widthfull -gap2 la-combine-v">

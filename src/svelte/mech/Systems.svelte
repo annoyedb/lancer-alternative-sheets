@@ -2,8 +2,10 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary from "@/svelte/actor/header/HeaderTertiary.svelte";
+    import HeaderTertiary, { HEADER_TERTIARY_ICON_BUTTON_STYLE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
@@ -12,6 +14,9 @@
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
+    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
+    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -93,7 +98,7 @@
 <HeaderMain
     text={getLocalized("LA.mech.system.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize2"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-system"]}
     
     collapseID={collID}
@@ -104,35 +109,54 @@
 {#if systemComponents.length}
     <div class="la-combine-v -gap0 -widthfull">
     {#each systemComponents as component, index}
+    {#snippet headerTertiaryLeftOptions()}
+        <EffectButton
+            iconStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, getIconStyle(component), "-glow-header", "-glow-primary-hover"]}
+            iconBackgroundStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "la-text-scrollbar-secondary"]}
+            
+            flowClass={component.value.system.effect 
+                ? FlowClass.SendEffectToChat 
+                : FlowClass.SendToChat}
+            path={`system.loadout.systems.${index}.value`}
+
+            tooltip={component.value.system.effect || getLocalized("LA.chat.tooltip")}
+            tooltipDirection={TooltipDirection.LEFT}
+        />
+    {/snippet}
+    {#snippet headerTertiaryRightOptions()}
+        <TotalSP
+            value={component.value.system.sp}
+            textStyle={[getSPStyle(component)]}
+            tooltip={getLocalized("LA.mech.system.points.tooltip")}
+        />
+        <div class="la-combine-v -margin3-lr">
+            <MessageButton
+                flowClass={FlowClass.SendToChat}
+            />
+            <EditButton
+                flowClass={FlowClass.ContextMenu}
+                path={`system.loadout.systems.${index}.value`}
+            />
+        </div>
+    {/snippet}
         <HeaderTertiary
-            itemID={component.value.uuid}
+            itemID={component.value.id}
             uuid={component.value.uuid}
             path={`system.loadout.systems.${index}.value`}
             acceptTypes={"mech_system"}
-
-            title={component.value.name}
-            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header"]}
-            headerFontStyle={[getTitleStyle(component), "-fontsize2"]}
-
-            subTitle={getSubtitle(component)}
-            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
-            iconStyle={[getIconStyle(component), "-fontsize9", "-lineheight8"]}
-
-            borderStyle={["-bordersoff"]}
-
-            collapse={collapse}
             collapseID={component.value.uuid}
             startCollapsed={true}
 
-            spOption={true}
-            spValue={component.value.system.sp}
-            spTextStyle={[getSPStyle(component), "-fontsize2"]}
-            spIconStyle={[getSPStyle(component), "-fontsize5"]}
+            text={component.value.name}
+            headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header", "la-anim-accent"]}
+            headerFontStyle={[getTitleStyle(component), "-fontsize2"]}
 
-            messageOption={true}
-            messageIconStyle={["-lineheight0"]}
-            editOption={true}
-            editIconStyle={["-lineheight0"]}
+            subText={getSubtitle(component)}
+            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0", "la-anim-header"]}
+            borderStyle={["-bordersoff"]}
+
+            headerContentLeft={headerTertiaryLeftOptions}
+            headerContentRight={headerTertiaryRightOptions}
         >
         {#if !getDestroyed(component)}
             <div class="la-generated -widthfull -gap2 la-combine-v">
