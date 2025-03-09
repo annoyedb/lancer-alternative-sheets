@@ -18,7 +18,7 @@ export class NPCSheetBase
             ],
             template: TEMPLATE_PATHS.npcSheetSvelte,
             width: 500,
-            height: 700,
+            height: 800,
             scrollY: [".LA_SCROLL_BODY"],
         }
     }
