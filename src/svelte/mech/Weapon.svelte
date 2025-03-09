@@ -84,7 +84,7 @@
     function renderLimited(weapon: any)
     {
         return (
-            weapon.system.sp || isLoading(weapon) || weapon.isLimited()
+            weapon.system.sp || isLoading(weapon) || weapon.isLimited() || weapon.system.mod
         );
     }
 </script>
@@ -102,17 +102,24 @@
     {/if}
 {/snippet}
 {#snippet limitedUses()}
-    <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
-        <LoadedBox
-            item={slot.weapon.value}
-            path={getWeaponPath(index)}
+    <div class="la-combine-v -gap0 -widthfull -margin2-l">
+        <WeaponMod
+            collapse={collapse}
+            mod={slot.weapon.value.system.mod}
+            path={`${getModPath(index)}`}
         />
-        <LimitedBox
-            usesValue={slot.weapon.value.system.uses.value}
-            usesMax={slot.weapon.value.system.uses.max}
-            path={getWeaponPath(index)}
-        />
-        {@render costSP()}
+        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
+            <LoadedBox
+                item={slot.weapon.value}
+                path={getWeaponPath(index)}
+            />
+            <LimitedBox
+                usesValue={slot.weapon.value.system.uses.value}
+                usesMax={slot.weapon.value.system.uses.max}
+                path={getWeaponPath(index)}
+            />
+            {@render costSP()}
+        </div>
     </div>
 {/snippet}
 {#snippet headerTertiaryLeftOptions()}
@@ -202,7 +209,7 @@
                 collapseID={getActionCollapseID(index)}
                 startCollapsed={false}
             />
-        {#if slot.size !== "Integrated"}
+        {#if slot.size !== "Integrated" && !slot.weapon.value.system.mod}
             <WeaponMod
                 collapse={collapse}
                 mod={slot.weapon.value.system.mod}

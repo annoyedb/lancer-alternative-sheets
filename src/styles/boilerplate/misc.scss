@@ -1,112 +1,115 @@
-.-pointerdisable
+.la-root
 {
-    pointer-events: none;
-}
-
-.-glow-header
-{
-    filter: drop-shadow(0px 0px 1.5px var(--header));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-}
-
-.-glow-secondary
-{
-    filter: drop-shadow(0px 0px 1.5px var(--secondary));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--secondary));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--secondary));
-}
-
-.-glow-active-hover
-{
-    &:hover
+    .-pointerdisable
     {
-        filter: drop-shadow(0px 0px 5px var(--active));
-        -webkit-filter: drop-shadow(0px 0px 5px var(--active));
-        -moz-filter: drop-shadow(0px 0px 5px var(--active));
+        pointer-events: none;
     }
-}
 
-.-glow-primary-hover
-{
-    &:hover
-    {
-        filter: drop-shadow(0px 0px 5px var(--primary));
-        -webkit-filter: drop-shadow(0px 0px 5px var(--primary));
-        -moz-filter: drop-shadow(0px 0px 5px var(--primary));
-    }
-}
-
-.-glow-header-active
-{
-    &:active
+    .-glow-header
     {
         filter: drop-shadow(0px 0px 1.5px var(--header));
         -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
         -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
     }
-}
 
-.-glow-header
-{
-    filter: drop-shadow(0px 0px 1.5px var(--header));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
-}
+    .-glow-secondary
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--secondary));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--secondary));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--secondary));
+    }
 
-.-glow-shield
-{
-    filter: drop-shadow(0px 0px 5px var(--bar-shield));
-    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-shield));
-    -moz-filter: drop-shadow(0px 0px 5px var(--bar-shield));
-}
+    .-glow-active-hover
+    {
+        &:hover
+        {
+            filter: drop-shadow(0px 0px 5px var(--active));
+            -webkit-filter: drop-shadow(0px 0px 5px var(--active));
+            -moz-filter: drop-shadow(0px 0px 5px var(--active));
+        }
+    }
 
-.-glow-burn
-{
-    filter: drop-shadow(0px 0px 5px var(--bar-burn));
-    -webkit-filter: drop-shadow(0px 0px 5px var(--bar-burn));
-    -moz-filter: drop-shadow(0px 0px 5px var(--bar-burn));
-}
+    .-glow-primary-hover
+    {
+        &:hover
+        {
+            filter: drop-shadow(0px 0px 5px var(--primary));
+            -webkit-filter: drop-shadow(0px 0px 5px var(--primary));
+            -moz-filter: drop-shadow(0px 0px 5px var(--primary));
+        }
+    }
 
-// TODO: probably generate these in the mixin
-.-glow-kinetic
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
-}
+    .-glow-header-active
+    {
+        &:active
+        {
+            filter: drop-shadow(0px 0px 1.5px var(--header));
+            -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+            -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+        }
+    }
 
-.-glow-energy
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
-}
+    .-glow-header
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--header));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+    }
 
-.-glow-explosive
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
-}
+    .-glow-shield
+    {
+        filter: drop-shadow(0px 0px 5px var(--bar-shield));
+        -webkit-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+        -moz-filter: drop-shadow(0px 0px 5px var(--bar-shield));
+    }
 
-.-glow-burn
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
-}
+    .-glow-burn
+    {
+        filter: drop-shadow(0px 0px 5px var(--bar-burn));
+        -webkit-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+        -moz-filter: drop-shadow(0px 0px 5px var(--bar-burn));
+    }
 
-.-glow-heat
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
-}
+    // TODO: probably generate these in the mixin
+    .-glow-kinetic
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--kinetic));
+    }
 
-.-glow-variable
-{
-    filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
-    -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
-    -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
+    .-glow-energy
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--energy));
+    }
+
+    .-glow-explosive
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--explosive));
+    }
+
+    .-glow-burn
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--burn));
+    }
+
+    .-glow-heat
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
+    }
+
+    .-glow-variable
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--variable));
+    }
 }

@@ -10,6 +10,7 @@
 
     const {
         name,
+        style,
         usesValue,
         usesMax,
         path,
@@ -24,7 +25,8 @@
 
 {#if usesMax}
 <div class="la-limited la-combine-h clipped-alt la-bckg-header-anti la-text-header 
-        -aligncenter -padding1-lr"
+        -aligncenter -padding1-lr
+        {style?.join(' ')}"
 >
     <span class="la-hexarray__span -fontsize1">
         {name}

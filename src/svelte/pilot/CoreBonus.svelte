@@ -47,15 +47,30 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
+        {#snippet renderLimited()}
+            {#if coreBonus.system.counters.length}
+            <div class="la-combine-v -gap0 -widthfull -margin2-l">
+            {#each coreBonus.system.counters as counter, jndex}
+                <CounterBox
+                    name={counter.name}
+                    usesValue={counter.value}
+                    usesMax={counter.max}
+                    path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
+                    style={["-widthfull"]}
+                />
+            {/each}
+            </div>
+            {/if}
+        {/snippet}
         {#snippet headerSecondaryLeftOptions()}
-        <i class="{SECONDARY_ICON_STYLE} cci cci-corebonus"></i>
+            <i class="{SECONDARY_ICON_STYLE} cci cci-corebonus"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
-        <EditButton
-            flowClass={FlowClass.ContextMenu}
-            path={`system.pilot.value.itemTypes.core_bonus.${index}`}
-            iconStyle={["-lineheight3"]}
-        />
+            <EditButton
+                flowClass={FlowClass.ContextMenu}
+                path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+                iconStyle={["-lineheight3"]}
+            />
         {/snippet}
         <HeaderSecondary
             text={coreBonus.name}
@@ -69,20 +84,11 @@
             collapseID={`${collID}.${index}`}
             startCollapsed={true}
 
+            renderOutsideCollapse={renderLimited}
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
         >
             <div class="la-generated -widthfull -gap2 la-combine-v">
-            {#if coreBonus.system.counters.length}
-            {#each coreBonus.system.counters as counter, jndex}
-                <CounterBox
-                    name={counter.name}
-                    usesValue={counter.value}
-                    usesMax={counter.max}
-                    path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
-                />
-            {/each}
-            {/if}
                 <BonusBox
                     bonuses={coreBonus.system.bonuses}
                     bonusPath={`itemTypes.core_bonus.${index}.system.bonuses`}

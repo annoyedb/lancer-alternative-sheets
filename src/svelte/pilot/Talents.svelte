@@ -21,15 +21,20 @@
     
     let talents = pilot.itemTypes.talent;
     let collID = `${pilot.uuid}.talents`;
-    
-    function getActionCollID(talentIndex: number, rankIndex: number)
-    {
-        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
-    }
 
     function getTalentCollID(talentIndex: number)
     {
         return `${pilot.uuid}.talents.${talentIndex}`;
+    }
+
+    function getRankCollID(talentIndex: number, rankIndex: number)
+    {
+        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}`;
+    }
+    
+    function getActionCollID(talentIndex: number, rankIndex: number)
+    {
+        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
     }
 
     function forceUpdateTalent(event: MouseEvent, _talent: any)
@@ -69,10 +74,10 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
-        {#snippet headerSecondaryTalentLeftOptions()}
+    {#snippet headerSecondaryTalentLeftOptions()}
         <i class="{SECONDARY_ICON_STYLE} cci cci-license"></i>
-        {/snippet}
-        {#snippet headerSecondaryTalentRightOptions()}
+    {/snippet}
+    {#snippet headerSecondaryTalentRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
             iconStyle={["-lineheight3"]}
@@ -81,7 +86,7 @@
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
         />
-        {/snippet}
+    {/snippet}
         <HeaderSecondary
             text={`${talent.name} ${talent.system.curr_rank}`}
             headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
@@ -101,15 +106,31 @@
             <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
             {#if jndex < talent.system.curr_rank}
-                {#snippet headerSecondaryRankLeftOptions()}
-                <i class="{SECONDARY_ICON_STYLE} cci cci-talent"></i>
+                {#snippet renderLimited()}
+                    {#if rank.counters.length}
+                        <div class="la-combine-v -gap0 -widthfull -margin2-l">
+                            {#each rank.counters as counter, kndex}
+                                <CounterBox
+                                    name={counter.name}
+                                    usesValue={counter.value}
+                                    usesMax={counter.max}
+                                    path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
+                                    onClick={(event) => forceUpdateTalent(event, talent)}
+                                    style={["-widthfull"]}
+                                />
+                            {/each}
+                        </div>
+                    {/if}
                 {/snippet}
-                {#snippet headerSecondaryRankRightOptions()}
-                <MessageButton
-                    flowClass={FlowClass.SendToChat}
-                    uuid={talent.uuid}
-                    rank={jndex}
-                />
+                {#snippet headerSecondaryRankLeftOptions()}
+                    <i class="{SECONDARY_ICON_STYLE} cci cci-talent"></i>
+                {/snippet}
+                    {#snippet headerSecondaryRankRightOptions()}
+                    <MessageButton
+                        flowClass={FlowClass.SendToChat}
+                        uuid={talent.uuid}
+                        rank={jndex}
+                    />
                 {/snippet}
                 <HeaderSecondary
                     text={rank.name}
@@ -119,24 +140,14 @@
 
                     rootStyle={["ref", "set"]}
                     uuid={talent.uuid}
-                    collapseID={rank}
+                    collapseID={getRankCollID(index, jndex)}
                     startCollapsed={false}
                     
+                    renderOutsideCollapse={renderLimited}
                     headerContentLeft={headerSecondaryRankLeftOptions}
                     headerContentRight={headerSecondaryRankRightOptions}
                 >
                     <div class="la-generated -widthfull -gap2 la-combine-v">
-                    {#if rank.counters.length}
-                    {#each rank.counters as counter, kndex}
-                        <CounterBox
-                            name={counter.name}
-                            usesValue={counter.value}
-                            usesMax={counter.max}
-                            path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
-                            onClick={(event) => forceUpdateTalent(event, talent)}
-                        />
-                    {/each}
-                    {/if}
                         <BonusBox
                             bonuses={rank.bonuses}
                             bonusPath={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}

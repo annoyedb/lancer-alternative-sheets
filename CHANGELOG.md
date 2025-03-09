@@ -4,11 +4,13 @@ This mainly major refactors to primary Svelte components for a little better reu
 ## Changes
 * Collapsing headers should be a little more obvious now that the "extension" will state what it does when you hover over it --suggested by one of my players!
 * As a result of some confusion over the current expand/collapse all button, expanding/collapsing all now affects the main header it is attached to --hopefully this will be more intuitive to everyone!
+* Reactions on the NPC sheet use the Reaction icon now `oop`
+* On the mech sheet, weapon mods, loaded tags, system limited tags, counters (only in Talent and Core Power where relevant) are now above the collapse area, so will always be displayed for easy access 
 * Minor adjustments to styling: adjusted header thickness and spacing between header and Core Power activation button
 * Slightly changed the animation for collapses to feel a bit more responsive
 * Reworded the tooltip for recharging NPC abilities for how it is actually rolled
-* Reactions on the NPC sheet use the Reaction icon now `oop`
 * Overcharge tooltip now also states the overcharge stage
+* Counter buttons now glow as everything else clickable does
 
 # 1.1.2
 ## Changes
