@@ -5,7 +5,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { collapseStates, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
     import { onMount } from "svelte";
-    import TerminalText from "../TerminalText.svelte";
+    import TerminalText from "@/svelte/actor/TerminalText.svelte";
 
     const {
         children,
