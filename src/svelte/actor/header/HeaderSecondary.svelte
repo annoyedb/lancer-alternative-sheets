@@ -1,12 +1,11 @@
 <script lang="ts">
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
-
     import type { HeaderSecondaryProps } from "@/interfaces/actor/header/HeaderSecondaryProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import { collapseStates, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
     import { onMount } from "svelte";
-    import TerminalText from "../TerminalText.svelte";
     import { getLocalized } from "@/scripts/helpers";
+    import TerminalText from "@/svelte/actor/TerminalText.svelte";
 
     const {
         children,
