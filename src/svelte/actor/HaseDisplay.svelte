@@ -25,7 +25,7 @@
             path={"system.grit"}
             sign={true}
             
-            outerStyle={["-positionrelative", "-grit", "-fontsize13", "bold", "-right2"]}
+            outerStyle={["-positionrelative", "-grit", "-fontsize13", "-bold", "-right2"]}
             innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5", "-divider", "-thickness1", "la-anim-header"]}
             buttonStyle={["-width7", "-height6", "-glow-primary-hover"]}
             outerTextStyle={["-lineheight0", "la-text-header", "la-text-header", "-width7", "-textaligncenter"]}
