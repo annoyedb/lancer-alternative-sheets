@@ -62,7 +62,7 @@
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt", "-padding0-r"]}
 
         collapseID={`${actor.uuid}.status.utilities`}
-        startCollapsed={false}
+        startCollapsed={true}
     >
         <FlowButton 
             flowClass={FlowClass.RechargeFeatures}

@@ -14,7 +14,7 @@
 	"LA.delete.label": "DELETE",
 	"LA.delete.tooltip": "Delete this item",
 	"LA.edit.label": "EDIT",
-	"LA.collapseAll.tooltip": "Collapse or expand all headers including this one",
+	"LA.collapseAll.tooltip": "Collapse or expand this header and all its subheaders",
 	"LA.edit.tooltip": "Edit this item",
 	"LA.chat.tooltip": "Send a card representing this item to the chat",
 	"LA.activate.label": "ACTIVATE",
