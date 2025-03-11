@@ -17,6 +17,8 @@
         onClick,
     }: CounterBoxProps = $props();
 
+    const defaultStyle = "clipped-alt -widthfull la-bckg-header-anti"
+
     //@ts-ignore
     function log(any: any) {
         console.log(any);
@@ -24,9 +26,8 @@
 </script>
 
 {#if usesMax}
-<div class="la-limited la-combine-h clipped-alt la-bckg-header-anti la-text-header 
-        -aligncenter -padding1-lr
-        {style?.join(' ')}"
+<div class="la-limited la-combine-h la-text-header -aligncenter -padding1-lr
+        {style?.join(' ') || defaultStyle}"
 >
     <span class="la-hexarray__span -fontsize1">
         {name}

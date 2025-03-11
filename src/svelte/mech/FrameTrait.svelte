@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
@@ -32,7 +32,7 @@
 {#each frame.system.traits as trait, index}
 
 {#snippet headerSecondaryLeftOptions()}
-<i class="{SECONDARY_ICON_STYLE} cci cci-frame"></i>
+<i class="{H2_ICON_SIZE} cci cci-frame"></i>
 {/snippet}
 {#snippet headerSecondaryRightOptions()}
 <MessageButton
@@ -46,7 +46,7 @@
 <!-- Frame Traits -->
 <HeaderSecondary
     text={trait.name}
-    headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot", "la-anim-header"]}
+    headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
     textStyle={["-fontsize2"]}
     borderStyle={["-bordersoff"]}
     

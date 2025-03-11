@@ -1,6 +1,6 @@
 <script lang="ts">
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -8,7 +8,7 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
+    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "../actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
@@ -63,7 +63,14 @@
     function getHeaderStyle(tech: any)
     {
         return isDestroyed(tech)
-            ? "la-text-error horus--very--subtle -strikethrough"
+            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
+            : "la-text-header la-anim-header";
+    }
+
+    function getIconStyle(tech: any)
+    {
+        return isDestroyed(tech)
+            ? "la-text-repcap"
             : "la-text-header";
     }
 </script>
@@ -88,8 +95,8 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each techs as tech}
-    {#snippet techSpecial()}
-        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+    {#snippet outerContent()}
+        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             {#if hasAccuracyBonus(tech)}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
                     data-tooltip={accuracyTip}
@@ -124,7 +131,7 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", getTechIcon(tech)]}
+            iconStyle={[getIconStyle(tech), "cci", getTechIcon(tech), "-fontsize5"]}
 
             flowClass={FlowClass.RollTech}
             path={`itemTypes.npc_feature.${tech.index}`}
@@ -132,6 +139,8 @@
             tooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipHeader={getTechTipHeader(tech)}
             tooltipDirection={TooltipDirection.UP}
+
+            disabled={isDestroyed(tech)}
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
@@ -150,7 +159,7 @@
     {/snippet}
         <HeaderSecondary
             text={tech.name}
-            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={[getHeaderStyle(tech), "-fontsize1"]}
             borderStyle={["-bordersoff"]}
 
@@ -161,7 +170,7 @@
             
             collapseID={tech.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasTechSpecial(tech) ? techSpecial : undefined}
+            renderOutsideCollapse={hasTechSpecial(tech) ? outerContent : undefined}
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}

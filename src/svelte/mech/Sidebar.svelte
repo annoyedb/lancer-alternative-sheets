@@ -30,14 +30,14 @@
 </script>
 
 <!-- Frame Name -->
-<span class="la-framename -overflowhidden">
-    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header la-dropshadow clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
+<div class="la-framename -overflowhidden">
+    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-cmdline la-text-header -fadein">>//: </span>
         {frameName}
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-anim-header -fadein"></span>
     </div>
-</span>
+</div>
 <div class="la-mech la-dropshadow -aligncontentcenter">
     <!-- Size, Speed, & Core Availability -->
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
@@ -72,7 +72,7 @@
     </div>
 </div>
 <!-- Mech Stats 1 -->
-<div class="la-stats la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
     <StatComboShort
         icon={"cci cci-role-defender"}
         label={getLocalized("LA.armor.short")}
@@ -105,7 +105,7 @@
     />
 </div>
 <!-- Mech Bars -->
-<div class="la-damage -margin0-lr -margin2-tb">
+<div class="la-damage la-dropshadow -margin0-lr -margin2-tb">
     <div class="la-combine-h -gap2">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR) -->
@@ -205,7 +205,7 @@
     </div>
 </div>
 <!-- Mech Stats 2 -->
-<div class="la-stats la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
     <StatComboShort
         icon={"cci cci-tech-full"}
         label={getLocalized("LA.tattack.short")}
@@ -238,7 +238,7 @@
     />
 </div>
 <!-- Mech Stats 3 -->
-<div class="la-stats la-combine-h -justifyevenly -margin1-t">
+<div class="la-stats la-dropshadow la-combine-h -justifyevenly -margin1-t">
     <StatComboShort
         icon={"cci cci-overcharge"}
         label={getLocalized("LA.overcharge.short")}

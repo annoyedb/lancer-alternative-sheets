@@ -89,7 +89,7 @@
         />
         <!-- Header Options -->
     {#if extraOptions}
-        <div class="la-combine-h -gap2">
+        <div class="la-combine-h -gap2 -aligncenter">
         {#if headerContent}
             {@render headerContent()}
         {/if}

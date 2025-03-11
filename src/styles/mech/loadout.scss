@@ -4,7 +4,8 @@
     {
         // Make only the damage glow on hovering the button
         // to indicate what is actually being rolled
-        .la-properties:hover>.la-damage>.la-number__span
+        // But only if the button is not disabled
+        .la-properties:not([disabled]):hover>.la-damage>.la-number__span
         {
             filter: drop-shadow(0px 0px 5px var(--primary));
             -webkit-filter: drop-shadow(0px 0px 5px var(--primary));

@@ -3,7 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -47,23 +47,23 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
-        {#snippet renderLimited()}
+        {#snippet outercontent()}
             {#if coreBonus.system.counters.length}
-            <div class="la-combine-v -gap0 -widthfull -margin2-l">
+            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             {#each coreBonus.system.counters as counter, jndex}
                 <CounterBox
                     name={counter.name}
                     usesValue={counter.value}
                     usesMax={counter.max}
                     path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
-                    style={["-widthfull"]}
+                    style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                 />
             {/each}
             </div>
             {/if}
         {/snippet}
         {#snippet headerSecondaryLeftOptions()}
-            <i class="{SECONDARY_ICON_STYLE} cci cci-corebonus"></i>
+            <i class="{H2_ICON_SIZE} cci cci-corebonus"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
             <EditButton
@@ -74,7 +74,7 @@
         {/snippet}
         <HeaderSecondary
             text={coreBonus.name}
-            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
             
@@ -84,7 +84,7 @@
             collapseID={`${collID}.${index}`}
             startCollapsed={true}
 
-            renderOutsideCollapse={renderLimited}
+            renderOutsideCollapse={outercontent}
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
         >

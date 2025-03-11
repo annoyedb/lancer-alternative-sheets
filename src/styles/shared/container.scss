@@ -44,6 +44,8 @@
     .collapse-wrapper
     {
         transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
+        -webkit-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
+        -moz-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
         max-height: 100%;
 
         &.collapsed

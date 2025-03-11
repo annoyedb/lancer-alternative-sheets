@@ -2,14 +2,14 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { id as moduleID } from '@/module.json';
+    import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
 
-    const { actor, pilot }: MechSheetProps = $props();
+    const { 
+        actor, 
+        pilot 
+    }: MechSheetProps = $props();
 
-    async function openSheetSettings(_event: MouseEvent)
-    {
-        
-    }
-
+    // @ts-expect-error
     function getVersion()
     {
         // @ts-expect-error
@@ -19,18 +19,12 @@
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
-    <!-- Actor Sheet Settings -->
-    {#if getVersion() >= 12}
+    <!-- Advanced Options Toggle -->
     <div class="la-settings__island -padding1">
-        <button type="button" 
-            class=""
-            aria-label="{getLocalized("LA.setting.customize.label")}"
-            onclick={(event) => openSheetSettings(event)}
-        >
-            <i class="mdi mdi-cogs"></i>
-        </button>
+        <AdvancedButton
+            key={actor.uuid}
+        />
     </div>
-    {/if}
     <div class="la-names las-combine-v -margin3">
         <input 
             class="la-mechname__input la-text-header -upper -fontsize5

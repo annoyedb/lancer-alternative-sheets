@@ -1,6 +1,6 @@
 <script lang="ts">
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -8,7 +8,7 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
+    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "../actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
@@ -33,10 +33,17 @@
         return trait.system.destroyed;
     }
 
-    function getHeaderStyle(trait: any)
+    function getHeaderStyle(reaction: any)
     {
-        return isDestroyed(trait)
-            ? "la-text-error horus--very--subtle -strikethrough"
+        return isDestroyed(reaction)
+            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
+            : "la-text-header la-anim-header";
+    }
+
+    function getIconStyle(reaction: any)
+    {
+        return isDestroyed(reaction)
+            ? "la-text-repcap"
             : "la-text-header";
     }
 </script>
@@ -61,8 +68,8 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}
-    {#snippet limitedUses()}
-        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+    {#snippet outerContent()}
+        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             <ChargedBox
                 item={trait}
             />
@@ -77,13 +84,15 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-trait"]}
+            iconStyle={[getIconStyle(trait), "cci", "cci-trait", "-fontsize5"]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}
 
             tooltip={trait.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipDirection={TooltipDirection.UP}
+
+            disabled={isDestroyed(trait)}
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
@@ -102,7 +111,7 @@
     {/snippet}
         <HeaderSecondary
             text={trait.name}
-            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={[getHeaderStyle(trait), "-fontsize1", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
 
@@ -113,7 +122,7 @@
             
             collapseID={trait.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasTraitSpecial(trait) ? limitedUses : undefined}
+            renderOutsideCollapse={hasTraitSpecial(trait) ? outerContent : undefined}
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}

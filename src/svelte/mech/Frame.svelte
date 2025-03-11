@@ -6,7 +6,7 @@
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "./FramePassivePower.svelte";
     import FrameTrait from "./FrameTrait.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
@@ -45,7 +45,7 @@
     />
 {/snippet}
 {#snippet headerSecondaryLeftOptions()}
-    <i class="-fontsize5 -lineheight3 cci cci-corebonus"></i>
+    <i class="{H2_ICON_SIZE} cci cci-corebonus"></i>
 {/snippet}
 
 <HeaderMain
@@ -61,29 +61,35 @@
 >
 {#if frame}
     <div class="la-generated la-combine-v -widthfull -gap0">
-        <!-- FRAME POWER -->
-        <HeaderSecondary
-            text={core.name}
-            headerStyle={[SECONDARY_HEADER_STYLE, frameColorBckg, "la-anim-header"]}
-            textStyle={["-fontsize2"]}
-            borderStyle={["-bordersoff"]}
-
-            collapseID={`${collID}.core`}
-            startCollapsed={true}
-
-            headerContentLeft={headerSecondaryLeftOptions}
-        >
-            <div class="la-generated la-combine-v -widthfull -gap0">
+        {#snippet outerContent()}
             {#if core.counters?.length}
+            <div class="la-combine-v -widthfull -padding2-l">
             {#each core.counters as counter, index}
                 <CounterBox
                     name={counter.name}
                     usesValue={counter.value}
                     usesMax={counter.max}
                     path={`system.loadout.frame.value.system.core_system.counters.${index}`}
+                    style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                 />
             {/each}
+            </div>
             {/if}
+        {/snippet}
+        <!-- FRAME POWER -->
+        <HeaderSecondary
+            text={core.name}
+            headerStyle={[H2_HEADER_STYLE, frameColorBckg]}
+            textStyle={["-fontsize2"]}
+            borderStyle={["-bordersoff"]}
+
+            collapseID={`${collID}.core`}
+            startCollapsed={true}
+
+            renderOutsideCollapse={outerContent}
+            headerContentLeft={headerSecondaryLeftOptions}
+        >
+            <div class="la-combine-v -widthfull -gap0">
                 <FrameActivePower {...props} />
                 <FramePassivePower {...props} />
             {#if core.tags?.length}

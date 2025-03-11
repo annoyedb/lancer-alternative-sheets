@@ -4,7 +4,7 @@
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import HeaderTertiary, { HEADER_TERTIARY_ICON_BUTTON_STYLE } from "@/svelte/actor/header/HeaderTertiary.svelte";
+    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -55,15 +55,15 @@
     function getSubtitleStyle(weapon:any)
     {
         return isDestroyed(weapon)
-            ? "la-text-error horus--very--subtle"
-            : "la-text-header";
+            ? "la-text-error la-anim-error horus--very--subtle"
+            : "la-text-header la-anim-header";
     }
 
-    function getRollStyle(weapon: any)
+    function getIconStyle(weapon: any)
     {
         return isDestroyed(weapon)
-            ? "la-text-repcap"
-            : "la-text-header";
+            ? `la-text-repcap`
+            : `-glow-header -glow-primary-hover`;
     }
 
     function getWeaponPath(index: number)
@@ -93,6 +93,7 @@
 {#if slot.weapon?.value}
 
 <!-- Snippets -->
+ <!-- TODO: this could be replaced with TotalSP component -->
 {#snippet costSP()}
     {#if slot.weapon.value.system.sp}
     <div class="la-loading la-hexarray la-combine-h -aligncenter la-text-header -fontsize5">
@@ -101,8 +102,8 @@
     </div>
     {/if}
 {/snippet}
-{#snippet limitedUses()}
-    <div class="la-combine-v -gap0 -widthfull -margin2-l">
+{#snippet outerContent()}
+    <div class="la-combine-v -gap0 -widthfull -padding2-l">
         <WeaponMod
             collapse={collapse}
             mod={slot.weapon.value.system.mod}
@@ -124,24 +125,29 @@
 {/snippet}
 {#snippet headerTertiaryLeftOptions()}
     <AttackButton
+        iconStyle={[H3_ICON_SIZE, getIconStyle(slot.weapon.value), "cci", "cci-weapon"]}
+        iconBackgroundStyle={[H3_ICON_SIZE, "la-text-scrollbar-secondary"]}
+
         flowClass={FlowClass.RollAttack}
-        iconStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "cci", "cci-weapon", "-glow-header", "-glow-primary-hover"]}
-        iconBackgroundStyle={[HEADER_TERTIARY_ICON_BUTTON_STYLE, "la-text-scrollbar-secondary"]}
         path={`system.loadout.weapon_mounts.${index}`}
 
         tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
+
+        disabled={isDestroyed(slot.weapon.value)}
     />
 {/snippet}
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
-        textStyle={[getRollStyle(slot.weapon.value)]}
+        textStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined}
         
         flowClass={FlowClass.RollDamage}
         range={slot.weapon.value.system.active_profile.all_range}
         damage={slot.weapon.value.system.active_profile.all_damage}
 
         tooltipDirection={TooltipDirection.UP}
+
+        disabled={isDestroyed(slot.weapon.value)}
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton
@@ -155,7 +161,6 @@
     </div>
 {/snippet}
 <!-- /Snippets -->
-
     <!-- Weapon -->
     <HeaderTertiary
         itemID={slot.weapon.value.id}
@@ -166,14 +171,14 @@
         startCollapsed={true}
 
         text={slot.weapon.value.name}
-        headerStyle={["la-bckg-pilot", "clipped-bot-alt", "-padding0-tb", "la-text-header", "la-anim-accent"]}
+        headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
         headerFontStyle={[getHeaderStyle(slot.weapon.value), "-fontsize2"]}
 
         subText={getSubtitle(slot.weapon.value)}
-        subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0", "la-anim-header"]}
+        subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
         
-        renderOutsideCollapse={renderLimited(slot.weapon.value) ? limitedUses : undefined}
+        renderOutsideCollapse={renderLimited(slot.weapon.value) ? outerContent : undefined}
         headerContentLeft={headerTertiaryLeftOptions}
         headerContentRight={headerTertiaryRightOptions}
     >
@@ -235,7 +240,8 @@
 <details class="la-details -widthfull la-combine-v
         ref set drop-settable mech_weapon"
     data-accept-types="mech_weapon"
-    data-path={getWeaponPath(index)}>
+    data-path={getWeaponPath(index)}
+>
     <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
         <div class="la-left la-combine-h">
             <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>

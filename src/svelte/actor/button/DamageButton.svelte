@@ -28,11 +28,11 @@
         textStyle,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & {textStyle?: Array<string>} = $props();
 
-    const hasAllWeaponProperties = damage?.length && range?.length;
     let tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
-</script>
-<script lang="ts" module>
-    export const HEADER_TERTIARY_ICON_BACKGROUND_STYLE: string = "-positionabsolute -fontsize9 la-text-scrollbar-secondary";
+    const hasAllWeaponProperties = damage?.length && range?.length;
+    const rollable = (!disabled && (damage?.length > 0));
+
+    const defaultIconBackgroundStyle = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
 </script>
 
 <button type="button"
@@ -40,10 +40,10 @@
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
-    data-tooltip={damage && damage.length > 0 ? tip : ""}
+    data-tooltip={rollable ? tip : undefined}
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    disabled={disabled || !(damage && damage.length > 0)}
+    disabled={!rollable}
 >
     <!-- Generated Range -->
 {#if range}
@@ -56,10 +56,14 @@
 {#if damage}
     <DamageArray
         damages={damage}
-        style={[...textStyle || [], disabled ? "" : "-glow-header"]}
+        style={[...textStyle || [], disabled ? "" : "-glow-header -glow-primary-hover"]}
     />
 {/if}
-{#if damage?.length}
-    <i class="fal fa-dice-d20 {iconBackgroundStyle?.join(' ') || HEADER_TERTIARY_ICON_BACKGROUND_STYLE}" style="z-index: -1;"></i>
+{#if !disabled && damage?.length}
+    <i 
+        class="fal fa-dice-d20 
+            {iconBackgroundStyle?.join(' ') || defaultIconBackgroundStyle}" 
+        style="z-index: -1;"
+    ></i>
 {/if}
 </button>

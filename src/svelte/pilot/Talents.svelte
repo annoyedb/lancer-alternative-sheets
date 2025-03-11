@@ -3,7 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE, SECONDARY_ICON_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -75,7 +75,7 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
     {#snippet headerSecondaryTalentLeftOptions()}
-        <i class="{SECONDARY_ICON_STYLE} cci cci-license"></i>
+        <i class="{H2_ICON_SIZE} cci cci-license"></i>
     {/snippet}
     {#snippet headerSecondaryTalentRightOptions()}
         <EditButton
@@ -89,7 +89,7 @@
     {/snippet}
         <HeaderSecondary
             text={`${talent.name} ${talent.system.curr_rank}`}
-            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
             
@@ -106,24 +106,24 @@
             <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
             {#if jndex < talent.system.curr_rank}
-                {#snippet renderLimited()}
+                {#snippet outerContent()}
                     {#if rank.counters.length}
-                        <div class="la-combine-v -gap0 -widthfull -margin2-l">
-                            {#each rank.counters as counter, kndex}
-                                <CounterBox
-                                    name={counter.name}
-                                    usesValue={counter.value}
-                                    usesMax={counter.max}
-                                    path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
-                                    onClick={(event) => forceUpdateTalent(event, talent)}
-                                    style={["-widthfull"]}
-                                />
-                            {/each}
-                        </div>
+                    <div class="la-combine-v -widthfull -padding2-l">
+                    {#each rank.counters as counter, kndex}
+                        <CounterBox
+                            name={counter.name}
+                            usesValue={counter.value}
+                            usesMax={counter.max}
+                            path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
+                            onClick={(event) => forceUpdateTalent(event, talent)}
+                            style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                        />
+                    {/each}
+                    </div>
                     {/if}
                 {/snippet}
                 {#snippet headerSecondaryRankLeftOptions()}
-                    <i class="{SECONDARY_ICON_STYLE} cci cci-talent"></i>
+                    <i class="{H2_ICON_SIZE} cci cci-talent"></i>
                 {/snippet}
                     {#snippet headerSecondaryRankRightOptions()}
                     <MessageButton
@@ -134,7 +134,7 @@
                 {/snippet}
                 <HeaderSecondary
                     text={rank.name}
-                    headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-header-anti"]}
+                    headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
                     textStyle={["-fontsize2"]}
                     borderStyle={["la-brdr-header-anti"]}
 
@@ -143,7 +143,7 @@
                     collapseID={getRankCollID(index, jndex)}
                     startCollapsed={false}
                     
-                    renderOutsideCollapse={renderLimited}
+                    renderOutsideCollapse={outerContent}
                     headerContentLeft={headerSecondaryRankLeftOptions}
                     headerContentRight={headerSecondaryRankRightOptions}
                 >

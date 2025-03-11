@@ -6,6 +6,8 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { CLICKABLE_HOVER } from "@/svelte/actor/button/Button.svelte";
+    import { H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
 
     const {
         style,
@@ -22,20 +24,30 @@
     }: IconButtonProps & ButtonProps & TooltipProps = $props();
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollAttack.tooltip"), tooltipHeader);
-</script>
-<script lang="ts" module>
-    export const HEADER_TERTIARY_STYLE: string = "la-text-header -fontsize9 -lineheight8";
+    const defaultIconBackgroundStyle = `${H3_ICON_SIZE} la-text-scrollbar-secondary`
+    const defaultIconStyle = `${H3_ICON_SIZE}`
 </script>
 
 <button type="button" 
-    class="{style?.join(' ')}
+    class="
+        {style?.join(' ')}
         {flowClass || FlowClass.RollAttack}"
-    data-tooltip={tip}
+    data-tooltip={disabled ? undefined : tip}
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
-    aria-label={getLocalized("LA.flow.rollAttack.label")}
+    aria-label={tooltip || getLocalized("LA.flow.rollAttack.tooltip")}
     disabled={disabled || false}
 >
-    <i class="{iconStyle?.join(' ')}"></i>
-    <i class="fal fa-dice-d20 -positionabsolute -left0 {iconBackgroundStyle?.join(' ')}" style="z-index: -1;"></i>
+    <i 
+        class="
+            {disabled ? "" : CLICKABLE_HOVER}
+            {iconStyle?.join(' ') || defaultIconStyle}"
+    ></i>
+{#if !disabled}
+    <i 
+        class="fal fa-dice-d20 -positionabsolute -left0 
+            {iconBackgroundStyle?.join(' ') || defaultIconBackgroundStyle}" 
+        style="z-index: -1;"
+    ></i>
+{/if}
 </button>

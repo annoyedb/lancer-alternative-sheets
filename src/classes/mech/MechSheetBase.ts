@@ -9,6 +9,7 @@ import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
+import AdvancedSettings from "@/svelte/mech/AdvancedSettings.svelte";
 
 export class MechSheetBase
 {
@@ -135,6 +136,11 @@ export class MechSheetBase
                     target: html.find(".la-SVELTE-STATUS")[0],
                     props: data,
                 });
+                mount(AdvancedSettings,
+                {
+                    target: html.find(".la-SVELTE-ADVANCED")[0],
+                    props: data,
+                })
                 mount(Loadout,
                 {
                     target: html.find(".la-SVELTE-LOADOUT")[0],

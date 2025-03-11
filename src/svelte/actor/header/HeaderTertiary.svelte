@@ -38,7 +38,6 @@
     });
 
     const extraOptions = headerContentRight ? true : false;
-    const defaultHeaderStyle = "la-bckg-primary -padding0-tb -padding3-lr"
     
     onMount(() => 
     {
@@ -66,7 +65,9 @@
     }
 </script>
 <script lang="ts" module>
-    export const HEADER_TERTIARY_ICON_BUTTON_STYLE: string = "-fontsize7";
+    export const H3_ICON_SIZE: string = "-fontsize7";
+    export const H3_HEADER_STYLE = "clipped-bot-alt -padding0-tb la-text-header la-anim-accent"
+
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
@@ -83,7 +84,7 @@
     <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull
-            {headerStyle?.join(' ') || defaultHeaderStyle}
+            {headerStyle?.join(' ') || H3_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >

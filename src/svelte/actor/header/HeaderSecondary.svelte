@@ -64,8 +64,9 @@
     }
 </script>
 <script lang="ts" module>
-    export const SECONDARY_HEADER_STYLE = "clipped-bot-alt -padding0 -padding3-r la-text-header la-anim-header";
-    export const SECONDARY_ICON_STYLE = "-fontsize5 -lineheight3"
+    export const H2_HEADER_STYLE = "clipped-bot-alt -padding0-l -padding3-r la-text-header la-anim-header";
+    export const H2_ICON_SIZE = "-fontsize5";
+    export const H2_TEXT_SIZE = "-fontsize2";
 </script>
 
 
@@ -83,7 +84,7 @@
     <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
-            {headerStyle?.join(' ') || SECONDARY_HEADER_STYLE}
+            {headerStyle?.join(' ') || H2_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >

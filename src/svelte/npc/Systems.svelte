@@ -1,6 +1,6 @@
 <script lang="ts">
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { SECONDARY_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -8,7 +8,7 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EffectButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_BUTTON_STYLE } from "@/svelte/actor/button/EffectButton.svelte";
+    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "../actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
@@ -21,9 +21,9 @@
         system,
         systems,
     }: NPCSheetProps & {systems : Array<any>} = $props();
-
+    
     const tier = system.tier;
-    let collID = `${actor.uuid}.systems`;
+    const collID = `${actor.uuid}.systems`;
 
     function hasComponentSpecial(component: any)
     {
@@ -48,7 +48,14 @@
     function getHeaderStyle(component: any)
     {
         return isDestroyed(component)
-            ? "la-text-error horus--very--subtle -strikethrough"
+            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
+            : "la-text-header la-anim-header";
+    }
+
+    function getIconStyle(component: any)
+    {
+        return isDestroyed(component)
+            ? "la-text-repcap"
             : "la-text-header";
     }
 </script>
@@ -73,8 +80,9 @@
 >
     <div class="la-combine-v -gap0 -widthfull">
     {#each systems as component}
-    {#snippet limitedUses()}
-        <div class="la-combine-h clipped-alt la-text-header la-bckg-header-anti -widthfull -margin2-l">
+    {#snippet outerContent()}
+        {#if !isDestroyed(component)}
+        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             <ChargedBox
                 item={component}
             />
@@ -86,16 +94,19 @@
                 usesMax={component.system.uses.max}
             />
         </div>
+        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[HEADER_SECONDARY_ICON_BUTTON_STYLE, "cci", "cci-system"]}
+            iconStyle={[getIconStyle(component), "cci", "cci-system", "-fontsize5"]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${component.index}`}
 
             tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipDirection={TooltipDirection.UP}
+
+            disabled={isDestroyed(component)}
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
@@ -114,7 +125,7 @@
     {/snippet}
         <HeaderSecondary
             text={component.name}
-            headerStyle={[SECONDARY_HEADER_STYLE, "la-bckg-pilot"]}
+            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={[getHeaderStyle(component), "-fontsize1"]}
             borderStyle={["-bordersoff"]}
 
@@ -125,7 +136,7 @@
             
             collapseID={component.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasComponentSpecial(component) ? limitedUses : undefined}
+            renderOutsideCollapse={hasComponentSpecial(component) ? outerContent : undefined}
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
