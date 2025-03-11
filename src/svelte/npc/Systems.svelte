@@ -82,17 +82,19 @@
     {#each systems as component}
     {#snippet outerContent()}
         {#if !isDestroyed(component)}
-        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
-            <ChargedBox
-                item={component}
-            />
-            <LoadedBox
-                item={component}
-            />
-            <LimitedBox
-                usesValue={component.system.uses.value}
-                usesMax={component.system.uses.max}
-            />
+        <div class="-widthfull -padding2-l">
+            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+                <ChargedBox
+                    item={component}
+                />
+                <LoadedBox
+                    item={component}
+                />
+                <LimitedBox
+                    usesValue={component.system.uses.value}
+                    usesMax={component.system.uses.max}
+                />
+            </div>
         </div>
         {/if}
     {/snippet}

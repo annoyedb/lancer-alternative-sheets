@@ -89,18 +89,22 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each reactions as reaction}
     {#snippet outerContent()}
-        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
-            <ChargedBox
-                item={reaction}
-            />
-            <LoadedBox
-                item={reaction}
-            />
-            <LimitedBox
-                usesValue={reaction.system.uses.value}
-                usesMax={reaction.system.uses.max}
-            />
+        {#if !isDestroyed(reaction)}
+        <div class="-widthfull -padding2-l">
+            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
+                <ChargedBox
+                    item={reaction}
+                />
+                <LoadedBox
+                    item={reaction}
+                />
+                <LimitedBox
+                    usesValue={reaction.system.uses.value}
+                    usesMax={reaction.system.uses.max}
+                />
+            </div>
         </div>
+        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton

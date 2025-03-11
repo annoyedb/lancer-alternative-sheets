@@ -90,38 +90,42 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each weapons as weapon, index}
     {#snippet outerContent()}
-        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
-        {#if hasAccuracyBonus(weapon)}
-            <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
-                data-tooltip={accuracyTip}
-                data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={TooltipDirection.DOWN}
-            >
-                {weapon.system.accuracy[tier - 1]}
-                <i class="cci cci-accuracy -fontsize4"></i>
-            </span>
-        {/if}
-        {#if hasAttackBonus(weapon)}
-            <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
-                data-tooltip={attackTip}
-                data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={TooltipDirection.DOWN}
-            >
-                {weapon.system.attack_bonus[tier - 1]}
-                <i class="cci cci-reticule -fontsize2"></i>
-            </span>
-        {/if}
-            <ChargedBox
-                item={weapon}
-            />
-            <LoadedBox
-                item={weapon}
-            />
-            <LimitedBox
-                usesValue={weapon.system.uses.value}
-                usesMax={weapon.system.uses.max}
-            />
+        {#if !isDestroyed(weapon)}
+        <div class="-widthfull -padding2-l">
+            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+            {#if hasAccuracyBonus(weapon)}
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+                    data-tooltip={accuracyTip}
+                    data-tooltip-class={"clipped-bot la-tooltip"}
+                    data-tooltip-direction={TooltipDirection.DOWN}
+                >
+                    {weapon.system.accuracy[tier - 1]}
+                    <i class="cci cci-accuracy -fontsize4"></i>
+                </span>
+            {/if}
+            {#if hasAttackBonus(weapon)}
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+                    data-tooltip={attackTip}
+                    data-tooltip-class={"clipped-bot la-tooltip"}
+                    data-tooltip-direction={TooltipDirection.DOWN}
+                >
+                    {weapon.system.attack_bonus[tier - 1]}
+                    <i class="cci cci-reticule -fontsize2"></i>
+                </span>
+            {/if}
+                <ChargedBox
+                    item={weapon}
+                />
+                <LoadedBox
+                    item={weapon}
+                />
+                <LimitedBox
+                    usesValue={weapon.system.uses.value}
+                    usesMax={weapon.system.uses.max}
+                />
+            </div>
         </div>
+        {/if}
     {/snippet}
     {#snippet headerTertiaryLeftOptions()}
         <AttackButton

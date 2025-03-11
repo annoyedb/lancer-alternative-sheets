@@ -69,18 +69,22 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}
     {#snippet outerContent()}
-        <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
-            <ChargedBox
-                item={trait}
-            />
-            <LoadedBox
-                item={trait}
-            />
-            <LimitedBox
-                usesValue={trait.system.uses.value}
-                usesMax={trait.system.uses.max}
-            />
+        {#if !isDestroyed(trait)}
+        <div class="-widthfull -padding2-l">
+            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+                <ChargedBox
+                    item={trait}
+                />
+                <LoadedBox
+                    item={trait}
+                />
+                <LimitedBox
+                    usesValue={trait.system.uses.value}
+                    usesMax={trait.system.uses.max}
+                />
+            </div>
         </div>
+        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
