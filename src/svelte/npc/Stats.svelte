@@ -21,6 +21,9 @@
     let tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
     let setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
     let rechargeTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.recharge.tooltip"), getLocalized("LA.action.startofturn.label"));
+    let notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
+    let notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
+    let notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
 </script>
 
 <div class="la-bckg-background la-shadow -medium -inset la-bg-scroll -widthfull -heightfull">
@@ -118,21 +121,25 @@
         <div class="la-combine-h">
             <div class="la-combine-v -flex1">
                 <div class="la-combine-h -height2 -justifyend -gap1 -widthfull">
-                    <button type=button
+                    <button type="button"
                         class="mdi mdi-note-edit -fontsize2
                             popout-text-edit-button"
-                        data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"))}
-                        data-tooltip-class="clipped-bot la-tooltip"
+                        data-tooltip={notesEditTip}
+                        data-tooltip-class={"clipped-bot la-tooltip"}
                         data-tooltip-direction={TooltipDirection.UP}
                         aria-label={getLocalized("LA.npc.notes.tooltip")}
                         data-path={`system.notes`}
                     >
                     </button>
-                    <i class="mdi mdi-information -fontsize2"
-                        data-tooltip={TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"))}
-                        data-tooltip-class="clipped-bot la-tooltip -wide"
-                        data-tooltip-direction={TooltipDirection.RIGHT}
-                    ></i>
+                    <button type="button"
+                        class="mdi mdi-information -fontsize2"
+                        data-tooltip={notesTip}
+                        data-tooltip-class={"clipped-bot la-tooltip -scrollbar"}
+                        data-tooltip-direction={TooltipDirection.UP}
+                        aria-label={getLocalized("LA.npc.notes.label")}
+                        onclick={(event) => TooltipFactory.activateLockedTooltip(event, notesContent, TooltipDirection.RIGHT)}
+                    >
+                    </button>
                 </div>
                 <div class="-flex1">
                     <!-- Mech Stats 1 -->

@@ -38,6 +38,14 @@
     {
         max-width: 500px;
     }
+
+    &.-scrollbar
+    {
+        overflow-y: auto;
+        max-height: 500px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) var(--invade-color);
+    }
 }
 
 // This is so oddly specific becuase Monk's Little Details adds an oddly specific 
