@@ -130,7 +130,7 @@
                     </button>
                     <i class="mdi mdi-information -fontsize2"
                         data-tooltip={TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"))}
-                        data-tooltip-class="clipped-bot la-tooltip"
+                        data-tooltip-class="clipped-bot la-tooltip -wide"
                         data-tooltip-direction={TooltipDirection.RIGHT}
                     ></i>
                 </div>

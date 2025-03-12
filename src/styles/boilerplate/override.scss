@@ -9,7 +9,8 @@
 // Use default theme colors for the tooltip, since for some reason var() 
 // does not work when data-tooltip-class is used on a var that's defined 
 // at the sheet level
-#tooltip.la-tooltip
+#tooltip.la-tooltip,
+.locked-tooltip.la-tooltip
 {
     padding: unset;
     border-color: var(--primary-color);
@@ -31,6 +32,11 @@
         box-shadow: inset 0px 0px 2px 0px var(--background-color);
         text-transform: uppercase;
         padding: 5px;
+    }
+
+    &.-wide
+    {
+        max-width: 500px;
     }
 }
 
