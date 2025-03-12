@@ -49,6 +49,19 @@
     border-color: var(--light-text)
 }
 
+.la-common
+{
+    @include theme(common.$common-theme);
+
+    @include generate-manufacturer-class(gms.$gms-theme);
+    @include generate-manufacturer-class(ipsn.$ipsn-theme);
+    @include generate-manufacturer-class(ssc.$ssc-theme);
+    @include generate-manufacturer-class(horus.$horus-theme);
+    @include generate-manufacturer-class(ha.$ha-theme);
+    @include generate-manufacturer-class(galsim.$galsim-theme);
+    @include generate-manufacturer-class(msmc.$msmc-theme);
+}
+
 // Themes
 .la-gms
 {
@@ -88,19 +101,6 @@
 .la-msmc
 {
     @include theme(msmc.$msmc-theme);
-}
-
-.la-common
-{
-    @include theme(common.$common-theme);
-
-    @include generate-manufacturer-class(gms.$gms-theme);
-    @include generate-manufacturer-class(ipsn.$ipsn-theme);
-    @include generate-manufacturer-class(ssc.$ssc-theme);
-    @include generate-manufacturer-class(horus.$horus-theme);
-    @include generate-manufacturer-class(ha.$ha-theme);
-    @include generate-manufacturer-class(galsim.$galsim-theme);
-    @include generate-manufacturer-class(msmc.$msmc-theme);
 }
 
 @include generate-lancer-classes(common.$common-theme);
