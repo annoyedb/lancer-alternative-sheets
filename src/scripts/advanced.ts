@@ -6,6 +6,9 @@ export const advancedStates = writable<{
     }
 }>({});
 
+// TODO: don't hardcode this and store a map of sheets UUIDs to activeTab
+export const activeTab = writable<string>("loadout");
+
 export function initializeAdvancedStates(uuid: string, startEnabled: boolean = false)
 {
     const state = startEnabled;
@@ -41,4 +44,9 @@ export function handleAdvancedToggle(event: MouseEvent & { currentTarget: EventT
     event.stopPropagation();
     const currentState = get(advancedStates)[uuid];
     setAdvancedState(uuid, !currentState.enabled);
+}
+
+export function setActiveTab(tab: string)
+{
+    activeTab.set(tab);
 }

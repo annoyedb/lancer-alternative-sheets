@@ -1,7 +1,6 @@
-import { applyTheme, getTheme } from "./theme";
+import { applyTheme } from "./theme";
 import { preloadTemplates } from "./loader";
-import { frameManufacturer, frameName, frameUUID, logData, overchargeStage as overchargeStage, randomExtension } from "./helpers";
-import { registerMechSheetSettings } from "./settings/mech-sheet";
+import { logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
@@ -24,24 +23,6 @@ Hooks.once("setup", async () =>
 function registerHandlebarsHelpers()
 {
     Handlebars.registerHelper("log", logData);
-    Handlebars.registerHelper("print", function (value) { console.log(value); });
-    Handlebars.registerHelper("gt", function (this: any, a, b, options)
-    {
-        if (a > b)
-        {
-            return options.fn(this);
-        } else
-        {
-            return options.inverse(this);
-        }
-    });
-    Handlebars.registerHelper("getTheme", getTheme)
-    Handlebars.registerHelper("percent", function (a, b) { return (a / b) * 100; });
-    Handlebars.registerHelper("getFrameName", frameName);
-    Handlebars.registerHelper("getFrameManufacturer", frameManufacturer);
-    Handlebars.registerHelper("getFrameUUID", frameUUID);
-    Handlebars.registerHelper("overchargeStage", overchargeStage);
-    Handlebars.registerHelper("randomExtension", randomExtension);
 }
 
 function registerSettings()
@@ -65,7 +46,7 @@ function registerFlows()
     {
         flows.set(flow.name, flow);
     }
-    
+
     console.info("Lancer Alternative Sheets | Registered flows: ", customFlows.join(", "));
 }
 

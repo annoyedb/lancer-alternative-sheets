@@ -10,6 +10,7 @@ import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/AdvancedSettings.svelte";
+import { setActiveTab } from "@/scripts/advanced";
 
 export class MechSheetBase
 {
@@ -75,6 +76,7 @@ export class MechSheetBase
             {
                 super.activateListeners(html);
 
+                this.applyTabListener(html);
                 this.reapplyImgListener(html);
             }
 
@@ -155,8 +157,19 @@ export class MechSheetBase
 
             reapplyImgListener(html: JQuery<HTMLElement>)
             {
-                html.find('img[data-edit="img"]').each((_, img) => {
+                html.find('img[data-edit="img"]').each((_, img) =>
+                {
                     $(img).on('click', this._onEditImage.bind(this));
+                });
+            }
+
+            applyTabListener(html: JQuery<HTMLElement>)
+            {
+                html.find('.la-nav__island button').each((_, button) => {
+                    $(button).on('click', (event) => {
+                        const tab = $(event.currentTarget).data('tab');
+                        setActiveTab(tab);
+                    });
                 });
             }
         }
