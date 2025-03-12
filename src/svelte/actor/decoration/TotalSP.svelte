@@ -4,7 +4,7 @@
     import type { TotalSPProps } from "@/interfaces/actor/decoration/TotalSPProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { H2_ICON_SIZE, H2_TEXT_SIZE } from "../header/HeaderSecondary.svelte";
+    import { H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
 
     const {
         value,

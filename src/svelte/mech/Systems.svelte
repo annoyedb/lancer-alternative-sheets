@@ -21,7 +21,6 @@
     const props: MechSheetProps = $props();  
     const {
         actor,
-        collapse,
         system,
     } = props;
 
@@ -186,6 +185,7 @@
         {#if !isDestroyed(component)}
             <div class="la-generated -widthfull -gap2 la-combine-v">
                 {#if component.value.system.counters?.length}
+                <div class="la-combine-v -gap0 -widthfull -padding1-l">
                 {#each component.value.system.counters as counter, jndex}
                     <CounterBox
                         name={counter.name}
@@ -194,6 +194,7 @@
                         path={`${getComponentPath(index)}.system.counters.${jndex}`}
                     />
                 {/each}
+                </div>
                 {/if}
                 <BonusBox
                     bonuses={component.value.system.bonuses}
@@ -207,14 +208,12 @@
                     uuid={component.value.uuid}
                     actions={component.value.system.actions}
                     path={`system.actions`}
-                    collapse={collapse}
                     collapseID={getActionCollID(index)}
                     startCollapsed={false}
                 />
                 <DeployableBox
                     source={actor}
                     lidSource={component.value.system}
-                    collapse={collapse}
                 />
             </div>
         {/if}

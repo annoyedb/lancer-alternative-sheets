@@ -20,7 +20,6 @@
     const {
         mount,
         mountIndex,
-        collapse,
     }: MountSlotProps = $props();
 
     function getSlotSize(size: string)
@@ -105,7 +104,6 @@
 {#snippet outerContent()}
     <div class="la-combine-v -gap0 -widthfull -padding2-l">
         <WeaponMod
-            collapse={collapse}
             mod={slot.weapon.value.system.mod}
             path={`${getModPath(index)}`}
         />
@@ -210,13 +208,11 @@
                 actions={slot.weapon.value.system.actions}
                 uuid={slot.weapon.value.uuid}
                 path={`system.actions`}
-                collapse={collapse}
                 collapseID={getActionCollapseID(index)}
                 startCollapsed={false}
             />
         {#if slot.size !== "Integrated" && !slot.weapon.value.system.mod}
             <WeaponMod
-                collapse={collapse}
                 mod={slot.weapon.value.system.mod}
                 path={`${getModPath(index)}`}
             />

@@ -34,15 +34,19 @@
     }
 }
 
-.la-override__header
+// This is so oddly specific becuase Monk's Little Details adds an oddly specific 
+// border CSS rule for some reason and dominance must be asserted :triumph:
+.system-lancer
 {
-    >.window-header
+    div.la-override__header
     {
-        background-color: var(--primary);
-        border-bottom: unset;
+        header.window-header
+        {
+            background-color: var(--primary);
+            border: unset;
+        }
     }
 }
-
 .window-content:has(>.la-root)
 {
     padding: inherit;

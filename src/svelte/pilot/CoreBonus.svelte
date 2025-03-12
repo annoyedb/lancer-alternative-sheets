@@ -14,7 +14,6 @@
 
     const props: MechSheetProps = $props();
     const {
-        collapse,
         pilot,
     } = props;
     
@@ -101,14 +100,12 @@
                     actions={coreBonus.system.actions}
                     uuid={coreBonus.uuid}
                     path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
-                    collapse={collapse}
                     collapseID={getActionCollID(index)}
                     startCollapsed={false}
                 />
                 <DeployableBox
                     source={pilot}
                     lidSource={coreBonus.system}
-                    collapse={collapse}
                 />
             </div>
         </HeaderSecondary>

@@ -81,14 +81,12 @@
                 uuid={frame.uuid}
                 actions={core.active_actions}
                 path={'system.core_system.active_actions'}
-                collapse={collapse}
                 collapseID={actionCollID}
                 startCollapsed={false}
             />
             <DeployableBox
                 source={actor}
                 lidSource={core}
-                collapse={collapse}
             />
         </div>
     </div>

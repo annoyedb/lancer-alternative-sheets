@@ -12,7 +12,6 @@
 
     const {
         actor,
-        collapse,
         system,
     }: MechSheetProps = $props();
 
@@ -80,14 +79,12 @@
             uuid={frame.uuid}
             actions={trait.actions}
             path={`system.traits.${index}.actions`}
-            collapse={collapse}
             collapseID={getActionCollapseID(index)}
             startCollapsed={false}
         />
         <DeployableBox
             source={actor}
             lidSource={trait}
-            collapse={collapse}
         />
     </div>
 </HeaderSecondary>

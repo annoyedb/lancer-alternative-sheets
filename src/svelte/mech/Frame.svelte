@@ -4,8 +4,8 @@
     import { getManufacturerColor } from "@/scripts/theme";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
-    import FramePassivePower from "./FramePassivePower.svelte";
-    import FrameTrait from "./FrameTrait.svelte";
+    import FramePassivePower from "@/svelte/mech/FramePassivePower.svelte";
+    import FrameTrait from "@/svelte/mech/FrameTrait.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";

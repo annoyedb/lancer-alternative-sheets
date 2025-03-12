@@ -5,12 +5,11 @@
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import MountNames from "../actor/decoration/MountNames.svelte";
+    import MountNames from "@/svelte/actor/decoration/MountNames.svelte";
 
     const props: MechSheetProps = $props();  
     const {
         actor,
-        collapse,
         system,
     } = props;
 
@@ -66,7 +65,6 @@
             <Weapon
                 mount={mount}
                 mountIndex={index}
-                collapse={collapse}
             />
         </div>
     {/if}

@@ -18,7 +18,6 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
 
     const {
-        collapse,
         mod,
         path,
     }: WeaponModProps = $props();
@@ -152,7 +151,6 @@
                 actions={mod.system.actions}
                 uuid={mod.uuid}
                 path={`system.actions`}
-                collapse={collapse}
                 collapseID={collID}
                 startCollapsed={false}
             />

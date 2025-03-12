@@ -17,6 +17,7 @@
         flowClass,
         disabled,
         path,
+        uuid,
 
         tooltip,
         tooltipClass,
@@ -33,6 +34,7 @@
     class="
         {style?.join(' ')}
         {flowClass || FlowClass.SendEffectToChat}"
+    data-uuid={uuid}
     data-path={path}
     data-tooltip={disabled ? undefined : tip}
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}

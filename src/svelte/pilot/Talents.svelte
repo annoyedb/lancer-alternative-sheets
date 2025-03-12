@@ -10,12 +10,11 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "../actor/button/MessageButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
         actor,
-        collapse,
         pilot,
     } = props;
     
@@ -160,7 +159,6 @@
                             actions={rank.actions}
                             uuid={talent.uuid}
                             path={`system.ranks.${jndex}.actions`}
-                            collapse={collapse}
                             collapseID={getActionCollID(index, jndex)}
                             startCollapsed={false}
                         />

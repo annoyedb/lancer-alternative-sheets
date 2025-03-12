@@ -60,7 +60,6 @@
             uuid={frame.uuid}
             actions={core.passive_actions}
             path={'system.core_system.passive_actions'}
-            collapse={collapse}
             collapseID={actionCollID}
             startCollapsed={false}
         />

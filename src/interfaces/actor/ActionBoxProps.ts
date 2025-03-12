@@ -9,10 +9,9 @@ export interface ActionBoxProps
     path?: string
     uuid?: string,
     
-    edit?: Boolean,
-    editDetails?: Boolean,
+    editable?: boolean,
+    editDetails?: boolean,
 
-    collapse?: any,
     collapseID?: string,
-    startCollapsed?: Boolean,
+    startCollapsed?: boolean,
 }

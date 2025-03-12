@@ -1,17 +1,15 @@
 <script lang="ts">
-    // import { FlowClass } from "@/enums/FlowClass";
+    import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
-    import ActionBox from "./ActionBox.svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
 
     const {
-        collapse,
         source, 
         lidSource, 
     }: DeployableBoxProps = $props();
@@ -62,7 +60,7 @@
     }
 </script>
 
-<!-- TODO: create a flow that would work specifically for deployables in V12 -->
+<!-- TODO: create a flow that would work specifically for deployables eventually? -->
 {#if source && !source.is_deployable() && !source.isToken}
 {#each globallyOwnedDeployables as deployable}
     {#if lidSourceHasDeployable(deployable)}
@@ -111,7 +109,6 @@
             <ActionBox
                 actions={deployable.system.actions}
                 path={`system.actions`}
-                collapse={collapse}
                 collapseID={`${deployable.uuid}_actions`}
                 startCollapsed={false}
             />

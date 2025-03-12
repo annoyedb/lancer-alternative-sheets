@@ -1,11 +1,11 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { getLocalized } from "@/scripts/helpers";
     import Weapons from "@/svelte/npc/Weapons.svelte";
     import Systems from "@/svelte/npc/Systems.svelte";
     import Traits from "@/svelte/npc/Traits.svelte";
-    import Reactions from "./Reactions.svelte";
-    import { getLocalized } from "@/scripts/helpers";
-    import TechAttack from "./TechAttack.svelte";
+    import Reactions from "@/svelte/npc/Reactions.svelte";
+    import TechAttack from "@/svelte/npc/TechAttack.svelte";
 
 
     const props = $props();
