@@ -11,6 +11,7 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
     const props: MechSheetProps = $props();
     const {
@@ -23,6 +24,19 @@
     function getActionCollID(index: number)
     {
         return `${pilot.uuid}.coreBonus.${index}.action`;
+    }
+
+    // (#4) Not a deployable but same idea
+    function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
+    {
+        event.stopPropagation();
+        if (pilot && action)
+        {
+            let description = `${action.detail}`;
+            if (action.trigger)
+                description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
+            SendUnknownToChatBase.startFlow(pilot.uuid, action.name, description);
+        }
     }
 </script>
 
@@ -102,10 +116,12 @@
                     path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
                     collapseID={getActionCollID(index)}
                     startCollapsed={false}
+                    onClick={sendActionToChat}
                 />
                 <DeployableBox
                     source={pilot}
                     lidSource={coreBonus.system}
+                    uuid={pilot.uuid}
                 />
             </div>
         </HeaderSecondary>

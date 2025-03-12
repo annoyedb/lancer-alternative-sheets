@@ -8,11 +8,14 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
     const {
         source, 
         lidSource, 
-    }: DeployableBoxProps = $props();
+        uuid,
+    }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
 
     let tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
 
@@ -58,6 +61,32 @@
             },
         ].filter(a => !!a.deployableAction);
     }
+
+    // (#4) Temporary until Lancer system implements proper deployable actions
+    function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
+    {
+        event.stopPropagation();
+        if (uuid && action)
+        {
+            let description = `${action.detail}`;
+            if (action.trigger)
+                description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
+            SendUnknownToChatBase.startFlow(uuid, action.name, description);
+        }
+    }
+
+    // (#4) Temporary until Lancer system implements proper deployable actions
+    function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
+    {
+        event.stopPropagation();
+        if (uuid && action)
+        {
+            SendUnknownToChatBase.startFlow(
+                uuid, 
+                `${deployable.name}`, 
+                `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`);
+        }
+    }
 </script>
 
 <!-- TODO: create a flow that would work specifically for deployables eventually? -->
@@ -80,16 +109,20 @@
                 <!-- Deployable Actions -->
                 <div class="la-effectbox-buttons la-combine-h -justifybetween">
                     <div class="la-combine-v -alignstart">
+                    <!-- (#4) -->
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            flowClass={""}
+                            style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+
+                            uuid={deployable.uuid}
+                            path={`deployables.${deployable.system.lid}`}
+                            flowClass={FlowClass.None}
+                            onClick={(event) => sendDeployableActionToChat(event, action, deployable)}
+
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction]).toUpperCase()}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
                             tooltipDirection={TooltipDirection.LEFT}
-                            uuid={deployable.uuid}
-                            path={`deployables.${deployable.system.lid}`}
-                            style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
                         />
                     {/each}
                     </div>
@@ -105,12 +138,17 @@
                 {@html deployable.system.detail}
             </div>
             <!-- Actions -->
+            <!-- (#4) Add back in when implemented
+                path={`system.actions`} -->
         {#if deployable.system.actions.length}
             <ActionBox
                 actions={deployable.system.actions}
-                path={`system.actions`}
-                collapseID={`${deployable.uuid}_actions`}
+                collapseID={`${deployable.uuid}.actions`}
                 startCollapsed={false}
+                
+                uuid={uuid || deployable.uuid}
+                disableLeftButton={uuid ? false : true}
+                onClick={uuid ? sendActionToChat : undefined}
             />
         {/if}
         </div>

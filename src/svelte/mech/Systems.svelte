@@ -214,6 +214,7 @@
                 <DeployableBox
                     source={actor}
                     lidSource={component.value.system}
+                    uuid={component.value.uuid}
                 />
             </div>
         {/if}

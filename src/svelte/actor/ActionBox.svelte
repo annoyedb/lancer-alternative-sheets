@@ -22,7 +22,10 @@
         editable,
         editDetails,
         collapseID,
-        startCollapsed
+        startCollapsed,
+
+        onClick,
+        disableLeftButton,
     }: ActionBoxProps = $props();
 
     let defaultPlaceholder = getLocalized("LA.placeholder");
@@ -106,10 +109,13 @@
         }
         uuid={uuid}
         path={`${path}.${index}`}
+        onClick={onClick ? (event) => onClick(event, action) : undefined}
 
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
         tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}
+
+        disabled={disableLeftButton}
     />    
 {/snippet}
     <HeaderQuinary

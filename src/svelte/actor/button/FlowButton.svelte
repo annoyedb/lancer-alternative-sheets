@@ -26,6 +26,8 @@
         disableCmdline: disableTerminal,
         disableExtension,
         disableCursor,
+
+        onClick,
     } : FlowButtonProps & ButtonProps & TooltipProps & TerminalTextProps = $props();
 
     const defaultStyle = "clipped-bot-alt la-bckg-secondary";
@@ -46,6 +48,7 @@
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
     data-path={path}
     aria-label={text}
+    onclick={(event) => onClick && onClick(event)}
 >
     <TerminalText
         text={text}

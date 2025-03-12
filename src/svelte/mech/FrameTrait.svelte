@@ -85,6 +85,7 @@
         <DeployableBox
             source={actor}
             lidSource={trait}
+            uuid={frame.uuid}
         />
     </div>
 </HeaderSecondary>

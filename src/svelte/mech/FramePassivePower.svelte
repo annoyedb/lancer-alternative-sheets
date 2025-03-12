@@ -1,15 +1,18 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getManufacturerColor } from "@/scripts/theme";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
-    import { collapseID as registerCollapse } from "@/scripts/lancer/helpers/collapse";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/actor/header/HeaderQuinary.svelte";
+    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
+    import { H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import { FlowClass } from "@/enums/FlowClass";
 
     const {
         actor,
-        collapse,
         system,
     }: MechSheetProps = $props();
 
@@ -17,52 +20,53 @@
     let core: any = frame.system.core_system;
     let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
     let frameColorBrdr = getManufacturerColor(frame.system.manufacturer, "brdr")
-    let collID: string = `${actor.uuid}_${frame.id}_passivepower`;
-    let actionCollID: string = `${actor.uuid}_${frame.id}_passivepower_action`;
-    let tip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
+    let collID: string = `${actor.uuid}.${frame.id}.passive`;
+    let actionCollID: string = `${actor.uuid}.${frame.id}.passive.action`;
+    let tip = core.passive_effect || getLocalized("LA.chat.tooltip");
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
+    {
+        event.stopPropagation();
+        SendUnknownToChatBase.startFlow(frame.uuid, core.passive_name, core.passive_effect)
+    }
 </script>
 
-{#if core.passive_effect !== "" || core.passive_actions.length || core.passive_bonuses.length}
+{#if core.passive_effect || core.passive_actions.length || core.passive_bonuses.length}
 <!-- Frame Passive -->
-<div class="la-effectbox -largeheader la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb {frameColorBrdr}">
-    <div class="la-actionheader la-combine-h {frameColorBckg} la-text-header clipped -padding0-lr
-            collapse-trigger"
-        data-la-collapse-id="{registerCollapse(collapse, collID, false)}">
-        <i class="cci cci-corebonus -fontsize5 -lineheight5 -flexthird"></i>
-        <span class="-fontsize2 -flexthird -textwrapnowrap -lineheight5 -textaligncenter">
-            {core.passive_name}
-        </span>
-        <div class="la-options la-combine-h -flexthird -justifyend">
-            <button type="button" 
-                class="chat-flow-button -glow-header -glow-primary-hover -fontsize2 -padding1-r" 
-                data-type={"passive"} 
-                data-uuid="{frame.uuid}"
-                data-tooltip={tip}
-                data-tooltip-class={"clipped-bot la-tooltip"}
-                data-tooltip-direction={"RIGHT"}
-                aria-label={getLocalized("LA.chat.tooltip")}>
-                <i class="mdi mdi-message"></i>
-            </button>
-        </div>
-    </div>
-    <div class="la-generated
-            collapse collapsed"
-        data-la-collapse-id="{registerCollapse(collapse, collID, true)}"
-    >
-    {#if core.passive_effect}
-        <EffectBox
-            name={getLocalized("LA.mech.core.passive.label")}
-            effect={core.passive_effect}
-        />
-    {/if}
-        <!-- Generated Content -->
-        <ActionBox
-            uuid={frame.uuid}
-            actions={core.passive_actions}
-            path={'system.core_system.passive_actions'}
-            collapseID={actionCollID}
-            startCollapsed={false}
-        />
-    </div>
-</div>
+{#snippet headerQuinaryLeftOptions()}
+<EffectButton
+    iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
+    
+    flowClass={FlowClass.None}
+    onClick={sendToChat}
+
+    tooltip={tip}
+    tooltipDirection={TooltipDirection.LEFT}
+/>
+{/snippet}
+<HeaderQuinary
+    text={core.passive_name}
+    headerStyle={[frameColorBckg, "-padding0-l"]}
+    borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
+
+    collapseID={collID}
+
+    headerContentLeft={headerQuinaryLeftOptions}
+>
+    <div class="la-divider-h la-bckg-primary -margin0-tb -margin2-b"></div>
+{#if core.passive_effect}
+    <EffectBox
+        name={getLocalized("LA.mech.core.passive.label")}
+        effect={core.passive_effect}
+    />
+{/if}
+    <!-- Generated Content -->
+    <ActionBox
+        uuid={frame.uuid}
+        actions={core.passive_actions}
+        path={'system.core_system.passive_actions'}
+        collapseID={actionCollID}
+        startCollapsed={false}
+    />
+</HeaderQuinary>
 {/if}

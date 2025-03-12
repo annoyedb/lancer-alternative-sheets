@@ -23,6 +23,7 @@
         tooltipClass,
         tooltipHeader,
         tooltipDirection,
+        onClick,
     } : IconButtonProps & ButtonProps & TooltipProps= $props();
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.effect.tooltip"), tooltipHeader);
@@ -30,6 +31,8 @@
     const defaultIconStyle = `${H2_ICON_SIZE}`
 </script>
 
+<!-- (#2) -->
+<!-- svelte-ignore event_directive_deprecated -->
 <button type="button"
     class="
         {style?.join(' ')}
@@ -41,6 +44,7 @@
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     aria-label={tooltip || getLocalized("LA.effect.tooltip")}
     disabled={disabled || false}
+    on:click={onClick ? (event) => onClick(event) : undefined}
 >
     <i 
         class="
