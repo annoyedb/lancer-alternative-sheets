@@ -37,7 +37,7 @@
         return `${getLocalized("LA.use.label")} ${getLocalized(ACTIVATION_LOCALIZE_MAP[activation])}`;
     }
 
-    function getActionTip(action: any): string 
+    function getReactionTooltip(action: any): string 
     {
         if (action.trigger)
             return `
@@ -108,7 +108,7 @@
         path={`${path}.${index}`}
 
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
-        tooltip={getActionTip(action)}
+        tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}
     />    
 {/snippet}

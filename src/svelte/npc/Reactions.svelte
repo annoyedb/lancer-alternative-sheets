@@ -25,12 +25,17 @@
     const tier = system.tier;
     let collID = `${actor.uuid}.reactions`;
     
-    function getReactionTooltip(reaction: any)
+    function getReactionTooltip(reaction: any): string 
     {
-        if (!reaction.system.effect)
+        if (reaction.system.effect)
+            return `
+                ${getLocalized("LA.trigger.label")}: ${reaction.system.trigger}
+                <br><br>
+                ${getLocalized("LA.mech.system.effect.label")}: ${reaction.system.effect}
+                <br><br>
+                ${getLocalized("LA.action.reaction.tooltip")}`;
+        else
             return getLocalized("LA.action.reaction.tooltip");
-
-        return `${reaction.system.trigger}<br><br>${reaction.system.effect}`;
     }
 
     function hasReactionSpecial(reaction: any)
