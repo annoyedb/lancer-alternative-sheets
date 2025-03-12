@@ -13,4 +13,10 @@ export enum FlowClass
     RechargeFeatures = "charge-macro",
     ContextMenu= "lancer-context-menu",
     DeleteActiveEffect = "", // No flow class for this
+    None = "NO_FLOW_CLASS",
+}
+
+export enum CustomFlowClass
+{
+    SendUnknownToChat = "SendUnknownToChat",
 }
