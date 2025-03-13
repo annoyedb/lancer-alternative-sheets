@@ -5,11 +5,14 @@
         profiles,
         weapon,
         path,
+        style
     }: ProfileBoxProps = $props();
+
+    const defaultStyle = " la-text-header la-bckg-pilot clipped -flex1 ";
 </script>
 
 {#if profiles.length > 1}
-<div class="la-limited la-combine-h la-text-header la-bckg-pilot clipped -flex1">
+<div class="la-limited la-combine-h {style?.join(' ') || defaultStyle}">
 {#each profiles as profile, index}
     <button type="button" 
         class="-glow-primary-hover -height5

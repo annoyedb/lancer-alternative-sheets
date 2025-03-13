@@ -82,8 +82,13 @@
 
     function renderLimited(weapon: any)
     {
+        console.log(weapon.system.profiles)
         return (
-            weapon.system.sp || isLoading(weapon) || weapon.isLimited() || weapon.system.mod
+            weapon.system.sp || 
+            isLoading(weapon) || 
+            weapon.isLimited() || 
+            weapon.system.mod ||
+            weapon.system.profiles.length > 1
         );
     }
 </script>
@@ -103,10 +108,13 @@
 {/snippet}
 {#snippet outerContent()}
     <div class="la-combine-v -gap0 -widthfull -padding2-l">
+        {#if slot.size !== "Integrated" && slot.weapon.value.system.mod}
         <WeaponMod
             mod={slot.weapon.value.system.mod}
             path={`${getModPath(index)}`}
         />
+        {/if}
+        {#if isLoading(slot.weapon.value) && slot.weapon.value.isLimited()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
             <LoadedBox
                 item={slot.weapon.value}
@@ -119,6 +127,13 @@
             />
             {@render costSP()}
         </div>
+        {/if}
+        <ProfileBox
+            profiles={slot.weapon.value.system.profiles}
+            weapon={slot.weapon.value}
+            path={`${getWeaponPath(index)}.system.selected_profile_index`}
+            style={["-widthfull", "la-bckg-header-anti", "la-text-header", "clipped-alt"]}
+        />
     </div>
 {/snippet}
 {#snippet headerTertiaryLeftOptions()}
@@ -183,11 +198,6 @@
     {#if !slot.weapon.value.system.destroyed}
         <div class="la-generated -widthfull -gap2 la-combine-v">
             <!-- Generated Content -->
-            <ProfileBox
-                profiles={slot.weapon.value.system.profiles}
-                weapon={slot.weapon.value}
-                path={`${getWeaponPath(index)}.system.selected_profile_index`}
-            />
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
                 effect={slot.weapon.value.system.active_profile.effect}
