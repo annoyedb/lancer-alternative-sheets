@@ -69,20 +69,23 @@ export function getTheme()
 // No, it does not deal with the dark themes, because they apparently already have good contrasting colors
 // Yes, this is biased
 // No, I'm not sorry
+//
+// 'la-icon-swap' is a class used to identify items with classes that need to be checked 
+// against the current LIGHT_MAP theme
 export function getSidebarImageTheme(type: "bckg" | "text" | "brdr")
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;
     if (LIGHT_MAP[currentTheme] === "light")
-        return `la-${type}-primary`
+        return `la-icon-swap la-${type}-primary`
     else
-        return `lancer-${type}-dark`;
+        return `la-icon-swap lancer-${type}-dark`;
 }
 
 export function applyThemeTarget(html: JQuery<HTMLElement>)
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;
     const themeClasses = Object.values(THEME_MAP);
-    
+
     html.removeClass(themeClasses.join(' ')).addClass(THEME_MAP[currentTheme]);
 }
 
@@ -90,6 +93,8 @@ export function applyTheme(_app: any, _html: JQuery<HTMLElement>, _context: any)
 {
     let currentTheme = game.settings.get("lancer", "uiTheme") as string;
     const themeClasses = Object.values(THEME_MAP);
+
+    // Swap class themes
     $(document).find('*').each(function ()
     {
         const element = $(this);
@@ -100,6 +105,42 @@ export function applyTheme(_app: any, _html: JQuery<HTMLElement>, _context: any)
                 .removeClass(currentThemeClass)
                 .addClass(THEME_MAP[currentTheme]);
         }
+    });
+
+    // Swap images
+    const isDarkTheme = LIGHT_MAP[currentTheme] === "dark";
+    $('img').each(function ()
+    {
+        const img = $(this);
+        const src = img.attr('src');
+        if (src && src.startsWith('systems/lancer/assets/icons'))
+        {
+            if (isDarkTheme && !src.includes('white'))
+            {
+                img.attr('src', src.replace('systems/lancer/assets/icons', 'systems/lancer/assets/icons/white'));
+            } else if (!isDarkTheme && src.includes('white'))
+            {
+                img.attr('src', src.replace('systems/lancer/assets/icons/white', 'systems/lancer/assets/icons'));
+            }
+        }
+    });
+
+    // Swap classes for la-icon-swap
+    $('.la-icon-swap').each(function ()
+    {
+        const element = $(this);
+        const classes = element.attr('class')?.split(' ') || [];
+        classes.forEach(cls =>
+        {
+            const isDarkClass = cls.startsWith('lancer-') && cls.endsWith('-dark');
+            const isPrimaryClass = cls.startsWith('la-') && cls.endsWith('-primary');
+            if (isDarkClass || isPrimaryClass)
+            {
+                const baseClass = cls.replace(/^(lancer-|la-)|(-dark|-primary)$/g, '');
+                const newClass = isDarkTheme ? `lancer-${baseClass}-dark` : `la-${baseClass}-primary`;
+                element.removeClass(cls).addClass(newClass);
+            }
+        });
     });
 }
 
@@ -117,7 +158,7 @@ export function getManufacturerColor(key: string, type: "bckg" | "text" | "brdr"
     {
         manufacturer = "primary";
     }
-    
+
     if (manufacturer === "ips-n")
         manufacturer = "ipsn";
     return `la-${type}-${manufacturer}`;
