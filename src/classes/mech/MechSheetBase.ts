@@ -1,6 +1,7 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTarget, getTheme } from "@/scripts/theme";
+import { setActiveTab } from "@/scripts/advanced";
 import { getLocalized } from "@/scripts/helpers";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
@@ -9,8 +10,7 @@ import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
-import AdvancedSettings from "@/svelte/mech/AdvancedSettings.svelte";
-import { setActiveTab } from "@/scripts/advanced";
+import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 
 export class MechSheetBase
 {

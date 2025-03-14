@@ -6,25 +6,25 @@
     flex-direction: inherit;
 }
 
-// Use default theme colors for the tooltip, since for some reason var() 
-// does not work when data-tooltip-class is used on a var that's defined 
-// at the sheet level
+// Use default theme colors for the tooltip, 
+// since they're declared at the Foundry root level
+// and tooltips appear outside of the sheet
 #tooltip.la-tooltip,
-.locked-tooltip.la-tooltip
+aside.la-tooltip.active
 {
     padding: unset;
     border-color: var(--primary-color);
     background-color: var(--invade-color);
     text-align: left;
         
-    >div
+    >.la-tooltip__content
     {    
         padding: 3px;
         padding-left: 10px;
         padding-right: 10px;
     }
     
-    >h3
+    h3
     {    
         margin: unset;
         border: unset;
@@ -45,6 +45,12 @@
         max-height: 500px;
         scrollbar-width: thin;
         scrollbar-color: var(--primary-color) var(--invade-color);
+    }
+
+    // TODO: find a better way to reimplement this
+    &.-widthfull
+    {
+        width: 100%;
     }
 }
 

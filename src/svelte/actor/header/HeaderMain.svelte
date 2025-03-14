@@ -73,7 +73,7 @@
     data-accept-types={acceptTypes}
 >
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-    <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
+    <!-- (#2) -->
     <!-- svelte-ignore event_directive_deprecated -->
     <h1 class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 

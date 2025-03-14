@@ -80,7 +80,10 @@
     draggable="true"
 >
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-    <!-- (#2) onclick bug: https://github.com/sveltejs/svelte/issues/14704 -->
+    <!-- (#2) 
+        onclick bug: https://github.com/sveltejs/svelte/issues/14704
+        related to how event handlers get attached in Lancer sheets: https://github.com/sveltejs/svelte/issues/13213 
+    -->
     <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull

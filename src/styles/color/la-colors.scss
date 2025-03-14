@@ -12,6 +12,13 @@
 :root
 {
     --size: 1px;
+    
+    // TODO: when fully moving away from relying on Lancer system colors (e.g. --dark-text)
+    // add our themes directly to the root here. Unfortunately this means to replace them on 
+    // theme change would have to be done via TypeScript, therefore we need to also hardcode 
+    // the SCSS values in the TypeScript file and swap by name on theme changes.
+    // 
+    // Which is why it isn't currently done lol
 }
 
 .la-brdr-transparent
@@ -47,6 +54,21 @@
 .lancer-brdr-light
 {
     border-color: var(--light-text)
+}
+
+.lancer-bckg-primary
+{
+    background-color: var(--primary-color)
+}
+
+.lancer-bckg-secondary
+{
+    background-color: var(--secondary-color)
+}
+
+.lancer-text-background
+{
+    color: var(--background-color)
 }
 
 .la-common

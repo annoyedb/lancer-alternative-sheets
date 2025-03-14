@@ -113,7 +113,7 @@
             path={`${getModPath(index)}`}
         />
         {/if}
-        {#if isLoading(slot.weapon.value) && slot.weapon.value.isLimited()}
+        {#if isLoading(slot.weapon.value) || slot.weapon.value.isLimited()}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
             <LoadedBox
                 item={slot.weapon.value}

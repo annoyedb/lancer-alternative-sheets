@@ -11,7 +11,8 @@ export const activeTab = writable<string>("loadout");
 
 export function initializeAdvancedStates(uuid: string, startEnabled: boolean = false)
 {
-    const state = startEnabled;
+    const storage = sessionStorage.getItem(`la-advanced-${uuid}`);
+    const state = storage ? storage === "true" : startEnabled;
 
     advancedStates.update(states =>
     {
@@ -37,6 +38,7 @@ export function setAdvancedState(uuid: string, enabled: boolean)
             states[uuid].enabled = enabled;
         return states;
     });
+    sessionStorage.setItem(`la-advanced-${uuid}`, enabled.toString());
 }
 
 export function handleAdvancedToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, uuid: string)

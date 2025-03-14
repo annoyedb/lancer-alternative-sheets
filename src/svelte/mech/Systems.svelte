@@ -24,8 +24,7 @@
         system,
     } = props;
 
-    // Unlinking leaves an array with null values; unsure if it's intended but it specifically breaks this sheet, and doesn't seem intended
-    let systemComponents = system.loadout.systems.filter((item: any) => item !== null);
+    let systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
     let collID = systemComponents.length
         ? `${actor.uuid}.systems`
         : `${actor.uuid}.systems.empty`;
@@ -110,7 +109,7 @@
 
     headerContent={headerOptions}
 >
-{#if systemComponents.length}
+{#if systemComponents?.length}
     <div class="la-combine-v -gap0 -widthfull">
     {#each systemComponents as component, index}
     {#snippet outerContent()}

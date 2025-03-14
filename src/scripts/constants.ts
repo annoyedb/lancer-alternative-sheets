@@ -63,6 +63,18 @@ export const MOUNT_LOCALIZE_MAP: { [key: string]: string } = {
     "Unknown"   : "LA.mech.mount.unknown.label",
 }
 
+export const MOUNT_FITTINGS: { [key: string]: Array<string> } = {
+    "Main"      : ["Main"],
+    "Heavy"     : ["Heavy"],
+    "Aux/Aux"   : ["Auxiliary", "Auxiliary"],
+    "Aux"       : ["Auxiliary"],
+    "Main/Aux"  : ["Main", "Auxiliary"],
+    "Flex"      : ["Flex"],
+    "Integrated": ["Integrated"],
+    "Superheavy": ["Superheavy"],
+    "Unknown"   : ["Integrated"],
+}
+
 export const SLOT_LOCALIZE_MAP: { [key: string]: string } = {
     "Auxiliary" : "LA.mech.slot.aux.label",
     "Main"      : "LA.mech.slot.main.label",
