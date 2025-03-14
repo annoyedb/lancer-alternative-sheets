@@ -1,6 +1,7 @@
 @use './general' as *;
 
-.la-root
+.la-root,
+aside.la-tooltip.active
 {
     .-bordersround-ltb
     {
@@ -35,17 +36,28 @@
         border-style: solid;
     }
 
+    .-borders-l
+    {
+        border-width: 0px 0px 0px 1px;
+        border-style: solid;
+    }
+
     .-bordersoff
     {
         border-color: transparent;
     }
 
-    // Collapse group
-    .collapse-wrapper
+    @mixin collapseFadeOut
     {
         transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
         -webkit-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
         -moz-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
+    }
+
+    // Collapse group
+    .collapse-wrapper
+    {
+        @include collapseFadeOut;
         max-height: 100%;
 
         &.collapsed

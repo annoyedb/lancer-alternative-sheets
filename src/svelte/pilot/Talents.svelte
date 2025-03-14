@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { collapseStates } from "@/scripts/collapse";
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
@@ -17,7 +18,6 @@
         actor,
         pilot,
     } = props;
-    
     let talents = pilot.itemTypes.talent;
     let collID = `${pilot.uuid}.talents`;
 
@@ -47,9 +47,9 @@
     }
 
     //@ts-ignore
-    function log(any: any)
+    function log(...args: any[])
     {
-        console.log(any);
+        console.log(...args);
     }
 </script>
 
@@ -107,7 +107,9 @@
             {#if jndex < talent.system.curr_rank}
                 {#snippet outerContent()}
                     {#if rank.counters.length}
-                    <div class="la-combine-v -widthfull -padding2-l">
+                    <div class="la-combine-v -widthfull -padding2-l
+                        {$collapseStates[getRankCollID(index, jndex)]?.collapsed ? "" : "la-brdr-trait -borders-l -collapseFadeOut"}"
+                    >
                     {#each rank.counters as counter, kndex}
                         <CounterBox
                             name={counter.name}
@@ -135,7 +137,7 @@
                     text={rank.name}
                     headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
                     textStyle={["-fontsize2"]}
-                    borderStyle={["la-brdr-header-anti"]}
+                    borderStyle={["la-brdr-trait"]}
 
                     rootStyle={["ref", "set"]}
                     uuid={talent.uuid}

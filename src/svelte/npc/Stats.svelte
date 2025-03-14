@@ -24,6 +24,19 @@
     let notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
     let notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
     let notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
+    
+    function handleShowNotes(event: MouseEvent)
+    {
+        event.stopPropagation();
+        TooltipFactory.renderTooltip(
+            event, 
+            { 
+                text: notesContent, 
+                direction: TooltipDirection.RIGHT,
+                locked: true,
+            } 
+        );
+    }
 </script>
 
 <div class="la-bckg-background la-shadow -medium -inset la-bg-scroll -widthfull -heightfull">
@@ -137,7 +150,7 @@
                         data-tooltip-class={"clipped-bot la-tooltip -scrollbar"}
                         data-tooltip-direction={TooltipDirection.UP}
                         aria-label={getLocalized("LA.npc.notes.label")}
-                        onclick={(event) => TooltipFactory.activateLockedTooltip(event, notesContent, TooltipDirection.RIGHT)}
+                        onclick={(event) => handleShowNotes(event)}
                     >
                     </button>
                 </div>

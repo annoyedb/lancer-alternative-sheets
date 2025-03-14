@@ -82,7 +82,6 @@
 
     function renderLimited(weapon: any)
     {
-        console.log(weapon.system.profiles)
         return (
             weapon.system.sp || 
             isLoading(weapon) || 
