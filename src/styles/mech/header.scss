@@ -59,7 +59,6 @@
         {
             >.la-names
             {
-                flex: 1;
                 align-self: flex-start;
                 min-width: 15rem;
 
@@ -70,23 +69,14 @@
                     letter-spacing: 0.25rem;
                     text-overflow: ellipsis;
                 }
-                
-                &.-alt
-                {
-                    position: absolute;
-                }
             }
 
-            >.la-mechhead__img
+            >.la-mechhead__container
             {
-                pointer-events: none;
-                flex: 1;
-
-                overflow: hidden;
-                height: 50%;
-                mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
-                -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
-                -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent 10rem);
+                >.la-mechhead__img
+                {
+                    height: 100%;
+                }
             }
         }
     }

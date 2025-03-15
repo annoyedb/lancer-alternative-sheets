@@ -3,7 +3,14 @@ aside.la-tooltip.active
 {
     .-pointerdisable
     {
+        cursor: default;
         pointer-events: none;
+    }
+
+    .-pointercursor
+    {
+        cursor: pointer;
+        pointer-events: all;
     }
 
     .-glow-header

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^1.0.4",
     "@league-of-foundry-developers/foundry-vtt-types": "0.8.9-10",
+    "@msgpack/msgpack": "^3.1.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
     "classic-level": "1.4.1",

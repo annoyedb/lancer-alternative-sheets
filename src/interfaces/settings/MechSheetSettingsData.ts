@@ -1,4 +1,6 @@
 export interface MechSheetSettingsData
-{
-    offsetY: number; // In pixels
+{ 
+    [uuid: string]: {
+        offsetY: number;
+    }
 }

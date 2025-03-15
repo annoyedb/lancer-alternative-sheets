@@ -2,17 +2,7 @@ import type { MechSheetSettingsData } from "@/interfaces/settings/MechSheetSetti
 
 export class MechSheetSettings implements MechSheetSettingsData
 {
-    offsetY: number;
-
-    constructor(data: MechSheetSettingsData)
-    {
-        this.offsetY = data.offsetY;
-    }
-
-    static get default(): MechSheetSettings
-    {
-        return new MechSheetSettings({ 
-            offsetY: 0,
-        });
-    }
+    [uuid: string]: {
+        offsetY: number;
+    };
 }
