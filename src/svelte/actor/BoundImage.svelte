@@ -1,10 +1,7 @@
 <script lang="ts">
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { id as moduleID } from '@/module.json';
     import { advancedStates } from "@/scripts/advanced";
-    import { getLocalized } from "@/scripts/helpers";
     import { getImageOffsetY, setImageOffsetY } from "@/scripts/settings/mech-sheet";
 
     const { 
@@ -50,18 +47,9 @@
 <!-- (#2) -->
 <!-- svelte-ignore event_directive_deprecated -->
 <div class="la-mechhead__container -flex1 -widthfull -heightfull">
-    {#if advancedOptions}
-        <i 
-            class="mdi mdi-arrow-up-down -positionabsolute -fontsize5 -right2 -top10 -aligncontentcenter"
-            data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-            data-tooltip-class={"la-tooltip clipped-bot"}
-            data-tooltip-direction={TooltipDirection.LEFT}
-            style="z-index: 1;"
-        ></i>
-    {/if}
     <img 
-        class="la-mechhead__img -heightfull -overflowhidden
-            {advancedOptions ? "-pointercursor" : ""}" 
+        class="la-mechhead__img -heightfull -overflowhidden -float-r
+            {advancedOptions ? "-pointermove" : ""}" 
         src="{actor.img}" 
         alt={`modules/${moduleID}/assets/assets/nodata.png`}
         style="
@@ -72,6 +60,7 @@
         on:pointerdown={event => handlePointerDown(event)}
         on:pointermove={event => handlePointerMove(event)}
         on:pointerup={event => handlePointerUp(event, () => { setImageOffsetY(actor.uuid, position.y); })}
+        on:pointerleave={event => handlePointerUp(event, () => { setImageOffsetY(actor.uuid, position.y); })}
         draggable={false}
     />
 </div>

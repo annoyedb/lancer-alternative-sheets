@@ -1,14 +1,20 @@
 <script lang="ts">
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { advancedStates } from "@/scripts/advanced";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
+    // import SidebarRatioHandle from "@/svelte/actor/button/SidebarRatioHandle.svelte";
 
     const props = $props();
     const { 
         actor, 
         pilot 
     }: MechSheetProps = props
+    
+    let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
 
     // @ts-expect-error
     function getVersion()
@@ -20,11 +26,22 @@
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
+    <!-- <SidebarRatioHandle
+        {...props}
+    /> -->
     <!-- Advanced Options Toggle -->
-    <div class="la-settings__island -padding1">
+    <div class="la-combine-v la-settings__island -padding1">
         <AdvancedButton
             key={actor.uuid}
         />
+        {#if advancedOptions}
+            <i 
+                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter"
+                data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
+                data-tooltip-class={"la-tooltip clipped-bot"}
+                data-tooltip-direction={TooltipDirection.LEFT}
+            ></i>
+        {/if}
     </div>
     <div class="la-names las-combine-v -flex1 -margin3">
         <input 

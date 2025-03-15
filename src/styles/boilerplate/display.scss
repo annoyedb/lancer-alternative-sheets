@@ -40,6 +40,11 @@ aside.la-tooltip.active
     {
         float: left;
     }
+
+    .-float-r
+    {
+        float: right;
+    }
     
     .-positionabsolute
     {
@@ -94,6 +99,11 @@ aside.la-tooltip.active
     .-bottom0
     {
         bottom: 0;
+    }
+
+    .-leftthird
+    {
+        left: 33.333333%;
     }
 
     .-left0

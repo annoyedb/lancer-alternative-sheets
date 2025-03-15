@@ -13,6 +13,12 @@ aside.la-tooltip.active
         pointer-events: all;
     }
 
+    .-pointermove
+    {
+        cursor: move;
+        pointer-events: all;
+    }
+
     .-glow-header
     {
         filter: drop-shadow(0px 0px 1.5px var(--header));

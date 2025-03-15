@@ -3,6 +3,15 @@ import type { MechSheetSettingsData } from "@/interfaces/settings/MechSheetSetti
 export class MechSheetSettings implements MechSheetSettingsData
 {
     [uuid: string]: {
-        offsetY: number;
+        headerImgOffsetY: number;
+        sidebarRatio: number;
     };
+
+    static emptyContent()
+    {
+        return {
+            headerImgOffsetY: 0,
+            sidebarRatio: 1,
+        }
+    }
 }

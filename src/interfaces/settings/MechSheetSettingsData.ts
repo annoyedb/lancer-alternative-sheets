@@ -1,6 +1,7 @@
 export interface MechSheetSettingsData
 { 
     [uuid: string]: {
-        offsetY: number;
+        headerImgOffsetY: number;
+        sidebarRatio: number;
     }
 }
