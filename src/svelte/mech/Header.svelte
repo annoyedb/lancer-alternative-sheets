@@ -1,13 +1,14 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { id as moduleID } from '@/module.json';
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
+    import BoundImage from "@/svelte/actor/BoundImage.svelte";
 
+    const props = $props();
     const { 
         actor, 
         pilot 
-    }: MechSheetProps = $props();
+    }: MechSheetProps = props
 
     // @ts-expect-error
     function getVersion()
@@ -25,7 +26,7 @@
             key={actor.uuid}
         />
     </div>
-    <div class="la-names las-combine-v -margin3">
+    <div class="la-names las-combine-v -flex1 -margin3">
         <input 
             class="la-mechname__input la-text-header -upper -fontsize5
                 charname"
@@ -46,8 +47,7 @@
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}
     </div>
-    <img 
-        class="la-mechhead__img" src="{actor.img}" 
-        alt={`modules/${moduleID}/assets/assets/nodata.png`}
+    <BoundImage
+        {...props}
     />
 </div>

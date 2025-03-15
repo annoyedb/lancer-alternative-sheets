@@ -92,7 +92,7 @@ export class MechSheetBase
             
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
-                // (#2) Super jank way of trying to overload however Foundry decided 
+                // (#1) Super jank way of trying to overload however Foundry decided 
                 // to cache this element to apply theme settings at the Application level
                 //
                 // Only seems to need to be done once and then _injectHTML will recache it?
