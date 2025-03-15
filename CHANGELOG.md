@@ -1,16 +1,31 @@
 # 1.1.3
-This mainly major refactors to primary Svelte components for a little better reuseability
+An advanced settings toggle has been added to the mech sheet? What does this entail? Here's a video instead! `because if a picture is worth a thousand words, use a video`
+
+Otherwise this patch mainly concerns major refactors to primary Svelte components for a little better reuseability utilizing Snippets
 
 ## Changes
+* #1 - Added adding/removing/editing mounts feature to the 'advanced' toggle
+* #19 - Added a temporary fix for missing core bonuses, deployable actions, and deployable ActionBox such as Turret Attack from the Turret Drone to display at least rudimentary information `the most permanent solutions are the temporary ones`. This is an experimental thing, so let me know if there are any issues `i'm about to perform an unscheduled rapid disassembly of all Hydras if deployables don't stop haunting me`
+* #20 - Added a way to access the mech sheet's inventory from the 'advanced' toggle
+* #23 - As a result of some confusion over the current expand/collapse all button, expanding/collapsing all now affects the main header it is attached to --hopefully this will be more intuitive to everyone!
+* Added the ability to adjust header image position to the 'advanced' toggle
 * Collapsing headers should be a little more obvious now that the "extension" will state what it does when you hover over it --suggested by one of my players!
-* As a result of some confusion over the current expand/collapse all button, expanding/collapsing all now affects the main header it is attached to --hopefully this will be more intuitive to everyone!
+* Systems and frame actives and passives can now be directly sent to the chat via their icons
+* Purely out of circumstantial chance, I've learned that some modules (e.g. Monk's Little Details) adds a border to the window header of these sheets through an oddly specific and largely inconsequential CSS rule, so I've overridden the addition with my own oddly specific CSS rule `I'M CASTIGATING AAAAAAAAAAA`
+* ActionBox components now use EffectButton instead of FlowButton. Also there was a bug where '@html' was used in place of '@render' for the FlowButton component on the mech sheet's ActionBox component. This would cause a long string of text to appear instead of a button. While I don't think anything actually used this thing I added for myself, it's since been replaced by this new addition.
 * Reactions on the NPC sheet use the Reaction icon now `oop`
-* On the mech sheet, weapon mods, loaded tags, system limited tags, counters (only in Talent and Core Power where relevant) are now above the collapse area, so will always be displayed for easy access 
+* On the mech sheet, weapon mods, weapon profiles, loaded tags, limited tags, and some counters (only in Frame Power, Talent, and Core Power where relevant) are now above the collapse area, so will always be displayed for easy access 
 * Minor adjustments to styling: adjusted header thickness and spacing between header and Core Power activation button
 * Slightly changed the animation for collapses to feel a bit more responsive
 * Reworded the tooltip for recharging NPC abilities for how it is actually rolled
 * Overcharge tooltip now also states the overcharge stage
 * Counter buttons now glow as everything else clickable does
+* Flipped the vertically written text to a more readable method for romanized languages on supported browsers (the Electron app is not one of them). Anything unsupported will fallback onto the normal way
+* There was a typo for superheavy bracing mounts, so it now displays the proper text when expanded
+* Other usability styling changes
+
+## Known Issues
+* Buttons that create locked tooltips (such as NPC sheet's notes and mech sheet's advanced edits) don't display anything when used from modules that redirect event to external windows such as 'PopOut!'. Unfortunately this likely won't be fixed, as it is an issue (or partly adjacent) with Foundry's method of locked tooltips and I don't want to rollout a custom solution. As a result, I'll have to pull out deliberate mod support for these kinds of mods on the page :pensive: (this doesn't change the fact that I use it)
 
 # 1.1.2
 ## Changes
@@ -58,12 +73,12 @@ Disclaimer that I still have an active campaign on V11, so this is likely where 
 * Accounted for nuances between styling on Chrome vs FireFox (this affects only HASE stats for Chrome users)
 
 ## Known Issues
-* If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know
-* Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)
+* ~~If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know~~
+* ~~Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)~~
 * Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at this but nothing) please let me know!
 * Pressing enter on an NPC sheet's input box activates the on-click event for templates/classes. Genuinely have no idea, but Lancer/Foundry's input boxes in general seem kind of cursed
-* Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`
-* Tooltips are currently width-restricted and minimally restyled, so there can be cases where the entire NPC Notes tooltip display won't fit
+* ~~Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`~~
+* ~~Tooltips are currently width-restricted and minimally restyled, so there can be cases where the entire NPC Notes tooltip display won't fit~~
 
 ## 1.0.0 -> 1.1.0 Summary
 * Added GMS Dark theme
@@ -151,6 +166,6 @@ And my issues list is already bigger than my change list.
 * ~~'editable' actions, 'bonuses', and 'weapon profiles' are not styled and frame deployables (different from system deployables) are not implemented. Not sure if they're even fully implemented in the Lancer system or what they even are~~
 * Some things that should have input boxes in the main content (e.g. the 'status' tab: overcharge, structure, and stress) but aren't there. There is an issue where when reading a number data type in the Lancer system and there is more than one of the same uuid, it will throw an value type error. I suspect its received an array, when it expected a single value, but I haven't looked at the code
 * ~~Activations (Full, Quick, etc) aren't mapped to use localized values.~~ Neither are the names or descriptions of talents, weapons, mods, etc.
-* No warnings yet if your loadout is illegal (e.g. two main weapons on a flex slot)
+* ~~No warnings yet if your loadout is illegal (e.g. two main weapons on a flex slot)~~
 * Some Lancer classes, types, and functions are repackaged with this module (only used by these sheets though) and it feels wholely unnecessary. If anyone knows how to get references to the actual classes/methods/types/functions used in the Lancer module please let me know. I tried getting vite to export types from the foundryvtt-lancer codebase but it's giving me rollup issues unless they're all defined in the global namespace `and I'm not doing that by hand`
 * ~~It's called "sheets" but there's only one sheet :eyes: `so what? you wanna fight???`~~
