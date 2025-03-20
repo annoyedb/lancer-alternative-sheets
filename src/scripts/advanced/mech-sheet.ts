@@ -80,6 +80,7 @@ export async function handleMountDelete(
 {
     let raw_val = button.dataset.actionValue;
 
+    // @ts-ignore
     let val: any = undefined;
     if (raw_val)
     {

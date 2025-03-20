@@ -41,7 +41,7 @@
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={TooltipDirection.LEFT}
 >
-    <i class="mdi -fontsize5 la-text-background
+    <i class="mdi -fontsize5 la-text-header
         {advancedOptions ? "mdi-toggle-switch" : "mdi-toggle-switch-off"}"
     ></i>
 </button>

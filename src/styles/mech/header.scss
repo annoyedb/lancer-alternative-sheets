@@ -12,11 +12,7 @@
         {
             position: absolute;
             z-index: 1;
-            right: 0rem;
             top: 8.25rem;
-            filter: drop-shadow(-3px 3px 1px var(--shadow));
-            -webkit-filter: drop-shadow(-3px 3px 1px var(--shadow));
-            -moz-filter: drop-shadow(-3px 3px 1px var(--shadow));
 
             >.la-tabs
             {

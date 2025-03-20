@@ -6,7 +6,7 @@
     import { advancedStates } from "@/scripts/advanced";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
-    // import SidebarRatioHandle from "@/svelte/actor/button/SidebarRatioHandle.svelte";
+    import { getImageOffsetY, setImageOffsetY } from "@/scripts/settings/mech-sheet";
 
     const props = $props();
     const { 
@@ -26,9 +26,6 @@
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
-    <!-- <SidebarRatioHandle
-        {...props}
-    /> -->
     <!-- Advanced Options Toggle -->
     <div class="la-combine-v la-settings__island -padding1">
         <AdvancedButton
@@ -36,7 +33,7 @@
         />
         {#if advancedOptions}
             <i 
-                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter"
+                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
                 data-tooltip-class={"la-tooltip clipped-bot"}
                 data-tooltip-direction={TooltipDirection.LEFT}
@@ -65,6 +62,9 @@
     {/if}
     </div>
     <BoundImage
-        {...props}
+        image={actor.img}
+        uuid={actor.uuid}
+        yGetter={getImageOffsetY}
+        ySetter={setImageOffsetY}
     />
 </div>

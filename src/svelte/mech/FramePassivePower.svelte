@@ -48,6 +48,7 @@
     text={core.passive_name}
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
+    textStyle={["la-text-header", "la-anim-header"]}
 
     collapseID={collID}
 

@@ -121,7 +121,8 @@
     <HeaderQuinary
         text={action.name}
         headerStyle={[ACTIVATION_COLOR_MAP[action.activation], "-padding0-l"]}
-        
+        textStyle={["la-text-header", "la-anim-header"]}
+
         uuid={uuid}
         path={`${path}.${index}`}
         collapseID={collapseID}

@@ -1,19 +1,21 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import type { BoundImageProps } from "@/interfaces/actor/BoundImageProps";
     import { id as moduleID } from '@/module.json';
     import { advancedStates } from "@/scripts/advanced";
-    import { getImageOffsetY, setImageOffsetY } from "@/scripts/settings/mech-sheet";
 
-    const { 
-        actor,
-    }: MechSheetProps = $props();
+    const {
+        image,
+        uuid,
+        yGetter,
+        ySetter,
+    }: BoundImageProps = $props();
 
-    let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
 
     // Dragging ---------------------------------------------------------------
     let dragging = false;
     let offset = { x: 0, y: 0 };
-    let position = $state({ x: 0, y: getImageOffsetY(actor.uuid) });
+    let position = $state({ x: 0, y: yGetter ? yGetter(uuid) : 0 });
 
     function handlePointerDown(event: PointerEvent) 
     {
@@ -50,7 +52,7 @@
     <img 
         class="la-mechhead__img -heightfull -overflowhidden -float-r
             {advancedOptions ? "-pointermove" : ""}" 
-        src="{actor.img}" 
+        src={image} 
         alt={`modules/${moduleID}/assets/assets/nodata.png`}
         style="
             margin-top: { position.y }px;
@@ -59,8 +61,8 @@
             -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));"
         on:pointerdown={event => handlePointerDown(event)}
         on:pointermove={event => handlePointerMove(event)}
-        on:pointerup={event => handlePointerUp(event, () => { setImageOffsetY(actor.uuid, position.y); })}
-        on:pointerleave={event => handlePointerUp(event, () => { setImageOffsetY(actor.uuid, position.y); })}
+        on:pointerup={event => ySetter ? handlePointerUp(event, () => { ySetter(uuid, position.y); }) : undefined }
+        on:pointerleave={event => ySetter ? handlePointerUp(event, () => { ySetter(uuid, position.y); }) : undefined }
         draggable={false}
     />
 </div>

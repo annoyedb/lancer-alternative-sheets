@@ -30,7 +30,7 @@
 </script>
 
 <!-- Frame Name -->
-<div class="la-framename -overflowhidden">
+<div class="la-framename la-dropshadow -overflowhidden">
     <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-cmdline la-text-header -fadein">>//: </span>
