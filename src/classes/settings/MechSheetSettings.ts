@@ -4,14 +4,14 @@ export class MechSheetSettings implements MechSheetSettingsData
 {
     [uuid: string]: {
         headerImgOffsetY: number;
-        sidebarRatio: number;
+        themeOverride: string;
     };
 
     static emptyContent()
     {
         return {
             headerImgOffsetY: 0,
-            sidebarRatio: 1,
+            themeOverride: "",
         }
     }
 }

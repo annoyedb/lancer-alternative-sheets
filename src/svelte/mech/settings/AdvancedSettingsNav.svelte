@@ -12,4 +12,6 @@
     uuid={actor.uuid}
     ratioGetter={getSidebarRatio}
     ratioSetter={setSidebarRatio}
+    style={["-aligncontentcenter"]}
+/>
 />

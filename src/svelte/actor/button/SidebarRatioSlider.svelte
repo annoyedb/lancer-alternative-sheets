@@ -10,7 +10,9 @@
     const { 
         uuid,
         ratioGetter,
-        ratioSetter, 
+        ratioSetter,
+        
+        style
     }: SidebarRatioSliderProps = props
     
     let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
@@ -40,12 +42,12 @@
 </script>
 <!-- Ratio Slider -->
 {#if advancedOptions}
-<div class=""
+<div class="{style?.join(' ')}"
     bind:this={component}
 >
     <input type="range"
-        class="la-range"
-        min={1}
+        class="la-range -glow-active-hover"
+        min={0.5}
         max={2}
         value={ratio}
         step={0.1}
