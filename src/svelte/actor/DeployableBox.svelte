@@ -10,15 +10,17 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
 
     const {
         source, 
         lidSource, 
         uuid,
+        sheetUUID,
     }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
+    let themeOverride = $state(getThemeOverride(sheetUUID));
 
-    let tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
-
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
     );
@@ -28,12 +30,26 @@
         return lidSource.deployables?.includes(deployable.system.lid) ?? false;
     }
 
+    const defaultImages = [
+        "systems/lancer/assets/icons/deployable.svg", 
+        "systems/lancer/assets/icons/white/deployable.svg"
+    ];
+    
     function getThemeImg(deployable: StoredDocument<LancerActor>)
     {
-        let theme = getBrightness();
-        return deployable.img
-        ? (theme === "dark" ? deployable.img.replace('/icons/', '/icons/white/') : deployable.img)
-        : (theme === "dark" ? "systems/lancer/assets/icons/white/generic_item.svg" : "systems/lancer/assets/icons/generic_item.svg");
+        let theme = getBrightness(themeOverride);
+        // If not assigned an image
+        if (!deployable.img)
+            return theme === "dark" 
+                ? "systems/lancer/assets/icons/white/generic_item.svg" 
+                : "systems/lancer/assets/icons/generic_item.svg";
+        // If for some reason the assigned deployable is the default image
+        else if (defaultImages.includes(deployable.img))
+            return theme === "dark" 
+                ? deployable.img.replace('/icons/', '/icons/white/') 
+                : deployable.img
+        else
+            return deployable.img;
     }
 
     function getDeployableActions(deployable: StoredDocument<any>)

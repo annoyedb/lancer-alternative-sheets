@@ -16,6 +16,7 @@
     const props: MechSheetProps = $props();
     const {
         pilot,
+        actor,
     } = props;
     
     let coreBonuses = pilot.itemTypes.core_bonus;
@@ -122,6 +123,7 @@
                     source={pilot}
                     lidSource={coreBonus.system}
                     uuid={pilot.uuid}
+                    sheetUUID={actor.uuid}
                 />
             </div>
         </HeaderSecondary>

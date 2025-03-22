@@ -2,11 +2,12 @@ export interface StatusBarProps
 {
     currentValue: number,
     maxValue: number,
-    currentValueAlt?: number,
-    maxValueAlt?: number,
+    currentValueSecondary?: number,
+    maxValueSecondary?: number,
     name?: string,
     dataName?: string,
-    styleClass?: string[],
-    styleClassAlt?: string[],
+    barStyle?: Array<string>,
+    barStyleSecondary?: Array<string>,
+    textStyle?: Array<string>,
     clipPath?: string,
 }

@@ -116,15 +116,16 @@
                 dataName="system.hp.value"
                 currentValue={system.hp.value}
                 maxValue={system.hp.max}
-                styleClass={["la-bckg-bar-health"]}
-                currentValueAlt={system.overshield.value}
-                maxValueAlt={system.hp.max}
-                styleClassAlt={["la-bckg-bar-shield", "-shield"]}
+                barStyle={["la-bckg-bar-health"]}
+                currentValueSecondary={system.overshield.value}
+                maxValueSecondary={system.hp.max}
+                barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                textStyle={["la-text-text"]}
                 clipPath={"clipped"}
                 
                 tooltip={getLocalized("LA.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
-                />
+            />
             <div class="la-spacer -tiny"></div>
             <!-- STRUCTURE -->
             <StatusBar
@@ -132,16 +133,17 @@
                 dataName="system.structure.value"
                 currentValue={system.structure.value}
                 maxValue={system.structure.max}
-                styleClass={["la-bckg-bar-structure"]}
+                barStyle={["la-bckg-bar-structure"]}
+                textStyle={["la-text-text"]}
                 clipPath={"clipped-alt"}
 
                 tooltip={getLocalized("LA.structure.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
-                />
+            />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-combine-v -divider la-anim-bar-shield -flex0 -width3ch -textaligncenter -glow-shield">
-            <input class="la-damage__input la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+        <div class="la-combine-v -divider la-anim-bar-shield la-text-text -flex0 -width3ch -textaligncenter -glow-shield">
+            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                 type="number" 
                 name="system.overshield.value" 
                 data-dtype="Number"
@@ -166,10 +168,11 @@
                 dataName="system.heat.value"
                 currentValue={system.heat.value}
                 maxValue={system.heat.max}
-                styleClass={["la-bckg-bar-heat"]}
-                currentValueAlt={system.burn}
-                maxValueAlt={system.heat.max}
-                styleClassAlt={["la-bckg-bar-burn", "-burn"]}
+                barStyle={["la-bckg-bar-heat"]}
+                currentValueSecondary={system.burn}
+                maxValueSecondary={system.heat.max}
+                barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
+                textStyle={["la-text-text"]}
                 clipPath={"clipped"}
 
                 tooltip={getLocalized("LA.heat.tooltip")}
@@ -182,7 +185,8 @@
                 dataName="system.stress.value"
                 currentValue={system.stress.value}
                 maxValue={system.stress.max}
-                styleClass={["la-bckg-bar-stress"]}
+                barStyle={["la-bckg-bar-stress"]}
+                textStyle={["la-text-text"]}
                 clipPath={"clipped-alt"}
 
                 tooltip={getLocalized("LA.stress.tooltip")}
@@ -190,8 +194,8 @@
                 />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-combine-v -divider la-anim-bar-burn -flex0 -width3ch -textaligncenter -glow-burn">
-            <input class="la-damage__input la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+        <div class="la-combine-v -divider la-anim-bar-burn la-text-text -flex0 -width3ch -textaligncenter -glow-burn">
+            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                 type="number" 
                 name="system.burn" 
                 data-dtype="Number"

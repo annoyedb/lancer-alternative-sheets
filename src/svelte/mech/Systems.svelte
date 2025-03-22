@@ -214,6 +214,7 @@
                     source={actor}
                     lidSource={component.value.system}
                     uuid={component.value.uuid}
+                    sheetUUID={actor.uuid}
                 />
             </div>
         {/if}

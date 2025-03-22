@@ -97,6 +97,7 @@
         source={actor}
         lidSource={core}
         uuid={frame.uuid}
+        sheetUUID={actor.uuid}
     />
 </HeaderQuinary>
 {/if}

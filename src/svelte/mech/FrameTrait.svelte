@@ -86,6 +86,7 @@
             source={actor}
             lidSource={trait}
             uuid={frame.uuid}
+            sheetUUID={actor.uuid}
         />
     </div>
 </HeaderSecondary>

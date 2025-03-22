@@ -198,10 +198,10 @@
                                     dataName="system.hp.value"
                                     currentValue={system.hp.value}
                                     maxValue={system.hp.max}
-                                    styleClass={["la-bckg-bar-health"]}
-                                    currentValueAlt={system.overshield.value}
-                                    maxValueAlt={system.hp.max}
-                                    styleClassAlt={["la-bckg-bar-shield", "-shield"]}
+                                    barStyle={["la-bckg-bar-health"]}
+                                    currentValueSecondary={system.overshield.value}
+                                    maxValueSecondary={system.hp.max}
+                                    barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
                                     clipPath={"clipped"}
                                     
                                     tooltip={getLocalized("LA.hitpoint.tooltip")}
@@ -214,7 +214,7 @@
                                     dataName="system.structure.value"
                                     currentValue={system.structure.value}
                                     maxValue={system.structure.max}
-                                    styleClass={["la-bckg-bar-structure"]}
+                                    barStyle={["la-bckg-bar-structure"]}
                                     clipPath={"clipped-alt"}
 
                                     tooltip={getLocalized("LA.structure.tooltip")}
@@ -248,10 +248,10 @@
                                     dataName="system.heat.value"
                                     currentValue={system.heat.value}
                                     maxValue={system.heat.max}
-                                    styleClass={["la-bckg-bar-heat"]}
-                                    currentValueAlt={system.burn}
-                                    maxValueAlt={system.heat.max}
-                                    styleClassAlt={["la-bckg-bar-burn", "-burn"]}
+                                    barStyle={["la-bckg-bar-heat"]}
+                                    currentValueSecondary={system.burn}
+                                    maxValueSecondary={system.heat.max}
+                                    barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
                                     clipPath={"clipped"}
 
                                     tooltip={getLocalized("LA.heat.tooltip")}
@@ -264,7 +264,7 @@
                                     dataName="system.stress.value"
                                     currentValue={system.stress.value}
                                     maxValue={system.stress.max}
-                                    styleClass={["la-bckg-bar-stress"]}
+                                    barStyle={["la-bckg-bar-stress"]}
                                     clipPath={"clipped-alt"}
 
                                     tooltip={getLocalized("LA.stress.tooltip")}

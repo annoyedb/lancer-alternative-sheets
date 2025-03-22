@@ -5,16 +5,18 @@
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import DeleteButton from "@/svelte/actor/button/DeleteButton.svelte";
+    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
 
     const {
         effects,
         actor,
         isOwner,
     }: ActiveEffectsProps = $props();
+    let themeOverride = $state(getThemeOverride(actor.uuid));
 
     function getThemedIcon(effect: any)
     {
-        let theme = getBrightness();
+        let theme = getBrightness(themeOverride);
         return effect.icon
             ? (theme === "dark" ? effect.icon : effect.icon.replace('/white/', '/'))
             : (theme === "dark" ? "systems/lancer/assets/icons/white/difficulty.svg" : "systems/lancer/assets/icons/difficulty.svg");
