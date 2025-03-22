@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getSidebarRatio, setSidebarRatio } from "@/scripts/settings/mech-sheet";
-    import SidebarRatioSlider from "@/svelte/actor/button/SidebarRatioSlider.svelte";
+    import SidebarRatioSlider from "@/svelte/actor/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
 
     const props = $props();

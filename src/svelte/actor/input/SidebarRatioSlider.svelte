@@ -36,6 +36,12 @@
         const value = parseFloat(target.value);
         if (sidebar)
             sidebar.css('flex', value.toString());
+    }
+
+    function handleOnRelease(event: Event)
+    {
+        const target = event.target as HTMLInputElement;
+        const value = parseFloat(target.value);
         ratioSetter(uuid, value);
     }
     
@@ -55,6 +61,7 @@
         data-tooltip-class={"la-tooltip clipped-bot"}
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
+        onpointerup={event => handleOnRelease(event)}
     />
 </div>
 {/if}
