@@ -1,6 +1,6 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
-import { applyThemeTarget, getTheme } from "@/scripts/theme";
+import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/advanced";
 import { getLocalized } from "@/scripts/helpers";
 import { LancerAlternative } from "@/enums/LancerAlternative";
@@ -12,6 +12,7 @@ import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
+import { getThemeOverride } from "@/scripts/settings/mech-sheet";
 
 export class MechSheetBase
 {
@@ -20,7 +21,7 @@ export class MechSheetBase
         return {
             classes: [
                 "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "mech", getTheme()
+                "lancer", "sheet", "actor", "mech", getSystemTheme()
             ],
             template: TEMPLATE_PATHS.mechSheetSvelte,
             width: 900,
@@ -44,28 +45,24 @@ export class MechSheetBase
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
         const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
         {
-            private _themeDirty: boolean;
-            private get themeDirty(): boolean { return this._themeDirty; }
-            private set themeDirty(value: boolean) { this._themeDirty = value; }
-
             constructor(...args: [any])
             {
                 super(...args);
-                this._themeDirty = false;
 
-                // Read pilot talent item updates
-                Hooks.on("preUpdateItem", (item: any, _changes: any, _options: any, _user: string) => {
-                    if (item.type !== "talent")
+                Hooks.on("laOverrideTheme", (uuid: string) =>
+                {
+                    if (uuid !== this.actor.uuid)
                         return;
+                    
+                    this.render();
+                })
 
-                    // TODO: figure out how to rerender the sheet when pilot talents are changed
-                    // and it not return stale data
-                    // console.dir(item, changes, options, user);
-                    // this.render(false);
-                });
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
-                Hooks.on("closeSettingsConfig", () => { this.themeDirty = true });
+                Hooks.on("closeSettingsConfig", () =>
+                {
+                    this.render();
+                });
             }
 
             static override get defaultOptions()
@@ -90,29 +87,28 @@ export class MechSheetBase
                 data.isOwner = data.owner;
                 return data as MechSheetProps;
             }
-            
+
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
-                // (#1) Super jank way of trying to overload however Foundry decided 
-                // to cache this element to apply theme settings at the Application level
-                //
-                // Only seems to need to be done once and then _injectHTML will recache it?
-                // That or `html` is mutable data in which case lolwhatever#JavaScript
-                if (this.themeDirty) applyThemeTarget(html);
                 super._injectHTML(html);
+                // (#1) Foundry caches the root window somewhere but can't find a way 
+                // to update the cached element, so we have to reapply the theme every time. 
+                // This isn't currently a huge deal since it's just a class swap
+                applyThemeTo(this.element, getThemeOverride(this.actor.uuid));
+
                 let data = await this.getData() as any;
-                
+
                 this.mountComponents(html, data);
 
                 this.activateListeners(html);
-                this.themeDirty = false;
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
+                applyThemeTo(element, getThemeOverride(this.actor.uuid));
                 let data = await this.getData() as any;
-                
+
                 this.mountComponents(html, data);
 
                 this.activateListeners(html);
@@ -123,42 +119,41 @@ export class MechSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
-                // (#1)
                 mount(Header,
-                {
-                    target: html.find(".la-SVELTE-HEADER")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-HEADER")[0],
+                        props: data,
+                    });
                 mount(AdvancedSettingsNav,
-                {
-                    target: html.find(".la-SVELTE-ADVANCEDNAV")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-ADVANCEDNAV")[0],
+                        props: data,
+                    });
                 mount(Sidebar,
-                {
-                    target: html.find(".la-SVELTE-SIDEBAR")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-SIDEBAR")[0],
+                        props: data,
+                    });
                 mount(Status,
-                {
-                    target: html.find(".la-SVELTE-STATUS")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-STATUS")[0],
+                        props: data,
+                    });
                 mount(AdvancedSettings,
-                {
-                    target: html.find(".la-SVELTE-ADVANCED")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-ADVANCED")[0],
+                        props: data,
+                    });
                 mount(Loadout,
-                {
-                    target: html.find(".la-SVELTE-LOADOUT")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-LOADOUT")[0],
+                        props: data,
+                    });
                 mount(HaseDisplay,
-                {
-                    target: html.find(".la-SVELTE-HASE")[0],
-                    props: data,
-                });
+                    {
+                        target: html.find(".la-SVELTE-HASE")[0],
+                        props: data,
+                    });
             }
 
             reapplyImgListener(html: JQuery<HTMLElement>)
@@ -171,8 +166,10 @@ export class MechSheetBase
 
             applyTabListener(html: JQuery<HTMLElement>)
             {
-                html.find('.la-nav__island button').each((_, button) => {
-                    $(button).on('click', (event) => {
+                html.find('.la-nav__island button').each((_, button) =>
+                {
+                    $(button).on('click', (event) =>
+                    {
                         const tab = $(event.currentTarget).data('tab');
                         setActiveTab(tab);
                     });

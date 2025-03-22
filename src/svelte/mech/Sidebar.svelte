@@ -10,23 +10,25 @@
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
 
     const { 
         system,
         actor,
     }: MechSheetProps = $props();
-    let frame = system.loadout.frame?.value;
-    let frameName = frame 
+    let themeOverride = $state(getThemeOverride(actor.uuid));
+
+    const frame = system.loadout.frame?.value;
+    const frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
         : getLocalized("LA.placeholder");
-    let frameUUID = frame ? frame.uuid : "";
-    let overchargeSequence = actor.system.overcharge_sequence.split(",");
-    let overchargeStage = actor.system.overcharge;
-    let emptyObject = '{}';
+    const frameUUID = frame ? frame.uuid : "";
+    const overchargeSequence = actor.system.overcharge_sequence.split(",");
+    const overchargeStage = actor.system.overcharge;
 
-    let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
-    let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
-    let overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
+    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
+    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
+    const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
 </script>
 
 <!-- Frame Name -->
@@ -42,12 +44,12 @@
     <!-- Size, Speed, & Core Availability -->
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
-        <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
+        <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
-        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
+        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
             data-tooltip={sizeTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
@@ -56,8 +58,8 @@
             data-tooltip={speedTip}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}>
-            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow"></i>
-            <span class="{getSidebarImageTheme("text")} la-outl-shadow -bold">{system.speed}</span>
+            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
+            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{system.speed}</span>
         </div>
         <CoreAvailability {system} />
     </div>
@@ -270,7 +272,6 @@
         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
         uuid={actor.uuid}
         flowType="Stabilize"
-        flowArgs={emptyObject}
     />
     <FlowButton 
         flowClass={FlowClass.Standard}
@@ -279,7 +280,6 @@
         tooltip={overchargeText}
         uuid={actor.uuid}
         flowType="Overcharge"
-        flowArgs={emptyObject}
     />
     <FlowButton 
         flowClass={FlowClass.RollStat}
@@ -294,7 +294,6 @@
         tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
         uuid={actor.uuid}
         flowType="BasicAttack"
-        flowArgs={emptyObject}
     />
     <FlowButton 
         flowClass={FlowClass.Standard}
@@ -302,7 +301,6 @@
         tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
         uuid={actor.uuid}
         flowType="Damage"
-        flowArgs={emptyObject}
     />
     <FlowButton 
         flowClass={FlowClass.Standard}
@@ -310,6 +308,5 @@
         tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
         uuid={actor.uuid}
         flowType="TechAttack"
-        flowArgs={emptyObject}
     />
 </div>

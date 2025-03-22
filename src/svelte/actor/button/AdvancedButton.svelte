@@ -6,31 +6,31 @@
     import { getLocalized } from "@/scripts/helpers";
 
     const {
-        key,
+        uuid,
     }: any = $props();
 
-    let advancedOptions = $derived($advancedStates[key]?.enabled || false);
+    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.tooltip"));
 
     onMount(() =>
     {
-        if (key)
+        if (uuid)
         {
-            initializeAdvancedStates(key);
+            initializeAdvancedStates(uuid);
         }
     });
 
     function toggleAdvancedOptions(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
-        if (key)
+        if (uuid)
         {
-            handleAdvancedToggle(event, key);   
+            handleAdvancedToggle(event, uuid);   
         }
     }
 </script>
 
-{#if key}
+{#if uuid}
 <!-- (#2) -->
 <!-- svelte-ignore event_directive_deprecated -->
 <button type="button"

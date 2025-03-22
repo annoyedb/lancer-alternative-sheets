@@ -9,7 +9,7 @@
     import MountOptions from "@/svelte/mech/settings/MountOptions.svelte";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     import MountDelete from "@/svelte/mech/settings/MountDelete.svelte";
-    import MountAdd from "./MountAdd.svelte";
+    import MountAdd from "@/svelte/mech/settings/MountAdd.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -17,7 +17,6 @@
         document,
         system,
     } = props;
-
     
     let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
     let active = $derived($activeTab);

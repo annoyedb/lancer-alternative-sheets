@@ -42,11 +42,11 @@
 </script>
 <!-- Ratio Slider -->
 {#if advancedOptions}
-<div class="{style?.join(' ')}"
+<div class="la-range {style?.join(' ')}"
     bind:this={component}
 >
     <input type="range"
-        class="la-range -glow-active-hover"
+        class="-glow-active-hover"
         min={0.5}
         max={2}
         value={ratio}

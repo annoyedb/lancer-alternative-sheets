@@ -36,7 +36,7 @@ export function getMechSheetLocalData()
 export function setMechSheetLocalData(data: MechSheetLocalSettings)
 {
     const encoded: Uint8Array = encoder.encode(data);
-    game.settings.set(LancerAlternative.Name, `_mech-settings-local`, encoded);
+    return game.settings.set(LancerAlternative.Name, `_mech-settings-local`, encoded);
 }
 
 export function getSidebarRatio(uuid: string): number
@@ -67,7 +67,7 @@ export function getMechSheetData()
 export function setMechSheetData(data: MechSheetSettings)
 {
     const encoded: Uint8Array = encoder.encode(data);
-    game.settings.set(LancerAlternative.Name, `_mech-settings`, encoded);
+    return game.settings.set(LancerAlternative.Name, `_mech-settings`, encoded);
 }
 
 export function getImageOffsetY(uuid: string): number
@@ -97,5 +97,9 @@ export function setThemeOverride(uuid: string, value: string)
     if (!data[uuid])
         data[uuid] = MechSheetSettings.emptyContent();
     data[uuid].themeOverride = value;
-    setMechSheetData(data);
+    setMechSheetData(data)
+        .then(() =>
+        {
+            Hooks.call("laOverrideTheme", uuid);
+        });
 }

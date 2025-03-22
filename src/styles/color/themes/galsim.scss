@@ -31,12 +31,21 @@ $galsim-theme: (
     success: #10a14c,
     warning: #e89f0c,
 
+    // Text
+    text: #b3b9ba,
+    // text: #fff,
+    // subtle: #b3b9ba,
+    // stark: #fff,
+    // anti: #000,
+    // light-text: #96a0a0, //fluff text
+    // stark-text: #fff,
+
     // ----------------
     // Sheet Colors
     // ----------------
     header: #f4f4f4,
     header-anti: #212121,
-    bar-back: oc.$oc-gray-8,
+    bar-back: oc.$oc-gray-9,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
     bar-structure: oc.$oc-violet-9,

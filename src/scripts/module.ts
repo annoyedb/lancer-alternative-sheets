@@ -1,4 +1,3 @@
-import { applyTheme } from "./theme";
 import { preloadTemplates } from "./loader";
 import { logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
@@ -33,7 +32,7 @@ function registerSettings()
 
 function registerFlows()
 {
-    // TODO: write PR 
+    // TODO: write PR to separate flow registration from hook call
     // We miss the 'lancer.registerFlows' hook, since it is called on init, but the 
     // classes are not ready for reading on init, so we have to grab the flows Map 
     // ourselves in the setup step
@@ -52,7 +51,7 @@ function registerFlows()
 
 function setupSheets()
 {
-    // TODO: write PR
+    // TODO: write PR to define these earlier or separate initialization/exposure 
     // Declare extension classes at runtime since they're only defined at that point
     MechSheetBase.setupSheet();
     NPCSheetBase.setupSheet();
@@ -60,8 +59,5 @@ function setupSheets()
 
 function setupEventListeners()
 {
-    // TODO: write PR
-    // Until a Lancer settings/theme hook is available, 
-    // this blasts on every single time the settings close
-    Hooks.on("closeSettingsConfig", applyTheme);
+    
 }

@@ -35,34 +35,60 @@ import "@/styles/color/themes/galsim.scss";
 import "@/styles/color/themes/msmc.scss";
 import "@/styles/color/themes/ha.scss";
 import "@/styles/color/themes/horus.scss";
+
+import { ThemeKey } from "@/enums/ThemeKey";
 import { slugify } from "./lancer/util/lid";
+import { getLocalized } from "./helpers";
 
-const THEME_MAP: { [key: string]: string } = {
-    "gms": "la-gms",
-    "gmsDark": "la-gmsdark",
-    "msmc": "la-msmc",
-    "gal": "la-galsim",
-    "horus": "la-horus",
-    "ha": "la-ha",
-    "ssc": "la-ssc",
-    "ipsn": "la-ipsn",
+const THEME_MAP: Record<ThemeKey | string, string> = {
+    [ThemeKey.GMS]: "la-gms",
+    [ThemeKey.GMSDark]: "la-gmsdark",
+    [ThemeKey.MSMC]: "la-msmc",
+    [ThemeKey.GALSIM]: "la-galsim",
+    [ThemeKey.HORUS]: "la-horus",
+    [ThemeKey.HA]: "la-ha",
+    [ThemeKey.SSC]: "la-ssc",
+    [ThemeKey.IPSN]: "la-ipsn",
 };
 
-const LIGHT_MAP: { [key: string]: "light" | "dark" } = {
-    "gms": "light",
-    "gmsDark": "dark",
-    "msmc": "dark",
-    "gal": "dark",
-    "horus": "dark",
-    "ha": "dark",
-    "ssc": "light",
-    "ipsn": "light",
+const LIGHT_MAP: Record<ThemeKey | string, "light" | "dark"> = {
+    [ThemeKey.GMS]: "light",
+    [ThemeKey.GMSDark]: "dark",
+    [ThemeKey.MSMC]: "dark",
+    [ThemeKey.GALSIM]: "dark",
+    [ThemeKey.HORUS]: "dark",
+    [ThemeKey.HA]: "dark",
+    [ThemeKey.SSC]: "light",
+    [ThemeKey.IPSN]: "light",
 };
 
-export function getTheme()
+const THEME_LOCALIZE_MAP: Record<ThemeKey | string, string> = {
+    [ThemeKey.GMS]: "LA.advanced.theme.gms.label",
+    [ThemeKey.GMSDark]: "LA.advanced.theme.gmsDark.label",
+    [ThemeKey.MSMC]: "LA.advanced.theme.msmc.label",
+    [ThemeKey.GALSIM]: "LA.advanced.theme.galsim.label",
+    [ThemeKey.HORUS]: "LA.advanced.theme.horus.label",
+    [ThemeKey.HA]: "LA.advanced.theme.ha.label",
+    [ThemeKey.SSC]: "LA.advanced.theme.ssc.label",
+    [ThemeKey.IPSN]: "LA.advanced.theme.ipsn.label",
+};
+
+export function getSystemTheme()
 {
-    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
+    const currentTheme = game.settings.get("lancer", "uiTheme") as string;
     return THEME_MAP[currentTheme];
+}
+
+export function getBrightness(theme?: ThemeKey | string): "light" | "dark"
+{
+    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
+    return LIGHT_MAP[selectedTheme];
+}
+
+export function getThemeName(theme?: ThemeKey | string)
+{
+    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
+    return getLocalized(THEME_LOCALIZE_MAP[selectedTheme]);
 }
 
 // Yes, this is basically just a theme picker for the sidebar
@@ -72,61 +98,64 @@ export function getTheme()
 //
 // 'la-icon-swap' is a class used to identify items with classes that need to be checked 
 // against the current LIGHT_MAP theme
-export function getSidebarImageTheme(type: "bckg" | "text" | "brdr")
+export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: string)
 {
-    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    if (LIGHT_MAP[currentTheme] === "light")
-        return `la-icon-swap la-${type}-primary`
-    else
-        return `la-icon-swap lancer-${type}-dark`;
+    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
+    const isLightTheme = LIGHT_MAP[selectedTheme] === "light";
+    return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `lancer-${type}-dark`}`;
 }
 
-export function applyThemeTarget(html: JQuery<HTMLElement>)
+export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr")
 {
-    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    const themeClasses = Object.values(THEME_MAP);
+    let manufacturer = slugify(key, "-");
 
-    html.removeClass(themeClasses.join(' ')).addClass(THEME_MAP[currentTheme]);
-}
-
-export function applyTheme(_app: any, _html: JQuery<HTMLElement>, _context: any)
-{
-    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    const themeClasses = Object.values(THEME_MAP);
-
-    // Swap class themes
-    $(document).find('*').each(function ()
+    if (!["gms", "ips-n", "ssc", "horus", "ha", "msmc", "galsim"].includes(manufacturer))
     {
-        const element = $(this);
-        const currentThemeClass = themeClasses.find(themeClass => element.hasClass(themeClass));
-        if (currentThemeClass)
-        {
-            element
-                .removeClass(currentThemeClass)
-                .addClass(THEME_MAP[currentTheme]);
-        }
-    });
+        manufacturer = "primary";
+    }
+
+    if (manufacturer === "ips-n")
+        manufacturer = "ipsn";
+    if (manufacturer === "gmsdark")
+        manufacturer = "gms";
+    return `la-${type}-${manufacturer}`;
+}
+
+export function applyThemeTo(html: JQuery<HTMLElement>, theme?: ThemeKey | string)
+{
+    const selectedtheme = theme || game.settings.get("lancer", "uiTheme") as string;
+
+    const themeClasses = Object.values(THEME_MAP);
+    html.removeClass(themeClasses.join(' ')).addClass(THEME_MAP[selectedtheme]);
+}
+
+export function applyThemeToImages(html: JQuery<HTMLElement>)
+{
+    const currentTheme = game.settings.get("lancer", "uiTheme") as string;
+    const isDarkTheme = LIGHT_MAP[currentTheme] === "dark";
 
     // Swap images
-    const isDarkTheme = LIGHT_MAP[currentTheme] === "dark";
-    $('img').each(function ()
+    html.find('img').each(function ()
     {
         const img = $(this);
         const src = img.attr('src');
         if (src && src.startsWith('systems/lancer/assets/icons'))
         {
             if (isDarkTheme && !src.includes('white'))
-            {
                 img.attr('src', src.replace('systems/lancer/assets/icons', 'systems/lancer/assets/icons/white'));
-            } else if (!isDarkTheme && src.includes('white'))
-            {
+            else if (!isDarkTheme && src.includes('white'))
                 img.attr('src', src.replace('systems/lancer/assets/icons/white', 'systems/lancer/assets/icons'));
-            }
         }
     });
+}
 
-    // Swap classes for la-icon-swap
-    $('.la-icon-swap').each(function ()
+export function applyThemeToMarkedIcons(html: JQuery<HTMLElement>)
+{
+    const currentTheme = game.settings.get("lancer", "uiTheme") as string;
+    const isDarkTheme = LIGHT_MAP[currentTheme] === "dark";
+
+    // Swap classes marked by la-icon-swap
+    html.find('.la-icon-swap').each(function ()
     {
         const element = $(this);
         const classes = element.attr('class')?.split(' ') || [];
@@ -142,24 +171,4 @@ export function applyTheme(_app: any, _html: JQuery<HTMLElement>, _context: any)
             }
         });
     });
-}
-
-export function getBrightness(): "light" | "dark"
-{
-    let currentTheme = game.settings.get("lancer", "uiTheme") as string;
-    return LIGHT_MAP[currentTheme];
-}
-
-export function getManufacturerColor(key: string, type: "bckg" | "text" | "brdr")
-{
-    let manufacturer = slugify(key, "-");
-
-    if (!["gms", "ips-n", "ssc", "horus", "ha"].includes(manufacturer))
-    {
-        manufacturer = "primary";
-    }
-
-    if (manufacturer === "ips-n")
-        manufacturer = "ipsn";
-    return `la-${type}-${manufacturer}`;
 }

@@ -29,17 +29,18 @@
     <!-- Advanced Options Toggle -->
     <div class="la-combine-v la-settings__island -padding1">
         <AdvancedButton
-            key={actor.uuid}
+            uuid={actor.uuid}
         />
-        {#if advancedOptions}
-            <i 
-                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
-                data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-                data-tooltip-class={"la-tooltip clipped-bot"}
-                data-tooltip-direction={TooltipDirection.LEFT}
-            ></i>
-        {/if}
+    {#if advancedOptions}
+        <i 
+            class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
+            data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
+            data-tooltip-class={"la-tooltip clipped-bot"}
+            data-tooltip-direction={TooltipDirection.LEFT}
+        ></i>
+    {/if}
     </div>
+    <!-- Mech/Pilot Name -->
     <div class="la-names las-combine-v -flex1 -margin3">
         <input 
             class="la-mechname__input la-text-header -upper -fontsize5

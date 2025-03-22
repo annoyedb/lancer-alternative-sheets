@@ -41,7 +41,7 @@
     the event. If this is changed, the issue turns to (#2) -->
     <button type="button"
         class=""
-        onclick={(event) => swapMount(event, mountIndex, morphIndex)}
+        onclick={event => swapMount(event, mountIndex, morphIndex)}
     >
         {getLocalized(MOUNT_LOCALIZE_MAP[mountType])}
     </button>

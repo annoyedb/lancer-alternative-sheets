@@ -195,6 +195,11 @@ aside.la-tooltip.active
     {
         align-content: center;
     }
+    
+    .-alignselfstart
+    {
+        align-self: flex-start;
+    }
 
     // Vertical flexbox
     .la-combine-v
