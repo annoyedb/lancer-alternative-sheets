@@ -32,7 +32,6 @@ $galsim-theme: (
     warning: #e89f0c,
 
     // Text
-    text: #b3b9ba,
     // text: #fff,
     // subtle: #b3b9ba,
     // stark: #fff,
@@ -40,11 +39,19 @@ $galsim-theme: (
     // light-text: #96a0a0, //fluff text
     // stark-text: #fff,
 
+    // panel: #333,
+    // tooltip: #222,
+    // light-panel: #444,
+    // dark-panel: #111,
+    // panel-border: #666,
+    // stark-panel: #222,
+
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #bec6c7,
     header: #f4f4f4,
-    header-anti: #212121,
+    header-anti: #0c1a24,
     bar-back: oc.$oc-gray-9,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
@@ -53,7 +60,7 @@ $galsim-theme: (
     bar-stress: oc.$oc-pink-9,
     bar-burn: oc.$oc-red-9,
     card: oc.$oc-gray-9,
-    shadow: rgba(99, 99, 99, 0.2),
+    shadow: rgba(20, 20, 20, 0.2),
     scrollbar-primary: rgba(#e36600, 0.5),
     scrollbar-secondary: rgba(#3e6a94, 0.5)
 );

@@ -79,7 +79,7 @@
         icon={"cci cci-role-defender"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.armor.tooltip")}
@@ -89,7 +89,7 @@
         icon={"cci cci-evasion"}
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.evasion.tooltip")}
@@ -99,7 +99,7 @@
         icon={"cci cci-edef"}
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.edefense.tooltip")}
@@ -216,7 +216,7 @@
         icon={"cci cci-tech-full"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.tattack.tooltip")}
@@ -226,7 +226,7 @@
         icon={"cci cci-save"}
         label={getLocalized("LA.save.short")}
         value={system.save}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.save.tooltip")}
@@ -236,7 +236,7 @@
         icon={"cci cci-sensor"}
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.sensor.tooltip")}
@@ -249,7 +249,7 @@
         icon={"cci cci-overcharge"}
         label={getLocalized("LA.overcharge.short")}
         value={overchargeSequence[overchargeStage]}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.overcharge.tooltip")}
@@ -259,7 +259,7 @@
         icon={"cci cci-repair"}
         label={getLocalized("LA.repair.short")}
         value={system.repairs.value}
-        outerStyle={["-fontsize5"]}
+        outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
         tooltip={getLocalized("LA.repair.tooltip")}

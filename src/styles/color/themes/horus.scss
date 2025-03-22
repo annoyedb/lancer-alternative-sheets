@@ -8,10 +8,10 @@ $horus-theme: (
 
     // Main
     primary: #126127,
-    secondary: #990,
+    secondary: #999900,
     active: #00a600,
     accent: #00d900,
-    background: #000,
+    background: #111111,
 
     // Misc.
     pilot: #005454,
@@ -32,16 +32,17 @@ $horus-theme: (
     warning: #e5e500,
 
     // Text
-    text: #fff,
-    subtle: #b3b9ba,
-    stark: #fff,
-    anti: #000,
-    light-text: #96a0a0,
-    stark-text: #fff,
+    // text: #fff,
+    // subtle: #b3b9ba,
+    // stark: #fff,
+    // anti: #000,
+    // light-text: #96a0a0,
+    // stark-text: #fff,
 
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #fff,
     header: #f4f4f4,
     header-anti: #212121,
     bar-back: oc.$oc-gray-8,
@@ -52,7 +53,7 @@ $horus-theme: (
     bar-stress: oc.$oc-pink-9,
     bar-burn: oc.$oc-red-9,
     card: oc.$oc-gray-9,
-    shadow: rgba(99, 99, 99, 0.2),
+    shadow: rgba(5, 5, 5, 0.2),
     scrollbar-primary: rgba(#126127, 0.5),
     scrollbar-secondary: rgba(#990, 0.5)
 );

@@ -32,16 +32,17 @@ $gmsdark-theme: (
     warning: #FFAB00,
     
     // Text
-    text: #212121,
-    subtle: #9E9E9E,
-    stark: #000,
-    anti: #fff,
-    light-text: #424242,
-    stark-text: #000,
+    // text: #212121,
+    // subtle: #9E9E9E,
+    // stark: #000,
+    // anti: #fff,
+    // light-text: #424242,
+    // stark-text: #000,
 
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #f4f4f4,
     header: #f4f4f4,
     header-anti: #212121,
     bar-back: oc.$oc-gray-8,
@@ -52,7 +53,7 @@ $gmsdark-theme: (
     bar-stress: oc.$oc-pink-9,
     bar-burn: oc.$oc-red-9,
     card: oc.$oc-gray-9,
-    shadow: rgba(99, 99, 99, 0.2),
+    shadow: rgba(5, 5, 5, 0.2),
     scrollbar-primary: rgba(#991E2A, 0.5), // primary
     scrollbar-secondary: rgba(#283593, 0.5) // secondary
 );

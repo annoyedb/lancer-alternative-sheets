@@ -33,7 +33,7 @@
                     unrenderCallback: () => { toggle = false; },
                 },
                 {
-                    direction: TooltipDirection.LEFT,
+                    direction: TooltipDirection.DOWN,
                     cssClass: "la-tooltip -widthfull",
                     locked: true,
                 }
@@ -77,7 +77,7 @@
     class="{style?.join(' ')} -glow-active-hover"
     data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.themeOverride.tooltip"))}
     data-tooltip-class={"clipped-bot la-tooltip"}
-    data-tooltip-direction={TooltipDirection.LEFT}
+    data-tooltip-direction={TooltipDirection.UP}
     aria-label="TEMP"
     onclick={event => handleOnClick(event)}
 >

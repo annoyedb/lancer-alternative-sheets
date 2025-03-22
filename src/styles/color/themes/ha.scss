@@ -14,7 +14,7 @@ $ha-theme: (
     background: #2b2b2b,
 
     // Misc.
-    pilot: #892886, // Except this, because the default bothers me greatly
+    pilot: #4d2a58, // Except this, because the default bothers me greatly
     exotic: #FFAB00,
 
     action--downtime: #158f8f,  // Except this, the original colors threaten my very existence
@@ -32,18 +32,26 @@ $ha-theme: (
     warning: #FFAB00,
 
     // Text
-    text: #fff,
-    subtle: #b3b9ba,
-    stark: #fff,
-    anti: #000,
-    light-text: #96a0a0, //fluff text
-    stark-text: #fff,
+    // text: #fff,
+    // subtle: #b3b9ba,
+    // stark: #fff,
+    // anti: #000,
+    // light-text: #96a0a0, //fluff text
+    // stark-text: #fff,
+
+    // panel: #333,
+    // tooltip: #222,
+    // light-panel: #444,
+    // dark-panel: #111,
+    // panel-border: #666,
+    // stark-panel: #222,
 
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #d3e3e6,
     header: #f4f4f4,
-    header-anti: #212121,
+    header-anti: #1a0615,
     bar-back: oc.$oc-gray-8,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
@@ -52,7 +60,7 @@ $ha-theme: (
     bar-stress: oc.$oc-pink-9,
     bar-burn: oc.$oc-red-9,
     card: oc.$oc-gray-9,
-    shadow: rgba(99, 99, 99, 0.2),
+    shadow: rgba(20, 20, 20, 0.2),
     scrollbar-primary: rgba(#771675, 0.5),
     scrollbar-secondary: rgba(#cf4bdb, 0.5)
 );

@@ -102,7 +102,7 @@ export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: str
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
     const isLightTheme = LIGHT_MAP[selectedTheme] === "light";
-    return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `lancer-${type}-dark`}`;
+    return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `la-${type}-text`}`;
 }
 
 export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr")

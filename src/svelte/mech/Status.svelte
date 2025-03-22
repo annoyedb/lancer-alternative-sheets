@@ -31,7 +31,8 @@
 
 <div class="la-status__list la-combine-v -widthfull">
     <!-- Active Effects -->
-    <HeaderMain text={getLocalized("LA.tab.status.effects.label")}
+    <HeaderMain 
+        text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
@@ -44,7 +45,8 @@
         <ActiveEffects {...props} />
     </HeaderMain>
     <!-- Integrity -->
-    <HeaderMain text={getLocalized("LA.tab.status.structure.label")}
+    <HeaderMain 
+        text={getLocalized("LA.tab.status.structure.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
@@ -84,7 +86,7 @@
                 <i class="cci cci-repair la-dropshadow -fontsize9"></i>
                 <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
                 <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
-                    <input class="la-top__input -width2ch la-shadow -medium -inset"
+                    <input class="la-top__input -width2ch la-shadow la-text-text -medium -inset"
                         type="number" 
                         name="system.repairs.value"
                         data-dtype="Number" value={system.repairs.value}
@@ -119,7 +121,8 @@
             </div>
         </div>
     </HeaderMain>
-    <HeaderMain text={getLocalized("LA.tab.status.reactor.label")}
+    <HeaderMain 
+        text={getLocalized("LA.tab.status.reactor.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}

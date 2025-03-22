@@ -32,16 +32,24 @@ $ipsn-theme: (
     warning: #FFAB00,
 
     // Text
-    text: #212121,
-    subtle: #5c5c5c,
-    stark: #000,
-    anti: #fff,
-    light-text: #424242, // flavor text
-    stark-text: #000,
+    // text: #212121,
+    // subtle: #5c5c5c,
+    // stark: #000,
+    // anti: #fff,
+    // light-text: #424242, // flavor text
+    // stark-text: #000,
+    
+    // panel: #ccc,
+    // tooltip: #e8e8e8,
+    // light-panel: #dbdbdb,
+    // dark-panel: #d6d6d6,
+    // panel-border: #8a949e,
+    // stark-panel: #EDEDED,
 
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #212121,
     header: #dbdbdb, // background
     header-anti: #212121,
     bar-back: oc.$oc-gray-5,

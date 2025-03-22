@@ -32,7 +32,7 @@ $msmc-theme: (
     warning: #FFAB00,
 
     // Text
-    text: #dbdbdb,
+    // text: #dbdbdb,
     // subtle: #b3b9ba,
     // stark: #fff,
     // anti: #000,
@@ -49,8 +49,9 @@ $msmc-theme: (
     // ----------------
     // Sheet Colors
     // ----------------
+    text: #dbdbdb,
     header: #f4f4f4,
-    header-anti: #212121,
+    header-anti: #121d21,
     bar-back: oc.$oc-gray-9,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
@@ -59,7 +60,7 @@ $msmc-theme: (
     bar-stress: oc.$oc-pink-9,
     bar-burn: oc.$oc-red-9,
     card: oc.$oc-gray-9,
-    shadow: rgba(99, 99, 99, 0.2),
+    shadow: rgba(20, 20, 20, 0.2),
     scrollbar-primary: rgba(#146464, 0.5),
     scrollbar-secondary: rgba(#d98f30, 0.5)
 );
