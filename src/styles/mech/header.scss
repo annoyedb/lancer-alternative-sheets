@@ -76,6 +76,16 @@
                     object-fit: cover;
                 }
             }
+
+            .la-textlog__wrapper
+            {
+                z-index: 1;
+                height: 10rem;
+                width: calc(100% - 15rem);
+                mask-image: linear-gradient(to top, black 25%, transparent 50%);
+                -webkit-mask-image: linear-gradient(to top, black 25%, transparent 50%);
+                -moz-mask-image: linear-gradient(to top, black 25%, transparent 50%);
+            }
         }
     }
 }

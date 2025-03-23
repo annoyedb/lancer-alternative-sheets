@@ -6,22 +6,18 @@
     import { advancedStates } from "@/scripts/advanced";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
-    import { getImageOffsetY, setImageOffsetY } from "@/scripts/settings/mech-sheet";
+    import { getImageOffsetY, getMechSheetLogSpeed, setImageOffsetY } from "@/scripts/settings/mech-sheet";
+    import TextLog from "../actor/TextLog.svelte";
+    import { TextLogIntro } from "@/enums/TextLogIntro";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const props = $props();
     const { 
         actor, 
         pilot 
     }: MechSheetProps = props
-    
     let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-
-    // @ts-expect-error
-    function getVersion()
-    {
-        // @ts-expect-error
-        return game.release.version;
-    }
+    let logSpeed = getMechSheetLogSpeed();
 </script>
 
 <!-- Header -->
@@ -61,6 +57,14 @@
     {#if pilot && pilot.system.active_mech.value.uuid !== actor.uuid}
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}
+    </div>
+    <div class="la-textlog__wrapper -top0 -left0 -positionabsolute">
+        <TextLog
+            hookID={TextLogHook.MechHeader}
+            style={["-widthfull", "-heightfull", "-padding1"]}
+            introType={TextLogIntro.Header}
+            speed={logSpeed}
+        />
     </div>
     <BoundImage
         image={actor.img}

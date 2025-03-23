@@ -191,6 +191,11 @@ aside.la-tooltip.active
         vertical-align: middle;
     }
 
+    header.sheet-header img
+    {
+        margin-right: unset;
+    }
+
     // Lancer overrides under this sheet
     .roll-attack,
     .roll-tech

@@ -29,9 +29,10 @@ export function frameUUID(framePath: string, options: HelperOptions): string
 const localizeMap: { [key: string]: string } = {};
 export function getLocalized(key: string): string
 {
-    if (!(key in localizeMap))
-        localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
-    return localizeMap[key];
+    // if (!(key in localizeMap))
+    //     localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
+    // return localizeMap[key];
+    return HandlebarsHelpers.localize(key, {} as HelperOptions);
 }
 
 export function overchargeStage(actor: any, overchargePath: string, options: HelperOptions): number
@@ -79,4 +80,16 @@ export function formatString(template: string, ...values: string[]): string
     {
         return typeof values[number] !== 'undefined' ? values[number] : match;
     });
+}
+
+export function getFoundryVersion()
+{
+    // @ts-expect-error
+    return game.release.version;
+}
+
+export function getLancerVersion()
+{
+    // @ts-expect-error
+    return game.system.version;
 }

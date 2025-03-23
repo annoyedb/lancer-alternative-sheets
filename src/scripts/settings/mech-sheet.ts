@@ -8,6 +8,24 @@ const decoder = new Decoder();
 
 export function registerMechSheetSettings()
 {
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-speed`, {
+        name: "LA.SETTINGS.logSpeed.label",
+        hint: "LA.SETTINGS.logSpeed.subLabel",
+        scope: "client",
+        config: true,
+        type: Number,
+        default: 25,
+    } as ClientSettings.PartialSetting<number>);
+
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-header`, {
+        name: "LA.SETTINGS.mech.enableHeaderLog.label",
+        hint: "LA.SETTINGS.mech.enableHeaderLog.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
+
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
         scope: "client",
         config: false,
@@ -23,7 +41,18 @@ export function registerMechSheetSettings()
     } as ClientSettings.PartialSetting<Array<Object>>);
 }
 
-// Client
+// Client Settings
+export function getMechSheetLogSpeed(): number
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-speed`) as number;
+}
+
+export function getMechSheetLogHeader(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-header`) as boolean;
+}
+
+// Client Private Settings
 export function getMechSheetLocalData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_mech-settings-local`) as Array<Object>;
@@ -54,7 +83,7 @@ export function setSidebarRatio(uuid: string, value: number)
     setMechSheetLocalData(data);
 }
 
-// World
+// World Private Settings
 export function getMechSheetData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<Object>;

@@ -195,6 +195,11 @@ aside.la-tooltip.active
     {
         align-content: center;
     }
+
+    .-aligncontentend
+    {
+        align-content: flex-end;
+    }
     
     .-alignselfstart
     {
@@ -356,6 +361,28 @@ aside.la-tooltip.active
                 -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
                 -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
             }
+        }
+    }
+
+    .la-textlog
+    {
+        .la-textlog__ruler
+        {
+            background-image: url(/assets/scale_1.png);
+        }
+
+        >.la-textlog-left>.la-textlog-left__current
+        {
+            height: 16px;
+            background-image: url(/assets/sb_l.png);
+            background-repeat: no-repeat;
+        }
+
+        >.la-textlog-right>.la-textlog-right__current
+        {
+            height: 16px;
+            background-image: url(/assets/sb_r.png);
+            background-repeat: no-repeat;
         }
     }
 }
