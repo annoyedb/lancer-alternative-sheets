@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
     import { advancedStates } from "@/scripts/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { setThemeOverride } from "@/scripts/settings/mech-sheet";
@@ -10,7 +11,7 @@
     const {
         uuid,
         style,
-    }: {uuid: string, style: Array<string>} = $props();
+    }: ThemeOverrideButtonProps = $props();
 
     let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
     let toggle = $state(false);
@@ -78,9 +79,9 @@
     data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.themeOverride.tooltip"))}
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={TooltipDirection.UP}
-    aria-label="TEMP"
+    aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
     onclick={event => handleOnClick(event)}
 >
-    <i class="mdi mdi-notebook-edit la-text-header -fontsize4"></i>
+    <i class="mdi mdi-notebook-edit la-text-header -fontsize3"></i>
 </button>
 {/if}

@@ -16,6 +16,7 @@
     import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         mount,
@@ -151,7 +152,7 @@
 {/snippet}
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
-        textStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined}
+        iconStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined}
         
         flowClass={FlowClass.RollDamage}
         range={slot.weapon.value.system.active_profile.all_range}
@@ -160,6 +161,9 @@
         tooltipDirection={TooltipDirection.UP}
 
         disabled={isDestroyed(slot.weapon.value)}
+        logText={getLocalized("LA.flow.rollDamage.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton

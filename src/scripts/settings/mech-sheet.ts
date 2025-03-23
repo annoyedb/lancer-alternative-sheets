@@ -8,14 +8,15 @@ const decoder = new Decoder();
 
 export function registerMechSheetSettings()
 {
-    game.settings.register(LancerAlternative.Name, `mech-settings-log-speed`, {
-        name: "LA.SETTINGS.logSpeed.label",
-        hint: "LA.SETTINGS.logSpeed.subLabel",
+    // Public Settings
+    game.settings.register(LancerAlternative.Name, `mech-settings-tip`, {
+        name: "LA.SETTINGS.mech.enableTooltip.label",
+        hint: "LA.SETTINGS.mech.enableTooltip.subLabel",
         scope: "client",
         config: true,
-        type: Number,
-        default: 25,
-    } as ClientSettings.PartialSetting<number>);
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-header`, {
         name: "LA.SETTINGS.mech.enableHeaderLog.label",
@@ -26,6 +27,7 @@ export function registerMechSheetSettings()
         default: true,
     } as ClientSettings.PartialSetting<boolean>);
 
+    // Private Settings
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
         scope: "client",
         config: false,
@@ -42,12 +44,12 @@ export function registerMechSheetSettings()
 }
 
 // Client Settings
-export function getMechSheetLogSpeed(): number
+export function getMechSheetTipEnabled(): boolean
 {
-    return game.settings.get(LancerAlternative.Name, `mech-settings-log-speed`) as number;
+    return game.settings.get(LancerAlternative.Name, `mech-settings-tip`) as boolean;
 }
 
-export function getMechSheetLogHeader(): boolean
+export function getMechSheetLogHeaderEnabled(): boolean
 {
     return game.settings.get(LancerAlternative.Name, `mech-settings-log-header`) as boolean;
 }

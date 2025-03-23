@@ -145,7 +145,7 @@
     {/snippet}
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
-            textStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined}
+            iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
