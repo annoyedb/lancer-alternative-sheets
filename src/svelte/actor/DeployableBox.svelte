@@ -6,7 +6,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { getThemeOverride } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";

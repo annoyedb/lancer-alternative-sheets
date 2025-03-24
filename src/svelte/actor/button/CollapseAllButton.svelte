@@ -7,7 +7,7 @@
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { collapseStates, handleCollapseAllToggle } from "@/scripts/collapse";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {

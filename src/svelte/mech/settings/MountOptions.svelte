@@ -1,7 +1,7 @@
 <script lang="ts">
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
-    import { handleMountChange } from "@/scripts/advanced/mech-sheet";
+    import { handleMountChange } from "@/scripts/mech/mount-helpers";
 
     const {
         actorSheet,

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getSidebarRatio, setSidebarRatio } from "@/scripts/settings/mech-sheet";
+    import { getSidebarRatio, setSidebarRatio } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import SidebarRatioSlider from "@/svelte/actor/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";

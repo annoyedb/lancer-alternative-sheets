@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";

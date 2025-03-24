@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { getMechSheetLogHeaderEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetLogHeaderEnabled } from "@/scripts/mech/settings";
     import { runIntro, setupTyped, setupTypeIt } from "@/scripts/text-log.js";
 
     const props = $props();

@@ -2,7 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { advancedStates } from "@/scripts/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled, setThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled, setThemeOverride } from "@/scripts/mech/settings";
     import { getThemeName } from "@/scripts/theme";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getBrightness } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
-    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { getThemeOverride } from "@/scripts/mech/settings";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";

@@ -8,7 +8,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";

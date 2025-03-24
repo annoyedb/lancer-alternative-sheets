@@ -6,7 +6,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { advancedStates } from "@/scripts/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const props = $props();

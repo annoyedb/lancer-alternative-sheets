@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getLocalized, randomExtension } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";

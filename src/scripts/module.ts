@@ -3,7 +3,7 @@ import { logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-import { registerMechSheetSettings } from "@/scripts/settings/mech-sheet";
+import { registerMechSheetSettings } from "@/scripts/mech/settings";
 
 Hooks.once("init", () =>
 {

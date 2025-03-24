@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { activeTab, advancedStates } from "@/scripts/advanced";
+    import { activeTabs, advancedStates } from "@/scripts/advanced";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -19,7 +19,7 @@
     } = props;
     
     let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-    let active = $derived($activeTab);
+    let active = $derived($activeTabs[actor.uuid]?.active || "loadout");// This is set to match the initial tab on the sheet setup
     let toggles = $state(new Array(system.loadout.weapon_mounts.length).fill(false));
     let tooltipElements = new Array(system.loadout.weapon_mounts.length).fill(null);
     let removeToggle = $state(false);

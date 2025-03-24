@@ -6,7 +6,7 @@
     import { advancedStates } from "@/scripts/advanced";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
-    import { getImageOffsetY, setImageOffsetY } from "@/scripts/settings/mech-sheet";
+    import { getImageOffsetY, setImageOffsetY } from "@/scripts/mech/settings";
     import TextLog from "../actor/TextLog.svelte";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";

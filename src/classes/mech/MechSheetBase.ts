@@ -12,7 +12,7 @@ import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
-import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+import { getThemeOverride } from "@/scripts/mech/settings";
 
 export class MechSheetBase
 {
@@ -171,7 +171,7 @@ export class MechSheetBase
                     $(button).on('click', (event) =>
                     {
                         const tab = $(event.currentTarget).data('tab');
-                        setActiveTab(tab);
+                        setActiveTab(this.actor.uuid, tab);
                     });
                 });
             }

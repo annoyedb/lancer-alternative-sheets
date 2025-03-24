@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { advancedStates, handleAdvancedToggle, initializeAdvancedStates } from "@/scripts/advanced";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";

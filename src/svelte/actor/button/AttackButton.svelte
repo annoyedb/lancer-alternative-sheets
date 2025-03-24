@@ -7,7 +7,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
     import { CLICKABLE_HOVER } from "@/svelte/actor/button/Button.svelte";
     import { H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";

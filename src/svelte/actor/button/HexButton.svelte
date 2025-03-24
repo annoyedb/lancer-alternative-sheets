@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
