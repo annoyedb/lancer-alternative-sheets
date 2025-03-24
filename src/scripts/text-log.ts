@@ -3,7 +3,7 @@ import Typed from "typed.js";
 import TypeIt from "typeit";
 import { TextLogIntro } from "@/enums/TextLogIntro";
 import { TextLogHook } from "@/enums/TextLogHook";
-import { formatString, getFoundryVersion, getLancerVersion, getLocalized } from "@/scripts/helpers";
+import { formatString, getFoundryVersion, getLancerVersion, getLocalized, getModuleVersion } from "@/scripts/helpers";
 
 export function setupTyped(component: HTMLElement, hookID: string, hookResetID: string)
 {
@@ -62,7 +62,7 @@ function getFormattedText(introType: TextLogIntro)
     {
         case TextLogIntro.Version:
             const template = getLocalized("LA.mech.log.version");
-            return formatString(template, getFoundryVersion(), getLancerVersion());
+            return formatString(template, getFoundryVersion(), getLancerVersion(), getModuleVersion());
         case TextLogIntro.Header:
             return getLocalized("LA.mech.log.cc.welcome");
     }
@@ -76,20 +76,22 @@ export function runIntro(instance: TypeIt, introType: TextLogIntro)
     {
         case TextLogIntro.Header:
             instance
-                .type("COMPANION/CONCIERGE UNIT INITIALIZING")
+                .type("COMPANION/CONCIERGE UNIT")
+                .break()
+                .type("<INITIALIZING / INICIALIZANDO / 初期化中 / 初始化>")
                 .pause(500)
                 .break()
-                .type("OMNINET", {delay: getRandomDelay()})
+                .type("> OMNINET", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
                 .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
                 .type("CONNECTED")
                 .break()
-                .type("SYSTEMS", {delay: getRandomDelay()})
+                .type("> SYSTEMS", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
                 .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
                 .type("ONLINE")
                 .break()
-                .type("WEAPONS", {delay: getRandomDelay()})
+                .type("> WEAPONS", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
                 .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
                 .type("ARMED")

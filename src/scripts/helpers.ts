@@ -1,6 +1,7 @@
 // Bridge module and foundryvtt-lancer system
 import type { HelperOptions } from "handlebars";
 import { resolveHelperDotpath } from './lancer/helpers/common';
+import { LancerAlternative } from "@/enums/LancerAlternative";
 
 export function frameName(framePath: string, options: HelperOptions): string
 {
@@ -92,4 +93,10 @@ export function getLancerVersion()
 {
     // @ts-expect-error
     return game.system.version;
+}
+
+export function getModuleVersion()
+{
+    // @ts-expect-error
+    return game.modules.get(LancerAlternative.Name).version;
 }

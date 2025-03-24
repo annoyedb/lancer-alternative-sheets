@@ -4,7 +4,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
-    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { getSidebarRatio, getThemeOverride } from "@/scripts/settings/mech-sheet";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
@@ -12,12 +12,26 @@
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
+    import { onMount } from 'svelte';
 
     const { 
         system,
         actor,
     }: MechSheetProps = $props();
     let themeOverride = $state(getThemeOverride(actor.uuid));
+    let component: HTMLElement | null = $state(null);
+
+    onMount(() => 
+    {
+        // TODO: fix this; probably needs a combined data store...
+        if (component)
+        {
+            let ratio = getSidebarRatio(actor.uuid);
+            let sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
+            if (sidebar)
+                sidebar.css('flex', ratio.toString());
+        }
+    });
 
     const frame = system.loadout.frame?.value;
     const frameName = frame 
@@ -33,7 +47,9 @@
 </script>
 
 <!-- Frame Name -->
-<div class="la-framename la-dropshadow -overflowhidden">
+<div class="la-framename la-dropshadow -overflowhidden"
+    bind:this={component}
+>
     <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-cmdline la-text-header -fadein">>//: </span>
