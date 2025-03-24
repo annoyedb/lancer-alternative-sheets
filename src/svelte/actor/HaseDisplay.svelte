@@ -3,6 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         pilot,
@@ -18,7 +19,11 @@
         <HexButton
             text={getLocalized("LA.grit.short")}
             value={system.grit}
+            
             tooltip={getLocalized("LA.grit.tooltip")}
+            logText={getLocalized("LA.grit.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
 
             uuid={actor.uuid}
             flowClass={FlowClass.RollStat}
@@ -34,7 +39,11 @@
         <HexButton
             text={getLocalized("LA.hull.short")}
             value={system.hull}
+
             tooltip={getLocalized("LA.hull.tooltip")}
+            logText={getLocalized("LA.hull.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
 
             uuid={actor.uuid}
             flowClass={FlowClass.RollHASE}
@@ -49,7 +58,11 @@
         <HexButton
             text={getLocalized("LA.systems.short")}
             value={system.sys}
+
             tooltip={getLocalized("LA.systems.tooltip")}
+            logText={getLocalized("LA.systems.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
 
             uuid={actor.uuid}
             flowClass={FlowClass.RollHASE}
@@ -64,7 +77,11 @@
         <HexButton
             text={getLocalized("LA.engineering.short")}
             value={system.eng}
+
             tooltip={getLocalized("LA.engineering.tooltip")}
+            logText={getLocalized("LA.engineering.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
 
             uuid={actor.uuid}
             flowClass={FlowClass.RollHASE}
@@ -79,7 +96,11 @@
         <HexButton
             text={getLocalized("LA.agility.short")}
             value={system.agi}
+
             tooltip={getLocalized("LA.agility.tooltip")}
+            logText={getLocalized("LA.agility.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
 
             uuid={actor.uuid}
             flowClass={FlowClass.RollHASE}

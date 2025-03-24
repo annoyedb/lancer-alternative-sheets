@@ -1,14 +1,23 @@
 <script lang="ts">
     import type { LoadedBoxProps } from "@/interfaces/actor/LoadedBoxProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized, isLoading } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         item,
         path,
-    }: LoadedBoxProps = $props();
-    let loaded = item.system.loaded;
-    let usesValue = loaded ? 1 : 0;
-    let usesMax = 1;
+        
+        logText,
+        logType,
+        logTypeReset,
+    }: LoadedBoxProps & TextLogEventProps = $props();
+    const loaded = item.system.loaded;
+    const usesValue = loaded ? 1 : 0;
+    const usesMax = 1;
+
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.loaded.tooltip");
 </script>
 
 {#if isLoading(item)}
@@ -24,6 +33,8 @@
         <button type="button" 
             class="-glow-header -glow-primary-hover -fontsize5"
             aria-label={getLocalized("LA.use.label")}
+            onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+            onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         >
             <i class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}
                     loaded-hex" 

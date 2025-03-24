@@ -23,7 +23,7 @@
     }: NPCSheetProps & {reactions : Array<any>} = $props();
 
     const tier = system.tier;
-    let collID = `${actor.uuid}.reactions`;
+    const collID = `${actor.uuid}.reactions`;
     
     function getReactionTooltip(reaction: any): string 
     {
@@ -152,7 +152,7 @@
             
             collapseID={reaction.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasReactionSpecial(reaction) ? outerContent : undefined}
+            renderOutsideCollapse={hasReactionSpecial(reaction) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
@@ -185,8 +185,9 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
+
+                    flowClass={FlowClass.SendEffectToChat}
                 />
                 <hr>
                 {@html reaction.system.trigger}

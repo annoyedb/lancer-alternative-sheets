@@ -29,10 +29,10 @@ export function frameUUID(framePath: string, options: HelperOptions): string
 const localizeMap: { [key: string]: string } = {};
 export function getLocalized(key: string): string
 {
-    // if (!(key in localizeMap))
-    //     localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
-    // return localizeMap[key];
-    return HandlebarsHelpers.localize(key, {} as HelperOptions);
+    if (!(key in localizeMap))
+        localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
+    return localizeMap[key];
+    // return HandlebarsHelpers.localize(key, {} as HelperOptions);
 }
 
 export function overchargeStage(actor: any, overchargePath: string, options: HelperOptions): number

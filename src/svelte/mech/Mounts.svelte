@@ -2,6 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
@@ -13,7 +14,7 @@
         system,
     } = props;
 
-    let weaponMounts = system.loadout.weapon_mounts;
+    const weaponMounts = system.loadout.weapon_mounts;
     
     function getCollapseID(index: number)
     {
@@ -32,9 +33,15 @@
     {#snippet headerOptions()}
     <MountNames
         mountNames={aggregateMountWeaponNames(mount)}
+
+        logText={getLocalized("LA.mech.mount.preview.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <CollapseAllButton
         collapseID={getCollapseID(index)}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     {/snippet}
     <HeaderMain 

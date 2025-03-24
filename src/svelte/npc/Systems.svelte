@@ -138,7 +138,7 @@
             
             collapseID={component.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasComponentSpecial(component) ? outerContent : undefined}
+            renderOutsideCollapse={hasComponentSpecial(component) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
@@ -171,8 +171,9 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
+
+                    flowClass={FlowClass.SendEffectToChat}
                 />
                 <hr>
                 {@html component.system.effect}

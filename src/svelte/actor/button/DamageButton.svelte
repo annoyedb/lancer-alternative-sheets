@@ -41,7 +41,7 @@
     const log = logText || getLocalized("LA.flow.rollDamage.tooltip");
 </script>
 <script lang="ts" module>
-    const DEFAULT_ICON_BG_STYLE = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
+    const _ICON_BG_STYLE = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
 </script>
 
 <button type="button"
@@ -49,11 +49,12 @@
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
-    data-tooltip={tipEnabled && rollable ? tip : undefined}
+    data-tooltip={tipEnabled && rollable ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined}
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined}
+    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    aria-label={tooltip || getLocalized("LA.flow.rollDamage.tooltip")}
     disabled={!rollable}
 >
     <!-- Generated Range -->
@@ -73,7 +74,7 @@
 {#if !disabled && damage?.length}
     <i 
         class="fal fa-dice-d20 
-            {iconBackgroundStyle?.join(' ') || DEFAULT_ICON_BG_STYLE}" 
+            {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
         style="z-index: -1;"
     ></i>
 {/if}

@@ -1,16 +1,17 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { formatString, getLocalized } from "@/scripts/helpers";
     import { id as moduleID } from '@/module.json';
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import { formatString, getLocalized } from "@/scripts/helpers";
+    import { getSidebarImageTheme } from "@/scripts/theme";
+    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
-    import { getSidebarImageTheme } from "@/scripts/theme";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
 
     const { 
         system,
@@ -270,47 +271,77 @@
 <div class="la-spacer -large"></div>
 <div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull">
     <FlowButton 
-        flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.stabilize.label")}
-        tooltipHeader={getLocalized("LA.action.full.label")}
-        tooltip={getLocalized("LA.flow.stabilize.tooltip")}
+
+        flowClass={FlowClass.Standard}
         uuid={actor.uuid}
         flowType="Stabilize"
+
+        tooltipHeader={getLocalized("LA.action.full.label")}
+        tooltip={getLocalized("LA.flow.stabilize.tooltip")}
+        logText={getLocalized("LA.flow.stabilize.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <FlowButton 
-        flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.overcharge.label")}
-        tooltipHeader={getLocalized("LA.action.overcharge.label")}
-        tooltip={overchargeText}
+
+        flowClass={FlowClass.Standard}
         uuid={actor.uuid}
         flowType="Overcharge"
+
+        tooltipHeader={getLocalized("LA.action.overcharge.label")}
+        tooltip={overchargeText}
+        logText={overchargeText}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <FlowButton 
-        flowClass={FlowClass.RollStat}
         text={getLocalized("LA.grit.label")}
-        tooltip={getLocalized("LA.grit.tooltip")}
+
+        flowClass={FlowClass.RollStat}
         uuid={actor.uuid}
         path={"system.grit"}
+
+        tooltip={getLocalized("LA.grit.tooltip")}
+        logText={getLocalized("LA.grit.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <FlowButton 
-        flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.rollAttack.label")}
-        tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+
+        flowClass={FlowClass.Standard}
         uuid={actor.uuid}
         flowType="BasicAttack"
+
+        tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+        logText={getLocalized("LA.flow.rollAttack.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <FlowButton 
-        flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.rollDamage.label")}
-        tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
+
+        flowClass={FlowClass.Standard}
         uuid={actor.uuid}
         flowType="Damage"
+
+        tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
+        logText={getLocalized("LA.flow.rollDamage.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <FlowButton 
-        flowClass={FlowClass.Standard}
         text={getLocalized("LA.flow.rollTechAttack.label")}
-        tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
+        
+        flowClass={FlowClass.Standard}
         uuid={actor.uuid}
         flowType="TechAttack"
+
+        tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
+        logText={getLocalized("LA.flow.rollTechAttack.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 </div>

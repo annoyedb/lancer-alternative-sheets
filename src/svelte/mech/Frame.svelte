@@ -2,6 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getManufacturerColor } from "@/scripts/theme";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "@/svelte/mech/FramePassivePower.svelte";
@@ -17,18 +18,18 @@
         system,
     } = props;
 
-    let frame: any | undefined = system.loadout.frame?.value;
-    let core: any = frame?.system.core_system;
-    let frameName: string = frame
+    const frame: any | undefined = system.loadout.frame?.value;
+    const core: any = frame?.system.core_system;
+    const frameName: string = frame
         ? `${frame.system.manufacturer.toUpperCase()} ${frame.name.toUpperCase()}`
         : getLocalized("LA.placeholder");
-    let frameColorBckg: string = frame 
+    const frameColorBckg: string = frame 
         ? getManufacturerColor(frame.system.manufacturer, "bckg")
         : "la-bckg-frame";
-    let frameColorBrdr: string = frame 
+    const frameColorBrdr: string = frame 
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
         : "la-brdr-frame";
-    let collID = frame
+    const collID = frame
         ? `${actor.uuid}.frame.${frame.id}`
         : `${actor.uuid}.frame.empty`;
 
@@ -42,6 +43,8 @@
 {#snippet headerOptions()}
     <CollapseAllButton
         collapseID={collID}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 {/snippet}
 {#snippet headerSecondaryLeftOptions()}
@@ -71,6 +74,9 @@
                     usesMax={counter.max}
                     path={`system.loadout.frame.value.system.core_system.counters.${index}`}
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                    
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             {/each}
             </div>

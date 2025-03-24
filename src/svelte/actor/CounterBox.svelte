@@ -6,7 +6,9 @@
 -->
 <script lang="ts">
     import type { CounterBoxProps } from "@/interfaces/actor/CounterBoxProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         name,
@@ -15,32 +17,40 @@
         usesMax,
         path,
         onClick,
-    }: CounterBoxProps = $props();
+        
+        logText,
+        logType,
+        logTypeReset,
+    }: CounterBoxProps & TextLogEventProps = $props();
 
-    const defaultStyle = "clipped-alt -widthfull la-bckg-header-anti"
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.counter.tooltip");
 
     //@ts-ignore
-    function log(any: any) {
+    function logToConsole(any: any) {
         console.log(any);
     }
+</script>
+<script lang="ts" module>
+    const _STYLE = "clipped-alt -widthfull la-bckg-header-anti"
 </script>
 
 {#if usesMax}
 <div class="la-limited la-combine-h la-text-header -aligncenter -padding1-lr
-        {style?.join(' ') || defaultStyle}"
+        {style?.join(' ') || _STYLE}"
 >
     <span class="la-hexarray__span -fontsize1">
         {name}
     </span>
 {#each {length: usesMax} as _, index}
-    <!-- (#2) -->
-    <!-- svelte-ignore event_directive_deprecated -->
-    <button 
+    <button type="button"
         class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} -glow-header -glow-primary-hover -fontsize5 
             counter-hex" 
-        data-available="{index < usesValue}" 
-        data-path="{path}"
-        on:click={onClick ? (event) => onClick(event) : null}
+        data-available={index < usesValue}
+        data-path={path}
+        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onclick={onClick ? (event) => onClick(event) : null}
         aria-label={`${getLocalized("LA.use.label")} ${name}`}>
     </button>
 {/each}

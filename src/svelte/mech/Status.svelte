@@ -1,12 +1,13 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
-    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -14,18 +15,18 @@
         system,
     } = props;
 
-    let emptyObject = '{}';
+    const overchargeSequence = actor.system.overcharge_sequence.split(",");
+    const overchargeStage = actor.system.overcharge;
+    const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
 
-    let overchargeSequence = actor.system.overcharge_sequence.split(",");
-    let overchargeStage = actor.system.overcharge;
-    let overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
-
-    let collID = `${actor.uuid}.status.activeEffects`;
+    const collID = `${actor.uuid}.status.activeEffects`;
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 {/snippet}
 
@@ -70,13 +71,16 @@
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     text={getLocalized("LA.flow.structureDamage.label")}
-                    tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
                     flowType={"Structure"}
-                    flowArgs={emptyObject}
+
+                    tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.structureDamage.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             </div>
         </div>
@@ -98,24 +102,30 @@
             <div class="la-combine-v la-dropshadow">
                 <FlowButton 
                     text={getLocalized("LA.flow.stabilize.label")}
-                    tooltipHeader={getLocalized("LA.action.full.label")}
-                    tooltip={getLocalized("LA.flow.stabilize.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
                     
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
-                    flowType="Stabilize"
-                    flowArgs={emptyObject}
+                    flowType={"Stabilize"}
+
+                    tooltipHeader={getLocalized("LA.action.full.label")}
+                    tooltip={getLocalized("LA.flow.stabilize.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.stabilize.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <FlowButton
                     text={getLocalized("LA.flow.fullRepair.label")}
-                    tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
                     flowType={"FullRepair"}
-                    flowArgs={emptyObject}
+
+                    tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.fullRepair.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <!-- TODO: make a flow for partial repair -->
             </div>
@@ -145,13 +155,16 @@
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     text={getLocalized("LA.flow.reactorStress.label")}
-                    tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
                     flowType={"Overheat"}
-                    flowArgs={emptyObject}
+
+                    tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.reactorStress.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             </div>
         </div>
@@ -169,22 +182,29 @@
             <div class="la-combine-v la-dropshadow">
                 <FlowButton 
                     text={getLocalized("LA.flow.overcharge.label")}
-                    tooltipHeader={getLocalized("LA.action.overcharge.label")}
-                    tooltip={overchargeText}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
-                    flowType="Overcharge"
-                    flowArgs={emptyObject}
+                    flowType={"Overcharge"}
+
+                    tooltipHeader={getLocalized("LA.action.overcharge.label")}
+                    tooltip={overchargeText}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={overchargeText}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <FlowButton
                     text={getLocalized("LA.flow.overchargeReset.label")}
-                    tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.ResetOvercharge}
+
+                    tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.overchargeReset.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             </div>
         </div>
@@ -200,14 +220,17 @@
             <div class="la-combine-v la-dropshadow">
                 <FlowButton
                     text={getLocalized("LA.flow.extinguish.label")}
-                    tooltipHeader={getLocalized("LA.action.endofturn.label")}
-                    tooltip={getLocalized("LA.flow.extinguish.tooltip")}
-                    tooltipDirection={TooltipDirection.LEFT}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.Standard}
                     flowType={"Burn"}
-                    flowArgs={emptyObject}
+
+                    tooltipHeader={getLocalized("LA.action.endofturn.label")}
+                    tooltip={getLocalized("LA.flow.extinguish.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.flow.extinguish.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             </div>
         </div>

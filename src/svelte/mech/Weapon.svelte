@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
-    import { getLocalized, isLoading } from "@/scripts/helpers";
+    import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -91,6 +91,13 @@
             weapon.system.profiles.length > 1
         );
     }
+
+    function getRollWeaponTip(weapon: any)
+    {
+        return formatString(
+            getLocalized("LA.flow.rollAttack.template.tooltip"), 
+            weapon.name);
+    }
 </script>
 
 {#each mount.slots as slot, index}
@@ -119,11 +126,17 @@
             <LoadedBox
                 item={slot.weapon.value}
                 path={getWeaponPath(index)}
+                
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <LimitedBox
                 usesValue={slot.weapon.value.system.uses.value}
                 usesMax={slot.weapon.value.system.uses.max}
                 path={getWeaponPath(index)}
+
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             {@render costSP()}
         </div>
@@ -133,6 +146,9 @@
             weapon={slot.weapon.value}
             path={`${getWeaponPath(index)}.system.selected_profile_index`}
             style={["-widthfull", "la-bckg-header-anti", "la-text-header", "clipped-alt"]}
+
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     </div>
 {/snippet}
@@ -144,34 +160,43 @@
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
 
-        tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+        tooltip={getRollWeaponTip(slot.weapon.value)}
         tooltipDirection={TooltipDirection.LEFT}
+        logText={getRollWeaponTip(slot.weapon.value)}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
 
         disabled={isDestroyed(slot.weapon.value)}
     />
 {/snippet}
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
-        iconStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined}
+        iconStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined }
         
         flowClass={FlowClass.RollDamage}
         range={slot.weapon.value.system.active_profile.all_range}
         damage={slot.weapon.value.system.active_profile.all_damage}
 
         tooltipDirection={TooltipDirection.UP}
-
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+
         disabled={isDestroyed(slot.weapon.value)}
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton
             flowClass={FlowClass.SendToChat}
             uuid={slot.weapon.value.uuid}
+
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
         <EditButton
             flowClass={FlowClass.ContextMenu}
             path={getWeaponPath(index)}
+
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     </div>
 {/snippet}
@@ -193,7 +218,7 @@
         subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
         
-        renderOutsideCollapse={renderLimited(slot.weapon.value) ? outerContent : undefined}
+        renderOutsideCollapse={renderLimited(slot.weapon.value) ? outerContent : undefined }
         headerContentLeft={headerTertiaryLeftOptions}
         headerContentRight={headerTertiaryRightOptions}
     >

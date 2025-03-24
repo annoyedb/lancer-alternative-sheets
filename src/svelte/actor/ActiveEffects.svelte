@@ -1,11 +1,12 @@
 <script lang="ts">
     import { getBrightness } from "@/scripts/theme";
-    import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import { getLocalized } from "@/scripts/helpers";
+    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import DeleteButton from "@/svelte/actor/button/DeleteButton.svelte";
-    import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
 
     const {
         effects,
@@ -50,11 +51,15 @@
 {#each effects as effect, index}
     {#snippet headerOptions()}
     <DeleteButton
+        style={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
+        iconStyle={["-fontsize2", "la-text-header-anti"]}
+
         uuid={effect._id}
         flowClass={FlowClass.DeleteActiveEffect}
         onClick={deleteActiveEffect}
-        style={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
-        iconStyle={["-fontsize2", "la-text-header-anti"]}
+
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     {/snippet}
     <HeaderMain 

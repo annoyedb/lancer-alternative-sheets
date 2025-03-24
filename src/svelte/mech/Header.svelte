@@ -26,6 +26,8 @@
     <div class="la-combine-v la-settings__island -padding1">
         <AdvancedButton
             uuid={actor.uuid}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     {#if advancedOptions}
         <i 

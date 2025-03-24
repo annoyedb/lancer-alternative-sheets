@@ -9,6 +9,7 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         actor,
@@ -37,8 +38,11 @@
 <MessageButton
     flowClass={FlowClass.SendToChat}
     uuid={frame.uuid}
-    type="trait"
+    type={"trait"}
     index={index}
+    
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 {/snippet}
 
@@ -68,6 +72,9 @@
             usesValue={counter.value}
             usesMax={counter.max}
             path={`system.traits.${index}.counters`}
+            
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     {/each}
     {/if}

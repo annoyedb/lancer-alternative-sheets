@@ -1,13 +1,16 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
     import { H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import { CLICKABLE_HOVER } from "@/svelte/actor/button/Button.svelte";
-    import { FlowClass } from "@/enums/FlowClass";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
 
     const {
         style,
@@ -23,37 +26,47 @@
         tooltipClass,
         tooltipHeader,
         tooltipDirection,
-        onClick,
-    } : IconButtonProps & ButtonProps & TooltipProps= $props();
+        
+        logText,
+        logType,
+        logTypeReset,
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.effect.tooltip"), tooltipHeader);
-    const defaultIconBackgroundStyle = `${H2_ICON_SIZE} la-text-scrollbar-secondary -padding0-l`
-    const defaultIconStyle = `${H2_ICON_SIZE}`
+        onClick,
+    } : IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
+
+    const tipEnabled = getMechSheetTipEnabled();
+    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.effect.tooltip"), tooltipHeader);
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.flow.effect.tooltip");
+</script>
+<script lang="ts" module>
+    const _ICON_BG_STYLE = `${H2_ICON_SIZE} la-text-scrollbar-secondary -padding0-l`
+    const _ICON_STYLE = `${H2_ICON_SIZE}`
 </script>
 
-<!-- (#2) -->
-<!-- svelte-ignore event_directive_deprecated -->
 <button type="button"
     class="
         {style?.join(' ')}
         {flowClass || FlowClass.SendEffectToChat}"
     data-uuid={uuid}
     data-path={path}
-    data-tooltip={disabled ? undefined : tip}
+    data-tooltip={tipEnabled && !disabled ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    aria-label={tooltip || getLocalized("LA.effect.tooltip")}
+    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    aria-label={tooltip || getLocalized("LA.flow.effect.tooltip")}
     disabled={disabled || false}
-    on:click={onClick ? (event) => onClick(event) : undefined}
+    onclick={onClick ? (event) => onClick(event) : undefined }
 >
     <i 
         class="
             {disabled ? "" : CLICKABLE_HOVER}
-            {iconStyle?.join(' ') || defaultIconStyle}"
+            {iconStyle?.join(' ') || _ICON_STYLE}"
     ></i>
 {#if !disabled}
     <i class="fal fa-dice-d20 -positionabsolute -left0 
-            {iconBackgroundStyle?.join(' ') || defaultIconBackgroundStyle}" 
+            {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
         style="z-index: -1;"
     ></i>
 {/if}

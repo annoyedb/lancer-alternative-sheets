@@ -1,9 +1,13 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
 
     const {
         text,
@@ -25,11 +29,20 @@
         outerTextStyle,
         innerTextStyle,
         buttonStyle,
-    }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps = $props();
+        
+        logText,
+        logType,
+        logTypeReset,
+    }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
-    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
-    let parsedValue = value 
-        ? sign ? (value > 0 ? `+${value}` : value) : value
+    const tipEnabled = getMechSheetTipEnabled();
+    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.flow.tooltip");
+    const parsedValue = value 
+        ? sign 
+            ? (value > 0 ? `+${value}` : value) 
+            : value
         : value;
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {outerStyle?.join(' ')}">
@@ -43,9 +56,11 @@
             data-uuid={uuid} 
             data-flow-type={flowType}
             data-flow-args={flowArgs}
-            data-tooltip={tip}
-            data-tooltip-class="clipped-bot la-tooltip"
             data-path={path}
+            data-tooltip={tipEnabled ? tip : undefined }
+            data-tooltip-class={"clipped-bot la-tooltip"}
+            onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+            onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
             aria-label={text}
         >
             <span class="la-value__span {innerTextStyle?.join(' ')}"><!--

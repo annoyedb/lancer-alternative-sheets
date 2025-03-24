@@ -3,6 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
@@ -12,7 +13,7 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import TotalSp from "@/svelte/actor/decoration/TotalSP.svelte";
+    import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
@@ -42,18 +43,27 @@
 
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
+        logText={getLocalized("LA.mech.mod.effect.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     {/snippet}
 
     {#snippet headerSecondaryRightOptions()}
-    <TotalSp
+    <TotalSP
         value={mod.system.sp}
         style={[H2_TEXT_SIZE, "-margin1-r"]}
-        tooltip={getLocalized("LA.mech.system.points.tooltip")}
+
+        logText={getLocalized("LA.mech.system.points.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <EditButton
         flowClass={FlowClass.ContextMenu}
         path={path}
+
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     {/snippet}
 
@@ -82,6 +92,9 @@
                         usesValue={mod.system.uses.value}
                         usesMax={mod.system.uses.max}
                         path={path}
+                        
+                        logType={TextLogHook.MechHeader}
+                        logTypeReset={TextLogHook.MechHeaderReset}
                     />
                 </div>
             {/if}
@@ -92,6 +105,9 @@
                     usesValue={counter.value}
                     usesMax={counter.max}
                     path={`${path}.system.counters.${index}`}
+            
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             {/each}
             {/if}
@@ -143,7 +159,11 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
+
                     flowClass={FlowClass.SendEffectToChat}
+
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <hr>
                 {@html mod.system.effect}

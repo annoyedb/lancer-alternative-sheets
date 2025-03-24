@@ -1,10 +1,13 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { SidebarRatioSliderProps } from "@/interfaces/actor/button/SidebarRatioSliderProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { advancedStates } from "@/scripts/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { onMount } from "svelte";
+    import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const props = $props();
     const { 
@@ -12,13 +15,22 @@
         ratioGetter,
         ratioSetter,
         
-        style
-    }: SidebarRatioSliderProps = props
+        style,
+
+        logText,
+        logType,
+        logTypeReset,
+    }: SidebarRatioSliderProps & TextLogEventProps = props
     
     let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
     let ratio = $state(ratioGetter(uuid));
     let component: HTMLElement | null = $state(null);
     let sidebar: JQuery<HTMLElement> | null = null;
+        
+    const tipEnabled = getMechSheetTipEnabled();
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.advanced.sidebarRatio.tooltip");
 
     onMount(() => 
     {
@@ -57,11 +69,14 @@
         max={2}
         value={ratio}
         step={0.1}
-        data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"))}
+        data-tooltip={tipEnabled ? tip : undefined }
         data-tooltip-class={"la-tooltip clipped-bot"}
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}
+        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>
 {/if}

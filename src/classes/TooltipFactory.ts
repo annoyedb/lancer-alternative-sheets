@@ -10,7 +10,7 @@ export class TooltipFactory
     {
         return `
             ${header
-                ? `<h3>${header}</h3>`
+                ? `<h3 style="text-transform: uppercase;">${header}</h3>`
                 : ""
             }
             <div class="la-tooltip__content">

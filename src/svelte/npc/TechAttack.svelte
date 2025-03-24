@@ -24,7 +24,7 @@
     }: NPCSheetProps & {techs : Array<any>} = $props();
 
     const tier = system.tier;
-    let collID = `${actor.uuid}.techs`;
+    const collID = `${actor.uuid}.techs`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
     const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
 
@@ -174,7 +174,7 @@
             
             collapseID={tech.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasTechSpecial(tech) ? outerContent : undefined}
+            renderOutsideCollapse={hasTechSpecial(tech) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
@@ -184,8 +184,9 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
+
+                    flowClass={FlowClass.SendEffectToChat}
                 />
                 <hr>
                 {@html tech.system.effect}

@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
@@ -11,16 +13,15 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
     const props: MechSheetProps = $props();
     const {
         pilot,
         actor,
     } = props;
-    
-    let coreBonuses = pilot.itemTypes.core_bonus;
-    let collID = `${pilot.uuid}.coreBonus`;
+    const isMechSheet = actor.type === "mech";
+    const coreBonuses = pilot.itemTypes.core_bonus;
+    const collID = `${pilot.uuid}.coreBonus`;
     
     function getActionCollID(index: number)
     {
@@ -44,6 +45,9 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+
+    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 />
 {/snippet}
 
@@ -71,6 +75,9 @@
                     usesMax={counter.max}
                     path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+
+                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                 />
             {/each}
             </div>
@@ -84,6 +91,9 @@
                 flowClass={FlowClass.ContextMenu}
                 path={`system.pilot.value.itemTypes.core_bonus.${index}`}
                 iconStyle={["-lineheight3"]}
+                
+                logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
             />
         {/snippet}
         <HeaderSecondary

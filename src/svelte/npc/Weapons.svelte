@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
@@ -66,6 +66,13 @@
         return isDestroyed(weapon)
             ? "la-text-repcap"
             : "la-text-header -glow-header -glow-primary-hover";
+    }
+
+    function getRollWeaponTip(weapon: any)
+    {
+        return formatString(
+            getLocalized("LA.flow.rollAttack.template.tooltip"), 
+            weapon.name);
     }
 </script>
 
@@ -136,8 +143,8 @@
             path={`system.loadout.weapon_mounts.${index}`}
 
             tooltip={ weapon.system.effect
-                ? `${getLocalized("LA.flow.rollAttack.tooltip")}<br><br>${weapon.system.effect}` 
-                : getLocalized("LA.flow.rollAttack.tooltip")}
+                ? `${getRollWeaponTip(weapon)}<br><br>${weapon.system.effect}` 
+                : getRollWeaponTip(weapon)}
             tooltipDirection={TooltipDirection.UP}
 
             disabled={isDestroyed(weapon)}
@@ -145,7 +152,7 @@
     {/snippet}
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
-            iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined}
+            iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -182,7 +189,7 @@
             subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
             borderStyle={["-bordersoff"]}
 
-            renderOutsideCollapse={hasWeaponSpecial(weapon) ? outerContent : undefined}
+            renderOutsideCollapse={hasWeaponSpecial(weapon) ? outerContent : undefined }
             headerContentLeft={headerTertiaryLeftOptions}
             headerContentRight={headerTertiaryRightOptions}
         >

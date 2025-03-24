@@ -1,21 +1,32 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { advancedStates } from "@/scripts/advanced";
+    import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled, setThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { getThemeName } from "@/scripts/theme";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
-    import { advancedStates } from "@/scripts/advanced";
-    import { getLocalized } from "@/scripts/helpers";
-    import { setThemeOverride } from "@/scripts/settings/mech-sheet";
-    import { getThemeName } from "@/scripts/theme";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         uuid,
         style,
-    }: ThemeOverrideButtonProps = $props();
+        
+        logText,
+        logType,
+        logTypeReset,
+    }: ThemeOverrideButtonProps & TextLogEventProps = $props();
 
     let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
+
+    const tipEnabled = getMechSheetTipEnabled();
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.themeOverride.tooltip"))
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.advanced.themeOverride.tooltip");
     
     function handleOnClick(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
@@ -76,11 +87,13 @@
 {#if advancedOptions}
 <button type="button"
     class="{style?.join(' ')} -glow-active-hover"
-    data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.themeOverride.tooltip"))}
+    data-tooltip={tipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={TooltipDirection.UP}
-    aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
+    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
     onclick={event => handleOnClick(event)}
+    aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >
     <i class="mdi mdi-notebook-edit la-text-header -fontsize3"></i>
 </button>

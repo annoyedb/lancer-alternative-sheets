@@ -2,6 +2,7 @@
     import type { ActionBoxProps } from "@/interfaces/actor/ActionBoxProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { slugify } from "@/scripts/lancer/util/lid";
@@ -28,7 +29,7 @@
         disableLeftButton,
     }: ActionBoxProps = $props();
 
-    let defaultPlaceholder = getLocalized("LA.placeholder");
+    const defaultPlaceholder = getLocalized("LA.placeholder");
     
     function getActivationClass(activation: string): string 
     {
@@ -65,16 +66,20 @@
 {#snippet defaultFlowButton()}
     <FlowButton
         text={getActivationName(action.activation)}
+        style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
+
+        uuid={uuid}
+        path={`${path}.${index}`}
         flowClass={action && uuid && path 
             ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
             : getActivationClass(action.activation)
         }
-        tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
+
+        tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}
         tooltipDirection={undefined}
-        uuid={uuid}
-        path={`${path}.${index}`}
-        style={["clipped-bot", ACTIVATION_COLOR_MAP[action.activation]]}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 {/snippet}
 {#snippet outercontent()}    
@@ -109,11 +114,13 @@
         }
         uuid={uuid}
         path={`${path}.${index}`}
-        onClick={onClick ? (event) => onClick(event, action) : undefined}
+        onClick={onClick ? (event) => onClick(event, action) : undefined }
 
-        tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation]).toUpperCase()}
+        tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
 
         disabled={disableLeftButton}
     />    

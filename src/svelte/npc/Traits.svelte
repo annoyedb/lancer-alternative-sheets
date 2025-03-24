@@ -21,7 +21,7 @@
         traits,
     }: NPCSheetProps & {traits : Array<any>} = $props();
 
-    let collID = `${actor.uuid}.traits`;
+    const collID = `${actor.uuid}.traits`;
 
     function hasTraitSpecial(trait: any)
     {
@@ -126,7 +126,7 @@
             
             collapseID={trait.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasTraitSpecial(trait) ? outerContent : undefined}
+            renderOutsideCollapse={hasTraitSpecial(trait) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
@@ -136,8 +136,9 @@
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
-                    flowClass={FlowClass.SendEffectToChat}
                     style={["clipped-bot", "la-bckg-secondary"]}
+
+                    flowClass={FlowClass.SendEffectToChat}
                 />
                 <hr>
                 {@html trait.system.effect}

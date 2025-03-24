@@ -1,16 +1,18 @@
 <script lang="ts">
+    import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import { FlowClass } from "@/enums/FlowClass";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { getThemeOverride } from "@/scripts/settings/mech-sheet";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import { FlowClass } from "@/enums/FlowClass";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         source, 
@@ -115,9 +117,9 @@
         data-uuid="{deployable.uuid}"
     >
         <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsize0
-                click-open"
+                click-open -upper"
         ><!--
-        --->{deployable.name ? deployable.name.toUpperCase() : ""}<!--
+        --->{deployable.name ? deployable.name : ""}<!--
     ---></span>
         <!-- Generated Content -->
         <div class="la-generated -gap2 la-combine-v">
@@ -136,9 +138,11 @@
                             flowClass={FlowClass.None}
                             onClick={(event) => sendDeployableActionToChat(event, action, deployable)}
 
-                            tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction]).toUpperCase()}
+                            tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
                             tooltipDirection={TooltipDirection.LEFT}
+                            logType={TextLogHook.MechHeader}
+                            logTypeReset={TextLogHook.MechHeaderReset}
                         />
                     {/each}
                     </div>
@@ -148,6 +152,8 @@
                         data-tooltip={tip}
                         data-tooltip-class="clipped-bot la-tooltip"
                         data-tooltip-direction={TooltipDirection.LEFT}
+                        onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), TextLogHook.MechHeader) }
+                        onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
                     />
                 </div>
                 <hr>
@@ -164,7 +170,7 @@
                 
                 uuid={uuid || deployable.uuid}
                 disableLeftButton={uuid ? false : true}
-                onClick={uuid ? sendActionToChat : undefined}
+                onClick={uuid ? sendActionToChat : undefined }
             />
         {/if}
         </div>

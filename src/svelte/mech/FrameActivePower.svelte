@@ -7,6 +7,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -19,22 +20,22 @@
         system,
     }: MechSheetProps = $props();
     
-    let frame: any = system.loadout.frame!.value;
-    let core: any = frame.system.core_system;
-    let collID: string = `${actor.uuid}.${frame.id}.activePower`;
-    let actionCollID: string = `${actor.uuid}.${frame.id}.activePower.action`;
-    let name = core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label");
-    let activationClass = `activation-${slugify(core.activation, "-")}`;
-    let activationTheme = system.core_energy
+    const frame: any = system.loadout.frame!.value;
+    const core: any = frame.system.core_system;
+    const collID: string = `${actor.uuid}.${frame.id}.activePower`;
+    const actionCollID: string = `${actor.uuid}.${frame.id}.activePower.action`;
+    const name = core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label");
+    const activationClass = `activation-${slugify(core.activation, "-")}`;
+    const activationTheme = system.core_energy
         ? `${ACTIVATION_COLOR_MAP[core.activation]}`
         : "la-bckg-repcap";
-    let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
-    let frameColorBrdr = system.core_energy
+    const frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
+    const frameColorBrdr = system.core_energy
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
         : "la-brdr-repcap";
-    let tip = TooltipFactory.buildTooltip(
+    const tip = TooltipFactory.buildTooltip(
         `${core.active_effect}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[core.activation])}`, 
-        getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation]).toUpperCase());
+        getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation]));
 </script>
 
 <!-- Frame Active -->
@@ -44,6 +45,12 @@
     iconStyle={[H2_ICON_SIZE, "cci", ACTIVATION_ICON_MAP[core.activation]]}
     
     flowClass={FlowClass.None}
+    
+    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
+    tooltipDirection={TooltipDirection.LEFT}
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
+
     disabled={true}
 />
 {/snippet}

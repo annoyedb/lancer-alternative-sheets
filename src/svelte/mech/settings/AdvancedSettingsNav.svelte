@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getSidebarRatio, setSidebarRatio } from "@/scripts/settings/mech-sheet";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import SidebarRatioSlider from "@/svelte/actor/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
 
@@ -16,9 +17,15 @@
     ratioGetter={getSidebarRatio}
     ratioSetter={setSidebarRatio}
     style={["-aligncontentcenter"]}
+    
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 
 <ThemeOverrideButton
     uuid={actor.uuid}
     style={["-alignselfstart"]}
+    
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />

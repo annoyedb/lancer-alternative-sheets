@@ -10,6 +10,7 @@
     import { H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         actor,
@@ -42,6 +43,8 @@
 
     tooltip={tip}
     tooltipDirection={TooltipDirection.LEFT}
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 {/snippet}
 <HeaderQuinary

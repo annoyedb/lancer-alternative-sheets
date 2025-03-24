@@ -12,14 +12,16 @@
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     const props: MechSheetProps = $props();
     const {
         actor,
         pilot,
     } = props;
-    let talents = pilot.itemTypes.talent;
-    let collID = `${pilot.uuid}.talents`;
+    const isMechSheet = actor.type === "mech";
+    const talents = pilot.itemTypes.talent;
+    const collID = `${pilot.uuid}.talents`;
 
     function getTalentCollID(talentIndex: number)
     {
@@ -56,6 +58,8 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 />
 {/snippet}
 
@@ -81,9 +85,15 @@
             flowClass={FlowClass.ContextMenu}
             iconStyle={["-lineheight3"]}
             path={`system.pilot.value.itemTypes.talent.${index}`}
+
+            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
         />
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
+            
+            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
         />
     {/snippet}
         <HeaderSecondary
@@ -118,6 +128,9 @@
                             path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
                             onClick={(event) => forceUpdateTalent(event, talent)}
                             style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                            
+                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                         />
                     {/each}
                     </div>

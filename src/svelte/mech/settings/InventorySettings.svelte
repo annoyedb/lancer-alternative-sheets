@@ -1,5 +1,6 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { activeTab, advancedStates } from "@/scripts/advanced";
     import { getLocalized } from "@/scripts/helpers";
@@ -23,9 +24,12 @@
     </span>
     <div class="la-combine-v -alignstart -padding0-b -heightfull">
         <InventoryButton
-            flowClass={FlowClass.Inventory}
             style={[SETTINGS_BUTTON_STYLE, "mdi mdi-archive"]}
-            tooltip={getLocalized("LA.advanced.inventory.open.tooltip")}
+            
+            flowClass={FlowClass.Inventory}
+            
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     </div>
 </div>

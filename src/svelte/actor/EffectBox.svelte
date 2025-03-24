@@ -1,5 +1,6 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import type { EffectBoxProps } from "@/interfaces/actor/EffectBoxProps";
     import { getLocalized } from "@/scripts/helpers";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
@@ -35,6 +36,8 @@
         <FlowButton
             text={getLocalized("LA.use.label")}
             flowClass={FlowClass.SendEffectToChat}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     {/if}
     <span

@@ -366,11 +366,23 @@ aside.la-tooltip.active
 
     .la-textlog
     {
-        .la-textlog__typeit
+        &.-scrolling
         {
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: gray transparent;
+            .la-textlog__typeit
+            {
+                display: flex;
+                flex-direction: column-reverse;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: gray transparent;
+                min-height: 100%;
+                
+                ::before
+                {
+                    content: none;
+                    display: none;
+                }
+            }
         }
 
         .la-textlog__ruler

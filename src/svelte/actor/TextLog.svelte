@@ -31,12 +31,12 @@
         <div class="la-textlog__ruler -flex1 -widthfull"></div>
         <div class="la-textlog-left__current -widthfull"></div>
     </div>
-    <div class="la-combine-v la-textlog-left -alignend -overflowhidden">
+    <div class="la-combine-v la-textlog-left -justifyend -overflowhidden">
         <div
-            class="la-textlog__typeit -flex1 -aligncontentend"
+            class="la-textlog__typeit -flex1 -justifystart -aligncontentend -widthfull"
             bind:this={typeItComponent}
         ></div>
-        <div class="la-combine-h -flex0 -justifystart -widthfull">
+        <div class="la-textlog__typed la-combine-h -flex0 -justifystart -widthfull">
             >//:&nbsp;
             <div
                 class=""

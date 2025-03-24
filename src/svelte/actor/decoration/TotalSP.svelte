@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { TotalSPProps } from "@/interfaces/actor/decoration/TotalSPProps";
-    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     import { H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
 
     const {
@@ -12,17 +11,19 @@
         style,
         textStyle,
         iconStyle,
-        tooltip,
-        tooltipDirection,
-    }: TotalSPProps & TooltipProps = $props();
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.mech.system.points.total.tooltip"))
+        logText,
+        logType,
+        logTypeReset,
+    }: TotalSPProps & TextLogEventProps = $props();
+
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.mech.system.points.total.tooltip");
 </script>
 
 <div class="la-combine-h -aligncenter -height2 {style?.join(' ') || H2_TEXT_SIZE}"
-    data-tooltip={tip}
-    data-tooltip-class="clipped-bot la-tooltip"
-    data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
+    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
 >
     <span class="{textStyle?.join(' ')}">
     {#if max}

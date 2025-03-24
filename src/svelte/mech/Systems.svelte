@@ -4,6 +4,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
@@ -24,8 +25,8 @@
         system,
     } = props;
 
-    let systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
-    let collID = systemComponents.length
+    const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
+    const collID = systemComponents.length
         ? `${actor.uuid}.systems`
         : `${actor.uuid}.systems.empty`;
     
@@ -91,9 +92,14 @@
 <TotalSP
     value={system.loadout.sp.value}
     max={system.loadout.sp.max}
+    
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 <CollapseAllButton
     collapseID={collID}
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />
 {/snippet}
 
@@ -122,6 +128,9 @@
                         usesValue={component.value.system.uses.value}
                         usesMax={component.value.system.uses.max}
                         path={getComponentPath(index)}
+
+                        logType={TextLogHook.MechHeader}
+                        logTypeReset={TextLogHook.MechHeaderReset}
                     />
                 </div>
             {/if}
@@ -139,8 +148,10 @@
                 : FlowClass.SendToChat}
             path={getComponentPath(index)}
 
-            tooltip={component.value.system.effect || getLocalized("LA.chat.tooltip")}
+            tooltip={component.value.system.effect}
             tooltipDirection={TooltipDirection.LEFT}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
             
             disabled={isDestroyed(component)}
         />
@@ -149,15 +160,24 @@
         <TotalSP
             value={component.value.system.sp}
             style={[getSPStyle(component)]}
-            tooltip={getLocalized("LA.mech.system.points.tooltip")}
+
+            logText={getLocalized("LA.mech.system.points.tooltip")}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
         <div class="la-combine-v -margin3-lr">
             <MessageButton
                 flowClass={FlowClass.SendToChat}
+
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <EditButton
                 flowClass={FlowClass.ContextMenu}
                 path={getComponentPath(index)}
+
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
         </div>
     {/snippet}
@@ -191,6 +211,9 @@
                         usesValue={counter.value}
                         usesMax={counter.max}
                         path={`${getComponentPath(index)}.system.counters.${jndex}`}
+            
+                        logType={TextLogHook.MechHeader}
+                        logTypeReset={TextLogHook.MechHeaderReset}
                     />
                 {/each}
                 </div>
