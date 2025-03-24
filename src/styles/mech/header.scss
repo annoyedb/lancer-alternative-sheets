@@ -80,12 +80,13 @@
 
             .la-textlog__wrapper
             {
+                top: 5rem;
                 z-index: 1;
-                height: 10rem;
+                height: 5rem;
                 width: calc(100% - 15rem);
-                mask-image: linear-gradient(to top, black 25%, transparent 50%);
-                -webkit-mask-image: linear-gradient(to top, black 25%, transparent 50%);
-                -moz-mask-image: linear-gradient(to top, black 25%, transparent 50%);
+                mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+                -moz-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
             }
         }
     }

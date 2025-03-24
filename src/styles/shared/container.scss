@@ -366,6 +366,13 @@ aside.la-tooltip.active
 
     .la-textlog
     {
+        .la-textlog__typeit
+        {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: gray transparent;
+        }
+
         .la-textlog__ruler
         {
             background-image: url(/assets/scale_1.png);

@@ -59,11 +59,11 @@
     {/if}
     </div>
     {#if pilot?.system.active_mech.value.uuid === actor.uuid}
-    <span class="la-textlog__wrapper -top0 -left0 -positionabsolute">
+    <span class="la-textlog__wrapper -left0 -positionabsolute -padding1">
         <TextLog
             hookID={TextLogHook.MechHeader}
             hookResetID={TextLogHook.MechHeaderReset}
-            style={["-widthfull", "-heightfull", "-padding1"]}
+            style={["-widthfull", "-heightfull"]}
             introType={TextLogIntro.Header}
         />
     </span>

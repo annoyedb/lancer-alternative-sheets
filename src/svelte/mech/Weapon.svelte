@@ -160,10 +160,9 @@
 
         tooltipDirection={TooltipDirection.UP}
 
-        disabled={isDestroyed(slot.weapon.value)}
-        logText={getLocalized("LA.flow.rollDamage.tooltip")}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+        disabled={isDestroyed(slot.weapon.value)}
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton

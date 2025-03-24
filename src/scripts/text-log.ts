@@ -102,16 +102,17 @@ export function runIntro(instance: TypeIt, introType: TextLogIntro)
                 .pause(500)
                 .type(getFormattedText(introType))
                 .go();
-
     }
 }
 
-export function sendToLog(logText: string, type: TextLogHook)
+export function sendToLog(event: PointerEvent, logText: string, type: TextLogHook)
 {
-    switch (type)
-    {
-        case TextLogHook.MechHeader:
-            Hooks.call(TextLogHook.MechHeader, logText, type);
-            break;
-    }
+    event.stopPropagation();
+    Hooks.call(type, logText, type);
+}
+
+export function resetLog(event: PointerEvent, type: TextLogHook)
+{
+    event.stopPropagation();
+    Hooks.call(type);
 }

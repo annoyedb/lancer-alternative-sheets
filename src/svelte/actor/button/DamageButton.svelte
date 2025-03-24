@@ -9,6 +9,7 @@
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/settings/mech-sheet";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
 
@@ -36,7 +37,8 @@
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
     const hasAllWeaponProperties = damage?.length && range?.length;
     const rollable = !disabled && (damage?.length > 0);
-    const logging = logText && logType && logTypeReset;
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.flow.rollDamage.tooltip");
 </script>
 <script lang="ts" module>
     const DEFAULT_ICON_BG_STYLE = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
@@ -50,8 +52,8 @@
     data-tooltip={tipEnabled && rollable ? tip : undefined}
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => { event.stopPropagation(); Hooks.call(logType, logText, logType)} : undefined}
-    onpointerleave={ logging ? event => { event.stopPropagation(); Hooks.call(logTypeReset)} : undefined}
+    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined}
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined}
     disabled={!rollable}
 >
     <!-- Generated Range -->
