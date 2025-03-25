@@ -6,7 +6,6 @@ export const advancedStates = writable<{
     }
 }>({});
 
-// TODO: don't hardcode this and store a map of sheets UUIDs to activeTab
 export const activeTabs = writable<{
     [key: string]: {
         active: string,

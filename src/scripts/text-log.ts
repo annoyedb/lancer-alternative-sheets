@@ -19,6 +19,7 @@ export function setupTyped(component: HTMLElement, hookID: string, hookResetID: 
 
     function registerHooks()
     {
+        // TODO: see sendToLog/resetLog
         Hooks.on(hookID, (text: string) => 
         {
             typed?.destroy();
@@ -109,12 +110,14 @@ export function runIntro(instance: TypeIt, introType: TextLogIntro)
 
 export function sendToLog(event: PointerEvent, logText: string, type: TextLogHook)
 {
+    // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
-    Hooks.call(type, logText, type);
+    Hooks.call(type, logText);
 }
 
 export function resetLog(event: PointerEvent, type: TextLogHook)
 {
+    // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
     Hooks.call(type);
 }

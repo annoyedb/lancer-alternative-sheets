@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { SidebarRatioSliderProps } from "@/interfaces/actor/button/SidebarRatioSliderProps";
@@ -32,7 +31,8 @@
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.advanced.sidebarRatio.tooltip");
 
-    onMount(() => 
+    // Force the sidebar to update its flex value based on the changes we make to ratio
+    $effect(() => 
     {
         if (component)
         {

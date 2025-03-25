@@ -21,9 +21,9 @@
     let themeOverride = $state(getThemeOverride(actor.uuid));
     let component: HTMLElement | null = $state(null);
 
+    // When rendered, adjust the sidebar ratio to whatever was set
     onMount(() => 
     {
-        // TODO: fix this; probably needs a combined data store...
         if (component)
         {
             let ratio = getSidebarRatio(actor.uuid);
