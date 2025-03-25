@@ -1,6 +1,7 @@
 <script lang="ts">
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import { getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -37,7 +38,11 @@
             let description = `${action.detail}`;
             if (action.trigger)
                 description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
-            SendUnknownToChatBase.startFlow(pilot.uuid, action.name, description);
+            let chatData = {
+                title: action.name, 
+                description: description
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(pilot.uuid, chatData);
         }
     }
 </script>

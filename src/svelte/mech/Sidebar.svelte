@@ -7,12 +7,13 @@
     import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { FlowClass } from "@/enums/FlowClass";
+    import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
     import { onMount } from 'svelte';
+    import { RunMacroBase } from '@/classes/flows/RunMacro';
 
     const { 
         system,
@@ -289,6 +290,13 @@
 <!-- Macros/Flows -->
 <div class="la-spacer -large"></div>
 <div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull">
+    <FlowButton
+        text="TESTING"
+        flowClass={CustomFlowClass.RunMacro}
+        onClick={() => {
+            RunMacroBase.getInstance().startFlow(actor.uuid, {title: "test", description: "text"});
+        }}
+    />
     <FlowButton 
         text={getLocalized("LA.flow.stabilize.label")}
 

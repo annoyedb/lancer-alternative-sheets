@@ -20,4 +20,5 @@ export enum FlowClass
 export enum CustomFlowClass
 {
     SendUnknownToChat = "SendUnknownToChat",
+    RunMacro = "RunMacro",
 }

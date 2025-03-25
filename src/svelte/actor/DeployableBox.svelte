@@ -13,6 +13,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
 
     const {
         source, 
@@ -90,7 +91,11 @@
             let description = `${action.detail}`;
             if (action.trigger)
                 description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
-            SendUnknownToChatBase.startFlow(uuid, action.name, description);
+            let chatData = {
+                title: action.name, 
+                description: description
+            } as ChatData 
+            SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
     }
 
@@ -100,10 +105,12 @@
         event.stopPropagation();
         if (uuid && action)
         {
-            SendUnknownToChatBase.startFlow(
-                uuid, 
-                `${deployable.name}`, 
-                `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`);
+            const description = `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`;
+            let chatData = {
+                title: deployable.name, 
+                description: description
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
     }
 </script>

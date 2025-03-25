@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import { getManufacturerColor } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
@@ -28,7 +29,11 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
         event.stopPropagation();
-        SendUnknownToChatBase.startFlow(frame.uuid, core.passive_name, core.passive_effect)
+        let chatData = {
+            title: core.passive_name, 
+            description: core.passive_effect
+        } as ChatData
+        SendUnknownToChatBase.getInstance().startFlow(frame.uuid, chatData);
     }
 </script>
 

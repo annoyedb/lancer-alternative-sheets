@@ -4,6 +4,7 @@ import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { registerMechSheetSettings } from "@/scripts/mech/settings";
+import { RunMacroBase } from "@/classes/flows/RunMacro";
 
 Hooks.once("init", () =>
 {
@@ -37,7 +38,13 @@ function registerFlows()
     // classes are not ready for reading on init, so we have to grab the flows Map 
     // ourselves in the setup step
     const customFlows = [
-        SendUnknownToChatBase.setupFlow(),
+        SendUnknownToChatBase.getInstance().setupFlow(),
+        RunMacroBase.getInstance().setupFlow(),
+    ];
+    
+    const customSteps = [
+        ...SendUnknownToChatBase.getInstance().setupFlowSteps(),
+        ...RunMacroBase.getInstance().setupFlowSteps(),
     ];
 
     const flows = game.lancer.flows as Map<string, any>;
@@ -46,7 +53,18 @@ function registerFlows()
         flows.set(flow.name, flow);
     }
 
-    console.info("Lancer Alternative Sheets | Registered flows: ", customFlows.join(", "));
+    const flowSteps = game.lancer.flowSteps as Map<string, any>;
+    for (const step of customSteps)
+    {
+        flowSteps.set(step.name, step);
+    }
+
+    console.info("Lancer Alternative Sheets | Registered flows: ", 
+        customFlows.map(flow => flow.name).join(", ")
+    );
+    console.info("Lancer Alternative Sheets | Registered steps: ", 
+        customSteps.map(flowStep => flowStep.name).join(", ")
+    );
 }
 
 function setupSheets()

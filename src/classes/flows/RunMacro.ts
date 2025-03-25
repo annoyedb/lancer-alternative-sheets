@@ -1,17 +1,18 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
 import type { ChatData } from "@/interfaces/flows/ChatData";
+import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
 import { FlowBase } from "./FlowBase";
 
 // Boiler plate mostly and an example of how this module extends flows
-export class SendUnknownToChatBase extends FlowBase
+export class RunMacroBase extends FlowBase
 {
     public constructor() { super(); }
 
     setupFlow()
     {
-        const SendUnknownToChat = class extends (game.lancer.flows as any).get("SimpleTextFlow")
+        const RunMacro = class extends (game.lancer.Flow as any)<ChatData>
         {
-            static steps = ["printGenericCard"];
+            static steps = ["printGenericCard", "testStep"];
 
             constructor(uuid: string, data: ChatData)
             {
@@ -24,12 +25,14 @@ export class SendUnknownToChatBase extends FlowBase
         }
 
         // Export the SendUnknownToChat class
-        return SendUnknownToChat;
+        return RunMacro;
     }
 
     setupFlowSteps(): any[]
     {
-        return [];
+        return [
+            this.testStep,
+        ];
     }
 
     /**
@@ -38,15 +41,24 @@ export class SendUnknownToChatBase extends FlowBase
      * @param {string} uuid - All flows require a UUID, though not all will make use of it. The matching item will be included in the data when sent.
      * @param {any} data - The data to pass to the flow
      */
-    startFlow(uuid: string, data: ChatData): void
+    startFlow(uuid: string, data: any): void
     {
         const flows = game.lancer.flows as Map<string, any>;
         // UUID doesn't actually matter here, but flows require it
-        let flow = new (flows.get(CustomFlowClass.SendUnknownToChat))(
-            uuid,
-            data
+        let flow = new (flows.get(CustomFlowClass.RunMacro))(
+            uuid, 
+            {
+                title: data.title,
+                description: data.description,
+            }
         );
+
         flow.begin();
     }
 
+    async testStep(state: FlowState<any>): Promise<boolean>
+    {
+        console.log("Testing step: ", state);
+        return true;
+    }
 }
