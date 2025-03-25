@@ -7,6 +7,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { onMount } from "svelte";
 
     const props = $props();
     const { 
@@ -32,13 +33,11 @@
     const log = logText || getLocalized("LA.advanced.sidebarRatio.tooltip");
 
     // Force the sidebar to update its flex value based on the changes we make to ratio
-    $effect(() => 
+    onMount(() => 
     {
         if (component)
         {
             sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
-            if (sidebar)
-                sidebar.css('flex', ratio.toString());
         }
     });
 
@@ -46,6 +45,7 @@
     {
         const target = event.target as HTMLInputElement;
         const value = parseFloat(target.value);
+        ratio = value;
         if (sidebar)
             sidebar.css('flex', value.toString());
     }
@@ -54,14 +54,15 @@
     {
         const target = event.target as HTMLInputElement;
         const value = parseFloat(target.value);
+        ratio = value;
         ratioSetter(uuid, value);
     }
     
 </script>
 <!-- Ratio Slider -->
-{#if advancedOptions}
 <div class="la-range {style?.join(' ')}"
     bind:this={component}
+    style="display: {advancedOptions ? 'block' : 'none'};"
 >
     <input type="range"
         class="-glow-active-hover"
@@ -79,4 +80,3 @@
         aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>
-{/if}
