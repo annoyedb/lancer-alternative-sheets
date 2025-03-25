@@ -54,7 +54,7 @@ export function setupTypeIt(component: HTMLElement )
 
 function getRandomDelay()
 {
-    return Math.floor(Math.random() * 151);
+    return Math.floor(Math.random() * 201);
 }
 
 function getFormattedText(introType: TextLogIntro)
@@ -77,28 +77,29 @@ export function runIntro(instance: TypeIt, introType: TextLogIntro)
     {
         case TextLogIntro.Header:
             instance
-                .type("COMPANION/CONCIERGE UNIT")
+                .type(formatString("COMPANION/CONCIERGE UNIT v{0}", getModuleVersion()))
                 .break()
-                .type("<INITIALIZING / INICIALIZANDO / 初期化中 / 初始化>")
+                .type("> INITIALIZING / INICIALIZANDO / 初期化中")
+                .type(" . ", {delay: 200}).type(". ", {delay: 200}).type(". ", {delay: 200})
                 .pause(500)
                 .break()
-                .type("> OMNINET", {delay: getRandomDelay()})
+                .type(">> OMNINET", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
-                .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
+                .type(" . ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()})
                 .type("CONNECTED")
                 .break()
-                .type("> SYSTEMS", {delay: getRandomDelay()})
+                .type(">> SYSTEMS", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
-                .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
+                .type(" . ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()})
                 .type("ONLINE")
                 .break()
-                .type("> WEAPONS", {delay: getRandomDelay()})
+                .type(">> WEAPONS", {delay: getRandomDelay()})
                 .pause(getRandomDelay())
-                .type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()}).type(".", {delay: getRandomDelay()})
+                .type(" . ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()}).type(". ", {delay: getRandomDelay()})
                 .type("ARMED")
                 .break()
                 .pause(500)
-                .type("COMPANION/CONCIERGE UNIT INITIALIZATION COMPLETE", {delay: 0})
+                .type("INITIALIZATION COMPLETE / INICIALIZAÇÃO CONCLUÍDA / 初期化完了", {delay: 0})
                 .break()
                 .type(getFormattedText(TextLogIntro.Version))
                 .break()
