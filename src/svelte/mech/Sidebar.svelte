@@ -4,14 +4,14 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
-    import { getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
+    import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
-    import CoreAvailability from "@/svelte/actor/CoreAvailability.svelte";
+    import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
     import { onMount } from 'svelte';
 
     const { 
@@ -41,9 +41,12 @@
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
 
+    const tipEnabled = getMechSheetTipEnabled();
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
     const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
+    const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
+    const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))
 </script>
 
 <!-- Frame Name -->
@@ -62,17 +65,17 @@
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
         <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
-            data-tooltip={sizeTip}
+            data-tooltip={tipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
         <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
-            data-tooltip={sizeTip}
+            data-tooltip={tipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
         <div class="la-combine-h -fontsize7" 
-            data-tooltip={speedTip}
+            data-tooltip={tipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
@@ -83,10 +86,10 @@
     <div class="la-combine-h">
         <!-- Mech Image -->
         <img class="la-mech__img" 
-            src="{actor.img}"
+            src={actor.img}
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
-            data-edit="img" 
-            data-uuid="{actor.uuid}"
+            data-edit={"img"}
+            data-uuid={actor.uuid}
         />
     </div>
 </div>
@@ -130,7 +133,7 @@
             <!-- HP, SHIELD (BAR) -->
             <StatusBar
                 name={getLocalized("LA.hitpoint.short")}
-                dataName="system.hp.value"
+                dataName={"system.hp.value"}
                 currentValue={system.hp.value}
                 maxValue={system.hp.max}
                 barStyle={["la-bckg-bar-health"]}
@@ -147,7 +150,7 @@
             <!-- STRUCTURE -->
             <StatusBar
                 name={getLocalized("LA.structure.label")}
-                dataName="system.structure.value"
+                dataName={"system.structure.value"}
                 currentValue={system.structure.value}
                 maxValue={system.structure.max}
                 barStyle={["la-bckg-bar-structure"]}
@@ -161,13 +164,13 @@
         <!-- SHIELD (VALUE) -->
         <div class="la-combine-v -divider la-anim-bar-shield la-text-text -flex0 -width3ch -textaligncenter -glow-shield">
             <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
-                type="number" 
-                name="system.overshield.value" 
-                data-dtype="Number"
-                value="{system.overshield.value}">
+                type={"number"}
+                name={"system.overshield.value"}
+                data-dtype={"Number"}
+                value={system.overshield.value}>
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'))}"
-                data-tooltip-class="clipped-bot la-tooltip"
+                data-tooltip={tipEnabled ? shieldTip : undefined}
+                data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
@@ -182,7 +185,7 @@
             <!-- HEAT -->
             <StatusBar
                 name={getLocalized("LA.heat.label")}
-                dataName="system.heat.value"
+                dataName={"system.heat.value"}
                 currentValue={system.heat.value}
                 maxValue={system.heat.max}
                 barStyle={["la-bckg-bar-heat"]}
@@ -199,7 +202,7 @@
             <!-- STRESS, BURN (BAR) -->
             <StatusBar
                 name={getLocalized("LA.stress.label")}
-                dataName="system.stress.value"
+                dataName={"system.stress.value"}
                 currentValue={system.stress.value}
                 maxValue={system.stress.max}
                 barStyle={["la-bckg-bar-stress"]}
@@ -213,13 +216,13 @@
         <!-- BURN (VALUE) -->
         <div class="la-combine-v -divider la-anim-bar-burn la-text-text -flex0 -width3ch -textaligncenter -glow-burn">
             <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
-                type="number" 
-                name="system.burn" 
-                data-dtype="Number"
-                value="{system.burn}">
+                type={"number"}
+                name={"system.burn"}
+                data-dtype={"Number"}
+                value={system.burn}>
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))}"
-                data-tooltip-class="clipped-bot la-tooltip"
+                data-tooltip={tipEnabled ? burnTip : undefined}
+                data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.burn.short")}<!--
@@ -291,7 +294,7 @@
 
         flowClass={FlowClass.Standard}
         uuid={actor.uuid}
-        flowType="Stabilize"
+        flowType={"Stabilize"}
 
         tooltipHeader={getLocalized("LA.action.full.label")}
         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
@@ -304,7 +307,7 @@
 
         flowClass={FlowClass.Standard}
         uuid={actor.uuid}
-        flowType="Overcharge"
+        flowType={"Overcharge"}
 
         tooltipHeader={getLocalized("LA.action.overcharge.label")}
         tooltip={overchargeText}
@@ -329,7 +332,7 @@
 
         flowClass={FlowClass.Standard}
         uuid={actor.uuid}
-        flowType="BasicAttack"
+        flowType={"BasicAttack"}
 
         tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
         logText={getLocalized("LA.flow.rollAttack.tooltip")}
@@ -341,7 +344,7 @@
 
         flowClass={FlowClass.Standard}
         uuid={actor.uuid}
-        flowType="Damage"
+        flowType={"Damage"}
 
         tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
         logText={getLocalized("LA.flow.rollDamage.tooltip")}
@@ -353,7 +356,7 @@
         
         flowClass={FlowClass.Standard}
         uuid={actor.uuid}
-        flowType="TechAttack"
+        flowType={"TechAttack"}
 
         tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
         logText={getLocalized("LA.flow.rollTechAttack.tooltip")}

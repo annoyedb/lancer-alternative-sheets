@@ -1,18 +1,18 @@
 <script lang="ts">
-    import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
+    import { getMechSheetTipEnabled, getThemeOverride } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import { getThemeOverride } from "@/scripts/mech/settings";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         source, 
@@ -22,6 +22,7 @@
     }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
     let themeOverride = $state(getThemeOverride(sheetUUID));
 
+    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
@@ -149,7 +150,7 @@
                     <img class="-height10 click-open -glow-secondary -glow-primary-hover" 
                         src={getThemeImg(deployable)}
                         alt={getLocalized("LA.placeholder")}
-                        data-tooltip={tip}
+                        data-tooltip={tipEnabled ? tip : undefined}
                         data-tooltip-class="clipped-bot la-tooltip"
                         data-tooltip-direction={TooltipDirection.LEFT}
                         onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), TextLogHook.MechHeader) }

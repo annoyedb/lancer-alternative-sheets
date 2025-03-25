@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { StatusBarProps } from "@/interfaces/actor/StatusBarProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
 
 
     const {
@@ -21,13 +22,14 @@
         tooltipDirection
     } : StatusBarProps & TooltipProps = $props();
 
-    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
+    const tipEnabled = getMechSheetTipEnabled();
+    const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
 </script>
 
 <div class="la-statusbar la-combine-h -fontsize1 -gap2 {textStyle?.join(' ')}">
     {#if name}
     <span class="la-damage__span -fontsize0 -flexbasis13 -textalignright"
-        data-tooltip={tip}
+        data-tooltip={tipEnabled ? tip : undefined}
         data-tooltip-class="clipped-bot la-tooltip"
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
     ><!--
