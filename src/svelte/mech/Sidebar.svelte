@@ -14,13 +14,17 @@
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
     import { onMount } from 'svelte';
     import { RunMacroBase } from '@/classes/flows/RunMacro';
+    import type { UUIDData } from '@/interfaces/flows/UUIDData';
 
     const { 
         system,
         actor,
+
+        dragDrop,
     }: MechSheetProps = $props();
     let themeOverride = $state(getThemeOverride(actor.uuid));
     let component: HTMLElement | null = $state(null);
+    let macroDropComponent: HTMLElement | null = $state(null);
 
     // When rendered, adjust the sidebar ratio to whatever was set
     onMount(() => 
@@ -32,8 +36,12 @@
             if (sidebar)
                 sidebar.css('flex', ratio.toString());
         }
+        if (macroDropComponent)
+        {
+            dragDrop.bind(macroDropComponent);
+        }
     });
-
+    
     const frame = system.loadout.frame?.value;
     const frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
@@ -289,12 +297,18 @@
 </div>
 <!-- Macros/Flows -->
 <div class="la-spacer -large"></div>
-<div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull">
+<div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull
+    macro-droppable"
+    bind:this={macroDropComponent}
+>
     <FlowButton
         text="TESTING"
         flowClass={CustomFlowClass.RunMacro}
         onClick={() => {
-            RunMacroBase.getInstance().startFlow(actor.uuid, {title: "test", description: "text"});
+            let macroData = {
+                uuid: "Macro.Zai1Ehy58dRoZXTn",
+            } as UUIDData;
+            RunMacroBase.getInstance().startFlow(actor.uuid, macroData);
         }}
     />
     <FlowButton 

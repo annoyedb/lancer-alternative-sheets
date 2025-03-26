@@ -1,7 +1,7 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
-import type { ChatData } from "@/interfaces/flows/ChatData";
 import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
 import { FlowBase } from "./FlowBase";
+import type { UUIDData } from "@/interfaces/flows/UUIDData";
 
 // Boiler plate mostly and an example of how this module extends flows
 export class RunMacroBase extends FlowBase
@@ -10,17 +10,13 @@ export class RunMacroBase extends FlowBase
 
     setupFlow()
     {
-        const RunMacro = class extends (game.lancer.Flow as any)<ChatData>
+        const RunMacro = class extends (game.lancer.Flow as any)<UUIDData>
         {
-            static steps = ["printGenericCard", "testStep"];
+            static steps = ["runMacroStep"];
 
-            constructor(uuid: string, data: ChatData)
+            constructor(uuid: string, data: UUIDData)
             {
-                super(uuid, {
-                    title: data.title,
-                    description: data.description,
-                    tags: [],
-                });
+                super(uuid, data);
             }
         }
 
@@ -31,7 +27,7 @@ export class RunMacroBase extends FlowBase
     setupFlowSteps(): any[]
     {
         return [
-            this.testStep,
+            this.runMacroStep,
         ];
     }
 
@@ -41,24 +37,28 @@ export class RunMacroBase extends FlowBase
      * @param {string} uuid - All flows require a UUID, though not all will make use of it. The matching item will be included in the data when sent.
      * @param {any} data - The data to pass to the flow
      */
-    startFlow(uuid: string, data: any): void
+    startFlow(uuid: string, data: UUIDData): void
     {
         const flows = game.lancer.flows as Map<string, any>;
         // UUID doesn't actually matter here, but flows require it
         let flow = new (flows.get(CustomFlowClass.RunMacro))(
             uuid, 
-            {
-                title: data.title,
-                description: data.description,
-            }
+            data
         );
 
         flow.begin();
     }
 
-    async testStep(state: FlowState<any>): Promise<boolean>
+    async runMacroStep(state: FlowState<UUIDData>): Promise<boolean>
     {
         console.log("Testing step: ", state);
+        if (!state.data?.uuid)
+        {
+            console.error("Lancer Alternative Sheets: Missing UUID passed to runMacroStep.");
+            return false;
+        }
+        const macro = fromUuidSync(state.data.uuid) as Macro;
+        macro?.execute();
         return true;
     }
 }
