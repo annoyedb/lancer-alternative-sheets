@@ -10,6 +10,7 @@
     import TextLog from "../actor/TextLog.svelte";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const props = $props();
     const { 
@@ -40,17 +41,26 @@
     </div>
     <!-- Mech/Pilot Name -->
     <div class="la-names las-combine-v -flex1 -margin3">
-        <input 
+        <input type="text"
             class="la-mechname__input la-text-header -upper -fontsize5
                 charname"
-            name="name" type="text" value="{actor.name}" 
-            placeholder="{getLocalized("LA.namePlaceholder")}" />
+            name={"name"}
+            value={actor.name}
+            placeholder="{getLocalized("LA.namePlaceholder")}"
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+        />
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
         <span class="la-pilotname__span -upper la-text-header -fontsize3
                 ref set pilot click-open"
-            data-uuid="{pilot ? pilot.uuid : ""}" 
-            data-path="system.pilot"
-            data-accept-types="pilot">{pilot ? pilot.system.callsign : getLocalized("LA.pilotPlaceholder")} </span>
+            data-uuid={pilot?.uuid}
+            data-path={"system.pilot"}
+            data-accept-types={"pilot"}
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.open.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+        >
+            {pilot?.system.callsign || getLocalized("LA.pilotPlaceholder")}
+        </span>
     {#if pilot}
         <span class="la-pilotlevel__span -upper la-text-header">LL{pilot.system.level} </span>
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.search.label")}</span><!--

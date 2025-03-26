@@ -10,6 +10,9 @@
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     import MountDelete from "@/svelte/mech/settings/MountDelete.svelte";
     import MountAdd from "@/svelte/mech/settings/MountAdd.svelte";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const props: MechSheetProps = $props();
     const {
@@ -33,6 +36,7 @@
 
     const weaponMounts = system.loadout.weapon_mounts;
 
+    const tipEnabled = getMechSheetTipEnabled();
     const removeTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.remove.tooltip"));
     const editTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.edit.tooltip"));
 
@@ -226,11 +230,13 @@
         <MountAdd/>
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
-            data-tooltip={removeTip}
+            data-tooltip={tipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class={"la-tooltip clipped-bot"}
-            aria-label={getLocalized("LA.advanced.mount.remove.tooltip")}
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.remove.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleRemove(event, removeMount)}
+            aria-label={getLocalized("LA.advanced.mount.remove.tooltip")}
         >
             <i class="mdi mdi-minus-box -verticalaligntop"></i>
         </button>
@@ -238,11 +244,13 @@
         <!-- svelte-ignore event_directive_deprecated -->
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
-            data-tooltip={editTip}
+            data-tooltip={tipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class={"la-tooltip clipped-bot"}
-            aria-label={getLocalized("LA.advanced.mount.edit.tooltip")}
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.edit.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleEdit(event, editMount)}
+            aria-label={getLocalized("LA.advanced.mount.edit.tooltip")}
         >
             <i class="mdi mdi-list-box -verticalaligntop"></i>
         </button>

@@ -1,8 +1,10 @@
 <!-- Cursed core power button from original sheet -->
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
     
     const {
         system,
@@ -20,5 +22,7 @@
     data-tooltip={tipEnabled ? tip : undefined}
     data-tooltip-class="clipped-bot la-tooltip"
     data-tooltip-direction="RIGHT"
+    onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.core.available.tooltip"), TextLogHook.MechHeader) }
+    onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
     bind:checked={system.core_energy}
 />

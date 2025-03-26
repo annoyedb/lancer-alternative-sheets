@@ -1,7 +1,11 @@
 <script lang="ts">
     import { id as moduleID } from '@/module.json';
+    import { onMount } from 'svelte';
+    import { RunMacroBase } from '@/classes/flows/RunMacro';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import type { UUIDData } from '@/interfaces/flows/UUIDData';
+    import { resetLog, sendToLog } from '@/scripts/text-log';
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
@@ -12,9 +16,6 @@
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
-    import { onMount } from 'svelte';
-    import { RunMacroBase } from '@/classes/flows/RunMacro';
-    import type { UUIDData } from '@/interfaces/flows/UUIDData';
 
     const { 
         system,
@@ -99,6 +100,8 @@
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
             data-edit={"img"}
             data-uuid={actor.uuid}
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
         />
     </div>
 </div>
