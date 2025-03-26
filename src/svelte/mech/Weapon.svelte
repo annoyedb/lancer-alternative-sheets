@@ -47,7 +47,7 @@
         if (isDestroyed(weapon))
             return getLocalized("LA.mech.slot.destroyed.label")
         if (weapon.system.size && weapon.system.active_profile.type)
-            return `${weapon.system.size.toUpperCase()} ${weapon.system.active_profile.type.toUpperCase()}`
+            return `${weapon.system.size} ${weapon.system.active_profile.type}`
         else
             return getLocalized("LA.placeholder");
     }
@@ -55,8 +55,8 @@
     function getSubtitleStyle(weapon:any)
     {
         return isDestroyed(weapon)
-            ? "la-text-error la-anim-error horus--very--subtle"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-anim-error horus--very--subtle -upper"
+            : "la-text-header la-anim-header -upper";
     }
 
     function getIconStyle(weapon: any)

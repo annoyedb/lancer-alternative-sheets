@@ -21,7 +21,7 @@
     const frame: any | undefined = system.loadout.frame?.value;
     const core: any = frame?.system.core_system;
     const frameName: string = frame
-        ? `${frame.system.manufacturer.toUpperCase()} ${frame.name.toUpperCase()}`
+        ? `${frame.system.manufacturer} ${frame.name}`
         : getLocalized("LA.placeholder");
     const frameColorBckg: string = frame 
         ? getManufacturerColor(frame.system.manufacturer, "bckg")
@@ -53,7 +53,7 @@
 
 <HeaderMain
     text={frame ? frameName : getLocalized("LA.placeholder")}
-    headerStyle={[MAIN_HEADER_STYLE, frameColorBckg]}
+    headerStyle={[MAIN_HEADER_STYLE, frameColorBckg, "-upper"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={[frameColorBrdr]}
 
