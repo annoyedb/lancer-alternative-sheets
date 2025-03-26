@@ -16,5 +16,5 @@ export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
     isLimited: Boolean,
     isOwner: Boolean,
 
-    activeTab: string,
+    dragDrop: DragDrop,
 }

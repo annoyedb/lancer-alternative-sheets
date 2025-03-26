@@ -45,6 +45,14 @@ export class MechSheetBase
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
         const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
         {
+            private dragDropHandler = new DragDrop({ 
+                dragSelector: ".macro",
+                dropSelector: ".macro-droppable",
+                callbacks: {
+                    drop: (event) => this.handleDropData(event),
+                }
+            });
+
             constructor(...args: [any])
             {
                 super(...args);
@@ -57,7 +65,7 @@ export class MechSheetBase
                     this.render();
                 })
 
-                // TODO: Until a Lancer settings/theme hook is available, 
+                // TODO: Write a PR. Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () =>
                 {
@@ -78,6 +86,8 @@ export class MechSheetBase
                 this.reapplyImgListener(html);
             }
 
+            // The more pressing issue is whether or not this 
+            // function's is networked and if it's return is internally cached
             override async getData(): Promise<MechSheetProps>
             {
                 let data = await super.getData() as any;
@@ -85,6 +95,7 @@ export class MechSheetBase
                 data.effectCategories = data.effect_categories;
                 data.isLimited = data.limited;
                 data.isOwner = data.owner;
+                data.dragDrop = this.dragDropHandler;
                 return data as MechSheetProps;
             }
 
@@ -93,7 +104,7 @@ export class MechSheetBase
                 super._injectHTML(html);
                 // (#1) Foundry caches the root window somewhere but can't find a way 
                 // to update the cached element, so we have to reapply the theme every time. 
-                // This isn't currently a huge deal since it's just a class swap
+                // This isn't currently a huge deal since it's just a targeted class swap
                 applyThemeTo(this.element, getThemeOverride(this.actor.uuid));
 
                 let data = await this.getData() as any;
@@ -106,6 +117,7 @@ export class MechSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
+                // (#1)
                 applyThemeTo(element, getThemeOverride(this.actor.uuid));
                 let data = await this.getData() as any;
 
@@ -175,6 +187,23 @@ export class MechSheetBase
                     });
                 });
             }
+
+            handleDropData(event: DragEvent)
+            {
+                event.stopPropagation();
+                const data = event.dataTransfer?.getData("text/plain");
+                if (!data)
+                    return;
+                const obj = JSON.parse(data);
+                switch (obj.type)
+                {
+                    case "Macro":
+                        let macro = obj.uuid
+                        console.log("Dropped", macro);
+                        // TODO: create a button on the sheet, and assign macro uuid to it
+                        break;
+                }
+            } 
         }
 
         Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
