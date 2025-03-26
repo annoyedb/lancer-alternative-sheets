@@ -51,14 +51,16 @@ export class RunMacroBase extends FlowBase
 
     async runMacroStep(state: FlowState<UUIDData>): Promise<boolean>
     {
-        console.log("Testing step: ", state);
         if (!state.data?.uuid)
         {
             console.error("Lancer Alternative Sheets: Missing UUID passed to runMacroStep.");
             return false;
         }
-        const macro = fromUuidSync(state.data.uuid) as Macro;
-        macro?.execute();
+
+        fromUuid(state.data.uuid).then((item) => 
+        {
+            (item as Macro).execute();
+        });
         return true;
     }
 }

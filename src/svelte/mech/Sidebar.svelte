@@ -1,17 +1,15 @@
 <script lang="ts">
     import { id as moduleID } from '@/module.json';
     import { onMount } from 'svelte';
-    import { RunMacroBase } from '@/classes/flows/RunMacro';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import type { UUIDData } from '@/interfaces/flows/UUIDData';
     import { resetLog, sendToLog } from '@/scripts/text-log';
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
+    import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
@@ -304,16 +302,6 @@
     macro-droppable"
     bind:this={macroDropComponent}
 >
-    <FlowButton
-        text="TESTING"
-        flowClass={CustomFlowClass.RunMacro}
-        onClick={() => {
-            let macroData = {
-                uuid: "Macro.Zai1Ehy58dRoZXTn",
-            } as UUIDData;
-            RunMacroBase.getInstance().startFlow(actor.uuid, macroData);
-        }}
-    />
     <FlowButton 
         text={getLocalized("LA.flow.stabilize.label")}
 

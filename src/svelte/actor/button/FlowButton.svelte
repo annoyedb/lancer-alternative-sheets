@@ -48,7 +48,7 @@
 
 <button 
     type="button"
-    class="
+    class="-upper
         {disableSlide || "la-flow"} 
         {style?.join(' ') || _STYLE} 
         {flowClass || ''}"

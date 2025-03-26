@@ -13,6 +13,11 @@ import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import { getThemeOverride } from "@/scripts/mech/settings";
+import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+import { CustomFlowClass } from "@/enums/FlowClass";
+import type { UUIDData } from "@/interfaces/flows/UUIDData";
+import { RunMacroBase } from "@/classes/flows/RunMacro";
+import { TextLogHook } from "@/enums/TextLogHook";
 
 export class MechSheetBase
 {
@@ -198,12 +203,43 @@ export class MechSheetBase
                 switch (obj.type)
                 {
                     case "Macro":
-                        let macro = obj.uuid
-                        console.log("Dropped", macro);
-                        // TODO: create a button on the sheet, and assign macro uuid to it
+                        this.handleMacroDrop(obj, event);
                         break;
                 }
-            } 
+            }
+
+            handleMacroDrop(obj: any, event: DragEvent)
+            {
+                const target = $(event.target as HTMLElement).closest(".macro-droppable");
+                if (!target.length)
+                {
+                    console.warn("Lancer Alternative Sheets: No valid macro-droppable parent found.");
+                    return;
+                }
+                
+                // Mount the button onto the element
+                fromUuid(obj.uuid).then((item) => {
+                    function onClickHandler(uuid: string)
+                    {
+                        let macroData = {
+                            uuid: obj.uuid,
+                        } as UUIDData;
+                        RunMacroBase.getInstance().startFlow(uuid, macroData);
+                    }
+
+                    mount(FlowButton, 
+                    {
+                        target: target[0],
+                        props: {
+                            text: item?.name || getLocalized("LA.placeholder"),
+                            flowClass: CustomFlowClass.RunMacro,
+                            onClick: () => onClickHandler(this.actor.uuid),
+                            logType: TextLogHook.MechHeader,
+                            logTypeReset: TextLogHook.MechHeaderReset,
+                        }
+                    });
+                });
+            }
         }
 
         Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
