@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
-    import { getLocalized } from "@/scripts/helpers";
+    import { formatString, getLocalized } from "@/scripts/helpers";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -87,6 +87,23 @@
         console.log(any);
     }
 </script>
+
+{#snippet emptySystems()}
+<details class="la-details -widthfull la-combine-v
+        ref set drop-settable mech_system"
+    data-accept-types="mech_system"
+    data-path="system.loadout.systems.{systemComponents.length}.value">
+    <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
+        <div class="la-left la-combine-h">
+            <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
+            <span class="la-name__span -fontsize2">{!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.label") : getLocalized("LA.mech.system.undermounted.label")}</span>
+        </div>
+    </summary>
+    <div class="la-details__wrapper -bordersround -bordersoff">
+        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.subLabel") : formatString(getLocalized("LA.mech.system.undermounted.subLabel"), (system.loadout.sp.max - system.loadout.sp.value).toString())} //</div>
+    </div>
+</details>
+{/snippet}
 
 {#snippet headerOptions()}
 <TotalSP
@@ -243,22 +260,12 @@
         {/if}
         </HeaderTertiary>
     {/each}
+    {#if system.loadout.sp.value < system.loadout.sp.max}
+        {@render emptySystems()}
+    {/if}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable mech_system"
-        data-accept-types="mech_system"
-        data-path="system.loadout.systems.0.value">
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.mech.system.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {getLocalized("LA.mech.system.empty.subLabel")} //</div>
-        </div>
-    </details>
+    {@render emptySystems()}
 {/if}
 </HeaderMain>
 {/if}

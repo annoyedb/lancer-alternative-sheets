@@ -65,7 +65,7 @@ export function handleMountChange(
     document.update({
         [`${mountPath}.type`]: mountTypes[selectionIndex],
         [`${mountPath}.bracing`]: bracing,
-        [`${mountPath}.slots`]: newSlotFittings,
+        [`${mountPath}.slots`]: newSlots.loadout.weapon_mounts[0].slots,
     });
 
     callback?.(MOUNT_LOCALIZE_MAP[mountTypes[selectionIndex]]);

@@ -171,6 +171,8 @@
 	"LA.mech.system.label": "SYSTEMS",
 	"LA.mech.system.empty.label": "NO SYSTEM",
 	"LA.mech.system.empty.subLabel": "SYSTEMS NOT DETECTED",
+	"LA.mech.system.undermounted.label": "VACANT SYSTEMS",
+	"LA.mech.system.undermounted.subLabel": "SYSTEM CAPACITY REMAINING: {0}",
 	"LA.mech.system.effect.label": "EFFECT",
 	"LA.mech.system.destroyed.label": "DESTROYED",
     "LA.mech.system.deployable.label": "DEPLOYABLE",

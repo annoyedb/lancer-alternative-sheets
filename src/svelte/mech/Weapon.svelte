@@ -98,6 +98,12 @@
             getLocalized("LA.flow.rollAttack.template.tooltip"), 
             weapon.name);
     }
+
+    //@ts-ignore
+    function log(...args: any[])
+    {
+        console.log(...args);
+    }
 </script>
 
 {#each mount.slots as slot, index}
@@ -282,7 +288,7 @@
         </div>
     </summary>
     <div class="la-details__wrapper -bordersround -bordersoff">
-        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getSlotSize(slot.size)}</div>
+        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getSlotSize(mount.slots[0].size)}</div>
     </div>
 </details>
 {/if}
