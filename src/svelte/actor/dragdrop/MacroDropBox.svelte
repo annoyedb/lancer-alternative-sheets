@@ -41,8 +41,8 @@
     {
         if (dropData.type === LADataType.Sorting)
         {
-            [sidebarExes[thisData.index], sidebarExes[dropData.index]] = 
-            [sidebarExes[dropData.index], sidebarExes[thisData.index]];
+            const [movedItem] = sidebarExes.splice(dropData.index, 1);
+            sidebarExes.splice(thisData.index, 0, movedItem);
             setSidebarExecutables(uuid, sidebarExes);
         }
     }
