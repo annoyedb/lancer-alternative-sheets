@@ -9,14 +9,14 @@ const decoder = new Decoder();
 export function registerMechSheetSettings()
 {
     // Public Settings
-    game.settings.register(LancerAlternative.Name, `mech-settings-performance`, {
-        name: "LA.SETTINGS.mech.enableEffects.label",
-        hint: "LA.SETTINGS.mech.enableEffects.subLabel",
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    // game.settings.register(LancerAlternative.Name, `mech-settings-performance`, {
+    //     name: "LA.SETTINGS.mech.enableEffects.label",
+    //     hint: "LA.SETTINGS.mech.enableEffects.subLabel",
+    //     scope: "client",
+    //     config: true,
+    //     type: Boolean,
+    //     default: true,
+    // } as ClientSettings.PartialSetting<boolean>);
 
     game.settings.register(LancerAlternative.Name, `mech-settings-tip`, {
         name: "LA.SETTINGS.mech.enableTooltip.label",

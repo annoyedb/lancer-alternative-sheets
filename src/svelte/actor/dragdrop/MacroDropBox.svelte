@@ -55,6 +55,13 @@
         }
     }
 
+    function handleDelete(event: MouseEvent, index: number)
+    {
+        event.stopPropagation();
+        sidebarExes.splice(index, 1);
+        setSidebarExecutables(uuid, sidebarExes);
+    }
+
     // Foundry drag and drop handler -------------------------------------------------
     // Drag and drop handler for Foundry document items
     const macroDropHandler = new DragDrop({
@@ -97,8 +104,13 @@
         root={component}
         data={buildFlowData(type, index)}
         style={["-justifyend"]}
-        iconStyle={["-fontsize2", "-padding1-lr"]}
+        iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb"]}
         onDrop={handleFlowDrop}
+        onDelete={event => handleDelete(event, index)}
+        deleteDisabled={!isMacro(type)}
+
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     >
         {#if isMacro(type)}
             <FlowButton

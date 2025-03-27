@@ -1,35 +1,45 @@
 <!-- Wrapper handle for sorting -->
 <script lang="ts">
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { DragDropHandleProps } from "@/interfaces/dragdrop/DragDropHandleProps";
     import { advancedStates } from "@/scripts/advanced";
-    import type { Snippet } from "svelte";
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/text-log";
 
     const {
         children,
         uuid,
         index,
         root,
+        
         data,
         style,
         iconStyle,
+
         onDragStart,
         onDrop,
         onDropError,
-    }: {
-        children: Snippet,
-        uuid: string,
-        index: number,
-        root: HTMLElement,
-        style?: Array<string>,
-        iconStyle?: Array<string>,
-        data?: any,
-        onDragStart?: (event: DragEvent, thisData: any) => void,
-        onDrop?: (event: DragEvent, dropData: any, thisData: any) => void,
-        onDropError?: (event: DragEvent, dropData: any) => void,
-    } = $props();
+        onDelete,
+
+        deleteDisabled,
+
+        tooltipClass,
+        tooltipDirection,
+
+        logType,
+        logTypeReset,
+    }: DragDropHandleProps & TooltipProps & TextLogEventProps = $props();
     let component: HTMLElement | null = $state(null);
     let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
 
-    function handleDragStart(event: DragEvent): void {
+    const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
+    const logging = logType && logTypeReset;
+
+    function handleDragStart(event: DragEvent): void 
+    {
         try 
         {
             const jsonData = JSON.stringify(data);
@@ -42,7 +52,8 @@
         }
     }
 
-    function handleDrop(event: DragEvent) {
+    function handleDrop(event: DragEvent) 
+    {
         event.preventDefault();
         const dropData = event.dataTransfer?.getData('text/plain');
         if (!dropData) return;
@@ -71,6 +82,12 @@
             console.error('Lancer Alternative Sheets: Failed to parse drop data:', error);
         }
     }
+
+    function handleOnDelete(event: MouseEvent) 
+    {
+        event.stopPropagation();
+        onDelete?.(event);
+    }
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -81,11 +98,26 @@
     draggable={advancedOptions}
     bind:this={component}
 >
-    <i
-        class="fas fa-grip-lines -positionabsolute -left0 -pointergrab {advancedOptions ? '-visibilityvisible' : '-visibilityhidden'}
-            {iconStyle?.join(' ')}"
+{#if advancedOptions}
+    <i class="fas fa-grip-lines -positionabsolute -left0 -pointergrab -glow-primary-hover {iconStyle?.join(' ')}"
+        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        aria-label={getLocalized("LA.advanced.reorderMacro.tooltip")}
     ></i>
-    {#if children}
-        {@render children()}
-    {/if}
+{/if}
+{#if children}
+    {@render children()}
+{/if}
+{#if advancedOptions && !deleteDisabled}
+    <button type="button"
+        class="fas fa-delete-left -positionabsolute -right0 -glow-primary-hover {iconStyle?.join(' ')}"
+        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onclick={handleOnDelete}
+        data-tooltip={deleteTip}
+        data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+        data-tooltip-direction={tooltipDirection || TooltipDirection.RIGHT}
+        aria-label={getLocalized("LA.delete.tooltip")}
+    ></button>
+{/if}
 </div>
