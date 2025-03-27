@@ -21,8 +21,7 @@
         uuid,
         sheetUUID,
     }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
-    let themeOverride = $state(getThemeOverride(sheetUUID));
-
+    const themeOverride = getThemeOverride(sheetUUID);
     const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(

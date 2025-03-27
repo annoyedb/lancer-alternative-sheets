@@ -60,9 +60,9 @@
     
 </script>
 <!-- Ratio Slider -->
-<div class="la-range {style?.join(' ')}"
+<div class="la-range {style?.join(' ')}
+        {advancedOptions ? '-displayblock' : '-displaynone'}"
     bind:this={component}
-    style="display: {advancedOptions ? 'block' : 'none'};"
 >
     <input type="range"
         class="-glow-active-hover"

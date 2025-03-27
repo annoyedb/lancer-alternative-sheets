@@ -13,7 +13,7 @@
         actor,
         isOwner,
     }: ActiveEffectsProps = $props();
-    let themeOverride = $state(getThemeOverride(actor.uuid));
+    const themeOverride = getThemeOverride(actor.uuid);
 
     function getThemedIcon(effect: any)
     {

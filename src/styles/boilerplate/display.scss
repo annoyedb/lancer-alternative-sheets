@@ -36,6 +36,21 @@ aside.la-tooltip.active
         display: none;
     }
 
+    .-displayblock
+    {
+        display: block;
+    }
+
+    .-visibilityhidden
+    {
+        visibility: hidden;
+    }
+
+    .-visibilityvisible
+    {
+        visibility: visible;
+    }
+
     .-float-l
     {
         float: left;
