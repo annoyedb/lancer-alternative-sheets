@@ -9,6 +9,15 @@ const decoder = new Decoder();
 export function registerMechSheetSettings()
 {
     // Public Settings
+    game.settings.register(LancerAlternative.Name, `mech-settings-performance`, {
+        name: "LA.SETTINGS.mech.enableEffects.label",
+        hint: "LA.SETTINGS.mech.enableEffects.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
+
     game.settings.register(LancerAlternative.Name, `mech-settings-tip`, {
         name: "LA.SETTINGS.mech.enableTooltip.label",
         hint: "LA.SETTINGS.mech.enableTooltip.subLabel",
@@ -44,6 +53,11 @@ export function registerMechSheetSettings()
 }
 
 // Client Settings
+export function getMechSheetEffectsEnabled(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-performance`) as boolean;
+}
+
 export function getMechSheetTipEnabled(): boolean
 {
     return game.settings.get(LancerAlternative.Name, `mech-settings-tip`) as boolean;
@@ -133,4 +147,19 @@ export function setThemeOverride(uuid: string, value: string)
         {
             Hooks.call("laOverrideTheme", uuid);
         });
+}
+
+export function getSidebarExecutables(uuid: string): Array<string>
+{
+    const data = getMechSheetData();
+    return data[uuid]?.sidebarExes ?? MechSheetSettings.emptyContent().sidebarExes;
+}
+
+export function setSidebarExecutables(uuid: string, macros: Array<string>)
+{
+    const data = getMechSheetData();
+    if (!data[uuid])
+        data[uuid] = MechSheetSettings.emptyContent();
+    data[uuid].sidebarExes = macros;
+    setMechSheetData(data);
 }

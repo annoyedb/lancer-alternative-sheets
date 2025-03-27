@@ -4,43 +4,24 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { resetLog, sendToLog } from '@/scripts/text-log';
-    import { formatString, getLocalized } from "@/scripts/helpers";
+    import { getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { FlowClass } from "@/enums/FlowClass";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
+    import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
 
+    const props = $props();
     const { 
         system,
         actor,
-
-        dragDrop,
-    }: MechSheetProps = $props();
-    let themeOverride = $state(getThemeOverride(actor.uuid));
+    }: MechSheetProps = props
     let component: HTMLElement | null = $state(null);
-    let macroDropComponent: HTMLElement | null = $state(null);
-
-    // When rendered, adjust the sidebar ratio to whatever was set
-    onMount(() => 
-    {
-        if (component)
-        {
-            let ratio = getSidebarRatio(actor.uuid);
-            let sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
-            if (sidebar)
-                sidebar.css('flex', ratio.toString());
-        }
-        if (macroDropComponent)
-        {
-            dragDrop.bind(macroDropComponent);
-        }
-    });
     
+    const themeOverride = getThemeOverride(actor.uuid);
     const frame = system.loadout.frame?.value;
     const frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
@@ -52,9 +33,20 @@
     const tipEnabled = getMechSheetTipEnabled();
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
-    const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
-    const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))
+    const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
+
+    // When rendered, adjust the sidebar ratio to whatever was set
+    onMount(() => 
+    {
+        if (component)
+        {
+            let ratio = getSidebarRatio(actor.uuid);
+            let sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
+            if (sidebar)
+                sidebar.css('flex', ratio.toString());
+        }
+    });
 </script>
 
 <!-- Frame Name -->
@@ -298,82 +290,6 @@
 </div>
 <!-- Macros/Flows -->
 <div class="la-spacer -large"></div>
-<div class="la-macroflows la-dropshadow la-combine-v -alignend -widthfull
-    macro-droppable"
-    bind:this={macroDropComponent}
->
-    <FlowButton 
-        text={getLocalized("LA.flow.stabilize.label")}
-
-        flowClass={FlowClass.Standard}
-        uuid={actor.uuid}
-        flowType={"Stabilize"}
-
-        tooltipHeader={getLocalized("LA.action.full.label")}
-        tooltip={getLocalized("LA.flow.stabilize.tooltip")}
-        logText={getLocalized("LA.flow.stabilize.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <FlowButton 
-        text={getLocalized("LA.flow.overcharge.label")}
-
-        flowClass={FlowClass.Standard}
-        uuid={actor.uuid}
-        flowType={"Overcharge"}
-
-        tooltipHeader={getLocalized("LA.action.overcharge.label")}
-        tooltip={overchargeText}
-        logText={overchargeText}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <FlowButton 
-        text={getLocalized("LA.grit.label")}
-
-        flowClass={FlowClass.RollStat}
-        uuid={actor.uuid}
-        path={"system.grit"}
-
-        tooltip={getLocalized("LA.grit.tooltip")}
-        logText={getLocalized("LA.grit.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <FlowButton 
-        text={getLocalized("LA.flow.rollAttack.label")}
-
-        flowClass={FlowClass.Standard}
-        uuid={actor.uuid}
-        flowType={"BasicAttack"}
-
-        tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
-        logText={getLocalized("LA.flow.rollAttack.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <FlowButton 
-        text={getLocalized("LA.flow.rollDamage.label")}
-
-        flowClass={FlowClass.Standard}
-        uuid={actor.uuid}
-        flowType={"Damage"}
-
-        tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
-        logText={getLocalized("LA.flow.rollDamage.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <FlowButton 
-        text={getLocalized("LA.flow.rollTechAttack.label")}
-        
-        flowClass={FlowClass.Standard}
-        uuid={actor.uuid}
-        flowType={"TechAttack"}
-
-        tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
-        logText={getLocalized("LA.flow.rollTechAttack.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-</div>
+<MacroDropBox
+    uuid={actor.uuid}
+/>

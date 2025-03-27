@@ -5,6 +5,8 @@
 	"LA.SETTINGS.mech.enableTooltip.subLabel": "Enable display of non-essential tooltips in mech sheets",
 	"LA.SETTINGS.mech.enableHeaderLog.label": "Enable Mech Sheet Header Log",
 	"LA.SETTINGS.mech.enableHeaderLog.subLabel": "Enable TypeIt display in mech sheet headers",
+	"LA.SETTINGS.mech.enableEffects.label": "Enable Mech Sheet Effects",
+	"LA.SETTINGS.mech.enableEffects.subLabel": "Enable the display of CSS effects such as animations and drop shadows in mech sheets",
 	"LA.placeholder": "UNKNOWN",
 	"LA.namePlaceholder": "Name: UNKNOWN",
 	"LA.imgPlaceholder": "Visual: UNKNOWN",

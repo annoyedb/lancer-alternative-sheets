@@ -13,11 +13,6 @@ import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import { getThemeOverride } from "@/scripts/mech/settings";
-import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-import { CustomFlowClass } from "@/enums/FlowClass";
-import type { UUIDData } from "@/interfaces/flows/UUIDData";
-import { RunMacroBase } from "@/classes/flows/RunMacro";
-import { TextLogHook } from "@/enums/TextLogHook";
 
 export class MechSheetBase
 {
@@ -50,14 +45,6 @@ export class MechSheetBase
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
         const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
         {
-            private dragDropHandler = new DragDrop({ 
-                dragSelector: ".macro",
-                dropSelector: ".macro-droppable",
-                callbacks: {
-                    drop: (event) => this.handleDropData(event),
-                }
-            });
-
             constructor(...args: [any])
             {
                 super(...args);
@@ -66,7 +53,7 @@ export class MechSheetBase
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-                    
+
                     this.render();
                 })
 
@@ -100,7 +87,6 @@ export class MechSheetBase
                 data.effectCategories = data.effect_categories;
                 data.isLimited = data.limited;
                 data.isOwner = data.owner;
-                data.dragDrop = this.dragDropHandler;
                 return data as MechSheetProps;
             }
 
@@ -136,41 +122,34 @@ export class MechSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
-                mount(Header,
-                    {
-                        target: html.find(".la-SVELTE-HEADER")[0],
-                        props: data,
-                    });
-                mount(AdvancedSettingsNav,
-                    {
-                        target: html.find(".la-SVELTE-ADVANCEDNAV")[0],
-                        props: data,
-                    });
-                mount(Sidebar,
-                    {
-                        target: html.find(".la-SVELTE-SIDEBAR")[0],
-                        props: data,
-                    });
-                mount(Status,
-                    {
-                        target: html.find(".la-SVELTE-STATUS")[0],
-                        props: data,
-                    });
-                mount(AdvancedSettings,
-                    {
-                        target: html.find(".la-SVELTE-ADVANCED")[0],
-                        props: data,
-                    });
-                mount(Loadout,
-                    {
-                        target: html.find(".la-SVELTE-LOADOUT")[0],
-                        props: data,
-                    });
-                mount(HaseDisplay,
-                    {
-                        target: html.find(".la-SVELTE-HASE")[0],
-                        props: data,
-                    });
+                mount(Header, {
+                    target: html.find(".la-SVELTE-HEADER")[0],
+                    props: data,
+                });
+                mount(AdvancedSettingsNav, {
+                    target: html.find(".la-SVELTE-ADVANCEDNAV")[0],
+                    props: data,
+                });
+                mount(Sidebar, {
+                    target: html.find(".la-SVELTE-SIDEBAR")[0],
+                    props: data,
+                });
+                mount(Status, {
+                    target: html.find(".la-SVELTE-STATUS")[0],
+                    props: data,
+                });
+                mount(AdvancedSettings, {
+                    target: html.find(".la-SVELTE-ADVANCED")[0],
+                    props: data,
+                });
+                mount(Loadout, {
+                    target: html.find(".la-SVELTE-LOADOUT")[0],
+                    props: data,
+                });
+                mount(HaseDisplay, {
+                    target: html.find(".la-SVELTE-HASE")[0],
+                    props: data,
+                });
             }
 
             reapplyImgListener(html: JQuery<HTMLElement>)
@@ -189,54 +168,6 @@ export class MechSheetBase
                     {
                         const tab = $(event.currentTarget).data('tab');
                         setActiveTab(this.actor.uuid, tab);
-                    });
-                });
-            }
-
-            handleDropData(event: DragEvent)
-            {
-                event.stopPropagation();
-                const data = event.dataTransfer?.getData("text/plain");
-                if (!data)
-                    return;
-                const obj = JSON.parse(data);
-                switch (obj.type)
-                {
-                    case "Macro":
-                        this.handleMacroDrop(obj, event);
-                        break;
-                }
-            }
-
-            handleMacroDrop(obj: any, event: DragEvent)
-            {
-                const target = $(event.target as HTMLElement).closest(".macro-droppable");
-                if (!target.length)
-                {
-                    console.warn("Lancer Alternative Sheets: No valid macro-droppable parent found.");
-                    return;
-                }
-                
-                // Mount the button onto the element
-                fromUuid(obj.uuid).then((item) => {
-                    function onClickHandler(uuid: string)
-                    {
-                        let macroData = {
-                            uuid: obj.uuid,
-                        } as UUIDData;
-                        RunMacroBase.getInstance().startFlow(uuid, macroData);
-                    }
-
-                    mount(FlowButton, 
-                    {
-                        target: target[0],
-                        props: {
-                            text: item?.name || getLocalized("LA.placeholder"),
-                            flowClass: CustomFlowClass.RunMacro,
-                            onClick: () => onClickHandler(this.actor.uuid),
-                            logType: TextLogHook.MechHeader,
-                            logTypeReset: TextLogHook.MechHeaderReset,
-                        }
                     });
                 });
             }
