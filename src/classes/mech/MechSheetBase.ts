@@ -13,6 +13,7 @@ import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import { getThemeOverride } from "@/scripts/mech/settings";
+import { unregisterTrackedHooks } from "@/scripts/hooks";
 
 export class MechSheetBase
 {
@@ -61,6 +62,7 @@ export class MechSheetBase
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () =>
                 {
+                    console.log("How many times am I blasted then?");
                     this.render();
                 });
             }
@@ -122,6 +124,8 @@ export class MechSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
+                // Untrack all hooks that are registered in Svelte
+                unregisterTrackedHooks();
                 mount(Header, {
                     target: html.find(".la-SVELTE-HEADER")[0],
                     props: data,

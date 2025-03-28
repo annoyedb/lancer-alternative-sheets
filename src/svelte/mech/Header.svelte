@@ -73,9 +73,9 @@
     {#if pilot?.system.active_mech.value.uuid === actor.uuid}
     <span class="la-textlog__wrapper -left0 -positionabsolute -padding1">
         <TextLog
+            style={["-widthfull", "-heightfull"]}
             hookID={TextLogHook.MechHeader}
             hookResetID={TextLogHook.MechHeaderReset}
-            style={["-widthfull", "-heightfull"]}
             introType={TextLogIntro.Header}
         />
     </span>
