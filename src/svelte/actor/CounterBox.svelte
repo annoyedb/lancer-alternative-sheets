@@ -22,13 +22,15 @@
         logType,
         logTypeReset,
     }: CounterBoxProps & TextLogEventProps = $props();
-
+    
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.counter.tooltip");
 
-    //@ts-ignore
-    function logToConsole(any: any) {
-        console.log(any);
+    function handleOnClick(event: MouseEvent, index: number)
+    {
+        event.stopPropagation();
+        if (onClick)
+            onClick(event, index);
     }
 </script>
 <script lang="ts" module>
@@ -43,14 +45,16 @@
         {name}
     </span>
 {#each {length: usesMax} as _, index}
+    <!-- (#2) onclick has issues bubbling events, on:click does not -->
+    <!-- svelte-ignore event_directive_deprecated -->
     <button type="button"
         class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} -glow-header -glow-primary-hover -fontsize5 
             counter-hex" 
         data-available={index < usesValue}
         data-path={path}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
-        onclick={onClick ? (event) => onClick(event) : null}
+        on:pointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+        on:pointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        on:click={event => handleOnClick(event, index)}
         aria-label={`${getLocalized("LA.use.label")} ${name}`}>
     </button>
 {/each}
