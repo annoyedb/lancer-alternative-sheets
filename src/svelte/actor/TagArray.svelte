@@ -18,7 +18,7 @@ TODO: completely divorce from the default tag system
 </script>
 
 {#if tags.length > 0}
-<div class="la-combine-h -widthfull -justify{justify || "center"}">
+<div class="la-combine-h -wrapwrap -widthfull -justify{justify || "center"}">
 {#each tags as tag}
     {#if !tag.hidden}
         {@html getCompactTag(tag)}

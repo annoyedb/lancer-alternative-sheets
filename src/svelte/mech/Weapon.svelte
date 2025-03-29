@@ -108,37 +108,37 @@
 
 {#each mount.slots as slot, index}
 {#if slot.weapon?.value}
-
+{@const weapon = slot.weapon.value}
 <!-- Snippets -->
  <!-- TODO: this could be replaced with TotalSP component -->
 {#snippet costSP()}
-    {#if slot.weapon.value.system.sp}
+    {#if weapon.system.sp}
     <div class="la-loading la-hexarray la-combine-h -aligncenter la-text-header -fontsize5">
-        <span class="la-hexarray__span -fontsize4">{slot.weapon.value.system.sp}</span>
+        <span class="la-hexarray__span -fontsize4">{weapon.system.sp}</span>
         <i class="cci cci-system-point"></i>
     </div>
     {/if}
 {/snippet}
 {#snippet outerContent()}
     <div class="la-combine-v -gap0 -widthfull -padding2-l">
-        {#if slot.size !== "Integrated" && slot.weapon.value.system.mod}
+        {#if slot.size !== "Integrated" && weapon.system.mod}
         <WeaponMod
-            mod={slot.weapon.value.system.mod}
+            mod={weapon.system.mod}
             path={`${getModPath(index)}`}
         />
         {/if}
-        {#if isLoading(slot.weapon.value) || slot.weapon.value.isLimited() || slot.weapon.value.system.sp}
+        {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
             <LoadedBox
-                item={slot.weapon.value}
+                item={weapon}
                 path={getWeaponPath(index)}
                 
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
             <LimitedBox
-                usesValue={slot.weapon.value.system.uses.value}
-                usesMax={slot.weapon.value.system.uses.max}
+                usesValue={weapon.system.uses.value}
+                usesMax={weapon.system.uses.max}
                 path={getWeaponPath(index)}
 
                 logType={TextLogHook.MechHeader}
@@ -148,8 +148,8 @@
         </div>
         {/if}
         <ProfileBox
-            profiles={slot.weapon.value.system.profiles}
-            weapon={slot.weapon.value}
+            profiles={weapon.system.profiles}
+            weapon={weapon}
             path={`${getWeaponPath(index)}.system.selected_profile_index`}
             style={["-widthfull", "la-bckg-header-anti", "la-text-header", "clipped-alt"]}
 
@@ -160,39 +160,39 @@
 {/snippet}
 {#snippet headerTertiaryLeftOptions()}
     <AttackButton
-        iconStyle={[H3_ICON_SIZE, getIconStyle(slot.weapon.value), "cci", "cci-weapon"]}
+        iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
         iconBackgroundStyle={[H3_ICON_SIZE, "la-text-scrollbar-secondary"]}
 
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
 
-        tooltip={getRollWeaponTip(slot.weapon.value)}
+        tooltip={getRollWeaponTip(weapon)}
         tooltipDirection={TooltipDirection.LEFT}
-        logText={getRollWeaponTip(slot.weapon.value)}
+        logText={getRollWeaponTip(weapon)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
-        disabled={isDestroyed(slot.weapon.value)}
+        disabled={isDestroyed(weapon)}
     />
 {/snippet}
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
-        iconStyle={isDestroyed(slot.weapon.value) ? ["la-text-repcap"] : undefined }
+        iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
         
         flowClass={FlowClass.RollDamage}
-        range={slot.weapon.value.system.active_profile.all_range}
-        damage={slot.weapon.value.system.active_profile.all_damage}
+        range={weapon.system.active_profile.all_range}
+        damage={weapon.system.active_profile.all_damage}
 
         tooltipDirection={TooltipDirection.UP}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
-        disabled={isDestroyed(slot.weapon.value)}
+        disabled={isDestroyed(weapon)}
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton
             flowClass={FlowClass.SendToChat}
-            uuid={slot.weapon.value.uuid}
+            uuid={weapon.uuid}
 
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
@@ -209,64 +209,63 @@
 <!-- /Snippets -->
     <!-- Weapon -->
     <HeaderTertiary
-        itemID={slot.weapon.value.id}
-        uuid={slot.weapon.value.uuid}
+        itemID={weapon.id}
+        uuid={weapon.uuid}
         path={getWeaponPath(index)}
         acceptTypes={"mech_weapon"}
-        collapseID={slot.weapon.value.uuid}
+        collapseID={weapon.uuid}
         startCollapsed={true}
 
-        text={slot.weapon.value.name}
+        text={weapon.name}
         headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-        headerFontStyle={[getHeaderStyle(slot.weapon.value), "-fontsize2"]}
+        headerFontStyle={[getHeaderStyle(weapon), "-fontsize2"]}
 
-        subText={getSubtitle(slot.weapon.value)}
-        subHeaderFontStyle={[getSubtitleStyle(slot.weapon.value), "-fontsize0"]}
+        subText={getSubtitle(weapon)}
+        subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
         
-        renderOutsideCollapse={renderLimited(slot.weapon.value) ? outerContent : undefined }
+        renderOutsideCollapse={renderLimited(weapon) ? outerContent : undefined }
         headerContentLeft={headerTertiaryLeftOptions}
         headerContentRight={headerTertiaryRightOptions}
     >
-    {#if !slot.weapon.value.system.destroyed}
+    {#if !weapon.system.destroyed}
+        {@const profile = weapon.system.active_profile}
         <div class="la-generated -widthfull -gap2 la-combine-v">
             <!-- Generated Content -->
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
-                effect={slot.weapon.value.system.active_profile.effect}
+                effect={profile.effect}
             />
             <EffectBox
                 name={getLocalized("LA.effect.attack.label")}
-                effect={slot.weapon.value.system.active_profile.on_attack}
+                effect={profile.on_attack}
             />
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
-                effect={slot.weapon.value.system.active_profile.on_hit}
+                effect={profile.on_hit}
             />
             <EffectBox
                 name={getLocalized("LA.effect.crit.label")}
-                effect={slot.weapon.value.system.active_profile.on_crit}
+                effect={profile.on_crit}
             />
             <ActionBox
-                actions={slot.weapon.value.system.actions}
-                uuid={slot.weapon.value.uuid}
+                actions={weapon.system.actions}
+                uuid={weapon.uuid}
                 path={`system.actions`}
                 collapseID={getActionCollapseID(index)}
                 startCollapsed={false}
             />
-        {#if slot.size !== "Integrated" && !slot.weapon.value.system.mod}
+        {#if slot.size !== "Integrated" && !weapon.system.mod}
             <WeaponMod
-                mod={slot.weapon.value.system.mod}
+                mod={weapon.system.mod}
                 path={`${getModPath(index)}`}
             />
         {/if}
-        {#if slot.weapon.value.system.all_tags.length}
             <TagArray 
-                tags={slot.weapon.value.system.all_tags}
-                path={`${getWeaponPath(index)}.system.all_tags`}
+                tags={profile.all_tags}
+                path={`${getWeaponPath(index)}.system.profiles.${weapon.system.selected_profile_index}.all_tags`}
                 justify={"start"}
             />
-        {/if}
         </div>
     {/if}
     </HeaderTertiary>
