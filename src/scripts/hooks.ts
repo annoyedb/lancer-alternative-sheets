@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store';
 
-export const trackedHooks = writable<Record<string, number>>({});
+export const trackedHooks = writable<Record<number, string>>({});
 
-export function trackHook(key: string, value: number)
+export function trackHook(key: number, value: string)
 {
     trackedHooks.update(hooks =>
     {
@@ -15,10 +15,10 @@ export function unregisterTrackedHooks()
 {
     trackedHooks.update(hooks =>
     {
-        Object.keys(hooks).forEach(key =>
+        for (const [key, value] of Object.entries(hooks))
         {
-            Hooks.off(key, hooks[key]);
-        });
+            Hooks.off(value, Number(key));
+        }
         return {};
     });
 }

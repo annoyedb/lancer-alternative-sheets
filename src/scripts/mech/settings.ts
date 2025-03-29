@@ -36,6 +36,38 @@ export function registerMechSheetSettings()
         default: true,
     } as ClientSettings.PartialSetting<boolean>);
 
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-sidebar`, {
+        name: "LA.SETTINGS.mech.enableSidebarActionLog.label",
+        hint: "LA.SETTINGS.mech.enableSidebarActionLog.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
+
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main`, {
+        name: "LA.SETTINGS.mech.enableMainActionLog.label",
+        hint: "LA.SETTINGS.mech.enableMainActionLog.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    } as ClientSettings.PartialSetting<boolean>);
+
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-maxheight`, {
+        name: "LA.SETTINGS.mech.sizeMainActionLog.label",
+        hint: "LA.SETTINGS.mech.sizeMainActionLog.subLabel",
+        scope: "client",
+        config: true,
+        type: Number,
+        range: {
+            min: 10,
+            max: 30,
+            step: 1,
+        },
+        default: 12,
+    } as ClientSettings.PartialSetting<number>);
+
     // Private Settings
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
         scope: "client",
@@ -66,6 +98,21 @@ export function getMechSheetTipEnabled(): boolean
 export function getMechSheetLogHeaderEnabled(): boolean
 {
     return game.settings.get(LancerAlternative.Name, `mech-settings-log-header`) as boolean;
+}
+
+export function getMechSheetLogActionSidebarEnabled(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-sidebar`) as boolean;
+}
+
+export function getMechSheetLogActionMainEnabled(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main`) as boolean;
+}
+
+export function getMechSheetLogActionMainMaxHeight(): number
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-maxheight`) as number;
 }
 
 // Client Private Settings

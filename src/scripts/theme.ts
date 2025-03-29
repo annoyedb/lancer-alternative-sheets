@@ -98,6 +98,7 @@ export function getThemeName(theme?: ThemeKey | string)
 //
 // 'la-icon-swap' is a class used to identify items with classes that need to be checked 
 // against the current LIGHT_MAP theme
+// As of this moment this isn't really utilized due to a rewrite that happened a while back, but its kept here just in case someone else needs it? idk. The correct class is redetermined because we call a rerender on theme changes now
 export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: string)
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;

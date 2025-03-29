@@ -30,16 +30,16 @@ export class TypedWriter
 
     public registerHooks()
     {
-        trackHook(this.hookID, Hooks.on(this.hookID, (text: string) =>
+        trackHook(Hooks.on(this.hookID, (text: string) =>
         {
             this.typed?.destroy();
             this.typed = new Typed(this.component, {
                 strings: [text],
                 ...this.typedOptions,
             });
-        }));
+        }), this.hookID);
 
-        trackHook(this.hookResetID, Hooks.on(this.hookResetID, () =>
+        trackHook(Hooks.on(this.hookResetID, () =>
         {
             this.garbage = this.typed;
             this.typed = new Typed(this.component, {
@@ -47,7 +47,7 @@ export class TypedWriter
                 ...this.typedOptions,
             });
             this.garbage?.destroy(); // Typed.js does not do well cleaning up after itself
-        }));
+        }), this.hookResetID);
     }
 }
 

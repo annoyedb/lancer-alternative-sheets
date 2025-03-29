@@ -254,7 +254,7 @@ export async function parse_control_val(raw_val: string): Promise<{ success: boo
                 }
             case "struct":
                 // (#7)
-                return { success: false, val: "I HAVE NO MOUTH, AND I MUST SCREAM"};
+                return { success: false, val: "I HAVE NO MOUTH, AND I MUST SCREAM" };
         }
     }
 
@@ -385,7 +385,7 @@ export function handleGenControls(
 }
 
 
-// Custom `.gen-control` delete handler, stripped down from above function
+// Lancer Alternative Sheets: custom `.gen-control` delete handler, stripped down from above function
 export async function handleGenDeleteControl(
     event: MouseEvent,
     doc: any,
@@ -442,7 +442,7 @@ export async function handleGenDeleteControl(
         target_document: dd.sub_doc,
         relative_path: dd.sub_path,
     };
-    
+
     // Splice out the value at path dest, then writeback
     let changes = array_path_edit_changes(ctx.target_document, ctx.relative_path, null, "delete");
     await ctx.target_document.update({ [changes.path]: changes.new_val });
@@ -451,4 +451,34 @@ export async function handleGenDeleteControl(
     {
         post_hook(ctx);
     }
+}
+
+// Isolates a value to ensure it is compliant with a list of values
+export function restrict_choices<T extends string>(choices: T[], default_choice: T, provided?: string): T
+{
+    if (!provided) return default_choice;
+    let lcp = provided.toLowerCase();
+    // Try matching on lower case
+    for (let caseFix of choices)
+    {
+        if (caseFix.toLowerCase() == lcp)
+        {
+            return caseFix;
+        }
+    }
+
+    return default_choice;
+}
+
+// List possible values of an enum
+export function list_enum<T extends string>(enum_: { [key: string]: T }): T[]
+{
+    return Object.keys(enum_).map(k => enum_[k]);
+}
+
+// Isolates a value to ensure it is enum compliant
+export function restrict_enum<T extends string>(enum_: { [key: string]: T }, default_choice: T, provided?: string): T
+{
+    let choices = list_enum(enum_);
+    return restrict_choices(choices, default_choice, provided);
 }

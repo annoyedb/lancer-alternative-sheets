@@ -284,4 +284,61 @@ aside.la-tooltip.active
         max-height: unset;
         object-fit: unset;
     }
+
+    .lancer-damage-button-group
+    {
+        >.lancer-damage-apply
+        {
+            border-radius: 0px 4px 4px 0px;
+            border-color: var(--secondary);
+            border-width: 1px 1px 1px 0px;
+            border-style: solid;
+            background-color: var(--weapon);
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+        
+        >.lancer-damage-apply-select
+        {
+            border-radius: 4px 0px 0px 4px;
+            border-color: var(--secondary);
+            background-color: var(--secondary);
+            color: var(--header);
+        }
+    }
+
+    .mini-weapon-profile
+    {
+        background-color: var(--card-back);
+        color: var(--text);
+    }
+
+    .lancer-mini-header
+    {
+        background-color: var(--pilot);
+        color: var(--header);
+    }
+
+    .lancer-damage-flow
+    {
+        background-color: var(--secondary);
+        color: var(--header);
+    }
+
+    .lancer-header
+    {
+        background-color: var(--primary);
+        color: var(--header);
+    }
+
+    .compact-tag
+    {
+        background-color: var(--primary);
+        color: var(--header);
+
+        >i
+        {
+            color: var(--header);
+        }
+    }
 }

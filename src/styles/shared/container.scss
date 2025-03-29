@@ -404,4 +404,16 @@ aside.la-tooltip.active
             background-repeat: no-repeat;
         }
     }
+
+    .la-actionlog
+    {
+        max-height: 15rem;
+        scrollbar-width: thin;
+
+        &.-main
+        {
+            overflow-y: auto;
+            scrollbar-color: var(--scrollbar-secondary) transparent;
+        }
+    }
 }

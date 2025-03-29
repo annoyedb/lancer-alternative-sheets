@@ -8,13 +8,15 @@
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import ActionLog from "../actor/ActionLog.svelte";
+    import { getMechSheetLogActionMainEnabled } from "@/scripts/mech/settings";
 
     const props: MechSheetProps = $props();
     const {
         actor,
         system,
     } = props;
-
+    const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
     const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
@@ -31,6 +33,22 @@
 {/snippet}
 
 <div class="la-status__list la-combine-v -widthfull">
+    {#if actionLogEnabled}
+    <!-- Action Log -->
+    <HeaderMain
+        text={getLocalized("LA.tab.status.actionLog.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+        borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+
+        collapseID={`${actor.uuid}.status.actionLog`}
+        startCollapsed={false}
+    >
+        <ActionLog
+            id={actor.id}
+        />
+    </HeaderMain>
+    {/if}
     <!-- Active Effects -->
     <HeaderMain 
         text={getLocalized("LA.tab.status.effects.label")}
@@ -52,7 +70,7 @@
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         
-        collapseID={`${actor.uuid}_status_structure`}
+        collapseID={`${actor.uuid}.status.structure`}
         startCollapsed={false}
     >
         <!-- Structure -->
@@ -137,7 +155,7 @@
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         
-        collapseID={`${actor.uuid}_status_reactor`}
+        collapseID={`${actor.uuid}.status.reactor`}
         startCollapsed={false}
     >
         <!-- Stress -->
