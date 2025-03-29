@@ -14,7 +14,8 @@
     data-uuid={uuid}
 >
     <span class="-upper -fontsize2">{name}</span>
-    <button class="fas fa-edit -fontsize0 -positionabsolute
+    <button type="button" 
+        class="fas fa-edit -fontsize0 -positionabsolute
             lancer-context-menu"
         data-path={path}
         aria-label={getLocalized("LA.edit.label")}
