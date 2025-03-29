@@ -16,6 +16,7 @@
         acceptTypes,
         collapseID,
         startCollapsed,
+        saveCollapse,
 
         headerContent,
 
@@ -46,7 +47,7 @@
     function toggleCollapse(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
     {
         if (collapseID)
-            handleCollapseToggle(event, collapseID);
+            handleCollapseToggle(event, collapseID, saveCollapse);
     }
 
     function getExtensionText()

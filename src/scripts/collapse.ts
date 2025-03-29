@@ -42,7 +42,7 @@ export function initializeCollapseStates(id: string, startCollapsed: boolean = f
  * @param id - The unique identifier of the element.
  * @param state - The collapse state to set. `true` for collapsed, `false` for expanded.
  */
-export function setCollapseState(id: string, state: boolean)
+export function setCollapseState(id: string, state: boolean, toSessionStorage: boolean)
 {
     collapseStates.update(states =>
     {
@@ -52,7 +52,8 @@ export function setCollapseState(id: string, state: boolean)
             states[id].collapsed = state;
         return states;
     });
-    sessionStorage.setItem(`la-collapse-${id}`, state ? CollapseState.Closed : CollapseState.Opened);
+    if (toSessionStorage)
+        sessionStorage.setItem(`la-collapse-${id}`, state ? CollapseState.Closed : CollapseState.Opened);
 }
 
 
@@ -62,11 +63,11 @@ export function setCollapseState(id: string, state: boolean)
  * @param event - The mouse event triggered by the user interaction. It includes the current target element.
  * @param id - The unique identifier for the element whose collapse state is being toggled.
  */
-export function handleCollapseToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, id: string)
+export function handleCollapseToggle(event: MouseEvent, id: string, toSessionStorage: boolean = true)
 {
     event.stopPropagation();
     const currentState = get(collapseStates)[id];
-    setCollapseState(id, !currentState.collapsed);
+    setCollapseState(id, !currentState.collapsed, toSessionStorage);
 }
 
 /**
@@ -84,7 +85,7 @@ export function handleCollapseToggle(event: MouseEvent & { currentTarget: EventT
  * 
  * The function will toggle the collapse state of all elements within the same `collapse-group` as the event's current target.
  */
-export function handleCollapseAllToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, id: string)
+export function handleCollapseAllToggle(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, id: string, toSessionStorage: boolean = true)
 {
     event.stopPropagation();
     const collapse = get(collapseStates)[id].collapsed;
@@ -97,9 +98,9 @@ export function handleCollapseAllToggle(event: MouseEvent & { currentTarget: Eve
             const childId = trigger.getAttribute('data-la-collapse-id');
             if (childId)
             {
-                setCollapseState(childId, !collapse);
+                setCollapseState(childId, !collapse, toSessionStorage);
             }
         });
-        setCollapseState(id, !collapse);
+        setCollapseState(id, !collapse, toSessionStorage);
     }
 }
