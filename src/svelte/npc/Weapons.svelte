@@ -15,6 +15,7 @@
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
     import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
 
     const {
         actor,
@@ -200,6 +201,11 @@
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={weapon.system.on_hit}
+            />
+            <TagArray 
+                tags={weapon.system.tags}
+                path={`itemTypes.npc_feature.${weapon.index}.system.all_tags`}
+                justify={"end"}
             />
         </HeaderTertiary>
     {/each}
