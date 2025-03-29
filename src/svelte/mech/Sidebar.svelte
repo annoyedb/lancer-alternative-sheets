@@ -35,6 +35,8 @@
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
+    const overchargePlusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.increase.tooltip'));
+    const overchargeMinusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.decrease.tooltip'));
 
     // When rendered, adjust the sidebar ratio to whatever was set
     onMount(() => 
@@ -47,6 +49,22 @@
                 sidebar.css('flex', ratio.toString());
         }
     });
+
+    function handleOverchargeIncrease(event: MouseEvent) 
+    {
+        event.stopPropagation();
+        actor.update({
+            "system.overcharge": Math.min(overchargeStage + 1, overchargeSequence.length - 1)
+        });
+    }
+
+    function handleOverchargeDecrease(event: MouseEvent) 
+    {
+        event.stopPropagation();
+        actor.update({
+            "system.overcharge": Math.max(overchargeStage - 1, 0)
+        });
+    }
 </script>
 
 <!-- Frame Name -->
@@ -269,16 +287,36 @@
 </div>
 <!-- Mech Stats 3 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly -margin1-t">
-    <StatComboShort
-        icon={"cci cci-overcharge"}
-        label={getLocalized("LA.overcharge.short")}
-        value={overchargeSequence[overchargeStage]}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+    <div class="la-combine-h -positionrelative -aligncenter">
+        <button type="button"
+            class="mdi mdi-chevron-left -glow-primary-hover -positionabsolute -fontsize2"
+            style="left: -1rem;"
+            data-tooltip={tipEnabled ? overchargeMinusTip : undefined}
+            data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-direction={TooltipDirection.UP}
+            onclick={event => handleOverchargeDecrease(event)}
+            aria-label={getLocalized("LA.overcharge.decrease.tooltip")}
+        ></button>
+        <StatComboShort
+            icon={"cci cci-overcharge"}
+            label={getLocalized("LA.overcharge.short")}
+            value={overchargeSequence[overchargeStage]}
+            outerStyle={["la-text-text", "-fontsize5"]}
+            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
-        tooltip={getLocalized("LA.overcharge.tooltip")}
-        tooltipDirection={TooltipDirection.RIGHT}
-    />
+            tooltip={getLocalized("LA.overcharge.tooltip")}
+            tooltipDirection={TooltipDirection.RIGHT}
+        />
+        <button type="button"
+            class="mdi mdi-chevron-right -glow-primary-hover -positionabsolute -fontsize2"
+            style="right: -1.5rem;"
+            data-tooltip={tipEnabled ? overchargePlusTip : undefined}
+            data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-direction={TooltipDirection.UP}
+            onclick={event => handleOverchargeIncrease(event)}
+            aria-label={getLocalized("LA.overcharge.increase.tooltip")}
+        ></button>
+    </div>
     <StatComboShort
         icon={"cci cci-repair"}
         label={getLocalized("LA.repair.short")}

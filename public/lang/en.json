@@ -114,6 +114,8 @@
 	"LA.repair.tooltip": "The number of Repairs this mech has that can be used to regain HP or fix structure, mounts, and systems",
 	"LA.overcharge.short": "OVRCHRG",
 	"LA.overcharge.tooltip": "The current stage of overcharge this character will roll when taking the Overcharge action",
+	"LA.overcharge.increase.tooltip": "Increase the overcharge stage",
+	"LA.overcharge.decrease.tooltip": "Decrease the overcharge stage",
 	"LA.speed.tooltip": "The amount of space this character can cover on a standard move or when they Boost",
 	"LA.size.tooltip": "The effective size of this character including their area of control",
 	"LA.loading.label": "LOADING",
