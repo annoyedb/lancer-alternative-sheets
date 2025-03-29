@@ -2,6 +2,7 @@ import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
 import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
+import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import Body from "@/svelte/npc/Body.svelte";
 import Header from "@/svelte/npc/Header.svelte";
@@ -17,8 +18,8 @@ export class NPCSheetBase
                 "lancer", "sheet", "actor", "npc", getSystemTheme()
             ],
             template: TEMPLATE_PATHS.npcSheetSvelte,
-            width: 500,
-            height: 800,
+            width: getNPCSheetWidth() || 500,
+            height: getNPCSheetHeight() || 800,
             scrollY: [".LA_SCROLL_BODY"],
         }
     }

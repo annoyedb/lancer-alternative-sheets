@@ -5,6 +5,7 @@ import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { registerMechSheetSettings } from "@/scripts/mech/settings";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
+import { registerNPCSheetSettings } from "@/scripts/npc/settings";
 
 Hooks.once("init", () =>
 {
@@ -29,6 +30,7 @@ function registerHandlebarsHelpers()
 function registerSettings()
 {
     registerMechSheetSettings();
+    registerNPCSheetSettings();
 }
 
 function registerFlows()
