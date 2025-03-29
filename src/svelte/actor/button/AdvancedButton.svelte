@@ -41,7 +41,7 @@
 
 {#if uuid}
 <button type="button"
-    class=""
+    class="-fontsize3"
     aria-label={getLocalized("LA.advanced.tooltip")}
     data-tooltip={tipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}

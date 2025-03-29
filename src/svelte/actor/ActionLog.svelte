@@ -1,13 +1,17 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "./header/HeaderSecondary.svelte";
     import { trackHook } from "@/scripts/hooks";
-    import ActionLogMessage from "./ActionLogMessage.svelte";
-    import { getMechSheetLogActionMainMaxHeight } from "@/scripts/mech/settings";
+    import type { ActionLogProps } from "@/interfaces/actor/ActionLogProps";
+    import ActionLogMessage from "@/svelte/actor/ActionLogMessage.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
 
     const {
         id,
-    } = $props();
+        maxHeight,
+        saveCollapse,
+        startCollapsed,
+        collapsePrefix,
+    }: ActionLogProps = $props();
     //@ts-ignore Foundry native
     const messages = game.messages as Array<any>;
 
@@ -19,8 +23,6 @@
     let extractedTimes: Array<string> = $state([]);
     let extractedNames: Array<string> = $state([]);
     let animationFrame: number;
-
-    const maxHeight = getMechSheetLogActionMainMaxHeight()
 
     onMount(() => 
     {
@@ -86,7 +88,7 @@
 
 <div
     class="la-actionlog -main la-combine-v -gap0 -widthfull"
-    style="max-height: {maxHeight}rem;"
+    style={maxHeight ? `max-height: ${maxHeight}rem;` : ""}
     bind:this={component}
 >
 {#each filteredMessages as message, index}
@@ -100,9 +102,9 @@
         borderStyle={["la-brdr-header-anti"]}
         
         itemID={message.id}
-        collapseID={`chat.${message.id}`}
-        startCollapsed={true}
-        saveCollapse={false}
+        collapseID={`chat.${collapsePrefix ? collapsePrefix + '.' : ''}${message.id}`}
+        startCollapsed={startCollapsed}
+        saveCollapse={saveCollapse}
 
         headerContentLeft={headerSecondaryLeftOptions}
         headerContentRight={headerSecondaryRightOptions}

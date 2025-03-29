@@ -407,13 +407,30 @@ aside.la-tooltip.active
 
     .la-actionlog
     {
-        max-height: 15rem;
         scrollbar-width: thin;
 
         &.-main
         {
             overflow-y: auto;
             scrollbar-color: var(--scrollbar-secondary) transparent;
+        }
+    }
+
+    button.la-tab
+    {
+        letter-spacing: 0.2rem;
+        text-align: center;
+
+        transition: all 0.15s ease-in;
+
+        &:hover
+        {
+            background-color: var(--darken-1);
+        }
+
+        &.active
+        {
+            background-color: var(--darken-2);
         }
     }
 }

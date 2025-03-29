@@ -1,3 +1,4 @@
+import type { ActiveTab } from "@/enums/ActiveTab";
 import { get, writable } from "svelte/store";
 
 export const advancedStates = writable<{
@@ -8,9 +9,23 @@ export const advancedStates = writable<{
 
 export const activeTabs = writable<{
     [key: string]: {
-        active: string,
+        active: { [key in ActiveTab]: string },
     }
 }>({});
+
+export function setActiveTab(uuid: string, tab: ActiveTab, value: string)
+{
+    activeTabs.update(allTabs => 
+    {
+        if (!allTabs[uuid])
+        {
+            allTabs[uuid] = { active: {} as { [key in ActiveTab]: string } };
+        }
+        
+        allTabs[uuid].active[tab] = value;
+        return allTabs;
+    });
+}
 
 export function initializeAdvancedStates(uuid: string, startEnabled: boolean = false)
 {
@@ -49,16 +64,4 @@ export function handleAdvancedToggle(event: MouseEvent & { currentTarget: EventT
     event.stopPropagation();
     const currentState = get(advancedStates)[uuid];
     setAdvancedState(uuid, !currentState.enabled);
-}
-
-export function setActiveTab(uuid: string, tab: string)
-{
-    activeTabs.update(tabs => 
-    {
-        if (!tabs[uuid])
-            tabs[uuid] = { active: tab };
-        else
-            tabs[uuid].active = tab;
-        return tabs;
-    });
 }

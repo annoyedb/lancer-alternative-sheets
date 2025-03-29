@@ -25,8 +25,9 @@
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <nav 
-                class="la-tabs la-bckg-pilot clipped-alt" 
-                data-group="primary">
+                class="la-tabs la-combine-h la-bckg-pilot clipped-alt" 
+                data-group="primary"
+            >
                 <button type="button"
                     class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
                     data-group="primary"
@@ -46,9 +47,48 @@
     </header>
     <div class="la-body la-combine-h la-bckg-background -heightfull">
         <!-- Sidebar -->
-        <section class="la-SVELTE-SIDEBAR LA_SCROLL_SIDEBAR la-sidebar la-bg-scroll la-shadow -medium -inset -widthfull -heightfull">
-            {{!-- (#1) --}}
-            {{!-- Svelte is injected in-place here --}}
+        <section class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull">
+            <div class="la-nav-secondary__island la-combine-h -justifystart -positionabsolute -left0 -top0">
+                <nav 
+                    class="la-tabs-secondary la-combine-h la-bckg-active clipped-bot" 
+                    data-group="secondary"
+                    style="z-index: 1;"
+                >
+                {{!-- If you add the type attribute here it will actually break when inputs are submitted --}}
+                    <button
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-group="secondary"
+                        data-tab="statistics"
+                    >
+                        {{localize "LA.tab.statistics.label"}}
+                    </button>
+                    <button
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-group="secondary" 
+                        data-tab="activity"
+                    >
+                        {{localize "LA.tab.activity.label"}}
+                    </button>
+                </nav>
+            </div>
+            <section class="la-content-secondary LA_SCROLL_SIDEBAR -widthfull -heightfull">
+                <div class="la-SVELTE-SIDEBARSTATISTICS la-sidebar__statistics la-content-secondary
+                        tab"
+                    data-group="secondary"
+                    data-tab="statistics"
+                >
+                    {{!-- (#1) --}}
+                    {{!-- Svelte is injected in-place here --}}
+                </div>
+                <div class="la-SVELTE-SIDEBARACTIVITY la-sidebar__activity la-content-secondary
+                        tab"
+                    data-group="secondary"
+                    data-tab="activity"
+                >
+                    {{!-- (#1) --}}
+                    {{!-- Svelte is injected in-place here --}}
+                </div>
+            </section>
         </section>
         <div class="la-ruler">&nbsp;</div>
         <section 

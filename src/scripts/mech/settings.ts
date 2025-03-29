@@ -1,5 +1,6 @@
 import { MechSheetLocalSettings } from "@/classes/settings/MechSheetLocalSettings";
 import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
+import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { Encoder, Decoder } from "@msgpack/msgpack";
 
@@ -54,7 +55,7 @@ export function registerMechSheetSettings()
         default: false,
     } as ClientSettings.PartialSetting<boolean>);
 
-    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-maxheight`, {
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-max-height`, {
         name: "LA.SETTINGS.mech.sizeMainActionLog.label",
         hint: "LA.SETTINGS.mech.sizeMainActionLog.subLabel",
         scope: "client",
@@ -67,6 +68,33 @@ export function registerMechSheetSettings()
         },
         default: 12,
     } as ClientSettings.PartialSetting<number>);
+
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`, {
+        name: "LA.SETTINGS.mech.saveCollapse.label",
+        hint: "LA.SETTINGS.mech.saveCollapse.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: (_value: boolean) => {
+            for (const key in sessionStorage)
+            {
+                if (key.startsWith(`chat.${ActionLogCollapsePrefix.MechSheet}.`))
+                {
+                    sessionStorage.removeItem(key);
+                }
+            }
+        }
+    } as ClientSettings.PartialSetting<boolean>);
+
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-start-collapsed`, {
+        name: "LA.SETTINGS.mech.startCollapsed.label",
+        hint: "LA.SETTINGS.mech.startCollapsed.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
 
     // Private Settings
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
@@ -112,7 +140,17 @@ export function getMechSheetLogActionMainEnabled(): boolean
 
 export function getMechSheetLogActionMainMaxHeight(): number
 {
-    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-maxheight`) as number;
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-max-height`) as number;
+}
+
+export function getMechSheetLogActionMainSaveCollapse(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`) as boolean;
+}
+
+export function getMechSheetLogActionMainStartCollapsed(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-start-collapsed`) as boolean;
 }
 
 // Client Private Settings

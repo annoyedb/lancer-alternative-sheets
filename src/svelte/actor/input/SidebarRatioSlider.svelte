@@ -37,7 +37,7 @@
     {
         if (component)
         {
-            sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
+            sidebar = jQuery(component).closest('.la-root').find('.la-sidebar');
         }
     });
 

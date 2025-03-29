@@ -24,7 +24,7 @@
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Advanced Options Toggle -->
-    <div class="la-combine-v la-settings__island -padding1">
+    <div class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" style="z-index: 1;">
         <AdvancedButton
             uuid={actor.uuid}
             logType={TextLogHook.MechHeader}

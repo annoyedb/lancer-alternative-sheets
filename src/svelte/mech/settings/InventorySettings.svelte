@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { ActiveTab } from "@/enums/ActiveTab";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
@@ -13,7 +14,7 @@
     } = props;
 
     let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-    let active = $derived($activeTabs[actor.uuid]?.active || "loadout");// This is set to match the initial tab on the sheet setup
+    let active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Primary] || "loadout");// This is set to match the initial tab on the sheet setup
 </script>
 
 <div class="-heightfull

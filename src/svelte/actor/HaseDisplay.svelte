@@ -4,17 +4,26 @@
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { activeTabs } from "@/scripts/advanced";
+    import { ActiveTab } from "@/enums/ActiveTab";
 
     const {
         pilot,
         actor,
         system,
     }: MechSheetProps = $props();
+    const active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Secondary] || "statistics")
+    
+    $effect(() => {
+        console.log(active);
+    });
 </script>
 
 <!-- HASE Stats -->
 {#if pilot && pilot.system.active_mech.value.uuid === actor.uuid}
-<div class="la-hasegroup la-combine-v -positionabsolute -widthnone">
+<div class="la-hasegroup -positionabsolute -widthnone
+        {active === "statistics" ? "la-combine-v" : "-displaynone"}"
+>
     <div class="la-hase -heightnone">
         <HexButton
             text={getLocalized("LA.grit.short")}

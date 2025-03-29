@@ -13,42 +13,6 @@
             position: absolute;
             z-index: 1;
             top: 8.25rem;
-
-            >.la-tabs
-            {
-                display: flex;
-
-                >.la-tab
-                {
-                    letter-spacing: 0.2rem;
-                    text-align: center;
-
-                    transition: all 0.15s ease-in;
-
-                    &:hover
-                    {
-                        background-color: var(--darken-1);
-                    }
-
-                    &.active
-                    {
-                        background-color: var(--darken-2);
-                    }
-                }
-            }
-        }
-
-        .la-settings__island
-        {
-            position: absolute;
-            z-index: 1;
-            right: 0px;
-            top: 0px;
-
-            >button
-            {
-                font-size: 1.5rem;
-            }
         }
 
         .la-header-content

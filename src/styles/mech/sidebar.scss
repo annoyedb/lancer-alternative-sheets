@@ -6,67 +6,73 @@
         min-width: 15rem;
         flex: 1;
 
-        overflow-y: scroll;
-        overflow-x: hidden;
-
-        // Image
-        >.la-mech
+        >.la-content-secondary
         {
-            min-height: 12rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
 
-            .la-mech__img
+            >.la-sidebar__statistics
             {
-                max-height: 25rem;
-            }
-        }
-
-        // Macros/Flows
-        .la-macroflows
-        {
-            .la-flow
-            {
-                width: calc(100% - 2rem);
+                // Image
+                >.la-mech
+                {
+                    min-height: 12rem;
+        
+                    .la-mech__img
+                    {
+                        max-height: 25rem;
+                    }
+                }
+        
+                // Macros/Flows
+                .la-macroflows
+                {
+                    .la-flow
+                    {
+                        width: calc(100% - 2rem);
+                    }
+                }
             }
         }
     }
 
     // Scrollbar
-    .la-body
+    .la-body>.la-sidebar
     {
-        >.la-sidebar
+        >.la-content-secondary
         {
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-secondary) transparent;
         }
 
-        >.la-sidebar::-webkit-scrollbar
+        >.la-content-secondary::-webkit-scrollbar
         {
             width: 2px;
         }
 
-        >.la-sidebar::-webkit-scrollbar-thumb
+        >.la-content-secondary::-webkit-scrollbar-thumb
         {
             background: var(--scrollbar-secondary);
             border: 0px;
         }
 
-        >.la-sidebar::-webkit-scrollbar-track
+        >.la-content-secondary::-webkit-scrollbar-track
         {
             background: transparent;
         }
 
-        >.la-sidebar::-moz-scrollbar
+        >.la-content-secondary::-moz-scrollbar
         {
             width: 2px;
         }
 
-        >.la-sidebar::-moz-scrollbar-thumb
+        >.la-content-secondary::-moz-scrollbar-thumb
         {
             background: var(--scrollbar-secondary);
             border: 0px;
         }
 
-        >.la-sidebar::-moz-scrollbar-track
+        >.la-content-secondary::-moz-scrollbar-track
         {
             background: transparent;
         }

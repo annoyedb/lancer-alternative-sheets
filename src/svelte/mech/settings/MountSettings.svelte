@@ -13,6 +13,7 @@
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { ActiveTab } from "@/enums/ActiveTab";
 
     const props: MechSheetProps = $props();
     const {
@@ -22,7 +23,7 @@
     } = props;
     
     let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-    let active = $derived($activeTabs[actor.uuid]?.active || "loadout");// This is set to match the initial tab on the sheet setup
+    let active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Primary] || "loadout");// This is set to match the initial tab on the sheet setup
     let toggles = $state(new Array(system.loadout.weapon_mounts.length).fill(false));
     let tooltipElements = new Array(system.loadout.weapon_mounts.length).fill(null);
     let removeToggle = $state(false);

@@ -28,6 +28,10 @@
         text,
         extensionText,
         textStyle,
+
+        disableCmdline,
+        disableCursor,
+        disableExtension,
     }: HeaderProps & HeaderSecondaryProps & TerminalTextProps = $props();
     
     let isCollapsed = $derived.by(() => {
@@ -97,7 +101,9 @@
                 text={collapseID || !extensionText ? `${text} ` : text}
                 textStyle={textStyle}
                 extensionText={getExtensionText()}
-                disableCmdline={true}
+                disableCmdline={disableCmdline || true}
+                disableCursor={disableCursor || false}
+                disableExtension={disableExtension || false}
             />
             <!-- <span class="la-name__span {headerFontStyle?.join(' ') || "-fontsize2"}">{title}</span> -->
         </div>

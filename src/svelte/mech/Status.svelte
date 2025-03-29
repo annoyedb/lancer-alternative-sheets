@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
+    import { getMechSheetLogActionMainEnabled, getMechSheetLogActionMainSaveCollapse, getMechSheetLogActionMainStartCollapsed } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionMainMaxHeight } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -8,8 +10,8 @@
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import ActionLog from "../actor/ActionLog.svelte";
-    import { getMechSheetLogActionMainEnabled } from "@/scripts/mech/settings";
+    import ActionLog from "@/svelte/actor/ActionLog.svelte";
+    import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
 
     const props: MechSheetProps = $props();
     const {
@@ -17,6 +19,9 @@
         system,
     } = props;
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
+    const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
+    const actionLogSaveCollapse = getMechSheetLogActionMainSaveCollapse();
+    const actionLogStartCollapsed = getMechSheetLogActionMainStartCollapsed();
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
     const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
@@ -46,6 +51,10 @@
     >
         <ActionLog
             id={actor.id}
+            maxHeight={actionLogMaxHeight}
+            saveCollapse={actionLogSaveCollapse}
+            startCollapsed={actionLogStartCollapsed}
+            collapsePrefix={ActionLogCollapsePrefix.MechSheet}
         />
     </HeaderMain>
     {/if}

@@ -14,6 +14,8 @@ import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import { getThemeOverride } from "@/scripts/mech/settings";
 import { unregisterTrackedHooks } from "@/scripts/hooks";
+import Activity from "@/svelte/mech/Activity.svelte";
+import { ActiveTab } from "@/enums/ActiveTab";
 
 export class MechSheetBase
 {
@@ -33,6 +35,11 @@ export class MechSheetBase
                     contentSelector: ".la-content",
                     initial: "loadout"
                 },
+                {
+                    navSelector: ".la-tabs-secondary",
+                    contentSelector: ".la-content-secondary",
+                    initial: "statistics"
+                }
             ],
             scrollY: [".LA_SCROLL_BODY", ".LA_SCROLL_SIDEBAR"],
         }
@@ -62,7 +69,6 @@ export class MechSheetBase
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () =>
                 {
-                    console.log("How many times am I blasted then?");
                     this.render();
                 });
             }
@@ -135,9 +141,13 @@ export class MechSheetBase
                     props: data,
                 });
                 mount(Sidebar, {
-                    target: html.find(".la-SVELTE-SIDEBAR")[0],
+                    target: html.find(".la-SVELTE-SIDEBARSTATISTICS")[0],
                     props: data,
                 });
+                mount(Activity, {
+                    target: html.find(".la-SVELTE-SIDEBARACTIVITY")[0],
+                    props: data,
+                })
                 mount(Status, {
                     target: html.find(".la-SVELTE-STATUS")[0],
                     props: data,
@@ -166,12 +176,21 @@ export class MechSheetBase
 
             applyTabListener(html: JQuery<HTMLElement>)
             {
-                html.find('.la-nav__island button').each((_, button) =>
+                html.find('.la-nav__island>.la-tabs>.la-tab').each((_, button) =>
                 {
                     $(button).on('click', (event) =>
                     {
                         const tab = $(event.currentTarget).data('tab');
-                        setActiveTab(this.actor.uuid, tab);
+                        setActiveTab(this.actor.uuid, ActiveTab.Primary, tab);
+                    });
+                });
+
+                html.find('.la-nav-secondary__island>.la-tabs-secondary>.la-tab').each((_, button) => 
+                {
+                    $(button).on('click', (event) =>
+                    {
+                        const tab = $(event.currentTarget).data('tab');
+                        setActiveTab(this.actor.uuid, ActiveTab.Secondary, tab);
                     });
                 });
             }

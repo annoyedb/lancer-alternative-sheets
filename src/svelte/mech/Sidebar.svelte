@@ -42,7 +42,7 @@
         if (component)
         {
             let ratio = getSidebarRatio(actor.uuid);
-            let sidebar = jQuery(component).closest('.la-root').find('.la-SVELTE-SIDEBAR');
+            let sidebar = jQuery(component).closest('.la-root').find('.la-sidebar');
             if (sidebar)
                 sidebar.css('flex', ratio.toString());
         }
@@ -53,7 +53,7 @@
 <div class="la-framename la-dropshadow -overflowhidden"
     bind:this={component}
 >
-    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin3-t -margin1-l" 
+    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin5-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-cmdline la-text-header -fadein">>//: </span>
         {frameName}
@@ -169,7 +169,9 @@
                 type={"number"}
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
-                value={system.overshield.value}>
+                value={system.overshield.value}
+                onsubmit={ event => console.log("Submitted how many times?", event) }    
+            >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tipEnabled ? shieldTip : undefined}
                 data-tooltip-class={"clipped-bot la-tooltip"}
