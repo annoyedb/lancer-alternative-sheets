@@ -48,6 +48,7 @@
     class="
         {style?.join(' ')}
         {flowClass || FlowClass.SendEffectToChat}"
+    style="z-index: 1;"
     data-uuid={uuid}
     data-path={path}
     data-tooltip={tipEnabled && !disabled ? tip : undefined }

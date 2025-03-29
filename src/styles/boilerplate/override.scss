@@ -293,7 +293,7 @@ aside.la-tooltip.active
             border-color: var(--secondary);
             border-width: 1px 1px 1px 0px;
             border-style: solid;
-            background-color: var(--weapon);
+            background-color: var(--darken-3);
             padding-left: 0.25rem;
             padding-right: 0.25rem;
         }
@@ -309,8 +309,9 @@ aside.la-tooltip.active
 
     .mini-weapon-profile
     {
-        background-color: var(--card-back);
+        background-color: var(--darken-1);
         color: var(--text);
+        font-size: 1.25rem;
     }
 
     .lancer-mini-header

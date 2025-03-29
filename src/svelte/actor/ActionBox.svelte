@@ -106,6 +106,7 @@
 {/snippet}
 {#snippet headerQuinaryLeftOptions()}
     <EffectButton
+        style={["-positionabsolute", "-left0", "-top0", "-padding0-l"]}
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
 
         flowClass={action && uuid && path 
@@ -128,7 +129,7 @@
     <HeaderQuinary
         text={action.name}
         headerStyle={[ACTIVATION_COLOR_MAP[action.activation], "-padding0-l"]}
-        textStyle={["la-text-header", "la-anim-header"]}
+        textStyle={["la-text-header", "la-anim-header", "-lineheight5"]}
 
         uuid={uuid}
         path={`${path}.${index}`}
