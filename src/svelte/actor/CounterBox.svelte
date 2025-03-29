@@ -26,7 +26,7 @@
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.counter.tooltip");
 
-    function handleOnClick(event: MouseEvent, index: number)
+    function handleOnClick(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }, index: number)
     {
         event.stopPropagation();
         if (onClick)
