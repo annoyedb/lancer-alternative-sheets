@@ -3,6 +3,19 @@ This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the
 
 It is designed to be a player-facing sheet that provides most of the functionality carried over from the original sheet, providing an immersive and convenient way to interact with the Lancer system, and a simple-to-understand responsive layout.
 
+While the main goal is to provide aesthetic alternative sheets to the Lancer system, there are some functional features included as well:
+
+Mech Sheets:
+* per-sheet sheet configuration/customization
+* reminders on ruling for statuses, stats, and some actions
+* view/remove applied status effects
+* run/add/remove macros in the sidebar
+* 'action log' that filters the sheet actor's actions into their own log
+* some stand-in implementations for features yet to be added by the system (e.g. counter display, some send-to-chat functions on various things)
+
+NPC Sheets:
+* none yet :pensive:
+
 <details>
   <summary>
     <h3>Player Sheets & Theme Previews</h3>
@@ -87,14 +100,20 @@ This module can be installed:
 * through the latest manifest link - `https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json`
 * downloaded and installed manually (from module.zip) found in the [Releases](https://github.com/annoyedb/lancer-alternative-sheets/releases) page
 
-This module is supported on Foundry V11 (Lancer 2.4.3 - 2.5.0) and Foundry V12 (Lancer 2.6.0+). If you are on a supported version but the last-verified version does not match, it is because the last-verified version is whatever my campaign is currently using. :eyes:
+This module is supported on Foundry V11 (Lancer 2.4.3 - 2.5.0) and Foundry V12 (Lancer 2.6.0+). 
+
+If you are on a supported version but the last-verified version does not match, it is because the last-verified version is whatever my campaign is currently using. :eyes:
 
 ## Using the sheet
-To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the image above) in the selected actor sheet and select "lancer.LASMechSheet" to override the default sheet or to act as the new default sheet.
+To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the images above) in the selected actor sheet and select "Alternative `<Type>` Sheet" to override the default sheet or to act as the new default sheet.
 
 The current fully implemented sheets are as follows:
 * NPC sheets
 * Mech sheets
+
+To change the global system theme, change the LANCER system theme by going to Game Settings -> Configure Settings -> LANCER -> UI Theme. This setting is per-client, but all sheets will reflect this setting by default.
+
+To override or set a fixed theme per-sheet, you can activate the 'advanced toggle' in the sheet (in the sheet itself, typically near the top) and find a notebook symbol. This setting is synced across all clients.
 
 ## Development
 This module uses Svelte 5 to render overtop of the Lancer system's current implementation of Application by mounting overtop of a Handlebars div. As such it does not extend from Application but from Lancer's ActorSheets, making it fully interchangeable between the Lancer included sheets, while allowing the reactive rendering and maintainability of using Svelte.
@@ -111,7 +130,7 @@ Now any changes to `.hbs` templates, `.json` localization files, and source code
 
 Some things to note: 
 * [module manifests](/dist/module.json) may become 'stale' if adding anything new that is declared in them, in which case Foundry (and by extension the Vite server) needs to be returned to the Setup menu to reload the manifest.
-* events newly assigned to Svelte components (e.g. on:click/onclick) will not be assigned until a manual refresh
+* events newly assigned to Svelte components (e.g. on:click/onclick) may not be assigned until a manual refresh
 * localization strings are cached, so require a refresh to display changes
 
 Included is a (probably) outdated bunch of type definitions generated from [foundryvtt-lancer](https://github.com/Eranziel/foundryvtt-lancer), but aside from some globally defined constants I haven't found a way to get Vite to roll-up the definitions in a working build.
