@@ -21,6 +21,16 @@
             background-color: var(--#{$name}) !important;
         }
 
+        @for $i from 1 through 5 
+        {
+            $alpha: $i * 0.1;
+
+            .la-bckg-#{$name}-g#{$i}
+            {
+            background-color: rgba(var(--#{$name}), $alpha) !important;
+            }
+        }
+
         .la-text-#{$name}
         {
             color: var(--#{$name}) !important;
