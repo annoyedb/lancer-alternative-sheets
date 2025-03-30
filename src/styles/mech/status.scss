@@ -1,12 +1,5 @@
 @use '../shared/general' as *;
 .la-root
 {
-    .la-status.la-tab
-    {
-        // Establish initial flex width
-        .la-flow
-        {
-            width: 13rem;
-        }
-    }
+
 }

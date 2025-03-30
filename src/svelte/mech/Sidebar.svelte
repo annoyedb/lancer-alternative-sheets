@@ -116,7 +116,7 @@
 <!-- Mech Stats 1 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly">
     <StatComboShort
-        icon={"cci cci-role-defender"}
+        icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -126,7 +126,7 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
-        icon={"cci cci-evasion"}
+        icon={"cci cci-evasion -alignselfcenter"}
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -136,7 +136,7 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
-        icon={"cci cci-edef"}
+        icon={"cci cci-edef -alignselfcenter"}
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -255,7 +255,7 @@
 <!-- Mech Stats 2 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly">
     <StatComboShort
-        icon={"cci cci-tech-full"}
+        icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -265,7 +265,7 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
-        icon={"cci cci-save"}
+        icon={"cci cci-save -alignselfcenter"}
         label={getLocalized("LA.save.short")}
         value={system.save}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -275,7 +275,7 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
     <StatComboShort
-        icon={"cci cci-sensor"}
+        icon={"cci cci-sensor -alignselfcenter"}
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
         outerStyle={["la-text-text", "-fontsize5"]}
@@ -287,9 +287,9 @@
 </div>
 <!-- Mech Stats 3 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly -margin1-t">
-    <div class="la-combine-h -positionrelative -aligncenter">
+    <div class="la-combine-h -alignselfcenter -positionrelative">
         <button type="button"
-            class="mdi mdi-chevron-left -glow-primary-hover -positionabsolute -fontsize2"
+            class="mdi mdi-chevron-left la-text-secondary -glow-primary-hover -positionabsolute -fontsize3"
             style="left: -1rem;"
             data-tooltip={tipEnabled ? overchargeMinusTip : undefined}
             data-tooltip-class={"clipped-bot la-tooltip"}
@@ -298,7 +298,7 @@
             aria-label={getLocalized("LA.overcharge.decrease.tooltip")}
         ></button>
         <StatComboShort
-            icon={"cci cci-overcharge"}
+            icon={"cci cci-overcharge -alignselfcenter"}
             label={getLocalized("LA.overcharge.short")}
             value={overchargeSequence[overchargeStage]}
             outerStyle={["la-text-text", "-fontsize5"]}
@@ -308,7 +308,7 @@
             tooltipDirection={TooltipDirection.RIGHT}
         />
         <button type="button"
-            class="mdi mdi-chevron-right -glow-primary-hover -positionabsolute -fontsize2"
+            class="mdi mdi-chevron-right la-text-secondary -glow-primary-hover -positionabsolute -fontsize3"
             style="right: -1.5rem;"
             data-tooltip={tipEnabled ? overchargePlusTip : undefined}
             data-tooltip-class={"clipped-bot la-tooltip"}
@@ -318,7 +318,7 @@
         ></button>
     </div>
     <StatComboShort
-        icon={"cci cci-repair"}
+        icon={"cci cci-repair -alignselfcenter"}
         label={getLocalized("LA.repair.short")}
         value={system.repairs.value}
         outerStyle={["la-text-text", "-fontsize5"]}
