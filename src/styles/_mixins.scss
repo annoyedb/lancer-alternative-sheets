@@ -1,4 +1,5 @@
 @use "sass:map";
+
 @mixin theme($theme-map)
 {
     @each $name, $color in $theme-map
@@ -11,39 +12,32 @@
 {
     @each $name, $color in $theme-map
     {
-        .la-outl-#{$name}
+        @if type-of($color) == 'color' 
         {
-            -webkit-text-stroke: var(--size) var(--#{$name});
-        }
-
-        .la-bckg-#{$name}
-        {
-            background-color: var(--#{$name}) !important;
-        }
-
-        @for $i from 1 through 5 
-        {
-            $alpha: $i * 0.1;
-
-            .la-bckg-#{$name}-g#{$i}
+            .la-outl-#{$name}
             {
-            background-color: rgba(var(--#{$name}), $alpha) !important;
+                -webkit-text-stroke: var(--size) var(--#{$name});
             }
-        }
 
-        .la-text-#{$name}
-        {
-            color: var(--#{$name}) !important;
-        }
+            .la-bckg-#{$name}
+            {
+                background-color: var(--#{$name}) !important;
+            }
 
-        .la-brdr-#{$name}
-        {
-            border-color: var(--#{$name});
-        }
+            .la-text-#{$name}
+            {
+                color: var(--#{$name}) !important;
+            }
 
-        .la-anim-#{$name}
-        {
-            --color: var(--#{$name});
+            .la-brdr-#{$name}
+            {
+                border-color: var(--#{$name});
+            }
+
+            .la-anim-#{$name}
+            {
+                --color: var(--#{$name});
+            }
         }
     }
 }
@@ -55,18 +49,18 @@
 
     .la-bckg-#{$theme-id}
     {
-        background-color: $primary-color !important;
+        background-color: #{$primary-color} !important;
     }
 
     .la-text-#{$theme-id}
     {
-        color: $primary-color !important;
+        color: #{$primary-color} !important;
     }
 
     .la-brdr-#{$theme-id}
     {
-        border-color: $primary-color;
+        border-color: #{$primary-color};
     }
 
-    --#{$theme-id}-theme: $primary-color;
+    --#{$theme-id}-theme: #{$primary-color};
 }
