@@ -4,7 +4,27 @@ import TypeIt from "typeit";
 import { TextLogIntro } from "@/enums/TextLogIntro";
 import { TextLogHook } from "@/enums/TextLogHook";
 import { formatString, getFoundryVersion, getLancerVersion, getLocalized, getModuleVersion } from "@/scripts/helpers";
-import { trackHook } from "./hooks";
+import { trackHook } from "@/scripts/hooks";
+import { writable } from "svelte/store";
+
+export const introRun = writable<{
+    [key: string]: {
+        enabled: boolean,
+    }
+}>({});
+
+export function setIntroRun(uuid: string, enabled: boolean)
+{
+    introRun.update(states =>
+    {
+        if (!states[uuid])
+            states[uuid] = { enabled };
+        else
+            states[uuid].enabled = enabled;
+        return states;
+    });
+    sessionStorage.setItem(`la-advanced-${uuid}`, enabled.toString());
+}
 
 export class TypedWriter
 {
@@ -119,7 +139,27 @@ export class TypeItWriter
                     .go();
         }
     }
+
+    public getFinishedIntro(introType: TextLogIntro): string
+    {
+        switch (introType)
+        {
+            case TextLogIntro.Header:
+                return `
+                    <span>${formatString("COMPANION/CONCIERGE UNIT v{0}", getModuleVersion())}</span><br>
+                    <span>> INITIALIZING / INICIALIZANDO / 初期化中</span><br>
+                    <span>>> OMNINET . . . CONNECTED</span><br>
+                    <span>>> SYSTEMS . . . ONLINE</span><br>
+                    <span>>> WEAPONS . . . ARMED</span><br>
+                    <span>INITIALIZATION COMPLETE / INICIALIZAÇÃO CONCLUÍDA / 初期化完了</span><br>
+                    <span>${this.getFormattedText(TextLogIntro.Version)}</span><br>
+                    <span>${this.getFormattedText(introType)}</span>
+                `;
+        }
+        return '';
+    }
 }
+
 
 export function sendToLog(event: PointerEvent, logText: string, type: TextLogHook)
 {

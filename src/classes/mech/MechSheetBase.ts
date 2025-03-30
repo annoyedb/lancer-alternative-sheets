@@ -16,6 +16,7 @@ import { getThemeOverride } from "@/scripts/mech/settings";
 import { unregisterTrackedHooks } from "@/scripts/hooks";
 import Activity from "@/svelte/mech/Activity.svelte";
 import { ActiveTab } from "@/enums/ActiveTab";
+import { setIntroRun } from "@/scripts/text-log";
 
 export class MechSheetBase
 {
@@ -70,6 +71,7 @@ export class MechSheetBase
                 Hooks.on("closeSettingsConfig", () =>
                 {
                     this.render();
+                    setIntroRun(this.actor.uuid, false);
                 });
             }
 

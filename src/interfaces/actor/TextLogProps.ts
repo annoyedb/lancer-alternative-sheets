@@ -5,6 +5,7 @@ export interface TextLogProps
 {
     style: Array<string>;
     introType: TextLogIntro;
+    uuid: string;
     hookID: TextLogHook;
     hookResetID: TextLogHook;
 }

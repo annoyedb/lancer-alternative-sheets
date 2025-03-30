@@ -1,18 +1,20 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getMechSheetLogHeaderEnabled } from "@/scripts/mech/settings";
-    import { TypeItWriter, TypedWriter } from "@/scripts/text-log.js";
+    import { TypeItWriter, TypedWriter, introRun, setIntroRun } from "@/scripts/text-log.js";
     import type { TextLogProps } from "@/interfaces/actor/TextLogProps";
 
     const props = $props();
     const {
         style,
         introType,
+        uuid,
         hookID,
         hookResetID,
     }: TextLogProps = props;
     let typeItComponent: HTMLElement | null = $state(null);
     let typedComponent: HTMLElement | null = $state(null);
+    let runIntro = $derived($introRun[uuid] || false);
     let enabled = getMechSheetLogHeaderEnabled();
     let typedWriter: TypedWriter | null = null;
     let typeItWriter: TypeItWriter | null = null;
@@ -25,7 +27,15 @@
         typedWriter = new TypedWriter(typedComponent!, hookID, hookResetID);
         typedWriter.registerHooks();
         typeItWriter = new TypeItWriter(typeItComponent!);
-        typeItWriter.runIntro(introType);
+        if (runIntro)
+        {
+            typeItWriter.runIntro(introType);
+            setIntroRun(uuid, true);
+        }
+        else
+        {
+            typeItComponent!.innerHTML = typeItWriter.getFinishedIntro(introType);
+        }
     });
 </script>
 
