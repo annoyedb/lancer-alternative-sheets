@@ -36,7 +36,7 @@
     --->{name}<!--
 ---></span>
     {/if}
-    <div class="la-bar-h la-bckg-bar-back -flex1 {clipPath}">
+    <div class="la-bar-h lancer-bckg-darken-3 -flex1 {clipPath}">
         <div class="la-bar-h-progress la-combine-h">
             <input class="la-bar-h-progress__input -flex1 {textStyle?.join(' ')}"
                 type="number" 

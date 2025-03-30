@@ -1,86 +1,159 @@
 .la-mech
 {
-    .la-hasegroup>.la-hase
+    .la-hase
     {
-        translate: -0.5rem;
+        display: flex;
+        translate: -1rem 1rem;
         
-        >.la-attribute
+        >.la-combine-h
         {
-            &.-grit
+            pointer-events: none;
+
+            // MDI hexagon-specific offsets to allow a good-enough 'fitted' effect
+            @mixin mdiAbsolute
             {
-                top: 0.2rem;
-            }
+                height: 2.6875rem; // 43px / 16
+                width: 3.25rem; // 52px / 16
+                font-size: 4rem; // 64px / 16
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-            &.-hull
-            {
-                left: 1.6rem;
-
-                // Everything else
-                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                >.la-combine-v
                 {
-                    top: -2rem;
-                }
-                // Firefox
-                @supports(-moz-appearance: none)
-                {
-                    top: -1.9rem;
-                }
-            }
-
-            &.-systems
-            {
-                left: 0;
-
-                // Everything else
-                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
-                {
-                    top: -4rem;
-                }
-                // Firefox
-                @supports(-moz-appearance: none)
-                {
-                    top: -3.9rem;
+                    height: 2.375rem; // 38px / 16
+                    width: 2.625rem; // 42px / 16
+                    >.la-label__span
+                    {
+                        font-size: 0.7rem; // 12px / 16
+                    }
+                    >button
+                    {
+                        pointer-events: all;
+                    }
                 }
             }
 
-            &.-engineering
+            >.-grit
             {
-                left: 1.6rem;
-
-                // Everything else
-                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+                @include mdiAbsolute;
+                height: 3.75rem; // 60px / 16
+                width: 4rem; // 64px / 16
+                font-size: 5.25rem; // 84px / 16
+                
+                >.la-combine-v
                 {
-                    top: -6rem;
-                }
-                // Firefox
-                @supports(-moz-appearance: none)
-                {
-                    top: -5.9rem;
+                    height: 2.6875rem; // 43px / 16
+                    width: 3.25rem; // 52px / 16
+                    >.la-label__span
+                    {
+                        font-size: 0.75rem; // 12px / 16
+                    }
                 }
             }
 
-            &.-agility 
+            >.-hull
             {
-                right: 1.6rem;
-
-                // Everything else
-                @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
-                {
-                    top: -15.85rem;
-                }
-                // Firefox
-                @supports(-moz-appearance: none)
-                {
-                    top: -15.95rem;
-                }
+                @include mdiAbsolute;
             }
 
-            // Override text size
-            >.la-combine-v>.la-label__span
+            >.-agi
             {
-                font-size: 0.65rem;
-                line-height: 0.7rem;
+                @include mdiAbsolute;
+            }
+
+            >.-sys
+            {
+                @include mdiAbsolute;
+            }
+
+            >.-eng
+            {
+                @include mdiAbsolute;
             }
         }
     }
+    // .la-hasegroup>.la-hase
+    // {
+    //     translate: -0.5rem;
+        
+    //     >.la-attribute
+    //     {
+    //         &.-grit
+    //         {
+    //             top: 0.2rem;
+    //         }
+
+    //         &.-hull
+    //         {
+    //             left: 1.6rem;
+
+    //             // Everything else
+    //             @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+    //             {
+    //                 top: -2rem;
+    //             }
+    //             // Firefox
+    //             @supports(-moz-appearance: none)
+    //             {
+    //                 top: -1.9rem;
+    //             }
+    //         }
+
+    //         &.-systems
+    //         {
+    //             left: 0;
+
+    //             // Everything else
+    //             @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+    //             {
+    //                 top: -4rem;
+    //             }
+    //             // Firefox
+    //             @supports(-moz-appearance: none)
+    //             {
+    //                 top: -3.9rem;
+    //             }
+    //         }
+
+    //         &.-engineering
+    //         {
+    //             left: 1.6rem;
+
+    //             // Everything else
+    //             @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+    //             {
+    //                 top: -6rem;
+    //             }
+    //             // Firefox
+    //             @supports(-moz-appearance: none)
+    //             {
+    //                 top: -5.9rem;
+    //             }
+    //         }
+
+    //         &.-agility 
+    //         {
+    //             right: 1.6rem;
+
+    //             // Everything else
+    //             @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) 
+    //             {
+    //                 top: -15.85rem;
+    //             }
+    //             // Firefox
+    //             @supports(-moz-appearance: none)
+    //             {
+    //                 top: -15.95rem;
+    //             }
+    //         }
+
+    //         // Override text size
+    //         >.la-combine-v>.la-label__span
+    //         {
+    //             font-size: 0.65rem;
+    //             line-height: 0.7rem;
+    //         }
+    //     }
+    // }
 }
