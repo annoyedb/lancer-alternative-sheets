@@ -1,3 +1,50 @@
+# 1.1.4 - Mech Sheet Ultra Pro Max
+"Why is the header so big when the sidebar already shows the mech?" 
+
+`first of all how dare you`
+
+Well, `eventually dead` anonymous Lancer, because of an Action Log that has been planned since the inception of the mech sheet! Picture this:
+
+Have you ever activated first in the round, fall asleep, and wake up to a `degenerate Hydra` Lancer yelling at you to make your reaction, only for you spend nine actual celestial cycles scrolling past seven integrated mount activations to find a reaction you set up twenty minutes ago? 
+
+No? ... Well, now you have access to a localized Action Log to help you find what you did recently! As well as a few other things showcased here:
+
+https://github.com/user-attachments/assets/a8d5bbcb-0f1e-45fb-aa41-e410b1949a71
+
+That about wraps up the things I had planned for the mech sheet, barring any bug fixes
+
+## Changes
+* #15 - Fixed issue where input fields on NPC sheets would trigger the Template component's onclick event
+* #24 - Added default width/height specifier for NPC sheets
+* #25 - Fixed HASE stat display when users had root element sizes different from 16px. Or atleast I think I did, anyway
+* #26 - Fixed NPC tags not appearing in their weapons
+* #30 - Added overcharge increment/decrement buttons to the sidebar
+* #31 - Fixed issue where editing a mount would delete the weapon(s) mounted
+* Fixed bug where empty weapon slot did not have correct localized sub label and always showed 'any'
+* Fixed bug where empty systems slot would always point to the first index
+* Fixed bug where blinking cursor would not appear for H4 type header components
+* Fixed a bug where system points would not be shown for weapon mounts such as Autopods
+* Fixed issue where ActionBox effect buttons would be pushed off into the abyss when shrinking horizontally
+* Removed "Grit" as a button from the sidebar --use the Grit hex instead
+* Removed parts of the sheet that used the Lancer system's themes (namely, text) to support theme overrides
+* Added a personalized Action Log to mech sheets, displaying rolls and actions done by that mech. There are configs in the settings sheet to display in the status tab of the main content area or the sidebar
+* Added drag-drop functionality mech sheet sidebar buttons area. Simply drag and drop a macro over to add them to the list! Currently only Macro documents are supported, though that should cover most use cases `some of you have macros more complicated than many actual modules, i'm sure you'll make it work`
+* Added sortability and deletion to the relevant drag-drop areas. Note that the drag drop handle must be used to sort buttons (shown when the 'advanced options' are toggled). If you aren't dragging with the handle, and it is draggable, it's equivalent to dragging a built-in Flow in the system's default sheet `just click the bars`. Flows such as Overcharge, Stabilize, Attack, Tech Attack, and Damage cannot be deleted, since removing them would remove them permanently
+* Added a theme override button to player mech sheets. Note that tooltips (both Lancer System and this module's), which are rendered outside of the actual sheets do not take on the sheet's settings and instead use the system's theme
+* Added a sidebar ratio adjustment to player mech sheets ranging from 25%-50%. Note that there is still a minimum width to the sidebar and that this setting is intentionally not synced across clients
+* Added a section for this module's settings
+* Added a header text log to the empty space in the header that can be toggled in this module's settings. It's mostly just flavor, but it's been an intentional design implementation since initial release
+* Added context clues to the header text log
+* Added display of Foundry version, Lancer version, and this module's version in the header text log for slight convenience
+* Added an option to disable non-essential tooltips in this module's settings
+* Added an indicator when system slots are vacant, similar to weapons, which can be interacted the same way
+* Added a bunch of module per-client settings under module settings such as whether to display the header log, tooltips, etc
+* Adjusted some themes for readability
+* Adjusted some tooltip wording
+* Minimized a potential bug regarding deployable images
+## Known Issues
+* Please note that only actions that are 'rollable actions' will be recorded in the Action Log. Items sent to chat (due to data inconsistency, I've set some systems do this as their default action rather than nothing at all) do not qualify to being recorded in the action log. When in doubt, know that all Action boxes will always be recorded, all weapon rolls we always be recorded, and all systems with 'effects' clearly listed will be sent to the action history
+
 # 1.1.3
 An advanced settings toggle has been added to the mech sheet? What does this entail? Here's a video instead! `because if a picture is worth a thousand words, use a video`
 
@@ -76,7 +123,7 @@ Disclaimer that I still have an active campaign on V11, so this is likely where 
 * ~~If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know~~
 * ~~Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)~~
 * Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at this but nothing) please let me know!
-* Pressing enter on an NPC sheet's input box activates the on-click event for templates/classes. Genuinely have no idea, but Lancer/Foundry's input boxes in general seem kind of cursed
+* ~~Pressing enter on an NPC sheet's input box activates the on-click event for templates/classes. Genuinely have no idea, but Lancer/Foundry's input boxes in general seem kind of cursed~~
 * ~~Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`~~
 * ~~Tooltips are currently width-restricted and minimally restyled, so there can be cases where the entire NPC Notes tooltip display won't fit~~
 
