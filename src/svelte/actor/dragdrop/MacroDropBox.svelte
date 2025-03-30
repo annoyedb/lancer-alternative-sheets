@@ -112,32 +112,32 @@
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     >
-        {#if isMacro(type)}
-            <FlowButton
-                text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
-                flowClass={CustomFlowClass.RunMacro}
-                onClick={event => {
-                    event.stopPropagation();
-                    RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
-                }}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
-            />
-        {:else}
-            <FlowButton
-                text={ButtonFactory.getSystemButtonLabel(type)}
+    {#if isMacro(type)}
+        <FlowButton
+            text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
+            flowClass={CustomFlowClass.RunMacro}
+            onClick={event => {
+                event.stopPropagation();
+                RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
+            }}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
+        />
+    {:else}
+        <FlowButton
+            text={ButtonFactory.getSystemButtonLabel(type)}
 
-                flowClass={FlowClass.Standard}
-                uuid={uuid}
-                flowType={type}
+            flowClass={FlowClass.Standard}
+            uuid={uuid}
+            flowType={type}
 
-                tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
-                tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
-                logText={ButtonFactory.getSystemButtonTip(type, uuid)}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
-            />
-        {/if}
+            tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
+            tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
+            logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
+        />
+    {/if}
     </DragDropHandle>
 {/each}
 </div>
