@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { activeTabs, advancedStates } from "@/scripts/advanced";
+    import { getActiveTab, getAdvancedState } from "@/scripts/store/advanced";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -12,7 +12,7 @@
     import MountAdd from "@/svelte/mech/settings/MountAdd.svelte";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
 
     const props: MechSheetProps = $props();
@@ -22,8 +22,8 @@
         system,
     } = props;
     
-    let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-    let active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Primary] || "loadout");// This is set to match the initial tab on the sheet setup
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
     let toggles = $state(new Array(system.loadout.weapon_mounts.length).fill(false));
     let tooltipElements = new Array(system.loadout.weapon_mounts.length).fill(null);
     let removeToggle = $state(false);

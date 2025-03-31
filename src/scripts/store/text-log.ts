@@ -4,26 +4,17 @@ import TypeIt from "typeit";
 import { TextLogIntro } from "@/enums/TextLogIntro";
 import { TextLogHook } from "@/enums/TextLogHook";
 import { formatString, getFoundryVersion, getLancerVersion, getLocalized, getModuleVersion } from "@/scripts/helpers";
-import { trackHook } from "@/scripts/hooks";
-import { writable } from "svelte/store";
-
-export const introRun = writable<{
-    [key: string]: {
-        enabled: boolean,
-    }
-}>({});
+import { trackHook } from "@/scripts/store/hooks";
+import { getSheetStore, setSheetStore } from "@/scripts/store/store";
 
 export function setIntroRun(uuid: string, enabled: boolean)
 {
-    introRun.update(states =>
-    {
-        if (!states[uuid])
-            states[uuid] = { enabled };
-        else
-            states[uuid].enabled = enabled;
-        return states;
-    });
-    sessionStorage.setItem(`la-advanced-${uuid}`, enabled.toString());
+    setSheetStore(uuid, { introPlayed: enabled });
+}
+
+export function getIntroRun(uuid: string): boolean
+{
+    return getSheetStore(uuid)?.introPlayed;
 }
 
 export class TypedWriter
@@ -48,9 +39,9 @@ export class TypedWriter
         this.hookResetID = hookResetID;
     }
 
-    public registerHooks()
+    public registerHooks(uuid: string)
     {
-        trackHook(Hooks.on(this.hookID, (text: string) =>
+        trackHook(uuid, Hooks.on(this.hookID, (text: string) =>
         {
             this.typed?.destroy();
             this.typed = new Typed(this.component, {
@@ -59,7 +50,7 @@ export class TypedWriter
             });
         }), this.hookID);
 
-        trackHook(Hooks.on(this.hookResetID, () =>
+        trackHook(uuid, Hooks.on(this.hookResetID, () =>
         {
             this.garbage = this.typed;
             this.typed = new Typed(this.component, {

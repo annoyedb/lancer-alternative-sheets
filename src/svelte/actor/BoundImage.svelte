@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { BoundImageProps } from "@/interfaces/actor/BoundImageProps";
     import { id as moduleID } from '@/module.json';
-    import { advancedStates } from "@/scripts/advanced";
+    import { getAdvancedState } from "@/scripts/store/advanced";
 
     const {
         image,
@@ -10,7 +10,7 @@
         ySetter,
     }: BoundImageProps = $props();
 
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived(getAdvancedState(uuid));
 
     // Dragging ---------------------------------------------------------------
     let dragging = false;
@@ -41,9 +41,9 @@
 
     function handlePointerUp(_event: PointerEvent, callback?: () => void) 
     {
-        dragging = false;
-        if (callback)
+        if (dragging && callback)
             callback();
+        dragging = false;
     }
 </script>
 <!-- (#2) -->

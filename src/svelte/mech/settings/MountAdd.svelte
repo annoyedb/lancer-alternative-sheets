@@ -5,7 +5,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { SETTINGS_BUTTON_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
     const tipEnabled = getMechSheetTipEnabled();

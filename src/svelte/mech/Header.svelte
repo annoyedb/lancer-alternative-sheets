@@ -3,22 +3,23 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { advancedStates } from "@/scripts/advanced";
+    import { getAdvancedState } from "@/scripts/store/advanced";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
     import { getImageOffsetY, setImageOffsetY } from "@/scripts/mech/settings";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const props = $props();
     const { 
         actor, 
         pilot 
     }: MechSheetProps = props
-    
-    let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
+
+    let introPlayed = $derived(getIntroRun(actor.uuid));
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
 </script>
 
 <!-- Header -->
@@ -74,9 +75,11 @@
     <span class="la-textlog__wrapper -left0 -positionabsolute -padding1">
         <TextLog
             style={["-widthfull", "-heightfull"]}
+            uuid={actor.uuid}
             hookID={TextLogHook.MechHeader}
             hookResetID={TextLogHook.MechHeaderReset}
             introType={TextLogIntro.Header}
+            runIntro={!introPlayed}
         />
     </span>
     {/if}

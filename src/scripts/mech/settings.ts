@@ -1,6 +1,5 @@
 import { MechSheetLocalSettings } from "@/classes/settings/MechSheetLocalSettings";
 import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
-import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { Encoder, Decoder } from "@msgpack/msgpack";
 
@@ -76,15 +75,6 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-        onChange: (_value: boolean) => {
-            for (const key in sessionStorage)
-            {
-                if (key.startsWith(`chat.${ActionLogCollapsePrefix.MechSheet}.`))
-                {
-                    sessionStorage.removeItem(key);
-                }
-            }
-        }
     } as ClientSettings.PartialSetting<boolean>);
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-start-collapsed`, {
@@ -143,9 +133,12 @@ export function getMechSheetLogActionMainMaxHeight(): number
     return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-max-height`) as number;
 }
 
-export function getMechSheetLogActionMainSaveCollapse(): boolean
+export function getMechSheetLogActionMainDontSaveCollapse(): boolean
 {
-    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`) as boolean;
+    // It is easier to maintain this code if this setting was inverted
+    // But semantically it makes more sense to have it worded the way it is
+    // Therefore, this setting is inverted in the UI
+    return !game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`) as boolean;
 }
 
 export function getMechSheetLogActionMainStartCollapsed(): boolean

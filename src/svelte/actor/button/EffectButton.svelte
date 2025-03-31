@@ -4,7 +4,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";

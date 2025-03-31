@@ -3,10 +3,10 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { SidebarRatioSliderProps } from "@/interfaces/actor/button/SidebarRatioSliderProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { advancedStates } from "@/scripts/advanced";
+    import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { onMount } from "svelte";
 
     const props = $props();
@@ -22,7 +22,7 @@
         logTypeReset,
     }: SidebarRatioSliderProps & TextLogEventProps = props
     
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived(getAdvancedState(uuid));
     let ratio = $state(ratioGetter(uuid));
     let component: HTMLElement | null = $state(null);
     let sidebar: JQuery<HTMLElement> | null = null;

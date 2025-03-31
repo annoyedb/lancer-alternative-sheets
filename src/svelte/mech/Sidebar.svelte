@@ -3,7 +3,7 @@
     import { onMount } from 'svelte';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { resetLog, sendToLog } from '@/scripts/text-log';
+    import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getMechSheetTipEnabled, getSidebarRatio, getThemeOverride } from "@/scripts/mech/settings";

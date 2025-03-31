@@ -1,11 +1,11 @@
 <script lang="ts">
     import type { HeaderMainProps } from "@/interfaces/actor/header/HeaderMainProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
-    import { collapseStates, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
+    import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
-    import { onMount } from "svelte";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
+    import { onMount } from "svelte";
 
     const {
         children,
@@ -16,7 +16,7 @@
         acceptTypes,
         collapseID,
         startCollapsed,
-        saveCollapse,
+        dontSaveCollapse,
 
         headerContent,
 
@@ -28,26 +28,31 @@
         extensionText,
     }: HeaderProps & HeaderMainProps & TerminalTextProps = $props();
     
-    let isCollapsed = $derived.by(() => {
-        if (collapseID && $collapseStates[collapseID])
-            return $collapseStates[collapseID].collapsed;
-        return false;
-    });
+    let isCollapsed = $state(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
     const extraOptions = headerContent ? true : false;
 
+    // (#3) - Since collapsables may not always be collapsable, may want to reset their collapse state 
+    // to the default, need to be persistent across rerenders, and still be able to read from derived()
+    // we need to use a state with varying levels of fallbacks, and to properly set the store based on 
+    // the 
     onMount(() => 
     {
-        if (collapseID)
+        if (collapseID && (dontSaveCollapse ?? getCollapseState(collapseID) === undefined))
         {
-            initializeCollapseStates(collapseID, startCollapsed);
+            setCollapseState(collapseID, startCollapsed ?? false);
+            isCollapsed = startCollapsed ?? false;
         }
     });
 
-    function toggleCollapse(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    function toggleCollapse(event: MouseEvent) 
     {
+        event.stopPropagation();
         if (collapseID)
-            handleCollapseToggle(event, collapseID, saveCollapse);
+        {
+            setCollapseState(collapseID, !isCollapsed);
+            isCollapsed = !isCollapsed;
+        }
     }
 
     function getExtensionText()

@@ -1,4 +1,4 @@
-// Rebinds the buttons in the action log to the appropriate Lancer system function, since 
+// Rebinds the buttons in ActionLog to the appropriate Lancer system function, since 
 // these buttons are dynamically added to the DOM and not part of the original HTML
 // These are semi-rewrites from the base Lancer system
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getLocalized, randomExtension } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
     import TerminalText, { FLOW_BUTTON_STYLE } from "@/svelte/actor/TerminalText.svelte";

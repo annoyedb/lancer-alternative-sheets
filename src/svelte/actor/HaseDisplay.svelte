@@ -4,7 +4,7 @@
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { activeTabs } from "@/scripts/advanced";
+    import { getActiveTab } from "@/scripts/store/advanced";
     import { ActiveTab } from "@/enums/ActiveTab";
 
     const {
@@ -12,7 +12,7 @@
         actor,
         system,
     }: MechSheetProps = $props();
-    const active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Secondary] || "statistics");
+    const active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
 </script>
 
 <!-- HASE Stats -->

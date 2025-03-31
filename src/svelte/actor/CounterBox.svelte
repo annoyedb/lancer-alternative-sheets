@@ -8,7 +8,7 @@
     import type { CounterBoxProps } from "@/interfaces/actor/CounterBoxProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         name,

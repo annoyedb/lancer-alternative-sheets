@@ -1,12 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getMechSheetLogHeaderEnabled } from "@/scripts/mech/settings";
-    import { TypeItWriter, TypedWriter, introRun, setIntroRun } from "@/scripts/text-log.js";
+    import { TypeItWriter, TypedWriter, setIntroRun } from "@/scripts/store/text-log.js";
     import type { TextLogProps } from "@/interfaces/actor/TextLogProps";
 
     const props = $props();
     const {
         style,
+        runIntro,
         introType,
         uuid,
         hookID,
@@ -14,10 +15,10 @@
     }: TextLogProps = props;
     let typeItComponent: HTMLElement | null = $state(null);
     let typedComponent: HTMLElement | null = $state(null);
-    let runIntro = $derived($introRun[uuid] || false);
-    let enabled = getMechSheetLogHeaderEnabled();
     let typedWriter: TypedWriter | null = null;
     let typeItWriter: TypeItWriter | null = null;
+
+    const enabled = getMechSheetLogHeaderEnabled();
 
     onMount(() => 
     {
@@ -25,7 +26,7 @@
             return;
         // Setup Typed
         typedWriter = new TypedWriter(typedComponent!, hookID, hookResetID);
-        typedWriter.registerHooks();
+        typedWriter.registerHooks(uuid);
         typeItWriter = new TypeItWriter(typeItComponent!);
         if (runIntro)
         {

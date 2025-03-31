@@ -8,8 +8,8 @@ export interface ActionLogProps
     // Optional max height for the log
     maxHeight?: number;
 
-    // Whether or not collapsed logs should save to session storage
-    saveCollapse?: boolean;
+    // Whether or not collapsed logs should reload to their saved state on rerenders
+    dontSaveCollapse?: boolean;
 
     // Whether or not log items should start collapsed
     startCollapsed?: boolean;

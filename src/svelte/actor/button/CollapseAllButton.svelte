@@ -5,10 +5,10 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { collapseStates, handleCollapseAllToggle } from "@/scripts/collapse";
+    import { getCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         collapseID,
@@ -20,21 +20,27 @@
         logType,
         logTypeReset,
     }: IconButtonProps & CollapseAllButtonProps & TooltipProps & TextLogEventProps = $props();
-    let isExpanding = $derived.by(() => {
-        if (collapseID && $collapseStates[collapseID])
-            return !$collapseStates[collapseID].collapsed;
-        return true;
-    });
+    let isExpanding = $derived(!getCollapseState(collapseID));
 
     const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.collapseAll.tooltip");
 
-    function toggleCollapseAll(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    function toggleCollapseAll(event: MouseEvent) 
     {
-        if (collapseID)
-            handleCollapseAllToggle(event, collapseID);
+        event.stopPropagation();
+        if (!collapseID || event.currentTarget === null)
+            return;
+        const collapseGroup = jQuery(event.currentTarget).closest('.collapse-group');
+        if (collapseGroup.length)
+        {
+            const triggers = collapseGroup.find('.collapse-trigger');
+            triggers.each((_: any, trigger: any) => {
+                const clickEvent = new MouseEvent('click');
+                trigger.dispatchEvent(clickEvent);
+            });
+        }
     }
 </script>
 <script lang="ts" module>

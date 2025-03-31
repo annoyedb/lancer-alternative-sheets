@@ -42,7 +42,7 @@ export interface HeaderProps {
     /**
      * Save collapse state to the SessionStorage API on rerender.
      */
-    saveCollapse?: boolean;
+    dontSaveCollapse?: boolean;
 
     /**
      * Array of styles to be applied to the root element.

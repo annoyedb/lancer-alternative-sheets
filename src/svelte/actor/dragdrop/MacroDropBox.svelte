@@ -6,7 +6,7 @@
     import { SystemButton } from '@/enums/SystemButton';
     import { TextLogHook } from '@/enums/TextLogHook';
     import { getLocalized } from '@/scripts/helpers';
-    import { advancedStates } from '@/scripts/advanced';
+    import { getAdvancedState } from '@/scripts/store/advanced';
     import { getSidebarExecutables, setSidebarExecutables } from "@/scripts/mech/settings";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
@@ -16,7 +16,7 @@
         uuid,
     } = $props();
     let component: HTMLElement | null = $state(null);
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived(getAdvancedState(uuid));
     let sidebarExes = $state(getSidebarExecutables(uuid));
 
     const buttonTypes = Object.values(SystemButton);

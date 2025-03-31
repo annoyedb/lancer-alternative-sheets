@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte";
-    import { trackHook } from "@/scripts/hooks";
+    import { trackHook } from "@/scripts/store/hooks";
     import type { ActionLogProps } from "@/interfaces/actor/ActionLogProps";
     import ActionLogMessage from "@/svelte/actor/ActionLogMessage.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
@@ -8,10 +8,11 @@
     const {
         id,
         maxHeight,
-        saveCollapse,
+        dontSaveCollapse,
         startCollapsed,
         collapsePrefix,
     }: ActionLogProps = $props();
+
     //@ts-ignore Foundry native
     const messages = game.messages as Array<any>;
 
@@ -40,7 +41,7 @@
             extractedTimes.push(extractTime(message.timestamp));
         });
 
-        trackHook(Hooks.on("createChatMessage", (message: any) => 
+        trackHook(`Actor.${id}`, Hooks.on("createChatMessage", (message: any) => 
         {
             if (message.speaker.actor === id && message.rolls.length) 
             {
@@ -104,7 +105,7 @@
         itemID={message.id}
         collapseID={`chat.${collapsePrefix ? collapsePrefix + '.' : ''}${message.id}`}
         startCollapsed={startCollapsed}
-        saveCollapse={saveCollapse}
+        dontSaveCollapse={dontSaveCollapse}
 
         headerContentLeft={headerSecondaryLeftOptions}
         headerContentRight={headerSecondaryRightOptions}

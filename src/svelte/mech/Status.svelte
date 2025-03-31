@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
-    import { getMechSheetLogActionMainEnabled, getMechSheetLogActionMainSaveCollapse, getMechSheetLogActionMainStartCollapsed } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionMainEnabled, getMechSheetLogActionMainDontSaveCollapse, getMechSheetLogActionMainStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -20,7 +20,7 @@
     } = props;
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
-    const actionLogSaveCollapse = getMechSheetLogActionMainSaveCollapse();
+    const actionLogSaveCollapse = getMechSheetLogActionMainDontSaveCollapse();
     const actionLogStartCollapsed = getMechSheetLogActionMainStartCollapsed();
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
@@ -52,7 +52,7 @@
         <ActionLog
             id={actor.id}
             maxHeight={actionLogMaxHeight}
-            saveCollapse={actionLogSaveCollapse}
+            dontSaveCollapse={actionLogSaveCollapse}
             startCollapsed={actionLogStartCollapsed}
             collapsePrefix={ActionLogCollapsePrefix.MechSheet}
         />

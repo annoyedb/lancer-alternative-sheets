@@ -2,7 +2,7 @@
     import type { MountNamesProps } from "@/interfaces/actor/decoration/MountNamesProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         mountNames,

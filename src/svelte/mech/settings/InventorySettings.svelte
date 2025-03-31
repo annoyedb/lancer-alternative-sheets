@@ -3,7 +3,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { activeTabs, advancedStates } from "@/scripts/advanced";
+    import { getActiveTab, getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import InventoryButton from "@/svelte/actor/button/InventoryButton.svelte";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
@@ -13,8 +13,8 @@
         actor,
     } = props;
 
-    let advancedOptions = $derived($advancedStates[actor.uuid]?.enabled || false);// This is initialized in the Header's onMount function
-    let active = $derived($activeTabs[actor.uuid]?.active[ActiveTab.Primary] || "loadout");// This is set to match the initial tab on the sheet setup
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
 </script>
 
 <div class="-heightfull

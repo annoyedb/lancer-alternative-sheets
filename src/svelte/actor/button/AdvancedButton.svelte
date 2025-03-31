@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { advancedStates, handleAdvancedToggle, initializeAdvancedStates } from "@/scripts/advanced";
+    import { getAdvancedState, setAdvancedState } from "@/scripts/store/advanced";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         uuid,
@@ -15,27 +14,17 @@
         logType,
         logTypeReset,
     }: {uuid: string} & TextLogEventProps = $props();
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);
+    let advancedOptions = $derived(getAdvancedState(uuid));
 
     const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.advanced.tooltip");
-    
-    onMount(() =>
-    {
-        if (uuid)
-        {
-            initializeAdvancedStates(uuid);
-        }
-    });
 
-    function toggleAdvancedOptions(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
+    function toggleAdvancedOptions(event: MouseEvent)
     {
-        if (uuid)
-        {
-            handleAdvancedToggle(event, uuid);   
-        }
+        event.stopPropagation();
+        setAdvancedState(uuid, !advancedOptions);
     }
 </script>
 

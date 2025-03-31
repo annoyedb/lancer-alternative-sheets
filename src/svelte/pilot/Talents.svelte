@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { collapseStates } from "@/scripts/collapse";
+    import { getCollapseState } from "@/scripts/store/collapse";
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
@@ -19,6 +19,7 @@
         actor,
         pilot,
     } = props;
+    
     const isMechSheet = actor.type === "mech";
     const talents = pilot.itemTypes.talent;
     const collID = `${pilot.uuid}.talents`;
@@ -118,7 +119,7 @@
                 {#snippet outerContent()}
                     {#if rank.counters.length}
                     <div class="la-combine-v -widthfull -padding2-l
-                        {$collapseStates[getRankCollID(index, jndex)]?.collapsed ? "" : "la-brdr-trait -borders-l -collapseFadeOut"}"
+                        {getCollapseState(getRankCollID(index, jndex)) ? "" : "la-brdr-trait -borders-l -collapseFadeOut"}"
                     >
                     {#each rank.counters as counter, kndex}
                         <CounterBox

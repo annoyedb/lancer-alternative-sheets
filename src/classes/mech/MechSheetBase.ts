@@ -1,7 +1,7 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
-import { setActiveTab } from "@/scripts/advanced";
+import { setActiveTab } from "@/scripts/store/advanced";
 import { getLocalized } from "@/scripts/helpers";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
@@ -13,10 +13,10 @@ import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import { getThemeOverride } from "@/scripts/mech/settings";
-import { unregisterTrackedHooks } from "@/scripts/hooks";
+import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import Activity from "@/svelte/mech/Activity.svelte";
 import { ActiveTab } from "@/enums/ActiveTab";
-import { setIntroRun } from "@/scripts/text-log";
+import { setIntroRun } from "@/scripts/store/text-log";
 
 export class MechSheetBase
 {
@@ -132,8 +132,7 @@ export class MechSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
-                // Untrack all hooks that are registered in Svelte
-                unregisterTrackedHooks();
+                unregisterTrackedHooks(this.actor.uuid); // Untrack all hooks that were registered from Svelte components
                 mount(Header, {
                     target: html.find(".la-SVELTE-HEADER")[0],
                     props: data,

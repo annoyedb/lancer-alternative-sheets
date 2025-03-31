@@ -2,7 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";

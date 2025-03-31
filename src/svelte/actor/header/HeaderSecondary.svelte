@@ -2,10 +2,10 @@
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
     import type { HeaderSecondaryProps } from "@/interfaces/actor/header/HeaderSecondaryProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
-    import { collapseStates, handleCollapseToggle, initializeCollapseStates } from "@/scripts/collapse";
-    import { onMount } from "svelte";
+    import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
+    import { onMount } from "svelte";
 
     const {
         children,
@@ -16,7 +16,7 @@
         acceptTypes,
         collapseID,
         startCollapsed,
-        saveCollapse,
+        dontSaveCollapse,
 
         headerContentLeft,
         headerContentRight,
@@ -34,26 +34,27 @@
         disableExtension,
     }: HeaderProps & HeaderSecondaryProps & TerminalTextProps = $props();
     
-    let isCollapsed = $derived.by(() => {
-        if (collapseID && $collapseStates[collapseID])
-            return $collapseStates[collapseID].collapsed;
-        return false;
-    });
+    let isCollapsed = $state(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
     const extraOptions =  headerContentRight ? true : false;
-    
+
     onMount(() => 
     {
-        if (collapseID)
+        if (collapseID && (dontSaveCollapse || getCollapseState(collapseID) === undefined))
         {
-            initializeCollapseStates(collapseID, startCollapsed);
+            setCollapseState(collapseID, startCollapsed ?? false);
+            isCollapsed = startCollapsed ?? false;
         }
     });
 
-    function toggleCollapse(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }) 
+    function toggleCollapse(event: MouseEvent) 
     {
+        event.stopPropagation();
         if (collapseID)
-            handleCollapseToggle(event, collapseID, saveCollapse);
+        {
+            setCollapseState(collapseID, !isCollapsed);
+            isCollapsed = !isCollapsed;
+        }
     }
 
     function getExtensionText()

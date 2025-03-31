@@ -5,9 +5,9 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { DragDropHandleProps } from "@/interfaces/dragdrop/DragDropHandleProps";
-    import { advancedStates } from "@/scripts/advanced";
+    import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         children,
@@ -33,7 +33,7 @@
         logTypeReset,
     }: DragDropHandleProps & TooltipProps & TextLogEventProps = $props();
     let component: HTMLElement | null = $state(null);
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived(getAdvancedState(uuid));
 
     const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
     const logging = logType && logTypeReset;

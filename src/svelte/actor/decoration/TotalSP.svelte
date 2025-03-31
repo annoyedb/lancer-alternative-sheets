@@ -2,7 +2,7 @@
     import type { TotalSPProps } from "@/interfaces/actor/decoration/TotalSPProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
 
     const {

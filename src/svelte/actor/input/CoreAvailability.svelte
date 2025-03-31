@@ -4,7 +4,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     
     const {
         system,

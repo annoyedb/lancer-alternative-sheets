@@ -1,6 +1,6 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { advancedStates } from "@/scripts/advanced";
+    import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled, setThemeOverride } from "@/scripts/mech/settings";
     import { getThemeName } from "@/scripts/theme";
@@ -8,7 +8,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         uuid,
@@ -19,7 +19,7 @@
         logTypeReset,
     }: ThemeOverrideButtonProps & TextLogEventProps = $props();
 
-    let advancedOptions = $derived($advancedStates[uuid]?.enabled || false);// This is initialized in the Header's onMount function
+    let advancedOptions = $derived(getAdvancedState(uuid));
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 

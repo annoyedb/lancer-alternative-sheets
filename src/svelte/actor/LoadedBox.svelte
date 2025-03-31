@@ -2,7 +2,7 @@
     import type { LoadedBoxProps } from "@/interfaces/actor/LoadedBoxProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized, isLoading } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         item,

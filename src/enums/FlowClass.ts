@@ -11,7 +11,7 @@ export enum FlowClass
     ResetOvercharge = "overcharge-reset",
     CoreActivation = "activation-flow",
     RechargeFeatures = "charge-macro",
-    ContextMenu= "lancer-context-menu",
+    ContextMenu = "lancer-context-menu",
     DeleteActiveEffect = "", // No flow class for this
     Inventory= "", // No flow class for this
     None = "NO_FLOW_CLASS",
