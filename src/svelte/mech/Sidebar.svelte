@@ -188,7 +188,6 @@
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
-                onsubmit={ event => console.log("Submitted how many times?", event) }    
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tipEnabled ? shieldTip : undefined}

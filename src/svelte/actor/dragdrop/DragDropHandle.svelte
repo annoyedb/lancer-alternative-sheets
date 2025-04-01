@@ -1,5 +1,6 @@
 <!-- Wrapper handle for sorting -->
 <script lang="ts">
+    import { Logger } from "@/classes/Logger";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
@@ -48,7 +49,7 @@
         } 
         catch (error) 
         {
-            console.error('Lancer Alternative Sheets: Failed to handle drag start:', error);
+            Logger.error('Failed to handle drag start', error);
         }
     }
 
@@ -79,7 +80,7 @@
         } 
         catch (error) 
         {
-            console.error('Lancer Alternative Sheets: Failed to parse drop data:', error);
+            Logger.error('Failed to parse drop data', error);
         }
     }
 

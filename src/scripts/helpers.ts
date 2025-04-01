@@ -1,31 +1,8 @@
 // Bridge module and foundryvtt-lancer system
 import type { HelperOptions } from "handlebars";
+import { Logger } from "@/classes/Logger";
 import { resolveHelperDotpath } from './lancer/helpers/common';
 import { LancerAlternative } from "@/enums/LancerAlternative";
-
-export function frameName(framePath: string, options: HelperOptions): string
-{
-    let frame: any = resolveHelperDotpath(options, framePath);
-    if (!frame) return "";
-
-    return `${frame.name}`
-}
-
-export function frameManufacturer(framePath: string, options: HelperOptions): string
-{
-    let frame: any = resolveHelperDotpath(options, framePath);
-    if (!frame) return "";
-
-    return `${frame.system.manufacturer}`
-}
-
-export function frameUUID(framePath: string, options: HelperOptions): string
-{
-    let frame: any = resolveHelperDotpath(options, framePath);
-    if (!frame) return "";
-    
-    return `${frame.uuid}`;
-}
 
 const localizeMap: { [key: string]: string } = {};
 export function getLocalized(key: string): string
@@ -34,20 +11,6 @@ export function getLocalized(key: string): string
         localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
     return localizeMap[key];
     // return HandlebarsHelpers.localize(key, {} as HelperOptions);
-}
-
-export function overchargeStage(actor: any, overchargePath: string, options: HelperOptions): number
-{
-    const sequence = actor.system.overcharge_sequence.split(",");
-
-    let index: number = resolveHelperDotpath(options, overchargePath) as number;
-    index = Math.max(0, Math.min(sequence.length - 1, index));
-    return sequence[index];
-}
-
-export function getTagArray(tagsPath: string, options: HelperOptions)
-{
-    return options.hash["tags"] ?? resolveHelperDotpath(options, tagsPath) ?? [];
 }
 
 export function randomExtension(): string
@@ -60,7 +23,7 @@ export function randomExtension(): string
 export function logData(path: string, options: HelperOptions)
 {
     const data = resolveHelperDotpath(options, path);
-    console.log(data);
+    Logger.log(`Data received`, data);
 }
 
 export function isLoading(item: any): boolean

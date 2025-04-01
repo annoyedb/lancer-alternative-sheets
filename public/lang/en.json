@@ -1,6 +1,8 @@
 {
 	"LA.SHEET.mech.label": "Alternative Mech Sheet",
 	"LA.SHEET.npc.label": "Alternative NPC Sheet",
+	"LA.SETTINGS.mech.debug.label": "Verbose Debugging",
+	"LA.SETTINGS.mech.debug.subLabel": "Enable verbose debugging for sheets.",
 	"LA.SETTINGS.mech.enableEffects.label": "Enable Mech Sheet Effects",
 	"LA.SETTINGS.mech.enableEffects.subLabel": "Enable the display of CSS effects such as animations and drop shadows in mech sheets.",
 	"LA.SETTINGS.mech.enableTooltip.label": "Enable Mech Sheet Tooltips",

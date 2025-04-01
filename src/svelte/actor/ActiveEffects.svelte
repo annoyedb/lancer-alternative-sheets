@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Logger } from "@/classes/Logger";
     import { getBrightness } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
     import { getThemeOverride } from "@/scripts/mech/settings";
@@ -28,7 +29,7 @@
         event.stopPropagation();
         if (!isOwner)
         {
-            console.error("Lancer Alternative Sheets: User is not the owner of this actor.");
+            Logger.error("User is not the owner of this actor.");
             return;
         }
 
@@ -39,7 +40,7 @@
         } 
         catch (error)
         {
-            console.error("Lancer Alternative Sheets: Error deleting active effect.", error);
+            Logger.error("Error deleting active effect.", error);
         }
     }
 </script>

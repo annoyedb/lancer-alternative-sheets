@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { Logger } from "@/classes/Logger";
     import { ButtonFactory } from '@/classes/ButtonFactory';
     import { RunMacroBase } from '@/classes/flows/RunMacro';
     import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
@@ -88,7 +89,7 @@
             case LADataType.Sorting:
                 break;
             default:
-                console.info("Lancer Alternative Sheets: Unsupported drop type:", obj.type);
+                Logger.log("Unsupported drop type", obj.type);
         }
     }
 </script>

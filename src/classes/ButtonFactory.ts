@@ -5,6 +5,7 @@ import { SystemButton } from "@/enums/SystemButton";
 import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
 import { TextLogHook } from "@/enums/TextLogHook";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
+import { Logger } from "@/classes/Logger";
 import { formatString, getLocalized } from "@/scripts/helpers";
 import FlowButton from '@/svelte/actor/button/FlowButton.svelte';
 
@@ -67,7 +68,7 @@ export class ButtonFactory
                 const overchargeStage = actor.system.overcharge;
                 return formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
             }
-            console.error("Lancer Alternative Sheets: Actor not found for Overcharge button.");
+            Logger.error("Actor required to get overcharge sequence for tooltip.");
         }
         const tips: Record<string, string> = {
             [SystemButton.Stabilize]: "LA.flow.stabilize.tooltip",

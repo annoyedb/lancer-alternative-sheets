@@ -1,4 +1,5 @@
 import type { Document } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/module.mjs";
+import { Logger } from "@/classes/Logger";
 import { MOUNT_FITTINGS, MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
 import { array_path_edit_changes, drilldownDocument, parse_control_val } from "@/scripts/lancer/helpers/common";
 import type { EmbeddedRef } from "@/types/foundryvtt-lancer/module/source-template";
@@ -87,7 +88,7 @@ export async function handleMountDelete(
         let result = await parse_control_val(raw_val);
         if (!result.success)
         {
-            console.error(`Gen control failed: Bad data-action-value: ${raw_val}`);
+            Logger.error(`bad data-action-value from gen control ${raw_val}`);
             return; // Bad arg - no effect
         }
         else

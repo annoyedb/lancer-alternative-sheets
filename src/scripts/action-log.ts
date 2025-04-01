@@ -1,7 +1,7 @@
 // Rebinds the buttons in ActionLog to the appropriate Lancer system function, since 
 // these buttons are dynamically added to the DOM and not part of the original HTML
 // These are semi-rewrites from the base Lancer system
-
+import { Logger } from "@/classes/Logger";
 import { getLocalized } from "@/scripts/helpers";
 import { AppliedDamage } from "./lancer/actor/damage-calc";
 import { Damage } from "./lancer/models/bits/damage";
@@ -24,7 +24,7 @@ export function rebindButtons(messageData: any, messageContainer: HTMLElement): 
         }
         else
         {
-            logUnknownButtonClass(button);
+            Logger.warn(`Unknown lancer button class: ${button.attr('class')}`);
         }
     });
 }
@@ -133,9 +133,4 @@ function handleDamageApply(messageData: any, button: JQuery<HTMLButtonElement>):
     {
         runApplyDamageFlow(event, messageData);
     });
-}
-
-function logUnknownButtonClass(button: JQuery<HTMLButtonElement>): void
-{
-    console.error('Lancer Alternative Sheets: Unknown lancer button class', button.attr('class'));
 }

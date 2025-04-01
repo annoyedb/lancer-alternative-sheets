@@ -6,6 +6,7 @@ import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { registerMechSheetSettings } from "@/scripts/mech/settings";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { registerNPCSheetSettings } from "@/scripts/npc/settings";
+import { registerModuleSettings } from "./settings";
 
 Hooks.once("init", () =>
 {
@@ -29,6 +30,7 @@ function registerHandlebarsHelpers()
 
 function registerSettings()
 {
+    registerModuleSettings();
     registerMechSheetSettings();
     registerNPCSheetSettings();
 }

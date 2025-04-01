@@ -1,5 +1,7 @@
+import { Logger } from "@/classes/Logger";
 import { MechSheetLocalSettings } from "@/classes/settings/MechSheetLocalSettings";
 import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
+import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { Encoder, Decoder } from "@msgpack/msgpack";
 
@@ -100,6 +102,9 @@ export function registerMechSheetSettings()
         type: Array,
         default: [],
     } as ClientSettings.PartialSetting<Array<Object>>);
+
+    // Sockets
+    SocketManager.getInstance().register(setMechSheetData);
 }
 
 // Client Settings
@@ -205,7 +210,15 @@ export function setImageOffsetY(uuid: string, value: number)
     if (!data[uuid])
         data[uuid] = MechSheetSettings.emptyContent();
     data[uuid].headerImgOffsetY = value;
-    setMechSheetData(data);
+    // setMechSheetData(data);
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Image offset Y set to ${value} for ${uuid}`);
+        },
+        data,
+    );
 }
 
 export function getThemeOverride(uuid: string): string

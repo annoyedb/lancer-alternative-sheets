@@ -2,6 +2,7 @@ import { CustomFlowClass } from "@/enums/FlowClass";
 import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
 import { FlowBase } from "./FlowBase";
 import type { UUIDData } from "@/interfaces/flows/UUIDData";
+import { Logger } from "@/classes/Logger";
 
 // Boiler plate mostly and an example of how this module extends flows
 export class RunMacroBase extends FlowBase
@@ -53,7 +54,7 @@ export class RunMacroBase extends FlowBase
     {
         if (!state.data?.uuid)
         {
-            console.error("Lancer Alternative Sheets: Missing UUID passed to runMacroStep.");
+            Logger.error(`Missing UUID passed to ${this.runMacroStep.name}.`);
             return false;
         }
 
