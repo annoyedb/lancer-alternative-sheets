@@ -81,6 +81,15 @@
             return `${days}d ago`;
         }
     }
+
+    function* reverse()
+    {
+        for (let i = filteredMessages.length - 1; i >= 0; i--) 
+        {
+            console.log(filteredMessages[i]);
+            yield filteredMessages[i];
+        }
+    }
 </script>
 
 {#snippet headerSecondaryLeftOptions()}
@@ -92,12 +101,12 @@
     style={maxHeight ? `max-height: ${maxHeight}rem;` : ""}
     bind:this={component}
 >
-{#each filteredMessages as message, index}
+{#each reverse() as message, index}
 {#snippet headerSecondaryRightOptions()}
-    <span class="-fontsize0">{extractedTimes[index]}</span>
+    <span class="-fontsize0">{extractedTimes[filteredMessages.length - 1 - index]}</span>
 {/snippet}
     <HeaderSecondary
-        text={extractedNames[index]}
+        text={extractedNames[filteredMessages.length - 1 - index]}
         headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
         textStyle={["la-text-header", "la-anim-header", "-fontsize1", "-upper"]}
         borderStyle={["la-brdr-header-anti"]}
@@ -112,7 +121,7 @@
     >
         <ActionLogMessage
             messageData={message}
-            nameFoundCallback={(n: string) => {extractedNames[index] = n}}
+            nameFoundCallback={(n: string) => {extractedNames[filteredMessages.length - 1 - index] = n}}
         />
     </HeaderSecondary>
 {/each}
