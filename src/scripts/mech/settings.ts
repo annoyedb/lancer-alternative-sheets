@@ -1,9 +1,10 @@
+import { Encoder, Decoder } from "@msgpack/msgpack";
 import { Logger } from "@/classes/Logger";
 import { MechSheetLocalSettings } from "@/classes/settings/MechSheetLocalSettings";
 import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
 import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
-import { Encoder, Decoder } from "@msgpack/msgpack";
+import { getModuleVersion } from "@/scripts/helpers";
 
 const encoder = new Encoder();
 const decoder = new Decoder();
@@ -92,16 +93,30 @@ export function registerMechSheetSettings()
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
         scope: "client",
         config: false,
-        type: Array,
-        default: [],
-    } as ClientSettings.PartialSetting<Array<Object>>);
+        type: String,
+        default: "",
+    } as ClientSettings.PartialSetting<string>);
+
+    game.settings.register(LancerAlternative.Name, `_mech-settings-local-version`, {
+        scope: "client",
+        config: false,
+        type: String, // JSON object
+        default: "",
+    } as ClientSettings.PartialSetting<string>);
 
     game.settings.register(LancerAlternative.Name, `_mech-settings`, {
         scope: "world",
         config: false,
-        type: Array,
+        type: Array, // MessagePack encoded object
         default: [],
-    } as ClientSettings.PartialSetting<Array<Object>>);
+    } as ClientSettings.PartialSetting<Array<number>>);
+
+    game.settings.register(LancerAlternative.Name, `_mech-settings-version`, {
+        scope: "world",
+        config: false,
+        type: String,
+        default: "",
+    } as ClientSettings.PartialSetting<string>);
 
     // Sockets
     SocketManager.getInstance().register(setMechSheetData);
@@ -154,17 +169,24 @@ export function getMechSheetLogActionMainStartCollapsed(): boolean
 // Client Private Settings
 export function getMechSheetLocalData()
 {
-    const settings = game.settings.get(LancerAlternative.Name, `_mech-settings-local`) as Array<Object>;
-    if (!settings.length)
+    try
+    {
+        const settings = game.settings.get(LancerAlternative.Name, `_mech-settings-local`) as string;
+        return JSON.parse(settings) as MechSheetLocalSettings;
+    }
+    catch
+    {
         return new MechSheetLocalSettings();
-    const encoded = new Uint8Array(Object.values(settings[0]));
-    return decoder.decode(encoded) as MechSheetLocalSettings;
+    }
 }
 
 export function setMechSheetLocalData(data: MechSheetLocalSettings)
 {
-    const encoded: Uint8Array = encoder.encode(data);
-    return game.settings.set(LancerAlternative.Name, `_mech-settings-local`, encoded);
+    const encoded = JSON.stringify(data);
+    return Promise.all([
+        game.settings.set(LancerAlternative.Name, `_mech-settings-local`, encoded),
+        game.settings.set(LancerAlternative.Name, `_mech-settings-local-version`, getModuleVersion()),
+    ])
 }
 
 export function getSidebarRatio(uuid: string): number
@@ -185,17 +207,42 @@ export function setSidebarRatio(uuid: string, value: number)
 // World Private Settings
 export function getMechSheetData()
 {
-    const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<Object>;
+    const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<number>;
     if (!settings.length)
         return new MechSheetSettings();
-    const encoded = new Uint8Array(Object.values(settings[0]));
-    return decoder.decode(encoded) as MechSheetSettings;
+    try
+    {
+        const encoded = new Uint8Array(Object.values(settings));
+        return decoder.decode(encoded) as MechSheetSettings;
+    }
+    catch
+    {
+        try
+        {
+            Logger.log("MechSheetSettings: Decoding failed, trying legacy decode.");
+            const encoded = new Uint8Array(Object.values(settings[0]));
+            return decoder.decode(encoded) as MechSheetSettings;
+        }
+        catch
+        {
+            Logger.error("MechSheetSettings: Decoding failed, returning empty settings.");
+            return new MechSheetSettings();
+        }
+    }
 }
 
-export function setMechSheetData(data: MechSheetSettings)
+export function encodeMechSheetData(data: MechSheetSettings): Array<number>
 {
     const encoded: Uint8Array = encoder.encode(data);
-    return game.settings.set(LancerAlternative.Name, `_mech-settings`, encoded);
+    return Array.from(encoded);
+}
+
+export function setMechSheetData(encoded: Array<number>)
+{
+    return Promise.all([
+        game.settings.set(LancerAlternative.Name, `_mech-settings`, encoded),
+        game.settings.set(LancerAlternative.Name, `_mech-settings-version`, getModuleVersion()),
+    ]);
 }
 
 export function getImageOffsetY(uuid: string): number
@@ -211,13 +258,14 @@ export function setImageOffsetY(uuid: string, value: number)
         data[uuid] = MechSheetSettings.emptyContent();
     data[uuid].headerImgOffsetY = value;
     // setMechSheetData(data);
+
     SocketManager.getInstance().runAsGM(
         setMechSheetData,
         () =>
         {
             Logger.log(`Image offset Y set to ${value} for ${uuid}`);
         },
-        data,
+        encodeMechSheetData(data),
     );
 }
 
@@ -233,11 +281,15 @@ export function setThemeOverride(uuid: string, value: string)
     if (!data[uuid])
         data[uuid] = MechSheetSettings.emptyContent();
     data[uuid].themeOverride = value;
-    setMechSheetData(data)
-        .then(() =>
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
         {
-            Hooks.call("laOverrideTheme", uuid);
-        });
+            Logger.log(`Theme override set to ${value} for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
+    Hooks.call("laOverrideTheme", uuid, value);
 }
 
 export function getSidebarExecutables(uuid: string): Array<string>
@@ -252,5 +304,12 @@ export function setSidebarExecutables(uuid: string, macros: Array<string>)
     if (!data[uuid])
         data[uuid] = MechSheetSettings.emptyContent();
     data[uuid].sidebarExes = macros;
-    setMechSheetData(data);
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Sidebar executables set to ${macros.join(", ")} for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
 }

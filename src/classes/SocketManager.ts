@@ -15,8 +15,8 @@ export class SocketManager
 
     private socketName: string = `module.${LancerAlternative.Name}`;
     private socket: io.Socket;
-    private registeredFunctions: Map<string, (...args: any[]) => void> = new Map();
-    private awaitingResponse: Map<string, (data: any) => void> = new Map();
+    private registeredFunctions: Map<string, (...args: any[]) => any> = new Map();
+    private awaitingResponse: Map<string, (data: any) => any> = new Map();
 
     private constructor()
     {
@@ -45,19 +45,9 @@ export class SocketManager
                     }
                     const response = func(...data.args);
                     if (data.responseID)
-                    {
-                        this.socket.emit(
-                            this.socketName,
-                            {
-                                type: "response",
-                                func: data.func,
-                                args: response,
-                                responseID: data.responseID,
-                            }
-                        );
-                    }
+                        this.handleResponse(response, data);
                 }
-                if (data.type === "response")
+                else if (data.type === "response")
                 {
                     const callback = this.awaitingResponse.get(data.responseID);
                     if (!callback)
@@ -69,6 +59,45 @@ export class SocketManager
                     this.awaitingResponse.delete(data.func);
                 }
             });
+    }
+
+    private handleResponse(response: any, data: any)
+    {
+        if (response instanceof Promise)
+        {
+            Logger.log(`GM proxy for ${data.func} is a promise, waiting for resolution...`);
+            response.then((resolvedResponse) =>
+            {
+                if (data.responseID)
+                {
+                    this.socket.emit(
+                        this.socketName,
+                        {
+                            type: "response",
+                            func: data.func,
+                            args: resolvedResponse,
+                            responseID: data.responseID,
+                        }
+                    );
+                }
+                Logger.log(`GM proxy for ${data.func} resolved`, resolvedResponse);
+            }).catch((error) =>
+            {
+                Logger.error(`Error in GM proxy function ${data.func}:`, error);
+            });
+        }
+        else
+        {
+            this.socket.emit(
+                this.socketName,
+                {
+                    type: "response",
+                    func: data.func,
+                    args: response,
+                    responseID: data.responseID,
+                }
+            );
+        }
     }
 
     public register(func: (...args: any[]) => void)
@@ -93,12 +122,30 @@ export class SocketManager
         this.registeredFunctions.delete(func.name);
     }
 
-    public runAsGM(func: (...args: any[]) => void, callback?: (data: any) => void, ...args: any[])
+    public runAsGM(func: (...args: any[]) => any, callback?: (data: any) => any, ...args: any[])
     {
         // @ts-expect-error
         if (game.user.isGM)
         {
-            func(...args);
+            const response = func(...args);
+            if (callback)
+            {
+                if (response instanceof Promise)
+                {
+                    response.then((resolvedResponse) =>
+                    {
+                        callback(resolvedResponse);
+                    }).catch((error) =>
+                    {
+                        Logger.error(`Error in ${func.name}:`, error);
+                    });
+                }
+                else
+                {
+                    callback(response);
+                }
+            }
+            return;
         }
         //@ts-expect-error
         if (!game.users.activeGM)

@@ -17,6 +17,7 @@ import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import Activity from "@/svelte/mech/Activity.svelte";
 import { ActiveTab } from "@/enums/ActiveTab";
 import { setIntroRun } from "@/scripts/store/text-log";
+import { getSheetStore, setSheetStore } from "@/scripts/store/store";
 
 export class MechSheetBase
 {
@@ -58,11 +59,13 @@ export class MechSheetBase
             {
                 super(...args);
 
-                Hooks.on("laOverrideTheme", (uuid: string) =>
+                Hooks.on("laOverrideTheme", (uuid: string, theme: string) =>
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-
+                    setSheetStore(this.actor.uuid, {
+                        currentTheme: theme,
+                    });
                     this.render();
                 })
 
@@ -119,7 +122,7 @@ export class MechSheetBase
             {
                 super._replaceHTML(element, html);
                 // (#1)
-                applyThemeTo(element, getThemeOverride(this.actor.uuid));
+                applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
                 let data = await this.getData() as any;
 
                 this.mountComponents(html, data);
