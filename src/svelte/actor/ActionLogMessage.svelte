@@ -23,7 +23,7 @@
     // to simply get the name of the item
     function extractName(component: HTMLElement) 
     {   
-        const headerElement = component.querySelector('.lancer-header') as HTMLElement | null;
+        const headerElement = component.querySelector('.lancer-header, .lancer-stat-header') as HTMLElement | null;
 
         if (!headerElement) 
         {

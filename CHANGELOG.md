@@ -8,7 +8,10 @@ Note that saving mech sheet theme, the header image offset, and macro list requi
 
 In laymans this update fixes the "permission error" notification and spamming on the sheets. Extend my condolences to your players.
 
+On a side note, there are a lot of buttons that get popped up in the chat log, if a button doesn't work, it'll (likely) be logged now. Open up the console and let me know what it says (alternatively, it'll pop up if Verbose Logging is enabled) as well as the button/action in the chat log that isn't covered. Whats been added so far is just stuff I've noticed in my player's Action Logs, but they're LL1, so...
+
 ## Changes
+* Added Cascade, SecondaryStructure, and StatRoll to supported buttons in the Action Log
 * Fixed drag handler event bug serializing data much more often than it needed to on mech sheet headers
 * Fixed players not being able to set world-level settings for their own sheets
 * Deprecated all uses of SessionStorage API
