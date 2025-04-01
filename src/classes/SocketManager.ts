@@ -41,7 +41,8 @@ export class SocketManager
                     const func = this.registeredFunctions.get(data.func);
                     if (!func)
                     {
-                        throw new Error(`Function ${data.func} is not registered.`);
+                        Logger.error(`Function ${data.func} is not registered.`);
+                        return;
                     }
                     const response = func(...data.args);
                     if (data.responseID)
@@ -104,7 +105,8 @@ export class SocketManager
     {
         if (this.registeredFunctions.has(func.name))
         {
-            throw new Error(`Function is already registered.`);
+            Logger.error(`Function ${func.name} is already registered.`);
+            return;
         }
         const wrappedCallback = (...args: any[]) => func(...args);
         this.registeredFunctions.set(func.name, wrappedCallback);
@@ -117,7 +119,8 @@ export class SocketManager
         const wrappedCallback = this.registeredFunctions.get(func.name);
         if (!wrappedCallback)
         {
-            throw new Error(`Function is not registered.`);
+            Logger.error(`Function ${func.name} is not registered.`);
+            return;
         }
         this.registeredFunctions.delete(func.name);
     }
@@ -151,7 +154,7 @@ export class SocketManager
         if (!game.users.activeGM)
         {
             Logger.error(`An active GM must be online to run GM-proxied functions`);
-            throw new Error("No active GM found.");
+            return;
         }
 
         Logger.log(`Requested GM proxy for ${func.name}`, args);

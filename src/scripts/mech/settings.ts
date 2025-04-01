@@ -208,26 +208,23 @@ export function setSidebarRatio(uuid: string, value: number)
 export function getMechSheetData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<number>;
+    console.log(settings);
     if (!settings.length)
         return new MechSheetSettings();
     try
     {
-        const encoded = new Uint8Array(Object.values(settings));
+        let encoded = new Uint8Array(Object.values(settings));
+        if (encoded.length === 1)
+        {
+            Logger.log("MechSheetSettings: Decoding failed, trying legacy decode.");
+            encoded = new Uint8Array(Object.values(settings[0]));
+        }
         return decoder.decode(encoded) as MechSheetSettings;
     }
     catch
     {
-        try
-        {
-            Logger.log("MechSheetSettings: Decoding failed, trying legacy decode.");
-            const encoded = new Uint8Array(Object.values(settings[0]));
-            return decoder.decode(encoded) as MechSheetSettings;
-        }
-        catch
-        {
-            Logger.error("MechSheetSettings: Decoding failed, returning empty settings.");
-            return new MechSheetSettings();
-        }
+        Logger.error("MechSheetSettings: Decoding failed, returning empty settings.");
+        return new MechSheetSettings();
     }
 }
 
