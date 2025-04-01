@@ -2,7 +2,7 @@
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
-    import { getMechSheetTipEnabled, getThemeOverride } from "@/scripts/mech/settings";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -14,6 +14,7 @@
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import type { ChatData } from "@/interfaces/flows/ChatData";
+    import { getSheetStore } from "@/scripts/store/store";
 
     const {
         source, 
@@ -21,7 +22,7 @@
         uuid,
         sheetUUID,
     }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
-    const themeOverride = getThemeOverride(sheetUUID);
+    const themeOverride = getSheetStore(sheetUUID).currentTheme;
     const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(

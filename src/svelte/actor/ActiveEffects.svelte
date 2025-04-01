@@ -2,19 +2,19 @@
     import { Logger } from "@/classes/Logger";
     import { getBrightness } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
-    import { getThemeOverride } from "@/scripts/mech/settings";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import DeleteButton from "@/svelte/actor/button/DeleteButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import { getSheetStore } from "@/scripts/store/store";
 
     const {
         effects,
         actor,
         isOwner,
     }: ActiveEffectsProps = $props();
-    const themeOverride = getThemeOverride(actor.uuid);
+    const themeOverride = getSheetStore(actor.uuid).currentTheme;
 
     function getThemedIcon(effect: any)
     {

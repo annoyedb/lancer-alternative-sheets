@@ -106,10 +106,10 @@ export class MechSheetBase
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                // (#1) Foundry caches the root window somewhere but can't find a way 
-                // to update the cached element, so we have to reapply the theme every time. 
-                // This isn't currently a huge deal since it's just a targeted class swap
-                applyThemeTo(this.element, getThemeOverride(this.actor.uuid));
+                setSheetStore(this.actor.uuid, {
+                    currentTheme: getThemeOverride(this.actor.uuid)
+                });
+                applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
                 let data = await this.getData() as any;
 
@@ -121,7 +121,6 @@ export class MechSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                // (#1)
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
                 let data = await this.getData() as any;
 
