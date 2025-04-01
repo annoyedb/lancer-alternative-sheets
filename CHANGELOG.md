@@ -1,3 +1,20 @@
+# 1.1.5
+This is a critical patch for those of you on version 1.1.3 or 1.1.4 of this module, fixing primarily permission errors but a few other egregious bugs
+
+In light of this issue and the various changes I've had to make, I've accounted for potential data migration.
+Unfortunately, I wasn't able to actually test it. Sorry if your sheet configurations have been reset/happy for you if it hasn't
+
+Note that saving mech sheet theme, the header image offset, and macro list require an active Game Master or Assistant Game Master to be present, since saving world data (which those two things are scoped to do) in Foundry require it.
+
+In laymans this update fixes the "permission error" notification and spamming on the sheets. Extend my condolences to your players.
+
+## Changes
+* Fixed drag handler event bug serializing data much more often than it needed to on mech sheet headers
+* Fixed players not being able to set world-level settings for their own sheets
+* Deprecated all uses of SessionStorage API
+* Added SocketManager class to handle GM proxies
+* Added Logger class for easier debugging
+
 # 1.1.4 - Mech Sheet Ultra Pro Max
 "Why is the header so big when the sidebar already shows the mech?" 
 
