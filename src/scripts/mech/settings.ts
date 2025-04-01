@@ -208,7 +208,6 @@ export function setSidebarRatio(uuid: string, value: number)
 export function getMechSheetData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<number>;
-    console.log(settings);
     if (!settings.length)
         return new MechSheetSettings();
     try
