@@ -25,7 +25,7 @@ Hooks.once("setup", async () =>
 
 function registerHandlebarsHelpers()
 {
-    Handlebars.registerHelper("log", logData);
+    Handlebars.registerHelper("la_logData", logData);
 }
 
 function registerSettings()
