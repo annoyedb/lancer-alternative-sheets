@@ -1,3 +1,9 @@
+# 1.1.6
+This patch fixes the overly generic Handlebars helper name I used to use for debugging back before the Svelte refactor, causing conflicts with other modules.
+
+## Changes
+* #32 - Fixes issue regarding Find the Culprit module (and potentially others)
+
 # 1.1.5
 This is a critical patch for those of you on version 1.1.3 or 1.1.4 of this module, fixing primarily permission errors but a few other egregious bugs
 
