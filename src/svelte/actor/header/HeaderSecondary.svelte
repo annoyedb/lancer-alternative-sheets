@@ -34,7 +34,7 @@
         disableExtension,
     }: HeaderProps & HeaderSecondaryProps & TerminalTextProps = $props();
     
-    let isCollapsed = $state(getCollapseState(collapseID) ?? startCollapsed ?? false);
+    let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
     const extraOptions =  headerContentRight ? true : false;
 
@@ -43,7 +43,6 @@
         if (collapseID && (dontSaveCollapse || getCollapseState(collapseID) === undefined))
         {
             setCollapseState(collapseID, startCollapsed ?? false);
-            isCollapsed = startCollapsed ?? false;
         }
     });
 
@@ -53,7 +52,6 @@
         if (collapseID)
         {
             setCollapseState(collapseID, !isCollapsed);
-            isCollapsed = !isCollapsed;
         }
     }
 

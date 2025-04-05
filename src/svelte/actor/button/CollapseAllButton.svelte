@@ -5,7 +5,7 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getCollapseState } from "@/scripts/store/collapse";
+    import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -32,14 +32,20 @@
         event.stopPropagation();
         if (!collapseID || event.currentTarget === null)
             return;
+        
         const collapseGroup = jQuery(event.currentTarget).closest('.collapse-group');
-        if (collapseGroup.length)
+        if (collapseGroup)
         {
-            const triggers = collapseGroup.find('.collapse-trigger');
-            triggers.each((_: any, trigger: any) => {
-                const clickEvent = new MouseEvent('click');
-                trigger.dispatchEvent(clickEvent);
+            const triggers = collapseGroup.find('[data-la-collapse-id]');
+            triggers.each((_: number, trigger: HTMLElement) =>
+            {
+                const childId = jQuery(trigger).data('la-collapse-id');
+                if (childId === collapseID)
+                    return;
+                if (childId)
+                    setCollapseState(childId, isExpanding);
             });
+            setCollapseState(collapseID, isExpanding);
         }
     }
 </script>
