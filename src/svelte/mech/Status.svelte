@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
-    import { getMechSheetLogActionMainEnabled, getMechSheetLogActionMainDontSaveCollapse, getMechSheetLogActionMainStartCollapsed } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -20,8 +20,8 @@
     } = props;
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
-    const actionLogSaveCollapse = getMechSheetLogActionMainDontSaveCollapse();
-    const actionLogStartCollapsed = getMechSheetLogActionMainStartCollapsed();
+    const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
+    const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
     const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);

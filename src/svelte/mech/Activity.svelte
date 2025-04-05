@@ -1,15 +1,15 @@
 <script lang="ts">
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getMechSheetLogActionMainDontSaveCollapse, getMechSheetLogActionMainStartCollapsed } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import ActionLog from "@/svelte/actor/ActionLog.svelte";
 
     const props = $props();
     const {
         actor
     }: MechSheetProps = props;
-    const actionLogSaveCollapse = getMechSheetLogActionMainDontSaveCollapse();
-    const actionLogStartCollapsed = getMechSheetLogActionMainStartCollapsed();
+    const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
+    const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
 </script>
 
 <div class="-margin5-t">

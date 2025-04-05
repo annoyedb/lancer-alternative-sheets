@@ -1,13 +1,10 @@
-import { Encoder, Decoder } from "@msgpack/msgpack";
 import { Logger } from "@/classes/Logger";
 import { MechSheetLocalSettings } from "@/classes/settings/MechSheetLocalSettings";
 import { MechSheetSettings } from "@/classes/settings/MechSheetSettings";
 import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { getModuleVersion } from "@/scripts/helpers";
-
-const encoder = new Encoder();
-const decoder = new Decoder();
+import { msgPackDecoder, msgPackEncoder } from "@/scripts/settings";
 
 export function registerMechSheetSettings()
 {
@@ -71,7 +68,7 @@ export function registerMechSheetSettings()
         default: 12,
     } as ClientSettings.PartialSetting<number>);
 
-    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`, {
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-save-collapse`, {
         name: "LA.SETTINGS.mech.saveCollapse.label",
         hint: "LA.SETTINGS.mech.saveCollapse.subLabel",
         scope: "client",
@@ -80,7 +77,7 @@ export function registerMechSheetSettings()
         default: false,
     } as ClientSettings.PartialSetting<boolean>);
 
-    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-start-collapsed`, {
+    game.settings.register(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`, {
         name: "LA.SETTINGS.mech.startCollapsed.label",
         hint: "LA.SETTINGS.mech.startCollapsed.subLabel",
         scope: "client",
@@ -153,17 +150,17 @@ export function getMechSheetLogActionMainMaxHeight(): number
     return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-max-height`) as number;
 }
 
-export function getMechSheetLogActionMainDontSaveCollapse(): boolean
+export function getMechSheetLogActionDontSaveCollapse(): boolean
 {
     // It is easier to maintain this code if this setting was inverted
     // But semantically it makes more sense to have it worded the way it is
     // Therefore, this setting is inverted in the UI
-    return !game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-save-collapse`) as boolean;
+    return !game.settings.get(LancerAlternative.Name, `mech-settings-log-action-save-collapse`) as boolean;
 }
 
-export function getMechSheetLogActionMainStartCollapsed(): boolean
+export function getMechSheetLogActionStartCollapsed(): boolean
 {
-    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-start-collapsed`) as boolean;
+    return game.settings.get(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`) as boolean;
 }
 
 // Client Private Settings
@@ -218,7 +215,7 @@ export function getMechSheetData()
             Logger.log("MechSheetSettings: Decoding failed, trying legacy decode.");
             encoded = new Uint8Array(Object.values(settings[0]));
         }
-        return decoder.decode(encoded) as MechSheetSettings;
+        return msgPackDecoder.decode(encoded) as MechSheetSettings;
     }
     catch
     {
@@ -229,7 +226,7 @@ export function getMechSheetData()
 
 export function encodeMechSheetData(data: MechSheetSettings): Array<number>
 {
-    const encoded: Uint8Array = encoder.encode(data);
+    const encoded: Uint8Array = msgPackEncoder.encode(data);
     return Array.from(encoded);
 }
 

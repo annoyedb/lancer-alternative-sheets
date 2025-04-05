@@ -2,8 +2,8 @@
     import { onDestroy, onMount } from "svelte";
     import { trackHook } from "@/scripts/store/hooks";
     import type { ActionLogProps } from "@/interfaces/actor/ActionLogProps";
-    import ActionLogMessage from "@/svelte/actor/ActionLogMessage.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import { getLocalized } from "@/scripts/helpers";
 
     const {
         id,
@@ -27,18 +27,11 @@
 
     onMount(() => 
     {
-        function refreshTimes() 
-        {
-            extractedTimes = filteredMessages.map((message) => extractTime(message.timestamp));
-            animationFrame = requestAnimationFrame(() => 
-            {
-                setTimeout(refreshTimes, 15000); // Update every 15 seconds like Foundry does
-            });
-        }
         
         filteredMessages.forEach((message) => 
         {
             extractedTimes.push(extractTime(message.timestamp));
+            extractedNames.push(extractName(message.content));
         });
 
         trackHook(`Actor.${id}`, Hooks.on("createChatMessage", (message: any) => 
@@ -47,13 +40,33 @@
             {
                 filteredMessages.push(message);
                 extractedTimes.push(extractTime(message.timestamp));
+                extractedNames.push(extractName(message.content));
             }
         }), "createChatMessage");
+        trackHook(`Actor.${id}`, Hooks.on("deleteChatMessage", (message: any) => 
+        {
+            const index = filteredMessages.findIndex((msg) => msg.id === message.id);
+            if (index !== -1) 
+            {
+                filteredMessages.splice(index, 1);
+                extractedTimes.splice(index, 1);
+                extractedNames.splice(index, 1);
+            }
+        }), "deleteChatMessage");
 
+        function refreshTimes() 
+        {
+            extractedTimes = filteredMessages.map((message) => extractTime(message.timestamp));
+            animationFrame = requestAnimationFrame(() => 
+            {
+                setTimeout(refreshTimes, 15000); // Update every 15 seconds like Foundry does
+            });
+        }
         refreshTimes();
     });
 
-    onDestroy(() => {
+    onDestroy(() => 
+    {
         cancelAnimationFrame(animationFrame);
     });
 
@@ -80,6 +93,27 @@
             const days = Math.round(diff / 86400000);
             return `${days}d ago`;
         }
+    }
+
+    // TODO: write PR so that more information (e.g. name, caller, etc) 
+    // gets stored in ChatMessage flags, so we don't have to do this jank
+    // to simply get the name of the item
+    function extractName(content: string) 
+    {
+        const element = document.createElement("div");
+        element.innerHTML = content;
+
+        const headerElement = jQuery(element).find('.lancer-header, .lancer-stat-header').get(0) as HTMLElement | null;
+
+        if (!headerElement)
+            return getLocalized("LA.placeholder");
+
+        const headerText = headerElement.firstChild?.textContent?.trim();
+        if (headerText)
+            return headerText;
+
+        const spanElement = jQuery(headerElement).find('span').get(0) as HTMLElement | null;
+        return spanElement?.textContent?.trim() || getLocalized("LA.placeholder");
     }
 
     function* reverse()
@@ -118,10 +152,9 @@
         headerContentLeft={headerSecondaryLeftOptions}
         headerContentRight={headerSecondaryRightOptions}
     >
-        <ActionLogMessage
-            messageData={message}
-            nameFoundCallback={(n: string) => {extractedNames[filteredMessages.length - 1 - index] = n}}
-        />
+        <div class="-fontsize1">
+            {@html message.content}
+        </div>
     </HeaderSecondary>
 {/each}
 </div>

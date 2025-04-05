@@ -1,30 +1,37 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled, setThemeOverride } from "@/scripts/mech/settings";
     import { getThemeName } from "@/scripts/theme";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         uuid,
+        disabled,
+        setOverride,
         style,
+        iconStyle,
+
+        tooltipEnabled,
+        tooltip,
+        tooltipHeader,
+        tooltipClass,
+        tooltipDirection,
         
         logText,
         logType,
         logTypeReset,
-    }: ThemeOverrideButtonProps & TextLogEventProps = $props();
+    }: ThemeOverrideButtonProps & IconButtonProps & TooltipProps & TextLogEventProps = $props();
 
-    let advancedOptions = $derived(getAdvancedState(uuid));
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 
-    const tipEnabled = getMechSheetTipEnabled();
-    const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.themeOverride.tooltip"))
+    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.themeOverride.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.advanced.themeOverride.tooltip");
     
@@ -60,7 +67,7 @@
         event.stopPropagation();
         const selectedTheme = theme === "default" ? "" : theme;
         
-        setThemeOverride(uuid, selectedTheme);
+        setOverride(uuid, selectedTheme);
     }
 </script>
 
@@ -84,17 +91,17 @@
     </div>
 {/snippet}
 
-{#if advancedOptions}
+{#if !disabled}
 <button type="button"
     class="{style?.join(' ')} -glow-active-hover"
-    data-tooltip={tipEnabled ? tip : undefined }
-    data-tooltip-class={"clipped-bot la-tooltip"}
-    data-tooltip-direction={TooltipDirection.UP}
+    data-tooltip={tooltipEnabled ? tip : undefined }
+    data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+    data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
     onclick={event => handleOnClick(event)}
     aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >
-    <i class="mdi mdi-notebook-edit la-text-header -fontsize3"></i>
+    <i class="mdi mdi-notebook-edit {iconStyle?.join(' ') || 'la-text-header -fontsize3'}"></i>
 </button>
 {/if}

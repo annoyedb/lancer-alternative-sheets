@@ -7,7 +7,7 @@
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
-    import { getImageOffsetY, setImageOffsetY } from "@/scripts/mech/settings";
+    import { getImageOffsetY, getMechSheetTipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -28,6 +28,7 @@
     <div class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" style="z-index: 1;">
         <AdvancedButton
             uuid={actor.uuid}
+            tooltipEnabled={getMechSheetTipEnabled()}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />

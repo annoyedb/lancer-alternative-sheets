@@ -95,7 +95,13 @@
     }
 </script>
 
-<div class="la-macroflows la-dropshadow la-combine-v -widthfull
+{#if advancedOptions}
+<div class="-positionrelative">
+    <span class="-textaligncenter -widthfull -positionabsolute -bottom0 la-text-accent -upper"><i class="mdi mdi-arrow-down-left"></i>{getLocalized("LA.advanced.addMacro.subLabel")}<i class="mdi mdi-arrow-down-right"></i></span>
+</div>
+{/if}
+<div class="la-macroflows la-dropshadow la-combine-v -widthfull -borders-t -thick
+    {advancedOptions ? "la-brdr-accent" : "la-brdr-transparent"}
     macro-droppable"
     bind:this={component}
 >
