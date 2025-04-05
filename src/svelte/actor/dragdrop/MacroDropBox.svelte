@@ -8,17 +8,18 @@
     import { TextLogHook } from '@/enums/TextLogHook';
     import { getLocalized } from '@/scripts/helpers';
     import { getAdvancedState } from '@/scripts/store/advanced';
-    import { getSidebarExecutables, setSidebarExecutables } from "@/scripts/mech/settings";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
     import { LADataType } from '@/enums/LADataType';
 
     const {
         uuid,
+        getExes,
+        setExes,
     } = $props();
     let component: HTMLElement | null = $state(null);
     let advancedOptions = $derived(getAdvancedState(uuid));
-    let sidebarExes = $state(getSidebarExecutables(uuid));
+    let executables = $state(getExes);
 
     const buttonTypes = Object.values(SystemButton);
     interface LocalDropData { type: string; index: number; }
@@ -42,9 +43,9 @@
     {
         if (dropData.type === LADataType.Sorting)
         {
-            const [movedItem] = sidebarExes.splice(dropData.index, 1);
-            sidebarExes.splice(thisData.index, 0, movedItem);
-            setSidebarExecutables(uuid, sidebarExes);
+            const [movedItem] = executables.splice(dropData.index, 1);
+            executables.splice(thisData.index, 0, movedItem);
+            setExes(uuid, executables);
         }
     }
 
@@ -59,8 +60,8 @@
     function handleDelete(event: MouseEvent, index: number)
     {
         event.stopPropagation();
-        sidebarExes.splice(index, 1);
-        setSidebarExecutables(uuid, sidebarExes);
+        executables.splice(index, 1);
+        setExes(uuid, executables);
     }
 
     // Foundry drag and drop handler -------------------------------------------------
@@ -83,8 +84,8 @@
         switch (obj.type)
         {
             case "Macro":
-                sidebarExes.push(obj.uuid);
-                setSidebarExecutables(uuid, sidebarExes);
+                executables.push(obj.uuid);
+                setExes(uuid, executables);
                 break;
             case LADataType.Sorting:
                 break;
@@ -98,7 +99,7 @@
     macro-droppable"
     bind:this={component}
 >
-{#each sidebarExes as type, index}
+{#each executables as type, index}
     <DragDropHandle
         uuid={uuid}
         index={index}

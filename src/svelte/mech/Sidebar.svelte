@@ -6,14 +6,14 @@
     import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
-    import { getMechSheetTipEnabled, getSidebarRatio } from "@/scripts/mech/settings";
+    import { getSheetStore } from '@/scripts/store/store';
+    import { getMechSheetTipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
     import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
-    import { getSheetStore } from '@/scripts/store/store';
 
     const props = $props();
     const { 
@@ -21,7 +21,8 @@
         actor,
     }: MechSheetProps = props
     let component: HTMLElement | null = $state(null);
-    
+    let sidebarExes = $state(getSidebarExecutables(actor.uuid));
+
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const frame = system.loadout.frame?.value;
     const frameName = frame 
@@ -332,4 +333,6 @@
 <div class="la-spacer -large"></div>
 <MacroDropBox
     uuid={actor.uuid}
+    getExes={sidebarExes}
+    setExes={setSidebarExecutables}
 />
