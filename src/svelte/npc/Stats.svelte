@@ -40,6 +40,9 @@
 </script>
 
 <div class="la-bckg-background la-shadow -medium -inset la-bg-scroll -widthfull -heightfull">
+    <div class="la-combine-h la-dropshadow -justifyevenly">
+    <!-- Left Side -->
+    
     <!-- Left Side Floating Stats -->
     <div class="la-stat__island -positionrelative la-dropshadow">
         <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
@@ -85,8 +88,6 @@
             </div>
         </div>
     </div>
-    <div class="la-combine-h la-dropshadow -justifyevenly">
-    <!-- Left Side -->
         <div class="la-combine-v -flex0">
             <!-- Tier Options -->
             <div class="la-combine-h -height2 ">
@@ -120,6 +121,7 @@
                     >+</button>
                 </div>
             </div>
+            <div class="la-combine-h -widthfull -heightfull">
             <!-- Actor Image -->
             <img class="la-npc__img
                     profile-img ref set"
@@ -128,10 +130,11 @@
                 data-edit="img" 
                 data-uuid="{actor.uuid}"
             />
+            <HaseDisplay {...props} />
         </div>
-        <HaseDisplay {...props} />
+        </div>
         <!-- Right Side -->
-        <div class="la-combine-h">
+        <div class="la-combine-h -padding1-r">
             <div class="la-combine-v -flex1">
                 <div class="la-combine-h -height2 -justifyend -gap1 -widthfull">
                     <button type="button"

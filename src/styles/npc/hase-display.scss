@@ -1,39 +1,38 @@
+@use "@/styles/mech/hase-display" as mech-hase;
+
 .la-npc
 {
-    .la-hasegroup
+    .la-haseposition
     {
+        width: 3rem;
+    }
+
+    .la-hasegroup>.la-hase
+    {
+        display: flex;
+        translate: 0rem 0.5rem;
 
         // HASE hexagons
-        >.la-hase>.la-attribute
+        >.la-combine-h
         {
-            &.-hull
+            >.-hull
             {
-                right: 0.6rem;
+                @include mech-hase.mdiAbsolute;
             }
 
-            &.-agility
+            >.-agi
             {
-                left: 0.6rem;
-                top: -1.5rem;
+                @include mech-hase.mdiAbsolute;
             }
 
-            &.-systems
+            >.-sys
             {
-                right: 0.6rem;
-                top: -3rem;
+                @include mech-hase.mdiAbsolute;
             }
 
-            &.-engineering
+            >.-eng
             {
-                left: 0.6rem;
-                top: -4.5rem;
-            }
-
-            // Override the HASE short labels
-            >.la-combine-v>.la-label__span
-            {
-                font-size: 0.5rem;
-                top: -0.5rem;
+                @include mech-hase.mdiAbsolute;
             }
         }
     }

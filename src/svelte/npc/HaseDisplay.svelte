@@ -12,89 +12,95 @@
 </script>
 
 <!-- Floating HASE -->
-<div class="la-hasegroup la-combine-v -width2 -height0">
-    <div class="la-hase">
-        <HexButton
-            text={getLocalized("LA.hull.short")}
-            value={system.hull}
+<div class="la-haseposition -positionrelative">
+    <div class="la-hasegroup -positionabsolute -widthnone">
+        <div class="la-hase la-combine-v -justifybetween -heightnone">
+            <div class="la-combine-h -aligncenter">
+                <HexButton
+                    text={getLocalized("LA.hull.short")}
+                    value={system.hull}
 
-            tooltip={getLocalized("LA.hull.tooltip")}
-            logText={getLocalized("LA.hull.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+                    tooltip={getLocalized("LA.hull.tooltip")}
+                    logText={getLocalized("LA.hull.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
 
-            uuid={actor.uuid}
-            flowClass={FlowClass.RollStat}
-            path={"system.hull"}
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.RollStat}
+                    path={"system.hull"}
 
-            outerStyle={["-positionrelative", "-hull", "-fontsize10"]}
-            innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
-            outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
-        />
-    </div>
-    <div class="la-hase">
-        <HexButton
-            text={getLocalized("LA.agility.short")}
-            value={system.agi}
+                    outerStyle={["-hull"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    outerTextStyle={["-widthfull", "-textaligncenter"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                />
+            </div>
+            <div class="la-combine-h -aligncenter">
+                <div class="-agi -pointerdisable">&nbsp;</div>
+                <HexButton
+                    text={getLocalized("LA.agility.short")}
+                    value={system.agi}
 
-            tooltip={getLocalized("LA.agility.tooltip")}
-            logText={getLocalized("LA.agility.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+                    tooltip={getLocalized("LA.agility.tooltip")}
+                    logText={getLocalized("LA.agility.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
 
-            uuid={actor.uuid}
-            flowClass={FlowClass.RollStat}
-            path={"system.agi"}
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.RollStat}
+                    path={"system.agi"}
 
-            outerStyle={["-positionrelative", "-agility", "-fontsize10"]}
-            innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
-            outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
-        />
-    </div>
-    <div class="la-hase">
-        <HexButton
-            text={getLocalized("LA.systems.short")}
-            value={system.sys}
+                    outerStyle={["-agi"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    outerTextStyle={["-widthfull", "-textaligncenter"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                />
+            </div>
+            <div class="la-combine-h -aligncenter">
+                <HexButton
+                    text={getLocalized("LA.systems.short")}
+                    value={system.sys}
 
-            tooltip={getLocalized("LA.systems.tooltip")}
-            logText={getLocalized("LA.systems.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+                    tooltip={getLocalized("LA.systems.tooltip")}
+                    logText={getLocalized("LA.systems.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
 
-            uuid={actor.uuid}
-            flowClass={FlowClass.RollStat}
-            path={"system.sys"}
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.RollStat}
+                    path={"system.sys"}
 
-            outerStyle={["-positionrelative", "-systems", "-fontsize10"]}
-            innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
-            outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
-        />
-    </div>
-    <div class="la-hase">
-        <HexButton
-            text={getLocalized("LA.engineering.short")}
-            value={system.eng}
+                    outerStyle={["-sys"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    outerTextStyle={["-widthfull", "-textaligncenter"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                />
+            </div>
+            <div class="la-combine-h -aligncenter">
+                <div class="-eng -pointerdisable">&nbsp;</div>
+                <HexButton
+                    text={getLocalized("LA.engineering.short")}
+                    value={system.eng}
 
-            tooltip={getLocalized("LA.engineering.tooltip")}
-            logText={getLocalized("LA.engineering.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+                    tooltip={getLocalized("LA.engineering.tooltip")}
+                    logText={getLocalized("LA.engineering.tooltip")}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
 
-            uuid={actor.uuid}
-            flowClass={FlowClass.RollStat}
-            path={"system.eng"}
-            
-            outerStyle={["-positionrelative", "-engineering", "-fontsize10"]}
-            innerStyle={["-positionabsolute", "-widthfull", "-left0", "-top5"]}
-            buttonStyle={["-width5", "-height5", "-glow-primary-hover"]}
-            outerTextStyle={["-lineheight1", "-positionabsolute", "la-text-header"]}
-            innerTextStyle={["-glow-header", "-fontsize3", "la-text-header"]}
-        />
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.RollStat}
+                    path={"system.eng"}
+
+                    outerStyle={["-eng"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    outerTextStyle={["-widthfull", "-textaligncenter"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                />
+            </div>
+        </div>
     </div>
 </div>
