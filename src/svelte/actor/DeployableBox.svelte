@@ -1,29 +1,32 @@
 <script lang="ts">
     import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import { getSheetStore } from "@/scripts/store/store";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { getSheetStore } from "@/scripts/store/store";
 
     const {
         source, 
         lidSource, 
         uuid,
         sheetUUID,
-    }: DeployableBoxProps & {uuid?: string} = $props(); // (#4)
+
+        tooltipEnabled,
+        logType,
+        logTypeReset,
+    }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
     const themeOverride = getSheetStore(sheetUUID).currentTheme;
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
@@ -146,22 +149,23 @@
                             flowClass={FlowClass.None}
                             onClick={(event) => sendDeployableActionToChat(event, action, deployable)}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
                             tooltipDirection={TooltipDirection.LEFT}
-                            logType={TextLogHook.MechHeader}
-                            logTypeReset={TextLogHook.MechHeaderReset}
+                            logType={logType}
+                            logTypeReset={logTypeReset}
                         />
                     {/each}
                     </div>
                     <img class="-height10 click-open -glow-secondary -glow-primary-hover" 
                         src={getThemeImg(deployable)}
                         alt={getLocalized("LA.placeholder")}
-                        data-tooltip={tipEnabled ? tip : undefined}
+                        data-tooltip={tooltipEnabled ? tip : undefined}
                         data-tooltip-class="clipped-bot la-tooltip"
                         data-tooltip-direction={TooltipDirection.LEFT}
-                        onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), TextLogHook.MechHeader) }
-                        onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+                        onpointerenter={ logType ? event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), logType) : undefined }
+                        onpointerleave={ logTypeReset ? event => resetLog(event, logTypeReset) : undefined }
                     />
                 </div>
                 <hr>
@@ -179,6 +183,10 @@
                 uuid={uuid || deployable.uuid}
                 disableLeftButton={uuid ? false : true}
                 onClick={uuid ? sendActionToChat : undefined }
+
+                tooltipEnabled={tooltipEnabled}
+                logType={logType}
+                logTypeReset={logTypeReset}
             />
         {/if}
         </div>

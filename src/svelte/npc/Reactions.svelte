@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
@@ -10,10 +15,6 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
@@ -21,6 +22,7 @@
         reactions,
     }: NPCSheetProps & {reactions : Array<any>} = $props();
 
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const tier = system.tier;
     const collID = `${actor.uuid}.reactions`;
     
@@ -75,6 +77,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 
@@ -117,6 +120,7 @@
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${reaction.index}`}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={getReactionTooltip(reaction)}
             tooltipHeader={getLocalized("LA.action.reaction.label")}
             tooltipDirection={TooltipDirection.UP}
@@ -130,12 +134,16 @@
             path={`itemTypes.npc_feature.${reaction.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+
+            tooltipEnabled={tooltipEnabled}
         />
         <MessageButton
             flowClass={FlowClass.SendToChat}
             uuid={reaction.uuid}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+            
+            tooltipEnabled={tooltipEnabled}
         />
     {/snippet}
         <HeaderSecondary
@@ -163,6 +171,8 @@
                     outerStyle={[
                         `${hasAccuracyBonus(reaction) ? "-bordersround" : "-bordersround-ltb"}`, 
                     ]}
+
+                    tooltipEnabled={tooltipEnabled}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
                         {reaction.system.attack_bonus[tier - 1]}
@@ -171,6 +181,8 @@
                 </EffectBox>
                 <EffectBox
                     name={getLocalized("LA.npc.accuracy.label")}
+
+                    tooltipEnabled={tooltipEnabled}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
                         {reaction.system.accuracy[tier - 1]}
@@ -181,16 +193,22 @@
         {/if}
             <EffectBox
                 name={getLocalized("LA.trigger.label")}
+
+                tooltipEnabled={tooltipEnabled}
             >
                 {@html reaction.system.trigger}
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
                 effect={reaction.system.effect}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={reaction.system.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <TagArray
                 tags={reaction.system.tags}

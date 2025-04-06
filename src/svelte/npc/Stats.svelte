@@ -2,6 +2,9 @@
     import { id as moduleID } from "@/module.json";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
+    import { setThemeOverride } from "@/scripts/npc/settings";
+    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
@@ -10,8 +13,6 @@
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
-    import { setThemeOverride } from "@/scripts/npc/settings";
-    import { getAdvancedState } from "@/scripts/store/advanced";
 
     const props = $props();
     const {
@@ -20,16 +21,19 @@
     }: NPCSheetProps = props;
 
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
-    const activTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
+    const activateTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
     const tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
     const setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
     const rechargeTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.recharge.tooltip"), getLocalized("LA.action.startofturn.label"));
     const notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
     const notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
     const notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
+    const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
+    const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
     
     function handleShowNotes(event: MouseEvent)
     {
@@ -55,7 +59,7 @@
                     <button type="button"
                         class="la-bckg-secondary -width2
                             clicker-minus-button input-update"
-                        data-tooltip={setTierTip}
+                        data-tooltip={tooltipEnabled ? setTierTip : undefined}
                         data-tooltip-class={"clipped-bot la-tooltip"}
                         data-tooltip-direction={"UP"}
                         aria-label={getLocalized("LA.subtract.label")}
@@ -67,14 +71,14 @@
                         data-dtype={"Number"}
                         value={`${system.tier}`}
                         name={`system.tier`}
-                        data-tooltip={setTierTip}
+                        data-tooltip={tooltipEnabled ? setTierTip : undefined}
                         data-tooltip-class={"clipped-bot la-tooltip"}
                         data-tooltip-direction={"UP"}
                     /><!--
                 ---><button type="button"
                         class="la-bckg-secondary -width2
                             clicker-plus-button input-update"
-                        data-tooltip={setTierTip}
+                        data-tooltip={tooltipEnabled ? setTierTip : undefined}
                         data-tooltip-class={"clipped-bot la-tooltip"}
                         data-tooltip-direction={"UP"}
                         aria-label={getLocalized("LA.add.label")}
@@ -86,29 +90,29 @@
                 <div class="la-stat__island -positionrelative la-dropshadow">
                     <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
                         <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text")} la-outl-shadow"
-                            data-tooltip={tierTip}
+                            data-tooltip={tooltipEnabled ? tierTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {#if system.size < 1}
                         <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
-                            data-tooltip={sizeTip}
+                            data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {:else}
                         <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
-                            data-tooltip={sizeTip}
+                            data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {/if}
                         <div class="la-combine-h" 
-                            data-tooltip={speedTip}
+                            data-tooltip={tooltipEnabled ? speedTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
                             <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
                         </div>
                         <div class="la-combine-h -aligncenter" 
-                            data-tooltip={activTip}
+                            data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
@@ -118,7 +122,7 @@
                             <button type="button"
                                 class="mdi mdi-refresh-circle la-text-secondary -fontsize6
                                     charge-macro"
-                                data-tooltip={rechargeTip}
+                                data-tooltip={tooltipEnabled ? rechargeTip : undefined}
                                 data-tooltip-class="clipped-bot la-tooltip"
                                 data-tooltip-direction={TooltipDirection.RIGHT}
                                 aria-label={getLocalized("LA.npc.recharge.tooltip")}
@@ -147,6 +151,7 @@
                             uuid={actor.uuid}
                             style={["-lineheight3", "-glow-active-hover"]}
                             iconStyle={["-fontsize5"]}
+
                             tooltipEnabled={true}
                             tooltipDirection={TooltipDirection.UP}
                         />
@@ -156,6 +161,7 @@
                             style={["-lineheight3"]}
                             iconStyle={["-fontsize2"]}
                             setOverride={setThemeOverride}
+
                             tooltipEnabled={true}
                             tooltipDirection={TooltipDirection.UP}
                         />
@@ -195,6 +201,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.armor.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                             />
@@ -205,6 +212,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.evasion.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -215,6 +223,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.edefense.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -236,6 +245,7 @@
                                     barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
                                     clipPath={"clipped"}
                                     
+                                    tooltipEnabled={tooltipEnabled}
                                     tooltip={getLocalized("LA.hitpoint.tooltip")}
                                     tooltipDirection={TooltipDirection.LEFT}
                                 />
@@ -250,6 +260,7 @@
                                     barStyle={["la-bckg-bar-structure"]}
                                     clipPath={"clipped-alt"}
 
+                                    tooltipEnabled={tooltipEnabled}
                                     tooltip={getLocalized("LA.structure.tooltip")}
                                     tooltipDirection={TooltipDirection.LEFT}
                                 />
@@ -262,7 +273,7 @@
                                     data-dtype="Number"
                                     value="{system.overshield.value}">
                                 <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                                    data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'))}"
+                                    data-tooltip={tooltipEnabled ? shieldTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip"
                                     data-tooltip-direction="LEFT"
                                 ><!--
@@ -288,6 +299,7 @@
                                     barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
                                     clipPath={"clipped"}
 
+                                    tooltipEnabled={tooltipEnabled}
                                     tooltip={getLocalized("LA.heat.tooltip")}
                                     tooltipDirection={TooltipDirection.LEFT}
                                 />
@@ -302,6 +314,7 @@
                                     barStyle={["la-bckg-bar-stress"]}
                                     clipPath={"clipped-alt"}
 
+                                    tooltipEnabled={tooltipEnabled}
                                     tooltip={getLocalized("LA.stress.tooltip")}
                                     tooltipDirection={TooltipDirection.LEFT}
                                 />
@@ -314,7 +327,7 @@
                                     data-dtype="Number"
                                     value="{system.burn}">
                                 <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                                    data-tooltip="{TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'))}"
+                                    data-tooltip={tooltipEnabled ? burnTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip"
                                     data-tooltip-direction="LEFT"
                                 ><!--
@@ -332,6 +345,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.tattack.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -342,6 +356,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.save.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -352,6 +367,7 @@
                             outerStyle={["-fontsize5"]}
                             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+                            tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.sensor.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />

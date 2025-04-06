@@ -7,7 +7,6 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { CLICKABLE_HOVER } from "@/svelte/actor/button/Button.svelte";
     import { H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
@@ -20,6 +19,7 @@
         flowClass,
         disabled,
         
+        tooltipEnabled,
         tooltip,
         tooltipHeader,
         tooltipDirection,
@@ -29,7 +29,6 @@
         logType,
         logTypeReset,
     }: IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollAttack.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.flow.rollAttack.tooltip");
@@ -43,7 +42,7 @@
     class="
         {style?.join(' ')}
         {flowClass || FlowClass.RollAttack}"
-    data-tooltip={tipEnabled && !disabled ? tip : undefined }
+    data-tooltip={tooltipEnabled && !disabled ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

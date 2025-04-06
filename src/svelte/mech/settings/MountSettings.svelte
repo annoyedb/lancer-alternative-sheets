@@ -37,7 +37,7 @@
 
     const weaponMounts = system.loadout.weapon_mounts;
 
-    const tipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTipEnabled();
     const removeTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.remove.tooltip"));
     const editTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.edit.tooltip"));
 
@@ -231,7 +231,7 @@
         <MountAdd/>
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
-            data-tooltip={tipEnabled ? removeTip : undefined}
+            data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class={"la-tooltip clipped-bot"}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.remove.tooltip"), TextLogHook.MechHeader) }
@@ -245,7 +245,7 @@
         <!-- svelte-ignore event_directive_deprecated -->
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
-            data-tooltip={tipEnabled ? editTip : undefined}
+            data-tooltip={tooltipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class={"la-tooltip clipped-bot"}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.edit.tooltip"), TextLogHook.MechHeader) }

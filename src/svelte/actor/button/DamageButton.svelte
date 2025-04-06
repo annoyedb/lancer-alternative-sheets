@@ -8,7 +8,6 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
@@ -24,6 +23,7 @@
         flowClass,
         disabled,
 
+        tooltipEnabled,
         tooltip,
         tooltipHeader,
         tooltipDirection,
@@ -33,7 +33,7 @@
         logType,
         logTypeReset,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
-    const tipEnabled = getMechSheetTipEnabled();
+    
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
     const hasAllWeaponProperties = damage?.length && range?.length;
     const rollable = !disabled && (damage?.length > 0);
@@ -49,7 +49,7 @@
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
-    data-tooltip={tipEnabled && rollable ? tip : undefined }
+    data-tooltip={tooltipEnabled && rollable ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

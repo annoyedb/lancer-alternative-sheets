@@ -34,7 +34,7 @@
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
 
-    const tipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTipEnabled();
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
@@ -87,23 +87,25 @@
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
         <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
-            data-tooltip={tipEnabled ? sizeTip : undefined}
+            data-tooltip={tooltipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
         <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
-            data-tooltip={tipEnabled ? sizeTip : undefined}
+            data-tooltip={tooltipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
         <div class="la-combine-h -fontsize7" 
-            data-tooltip={tipEnabled ? speedTip : undefined}
+            data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip"
             data-tooltip-direction={TooltipDirection.RIGHT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{system.speed}</span>
         </div>
-        <CoreAvailability {system} />
+        <CoreAvailability {system} 
+            tooltipEnabled={tooltipEnabled}
+        />
     </div>
     <div class="la-combine-h">
         <!-- Mech Image -->
@@ -126,6 +128,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.armor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -136,6 +139,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.evasion.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -146,6 +150,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.edefense.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -167,6 +172,7 @@
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
                 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -181,6 +187,7 @@
                 textStyle={["la-text-text"]}
                 clipPath={"clipped-alt"}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.structure.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -194,7 +201,7 @@
                 value={system.overshield.value}
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                data-tooltip={tipEnabled ? shieldTip : undefined}
+                data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
@@ -220,6 +227,7 @@
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.heat.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
                 />
@@ -234,6 +242,7 @@
                 textStyle={["la-text-text"]}
                 clipPath={"clipped-alt"}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.stress.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
                 />
@@ -246,7 +255,7 @@
                 data-dtype={"Number"}
                 value={system.burn}>
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
-                data-tooltip={tipEnabled ? burnTip : undefined}
+                data-tooltip={tooltipEnabled ? burnTip : undefined}
                 data-tooltip-class={"clipped-bot la-tooltip"}
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
@@ -264,6 +273,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.tattack.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -274,6 +284,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.save.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -284,6 +295,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.sensor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -294,7 +306,7 @@
         <button type="button"
             class="mdi mdi-chevron-left la-text-secondary -glow-primary-hover -positionabsolute -fontsize3"
             style="left: -1rem;"
-            data-tooltip={tipEnabled ? overchargeMinusTip : undefined}
+            data-tooltip={tooltipEnabled ? overchargeMinusTip : undefined}
             data-tooltip-class={"clipped-bot la-tooltip"}
             data-tooltip-direction={TooltipDirection.UP}
             onclick={event => handleOverchargeDecrease(event)}
@@ -307,13 +319,14 @@
             outerStyle={["la-text-text", "-fontsize5"]}
             innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.overcharge.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
         />
         <button type="button"
             class="mdi mdi-chevron-right la-text-secondary -glow-primary-hover -positionabsolute -fontsize3"
             style="right: -1.5rem;"
-            data-tooltip={tipEnabled ? overchargePlusTip : undefined}
+            data-tooltip={tooltipEnabled ? overchargePlusTip : undefined}
             data-tooltip-class={"clipped-bot la-tooltip"}
             data-tooltip-direction={TooltipDirection.UP}
             onclick={event => handleOverchargeIncrease(event)}
@@ -327,6 +340,7 @@
         outerStyle={["la-text-text", "-fontsize5"]}
         innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getLocalized("LA.repair.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -338,7 +352,7 @@
     setExes={setSidebarExecutables}
     hintDropArea={true}
     allowDrop={advancedOptions}
-    tooltipEnabled={tipEnabled}
+    tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 />

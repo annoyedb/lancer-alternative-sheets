@@ -1,8 +1,9 @@
 <script lang="ts">
     import type { ActionBoxProps } from "@/interfaces/actor/ActionBoxProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { slugify } from "@/scripts/lancer/util/lid";
@@ -27,7 +28,11 @@
 
         onClick,
         disableLeftButton,
-    }: ActionBoxProps = $props();
+
+        tooltipEnabled,
+        logType,
+        logTypeReset
+    }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
 
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
@@ -75,11 +80,12 @@
             : getActivationClass(action.activation)
         }
 
+        tooltipEnabled={tooltipEnabled}
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}
         tooltipDirection={undefined}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={logType}
+        logTypeReset={logTypeReset}
     />
 {/snippet}
 {#snippet outercontent()}    
@@ -117,11 +123,12 @@
         path={`${path}.${index}`}
         onClick={onClick ? (event) => onClick(event, action) : undefined }
 
+        tooltipEnabled={tooltipEnabled}
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={logType}
+        logTypeReset={logTypeReset}
 
         disabled={disableLeftButton}
     />    
@@ -148,6 +155,10 @@
             <EffectBox
                 name={getLocalized("LA.trigger.label")}
                 outerStyle={["-bordersround"]}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={logType}
+                logTypeReset={logTypeReset}
             >
             {#if !collapseID}
                 {@render defaultFlowButton()}
@@ -162,6 +173,10 @@
 
                 editOption={editDetails}
                 editPath={`${path}.detail`}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={logType}
+                logTypeReset={logTypeReset}
             >
                 {@html action.detail || defaultPlaceholder}
             </EffectBox>
@@ -179,6 +194,10 @@
             <EffectBox
                 name={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
                 outerStyle={["-bordersround"]}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={logType}
+                logTypeReset={logTypeReset}
             >
                 {@html action.detail || defaultPlaceholder}
             </EffectBox>

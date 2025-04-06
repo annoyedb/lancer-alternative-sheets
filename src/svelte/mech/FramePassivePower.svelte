@@ -1,30 +1,32 @@
 <script lang="ts">
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { getManufacturerColor } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getManufacturerColor } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/actor/header/HeaderQuinary.svelte";
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import { H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         actor,
         system,
     }: MechSheetProps = $props();
 
-    let frame: any = system.loadout.frame!.value;
-    let core: any = frame.system.core_system;
-    let frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
-    let frameColorBrdr = getManufacturerColor(frame.system.manufacturer, "brdr")
-    let collID: string = `${actor.uuid}.${frame.id}.passive`;
-    let actionCollID: string = `${actor.uuid}.${frame.id}.passive.action`;
-    let tip = core.passive_effect || getLocalized("LA.chat.tooltip");
+    const tooltipEnabled = getMechSheetTipEnabled();
+    const frame: any = system.loadout.frame!.value;
+    const core: any = frame.system.core_system;
+    const frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
+    const frameColorBrdr = getManufacturerColor(frame.system.manufacturer, "brdr")
+    const collID: string = `${actor.uuid}.${frame.id}.passive`;
+    const actionCollID: string = `${actor.uuid}.${frame.id}.passive.action`;
+    const tip = core.passive_effect || getLocalized("LA.chat.tooltip");
 
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
@@ -46,6 +48,7 @@
     flowClass={FlowClass.None}
     onClick={sendToChat}
 
+    tooltipEnabled={tooltipEnabled}
     tooltip={tip}
     tooltipDirection={TooltipDirection.LEFT}
     logType={TextLogHook.MechHeader}
@@ -67,6 +70,10 @@
     <EffectBox
         name={getLocalized("LA.mech.core.passive.label")}
         effect={core.passive_effect}
+
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 {/if}
     <!-- Generated Content -->
@@ -74,8 +81,13 @@
         uuid={frame.uuid}
         actions={core.passive_actions}
         path={'system.core_system.passive_actions'}
+
         collapseID={actionCollID}
         startCollapsed={false}
+
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 </HeaderQuinary>
 {/if}

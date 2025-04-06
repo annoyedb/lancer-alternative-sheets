@@ -1,7 +1,8 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
     import type { EffectBoxProps } from "@/interfaces/actor/EffectBoxProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
 
@@ -15,7 +16,12 @@
 
         editOption,
         editPath,
-    }: EffectBoxProps = $props();
+
+        tooltipEnabled,
+
+        logType,
+        logTypeReset,
+    }: EffectBoxProps & TooltipProps & TextLogEventProps = $props();
 
 </script>
 
@@ -36,8 +42,10 @@
         <FlowButton
             text={getLocalized("LA.use.label")}
             flowClass={FlowClass.SendEffectToChat}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+
+            tooltipEnabled={tooltipEnabled}
+            logType={logType}
+            logTypeReset={logTypeReset}
         />
     {/if}
     <span

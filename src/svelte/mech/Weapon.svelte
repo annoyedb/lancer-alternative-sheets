@@ -1,9 +1,11 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
@@ -16,12 +18,13 @@
     import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
-    import { TextLogHook } from "@/enums/TextLogHook";
 
     const {
         mount,
         mountIndex,
     }: MountSlotProps = $props();
+
+    const tooltipEnabled = getMechSheetTipEnabled();
 
     function getSlotSize(size: string)
     {
@@ -166,6 +169,7 @@
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={getRollWeaponTip(weapon)}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getRollWeaponTip(weapon)}
@@ -183,6 +187,7 @@
         range={weapon.system.active_profile.all_range}
         damage={weapon.system.active_profile.all_damage}
 
+        tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
@@ -194,6 +199,7 @@
             flowClass={FlowClass.SendToChat}
             uuid={weapon.uuid}
 
+            tooltipEnabled={tooltipEnabled}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
@@ -201,6 +207,7 @@
             flowClass={FlowClass.ContextMenu}
             path={getWeaponPath(index)}
 
+            tooltipEnabled={tooltipEnabled}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
@@ -235,25 +242,46 @@
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
                 effect={profile.effect}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.attack.label")}
                 effect={profile.on_attack}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={profile.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.crit.label")}
                 effect={profile.on_crit}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
             <ActionBox
                 actions={weapon.system.actions}
                 uuid={weapon.uuid}
                 path={`system.actions`}
+
                 collapseID={getActionCollapseID(index)}
                 startCollapsed={false}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
         {#if slot.size !== "Integrated" && !weapon.system.mod}
             <WeaponMod

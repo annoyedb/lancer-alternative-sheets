@@ -2,18 +2,23 @@
     import { Logger } from "@/classes/Logger";
     import { getBrightness } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
+    import { getSheetStore } from "@/scripts/store/store";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { FlowClass } from "@/enums/FlowClass";
     import DeleteButton from "@/svelte/actor/button/DeleteButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import { getSheetStore } from "@/scripts/store/store";
 
     const {
         effects,
         actor,
         isOwner,
-    }: ActiveEffectsProps = $props();
+
+        tooltipEnabled,
+        logType,
+        logTypeReset,
+    }: ActiveEffectsProps & TooltipProps & TextLogEventProps = $props();
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
 
     function getThemedIcon(effect: any)
@@ -59,8 +64,9 @@
         flowClass={FlowClass.DeleteActiveEffect}
         onClick={deleteActiveEffect}
 
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        tooltipEnabled={tooltipEnabled}
+        logType={logType}
+        logTypeReset={logTypeReset}
     />
     {/snippet}
     <HeaderMain 

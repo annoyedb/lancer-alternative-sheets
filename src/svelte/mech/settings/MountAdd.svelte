@@ -8,7 +8,7 @@
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { SETTINGS_BUTTON_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
-    const tipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.add.tooltip"));
     function addMount(event: MouseEvent)
     {
@@ -23,7 +23,7 @@
     data-path={"system.loadout.weapon_mounts"}
     data-action={"append"}
     data-action-value="(struct)wep_mount"
-    data-tooltip={tipEnabled ? tip : undefined}
+    data-tooltip={tooltipEnabled ? tip : undefined}
     data-tooltip-direction={TooltipDirection.RIGHT}
     data-tooltip-class={"la-tooltip clipped-bot"}
     onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.add.tooltip"), TextLogHook.MechHeader) }

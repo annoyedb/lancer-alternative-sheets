@@ -1,13 +1,13 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { SidebarRatioSliderProps } from "@/interfaces/actor/button/SidebarRatioSliderProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import { onMount } from "svelte";
 
     const props = $props();
     const { 
@@ -17,17 +17,18 @@
         
         style,
 
+        tooltipEnabled,
+
         logText,
         logType,
         logTypeReset,
-    }: SidebarRatioSliderProps & TextLogEventProps = props
+    }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = props
     
     let advancedOptions = $derived(getAdvancedState(uuid));
     let ratio = $state(ratioGetter(uuid));
     let component: HTMLElement | null = $state(null);
     let sidebar: JQuery<HTMLElement> | null = null;
         
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.advanced.sidebarRatio.tooltip");
@@ -70,7 +71,7 @@
         max={2}
         value={ratio}
         step={0.1}
-        data-tooltip={tipEnabled ? tip : undefined }
+        data-tooltip={tooltipEnabled ? tip : undefined }
         data-tooltip-class={"la-tooltip clipped-bot"}
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}

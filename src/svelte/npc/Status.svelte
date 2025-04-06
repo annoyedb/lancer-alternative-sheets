@@ -1,23 +1,26 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { getLocalized } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
+    import { getAdvancedState } from "@/scripts/store/advanced";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
-    import { getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
-    import { getAdvancedState } from "@/scripts/store/advanced";
 
     const props = $props();
     const {
         actor,
     }: NPCSheetProps = props;
+
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let sidebarExes = $state(getSidebarExecutables(actor.uuid));
 
+    const tooltipEnabled = getNPCSheetTooltipEnabled(); 
     const activeEffectsCollID = `${actor.uuid}.status.activeEffects`;
     const utilitiesCollID = `${actor.uuid}.status.utilities`;
     const macrosCollID = `${actor.uuid}.status.macros`;
@@ -26,6 +29,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={activeEffectsCollID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 <HeaderMain 
@@ -39,7 +43,11 @@
 
     headerContent={headerOptions}
 >
-    <ActiveEffects {...props} />
+    <ActiveEffects { ...props }
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset} 
+    />
 </HeaderMain>
 
 <HeaderMain 
@@ -57,6 +65,8 @@
             text={getLocalized("LA.npc.recharge.label")}
             
             flowClass={FlowClass.RechargeFeatures}
+
+            tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.npc.recharge.tooltip")}
             tooltipHeader={getLocalized("LA.action.startofturn.label")}
             tooltipDirection={TooltipDirection.UP}
@@ -71,6 +81,7 @@
                     flowClass={FlowClass.Standard}
                     flowType={"BasicAttack"}
 
+                    tooltipEnabled={tooltipEnabled}
                     tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                     tooltipDirection={TooltipDirection.UP}
                 />
@@ -82,6 +93,7 @@
                     flowClass={FlowClass.Standard}
                     flowType={"Damage"}
 
+                    tooltipEnabled={tooltipEnabled}
                     tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                     tooltipDirection={TooltipDirection.UP}
                 />
@@ -95,6 +107,7 @@
                     flowClass={FlowClass.Standard}
                     flowType={"TechAttack"}
 
+                    tooltipEnabled={tooltipEnabled}
                     tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                     tooltipDirection={TooltipDirection.UP}
                 />
@@ -106,6 +119,7 @@
                     flowClass={FlowClass.Standard}
                     flowType={"Burn"}
 
+                    tooltipEnabled={tooltipEnabled}
                     tooltipHeader={getLocalized("LA.action.endofturn.label")}
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                     tooltipDirection={TooltipDirection.UP}

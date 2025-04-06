@@ -7,7 +7,6 @@
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
@@ -15,14 +14,16 @@
 
         style,
         iconStyle,
+        
+        tooltipEnabled,
         tooltipDirection,
+
         logText,
         logType,
         logTypeReset,
     }: IconButtonProps & CollapseAllButtonProps & TooltipProps & TextLogEventProps = $props();
     let isExpanding = $derived(!getCollapseState(collapseID));
 
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.collapseAll.tooltip");
@@ -55,7 +56,7 @@
 
 <button type="button"
     class="{style?.join(' ') || MAIN_HEADER_STYLE}"
-    data-tooltip={tipEnabled ? tip : undefined }
+    data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

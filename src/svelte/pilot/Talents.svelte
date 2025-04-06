@@ -1,8 +1,10 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { getCollapseState } from "@/scripts/store/collapse";
     import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
@@ -12,7 +14,6 @@
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { TextLogHook } from "@/enums/TextLogHook";
 
     const props: MechSheetProps = $props();
     const {
@@ -20,6 +21,7 @@
         pilot,
     } = props;
     
+    const tooltipEnabled = getMechSheetTipEnabled();
     const isMechSheet = actor.type === "mech";
     const talents = pilot.itemTypes.talent;
     const collID = `${pilot.uuid}.talents`;
@@ -59,6 +61,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 />
@@ -87,12 +90,13 @@
             iconStyle={["-lineheight3"]}
             path={`system.pilot.value.itemTypes.talent.${index}`}
 
+            tooltipEnabled={tooltipEnabled}
             logType={isMechSheet ? TextLogHook.MechHeader : undefined }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
         />
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
-            
+            tooltipEnabled={tooltipEnabled}
             logType={isMechSheet ? TextLogHook.MechHeader : undefined }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
         />
@@ -145,6 +149,10 @@
                         flowClass={FlowClass.SendToChat}
                         uuid={talent.uuid}
                         rank={jndex}
+
+                        tooltipEnabled={tooltipEnabled}
+                        logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                     />
                 {/snippet}
                 <HeaderSecondary
@@ -170,13 +178,21 @@
                         <EffectBox
                             name={getLocalized("LA.pilot.trait.label")}
                             effect={rank.description}
+
+                            tooltipEnabled={tooltipEnabled}
+                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                         />
                         <ActionBox
                             actions={rank.actions}
                             uuid={talent.uuid}
                             path={`system.ranks.${jndex}.actions`}
+
                             collapseID={getActionCollID(index, jndex)}
                             startCollapsed={false}
+
+                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                         />
                     </div>
                 </HeaderSecondary>

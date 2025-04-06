@@ -6,13 +6,13 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         flowClass,
         path,
 
+        tooltipEnabled,
         tooltipDirection,
 
         style,
@@ -23,7 +23,6 @@
         logTypeReset,
     }: IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
 
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.edit.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.edit.tooltip");
@@ -37,7 +36,7 @@
     class="la-combine-v {style?.join(' ') || _STYLE}
         {flowClass || 'lancer-context-menu'}"
     data-path={path}
-    data-tooltip={tipEnabled ? tip : undefined }
+    data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

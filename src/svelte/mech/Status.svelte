@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
-    import { getMechSheetLogActionMainMaxHeight } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionMainMaxHeight, getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -18,6 +18,8 @@
         actor,
         system,
     } = props;
+    
+    const tooltipEnabled = getMechSheetTipEnabled();
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
     const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
@@ -32,6 +34,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 />
@@ -70,7 +73,11 @@
 
         headerContent={headerOptions}
     >
-        <ActiveEffects {...props} />
+        <ActiveEffects { ...props }
+            tooltipEnabled={tooltipEnabled}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset} 
+        />
     </HeaderMain>
     <!-- Integrity -->
     <HeaderMain
@@ -99,7 +106,7 @@
                     <i class="cci cci-repair la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
                     <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
-                        <input class="la-top__input -width2ch la-shadow -medium -inset"
+                        <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
                             name="system.repairs.value"
                             data-dtype="Number" value={system.repairs.value}
@@ -145,6 +152,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"Structure"}
     
+                        tooltipEnabled={tooltipEnabled}
                         tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.structureDamage.tooltip")}
@@ -159,6 +167,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"Overheat"}
     
+                        tooltipEnabled={tooltipEnabled}
                         tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.reactorStress.tooltip")}
@@ -173,6 +182,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"FullRepair"}
     
+                        tooltipEnabled={tooltipEnabled}
                         tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.fullRepair.tooltip")}
@@ -189,6 +199,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"Overcharge"}
 
+                        tooltipEnabled={tooltipEnabled}
                         tooltipHeader={getLocalized("LA.action.overcharge.label")}
                         tooltip={overchargeText}
                         tooltipDirection={TooltipDirection.LEFT}
@@ -203,6 +214,7 @@
                         uuid={actor.uuid}
                         flowClass={FlowClass.ResetOvercharge}
 
+                        tooltipEnabled={tooltipEnabled}
                         tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.overchargeReset.tooltip")}
@@ -217,6 +229,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"Stabilize"}
     
+                        tooltipEnabled={tooltipEnabled}
                         tooltipHeader={getLocalized("LA.action.full.label")}
                         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
@@ -232,6 +245,7 @@
                         flowClass={FlowClass.Standard}
                         flowType={"Burn"}
     
+                        tooltipEnabled={tooltipEnabled}
                         tooltipHeader={getLocalized("LA.action.endofturn.label")}
                         tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}

@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
@@ -19,6 +18,7 @@
         flowClass,
         disabled,
         
+        tooltipEnabled,
         tooltip,
         tooltipHeader,
         tooltipDirection,
@@ -28,7 +28,6 @@
         logTypeReset,
     }: {children?: Snippet} & FlowButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
 
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.inventory.open.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.advanced.inventory.open.tooltip");
@@ -39,7 +38,7 @@
         class="
             {style?.join(' ')}
             {flowClass}"
-        data-tooltip={tipEnabled ? tip : undefined }
+        data-tooltip={tooltipEnabled ? tip : undefined }
         data-tooltip-class={"clipped-bot la-tooltip"}
         data-tooltip-direction={tooltipDirection || TooltipDirection.RIGHT}
         onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

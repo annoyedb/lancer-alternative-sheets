@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -23,7 +24,8 @@
         path,
     }: WeaponModProps = $props();
 
-    let collID = mod ? `${mod.uuid}_action` : "empty";
+    const collID = mod ? `${mod.uuid}_action` : "empty";
+    const tooltipEnabled = getMechSheetTipEnabled();
 
     //@ts-ignore
     function log(any: any)
@@ -41,6 +43,7 @@
         flowClass={FlowClass.SendEffectToChat}
         path={path}
 
+        tooltipEnabled={tooltipEnabled}
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
@@ -62,6 +65,7 @@
         flowClass={FlowClass.ContextMenu}
         path={path}
 
+        tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />
@@ -120,6 +124,10 @@
                     name={getLocalized("LA.mech.mod.range.label")}
                     innerStyle={["-fontsize3"]}
                     outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-bordersround"] : []}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 >
                     <RangeArray
                         ranges={mod.system.added_range}
@@ -130,6 +138,10 @@
                 <EffectBox
                     name={getLocalized("LA.mech.mod.damage.label")}
                     innerStyle={["-fontsize3"]}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 >
                     <DamageArray
                         damages={mod.system.added_damage}
@@ -144,6 +156,10 @@
             />
             <EffectBox
                 name={getLocalized("LA.mech.mod.tags.label")}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             >
                 <TagArray
                     tags={mod.system.added_tags}
@@ -156,12 +172,17 @@
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.mech.mod.effect.label")}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             >
                 <FlowButton
                     text={getLocalized("LA.use.label")}
 
                     flowClass={FlowClass.SendEffectToChat}
 
+                    tooltipEnabled={tooltipEnabled}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -172,8 +193,13 @@
                 actions={mod.system.actions}
                 uuid={mod.uuid}
                 path={`system.actions`}
+
                 collapseID={collID}
                 startCollapsed={false}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
             />
         </div>
     </HeaderSecondary>

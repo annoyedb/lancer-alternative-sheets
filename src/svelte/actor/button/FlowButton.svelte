@@ -1,6 +1,5 @@
 <script lang="ts">
     import { getLocalized, randomExtension } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
@@ -21,6 +20,7 @@
         style,
         textStyle,
 
+        tooltipEnabled,
         tooltipHeader,
         tooltip,
         tooltipDirection,
@@ -37,7 +37,6 @@
         onClick,
     } : FlowButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.flow.tooltip");
@@ -56,7 +55,7 @@
     data-flow-type={flowType}
     data-flow-args={flowArgs}
     data-path={path}
-    data-tooltip={tipEnabled ? tip : undefined }
+    data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }

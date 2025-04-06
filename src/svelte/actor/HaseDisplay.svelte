@@ -1,18 +1,24 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import HexButton from "@/svelte/actor/button/HexButton.svelte";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
     import { getActiveTab } from "@/scripts/store/advanced";
+    import { FlowClass } from "@/enums/FlowClass";
     import { ActiveTab } from "@/enums/ActiveTab";
+    import HexButton from "@/svelte/actor/button/HexButton.svelte";
 
     const {
         pilot,
         actor,
         system,
-    }: MechSheetProps = $props();
-    const active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
+
+        tooltipEnabled,
+
+        logType,
+        logTypeReset,
+    }: MechSheetProps & TooltipProps & TextLogEventProps = $props();
+    let active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
 </script>
 
 <!-- HASE Stats -->
@@ -26,10 +32,11 @@
                 text={getLocalized("LA.grit.short")}
                 value={system.grit}
                 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.grit.tooltip")}
                 logText={getLocalized("LA.grit.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollStat}
@@ -48,10 +55,11 @@
                 text={getLocalized("LA.agility.short")}
                 value={system.agi}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.agility.tooltip")}
                 logText={getLocalized("LA.agility.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -67,10 +75,11 @@
                 text={getLocalized("LA.hull.short")}
                 value={system.hull}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.hull.tooltip")}
                 logText={getLocalized("LA.hull.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -88,10 +97,11 @@
                 text={getLocalized("LA.systems.short")}
                 value={system.sys}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.systems.tooltip")}
                 logText={getLocalized("LA.systems.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -110,10 +120,11 @@
                 text={getLocalized("LA.engineering.short")}
                 value={system.eng}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.engineering.tooltip")}
                 logText={getLocalized("LA.engineering.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}

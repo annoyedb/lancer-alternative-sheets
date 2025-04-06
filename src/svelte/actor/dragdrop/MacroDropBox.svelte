@@ -11,7 +11,6 @@
     import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
     import { LADataType } from '@/enums/LADataType';
     import { SystemButton } from '@/enums/SystemButton';
-    import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipDirection } from '@/enums/TooltipDirection';
     import { getLocalized } from '@/scripts/helpers';
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
@@ -155,8 +154,8 @@
             disabled={!allowDrop}
             deleteDisabled={!isMacro(type)}
 
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={logType}
+            logTypeReset={logTypeReset}
         >
         {#if isMacro(type)}
             <FlowButton
@@ -167,8 +166,10 @@
                     event.stopPropagation();
                     RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
                 }}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={logType}
+                logTypeReset={logTypeReset}
             />
         {:else}
             <FlowButton
@@ -178,11 +179,12 @@
                 uuid={uuid}
                 flowType={type}
 
+                tooltipEnabled={tooltipEnabled}
                 tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                 tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                 logText={ButtonFactory.getSystemButtonTip(type, uuid)}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={logType}
+                logTypeReset={logTypeReset}
             />
         {/if}
         </DragDropHandle>

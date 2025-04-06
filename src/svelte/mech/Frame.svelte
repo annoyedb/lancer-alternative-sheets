@@ -2,6 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getManufacturerColor } from "@/scripts/theme";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
@@ -18,6 +19,7 @@
         system,
     } = props;
 
+    const tooltipEnabled = getMechSheetTipEnabled();
     const frame: any | undefined = system.loadout.frame?.value;
     const core: any = frame?.system.core_system;
     const frameName: string = frame
@@ -43,6 +45,7 @@
 {#snippet headerOptions()}
     <CollapseAllButton
         collapseID={collID}
+        tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

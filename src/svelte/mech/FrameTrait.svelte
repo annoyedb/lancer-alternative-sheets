@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
@@ -17,6 +18,7 @@
     }: MechSheetProps = $props();
 
     let frame: any = system.loadout.frame!.value;
+    const tooltipEnabled = getMechSheetTipEnabled();
 
     function getCollapseID(index: number)
     {
@@ -41,6 +43,7 @@
     type={"trait"}
     index={index}
     
+    tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 />
@@ -63,6 +66,10 @@
         <EffectBox
             name={getLocalized("LA.mech.frame.trait.label")}
             effect={trait.description}
+
+            tooltipEnabled={tooltipEnabled}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
         <!-- Generated Content -->
     {#if trait.counters?.length}
@@ -86,14 +93,23 @@
             uuid={frame.uuid}
             actions={trait.actions}
             path={`system.traits.${index}.actions`}
+
             collapseID={getActionCollapseID(index)}
             startCollapsed={false}
+
+            tooltipEnabled={tooltipEnabled}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
         <DeployableBox
             source={actor}
             lidSource={trait}
             uuid={frame.uuid}
             sheetUUID={actor.uuid}
+
+            tooltipEnabled={tooltipEnabled}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
         />
     </div>
 </HeaderSecondary>

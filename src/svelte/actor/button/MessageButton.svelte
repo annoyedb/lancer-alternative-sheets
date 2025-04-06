@@ -2,7 +2,6 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
@@ -20,6 +19,7 @@
         iconStyle,
         onClick,
         
+        tooltipEnabled,
         tooltipDirection,
 
         logText,
@@ -27,7 +27,6 @@
         logTypeReset,
     }: IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
 
-    const tipEnabled = getMechSheetTipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.chat.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.chat.tooltip");
@@ -41,7 +40,7 @@
     data-uuid={uuid}
     data-type={type}
     data-index={index}
-    data-tooltip={tipEnabled ? tip : undefined }
+    data-tooltip={tooltipEnabled ? tip : undefined }
     data-rank={rank}
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}

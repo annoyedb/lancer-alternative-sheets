@@ -8,6 +8,15 @@ import { Logger } from "@/classes/Logger";
 export function registerNPCSheetSettings()
 {
     // Public Settings
+    game.settings.register(LancerAlternative.Name, `npc-settings-tip`, {
+        name: "LA.SETTINGS.npc.enableTooltip.label",
+        hint: "LA.SETTINGS.npc.enableTooltip.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
+
     game.settings.register(LancerAlternative.Name, `npc-settings-sheet-width`, {
         name: "LA.SETTINGS.npc.sheetWidth.label",
         hint: "LA.SETTINGS.npc.sheetWidth.subLabel",
@@ -31,8 +40,8 @@ export function registerNPCSheetSettings()
     } as ClientSettings.PartialSetting<number>);
 
     game.settings.register(LancerAlternative.Name, `npc-settings-log-action-save-collapse`, {
-        name: "LA.SETTINGS.mech.saveCollapse.label",
-        hint: "LA.SETTINGS.mech.saveCollapse.subLabel",
+        name: "LA.SETTINGS.npc.saveCollapse.label",
+        hint: "LA.SETTINGS.npc.saveCollapse.subLabel",
         scope: "client",
         config: true,
         type: Boolean,
@@ -40,8 +49,8 @@ export function registerNPCSheetSettings()
     } as ClientSettings.PartialSetting<boolean>);
 
     game.settings.register(LancerAlternative.Name, `npc-settings-log-action-start-collapsed`, {
-        name: "LA.SETTINGS.mech.startCollapsed.label",
-        hint: "LA.SETTINGS.mech.startCollapsed.subLabel",
+        name: "LA.SETTINGS.npc.startCollapsed.label",
+        hint: "LA.SETTINGS.npc.startCollapsed.subLabel",
         scope: "client",
         config: true,
         type: Boolean,
@@ -68,6 +77,11 @@ export function registerNPCSheetSettings()
 }
 
 // Client Settings
+export function getNPCSheetTooltipEnabled(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `npc-settings-tip`) as boolean;
+}
+
 export function getNPCSheetWidth(): number
 {
     const width = game.settings.get(LancerAlternative.Name, `npc-settings-sheet-width`) as number;

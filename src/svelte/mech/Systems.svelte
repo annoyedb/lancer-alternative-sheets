@@ -2,6 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { formatString, getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -25,6 +26,7 @@
         system,
     } = props;
 
+    const tooltipEnabled = getMechSheetTipEnabled();
     const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
     const collID = systemComponents.length
         ? `${actor.uuid}.systems`
@@ -115,6 +117,7 @@
 />
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 />
@@ -165,6 +168,7 @@
                 : FlowClass.SendToChat}
             path={getComponentPath(index)}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={component.value.system.effect}
             tooltipDirection={TooltipDirection.LEFT}
             logType={TextLogHook.MechHeader}
@@ -186,6 +190,7 @@
             <MessageButton
                 flowClass={FlowClass.SendToChat}
 
+                tooltipEnabled={tooltipEnabled}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
@@ -193,6 +198,7 @@
                 flowClass={FlowClass.ContextMenu}
                 path={getComponentPath(index)}
 
+                tooltipEnabled={tooltipEnabled}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
@@ -242,19 +248,32 @@
                 <EffectBox
                     name={getLocalized("LA.mech.system.effect.label")}
                     effect={component.value.system.effect}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <ActionBox
                     uuid={component.value.uuid}
                     actions={component.value.system.actions}
                     path={`system.actions`}
+
                     collapseID={getActionCollID(index)}
                     startCollapsed={false}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
                 <DeployableBox
                     source={actor}
                     lidSource={component.value.system}
                     uuid={component.value.uuid}
                     sheetUUID={actor.uuid}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
                 />
             </div>
         {/if}

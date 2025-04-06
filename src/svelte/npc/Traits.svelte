@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
@@ -10,16 +15,13 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
         traits,
     }: NPCSheetProps & {traits : Array<any>} = $props();
 
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const collID = `${actor.uuid}.traits`;
 
     function hasTraitSpecial(trait: any)
@@ -50,6 +52,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 
@@ -92,6 +95,7 @@
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={trait.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipDirection={TooltipDirection.UP}
 
@@ -104,12 +108,16 @@
             path={`itemTypes.npc_feature.${trait.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+
+            tooltipEnabled={tooltipEnabled}
         />
         <MessageButton
             flowClass={FlowClass.SendToChat}
             uuid={trait.uuid}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+            
+            tooltipEnabled={tooltipEnabled}
         />
     {/snippet}
         <HeaderSecondary
@@ -132,12 +140,16 @@
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
+
+                tooltipEnabled={tooltipEnabled}
             >
                 {@html trait.system.effect}
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={trait.system.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <TagArray
                 tags={trait.system.tags}

@@ -3,6 +3,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -20,6 +21,8 @@
         pilot,
         actor,
     } = props;
+
+    const tooltipEnabled = getMechSheetTipEnabled();
     const isMechSheet = actor.type === "mech";
     const coreBonuses = pilot.itemTypes.core_bonus;
     const collID = `${pilot.uuid}.coreBonus`;
@@ -50,7 +53,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
-
+    tooltipEnabled={tooltipEnabled}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 />
@@ -97,6 +100,7 @@
                 path={`system.pilot.value.itemTypes.core_bonus.${index}`}
                 iconStyle={["-lineheight3"]}
                 
+                tooltipEnabled={tooltipEnabled}
                 logType={isMechSheet ? TextLogHook.MechHeader : undefined }
                 logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
             />
@@ -125,20 +129,33 @@
                 <EffectBox
                     name={getLocalized("LA.mech.system.effect.label")}
                     effect={coreBonus.system.effect}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                 />
                 <ActionBox
                     actions={coreBonus.system.actions}
                     uuid={coreBonus.uuid}
                     path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
                     collapseID={getActionCollID(index)}
+
                     startCollapsed={false}
                     onClick={sendActionToChat}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                 />
                 <DeployableBox
                     source={pilot}
                     lidSource={coreBonus.system}
                     uuid={pilot.uuid}
                     sheetUUID={actor.uuid}
+
+                    tooltipEnabled={tooltipEnabled}
+                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
                 />
             </div>
         </HeaderSecondary>

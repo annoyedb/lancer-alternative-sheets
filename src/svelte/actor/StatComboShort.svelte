@@ -2,7 +2,6 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
 
     const {
         icon,
@@ -11,20 +10,20 @@
         outerStyle,
         innerStyle,
 
+        tooltipEnabled,
         tooltip,
         tooltipHeader,
         tooltipDirection
     }: StatComboProps & TooltipProps = $props()
 
-    const tipEnabled = getMechSheetTipEnabled();
-    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : "";
+    let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 </script>
 
 <div class="la-shortstat la-combine-h {outerStyle?.join(' ')}">
     <!-- the mdi shield is a bit larger than the cci icons -->
     <i class="{icon}"></i>
     <div class="la-combine-v {innerStyle?.join(' ')}"
-        data-tooltip={tipEnabled ? tip : undefined}
+        data-tooltip={tooltipEnabled ? tip : undefined}
         data-tooltip-class="clipped-bot la-tooltip"
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
     >

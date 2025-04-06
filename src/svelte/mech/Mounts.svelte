@@ -2,6 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
@@ -14,6 +15,7 @@
         system,
     } = props;
 
+    const tooltipEnabled = getMechSheetTipEnabled();
     const weaponMounts = system.loadout.weapon_mounts;
     
     function getCollapseID(index: number)
@@ -40,6 +42,7 @@
     />
     <CollapseAllButton
         collapseID={getCollapseID(index)}
+        tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

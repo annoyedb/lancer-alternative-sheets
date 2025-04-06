@@ -4,6 +4,7 @@
     import { slugify } from "@/scripts/lancer/util/lid";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
+    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
@@ -19,7 +20,8 @@
         actor,
         system,
     }: MechSheetProps = $props();
-    
+    const tooltipEnabled = getMechSheetTipEnabled();
+
     const frame: any = system.loadout.frame!.value;
     const core: any = frame.system.core_system;
     const collID: string = `${actor.uuid}.${frame.id}.activePower`;
@@ -46,6 +48,7 @@
     
     flowClass={FlowClass.None}
     
+    tooltipEnabled={tooltipEnabled}
     tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
     tooltipDirection={TooltipDirection.LEFT}
     logType={TextLogHook.MechHeader}
@@ -92,19 +95,32 @@
     <EffectBox
         name={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
         effect={core.active_effect}
+
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <ActionBox
         uuid={frame.uuid}
         actions={core.active_actions}
         path={'system.core_system.active_actions'}
+
         collapseID={actionCollID}
         startCollapsed={false}
+
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
     <DeployableBox
         source={actor}
         lidSource={core}
         uuid={frame.uuid}
         sheetUUID={actor.uuid}
+
+        tooltipEnabled={tooltipEnabled}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
     />
 </HeaderQuinary>
 {/if}

@@ -1,4 +1,10 @@
 <script lang="ts">
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
@@ -10,11 +16,6 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
@@ -22,6 +23,7 @@
         techs,
     }: NPCSheetProps & {techs : Array<any>} = $props();
 
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const tier = system.tier;
     const collID = `${actor.uuid}.techs`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
@@ -77,6 +79,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 
@@ -139,6 +142,7 @@
             flowClass={FlowClass.RollTech}
             path={`itemTypes.npc_feature.${tech.index}`}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipHeader={getTechTipHeader(tech)}
             tooltipDirection={TooltipDirection.UP}
@@ -152,12 +156,16 @@
             path={`itemTypes.npc_feature.${tech.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+
+            tooltipEnabled={tooltipEnabled}
         />
         <MessageButton
             flowClass={FlowClass.SendToChat}
             uuid={tech.uuid}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+            
+            tooltipEnabled={tooltipEnabled}
         />
     {/snippet}
         <HeaderSecondary
@@ -180,12 +188,16 @@
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
+
+                tooltipEnabled={tooltipEnabled}
             >
                 {@html tech.system.effect}
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={tech.system.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <TagArray
                 tags={tech.system.tags}

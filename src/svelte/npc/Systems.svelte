@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
@@ -10,10 +15,6 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         actor,
@@ -21,6 +22,7 @@
         systems,
     }: NPCSheetProps & {systems : Array<any>} = $props();
     
+    const tooltipEnabled = getNPCSheetTooltipEnabled(); 
     const tier = system.tier;
     const collID = `${actor.uuid}.systems`;
 
@@ -62,6 +64,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 
@@ -104,6 +107,7 @@
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${component.index}`}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
             tooltipDirection={TooltipDirection.UP}
 
@@ -116,12 +120,16 @@
             path={`itemTypes.npc_feature.${component.index}`}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+
+            tooltipEnabled={tooltipEnabled}
         />
         <MessageButton
             flowClass={FlowClass.SendToChat}
             uuid={component.uuid}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+            
+            tooltipEnabled={tooltipEnabled}
         />
     {/snippet}
         <HeaderSecondary
@@ -149,6 +157,8 @@
                     outerStyle={[
                         `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
                     ]}
+
+                    tooltipEnabled={tooltipEnabled}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
                         {component.system.attack_bonus[tier - 1]}
@@ -157,6 +167,8 @@
                 </EffectBox>
                 <EffectBox
                     name={getLocalized("LA.npc.accuracy.label")}
+
+                    tooltipEnabled={tooltipEnabled}
                 >
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
                         {component.system.accuracy[tier - 1]}
@@ -167,12 +179,16 @@
         {/if}
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
+
+                tooltipEnabled={tooltipEnabled}
             >
                 {@html component.system.effect}
             </EffectBox>
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={component.system.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <TagArray
                 tags={component.system.tags}

@@ -15,7 +15,12 @@ export interface DeployableBoxProps {
     lidSource: any;
 
     /**
-     * UUID of the sheet that the deployable box is associated with.
+     * UUID of the deployable's sheet
+     */
+    uuid?: string
+
+    /**
+     * UUID of the sheet that the deployable box is owned by.
      * Used to determine the color of the deployable image.
      */
     sheetUUID: string;

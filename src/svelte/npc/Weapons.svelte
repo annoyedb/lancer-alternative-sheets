@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
@@ -22,7 +23,8 @@
         system,
         weapons,
     }: NPCSheetProps & {weapons : Array<any>} = $props();
-    
+
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const tier = system.tier;
     const collID = `${actor.uuid}.weapons`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
@@ -80,6 +82,7 @@
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
 />
 {/snippet}
 
@@ -103,7 +106,7 @@
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
             {#if hasAccuracyBonus(weapon)}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
-                    data-tooltip={accuracyTip}
+                    data-tooltip={tooltipEnabled ? accuracyTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
@@ -113,7 +116,7 @@
             {/if}
             {#if hasAttackBonus(weapon)}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
-                    data-tooltip={attackTip}
+                    data-tooltip={tooltipEnabled ? attackTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
@@ -143,6 +146,7 @@
             flowClass={FlowClass.RollAttack}
             path={`system.loadout.weapon_mounts.${index}`}
 
+            tooltipEnabled={tooltipEnabled}
             tooltip={ weapon.system.effect
                 ? `${getRollWeaponTip(weapon)}<br><br>${weapon.system.effect}` 
                 : getRollWeaponTip(weapon)}
@@ -159,6 +163,7 @@
             range={weapon.system.range}
             damage={weapon.system.damage[tier - 1]}
 
+            tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
 
             disabled={isDestroyed(weapon)}
@@ -167,10 +172,14 @@
             <MessageButton
                 flowClass={FlowClass.SendToChat}
                 uuid={weapon.uuid}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <EditButton
                 flowClass={FlowClass.ContextMenu}
                 path={`itemTypes.npc_feature.${weapon.index}`}
+
+                tooltipEnabled={tooltipEnabled}
             />
         </div>
     {/snippet}
@@ -197,10 +206,14 @@
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}
                 effect={weapon.system.effect}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={weapon.system.on_hit}
+
+                tooltipEnabled={tooltipEnabled}
             />
             <TagArray 
                 tags={weapon.system.tags}
