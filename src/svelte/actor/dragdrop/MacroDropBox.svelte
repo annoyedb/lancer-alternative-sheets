@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { resetLog, sendToLog } from '@/scripts/store/text-log';
-    import { Logger } from "@/classes/Logger";
     import type { MacroDropBoxProps } from '@/interfaces/actor/dragdrop/MacroDropBoxProps';
     import type { TooltipProps } from '@/interfaces/actor/TooltipProps';
     import type { TextLogEventProps } from '@/interfaces/actor/TextLogEventProps';
+    import { Logger } from "@/classes/Logger";
     import { TooltipFactory } from '@/classes/TooltipFactory';
     import { ButtonFactory } from '@/classes/ButtonFactory';
     import { RunMacroBase } from '@/classes/flows/RunMacro';
@@ -27,13 +27,11 @@
         iconStyle,
         buttonStyle,
 
-        tooltip,
         tooltipHeader,
         tooltipClass,
         tooltipDirection,
         tooltipEnabled,
 
-        logText,
         logType,
         logTypeReset,
     }: MacroDropBoxProps & TooltipProps & TextLogEventProps = $props();
@@ -43,9 +41,12 @@
     const buttonTypes = Object.values(SystemButton);
     interface LocalDropData { type: string; index: number; }
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.addMacro.tooltip"), tooltipHeader);
+    const tipMain = TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.0"), tooltipHeader);
+    const tipAlt = TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.1"), tooltipHeader);
     const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.advanced.addMacro.tooltip");
+    const logMain = getLocalized("LA.advanced.addMacro.tooltip.0");
+    const logAlt = getLocalized("LA.advanced.addMacro.tooltip.1");
+    const log = allowDrop ? logAlt : logMain;
 
     onMount(() => {
         if (component)
@@ -189,22 +190,27 @@
     {:else}
         <details class="la-details -widthfull la-combine-v">
             <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull"
-                data-tooltip={tooltipEnabled ? tip : undefined}
+                data-tooltip={tooltipEnabled 
+                    ? allowDrop ? tipAlt : tipMain 
+                    : undefined}
                 data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
                 onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
                 onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
             >
                 <div class="la-left la-combine-h">
+                    {#if allowDrop}
+                    <span class="la-name__span -fontsize2">
+                        {getLocalized("LA.advanced.addMacro.subLabel")}
+                    </span>
+                    {:else}
                     <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                    <span class="la-name__span -fontsize2">{getLocalized("LA.advanced.addMacro.label")}</span>
+                    <span class="la-name__span -fontsize2">
+                        {getLocalized("LA.advanced.addMacro.label")}
+                    </span>
+                    {/if}
                 </div>
             </summary>
-            {#if allowDrop}
-            <div class="la-details__wrapper -bordersround -bordersoff">
-                <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.advanced.addMacro.subLabel")}</div>
-            </div>
-            {/if}
         </details>
     {/if}
     </div>
