@@ -16,6 +16,7 @@ Barring bug fixes this wraps up NPC sheets for now.
 * Added user-definable macro list to NPC sheets from 1.1.4's mech sheets
 * Added theme override to NPC sheets from 1.1.4's mech sheets
 * Added enable/disable tooltip setting for NPC sheets
+* Added more obvious indicator for ability to add macros to the sidebar or NPC sheet
 * Removed 'Use' button from NPC features --use the button in the header instead
 
 # 1.1.6
