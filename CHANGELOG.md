@@ -10,13 +10,14 @@ Barring bug fixes this wraps up NPC sheets for now.
 * Fixed HASE stat display made in 1.1.4 from mech sheets into NPC sheets
 * Fixed seemingly rare random scenario where sheet store would try to assign to a derived data store on initialization
 * Fixed pilot talents message icon not sending anything to the mech sheet's header text log
-* Action Logs now update on deleted messages from their respective actors
+* Added ability for Action Logs to update on deleted messages from their respective actors
 * Added real-estate in the NPC sheets by moving 'Combat Utilities' and 'Active Effects' into the new tab 'Status', bringing it in-line to player mech sheets
 * Added Log tab to NPC sheets and with it the Action Log from 1.1.4's mech sheets
 * Added user-definable macro list to NPC sheets from 1.1.4's mech sheets
 * Added theme override to NPC sheets from 1.1.4's mech sheets
 * Added enable/disable tooltip setting for NPC sheets
 * Added more obvious indicator for ability to add macros to the sidebar or NPC sheet
+* Increased specificity override to combat some modules still overwriting alternative sheet header borders
 * Removed 'Use' button from NPC features --use the button in the header instead
 
 # 1.1.6
