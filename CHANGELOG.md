@@ -1,7 +1,7 @@
 # 1.1.7
 This version implements the features created in 1.1.4 for mech sheets into NPC sheets and some changes to the layout for better sheet real-estate.
 
-Barring bug fixes this wraps up NPC sheets for now
+Barring bug fixes this wraps up NPC sheets for now.
 
 ## Changes
 * Fixed accidental console log spamming from ActionLog following refactors in 1.1.5
