@@ -1,3 +1,23 @@
+# 1.1.7
+This version implements the features created in 1.1.4 for mech sheets into NPC sheets and some changes to the layout for better sheet real-estate.
+
+Barring bug fixes this wraps up NPC sheets for now
+
+## Changes
+* Fixed accidental console log spamming from ActionLog following refactors in 1.1.5
+* Fixed accidental changes to the way collapse/expand all button worked following refactors in 1.1.5 
+* Fixed new messages not properly appearing with a correct name
+* Fixed HASE stat display made in 1.1.4 from mech sheets into NPC sheets
+* Fixed seemingly rare random scenario where sheet store would try to assign to a derived data store on initialization
+* Fixed pilot talents message icon not sending anything to the mech sheet's header text log
+* Action Logs now update on deleted messages from their respective actors
+* Added real-estate in the NPC sheets by moving 'Combat Utilities' and 'Active Effects' into the new tab 'Status', bringing it in-line to player mech sheets
+* Added Log tab to NPC sheets and with it the Action Log from 1.1.4's mech sheets
+* Added user-definable macro list to NPC sheets from 1.1.4's mech sheets
+* Added theme override to NPC sheets from 1.1.4's mech sheets
+* Added enable/disable tooltip setting for NPC sheets
+* Removed 'Use' button from NPC features --use the button in the header instead
+
 # 1.1.6
 This patch fixes the overly generic Handlebars helper name I used to use for debugging back before the Svelte refactor, causing conflicts with other modules.
 

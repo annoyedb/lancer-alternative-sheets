@@ -5,16 +5,12 @@ It is designed to be a player-facing sheet that provides most of the functionali
 
 While the main goal is to provide aesthetic alternative sheets to the Lancer system, there are some functional features included as well:
 
-Mech Sheets:
 * per-sheet sheet configuration/customization
 * reminders on ruling for statuses, stats, and some actions
 * view/remove applied status effects
-* run/add/remove macros in the sidebar
+* run/add/remove macros
 * 'action log' that filters the sheet actor's actions into their own log
 * some stand-in implementations for features yet to be added by the system (e.g. counter display, some send-to-chat functions on various things)
-
-NPC Sheets:
-* none yet :pensive:
 
 <details>
   <summary>
