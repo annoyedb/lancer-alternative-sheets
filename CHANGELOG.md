@@ -1,6 +1,16 @@
 # 1.1.7
 This version implements the features created in 1.1.4 for mech sheets into NPC sheets and some changes to the layout for better sheet real-estate.
 
+For convenience, the following settings have been designed to share between NPC tokens of the same actor:
+ - macro lists
+ - theme overrides
+Unique per NPC token:
+ - actions recorded in the log
+ - stats and everything else from the original sheets
+
+This way, even between scenes, and through however many extracted tokens, you only need to update one sheet and updating from a token will update the main sheet.
+In case it wasn't clear, this does not change any behaviour in the original sheets, and only affects Lancer Alternative Sheet settings.
+
 Barring bug fixes this wraps up NPC sheets for now.
 
 ## Changes

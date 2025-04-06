@@ -127,6 +127,20 @@ export function getNPCSheetData()
     }
 }
 
+/**
+ * Searches for whether or not the passed UUID has a root NPC sheet in the data.
+ * For example, if `Scene.4sJEdBnHRGvA0gFb.Token.4OPJsPGkq6k2Xw5u.Actor.6aSsblgi20r7RoND` is the UUID
+ * `Actor.6aSsblgi20r7RoND` is the root NPC sheet, in which case it will return the actorMatch.
+ * If the UUID is not found, it will return null.
+ * @param uuid 
+ * @returns 
+ */
+function getRoot(uuid: string): string | null
+{
+    const actorMatch = uuid.includes("Actor.") ? uuid.split(".").slice(-2).join(".") : null;
+    return actorMatch;
+}
+
 export function encodeNPCSheetData(data: NPCSheetSettings): Array<number>
 {
     const encoded: Uint8Array = msgPackEncoder.encode(data);
@@ -144,42 +158,50 @@ export function setNPCSheetData(encoded: Array<number>)
 export function getThemeOverride(uuid: string): string
 {
     const data = getNPCSheetData();
-    return data[uuid]?.themeOverride ?? "";
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.themeOverride ?? "";
 }
 
 export function setThemeOverride(uuid: string, value: string)
 {
     const data = getNPCSheetData();
-    if (!data[uuid])
-        data[uuid] = NPCSheetSettings.emptyContent();
-    data[uuid].themeOverride = value;
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = NPCSheetSettings.emptyContent();
+
+    data[workingUUID].themeOverride = value;
+
     SocketManager.getInstance().runAsGM(
         setNPCSheetData,
-        () =>
-        {
+        () => {
             Logger.log(`Theme override set to ${value} for ${uuid}`);
         },
         encodeNPCSheetData(data),
     );
+
     Hooks.call("laOverrideTheme", uuid, value);
 }
 
 export function getSidebarExecutables(uuid: string): Array<string>
 {
     const data = getNPCSheetData();
-    return data[uuid]?.sidebarExes ?? NPCSheetSettings.emptyContent().sidebarExes;
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.sidebarExes ?? [];
 }
 
 export function setSidebarExecutables(uuid: string, macros: Array<string>)
 {
     const data = getNPCSheetData();
-    if (!data[uuid])
-        data[uuid] = NPCSheetSettings.emptyContent();
-    data[uuid].sidebarExes = macros;
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = NPCSheetSettings.emptyContent();
+
+    data[workingUUID].sidebarExes = macros;
     SocketManager.getInstance().runAsGM(
         setNPCSheetData,
-        () =>
-        {
+        () => {
             Logger.log(`Sidebar executables set to ${macros.join(", ")} for ${uuid}`);
         },
         encodeNPCSheetData(data),
