@@ -186,7 +186,7 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-combine-v -divider la-anim-bar-shield la-text-text -flex0 -width3ch -textaligncenter -glow-shield">
+        <div class="la-combine-v -divider la-anim-bar-shield -flex0 -width3ch -textaligncenter -glow-shield">
             <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.overshield.value"}
@@ -239,7 +239,7 @@
                 />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-combine-v -divider la-anim-bar-burn la-text-text -flex0 -width3ch -textaligncenter -glow-burn">
+        <div class="la-combine-v -divider la-anim-bar-burn -flex0 -width3ch -textaligncenter -glow-burn">
             <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
