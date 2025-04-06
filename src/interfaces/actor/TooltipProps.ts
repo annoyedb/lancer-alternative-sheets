@@ -9,6 +9,7 @@ export interface TooltipProps
      * Optional flag to enable or disable the tooltip. If set to `false`, the tooltip will not be displayed.
      */
     tooltipEnabled?: boolean;
+    
     /**
      * Optional tooltip text to be displayed when hovering over the element. Used in `data-tooltip` attribute.
      */

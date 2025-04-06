@@ -338,6 +338,7 @@
     setExes={setSidebarExecutables}
     hintDropArea={true}
     allowDrop={advancedOptions}
-    iconStyle={[]}
-    buttonStyle={[]}
+    tooltipEnabled={tipEnabled}
+    logType={TextLogHook.MechHeader}
+    logTypeReset={TextLogHook.MechHeaderReset}
 />

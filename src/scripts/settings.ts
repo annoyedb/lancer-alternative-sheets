@@ -1,4 +1,8 @@
 import { LancerAlternative } from "@/enums/LancerAlternative";
+import { Encoder, Decoder } from "@msgpack/msgpack";
+
+export const msgPackEncoder = new Encoder();
+export const msgPackDecoder = new Decoder();
 
 export function registerModuleSettings()
 {

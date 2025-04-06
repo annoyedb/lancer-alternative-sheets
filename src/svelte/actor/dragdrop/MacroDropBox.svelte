@@ -1,15 +1,21 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { Logger } from "@/classes/Logger";
+    import type { MacroDropBoxProps } from '@/interfaces/actor/dragdrop/MacroDropBoxProps';
+    import type { TooltipProps } from '@/interfaces/actor/TooltipProps';
+    import type { TextLogEventProps } from '@/interfaces/actor/TextLogEventProps';
+    import { TooltipFactory } from '@/classes/TooltipFactory';
     import { ButtonFactory } from '@/classes/ButtonFactory';
     import { RunMacroBase } from '@/classes/flows/RunMacro';
     import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
+    import { LADataType } from '@/enums/LADataType';
     import { SystemButton } from '@/enums/SystemButton';
     import { TextLogHook } from '@/enums/TextLogHook';
+    import { TooltipDirection } from '@/enums/TooltipDirection';
     import { getLocalized } from '@/scripts/helpers';
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
-    import { LADataType } from '@/enums/LADataType';
 
     const {
         uuid,
@@ -17,14 +23,29 @@
         setExes,
         hintDropArea,
         allowDrop,
+
         iconStyle,
         buttonStyle,
-    } = $props();
+
+        tooltip,
+        tooltipHeader,
+        tooltipClass,
+        tooltipDirection,
+        tooltipEnabled,
+
+        logText,
+        logType,
+        logTypeReset,
+    }: MacroDropBoxProps & TooltipProps & TextLogEventProps = $props();
     let component: HTMLElement | null = $state(null);
     let executables = $state(getExes);
 
     const buttonTypes = Object.values(SystemButton);
     interface LocalDropData { type: string; index: number; }
+
+    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.addMacro.tooltip"), tooltipHeader);
+    const logging = logType && logTypeReset;
+    const log = logText || getLocalized("LA.advanced.addMacro.tooltip");
 
     onMount(() => {
         if (component)
@@ -100,10 +121,17 @@
 <div class="la-combine-v -widthfull {hintDropArea ? "-divider la-anim-accent" : ""}">
 {#if hintDropArea}
     {#if allowDrop}
-        <div class="la-combine-h -justifybetween -widthfull la-text-text -upper -fontsize0 -letterspacing0 -padding0-lr">
+        <div 
+            class="la-combine-h -justifybetween -widthfull la-text-text -upper -fontsize0 -letterspacing0 -padding0-lr"
+            data-tooltip={tooltipEnabled ? tip : undefined}
+            data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+            data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
+            onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+            onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        >
             <i class="mdi mdi-arrow-down-left"></i>
-            <span class="">
-                {getLocalized("LA.advanced.addMacro.subLabel")}
+            <span>
+                {getLocalized("LA.advanced.addMacro.hint")}
             </span>
             <i class="mdi mdi-arrow-down-right"></i>
         </div>
@@ -122,7 +150,7 @@
             root={component}
             data={buildFlowData(type, index)}
             style={["-justifyend"]}
-            iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb", ...iconStyle]}
+            iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb", ...(iconStyle || [])]}
             onDrop={handleFlowDrop}
             onDelete={event => handleDelete(event, index)}
 
@@ -134,7 +162,7 @@
         >
         {#if isMacro(type)}
             <FlowButton
-                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...buttonStyle]}
+                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...(buttonStyle || [])]}
                 text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {
