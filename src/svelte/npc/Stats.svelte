@@ -13,6 +13,7 @@
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
+    import { getSheetStore } from "@/scripts/store/store";
 
     const props = $props();
     const {
@@ -21,6 +22,7 @@
     }: NPCSheetProps = props;
 
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
@@ -89,17 +91,17 @@
                 <!-- Left Side Floating Stats -->
                 <div class="la-stat__island -positionrelative la-dropshadow">
                     <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
-                        <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text")} la-outl-shadow"
+                        <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? tierTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {#if system.size < 1}
-                        <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
+                        <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {:else}
-                        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
+                        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
@@ -108,15 +110,15 @@
                             data-tooltip={tooltipEnabled ? speedTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
-                            <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
+                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
+                            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
                         </div>
                         <div class="la-combine-h -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
-                            <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
+                            <i class="cci cci-activate {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
+                            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
                         </div>
                         <div class="la-recharge -lineheight3 -width6 -height6 -glow-primary-hover">
                             <button type="button"
