@@ -123,9 +123,6 @@
     {#if allowDrop}
         <div 
             class="la-combine-h -justifybetween -widthfull la-text-text -upper -fontsize0 -letterspacing0 -padding0-lr"
-            data-tooltip={tooltipEnabled ? tip : undefined}
-            data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
-            data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
             onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
             onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         >
@@ -191,15 +188,23 @@
     {/each}
     {:else}
         <details class="la-details -widthfull la-combine-v">
-            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
+            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull"
+                data-tooltip={tooltipEnabled ? tip : undefined}
+                data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+                data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
+                onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
+                onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+            >
                 <div class="la-left la-combine-h">
                     <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
                     <span class="la-name__span -fontsize2">{getLocalized("LA.advanced.addMacro.label")}</span>
                 </div>
             </summary>
+            {#if allowDrop}
             <div class="la-details__wrapper -bordersround -bordersoff">
                 <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.advanced.addMacro.subLabel")}</div>
             </div>
+            {/if}
         </details>
     {/if}
     </div>
