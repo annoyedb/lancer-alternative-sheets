@@ -14,7 +14,7 @@
 
 <div class="-margin5-t">
     <ActionLog
-        id={actor.id}
+        uuid={actor.uuid}
         dontSaveCollapse={actionLogSaveCollapse}
         startCollapsed={actionLogStartCollapsed}
         collapsePrefix={ActionLogCollapsePrefix.MechSheet}

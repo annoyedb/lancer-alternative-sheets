@@ -50,7 +50,7 @@
         startCollapsed={false}
     >
         <ActionLog
-            id={actor.id}
+            uuid={actor.uuid}
             maxHeight={actionLogMaxHeight}
             dontSaveCollapse={actionLogSaveCollapse}
             startCollapsed={actionLogStartCollapsed}

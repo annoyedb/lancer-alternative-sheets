@@ -3,7 +3,7 @@ import type { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
 export interface ActionLogProps
 {
     // The actor ID that this log will filter by
-    id: string;
+    uuid: string;
     
     // Optional max height for the log
     maxHeight?: number;

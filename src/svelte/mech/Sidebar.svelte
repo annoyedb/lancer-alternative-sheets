@@ -7,6 +7,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getSheetStore } from '@/scripts/store/store';
+    import { getAdvancedState } from '@/scripts/store/advanced';
     import { getMechSheetTipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -20,6 +21,7 @@
         system,
         actor,
     }: MechSheetProps = props
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let sidebarExes = $state(getSidebarExecutables(actor.uuid));
 
@@ -330,9 +332,12 @@
     />
 </div>
 <!-- Macros/Flows -->
-<div class="la-spacer -large"></div>
 <MacroDropBox
     uuid={actor.uuid}
     getExes={sidebarExes}
     setExes={setSidebarExecutables}
+    hintDropArea={true}
+    allowDrop={advancedOptions}
+    iconStyle={[]}
+    buttonStyle={[]}
 />

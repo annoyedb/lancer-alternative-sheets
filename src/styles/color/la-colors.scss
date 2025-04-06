@@ -32,6 +32,11 @@
     border-color: transparent;
 }
 
+.la-anim-transparent
+{
+    --color: transparent;
+}
+
 .la-common
 {
     @include theme(common.$common-theme);

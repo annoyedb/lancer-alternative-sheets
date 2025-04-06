@@ -6,13 +6,11 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { DragDropHandleProps } from "@/interfaces/dragdrop/DragDropHandleProps";
-    import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         children,
-        uuid,
         index,
         root,
         
@@ -25,6 +23,7 @@
         onDropError,
         onDelete,
 
+        disabled,
         deleteDisabled,
 
         tooltipClass,
@@ -34,7 +33,6 @@
         logTypeReset,
     }: DragDropHandleProps & TooltipProps & TextLogEventProps = $props();
     let component: HTMLElement | null = $state(null);
-    let advancedOptions = $derived(getAdvancedState(uuid));
 
     const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
     const logging = logType && logTypeReset;
@@ -96,20 +94,21 @@
         {style?.join(' ')}"
     ondragstart={handleDragStart}
     ondrop={handleDrop}
-    draggable={advancedOptions}
+    draggable={!disabled}
     bind:this={component}
 >
-{#if advancedOptions}
+{#if !disabled}
     <i class="fas fa-grip-lines -positionabsolute -left0 -pointergrab -glow-primary-hover {iconStyle?.join(' ')}"
         onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         aria-label={getLocalized("LA.advanced.reorderMacro.tooltip")}
+        style="z-index: 1;"
     ></i>
 {/if}
 {#if children}
     {@render children()}
 {/if}
-{#if advancedOptions && !deleteDisabled}
+{#if !disabled && !deleteDisabled}
     <button type="button"
         class="fas fa-delete-left -positionabsolute -right0 -glow-primary-hover {iconStyle?.join(' ')}"
         onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType) : undefined }

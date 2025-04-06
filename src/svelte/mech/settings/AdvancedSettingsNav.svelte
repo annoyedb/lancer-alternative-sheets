@@ -25,7 +25,7 @@
 />
 
 <ThemeOverrideButton
-    disabled={advancedOptions}
+    disabled={!advancedOptions}
     uuid={actor.uuid}
     style={["-alignselfstart"]}
     

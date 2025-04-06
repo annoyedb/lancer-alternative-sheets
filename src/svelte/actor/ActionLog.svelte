@@ -6,19 +6,20 @@
     import { getLocalized } from "@/scripts/helpers";
 
     const {
-        id,
+        uuid,
         maxHeight,
         dontSaveCollapse,
         startCollapsed,
         collapsePrefix,
     }: ActionLogProps = $props();
 
+    const idParts = uuid.split('.');
     //@ts-ignore Foundry native
     const messages = game.messages as Array<any>;
 
     let filteredMessages: Array<any> = $state(messages?.filter((m: any) => {
-        const msgActorID = m.speaker.actor;
-        return msgActorID === id && m.rolls.length;
+        const msgActorID = m.speaker.token || m.speaker.actor;
+        return idParts.includes(msgActorID) && m.rolls.length;
     }) || []);
     let component: HTMLElement | null = $state(null);
     let extractedTimes: Array<string> = $state([]);
@@ -34,16 +35,17 @@
             extractedNames.push(extractName(message.content));
         });
 
-        trackHook(`Actor.${id}`, Hooks.on("createChatMessage", (message: any) => 
+        trackHook(`Actor.${uuid}`, Hooks.on("createChatMessage", (message: any) => 
         {
-            if (message.speaker.actor === id && message.rolls.length) 
+            const msgActorID = message.speaker.token || message.speaker.actor;
+            if (idParts.includes(msgActorID) && message.rolls.length) 
             {
                 filteredMessages.push(message);
                 extractedTimes.push(extractTime(message.timestamp));
                 extractedNames.push(extractName(message.content));
             }
         }), "createChatMessage");
-        trackHook(`Actor.${id}`, Hooks.on("deleteChatMessage", (message: any) => 
+        trackHook(`Actor.${uuid}`, Hooks.on("deleteChatMessage", (message: any) => 
         {
             const index = filteredMessages.findIndex((msg) => msg.id === message.id);
             if (index !== -1) 

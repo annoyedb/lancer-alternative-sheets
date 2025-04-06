@@ -1,5 +1,6 @@
 export interface ThemeOverrideButtonProps
 {
     uuid: string;
-    style: Array<string>;
+    setOverride: (uuid: string, value: string) => void;
+    disabled?: boolean;
 }

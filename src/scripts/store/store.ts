@@ -27,7 +27,6 @@ export const getSheetStore = (key: string) =>
     if (!(key in store))
     {
         store[key] = { ...defaultData };
-        sheetStore.set(store);
     }
     return fromStore(sheetStore).current[key];
 };

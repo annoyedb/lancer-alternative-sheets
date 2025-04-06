@@ -3,7 +3,6 @@ import type { Snippet } from "svelte";
 export interface DragDropHandleProps
 {
     children: Snippet,
-    uuid: string,
     index: number,
     root: HTMLElement,
     
@@ -17,4 +16,5 @@ export interface DragDropHandleProps
     onDelete?: (event: MouseEvent) => void,
 
     deleteDisabled?: boolean,
+    disabled?: boolean,
 }

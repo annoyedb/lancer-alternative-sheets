@@ -7,7 +7,6 @@
     import { SystemButton } from '@/enums/SystemButton';
     import { TextLogHook } from '@/enums/TextLogHook';
     import { getLocalized } from '@/scripts/helpers';
-    import { getAdvancedState } from '@/scripts/store/advanced';
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
     import { LADataType } from '@/enums/LADataType';
@@ -16,9 +15,12 @@
         uuid,
         getExes,
         setExes,
+        hintDropArea,
+        allowDrop,
+        iconStyle,
+        buttonStyle,
     } = $props();
     let component: HTMLElement | null = $state(null);
-    let advancedOptions = $derived(getAdvancedState(uuid));
     let executables = $state(getExes);
 
     const buttonTypes = Object.values(SystemButton);
@@ -75,7 +77,7 @@
 
     function handleMacroDocumentDrop(event: DragEvent)
     {
-        if (!advancedOptions) return;
+        if (!allowDrop) return;
         
         const data = event.dataTransfer?.getData("text/plain");
         if (!data) return;
@@ -95,57 +97,82 @@
     }
 </script>
 
-{#if advancedOptions}
-<div class="-positionrelative">
-    <span class="-textaligncenter -widthfull -positionabsolute -bottom0 la-text-accent -upper"><i class="mdi mdi-arrow-down-left"></i>{getLocalized("LA.advanced.addMacro.subLabel")}<i class="mdi mdi-arrow-down-right"></i></span>
-</div>
-{/if}
-<div class="la-macroflows la-dropshadow la-combine-v -widthfull -borders-t -thick
-    {advancedOptions ? "la-brdr-accent" : "la-brdr-transparent"}
-    macro-droppable"
-    bind:this={component}
->
-{#each executables as type, index}
-    <DragDropHandle
-        uuid={uuid}
-        index={index}
-        root={component}
-        data={buildFlowData(type, index)}
-        style={["-justifyend"]}
-        iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb"]}
-        onDrop={handleFlowDrop}
-        onDelete={event => handleDelete(event, index)}
-        deleteDisabled={!isMacro(type)}
-
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    >
-    {#if isMacro(type)}
-        <FlowButton
-            text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
-            flowClass={CustomFlowClass.RunMacro}
-            onClick={event => {
-                event.stopPropagation();
-                RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
-            }}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
-        />
+<div class="la-combine-v -widthfull {hintDropArea ? "-divider la-anim-accent" : ""}">
+{#if hintDropArea}
+    {#if allowDrop}
+        <div class="la-combine-h -justifybetween -widthfull la-text-text -upper -fontsize0 -letterspacing0 -padding0-lr">
+            <i class="mdi mdi-arrow-down-left"></i>
+            <span class="">
+                {getLocalized("LA.advanced.addMacro.subLabel")}
+            </span>
+            <i class="mdi mdi-arrow-down-right"></i>
+        </div>
     {:else}
-        <FlowButton
-            text={ButtonFactory.getSystemButtonLabel(type)}
+        <span class="la-anim-transparent -fontsize0">&nbsp;</span>
+    {/if}
+{/if}
+    <div class="la-macroflows la-dropshadow la-combine-v -widthfull
+        macro-droppable"
+        bind:this={component}
+    >
+    {#if executables.length}
+    {#each executables as type, index}
+        <DragDropHandle
+            index={index}
+            root={component}
+            data={buildFlowData(type, index)}
+            style={["-justifyend"]}
+            iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb", ...iconStyle]}
+            onDrop={handleFlowDrop}
+            onDelete={event => handleDelete(event, index)}
 
-            flowClass={FlowClass.Standard}
-            uuid={uuid}
-            flowType={type}
+            disabled={!allowDrop}
+            deleteDisabled={!isMacro(type)}
 
-            tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
-            tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
-            logText={ButtonFactory.getSystemButtonTip(type, uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
-        />
+        >
+        {#if isMacro(type)}
+            <FlowButton
+                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...buttonStyle]}
+                text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
+                flowClass={CustomFlowClass.RunMacro}
+                onClick={event => {
+                    event.stopPropagation();
+                    RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
+                }}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
+            />
+        {:else}
+            <FlowButton
+                text={ButtonFactory.getSystemButtonLabel(type)}
+
+                flowClass={FlowClass.Standard}
+                uuid={uuid}
+                flowType={type}
+
+                tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
+                tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
+                logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
+            />
+        {/if}
+        </DragDropHandle>
+    {/each}
+    {:else}
+        <details class="la-details -widthfull la-combine-v">
+            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
+                <div class="la-left la-combine-h">
+                    <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
+                    <span class="la-name__span -fontsize2">{getLocalized("LA.advanced.addMacro.label")}</span>
+                </div>
+            </summary>
+            <div class="la-details__wrapper -bordersround -bordersoff">
+                <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.advanced.addMacro.subLabel")}</div>
+            </div>
+        </details>
     {/if}
-    </DragDropHandle>
-{/each}
+    </div>
 </div>
