@@ -1,13 +1,17 @@
 <script lang="ts">
+    import { id as moduleID } from "@/module.json";
+    import { getSidebarImageTheme } from "@/scripts/theme";
+    import { getLocalized } from "@/scripts/helpers";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
-    import { getSidebarImageTheme } from "@/scripts/theme";
-    import { id as moduleID } from "@/module.json";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { getLocalized } from "@/scripts/helpers";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
+    import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
+    import { setThemeOverride } from "@/scripts/npc/settings";
+    import { getAdvancedState } from "@/scripts/store/advanced";
 
     const props = $props();
     const {
@@ -15,15 +19,17 @@
         system,
     }: NPCSheetProps = props;
 
-    let sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
-    let speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
-    let activTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
-    let tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
-    let setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
-    let rechargeTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.recharge.tooltip"), getLocalized("LA.action.startofturn.label"));
-    let notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
-    let notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
-    let notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+
+    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
+    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
+    const activTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
+    const tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
+    const setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
+    const rechargeTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.recharge.tooltip"), getLocalized("LA.action.startofturn.label"));
+    const notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
+    const notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
+    const notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
     
     function handleShowNotes(event: MouseEvent)
     {
@@ -39,56 +45,10 @@
     }
 </script>
 
-<div class="la-bckg-background la-shadow -medium -inset la-bg-scroll -widthfull -heightfull">
+<div class="la-bg-scroll la-bckg-background la-shadow -medium -inset -widthfull -heightfull">
     <div class="la-combine-h la-dropshadow -justifyevenly">
     <!-- Left Side -->
-    
-    <!-- Left Side Floating Stats -->
-    <div class="la-stat__island -positionrelative la-dropshadow">
-        <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
-            <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text")} la-outl-shadow"
-                data-tooltip={tierTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={TooltipDirection.RIGHT}></i>
-        {#if system.size < 1}
-            <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
-                data-tooltip={sizeTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={TooltipDirection.RIGHT}></i>
-        {:else}
-            <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
-                data-tooltip={sizeTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={TooltipDirection.RIGHT}></i>
-        {/if}
-            <div class="la-combine-h" 
-                data-tooltip={speedTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={TooltipDirection.RIGHT}>
-                <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
-                <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
-            </div>
-            <div class="la-combine-h -aligncenter" 
-                data-tooltip={activTip}
-                data-tooltip-class="clipped-bot la-tooltip"
-                data-tooltip-direction={TooltipDirection.RIGHT}>
-                <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
-                <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
-            </div>
-            <div class="la-recharge -lineheight3 -width6 -height6 -glow-primary-hover">
-                <button type="button"
-                    class="mdi mdi-refresh-circle la-text-secondary -fontsize6
-                        charge-macro"
-                    data-tooltip={rechargeTip}
-                    data-tooltip-class="clipped-bot la-tooltip"
-                    data-tooltip-direction={TooltipDirection.RIGHT}
-                    aria-label={getLocalized("LA.npc.recharge.tooltip")}
-                >
-                </button>
-            </div>
-        </div>
-    </div>
-        <div class="la-combine-v -flex0">
+        <div class="la-combine-v">
             <!-- Tier Options -->
             <div class="la-combine-h -height2 ">
                 <div class="">
@@ -101,7 +61,7 @@
                         aria-label={getLocalized("LA.subtract.label")}
                     >-</button><!--
                 ---><input
-                        class="-height2 la-shadow -medium -inset
+                        class="-height2 la-shadow -medium -inset la-text-text
                             lancer-stat minor"
                         type={"number"}
                         data-dtype={"Number"}
@@ -122,40 +82,108 @@
                 </div>
             </div>
             <div class="la-combine-h -widthfull -heightfull">
-            <!-- Actor Image -->
-            <img class="la-npc__img
-                    profile-img ref set"
-                src="{actor.img}"
-                alt={`modules/${moduleID}/assets/assets/nodata.png`}
-                data-edit="img" 
-                data-uuid="{actor.uuid}"
-            />
-            <HaseDisplay {...props} />
-        </div>
+                <!-- Left Side Floating Stats -->
+                <div class="la-stat__island -positionrelative la-dropshadow">
+                    <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
+                        <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text")} la-outl-shadow"
+                            data-tooltip={tierTip}
+                            data-tooltip-class="clipped-bot la-tooltip"
+                            data-tooltip-direction={TooltipDirection.RIGHT}></i>
+                    {#if system.size < 1}
+                        <i class="cci cci-size-half {getSidebarImageTheme("text")} la-outl-shadow"
+                            data-tooltip={sizeTip}
+                            data-tooltip-class="clipped-bot la-tooltip"
+                            data-tooltip-direction={TooltipDirection.RIGHT}></i>
+                    {:else}
+                        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text")} la-outl-shadow"
+                            data-tooltip={sizeTip}
+                            data-tooltip-class="clipped-bot la-tooltip"
+                            data-tooltip-direction={TooltipDirection.RIGHT}></i>
+                    {/if}
+                        <div class="la-combine-h" 
+                            data-tooltip={speedTip}
+                            data-tooltip-class="clipped-bot la-tooltip"
+                            data-tooltip-direction={TooltipDirection.RIGHT}>
+                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
+                            <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
+                        </div>
+                        <div class="la-combine-h -aligncenter" 
+                            data-tooltip={activTip}
+                            data-tooltip-class="clipped-bot la-tooltip"
+                            data-tooltip-direction={TooltipDirection.RIGHT}>
+                            <i class="cci cci-activate {getSidebarImageTheme("text")} la-outl-shadow -fontsize6"></i>
+                            <span class="{getSidebarImageTheme("text")} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
+                        </div>
+                        <div class="la-recharge -lineheight3 -width6 -height6 -glow-primary-hover">
+                            <button type="button"
+                                class="mdi mdi-refresh-circle la-text-secondary -fontsize6
+                                    charge-macro"
+                                data-tooltip={rechargeTip}
+                                data-tooltip-class="clipped-bot la-tooltip"
+                                data-tooltip-direction={TooltipDirection.RIGHT}
+                                aria-label={getLocalized("LA.npc.recharge.tooltip")}
+                            >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actor Image -->
+                <img class="la-npc__img
+                        profile-img ref set"
+                    src="{actor.img}"
+                    alt={`modules/${moduleID}/assets/assets/nodata.png`}
+                    data-edit="img" 
+                    data-uuid="{actor.uuid}"
+                />
+                <HaseDisplay {...props} />
+            </div>
         </div>
         <!-- Right Side -->
         <div class="la-combine-h -padding1-r">
-            <div class="la-combine-v -flex1">
-                <div class="la-combine-h -height2 -justifyend -gap1 -widthfull">
-                    <button type="button"
-                        class="mdi mdi-note-edit -fontsize2
-                            popout-text-edit-button"
-                        data-tooltip={notesEditTip}
-                        data-tooltip-class={"clipped-bot la-tooltip"}
-                        data-tooltip-direction={TooltipDirection.UP}
-                        aria-label={getLocalized("LA.npc.notes.tooltip")}
-                        data-path={`system.notes`}
-                    >
-                    </button>
-                    <button type="button"
-                        class="mdi mdi-information -fontsize2"
-                        data-tooltip={notesTip}
-                        data-tooltip-class={"clipped-bot la-tooltip -scrollbar"}
-                        data-tooltip-direction={TooltipDirection.UP}
-                        aria-label={getLocalized("LA.npc.notes.label")}
-                        onclick={(event) => handleShowNotes(event)}
-                    >
-                    </button>
+            <div class="la-combine-v">
+                <div class="la-combine-h -height2 -justifybetween -widthfull">
+                    <div class="la-combine-h -gap1">
+                        <AdvancedButton
+                            uuid={actor.uuid}
+                            style={["-lineheight3", "-glow-active-hover"]}
+                            iconStyle={["-fontsize5"]}
+                            tooltipEnabled={true}
+                            tooltipDirection={TooltipDirection.UP}
+                        />
+                    {#if advancedOptions}
+                        <ThemeOverrideButton
+                            uuid={actor.uuid}
+                            style={["-lineheight3"]}
+                            iconStyle={["-fontsize2"]}
+                            setOverride={setThemeOverride}
+                            tooltipEnabled={true}
+                            tooltipDirection={TooltipDirection.UP}
+                        />
+                    {/if}
+                    </div>
+                    <div class="la-combine-h -gap1">
+                    {#if advancedOptions}
+                        <button type="button"
+                            class="mdi mdi-note-edit -fontsize2 -glow-active-hover
+                                popout-text-edit-button"
+                            data-tooltip={notesEditTip}
+                            data-tooltip-class={"clipped-bot la-tooltip"}
+                            data-tooltip-direction={TooltipDirection.UP}
+                            aria-label={getLocalized("LA.npc.notes.tooltip")}
+                            data-path={`system.notes`}
+                        >
+                        </button>
+                    {/if}
+                        <button type="button"
+                            class="mdi mdi-information -fontsize2 -glow-active-hover"
+                            data-tooltip={notesTip}
+                            data-tooltip-class={"clipped-bot la-tooltip -scrollbar"}
+                            data-tooltip-direction={TooltipDirection.UP}
+                            aria-label={getLocalized("LA.npc.notes.label")}
+                            onclick={(event) => handleShowNotes(event)}
+                        >
+                        </button>
+                    </div>
                 </div>
                 <div class="-flex1">
                     <!-- Mech Stats 1 -->
@@ -201,6 +229,7 @@
                                     dataName="system.hp.value"
                                     currentValue={system.hp.value}
                                     maxValue={system.hp.max}
+                                    textStyle={["la-text-text"]}
                                     barStyle={["la-bckg-bar-health"]}
                                     currentValueSecondary={system.overshield.value}
                                     maxValueSecondary={system.hp.max}
@@ -217,6 +246,7 @@
                                     dataName="system.structure.value"
                                     currentValue={system.structure.value}
                                     maxValue={system.structure.max}
+                                    textStyle={["la-text-text"]}
                                     barStyle={["la-bckg-bar-structure"]}
                                     clipPath={"clipped-alt"}
 
@@ -226,7 +256,7 @@
                             </div>
                             <!-- SHIELD (VALUE) -->
                             <div class="la-combine-v -divider la-anim-bar-shield -flex0 -width3ch -textaligncenter -glow-shield">
-                                <input class="la-damage__input la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+                                <input class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                                     type="number" 
                                     name="system.overshield.value" 
                                     data-dtype="Number"
@@ -251,6 +281,7 @@
                                     dataName="system.heat.value"
                                     currentValue={system.heat.value}
                                     maxValue={system.heat.max}
+                                    textStyle={["la-text-text"]}
                                     barStyle={["la-bckg-bar-heat"]}
                                     currentValueSecondary={system.burn}
                                     maxValueSecondary={system.heat.max}
@@ -267,6 +298,7 @@
                                     dataName="system.stress.value"
                                     currentValue={system.stress.value}
                                     maxValue={system.stress.max}
+                                    textStyle={["la-text-text"]}
                                     barStyle={["la-bckg-bar-stress"]}
                                     clipPath={"clipped-alt"}
 
@@ -276,7 +308,7 @@
                             </div>
                             <!-- BURN (VALUE) -->
                             <div class="la-combine-v -divider la-anim-bar-burn -flex0 -width3ch -textaligncenter -glow-burn">
-                                <input class="la-damage__input la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+                                <input class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                                     type="number" 
                                     name="system.burn" 
                                     data-dtype="Number"

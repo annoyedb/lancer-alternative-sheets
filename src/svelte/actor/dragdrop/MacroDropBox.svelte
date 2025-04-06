@@ -123,7 +123,7 @@
 {#if hintDropArea}
     {#if allowDrop}
         <div 
-            class="la-combine-h -justifybetween -widthfull la-text-text -upper -fontsize0 -letterspacing0 -padding0-lr"
+            class="la-combine-h -justifybetween -widthfull -upper -fontsize0 -letterspacing0 -padding0-lr"
             onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
             onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         >

@@ -36,8 +36,8 @@
                     innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
                 />
             </div>
-            <div class="la-combine-h -aligncenter">
-                <div class="-agi -pointerdisable">&nbsp;</div>
+            <div class="la-combine-h -aligncenter -pointerdisable">
+                <div class="-agi">&nbsp;</div>
                 <HexButton
                     text={getLocalized("LA.agility.short")}
                     value={system.agi}
@@ -79,8 +79,8 @@
                     innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
                 />
             </div>
-            <div class="la-combine-h -aligncenter">
-                <div class="-eng -pointerdisable">&nbsp;</div>
+            <div class="la-combine-h -aligncenter -pointerdisable">
+                <div class="-eng">&nbsp;</div>
                 <HexButton
                     text={getLocalized("LA.engineering.short")}
                     value={system.eng}

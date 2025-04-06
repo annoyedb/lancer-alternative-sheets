@@ -1,0 +1,137 @@
+<script lang="ts">
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { getLocalized } from "@/scripts/helpers";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
+    import { getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
+    import { getAdvancedState } from "@/scripts/store/advanced";
+
+    const props = $props();
+    const {
+        actor,
+    }: NPCSheetProps = props;
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let sidebarExes = $state(getSidebarExecutables(actor.uuid));
+
+    const activeEffectsCollID = `${actor.uuid}.status.activeEffects`;
+    const utilitiesCollID = `${actor.uuid}.status.utilities`;
+    const macrosCollID = `${actor.uuid}.status.macros`;
+</script>
+
+{#snippet headerOptions()}
+<CollapseAllButton
+    collapseID={activeEffectsCollID}
+/>
+{/snippet}
+<HeaderMain 
+    text={getLocalized("LA.tab.status.effects.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    borderStyle={["la-brdr-pilot"]}
+
+    collapseID={activeEffectsCollID}
+    startCollapsed={false}
+
+    headerContent={headerOptions}
+>
+    <ActiveEffects {...props} />
+</HeaderMain>
+
+<HeaderMain 
+    text={getLocalized("LA.npc.utilities.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    borderStyle={["la-brdr-pilot"]}
+
+    collapseID={utilitiesCollID}
+    startCollapsed={false}
+>
+    <div class="la-combine-v -gap0 -widthfull">
+        <FlowButton 
+            style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
+            text={getLocalized("LA.npc.recharge.label")}
+            
+            flowClass={FlowClass.RechargeFeatures}
+            tooltip={getLocalized("LA.npc.recharge.tooltip")}
+            tooltipHeader={getLocalized("LA.action.startofturn.label")}
+            tooltipDirection={TooltipDirection.UP}
+        />
+        <div class="la-combine-h -wrapwrap -widthfull -gap0">
+            <div class="la-combine-v -gap0 -flex1 -widthfull">
+                <FlowButton 
+                    style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                    text={getLocalized("LA.flow.rollAttack.label")}
+
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
+                    flowType={"BasicAttack"}
+
+                    tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+                    tooltipDirection={TooltipDirection.UP}
+                />
+                <FlowButton 
+                    style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                    text={getLocalized("LA.flow.rollDamage.label")}
+
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
+                    flowType={"Damage"}
+
+                    tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
+                    tooltipDirection={TooltipDirection.UP}
+                />
+            </div>
+            <div class="la-combine-v -gap0 -flex1 -widthfull">
+                <FlowButton 
+                    style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                    text={getLocalized("LA.flow.rollTechAttack.label")}
+
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
+                    flowType={"TechAttack"}
+
+                    tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
+                    tooltipDirection={TooltipDirection.UP}
+                />
+                <FlowButton
+                    style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                    text={getLocalized("LA.flow.extinguish.label")}
+
+                    uuid={actor.uuid}
+                    flowClass={FlowClass.Standard}
+                    flowType={"Burn"}
+
+                    tooltipHeader={getLocalized("LA.action.endofturn.label")}
+                    tooltip={getLocalized("LA.flow.extinguish.tooltip")}
+                    tooltipDirection={TooltipDirection.UP}
+                />
+            </div>
+        </div>
+    </div>
+</HeaderMain>
+
+<HeaderMain 
+    text={getLocalized("LA.npc.macros.label")}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    borderStyle={["la-brdr-pilot"]}
+
+    collapseID={macrosCollID}
+    startCollapsed={false}
+>
+<!-- TODO: make tooltipEnabled respect a setting -->
+    <MacroDropBox
+        uuid={actor.uuid}
+        getExes={sidebarExes}
+        setExes={setSidebarExecutables}
+        hintDropArea={false}
+        allowDrop={advancedOptions}
+        buttonStyle={[`${advancedOptions ? "-padding3-l" : ""}`]}
+        tooltipEnabled={true}
+    />
+</HeaderMain>

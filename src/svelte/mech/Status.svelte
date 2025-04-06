@@ -99,7 +99,7 @@
                     <i class="cci cci-repair la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
                     <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
-                        <input class="la-top__input -width2ch la-shadow la-text-text -medium -inset"
+                        <input class="la-top__input -width2ch la-shadow -medium -inset"
                             type="number" 
                             name="system.repairs.value"
                             data-dtype="Number" value={system.repairs.value}

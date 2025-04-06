@@ -1,12 +1,17 @@
+import { mount } from "svelte";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+import { setSheetStore, getSheetStore } from '@/scripts/store/store';
 import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
-import Body from "@/svelte/npc/Body.svelte";
+import Loadout from "@/svelte/npc/Loadout.svelte";
 import Header from "@/svelte/npc/Header.svelte";
-import { mount } from "svelte";
+import Activity from '@/svelte/npc/Activity.svelte';
+import Status from "@/svelte/npc/Status.svelte";
+import { getThemeOverride } from '@/scripts/npc/settings';
+import { unregisterTrackedHooks } from '@/scripts/store/hooks';
 
 export class NPCSheetBase
 {
@@ -20,6 +25,13 @@ export class NPCSheetBase
             template: TEMPLATE_PATHS.npcSheetSvelte,
             width: getNPCSheetWidth() || 500,
             height: getNPCSheetHeight() || 800,
+            tabs: [
+                {
+                    navSelector: ".la-tabs",
+                    contentSelector: ".la-content",
+                    initial: "loadout"
+                },
+            ],
             scrollY: [".LA_SCROLL_BODY"],
         }
     }
@@ -31,6 +43,16 @@ export class NPCSheetBase
             constructor(...args: [any])
             {
                 super(...args);
+                
+                Hooks.on("laOverrideTheme", (uuid: string, theme: string) =>
+                {
+                    if (uuid !== this.actor.uuid)
+                        return;
+                    setSheetStore(this.actor.uuid, {
+                        currentTheme: theme,
+                    });
+                    this.render();
+                })
 
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
@@ -64,7 +86,11 @@ export class NPCSheetBase
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                applyThemeTo(this.element); // (#1)
+                setSheetStore(this.actor.uuid, {
+                    currentTheme: getThemeOverride(this.actor.uuid)
+                });
+                applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
+
                 let data = await this.getData() as any;
 
                 this.mountComponents(html, data);
@@ -75,7 +101,7 @@ export class NPCSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element);
+                applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
                 let data = await this.getData() as any;
 
                 this.mountComponents(html, data);
@@ -88,14 +114,25 @@ export class NPCSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
+                unregisterTrackedHooks(this.actor.uuid); // Untrack all hooks that were registered from Svelte components
                 mount(Header,
                     {
                         target: html.find(".la-SVELTE-HEADER")[0],
                         props: data,
                     });
-                mount(Body,
+                mount(Loadout,
                     {
-                        target: html.find(".la-SVELTE-BODY")[0],
+                        target: html.find(".la-SVELTE-LOADOUT")[0],
+                        props: data,
+                    });
+                mount(Status,
+                    {
+                        target: html.find(".la-SVELTE-STATUS")[0],
+                        props: data,
+                    });
+                mount(Activity, 
+                    {
+                        target: html.find(".la-SVELTE-ACTIVITY")[0],
                         props: data,
                     });
             }

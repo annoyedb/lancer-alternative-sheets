@@ -1,7 +1,13 @@
+import { msgPackDecoder, msgPackEncoder } from "@/scripts/settings";
+import { NPCSheetSettings } from "@/classes/settings/NPCSheetSettings";
+import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
+import { getModuleVersion } from "@/scripts/helpers";
+import { Logger } from "@/classes/Logger";
 
 export function registerNPCSheetSettings()
 {
+    // Public Settings
     game.settings.register(LancerAlternative.Name, `npc-settings-sheet-width`, {
         name: "LA.SETTINGS.npc.sheetWidth.label",
         hint: "LA.SETTINGS.npc.sheetWidth.subLabel",
@@ -23,6 +29,42 @@ export function registerNPCSheetSettings()
         type: Number,
         default: 800,
     } as ClientSettings.PartialSetting<number>);
+
+    game.settings.register(LancerAlternative.Name, `npc-settings-log-action-save-collapse`, {
+        name: "LA.SETTINGS.mech.saveCollapse.label",
+        hint: "LA.SETTINGS.mech.saveCollapse.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    } as ClientSettings.PartialSetting<boolean>);
+
+    game.settings.register(LancerAlternative.Name, `npc-settings-log-action-start-collapsed`, {
+        name: "LA.SETTINGS.mech.startCollapsed.label",
+        hint: "LA.SETTINGS.mech.startCollapsed.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
+
+    // Private Settings
+    game.settings.register(LancerAlternative.Name, `_npc-settings`, {
+        scope: "world",
+        config: false,
+        type: Array, // MessagePack encoded object
+        default: [],
+    } as ClientSettings.PartialSetting<Array<number>>);
+
+    game.settings.register(LancerAlternative.Name, `_npc-settings-version`, {
+        scope: "world",
+        config: false,
+        type: String,
+        default: "",
+    } as ClientSettings.PartialSetting<string>);
+
+    // Sockets
+    SocketManager.getInstance().register(setNPCSheetData);
 }
 
 // Client Settings
@@ -36,4 +78,96 @@ export function getNPCSheetHeight(): number
 {
     const height = game.settings.get(LancerAlternative.Name, `npc-settings-sheet-height`) as number;
     return Math.max(0, height);
+}
+
+export function getNPCSheetLogActionDontSaveCollapse(): boolean
+{
+    return !game.settings.get(LancerAlternative.Name, `npc-settings-log-action-save-collapse`) as boolean;
+}
+
+export function getNPCSheetLogActionStartCollapsed(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `npc-settings-log-action-start-collapsed`) as boolean;
+}
+
+// World Private Settings
+export function getNPCSheetData()
+{
+    const settings = game.settings.get(LancerAlternative.Name, `_npc-settings`) as Array<number>;
+    if (!settings.length)
+        return new NPCSheetSettings();
+    try
+    {
+        let encoded = new Uint8Array(Object.values(settings));
+        if (encoded.length === 1)
+        {
+            Logger.log("NPCSheetSettings: Decoding failed, trying legacy decode.");
+            encoded = new Uint8Array(Object.values(settings[0]));
+        }
+        return msgPackDecoder.decode(encoded) as NPCSheetSettings;
+    }
+    catch
+    {
+        Logger.error("NPCSheetSettings: Decoding failed, returning empty settings.");
+        return new NPCSheetSettings();
+    }
+}
+
+export function encodeNPCSheetData(data: NPCSheetSettings): Array<number>
+{
+    const encoded: Uint8Array = msgPackEncoder.encode(data);
+    return Array.from(encoded);
+}
+
+export function setNPCSheetData(encoded: Array<number>)
+{
+    return Promise.all([
+        game.settings.set(LancerAlternative.Name, `_npc-settings`, encoded),
+        game.settings.set(LancerAlternative.Name, `_npc-settings-version`, getModuleVersion()),
+    ])
+}
+
+export function getThemeOverride(uuid: string): string
+{
+    const data = getNPCSheetData();
+    return data[uuid]?.themeOverride ?? "";
+}
+
+export function setThemeOverride(uuid: string, value: string)
+{
+    const data = getNPCSheetData();
+    if (!data[uuid])
+        data[uuid] = NPCSheetSettings.emptyContent();
+    data[uuid].themeOverride = value;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () =>
+        {
+            Logger.log(`Theme override set to ${value} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
+    Hooks.call("laOverrideTheme", uuid, value);
+}
+
+export function getSidebarExecutables(uuid: string): Array<string>
+{
+    const data = getNPCSheetData();
+    return data[uuid]?.sidebarExes ?? NPCSheetSettings.emptyContent().sidebarExes;
+}
+
+export function setSidebarExecutables(uuid: string, macros: Array<string>)
+{
+    const data = getNPCSheetData();
+    if (!data[uuid])
+        data[uuid] = NPCSheetSettings.emptyContent();
+    data[uuid].sidebarExes = macros;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () =>
+        {
+            Logger.log(`Sidebar executables set to ${macros.join(", ")} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
 }

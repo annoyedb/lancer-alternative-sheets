@@ -154,6 +154,75 @@
     }
 }
 
+@mixin scrollDiagonally
+{
+    @keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+
+    @-webkit-keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+
+    @-moz-keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+}
+
+@mixin scrollUp
+{
+    @keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+
+    @-webkit-keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+
+    @-moz-keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+}
+
 .la-root
 {
 
@@ -275,38 +344,38 @@
 
     .la-bg-scroll
     {
+        @include scrollDiagonally;
+
         background: url(/assets/grid.png);
         animation: 400s scroll infinite linear;
         -webkit-animation: 400s scroll infinite linear;
         -moz-animation: 400s scroll infinite linear;
+    }
 
-        @keyframes scroll
-        {
-            100%
-            {
-                background-position: -3000px -3000px;
-            }
-        }
+    .la-bg-scroll-alt
+    {
+        @include scrollDiagonally;
+        
+        background: url(/assets/dots.png);
+        animation: 400s scroll infinite linear;
+        -webkit-animation: 400s scroll infinite linear;
+        -moz-animation: 400s scroll infinite linear;
+    }
 
-        @-webkit-keyframes scroll
-        {
-            100%
-            {
-                background-position: -3000px -3000px;
-            }
-        }
-
-        @-moz-keyframes scroll
-        {
-            100%
-            {
-                background-position: -3000px -3000px;
-            }
-        }
+    .la-bg-scroll-alt-vertical
+    {
+        @include scrollUp;
+        
+        background: url(/assets/dots.png);
+        animation: scroll-up 600s infinite linear;
+        -webkit-animation: scroll-up 600s infinite linear;
+        -moz-animation: scroll-up 600s infinite linear;
     }
 
     .la-ruler
     {
+        @include scrollUp;
+
         width: 1rem;
         height: 100%;
         background-image: url(/assets/scale_1.png);
@@ -314,45 +383,6 @@
         animation: scroll-up 600s infinite linear;
         -webkit-animation: scroll-up 600s infinite linear;
         -moz-animation: scroll-up 600s infinite linear;
-
-        @keyframes scroll-up
-        {
-            from
-            {
-                background-position: 0 3000px;
-            }
-
-            to
-            {
-                background-position: 0 -3000px;
-            }
-        }
-
-        @-webkit-keyframes scroll-up
-        {
-            from
-            {
-                background-position: 0 3000px;
-            }
-
-            to
-            {
-                background-position: 0 -3000px;
-            }
-        }
-
-        @-moz-keyframes scroll-up
-        {
-            from
-            {
-                background-position: 0 3000px;
-            }
-
-            to
-            {
-                background-position: 0 -3000px;
-            }
-        }
     }
 
     .la-cmdline

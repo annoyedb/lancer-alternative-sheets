@@ -4,7 +4,6 @@
     import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
     import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
@@ -183,13 +182,6 @@
             <EffectBox
                 name={getLocalized("LA.trigger.label")}
             >
-                <FlowButton
-                    text={getLocalized("LA.use.label")}
-                    style={["clipped-bot", "la-bckg-secondary"]}
-
-                    flowClass={FlowClass.SendEffectToChat}
-                />
-                <hr>
                 {@html reaction.system.trigger}
             </EffectBox>
             <EffectBox

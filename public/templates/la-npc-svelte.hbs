@@ -1,8 +1,69 @@
-<form class="la-npc {{cssClass}} la-root flexcol {{getTheme}}" autocomplete="off">
-    <div class="la-combine-v -divider la-anim-active -heightfull">
-        <div class="la-SVELTE-HEADER -widthfull">
+<form class="la-npc la-text-text {{cssClass}} la-root flexcol {{getTheme}}" autocomplete="off">
+    <div class="la-bg-scroll-alt la-bckg-background la-combine-v -divider la-anim-primary -heightfull">
+        <div class="-widthfull">
+            <div class="la-SVELTE-HEADER">
+                {{!-- Svelte is injected in-place here --}}
+            </div>
         </div>
-        <div class="la-SVELTE-BODY LA_SCROLL_BODY -flex1 -widthfull">
+        <!-- Navigation -->
+        <div class="-positionrelative -widthfull la-dropshadow"
+            style="z-index: 1;"
+        >
+            <div class="la-nav__island la-combine-h -justifystart -positionabsolute -left0 -top0"
+            >
+                <nav
+                    class="la-tabs la-combine-h la-bckg-primary clipped-bot" 
+                    data-group="primary"
+                >
+                    <button type="button"
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-group="primary" 
+                        data-tab="loadout"
+                    >
+                        {{localize "LA.tab.loadout.label"}}
+                    </button>
+                    <button type="button"
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-group="primary"
+                        data-tab="status"
+                    >
+                        {{localize "LA.tab.status.label"}}
+                    </button>
+                    <button type="button"
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-group="primary"
+                        data-tab="activity"
+                    >
+                        {{localize "LA.tab.activity.label"}}
+                    </button>
+                </nav>
+            </div>
         </div>
+        <section
+            class="la-content LA_SCROLL_BODY -flex1 -widthfull -padding6-t"
+        >
+            <div 
+                class="la-SVELTE-LOADOUT -widthfull
+                    tab"
+                data-group="primary" 
+                data-tab="loadout"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div class="la-SVELTE-STATUS -widthfull
+                    tab"
+                data-group="primary" 
+                data-tab="status"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div class="la-SVELTE-ACTIVITY -widthfull
+                    tab"
+                data-group="primary" 
+                data-tab="activity"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+        </section>
     </div>
 </form>
