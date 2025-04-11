@@ -78,7 +78,7 @@
             name={counter.name}
             usesValue={counter.value}
             usesMax={counter.max}
-            path={`system.traits.${index}.counters`}
+            path={`system.loadout.frame.value.system.traits.${index}.counters`}
             
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}

@@ -19,6 +19,7 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import TagArray from "@/svelte/actor/TagArray.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -274,6 +275,11 @@
                     tooltipEnabled={tooltipEnabled}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
+                />
+                <TagArray 
+                    tags={component.value.system.tags}
+                    path={`${getComponentPath(index)}.system.tags`}
+                    justify={"start"}
                 />
             </div>
         {/if}

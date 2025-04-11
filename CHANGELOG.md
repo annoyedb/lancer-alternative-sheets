@@ -1,3 +1,11 @@
+# 1.1.8
+Thanks to `stormtalus` on Discord for pointing these issues out.
+
+## Changes
+* Fixed error caused by 'drilldownDocument' in frame traits (this does not fix the issue where Gilgamesh's counters do not get updated)
+* Added tags display to mech sheet systems `why did no one else tell me these were missing AAAAAAAAAAAAAAAAAAAAAAAAA`
+* Expanded arbitrary restriction from the alternative sheets taken from the original sheet limiting the 'loaded' tag from only weapons to support NPC features that are not of a 'weapon' type (e.g. systems and traits). To reiterate, this does not change the underlying data structure nor does it change the base sheets. Neither am I planning on rewriting parts of the Lancer system for homebrew support in this module, it just happened that the data is all there to support it. So if you plan to make use of this, it is only available in the alternative sheet. You may consider this an experimental thing that may change without notice in any future iteration of the Lancer system.
+
 # 1.1.7
 This version implements the features created in 1.1.4 for mech sheets into NPC sheets and some changes to the layout for better sheet real-estate.
 

@@ -83,7 +83,8 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each systems as component}
     {#snippet outerContent()}
-        {#if !isDestroyed(component)}
+        {#if !isDestroyed(component) 
+        && (isLoading(component) || isRecharge(component) || component.system.uses.max)}
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
                 <ChargedBox
