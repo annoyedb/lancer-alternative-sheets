@@ -56,17 +56,15 @@ aside.la-tooltip.active
 
 // This is so oddly specific becuase Monk's Little Details adds an oddly specific 
 // border CSS rule for some reason and dominance must be asserted :triumph:
-.system-lancer
+body.game.system-lancer>.lancer.sheet
 {
-    div.la-override__header
+    >header.window-header
     {
-        header.window-header
-        {
-            background-color: var(--primary);
-            border: unset;
-        }
+        background-color: var(--primary);
+        border: unset;
     }
 }
+
 .window-content:has(>.la-root)
 {
     padding: inherit;

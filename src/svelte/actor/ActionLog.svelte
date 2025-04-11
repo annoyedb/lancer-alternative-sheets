@@ -4,6 +4,7 @@
     import type { ActionLogProps } from "@/interfaces/actor/ActionLogProps";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import { getLocalized } from "@/scripts/helpers";
+    import ActionLogMessage from "@/svelte/actor/ActionLogMessage.svelte";
 
     const {
         uuid,
@@ -154,9 +155,9 @@
         headerContentLeft={headerSecondaryLeftOptions}
         headerContentRight={headerSecondaryRightOptions}
     >
-        <div class="-fontsize1">
-            {@html message.content}
-        </div>
+        <ActionLogMessage
+            messageData={message}
+        />
     </HeaderSecondary>
 {/each}
 </div>
