@@ -18,6 +18,7 @@
         actor,
         system,
     }: MechSheetProps = $props();
+    let effectButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTipEnabled();
     const frame: any = system.loadout.frame!.value;
@@ -53,6 +54,9 @@
     tooltipDirection={TooltipDirection.LEFT}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
+
+    onPointerEnter={() => {effectButtonHover = true;}}
+    onPointerLeave={() => {effectButtonHover = false;}}
 />
 {/snippet}
 <HeaderQuinary
@@ -60,6 +64,11 @@
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
     textStyle={["la-text-header", "la-anim-header"]}
+    extensionTextFunction={() => {
+        if (effectButtonHover)
+            return `--${getLocalized("LA.use.label")}`;
+        return undefined;
+    }}
 
     collapseID={collID}
 

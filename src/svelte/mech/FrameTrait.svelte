@@ -16,8 +16,9 @@
         actor,
         system,
     }: MechSheetProps = $props();
+    let messageButtonHover = $state(false);
 
-    let frame: any = system.loadout.frame!.value;
+    const frame = system.loadout.frame!.value;
     const tooltipEnabled = getMechSheetTipEnabled();
 
     function getCollapseID(index: number)
@@ -46,6 +47,9 @@
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
+
+    onPointerEnter={() => {messageButtonHover = true;}}
+    onPointerLeave={() => {messageButtonHover = false;}}
 />
 {/snippet}
 
@@ -55,6 +59,11 @@
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
     textStyle={["-fontsize2"]}
     borderStyle={["-bordersoff"]}
+    extensionTextFunction={() => {
+        if (messageButtonHover)
+            return `--${getLocalized("LA.chat.extension")}`;
+        return undefined;
+    }}
     
     collapseID={getCollapseID(index)}
     startCollapsed={true}

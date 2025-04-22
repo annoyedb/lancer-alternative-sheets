@@ -49,7 +49,7 @@ export interface ButtonProps
     type?: string;
 
     /**
-     * Option data index for the button. Used in `data-index` attribute.
+     * Optional data index for the button. Used in `data-index` attribute.
      */
     index?: number;
 

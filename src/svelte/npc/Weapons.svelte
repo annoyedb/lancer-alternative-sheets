@@ -23,6 +23,11 @@
         system,
         weapons,
     }: NPCSheetProps & {weapons : Array<any>} = $props();
+    let collapseAllButtonHover = $state(false);
+    let attackButtonHover = $state(false);
+    let damageButtonHover = $state(false);
+    let messageButtonHover = $state(false);
+    let editButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
     const tier = system.tier;
@@ -83,6 +88,9 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;}}
+    onPointerLeave={() => {collapseAllButtonHover = false;}}
 />
 {/snippet}
 
@@ -92,6 +100,11 @@
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-mech-weapon"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-mech-weapon", "-gap0"]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHover)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
     
     collapseID={collID}
     startCollapsed={true}
@@ -153,6 +166,9 @@
             tooltipDirection={TooltipDirection.UP}
 
             disabled={isDestroyed(weapon)}
+
+            onPointerEnter={() => {attackButtonHover = true;}}
+            onPointerLeave={() => {attackButtonHover = false;}}
         />
     {/snippet}
     {#snippet headerTertiaryRightOptions()}
@@ -167,6 +183,9 @@
             tooltipDirection={TooltipDirection.UP}
 
             disabled={isDestroyed(weapon)}
+
+            onPointerEnter={() => {damageButtonHover = true;}}
+            onPointerLeave={() => {damageButtonHover = false;}}
         />
         <div class="la-combine-v -margin3-lr">
             <MessageButton
@@ -174,12 +193,18 @@
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
+
+                onPointerEnter={() => {messageButtonHover = true;}}
+                onPointerLeave={() => {messageButtonHover = false;}}
             />
             <EditButton
                 flowClass={FlowClass.ContextMenu}
                 path={`itemTypes.npc_feature.${weapon.index}`}
 
                 tooltipEnabled={tooltipEnabled}
+
+                onPointerEnter={() => {editButtonHover = true;}}
+                onPointerLeave={() => {editButtonHover = false;}}
             />
         </div>
     {/snippet}
@@ -198,6 +223,17 @@
             subText={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
             subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
             borderStyle={["-bordersoff"]}
+            extensionTextFunction={() => {
+                if (attackButtonHover)
+                    return `--${getLocalized("LA.flow.rollAttack.extension")}`;
+                if (damageButtonHover)
+                    return `--${getLocalized("LA.flow.rollDamage.extension")}`;
+                if (messageButtonHover)
+                    return `--${getLocalized("LA.chat.extension")}`;
+                if (editButtonHover)
+                    return `--${getLocalized("LA.edit.extension")}`;
+                return undefined;
+            }}
 
             renderOutsideCollapse={hasWeaponSpecial(weapon) ? outerContent : undefined }
             headerContentLeft={headerTertiaryLeftOptions}

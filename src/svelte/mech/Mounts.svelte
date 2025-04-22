@@ -14,6 +14,7 @@
         actor,
         system,
     } = props;
+    let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTipEnabled();
     const weaponMounts = system.loadout.weapon_mounts;
@@ -45,6 +46,9 @@
         tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+
+        onPointerEnter={() => {collapseAllButtonHover = true;}}
+        onPointerLeave={() => {collapseAllButtonHover = false;}}
     />
     {/snippet}
     <HeaderMain 
@@ -52,6 +56,11 @@
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-brdr-primary"]}
+        extensionTextFunction={() => {
+            if (collapseAllButtonHover)
+                return `--${getLocalized("LA.collapseAll.extension")}`;
+            return undefined;
+        }}
 
         collapseID={getCollapseID(index)}
         startCollapsed={true}

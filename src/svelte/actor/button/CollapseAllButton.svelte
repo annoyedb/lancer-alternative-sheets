@@ -5,6 +5,7 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -21,12 +22,37 @@
         logText,
         logType,
         logTypeReset,
-    }: IconButtonProps & CollapseAllButtonProps & TooltipProps & TextLogEventProps = $props();
+
+        onPointerEnter,
+        onPointerLeave,
+    }: IconButtonProps & CollapseAllButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
     let isExpanding = $derived(!getCollapseState(collapseID));
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.collapseAll.tooltip");
+
+    function handleOnPointerEnter(event: PointerEvent) 
+    {
+        if (onPointerEnter)
+            onPointerEnter();
+
+        if (logging)
+            sendToLog(event, log, logType);
+        else
+            return undefined;
+    }
+
+    function handleOnPointerLeave(event: PointerEvent) 
+    {
+        if (onPointerLeave)
+            onPointerLeave();
+
+        if (logging)
+            resetLog(event, logTypeReset);
+        else
+            return undefined;
+    }
 
     function toggleCollapseAll(event: MouseEvent) 
     {
@@ -59,8 +85,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={"clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ handleOnPointerEnter }
+    onpointerleave={ handleOnPointerLeave }
     onclick={(event) => toggleCollapseAll(event)}
     aria-label={getLocalized("LA.collapseAll.tooltip")}
 >

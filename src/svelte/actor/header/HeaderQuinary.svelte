@@ -28,12 +28,14 @@
         borderStyle,
         
         text,
-        extensionText,
         textStyle,
+        extensionText,
+        extensionTextFunction,
     }: HeaderProps & HeaderQuinaryProps & TerminalTextProps = $props();
     
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
+    // (#3)
     onMount(() => 
     {
         if (collapseID && (dontSaveCollapse ?? getCollapseState(collapseID) === undefined))
@@ -53,6 +55,8 @@
 
     function getExtensionText()
     {
+        if (extensionTextFunction && extensionTextFunction())
+            return extensionTextFunction();
         if (extensionText)
             return extensionText;
         if (collapseID)
@@ -77,7 +81,7 @@
     data-uuid={uuid}
     data-path={path}
     data-accept-types={acceptTypes}
-    draggable="true"
+    draggable={true}
 >
     <!-- Action Box header -->
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->

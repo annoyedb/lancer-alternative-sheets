@@ -91,8 +91,10 @@ export class MechSheetBase
                 this.reapplyImgListener(html);
             }
 
-            // The more pressing issue is whether or not this 
-            // function's is networked and if it's return is internally cached
+            // getData() retrieves its data from volatile memory, so this is 'fine' that it runs twice.
+            // Alternatively, we could use a Handlebars handler to loop the first getData around the 
+            // block back to the code here, but that's a bit much compared to 
+            // how short this code is here, and that solution could be completely upended in AppV2 anyway.
             override async getData(): Promise<MechSheetProps>
             {
                 let data = await super.getData() as any;

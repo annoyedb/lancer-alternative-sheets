@@ -16,9 +16,9 @@
     const {
         actor,
     }: NPCSheetProps = props;
-
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let sidebarExes = $state(getSidebarExecutables(actor.uuid));
+    let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled(); 
     const activeEffectsCollID = `${actor.uuid}.status.activeEffects`;
@@ -30,6 +30,9 @@
 <CollapseAllButton
     collapseID={activeEffectsCollID}
     tooltipEnabled={tooltipEnabled}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;}}
+    onPointerLeave={() => {collapseAllButtonHover = false;}}
 />
 {/snippet}
 <HeaderMain 
@@ -55,6 +58,11 @@
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHover)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
 
     collapseID={utilitiesCollID}
     startCollapsed={false}

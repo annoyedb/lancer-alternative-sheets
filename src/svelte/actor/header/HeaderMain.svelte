@@ -26,8 +26,8 @@
         text,
         textStyle,
         extensionText,
+        extensionTextFunction,
     }: HeaderProps & HeaderMainProps & TerminalTextProps = $props();
-    
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
     const extraOptions = headerContent ? true : false;
@@ -35,7 +35,7 @@
     // (#3) - Since collapsables may not always be collapsable, may want to reset their collapse state 
     // to the default, need to be persistent across rerenders, and still be able to read from derived()
     // we need to use a state with varying levels of fallbacks, and to properly set the store based on 
-    // the 
+    // the derived value.
     onMount(() => 
     {
         if (collapseID && (dontSaveCollapse ?? getCollapseState(collapseID) === undefined))
@@ -55,6 +55,8 @@
 
     function getExtensionText()
     {
+        if (extensionTextFunction && extensionTextFunction())
+            return extensionTextFunction();
         if (extensionText)
             return extensionText;
         if (collapseID)

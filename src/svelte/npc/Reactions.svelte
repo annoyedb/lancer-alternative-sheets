@@ -21,6 +21,10 @@
         system,
         reactions,
     }: NPCSheetProps & {reactions : Array<any>} = $props();
+    let collapseAllButtonHover = $state(false);
+    let effectButtonHover = $state(false);
+    let editButtonHover = $state(false);
+    let messageButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
     const tier = system.tier;
@@ -78,6 +82,9 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;}}
+    onPointerLeave={() => {collapseAllButtonHover = false;}}
 />
 {/snippet}
 
@@ -87,6 +94,11 @@
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--reaction"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--reaction", "-gap0"]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHover)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
     
     collapseID={collID}
     startCollapsed={true}
@@ -126,6 +138,9 @@
             tooltipDirection={TooltipDirection.UP}
 
             disabled={isDestroyed(reaction)}
+
+            onPointerEnter={() => {effectButtonHover = true;}}
+            onPointerLeave={() => {effectButtonHover = false;}}
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
@@ -136,6 +151,9 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
+
+            onPointerEnter={() => {editButtonHover = true;}}
+            onPointerLeave={() => {editButtonHover = false;}}
         />
         <MessageButton
             flowClass={FlowClass.SendToChat}
@@ -144,6 +162,9 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
+
+            onPointerEnter={() => {messageButtonHover = true;}}
+            onPointerLeave={() => {messageButtonHover = false;}}
         />
     {/snippet}
         <HeaderSecondary
@@ -151,6 +172,15 @@
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={[getHeaderStyle(reaction), "-fontsize1"]}
             borderStyle={["-bordersoff"]}
+            extensionTextFunction={() => {
+                if (effectButtonHover)
+                    return `--${getLocalized("LA.use.label")}`;
+                if (messageButtonHover)
+                    return `--${getLocalized("LA.chat.extension")}`;
+                if (editButtonHover)
+                    return `--${getLocalized("LA.edit.extension")}`;
+                return undefined;
+            }}
 
             itemID={reaction.id}
             uuid={reaction.uuid}

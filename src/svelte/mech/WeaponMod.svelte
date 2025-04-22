@@ -23,6 +23,8 @@
         mod,
         path,
     }: WeaponModProps = $props();
+    let effectButtonHover = $state(false);
+    let editButtonHover = $state(false);
 
     const collID = mod ? `${mod.uuid}_action` : "empty";
     const tooltipEnabled = getMechSheetTipEnabled();
@@ -49,6 +51,9 @@
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+
+        onPointerEnter={() => {effectButtonHover = true;}}
+        onPointerLeave={() => {effectButtonHover = false;}}
     />
     {/snippet}
 
@@ -68,6 +73,9 @@
         tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+
+        onPointerEnter={() => {editButtonHover = true;}}
+        onPointerLeave={() => {editButtonHover = false;}}
     />
     {/snippet}
 
@@ -75,10 +83,18 @@
         uuid={mod.uuid}
         path={path}
         acceptTypes={"weapon_mod"}
+
         text={mod.name}
         headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
         textStyle={[H2_TEXT_SIZE]}
         borderStyle={["la-brdr-weapon-mod"]}
+        extensionTextFunction={() => {
+            if (effectButtonHover)
+                return `--${getLocalized("LA.use.label")}`;
+            if (editButtonHover)
+                return `--${getLocalized("LA.edit.extension")}`;
+            return undefined;
+        }}
         
         collapseID={mod.uuid}
         startCollapsed={true}
@@ -178,6 +194,7 @@
                 logTypeReset={TextLogHook.MechHeaderReset}
             >
                 <FlowButton
+                    style={["clipped-bot", "la-bckg-secondary"]}
                     text={getLocalized("LA.use.label")}
 
                     flowClass={FlowClass.SendEffectToChat}

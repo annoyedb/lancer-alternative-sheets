@@ -20,6 +20,8 @@
         actor,
         pilot,
     } = props;
+    let collapseAllButtonHoverTalent = $state(false);
+    let collapseAllButtonHoverRank = $state(false);
     
     const tooltipEnabled = getMechSheetTipEnabled();
     const isMechSheet = actor.type === "mech";
@@ -64,6 +66,9 @@
     tooltipEnabled={tooltipEnabled}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+
+    onPointerEnter={() => {collapseAllButtonHoverTalent = true;}}
+    onPointerLeave={() => {collapseAllButtonHoverTalent = false;}}
 />
 {/snippet}
 
@@ -73,6 +78,11 @@
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHoverTalent)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
 
     collapseID={collID}
     startCollapsed={true}
@@ -99,6 +109,9 @@
             tooltipEnabled={tooltipEnabled}
             logType={isMechSheet ? TextLogHook.MechHeader : undefined }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+
+            onPointerEnter={() => {collapseAllButtonHoverRank = true;}}
+            onPointerLeave={() => {collapseAllButtonHoverRank = false;}}
         />
     {/snippet}
         <HeaderSecondary
@@ -106,6 +119,11 @@
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
+            extensionTextFunction={() => {
+                if (collapseAllButtonHoverRank)
+                    return `--${getLocalized("LA.collapseAll.extension")}`;
+                return undefined;
+            }}
             
             rootStyle={["ref", "set", "lancer-talent", "submajor"]}
             uuid={talent.uuid}

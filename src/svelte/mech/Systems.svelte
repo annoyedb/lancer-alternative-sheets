@@ -26,6 +26,10 @@
         actor,
         system,
     } = props;
+    let collapseAllButtonHover = $state(false);
+    let effectButtonHover = $state(false);
+    let editButtonHover = $state(false);
+    let messageButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTipEnabled();
     const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
@@ -121,6 +125,9 @@
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;} }
+    onPointerLeave={() => {collapseAllButtonHover = false;} }
 />
 {/snippet}
 
@@ -130,6 +137,11 @@
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-system"]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHover)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
     
     collapseID={collID}
     startCollapsed={true}
@@ -176,6 +188,9 @@
             logTypeReset={TextLogHook.MechHeaderReset}
             
             disabled={isDestroyed(component)}
+            
+            onPointerEnter={() => {effectButtonHover = true;} }
+            onPointerLeave={() => {effectButtonHover = false;} }
         />
     {/snippet}
     {#snippet headerTertiaryRightOptions()}
@@ -194,6 +209,9 @@
                 tooltipEnabled={tooltipEnabled}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
+
+                onPointerEnter={() => {messageButtonHover = true;} }
+                onPointerLeave={() => {messageButtonHover = false;} }
             />
             <EditButton
                 flowClass={FlowClass.ContextMenu}
@@ -202,6 +220,9 @@
                 tooltipEnabled={tooltipEnabled}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
+
+                onPointerEnter={() => {editButtonHover = true;} }
+                onPointerLeave={() => {editButtonHover = false;} }
             />
         </div>
     {/snippet}
@@ -220,6 +241,15 @@
             subText={getSubtitle(component)}
             subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
             borderStyle={["-bordersoff"]}
+            extensionTextFunction={() => {
+                if (effectButtonHover)
+                    return `--${getLocalized("LA.use.label")}`;
+                if (messageButtonHover)
+                    return `--${getLocalized("LA.chat.extension")}`;
+                if (editButtonHover)
+                    return `--${getLocalized("LA.edit.extension")}`;
+                return undefined;
+            }}
 
             renderOutsideCollapse={outerContent}
             headerContentLeft={headerTertiaryLeftOptions}

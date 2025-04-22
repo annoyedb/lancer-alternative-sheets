@@ -26,8 +26,9 @@
         borderStyle,
         
         text,
-        extensionText,
         textStyle,
+        extensionText,
+        extensionTextFunction,
 
         disableCmdline,
         disableCursor,
@@ -38,6 +39,7 @@
     
     const extraOptions =  headerContentRight ? true : false;
 
+    // (#3)
     onMount(() => 
     {
         if (collapseID && (dontSaveCollapse || getCollapseState(collapseID) === undefined))
@@ -57,6 +59,8 @@
 
     function getExtensionText()
     {
+        if (extensionTextFunction && extensionTextFunction())
+            return extensionTextFunction();
         if (extensionText)
             return extensionText;
         if (collapseID)

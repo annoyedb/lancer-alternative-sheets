@@ -23,6 +23,10 @@
         mount,
         mountIndex,
     }: MountSlotProps = $props();
+    let attackButtonHover = $state(false);
+    let damageButtonHover = $state(false);
+    let messageButtonHover = $state(false);
+    let editButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTipEnabled();
 
@@ -177,6 +181,9 @@
         logTypeReset={TextLogHook.MechHeaderReset}
 
         disabled={isDestroyed(weapon)}
+
+        onPointerEnter={() => {attackButtonHover = true;} }
+        onPointerLeave={() => {attackButtonHover = false;} }
     />
 {/snippet}
 {#snippet headerTertiaryRightOptions()}
@@ -193,6 +200,9 @@
         logTypeReset={TextLogHook.MechHeaderReset}
 
         disabled={isDestroyed(weapon)}
+
+        onPointerEnter={() => {damageButtonHover = true;} }
+        onPointerLeave={() => {damageButtonHover = false;} }
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton
@@ -202,6 +212,9 @@
             tooltipEnabled={tooltipEnabled}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
+
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
         />
         <EditButton
             flowClass={FlowClass.ContextMenu}
@@ -210,6 +223,9 @@
             tooltipEnabled={tooltipEnabled}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
+
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
         />
     </div>
 {/snippet}
@@ -230,6 +246,17 @@
         subText={getSubtitle(weapon)}
         subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
         borderStyle={["-bordersoff"]}
+        extensionTextFunction={() => {
+            if (attackButtonHover)
+                return `--${getLocalized("LA.flow.rollAttack.extension")}`;
+            if (damageButtonHover)
+                return `--${getLocalized("LA.flow.rollDamage.extension")}`;
+            if (messageButtonHover)
+                return `--${getLocalized("LA.chat.extension")}`;
+            if (editButtonHover)
+                return `--${getLocalized("LA.edit.extension")}`;
+            return undefined;
+        }}
         
         renderOutsideCollapse={renderLimited(weapon) ? outerContent : undefined }
         headerContentLeft={headerTertiaryLeftOptions}

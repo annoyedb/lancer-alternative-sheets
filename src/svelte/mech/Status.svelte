@@ -18,6 +18,7 @@
         actor,
         system,
     } = props;
+    let collapseAllButtonHover = $state(false);
     
     const tooltipEnabled = getMechSheetTipEnabled();
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
@@ -37,6 +38,9 @@
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;}}
+    onPointerLeave={() => {collapseAllButtonHover = false;}}
 />
 {/snippet}
 
@@ -48,6 +52,11 @@
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        extensionTextFunction={() => {      
+            if (collapseAllButtonHover)
+                return `--${getLocalized("LA.collapseAll.extension")}`;
+            return undefined;
+        }}
 
         collapseID={`${actor.uuid}.status.actionLog`}
         startCollapsed={false}

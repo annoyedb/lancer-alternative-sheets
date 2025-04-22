@@ -14,6 +14,11 @@ export interface TerminalTextProps
     extensionText?: string;
 
     /**
+     * A function returning the text that appears after the text.
+     */
+    extensionTextFunction?: () => string | undefined;
+
+    /**
      * Optional array of style class names to apply to the button's icon, text, and cursor.
      * Use `anim` prefixed color classes to apply the `--color` CSS attribute.
      */

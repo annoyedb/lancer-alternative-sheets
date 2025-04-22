@@ -18,6 +18,7 @@
         actor,
         system,
     } = props;
+    let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTipEnabled();
     const frame: any | undefined = system.loadout.frame?.value;
@@ -48,6 +49,9 @@
         tooltipEnabled={tooltipEnabled}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
+
+        onPointerEnter={() => {collapseAllButtonHover = true;}}
+        onPointerLeave={() => {collapseAllButtonHover = false;}}
     />
 {/snippet}
 {#snippet headerSecondaryLeftOptions()}
@@ -59,6 +63,11 @@
     headerStyle={[MAIN_HEADER_STYLE, frameColorBckg, "-upper"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={[frameColorBrdr]}
+    extensionTextFunction={() => {
+        if (collapseAllButtonHover)
+            return `--${getLocalized("LA.collapseAll.extension")}`;
+        return undefined;
+    }}
 
     collapseID={collID}
     startCollapsed={true}

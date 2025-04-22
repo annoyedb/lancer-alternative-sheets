@@ -5,6 +5,7 @@
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { WeaponProps } from "@/interfaces/actor/button/WeaponProps";
+    import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
@@ -32,13 +33,38 @@
         logText,
         logType,
         logTypeReset,
-    }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps = $props();
+
+        onPointerEnter,
+        onPointerLeave,
+    }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
     
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
     const hasAllWeaponProperties = damage?.length && range?.length;
     const rollable = !disabled && (damage?.length > 0);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.flow.rollDamage.tooltip");
+
+    function handleOnPointerEnter(event: PointerEvent) 
+    {
+        if (onPointerEnter)
+            onPointerEnter();
+
+        if (logging)
+            sendToLog(event, log, logType);
+        else
+            return undefined;
+    }
+
+    function handleOnPointerLeave(event: PointerEvent) 
+    {
+        if (onPointerLeave)
+            onPointerLeave();
+
+        if (logging)
+            resetLog(event, logTypeReset);
+        else
+            return undefined;
+    }
 </script>
 <script lang="ts" module>
     const _ICON_BG_STYLE = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
@@ -52,8 +78,8 @@
     data-tooltip={tooltipEnabled && rollable ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ handleOnPointerEnter }
+    onpointerleave={ handleOnPointerLeave }
     aria-label={tooltip || getLocalized("LA.flow.rollDamage.tooltip")}
     disabled={!rollable}
 >
