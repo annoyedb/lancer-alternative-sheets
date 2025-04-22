@@ -148,6 +148,7 @@
         <div class="la-combine-h -padding1-r">
             <div class="la-combine-v">
                 <div class="la-combine-h -height2 -justifybetween -widthfull">
+                    <!-- Advanced options, theme override, notes, etc -->
                     <div class="la-combine-h -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
@@ -170,9 +171,8 @@
                     {/if}
                     </div>
                     <div class="la-combine-h -gap1">
-                    {#if advancedOptions}
                         <button type="button"
-                            class="mdi mdi-note-edit -fontsize2 -glow-active-hover
+                            class="mdi mdi-note-edit -fontsize2 -glow-active-hover {advancedOptions ? "" : "-visibilityhidden"}
                                 popout-text-edit-button"
                             data-tooltip={notesEditTip}
                             data-tooltip-class={"clipped-bot la-tooltip"}
@@ -181,7 +181,6 @@
                             data-path={`system.notes`}
                         >
                         </button>
-                    {/if}
                         <button type="button"
                             class="mdi mdi-information -fontsize2 -glow-active-hover"
                             data-tooltip={notesTip}
