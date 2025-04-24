@@ -33,6 +33,7 @@
         logType,
         logTypeReset
     }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
+    let effectButtonHover = $state(false);
 
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
@@ -131,12 +132,20 @@
         logTypeReset={logTypeReset}
 
         disabled={disableLeftButton}
+
+        onPointerEnter={() => {effectButtonHover = true;}}
+        onPointerLeave={() => {effectButtonHover = false;}}
     />    
 {/snippet}
     <HeaderQuinary
         text={action.name}
         headerStyle={[ACTIVATION_COLOR_MAP[action.activation], "-padding0-l"]}
         textStyle={["la-text-header", "la-anim-header", "-lineheight5"]}
+        extensionTextFunction={() => {
+            if (effectButtonHover)
+                return `--${getLocalized("LA.chat.extension")}`;
+            return undefined;
+        }}
 
         uuid={uuid}
         path={`${path}.${index}`}
