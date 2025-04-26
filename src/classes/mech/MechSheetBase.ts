@@ -3,7 +3,12 @@ import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/store/advanced";
 import { getLocalized } from "@/scripts/helpers";
+import { getThemeOverride } from "@/scripts/mech/settings";
+import { unregisterTrackedHooks } from "@/scripts/store/hooks";
+import { setIntroRun } from "@/scripts/store/text-log";
+import { getSheetStore, setSheetStore } from "@/scripts/store/store";
 import { LancerAlternative } from "@/enums/LancerAlternative";
+import { ActiveTab } from "@/enums/ActiveTab";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
@@ -12,12 +17,7 @@ import Loadout from "@/svelte/mech/Loadout.svelte";
 import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
-import { getThemeOverride } from "@/scripts/mech/settings";
-import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import Activity from "@/svelte/mech/Activity.svelte";
-import { ActiveTab } from "@/enums/ActiveTab";
-import { setIntroRun } from "@/scripts/store/text-log";
-import { getSheetStore, setSheetStore } from "@/scripts/store/store";
 
 export class MechSheetBase
 {

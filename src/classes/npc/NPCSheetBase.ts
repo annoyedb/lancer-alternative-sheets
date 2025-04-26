@@ -6,12 +6,12 @@ import { getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
+import { getThemeOverride } from '@/scripts/npc/settings';
+import { unregisterTrackedHooks } from '@/scripts/store/hooks';
 import Loadout from "@/svelte/npc/Loadout.svelte";
 import Header from "@/svelte/npc/Header.svelte";
 import Activity from '@/svelte/npc/Activity.svelte';
 import Status from "@/svelte/npc/Status.svelte";
-import { getThemeOverride } from '@/scripts/npc/settings';
-import { unregisterTrackedHooks } from '@/scripts/store/hooks';
 
 export class NPCSheetBase
 {
