@@ -30,14 +30,12 @@
             >
                 <button type="button"
                     class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
-                    data-group="primary"
                     data-tab="status"
                 >
                     {{localize "LA.tab.status.label"}}
                 </button>
                 <button type="button"
                     class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
-                    data-group="primary" 
                     data-tab="loadout"
                 >
                     {{localize "LA.tab.loadout.label"}}
@@ -56,24 +54,23 @@
                 >
                     <button
                         class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
-                        data-group="secondary"
                         data-tab="statistics"
                     >
                         {{localize "LA.tab.statistics.label"}}
                     </button>
                     <button
                         class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
-                        data-group="secondary" 
                         data-tab="activity"
                     >
                         {{localize "LA.tab.activity.label"}}
                     </button>
                 </nav>
             </div>
-            <section class="la-content-secondary LA_SCROLL_SIDEBAR -widthfull -heightfull">
+            <section class="la-content-secondary LA_SCROLL_SIDEBAR -widthfull -heightfull"
+                data-group="secondary"
+            >
                 <div class="la-SVELTE-SIDEBARSTATISTICS la-sidebar__statistics
                         tab"
-                    data-group="secondary"
                     data-tab="statistics"
                 >
                     {{!-- (#1) --}}
@@ -81,7 +78,6 @@
                 </div>
                 <div class="la-SVELTE-SIDEBARACTIVITY la-sidebar__activity
                         tab"
-                    data-group="secondary"
                     data-tab="activity"
                 >
                     {{!-- (#1) --}}
@@ -93,6 +89,7 @@
         <section 
             class="la-content -widthfull -heightfull LA_SCROLL_BODY
                 sheet-body"
+            data-group="primary" 
         >
             {{!-- (#1) --}}
             <div class="la-SVELTE-HASE">
@@ -104,7 +101,6 @@
             <div 
                 class="la-SVELTE-STATUS la-status la-tab la-dropshadow -fontsize2
                     tab" 
-                data-group="primary" 
                 data-tab="status"
             >
                 {{!-- Svelte is injected in-place here --}}
@@ -112,7 +108,6 @@
             <div 
                 class="la-SVELTE-LOADOUT la-loadout la-tab la-dropshadow -fontsize2
                     tab" 
-                data-group="primary" 
                 data-tab="loadout"
             >
                 {{!-- Svelte is injected in-place here --}}

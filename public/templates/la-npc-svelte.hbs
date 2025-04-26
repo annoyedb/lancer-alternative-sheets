@@ -17,21 +17,18 @@
                 >
                     <button
                         class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
-                        data-group="primary" 
                         data-tab="loadout"
                     >
                         {{localize "LA.tab.loadout.label"}}
                     </button>
                     <button
                         class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
-                        data-group="primary"
                         data-tab="status"
                     >
                         {{localize "LA.tab.status.label"}}
                     </button>
                     <button
                         class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
-                        data-group="primary"
                         data-tab="activity"
                     >
                         {{localize "LA.tab.activity.label"}}
@@ -41,25 +38,23 @@
         </div>
         <section
             class="la-content LA_SCROLL_BODY -flex1 -widthfull -padding6-t"
+            data-group="primary" 
         >
             <div 
                 class="la-SVELTE-LOADOUT -widthfull
                     tab"
-                data-group="primary" 
                 data-tab="loadout"
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <div class="la-SVELTE-STATUS -widthfull
                     tab"
-                data-group="primary" 
                 data-tab="status"
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <div class="la-SVELTE-ACTIVITY -widthfull
                     tab"
-                data-group="primary" 
                 data-tab="activity"
             >
                 {{!-- Svelte is injected in-place here --}}
