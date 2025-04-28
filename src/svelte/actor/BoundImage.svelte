@@ -4,10 +4,13 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
 
     const {
+        children,
         image,
         uuid,
         yGetter,
         ySetter,
+        xGetter,
+        xSetter,
     }: BoundImageProps = $props();
 
     let advancedOptions = $derived(getAdvancedState(uuid));
@@ -15,18 +18,20 @@
     // Dragging ---------------------------------------------------------------
     let dragging = false;
     let offset = { x: 0, y: 0 };
-    let position = $state({ x: 0, y: yGetter ? yGetter(uuid) : 0 });
+    let position = $state({ 
+        x: xGetter ? xGetter(uuid) : 0, 
+        y: yGetter ? yGetter(uuid) : 0 
+    });
 
     function handlePointerDown(event: PointerEvent) 
     {
         if (!advancedOptions) return;
 
-        const image = event.currentTarget as HTMLImageElement;
         dragging = true;
 
         offset = {
-            x: event.clientX - image.offsetLeft,
-            y: event.clientY - image.offsetTop
+            x: event.clientX - position.x,
+            y: event.clientY - position.y
         };
     }
 
@@ -45,24 +50,44 @@
             callback();
         dragging = false;
     }
+
+    function handleAssignment(event: PointerEvent)
+    {
+        handlePointerUp(event, () => {
+            if (ySetter) 
+            {
+                ySetter(uuid, position.y);
+            }
+            if (xSetter) 
+            {
+                xSetter(uuid, position.x);
+            }
+        });
+    }
+
 </script>
 <!-- (#2) -->
 <!-- svelte-ignore event_directive_deprecated -->
-<div class="la-mechhead__container -flex1 -widthfull -heightfull">
+<div class="la-boundimage -flex1 -widthfull -heightfull"
+    >
+    {#if children}
+        {@render children()}
+    {/if}
     <img 
-        class="la-mechhead__img -heightfull -overflowhidden -float-r
+        class="la-boundimage__image -heightfull -overflowhidden -float-r
             {advancedOptions ? "-pointermove" : ""}" 
         src={image} 
         alt={`modules/${moduleID}/assets/assets/nodata.png`}
         style="
-            margin-top: { position.y }px;
+            margin-top: { ySetter ? position.y : 0 }px;
+            margin-right: { xSetter ? -position.x : 0 }px;
             mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
             -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
             -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));"
         on:pointerdown={event => handlePointerDown(event)}
         on:pointermove={event => handlePointerMove(event)}
-        on:pointerup={event => ySetter ? handlePointerUp(event, () => { ySetter(uuid, position.y); }) : undefined }
-        on:pointerleave={event => ySetter ? handlePointerUp(event, () => { ySetter(uuid, position.y); }) : undefined }
+        on:pointerup={ handleAssignment }
+        on:pointerleave={ handleAssignment }
         draggable={false}
     />
 </div>

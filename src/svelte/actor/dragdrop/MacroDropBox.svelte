@@ -15,6 +15,7 @@
     import { getLocalized } from '@/scripts/helpers';
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
+    import SkillTriggerButton from '@/svelte/actor/button/SkillTriggerButton.svelte';
 
     const {
         uuid,
@@ -37,7 +38,7 @@
     let component: HTMLElement | null = $state(null);
     let executables = $state(getExes);
 
-    const buttonTypes = Object.values(SystemButton);
+    const systemTypes = Object.values(SystemButton);
     interface LocalDropData { type: string; index: number; }
 
     const tipMain = TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.0"), tooltipHeader);
@@ -54,9 +55,14 @@
         }
     });
     
-    function isMacro(item: string) 
+    function isSystemFlow(item: string) 
     {
-        return !buttonTypes.includes(item as SystemButton);
+        return systemTypes.includes(item as SystemButton);
+    }
+
+    function isSkillTrigger(item: string) 
+    {
+        return (fromUuidSync(item) as any)?.type === "skill";
     }
 
     function handleFlowDrop(
@@ -141,6 +147,10 @@
         bind:this={component}
     >
     {#if executables.length}
+    <!-- 
+    `type` will be a string (e.g "Overcharge") if a system flow
+    or a UUID if a macro or skill trigger.  
+    -->
     {#each executables as type, index}
         <DragDropHandle
             index={index}
@@ -152,26 +162,12 @@
             onDelete={event => handleDelete(event, index)}
 
             disabled={!allowDrop}
-            deleteDisabled={!isMacro(type)}
+            deleteDisabled={isSystemFlow(type) || isSkillTrigger(type)}
 
             logType={logType}
             logTypeReset={logTypeReset}
         >
-        {#if isMacro(type)}
-            <FlowButton
-                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...(buttonStyle || [])]}
-                text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
-                flowClass={CustomFlowClass.RunMacro}
-                onClick={event => {
-                    event.stopPropagation();
-                    RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
-                }}
-
-                tooltipEnabled={tooltipEnabled}
-                logType={logType}
-                logTypeReset={logTypeReset}
-            />
-        {:else}
+        {#if isSystemFlow(type)}
             <FlowButton
                 text={ButtonFactory.getSystemButtonLabel(type)}
 
@@ -183,6 +179,26 @@
                 tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                 tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                 logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+                logType={logType}
+                logTypeReset={logTypeReset}
+            />
+        {:else if isSkillTrigger(type)}
+            <SkillTriggerButton
+                item={fromUuidSync(type)}
+            >
+                
+            </SkillTriggerButton>
+        {:else}
+            <FlowButton
+                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...(buttonStyle || [])]}
+                text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
+                flowClass={CustomFlowClass.RunMacro}
+                onClick={event => {
+                    event.stopPropagation();
+                    RunMacroBase.getInstance().startFlow(uuid, {uuid: type});
+                }}
+
+                tooltipEnabled={tooltipEnabled}
                 logType={logType}
                 logTypeReset={logTypeReset}
             />

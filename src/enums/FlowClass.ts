@@ -12,6 +12,7 @@ export enum FlowClass
     CoreActivation = "activation-flow",
     RechargeFeatures = "charge-macro",
     ContextMenu = "lancer-context-menu",
+    Skill = "skill-flow",
     DeleteActiveEffect = "", // No flow class for this
     Inventory= "", // No flow class for this
     None = "NO_FLOW_CLASS",
