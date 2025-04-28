@@ -1,3 +1,4 @@
+// TODO: move this to a more generalized location, since it describes both mech and pilot sheets
 .la-root
 {
     // Body
@@ -20,7 +21,6 @@
 
         >.la-tab
         {
-            margin-top: 1rem;
             margin-left: 2.2rem;
         }
     }
@@ -29,40 +29,40 @@
     .la-body
     {
         // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-        >.la-content
+        >.LA_SCROLL_BODY
         {
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-primary) transparent;
         }
 
-        >.la-content::-webkit-scrollbar
+        >.LA_SCROLL_BODY::-webkit-scrollbar
         {
             width: 2px;
         }
 
-        >.la-content::-webkit-scrollbar-thumb
+        >.LA_SCROLL_BODY::-webkit-scrollbar-thumb
         {
             background: var(--scrollbar-primary);
             border: 0px;
         }
 
-        >.la-content::-webkit-scrollbar-track
+        >.LA_SCROLL_BODY::-webkit-scrollbar-track
         {
             background: transparent;
         }
 
-        >.la-content::-moz-scrollbar
+        >.LA_SCROLL_BODY::-moz-scrollbar
         {
             width: 2px;
         }
 
-        >.la-content::-moz-scrollbar-thumb
+        >.LA_SCROLL_BODY::-moz-scrollbar-thumb
         {
             background: var(--scrollbar-primary);
             border: 0px;
         }
 
-        >.la-content::-moz-scrollbar-track
+        >.LA_SCROLL_BODY::-moz-scrollbar-track
         {
             background: transparent;
         }

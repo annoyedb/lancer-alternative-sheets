@@ -7,8 +7,8 @@ export const msgPackDecoder = new Decoder();
 export function registerModuleSettings()
 {
     game.settings.register(LancerAlternative.Name, `settings-verbose-logging`, {
-        name: "LA.SETTINGS.mech.debug.label",
-        hint: "LA.SETTINGS.mech.debug.subLabel",
+        name: "LA.SETTINGS.debug.label",
+        hint: "LA.SETTINGS.debug.subLabel",
         scope: "client",
         config: true,
         type: Boolean,

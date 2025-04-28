@@ -86,6 +86,11 @@ aside.la-tooltip.active
         margin-right: 1rem;
     }
 
+    .-margin3-l
+    {
+        margin-left: 1rem;
+    }
+
     .-margin3-lr
     {
         margin-left: 1rem;
@@ -102,15 +107,30 @@ aside.la-tooltip.active
         margin-bottom: 1rem;
     }
 
+    .-margin3-tb
+    {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
     .-margin5-t
     {
         margin-top: 2rem;
     }
 
-    .-margin3-tb
+    .-margin5-b
     {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .-margin6-t
+    {
+        margin-top: 2.25rem;
+    }
+
+    .-margin7-t
+    {
+        margin-top: 2.5rem;
     }
 
     .-padding0

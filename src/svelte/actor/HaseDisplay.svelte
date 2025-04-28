@@ -7,6 +7,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { ActiveTab } from "@/enums/ActiveTab";
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
+    import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
 
     const {
         pilot,
@@ -17,12 +18,12 @@
 
         logType,
         logTypeReset,
-    }: MechSheetProps & TooltipProps & TextLogEventProps = $props();
+    }: MechSheetProps & PilotSheetProps & TooltipProps & TextLogEventProps = $props();
     let active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
 </script>
 
 <!-- HASE Stats -->
-{#if pilot && pilot.system.active_mech.value.uuid === actor.uuid}
+{#if pilot && pilot.system.active_mech.value.uuid === actor.uuid || !pilot && actor.type === "pilot"}
 <div class="la-hasegroup -positionabsolute -widthnone
         {active === "statistics" ? "" : "-displaynone"}"
 >

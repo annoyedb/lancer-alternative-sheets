@@ -29,14 +29,13 @@
 
     onMount(() => 
     {
-        
         filteredMessages.forEach((message) => 
         {
             extractedTimes.push(extractTime(message.timestamp));
             extractedNames.push(extractName(message.content));
         });
 
-        trackHook(`Actor.${uuid}`, Hooks.on("createChatMessage", (message: any) => 
+        trackHook(uuid, Hooks.on("createChatMessage", (message: any) => 
         {
             const msgActorID = message.speaker.token || message.speaker.actor;
             if (idParts.includes(msgActorID) && message.rolls.length) 
@@ -46,7 +45,7 @@
                 extractedNames.push(extractName(message.content));
             }
         }), "createChatMessage");
-        trackHook(`Actor.${uuid}`, Hooks.on("deleteChatMessage", (message: any) => 
+        trackHook(uuid, Hooks.on("deleteChatMessage", (message: any) => 
         {
             const index = filteredMessages.findIndex((msg) => msg.id === message.id);
             if (index !== -1) 

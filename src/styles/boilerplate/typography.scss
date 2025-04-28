@@ -177,6 +177,11 @@ aside.la-tooltip.active
         text-align: left;
     }
 
+    .-textalignjustify
+    {
+        text-align: justify;
+    }
+
     .-textwrapnowrap
     {
         white-space: nowrap;
@@ -191,5 +196,10 @@ aside.la-tooltip.active
     .-letterspacing0
     {
         letter-spacing: 0.1rem;
+    }
+
+    .-letterspacing1
+    {
+        letter-spacing: 0.2rem;
     }
 }

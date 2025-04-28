@@ -25,7 +25,10 @@
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Advanced Options Toggle -->
-    <div class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" style="z-index: 1;">
+    <div 
+        class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        style="z-index: 1;"
+    >
         <AdvancedButton
             uuid={actor.uuid}
             tooltipEnabled={getMechSheetTipEnabled()}
@@ -42,18 +45,18 @@
     {/if}
     </div>
     <!-- Mech/Pilot Name -->
-    <div class="la-names las-combine-v -flex1 -margin3">
+    <div class="la-names -flex1 -margin3">
         <input type="text"
             class="la-mechname__input la-text-header -upper -fontsize5
                 charname"
             name={"name"}
             value={actor.name}
-            placeholder="{getLocalized("LA.namePlaceholder")}"
+            placeholder={getLocalized("LA.namePlaceholder")}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
         />
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
-        <span class="la-pilotname__span -upper la-text-header -fontsize3
+        <span class="la-pilotcallsign__span -upper la-text-header -fontsize3
                 ref set pilot click-open"
             data-uuid={pilot?.uuid}
             data-path={"system.pilot"}
@@ -73,7 +76,10 @@
     {/if}
     </div>
     {#if pilot?.system.active_mech.value.uuid === actor.uuid}
-    <span class="la-textlog__wrapper -left0 -positionabsolute -padding1">
+    <span 
+        class="la-textlog__wrapper -left0 -positionabsolute -padding1
+            -pointerdisable"
+    >
         <TextLog
             style={["-widthfull", "-heightfull"]}
             uuid={actor.uuid}

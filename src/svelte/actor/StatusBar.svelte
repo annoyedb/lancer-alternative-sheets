@@ -8,10 +8,13 @@
         maxValue,
         currentValueSecondary,
         maxValueSecondary,
+        currentValueTertiary,
+        maxValueTertiary,
         name,
         dataName,
         barStyle,
         barStyleSecondary,
+        barStyleTertiary,
         textStyle,
         clipPath,
 
@@ -49,6 +52,10 @@
         {#if currentValueSecondary && maxValueSecondary}
         <div class="la-tempvalue la-bar-h-progress la-bar-h-current {barStyleSecondary?.join(" ")}"
             style="--percent:{currentValueSecondary / maxValueSecondary * 100}%"></div>
+        {/if}
+        {#if currentValueTertiary && maxValueTertiary}
+        <div class="la-tempvaluealt la-bar-h-progress la-bar-h-current {barStyleTertiary?.join(" ")}"
+            style="--percent:{currentValueTertiary / maxValueTertiary * 100}%"></div>
         {/if}
     </div>
 </div>

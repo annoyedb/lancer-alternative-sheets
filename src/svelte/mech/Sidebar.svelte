@@ -20,10 +20,10 @@
     const { 
         system,
         actor,
-    }: MechSheetProps = props
+    }: MechSheetProps = props;
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let component: HTMLElement | null = $state(null);
     let sidebarExes = $state(getSidebarExecutables(actor.uuid));
+    let component: HTMLElement | null = $state(null);
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const frame = system.loadout.frame?.value;

@@ -120,10 +120,10 @@ export function registerMechSheetSettings()
 }
 
 // Client Settings
-export function getMechSheetEffectsEnabled(): boolean
-{
-    return game.settings.get(LancerAlternative.Name, `mech-settings-performance`) as boolean;
-}
+// export function getMechSheetEffectsEnabled(): boolean
+// {
+//     return game.settings.get(LancerAlternative.Name, `mech-settings-performance`) as boolean;
+// }
 
 export function getMechSheetTipEnabled(): boolean
 {
