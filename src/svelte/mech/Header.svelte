@@ -7,7 +7,7 @@
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
-    import { getImageOffsetY, getMechSheetTipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
+    import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -31,7 +31,7 @@
     >
         <AdvancedButton
             uuid={actor.uuid}
-            tooltipEnabled={getMechSheetTipEnabled()}
+            tooltipEnabled={getMechSheetTooltipEnabled()}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />

@@ -23,6 +23,7 @@
         tooltipEnabled,
         tooltipHeader,
         tooltip,
+        tooltipDirection,
 
         outerStyle,
         innerStyle,
@@ -58,6 +59,7 @@
             data-path={path}
             data-tooltip={tooltipEnabled ? tip : undefined }
             data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-direction={tooltipDirection}
             onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
             onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
             aria-label={text}

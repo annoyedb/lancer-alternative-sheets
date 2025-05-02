@@ -29,40 +29,40 @@
     .la-body
     {
         // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-        >.LA_SCROLL_BODY
+        >.la-SCROLL_BODY
         {
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-primary) transparent;
         }
 
-        >.LA_SCROLL_BODY::-webkit-scrollbar
+        >.la-SCROLL_BODY::-webkit-scrollbar
         {
             width: 2px;
         }
 
-        >.LA_SCROLL_BODY::-webkit-scrollbar-thumb
+        >.la-SCROLL_BODY::-webkit-scrollbar-thumb
         {
             background: var(--scrollbar-primary);
             border: 0px;
         }
 
-        >.LA_SCROLL_BODY::-webkit-scrollbar-track
+        >.la-SCROLL_BODY::-webkit-scrollbar-track
         {
             background: transparent;
         }
 
-        >.LA_SCROLL_BODY::-moz-scrollbar
+        >.la-SCROLL_BODY::-moz-scrollbar
         {
             width: 2px;
         }
 
-        >.LA_SCROLL_BODY::-moz-scrollbar-thumb
+        >.la-SCROLL_BODY::-moz-scrollbar-thumb
         {
             background: var(--scrollbar-primary);
             border: 0px;
         }
 
-        >.LA_SCROLL_BODY::-moz-scrollbar-track
+        >.la-SCROLL_BODY::-moz-scrollbar-track
         {
             background: transparent;
         }

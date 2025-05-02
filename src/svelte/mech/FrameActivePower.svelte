@@ -4,7 +4,7 @@
     import { slugify } from "@/scripts/lancer/util/lid";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
@@ -20,7 +20,8 @@
         actor,
         system,
     }: MechSheetProps = $props();
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
 
     const frame: any = system.loadout.frame!.value;
     const core: any = frame.system.core_system;
@@ -45,6 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", ACTIVATION_ICON_MAP[core.activation]]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     

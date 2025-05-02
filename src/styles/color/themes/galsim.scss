@@ -11,7 +11,7 @@ $galsim-theme: (
     secondary: #3e6a94,
     active: #2a416b,
     accent: #4974bf,
-    background: #2b2b2b,
+    background: #2f2f2f, //#2b2b2b
 
     // Misc.
     pilot: #172b3a, // Except this, because the default bothers me greatly
@@ -52,6 +52,7 @@ $galsim-theme: (
     text: #bec6c7,
     header: #f4f4f4,
     header-anti: #0c1a24,
+    tabs: #284561,
     bar-back: oc.$oc-gray-9,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,

@@ -16,6 +16,7 @@
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
     import SkillTriggerButton from '@/svelte/actor/button/SkillTriggerButton.svelte';
+    import { SkillTriggerOtherBase } from '@/classes/flows/SkillTriggerOther';
 
     const {
         uuid,
@@ -110,6 +111,7 @@
         if (!data) return;
 
         const obj = JSON.parse(data);
+        // TODO: Handle dropping flows
         switch (obj.type)
         {
             case "Macro":
@@ -119,7 +121,7 @@
             case LADataType.Sorting:
                 break;
             default:
-                Logger.log("Unsupported drop type", obj.type);
+                Logger.log("Unsupported drop type", obj);
         }
     }
 </script>
@@ -167,27 +169,58 @@
             logType={logType}
             logTypeReset={logTypeReset}
         >
-        {#if isSystemFlow(type)}
-            <FlowButton
-                text={ButtonFactory.getSystemButtonLabel(type)}
-
-                flowClass={FlowClass.Standard}
-                uuid={uuid}
-                flowType={type}
-
+        {#if isSkillTrigger(type)}
+            <SkillTriggerButton
+                item={fromUuidSync(type)}
                 tooltipEnabled={tooltipEnabled}
-                tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
-                tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
-                logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+                tooltipHeader={tooltipHeader}
                 logType={logType}
                 logTypeReset={logTypeReset}
             />
-        {:else if isSkillTrigger(type)}
-            <SkillTriggerButton
-                item={fromUuidSync(type)}
-            >
-                
-            </SkillTriggerButton>
+        {:else if isSystemFlow(type)}
+            {#if type === SystemButton.SkillTriggerOther}
+                <div class="la-skilltrigger la-combine-h -justifyend">
+                    <FlowButton
+                        text={ButtonFactory.getSystemButtonLabel(type)}
+
+                        flowClass={FlowClass.None}
+                        uuid={uuid}
+
+                        tooltipEnabled={tooltipEnabled}
+                        tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
+                        tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
+                        logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+                        logType={logType}
+                        logTypeReset={logTypeReset}
+                        
+                        onClick={event => {
+                            event.stopPropagation();
+                            SkillTriggerOtherBase.getInstance()
+                                .startFlow(uuid, {} as any);
+                        }}
+                    />
+                    <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary lancer-bckg-darken-2">
+                        <div class="la-skilltrigger__inner -bordersround-rtb -small lancer-brdr-darken-2 la-text-text -fontsize2 -textaligncenter -overflowhidden -height3">
+                            0
+                        </div>
+                    </span>
+                </div>
+            {:else}
+                <FlowButton
+                    text={ButtonFactory.getSystemButtonLabel(type)}
+
+                    flowClass={FlowClass.Standard}
+                    uuid={uuid}
+                    flowType={type}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
+                    tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
+                    logText={ButtonFactory.getSystemButtonTip(type, uuid)}
+                    logType={logType}
+                    logTypeReset={logTypeReset}
+                />
+            {/if}
         {:else}
             <FlowButton
                 textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...(buttonStyle || [])]}

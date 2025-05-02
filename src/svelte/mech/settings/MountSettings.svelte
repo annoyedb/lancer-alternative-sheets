@@ -10,7 +10,7 @@
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     import MountDelete from "@/svelte/mech/settings/MountDelete.svelte";
     import MountAdd from "@/svelte/mech/settings/MountAdd.svelte";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
@@ -37,7 +37,7 @@
 
     const weaponMounts = system.loadout.weapon_mounts;
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
     const removeTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.remove.tooltip"));
     const editTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.edit.tooltip"));
 

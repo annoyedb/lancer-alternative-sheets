@@ -2,11 +2,15 @@ import { preloadTemplates } from "./loader";
 import { logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
+import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-import { registerMechSheetSettings } from "@/scripts/mech/settings";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
-import { registerNPCSheetSettings } from "@/scripts/npc/settings";
-import { registerModuleSettings } from "./settings";
+import { registerModuleSettings } from "@/scripts/settings";
+import { registerMechSheetSettings, resetMechSheetData, resetMechSheetLocalData } from "@/scripts/mech/settings";
+import { registerNPCSheetSettings, resetNPCSheetData } from "@/scripts/npc/settings";
+import { registerPilotSheetSettings, resetPilotSheetData, resetPilotSheetLocalData } from "@/scripts/pilot/settings";
+import { LancerAlternative } from "@/enums/LancerAlternative";
+import { SkillTriggerOtherBase } from "@/classes/flows/SkillTriggerOther";
 
 Hooks.once("init", () =>
 {
@@ -23,6 +27,19 @@ Hooks.once("setup", async () =>
     registerFlows();
 });
 
+Hooks.once("ready", async () => {
+    // @ts-expect-error It's not undefined; it's lying
+    game.modules.get(LancerAlternative.Name).api = {
+        settings: {
+            resetMechSheetLocalData,
+            resetMechSheetData,
+            resetNPCSheetData,
+            resetPilotSheetLocalData,
+            resetPilotSheetData,
+        },
+    };
+});
+
 function registerHandlebarsHelpers()
 {
     Handlebars.registerHelper("la_logData", logData);
@@ -33,6 +50,7 @@ function registerSettings()
     registerModuleSettings();
     registerMechSheetSettings();
     registerNPCSheetSettings();
+    registerPilotSheetSettings();
 }
 
 function registerFlows()
@@ -44,11 +62,13 @@ function registerFlows()
     const customFlows = [
         SendUnknownToChatBase.getInstance().setupFlow(),
         RunMacroBase.getInstance().setupFlow(),
+        SkillTriggerOtherBase.getInstance().setupFlow(),
     ];
     
     const customSteps = [
         ...SendUnknownToChatBase.getInstance().setupFlowSteps(),
         ...RunMacroBase.getInstance().setupFlowSteps(),
+        ...SkillTriggerOtherBase.getInstance().setupFlowSteps(),
     ];
 
     const flows = game.lancer.flows as Map<string, any>;
@@ -77,6 +97,7 @@ function setupSheets()
     // Declare extension classes at runtime since they're only defined at that point
     MechSheetBase.setupSheet();
     NPCSheetBase.setupSheet();
+    PilotSheetBase.setupSheet();
 }
 
 function setupEventListeners()

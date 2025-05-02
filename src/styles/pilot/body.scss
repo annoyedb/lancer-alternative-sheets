@@ -1,0 +1,19 @@
+.la-root.la-pilot
+{
+    .la-content-root
+    {
+        flex: 2;
+
+        .la-content-tertiary
+        {
+            .la-content,
+            .la-content-quaternary
+            {
+                .tab
+                {
+                    margin-left: 2.2rem;
+                }
+            }
+        }
+    }
+}

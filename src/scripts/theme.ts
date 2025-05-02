@@ -18,7 +18,12 @@ import "@/styles/mech/status.scss";
 import "@/styles/mech/loadout.scss";
 import "@/styles/mech/hase-display.scss";
 
+import "@/styles/pilot/body.scss";
+import "@/styles/pilot/header.scss";
+import "@/styles/pilot/sidebar.scss";
 import "@/styles/pilot/loadout.scss";
+import "@/styles/pilot/hase-display.scss";
+import "@/styles/pilot/bond.scss"
 
 import "@/styles/npc/header.scss";
 import "@/styles/npc/body.scss";

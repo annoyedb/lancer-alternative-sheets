@@ -16,7 +16,13 @@
     
     {#if props.pilot && 
         props.pilot.system.active_mech.value.uuid === props.actor.uuid}
-        <CoreBonus {...props} />
-        <Talents {...props} />
+        <CoreBonus
+            actor={props.pilot}
+            sheetActor={props.actor}
+        />
+        <Talents
+            actor={props.pilot}
+            sheetActor={props.actor}
+        />
     {/if}
 </div>

@@ -1,7 +1,6 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCollapseState } from "@/scripts/store/collapse";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -12,45 +11,51 @@
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
 
-    const props: MechSheetProps = $props();
     const {
         actor,
-        pilot,
-    } = props;
+        sheetActor,
+    } : {actor: any; sheetActor?: any} = $props();
     let collapseAllButtonHoverTalent = $state(false);
     let collapseAllButtonHoverRank = $state(false);
+    let messageButtonHover = $state(false);
+    let editButtonHover = $state(false);
     
-    const tooltipEnabled = getMechSheetTipEnabled();
-    const isMechSheet = actor.type === "mech";
-    const talents = pilot.itemTypes.talent;
-    const collID = `${pilot.uuid}.talents`;
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const isMechSheet = sheetActor?.type === "mech" || false;
+    const talents = actor.itemTypes.talent;
+    const collID = `${actor.uuid}.talents`;
 
     function getTalentCollID(talentIndex: number)
     {
-        return `${pilot.uuid}.talents.${talentIndex}`;
+        return `${actor.uuid}.talents.${talentIndex}`;
     }
 
     function getRankCollID(talentIndex: number, rankIndex: number)
     {
-        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}`;
+        return `${actor.uuid}.talents.${talentIndex}.ranks.${rankIndex}`;
     }
     
     function getActionCollID(talentIndex: number, rankIndex: number)
     {
-        return `${pilot.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
+        return `${actor.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
     }
 
     function forceUpdateTalent(event: MouseEvent, _talent: any)
     {
         event.stopPropagation();
-        if (actor.type === "pilot")
+        if (!isMechSheet)
         {
             return;
         }
-        console.log(pilot.items, pilot.itemTypes, _talent);
+
+        // Hooks.call("laOverrideTheme", actor.uuid, "");
+        setTimeout(() => {
+            Hooks.call("laOverrideTheme", sheetActor.uuid, "");
+        }, 1000);
+        console.log(actor.items, actor.itemTypes, _talent);
     }
 
     //@ts-ignore
@@ -92,23 +97,30 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each talents as talent, index}
     {#snippet headerSecondaryTalentLeftOptions()}
-        <i class="{H2_ICON_SIZE} cci cci-license"></i>
+        <i class="{H2_ICON_SIZE} cci cci-compendium"></i>
     {/snippet}
     {#snippet headerSecondaryTalentRightOptions()}
         <EditButton
             flowClass={FlowClass.ContextMenu}
+            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-margin0-lr"]}
             iconStyle={["-lineheight3"]}
-            path={`system.pilot.value.itemTypes.talent.${index}`}
+            path={ isMechSheet
+                ? `system.pilot.value.itemTypes.talent.${index}`
+                : `itemTypes.talent.${index}`
+            }
 
             tooltipEnabled={tooltipEnabled}
-            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+
+            onPointerEnter={() => {editButtonHover = true;}}
+            onPointerLeave={() => {editButtonHover = false;}}
         />
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
             tooltipEnabled={tooltipEnabled}
-            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
             onPointerEnter={() => {collapseAllButtonHoverRank = true;}}
             onPointerLeave={() => {collapseAllButtonHoverRank = false;}}
@@ -122,12 +134,17 @@
             extensionTextFunction={() => {
                 if (collapseAllButtonHoverRank)
                     return `--${getLocalized("LA.collapseAll.extension")}`;
+                if (editButtonHover)
+                    return `--${getLocalized("LA.edit.extension")}`;
                 return undefined;
             }}
             
             rootStyle={["ref", "set", "lancer-talent", "submajor"]}
             uuid={talent.uuid}
-            path={`system.pilot.value.itemTypes.talent.${index}`}
+            path={ isMechSheet
+                ? `system.pilot.value.itemTypes.talent.${index}`
+                : `itemTypes.talent.${index}`
+            }
 
             collapseID={getTalentCollID(index)}
             startCollapsed={true}
@@ -148,12 +165,15 @@
                             name={counter.name}
                             usesValue={counter.value}
                             usesMax={counter.max}
-                            path={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`}
+                            path={ isMechSheet
+                                ? `system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
+                                : `itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
+                            }
                             onClick={(event) => forceUpdateTalent(event, talent)}
                             style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                             
-                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                         />
                     {/each}
                     </div>
@@ -169,8 +189,11 @@
                         rank={jndex}
 
                         tooltipEnabled={tooltipEnabled}
-                        logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                        logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+
+                        onPointerEnter={() => {messageButtonHover = true;}}
+                        onPointerLeave={() => {messageButtonHover = false;}}
                     />
                 {/snippet}
                 <HeaderSecondary
@@ -178,6 +201,11 @@
                     headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
                     textStyle={["-fontsize2"]}
                     borderStyle={["la-brdr-trait"]}
+                    extensionTextFunction={() => {
+                        if (messageButtonHover)
+                            return `--${getLocalized("LA.chat.extension")}`;
+                        return undefined;
+                    }}
 
                     rootStyle={["ref", "set"]}
                     uuid={talent.uuid}
@@ -191,15 +219,18 @@
                     <div class="la-generated -widthfull -gap2 la-combine-v">
                         <BonusBox
                             bonuses={rank.bonuses}
-                            bonusPath={`system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`}
+                            bonusPath={ isMechSheet
+                                ? `system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`
+                                : `itemTypes.talent.${index}.system.ranks.${jndex}.bonuses`
+                            }
                         />
                         <EffectBox
                             name={getLocalized("LA.pilot.trait.label")}
                             effect={rank.description}
 
                             tooltipEnabled={tooltipEnabled}
-                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                         />
                         <ActionBox
                             actions={rank.actions}
@@ -209,8 +240,8 @@
                             collapseID={getActionCollID(index, jndex)}
                             startCollapsed={false}
 
-                            logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                         />
                     </div>
                 </HeaderSecondary>

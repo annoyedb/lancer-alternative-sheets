@@ -53,6 +53,7 @@ export class ButtonFactory
             [SystemButton.BasicAttack]: "LA.flow.rollAttack.label",
             [SystemButton.Damage]: "LA.flow.rollDamage.label",
             [SystemButton.TechAttack]: "LA.flow.rollTechAttack.label",
+            [SystemButton.SkillTriggerOther]: "LA.flow.skillOther.label",
         };
         return getLocalized(labels[build] || "LA.placeholder");
     }
@@ -62,7 +63,7 @@ export class ButtonFactory
         if (build === SystemButton.Overcharge && ownerUUID)
         {
             const actor = fromUuidSync(ownerUUID) as any;
-            if (actor)
+            if (actor && actor.type === "mech")
             {
                 const overchargeSequence = actor.system.overcharge_sequence.split(",");
                 const overchargeStage = actor.system.overcharge;
@@ -76,6 +77,7 @@ export class ButtonFactory
             [SystemButton.BasicAttack]: "LA.flow.rollAttack.tooltip",
             [SystemButton.Damage]: "LA.flow.rollDamage.tooltip",
             [SystemButton.TechAttack]: "LA.flow.rollTechAttack.tooltip",
+            [SystemButton.SkillTriggerOther]: "LA.flow.skillOther.tooltip",
         };
         return getLocalized(tips[build] || "LA.flow.tooltip");
     }
@@ -85,6 +87,7 @@ export class ButtonFactory
         const headers: Partial<Record<string, string>> = {
             [SystemButton.Stabilize]: "LA.action.full.label",
             [SystemButton.Overcharge]: "LA.action.overcharge.label",
+            [SystemButton.SkillTriggerOther]: "LA.pilot.skillTrigger.label",
         };
         return headers[build] ? getLocalized(headers[build]!) : undefined;
     }

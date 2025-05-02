@@ -27,6 +27,7 @@
     let messageButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const tier = system.tier;
     const collID = `${actor.uuid}.reactions`;
     
@@ -128,6 +129,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(reaction), "cci", "cci-reaction", "-fontsize5"]}
+            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${reaction.index}`}

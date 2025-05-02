@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
-    import { getMechSheetLogActionMainMaxHeight, getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetLogActionMainMaxHeight, getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -20,7 +20,7 @@
     } = props;
     let collapseAllButtonHover = $state(false);
     
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
     const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
@@ -154,7 +154,7 @@
             <div class="la-combine-h -gap0 -wrapwrap -justifybetween -widthfull -heightfull -flex0">
                 <div class="la-combine-v -gap0 la-dropshadow -flex1 -widthfull">
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
+                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
                         text={getLocalized("LA.flow.structureDamage.label")}
     
                         uuid={actor.uuid}
@@ -169,7 +169,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
+                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
                         text={getLocalized("LA.flow.reactorStress.label")}
     
                         uuid={actor.uuid}
@@ -184,7 +184,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
+                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
                         text={getLocalized("LA.flow.fullRepair.label")}
     
                         uuid={actor.uuid}

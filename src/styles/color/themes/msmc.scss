@@ -8,7 +8,7 @@ $msmc-theme: (
 
     // Main
     primary: #146464,
-    secondary: #d98f30,
+    secondary: #c88127, //#d98f30,
     active: #218a8a,
     accent: #1dc2c2,
     background: #263237,
@@ -52,6 +52,7 @@ $msmc-theme: (
     text: #dbdbdb,
     header: #f4f4f4,
     header-anti: #121d21,
+    tabs: #0d3a45,
     bar-back: oc.$oc-gray-9,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,

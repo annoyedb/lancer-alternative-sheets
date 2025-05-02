@@ -13,6 +13,9 @@ export enum FlowClass
     RechargeFeatures = "charge-macro",
     ContextMenu = "lancer-context-menu",
     Skill = "skill-flow",
+    BondPower = "bond-power-flow",
+    BondTallyXP = "bond-xp-button",
+    BondPowerRefresh = "refresh-powers-button",
     DeleteActiveEffect = "", // No flow class for this
     Inventory= "", // No flow class for this
     None = "NO_FLOW_CLASS",
@@ -22,4 +25,5 @@ export enum CustomFlowClass
 {
     SendUnknownToChat = "SendUnknownToChat",
     RunMacro = "RunMacro",
+    SkillTriggerOther = "SkillTriggerOther",
 }

@@ -5,7 +5,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getManufacturerColor } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
@@ -20,7 +20,8 @@
     }: MechSheetProps = $props();
     let effectButtonHover = $state(false);
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const frame: any = system.loadout.frame!.value;
     const core: any = frame.system.core_system;
     const frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
@@ -45,6 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     onClick={sendToChat}

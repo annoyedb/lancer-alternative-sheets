@@ -21,6 +21,7 @@
         disabled,
         path,
         uuid,
+        powerIndex,
 
         tooltipEnabled,
         tooltip,
@@ -75,6 +76,7 @@
     style="z-index: 1;"
     data-uuid={uuid}
     data-path={path}
+    data-power-index={powerIndex}
     data-tooltip={tooltipEnabled && !disabled ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}

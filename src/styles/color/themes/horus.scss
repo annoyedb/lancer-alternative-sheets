@@ -8,22 +8,22 @@ $horus-theme: (
 
     // Main
     primary: #126127,
-    secondary: #999900,
+    secondary: #782a8d, // #999900,
     active: #00a600,
     accent: #00d900,
-    background: #111111,
+    background: #0a0a0a,
 
     // Misc.
-    pilot: #005454,
+    pilot: #212121, //#005454,
     exotic: #FFAB00,
 
-    action--downtime: #1dc2c2,
-    reserve--organization: #3ec2c2,
+    action--downtime: #006a6a,//#1dc2c2,
+    reserve--organization: #058787, //#3ec2c2,
     action--reaction: #be51ed,
 
-    weapon: #555555,
-    mech-weapon: #555555,
-    pilot-weapon: #555555,
+    weapon: #3a3a3a, //#555555,
+    mech-weapon: #3a3a3a, //#555555,
+    pilot-weapon: #3a3a3a, //#555555,
 
     // Signal
     error: #e50000,
@@ -44,7 +44,8 @@ $horus-theme: (
     // ----------------
     text: #fff,
     header: #f4f4f4,
-    header-anti: #212121,
+    header-anti: #0c3420,
+    tabs: #4c1a5a,
     bar-back: oc.$oc-gray-8,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
@@ -55,5 +56,5 @@ $horus-theme: (
     card: oc.$oc-gray-9,
     shadow: rgba(5, 5, 5, 0.2),
     scrollbar-primary: rgba(#126127, 0.5),
-    scrollbar-secondary: rgba(#990, 0.5)
+    scrollbar-secondary: rgba(#782a8d, 0.5)
 );

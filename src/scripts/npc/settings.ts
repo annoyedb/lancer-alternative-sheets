@@ -105,6 +105,22 @@ export function getNPCSheetLogActionStartCollapsed(): boolean
 }
 
 // World Private Settings
+export function resetNPCSheetData(uuid?: string)
+{
+    if (uuid)
+    {
+        const data = getNPCSheetData();
+        if (data[uuid])
+            delete data[uuid];
+        setNPCSheetData(encodeNPCSheetData(data));
+    }
+    else
+    {
+        game.settings.set(LancerAlternative.Name, `_npc-settings`, game.settings.settings.get(`${LancerAlternative.Name}._npc-settings`)?.default);
+        game.settings.set(LancerAlternative.Name, `_npc-settings-version`, game.settings.settings.get(`${LancerAlternative.Name}._npc-settings-version`)?.default);
+    }
+}
+
 export function getNPCSheetData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_npc-settings`) as Array<number>;

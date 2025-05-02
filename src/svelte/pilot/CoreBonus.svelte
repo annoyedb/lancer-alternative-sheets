@@ -1,9 +1,8 @@
 <script lang="ts">
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -14,30 +13,32 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
+    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
 
-    const props: MechSheetProps = $props();
     const {
-        pilot,
         actor,
-    } = props;
+        sheetActor,
+    } : {actor: any; sheetActor?: any} = $props();
     let collapseAllButtonHover = $state(false);
+    let messageButtonHover = $state(false);
+    let editButtonHover = $state(false);
 
-    const tooltipEnabled = getMechSheetTipEnabled();
-    const isMechSheet = actor.type === "mech";
-    const coreBonuses = pilot.itemTypes.core_bonus;
-    const collID = `${pilot.uuid}.coreBonus`;
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const isMechSheet = sheetActor?.type === "mech" || false;
+    const coreBonuses = actor.itemTypes.core_bonus;
+    const collID = `${actor.uuid}.coreBonus`;
     
     function getActionCollID(index: number)
     {
-        return `${pilot.uuid}.coreBonus.${index}.action`;
+        return `${actor.uuid}.coreBonus.${index}.action`;
     }
 
     // (#4) Not a deployable but same idea
     function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
     {
         event.stopPropagation();
-        if (pilot && action)
+        if (actor && action)
         {
             let description = `${action.detail}`;
             if (action.trigger)
@@ -46,7 +47,7 @@
                 title: action.name, 
                 description: description
             } as ChatData
-            SendUnknownToChatBase.getInstance().startFlow(pilot.uuid, chatData);
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
     }
 </script>
@@ -93,8 +94,8 @@
                     path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
 
-                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                    logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
             {/each}
             </div>
@@ -106,12 +107,31 @@
         {#snippet headerSecondaryRightOptions()}
             <EditButton
                 flowClass={FlowClass.ContextMenu}
-                path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+                path={ isMechSheet 
+                    ? `system.pilot.value.itemTypes.core_bonus.${index}`
+                    : `itemTypes.core_bonus.${index}`
+                }
                 iconStyle={["-lineheight3"]}
                 
                 tooltipEnabled={tooltipEnabled}
-                logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+
+                onPointerEnter={() => {editButtonHover = true;}}
+                onPointerLeave={() => {editButtonHover = false;}}
+            />
+            <MessageButton
+                flowClass={FlowClass.SendToChat}
+                uuid={coreBonus.uuid}
+    
+                style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
+                
+                tooltipEnabled={tooltipEnabled}
+                logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+    
+                onPointerEnter={() => {messageButtonHover = true;}}
+                onPointerLeave={() => {messageButtonHover = false;}}
             />
         {/snippet}
         <HeaderSecondary
@@ -119,10 +139,20 @@
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
             textStyle={["-fontsize2"]}
             borderStyle={["-bordersoff"]}
+            extensionTextFunction={() => {
+                if (messageButtonHover)
+                    return `--${getLocalized("LA.chat.extension")}`;
+                if (editButtonHover)
+                    return `--${getLocalized("LA.edit.extension")}`;
+                return undefined;
+            }}
             
             rootStyle={["ref", "set"]}
             uuid={coreBonus.uuid}
-            path={`system.pilot.value.itemTypes.core_bonus.${index}`}
+            path={ isMechSheet 
+                ? `system.pilot.value.itemTypes.core_bonus.${index}`
+                : `itemTypes.core_bonus.${index}`
+            }
             collapseID={`${collID}.${index}`}
             startCollapsed={true}
 
@@ -140,31 +170,34 @@
                     effect={coreBonus.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                    logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
                 <ActionBox
                     actions={coreBonus.system.actions}
                     uuid={coreBonus.uuid}
-                    path={`system.pilot.value.itemTypes.core_bonus.${index}.system.actions`}
+                    path={ isMechSheet 
+                        ? `system.pilot.value.itemTypes.core_bonus.${index}.system.actions`
+                        : `itemTypes.core_bonus.${index}.system.actions`
+                    }
                     collapseID={getActionCollID(index)}
 
                     startCollapsed={false}
                     onClick={sendActionToChat}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                    logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
                 <DeployableBox
-                    source={pilot}
+                    source={actor}
                     lidSource={coreBonus.system}
-                    uuid={pilot.uuid}
-                    sheetUUID={actor.uuid}
+                    uuid={actor.uuid}
+                    sheetUUID={sheetActor?.uuid}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+                    logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+                    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
             </div>
         </HeaderSecondary>

@@ -30,6 +30,7 @@
     let editButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const tier = system.tier;
     const collID = `${actor.uuid}.weapons`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
@@ -154,7 +155,7 @@
     {#snippet headerTertiaryLeftOptions()}
         <AttackButton
             iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-text-scrollbar-secondary"]}
+            iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.RollAttack}
             path={`system.loadout.weapon_mounts.${index}`}
@@ -174,6 +175,7 @@
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
             iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
+            iconBackgroundStyle={["-fontsize7", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}

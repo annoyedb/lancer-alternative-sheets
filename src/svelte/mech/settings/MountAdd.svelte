@@ -4,11 +4,11 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { SETTINGS_BUTTON_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.add.tooltip"));
     function addMount(event: MouseEvent)
     {

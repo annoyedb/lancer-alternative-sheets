@@ -26,6 +26,7 @@
     let messageButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const collID = `${actor.uuid}.traits`;
 
     function hasTraitSpecial(trait: any)
@@ -103,6 +104,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(trait), "cci", "cci-trait", "-fontsize5"]}
+            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}

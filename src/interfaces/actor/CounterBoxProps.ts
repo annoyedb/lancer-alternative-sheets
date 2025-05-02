@@ -1,6 +1,6 @@
 export interface CounterBoxProps
 {
-    name: string;
+    name?: string;
     usesValue: number;
     usesMax: number;
     path: string;

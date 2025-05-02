@@ -84,6 +84,11 @@ body.game.system-lancer>.lancer.sheet
     background-color: var(--background);
 }
 
+.lancer.sheet select
+{
+    width: inherit;
+}
+
 .la-root
 {
     height: 100%;

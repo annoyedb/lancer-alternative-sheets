@@ -57,4 +57,9 @@ export interface ButtonProps
      * Optional data rank for the button. Used in `data-rank` attribute. Only known use is in Pilot Talents.
      */
     rank?: number;
+
+    /**
+     * Optional data value for the button. Used in `data-power-index` attribute for bonds.
+     */
+    powerIndex?: number;
 }

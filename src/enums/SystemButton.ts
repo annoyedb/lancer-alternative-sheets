@@ -8,4 +8,5 @@ export enum SystemButton
     BasicAttack = "BasicAttack",
     Damage = "Damage",
     TechAttack = "TechAttack",
+    SkillTriggerOther = "SkillTriggerOther",
 }

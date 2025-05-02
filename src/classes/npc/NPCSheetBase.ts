@@ -32,7 +32,7 @@ export class NPCSheetBase
                     initial: "loadout"
                 },
             ],
-            scrollY: [".LA_SCROLL_BODY"],
+            scrollY: [".la-SCROLL_BODY"],
         }
     }
 

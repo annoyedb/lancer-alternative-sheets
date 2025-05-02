@@ -7,6 +7,11 @@ aside.la-tooltip.active
         margin-right: 0.25rem;
     }
 
+    .-margin0-r
+    {
+        margin-right: 0.25rem;
+    }
+
     .-margin0-t
     {
         margin-top: 0.25rem;
@@ -268,6 +273,11 @@ aside.la-tooltip.active
         width: 100%;
     }
 
+    .-widthhalf
+    {
+        width: 50%;
+    }
+
     .-widthnone
     {
         width: 0px;
@@ -391,6 +401,11 @@ aside.la-tooltip.active
     .-lineheight5
     {
         line-height: 2rem;
+    }
+
+    .-lineheight6
+    {
+        line-height: 2.25rem;
     }
 
     .-lineheight8

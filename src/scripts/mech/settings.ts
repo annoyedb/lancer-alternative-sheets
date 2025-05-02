@@ -125,7 +125,7 @@ export function registerMechSheetSettings()
 //     return game.settings.get(LancerAlternative.Name, `mech-settings-performance`) as boolean;
 // }
 
-export function getMechSheetTipEnabled(): boolean
+export function getMechSheetTooltipEnabled(): boolean
 {
     return game.settings.get(LancerAlternative.Name, `mech-settings-tip`) as boolean;
 }
@@ -164,6 +164,22 @@ export function getMechSheetLogActionStartCollapsed(): boolean
 }
 
 // Client Private Settings
+export function resetMechSheetLocalData(uuid?: string)
+{
+    if (uuid)
+    {
+        const data = getMechSheetLocalData();
+        if (data[uuid])
+            delete data[uuid];
+        setMechSheetLocalData(data);
+    }
+    else
+    {
+        const data = new MechSheetLocalSettings();
+        setMechSheetLocalData(data);
+    }
+}
+
 export function getMechSheetLocalData()
 {
     try
@@ -202,6 +218,23 @@ export function setSidebarRatio(uuid: string, value: number)
 }
 
 // World Private Settings
+export function resetMechSheetData(uuid?: string)
+{
+    if (uuid)
+    {
+        const data = getMechSheetData();
+        if (data[uuid])
+            delete data[uuid];
+        setMechSheetData(encodeMechSheetData(data));
+    }
+    else
+    {
+        game.settings.set(LancerAlternative.Name, `_mech-settings`, game.settings.settings.get(`${LancerAlternative.Name}._mech-settings`)?.default);
+        game.settings.set(LancerAlternative.Name, `_mech-settings-version`, game.settings.settings.get(`${LancerAlternative.Name}._mech-settings-version`)?.default);
+    }
+}
+
+
 export function getMechSheetData()
 {
     const settings = game.settings.get(LancerAlternative.Name, `_mech-settings`) as Array<number>;

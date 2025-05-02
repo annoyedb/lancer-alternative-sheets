@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
@@ -19,7 +19,7 @@
     let messageButtonHover = $state(false);
 
     const frame = system.loadout.frame!.value;
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
 
     function getCollapseID(index: number)
     {

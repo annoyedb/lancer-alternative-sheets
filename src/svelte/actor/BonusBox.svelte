@@ -12,7 +12,7 @@
 {#if bonuses.length}
 <div class="la-combine-h -widthfull">
 {#each bonuses as bonus, index}
-    <div class="la-effectbox la-brdr-repcap la-bckg-card la-combine-h -widthfull {index === 0 ? "-bordersround" : "-bordersround-ltb"}">
+    <div class="la-effectbox la-brdr-repcap la-bckg-card la-combine-h -widthfull {index === bonuses.length - 1 ? "-bordersround-ltb" : "-bordersround"}">
         <span 
             class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -upper -fontsize0
                 {editable ? "editable" : ""}" 

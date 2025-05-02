@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -26,8 +26,9 @@
     let effectButtonHover = $state(false);
     let editButtonHover = $state(false);
 
-    const collID = mod ? `${mod.uuid}_action` : "empty";
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const collID = mod ? `${mod.uuid}.action` : "empty";
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
 
     //@ts-ignore
     function log(any: any)
@@ -41,6 +42,7 @@
     {#snippet headerSecondaryLeftOptions()}
     <EffectButton
         iconStyle={["cci", "cci-weaponmod", "-fontsize5"]}
+        iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
         flowClass={FlowClass.SendEffectToChat}
         path={path}

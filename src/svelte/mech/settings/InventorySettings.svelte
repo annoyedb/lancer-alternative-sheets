@@ -5,7 +5,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getActiveTab, getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import InventoryButton from "@/svelte/actor/button/InventoryButton.svelte";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
@@ -17,7 +17,7 @@
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
 </script>
 
 <div class="-heightfull

@@ -8,7 +8,7 @@
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { getSheetStore } from '@/scripts/store/store';
     import { getAdvancedState } from '@/scripts/store/advanced';
-    import { getMechSheetTipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
@@ -22,10 +22,10 @@
         actor,
     }: MechSheetProps = props;
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let sidebarExes = $state(getSidebarExecutables(actor.uuid));
     let component: HTMLElement | null = $state(null);
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
+    const sidebarExes = getSidebarExecutables(actor.uuid);
     const frame = system.loadout.frame?.value;
     const frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
@@ -34,7 +34,7 @@
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
@@ -47,8 +47,8 @@
     {
         if (component)
         {
-            let ratio = getSidebarRatio(actor.uuid);
-            let sidebar = jQuery(component).closest('.la-root').find('.la-sidebar');
+            const ratio = getSidebarRatio(actor.uuid);
+            const sidebar = jQuery(component).closest('.la-root').find('.la-sidebar');
             if (sidebar)
                 sidebar.css('flex', ratio.toString());
         }

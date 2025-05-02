@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -18,6 +18,7 @@
     import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
+    import SpCostArray from "@/svelte/actor/SPCostArray.svelte";
 
     const {
         mount,
@@ -28,7 +29,8 @@
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
 
     function getSlotSize(size: string)
     {
@@ -117,24 +119,15 @@
 {#if slot.weapon?.value}
 {@const weapon = slot.weapon.value}
 <!-- Snippets -->
- <!-- TODO: this could be replaced with TotalSP component -->
-{#snippet costSP()}
-    {#if weapon.system.sp}
-    <div class="la-loading la-hexarray la-combine-h -aligncenter la-text-header -fontsize5">
-        <span class="la-hexarray__span -fontsize4">{weapon.system.sp}</span>
-        <i class="cci cci-system-point"></i>
-    </div>
-    {/if}
-{/snippet}
 {#snippet outerContent()}
     <div class="la-combine-v -gap0 -widthfull -padding2-l">
-        {#if slot.size !== "Integrated" && weapon.system.mod}
+    {#if slot.size !== "Integrated" && weapon.system.mod}
         <WeaponMod
             mod={weapon.system.mod}
             path={`${getModPath(index)}`}
         />
-        {/if}
-        {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
+    {/if}
+    {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
             <LoadedBox
                 item={weapon}
@@ -151,9 +144,11 @@
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
-            {@render costSP()}
+            <SpCostArray
+                cost={weapon.system.sp}
+            />
         </div>
-        {/if}
+    {/if}
         <ProfileBox
             profiles={weapon.system.profiles}
             weapon={weapon}
@@ -168,7 +163,7 @@
 {#snippet headerTertiaryLeftOptions()}
     <AttackButton
         iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-        iconBackgroundStyle={[H3_ICON_SIZE, "la-text-scrollbar-secondary"]}
+        iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
@@ -189,6 +184,7 @@
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
         iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
+        iconBackgroundStyle={["-fontsize7", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
         
         flowClass={FlowClass.RollDamage}
         range={weapon.system.active_profile.all_range}

@@ -3,12 +3,13 @@ import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/store/advanced";
 import { getLocalized } from "@/scripts/helpers";
-import { getThemeOverride } from "@/scripts/mech/settings";
+import { getMechSheetTooltipEnabled, getThemeOverride } from "@/scripts/mech/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import { setIntroRun } from "@/scripts/store/text-log";
 import { getSheetStore, setSheetStore } from "@/scripts/store/store";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
+import { TextLogHook } from "@/enums/TextLogHook";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
@@ -43,7 +44,7 @@ export class MechSheetBase
                     initial: "statistics"
                 }
             ],
-            scrollY: [".LA_SCROLL_BODY", ".LA_SCROLL_SIDEBAR"],
+            scrollY: [".la-SCROLL_BODY", ".la-SCROLL_SIDEBAR"],
         }
     }
 
@@ -167,7 +168,12 @@ export class MechSheetBase
                 });
                 mount(HaseDisplay, {
                     target: html.find(".la-SVELTE-HASE")[0],
-                    props: data,
+                    props: {
+                        ...data,
+                        tooltipEnabled: getMechSheetTooltipEnabled(),
+                        logType: TextLogHook.MechHeader,
+                        logTypeReset: TextLogHook.MechHeaderReset,
+                    },
                 });
             }
 

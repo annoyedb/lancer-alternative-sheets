@@ -35,6 +35,7 @@
     }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
     let effectButtonHover = $state(false);
 
+    const qualityMode = true; // TODO: change to a setting
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
     function getActivationClass(activation: string): string 
@@ -115,6 +116,7 @@
     <EffectButton
         style={["-positionabsolute", "-left0", "-top0", "-padding0-l"]}
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
+        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
 
         flowClass={action && uuid && path 
             ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
@@ -149,7 +151,7 @@
 
         uuid={uuid}
         path={`${path}.${index}`}
-        collapseID={collapseID}
+        collapseID={`${collapseID}.${index}`}
         startCollapsed={startCollapsed}
 
         headerContentLeft={headerQuinaryLeftOptions}

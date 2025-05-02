@@ -122,6 +122,7 @@
     {#if renderOutsideCollapse}
         {@render renderOutsideCollapse()}
     {/if}
+    {#if collapseID || children}
     <div class="la-collapsegroup__wrapper
             {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
         data-la-collapse-id={collapseID}
@@ -135,4 +136,5 @@
             {/if}
         </div>
     </div>
+    {/if}
 </div>

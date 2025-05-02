@@ -1,0 +1,17 @@
+export interface PilotSheetProps extends ActorSheet.Data<ActorSheet.Options>
+{    
+    actor: any,
+    collapse: any,
+    deployables: any,
+    document: any,
+    effectCategories: Array<any>,
+    effects: Array<any>,
+    itemTypes: any,
+    items: Array<any>,
+    
+    pilot: any,
+    system: any,
+
+    isLimited: Boolean,
+    isOwner: Boolean,
+}

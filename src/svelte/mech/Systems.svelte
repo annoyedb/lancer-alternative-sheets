@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { formatString, getLocalized } from "@/scripts/helpers";
-    import { getMechSheetTipEnabled } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -31,7 +31,8 @@
     let editButtonHover = $state(false);
     let messageButtonHover = $state(false);
 
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
     const collID = systemComponents.length
         ? `${actor.uuid}.systems`
@@ -174,7 +175,7 @@
     {#snippet headerTertiaryLeftOptions()}
         <EffectButton
             iconStyle={[H3_ICON_SIZE, getIconStyle(component)]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-text-scrollbar-secondary"]}
+            iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={component.value.system.effect 
                 ? FlowClass.SendEffectToChat 

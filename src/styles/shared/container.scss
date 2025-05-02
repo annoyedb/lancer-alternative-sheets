@@ -29,9 +29,44 @@ aside.la-tooltip.active
         }
     }
 
+    .-bordersround-lrb
+    {
+        border-radius: 0px 0px 8px 8px;
+        border-width: 1px 1px 1px 1px;
+        border-style: solid;
+
+        &.-small
+        {
+            border-radius: 0px 0px 4px 4px;
+        }
+    }
+    
+    .-bordersround-rtb
+    {
+        border-radius: 0px 8px 8px 0px;
+        border-width: 1px 1px 1px 0px;
+        border-style: solid;
+
+        &.-small
+        {
+            border-radius: 0px 4px 4px 0px;
+        }
+    }
+
     .-bordersround
     {
         border-radius: 8px;
+        border-width: 1px;
+        border-style: solid;
+
+        &.-small
+        {
+            border-radius: 4px;
+        }
+    }
+
+    .-borders
+    {
         border-width: 1px;
         border-style: solid;
     }
@@ -438,6 +473,16 @@ aside.la-tooltip.active
         {
             overflow-y: auto;
             scrollbar-color: var(--scrollbar-secondary) transparent;
+        }
+    }
+
+    .la-boundimage
+    {
+        >.la-boundimage__image
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 

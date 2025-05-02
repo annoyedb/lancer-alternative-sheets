@@ -223,6 +223,157 @@
     }
 }
 
+@mixin pulseColor
+{
+    @keyframes pulse-color
+    {
+
+        0%,
+        100%
+        {
+            color: var(--darken-5);
+        }
+
+        50%
+        {
+            color: var(--color);
+        }
+    }
+
+    @-webkit-keyframes pulse-color
+    {
+
+        0%,
+        100%
+        {
+            color: var(--darken-5);
+        }
+
+        50%
+        {
+            color: var(--color);
+        }
+    }
+
+    @-moz-keyframes pulse-color
+    {
+
+        0%,
+        100%
+        {
+            color: var(--darken-5);
+        }
+
+        50%
+        {
+            color: var(--color);
+        }
+    }
+}
+
+@mixin pulseGlowHeader
+{
+    @keyframes pulse-glow-header
+    {
+
+        0%,
+        100%
+        {
+            filter: drop-shadow(0px 0px 1.5px var(--header));
+            -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+            -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+        }
+
+        50%
+        {
+            filter: drop-shadow(0px 0px 3px var(--header));
+            -webkit-filter: drop-shadow(0px 0px 3px var(--header));
+            -moz-filter: drop-shadow(0px 0px 3px var(--header));
+        }
+    }
+
+    @-webkit-keyframes pulse-glow-header
+    {
+
+        0%,
+        100%
+        {
+            -webkit-filter: drop-shadow(0px 0px 1.5px var(--header));
+        }
+
+        50%
+        {
+            -webkit-filter: drop-shadow(0px 0px 3px var(--header));
+        }
+    }
+
+    @-moz-keyframes pulse-glow-header
+    {
+
+        0%,
+        100%
+        {
+            -moz-filter: drop-shadow(0px 0px 1.5px var(--header));
+        }
+
+        50%
+        {
+            -moz-filter: drop-shadow(0px 0px 3px var(--header));
+        }
+    }
+}
+
+@mixin pulseGlowColor
+{
+    @keyframes pulse-glow-color
+    {
+        0%,
+        100%
+        {
+            filter: drop-shadow(0px 0px 1.5px var(--color));
+            -webkit-filter: drop-shadow(0px 0px 1.5px var(--color));
+            -moz-filter: drop-shadow(0px 0px 1.5px var(--color));
+        }
+
+        50%
+        {
+            filter: drop-shadow(0px 0px 3px var(--color));
+            -webkit-filter: drop-shadow(0px 0px 3px var(--color));
+            -moz-filter: drop-shadow(0px 0px 3px var(--color));
+        }
+    }
+
+    @-webkit-keyframes pulse-glow-color
+    {
+
+        0%,
+        100%
+        {
+            -webkit-filter: drop-shadow(0px 0px 1.5px var(--color));
+        }
+
+        50%
+        {
+            -webkit-filter: drop-shadow(0px 0px 3px var(--color));
+        }
+    }
+
+    @-moz-keyframes pulse-glow-color
+    {
+
+        0%,
+        100%
+        {
+            -moz-filter: drop-shadow(0px 0px 1.5px var(--color));
+        }
+
+        50%
+        {
+            -moz-filter: drop-shadow(0px 0px 3px var(--color));
+        }
+    }
+}
+
 .la-root
 {
 
@@ -373,8 +524,35 @@
         animation: scroll-up 600s infinite linear;
         -webkit-animation: scroll-up 600s infinite linear;
         -moz-animation: scroll-up 600s infinite linear;
-        
+
         @include scrollUp;
+    }
+
+    .la-pulse-color
+    {
+        animation: pulse-color 2.5s ease-in-out infinite;
+        -webkit-animation: pulse-color 2.5s ease-in-out infinite;
+        -moz-animation: pulse-color 2.5s ease-in-out infinite;
+
+        @include pulseColor;
+    }
+
+    .la-pulse-glow-header
+    {
+        animation: pulse-glow-header 2s ease-in-out infinite;
+        -webkit-animation: pulse-glow-header 2s ease-in-out infinite;
+        -moz-animation: pulse-glow-header 2s ease-in-out infinite;
+
+        @include pulseGlowHeader;
+    }
+
+    .la-pulse-glow-color
+    {
+        animation: pulse-glow-color 2s ease-in-out infinite;
+        -webkit-animation: pulse-glow-color 2s ease-in-out infinite;
+        -moz-animation: pulse-glow-color 2s ease-in-out infinite;
+
+        @include pulseGlowColor;
     }
 
     .la-ruler
@@ -435,6 +613,20 @@
             -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
             -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
         }
+    }
+
+    .la-reveal-hover .la-reveal
+    {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 0.25s, opacity 0.25s ease-in-out;
+    }
+
+    .la-reveal-hover:hover .la-reveal
+    {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s, opacity 0.25s ease-in-out;
     }
 
     .la-extension

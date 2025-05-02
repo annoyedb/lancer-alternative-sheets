@@ -1,0 +1,231 @@
+<form class="la-pilot la-text-text {{cssClass}} la-root flexcol" autocomplete="off">
+    {{!-- (#1)
+    // Foundry seems to initialize nav tabs only once on the constructor,
+    // but Svelte unfortunately mounts after the constructor so we must reconcile.
+    // 
+    // Chosen approach was made because navbar and relative content containers aren't
+    // reactive, so doing it how Foundry likes it is better than dealing with potential
+    // side-effects over trying to be consistent with the rest of the codebase.
+    //
+    // If Svelte needs to be reconciled (i.e. now that they don't have a common
+    // parent), <svelte:window on:eventsomewhere={}>CONTENT HERE</svelte:window> 
+    // can be used to listen for events in other mounted components, or an event 
+    // listener can be added through the activateListeners() override, or hooks, etc
+    --}}
+    <header 
+        class="la-header la-bg-scroll -flex0
+            sheet-header"
+    >
+        <div class="
+            la-SVELTE-HEADER">
+        </div>
+        {{!-- (#1) --}}
+        <!-- Navigation -->
+        <div class="la-nav__island la-combine-h -justifyend -gap1 la-dropshadow -widthfull">
+            <div 
+                class="la-combine-h -gap1
+                    la-SVELTE-ADVANCEDNAV "
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            {{!-- Tertiary Tabs (main) --}}
+            <div class="la-combine-h">
+                <nav 
+                    class="la-tabs-tertiary la-bckg-tabs clipped-alt" 
+                    data-group="tertiary"
+                >
+                    <button type="button"
+                        class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
+                        data-tab="status"
+                    >
+                        {{localize "LA.tab.status.label"}}
+                    </button>{{!-- Handlebars randomly adds whitespace here
+                --}}<button type="button"
+                        class="la-tab clipped-bot-alt la-text-header -fontsize2 -padding1"
+                        data-tab="loadout"
+                    >
+                        {{localize "LA.tab.loadout.label"}}
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="la-body la-combine-h la-bckg-background -heightfull">
+        <!-- Sidebar -->
+        <section class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull">
+            <div class="la-nav-secondary__island la-combine-h -justifystart -positionabsolute -left0 -top0">
+                <nav 
+                    class="la-tabs-secondary la-combine-h la-bckg-tabs clipped-bot" 
+                    data-group="secondary"
+                    style="z-index: 1;"
+                >
+                {{!-- If you add the type attribute here it will actually break when inputs are submitted --}}
+                    <button
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-tab="statistics"
+                    >
+                        {{localize "LA.tab.statistics.label"}}
+                    </button>
+                    <button
+                        class="la-tab clipped-bot la-text-header -fontsize1 -padding0 -padding1-lr"
+                        data-tab="activity"
+                    >
+                        {{localize "LA.tab.activity.label"}}
+                    </button>
+                </nav>
+            </div>
+            <section 
+                class="la-content-secondary -widthfull -heightfull
+                    la-SCROLL_SIDEBAR "
+                data-group="secondary"
+            >
+                <div 
+                    class="la-sidebar__statistics
+                        la-SVELTE-SIDEBARSTATISTICS tab"
+                    data-tab="statistics"
+                >
+                    {{!-- (#1) --}}
+                    {{!-- Svelte is injected in-place here --}}
+                </div>
+                <div 
+                    class="la-sidebar__activity
+                        la-SVELTE-SIDEBARACTIVITY tab"
+                    data-tab="activity"
+                >
+                    {{!-- (#1) --}}
+                    {{!-- Svelte is injected in-place here --}}
+                </div>
+            </section>
+        </section>
+        <div class="la-ruler">&nbsp;</div>
+        <section 
+            class="la-content-root -widthfull -heightfull
+                sheet-body"
+        >
+            {{!-- (#1) --}}
+            <div class="-positionrelative
+                    la-SVELTE-HASE " 
+                style="z-index: 1;"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div class="-positionabsolute -bottom0 -width5 -displayflex -direction-column -gap1
+                    la-SVELTE-ADVANCED"
+                style="z-index: 1;"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div 
+                class="la-content-tertiary la-body -widthfull -heightfull
+                    "
+            >
+                {{!-- Primary Content --}}
+                <div class="la-content-quaternary -widthfull -heightfull
+                        la-SCROLL_BODY tab"
+                    data-group="tertiary"
+                    data-tab="status"
+                >
+                    {{!-- Status Content --}}
+                    <nav 
+                        class="la-tabs-quaternary la-combine-h -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        data-group="quaternary"
+                        style="z-index: 1;"
+                    >
+                        <button type="button"
+                            class="la-tab clipped-top la-text-header -fontsize1 -padding0 -padding1-lr"
+                            data-tab="dossier"
+                        >
+                            {{localize "LA.tab.dossier.label"}}
+                        </button>
+                        <button type="button"
+                            class="la-tab clipped-top la-text-header -fontsize1 -padding0 -padding1-lr"
+                            data-tab="mechs"
+                        >
+                            {{localize "LA.tab.mechs.label"}}
+                        </button>
+                    </nav>
+                    <div class="-margin7-t">
+                        <div 
+                            class="la-dossier la-tab la-dropshadow -fontsize2
+                                la-SVELTE-DOSSIER tab" 
+                            data-tab="dossier"
+                            data-group="quaternary"
+                        >
+                            dossier
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                        <div 
+                            class="la-mechstorage la-tab la-dropshadow -fontsize2
+                                la-SVELTE-MECHSTORAGE tab" 
+                            data-tab="mechs"
+                            data-group="quaternary"
+                        >
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>mechs
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                    </div>
+                </div>
+                {{!-- Loadout Content --}}
+                <div class="la-content -widthfull -heightfull
+                        la-SCROLL_BODY tab"
+                    data-group="tertiary"
+                    data-tab="loadout"
+                >
+                    <nav 
+                        class="la-tabs la-combine-h -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        data-group="primary"
+                        style="z-index: 1;"
+                    >
+                        <button type="button"
+                            class="la-tab clipped-top la-text-header -fontsize1 -padding0 -padding1-lr"
+                            data-tab="abilities"
+                        >
+                            {{localize "LA.tab.abilities.label"}}
+                        </button>
+                        <button type="button"
+                            class="la-tab clipped-top la-text-header -fontsize1 -padding0 -padding1-lr"
+                            data-tab="bonds"
+                        >
+                            {{localize "LA.tab.bonds.label"}}
+                        </button>
+                        <button type="button"
+                            class="la-tab clipped-top la-text-header -fontsize1 -padding0 -padding1-lr"
+                            data-tab="equipment"
+                        >
+                            {{localize "LA.tab.equipment.label"}}
+                        </button>
+                    </nav>
+                    {{!-- data-group cannot just simply declared on this div in a nested scenario, 
+                        the system just assumes wrongly and doesn't set the active state properly --}}
+                    <div class="-margin7-t">
+                        <div 
+                            class="la-abilities la-tab la-dropshadow -fontsize2
+                                la-SVELTE-ABILITIES tab" 
+                            data-tab="abilities"
+                            data-group="primary"
+                        >
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                        <div 
+                            class="la-bonds la-tab la-dropshadow -fontsize2
+                                la-SVELTE-BONDS tab" 
+                            data-tab="bonds"
+                            data-group="primary"
+                        >
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                        <div 
+                            class="la-equipment la-tab la-dropshadow -fontsize2
+                                la-SVELTE-EQUIPMENT tab" 
+                            data-tab="equipment"
+                            data-group="primary"
+                        >
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="la-ruler">&nbsp;</div>
+    </div>
+</form>

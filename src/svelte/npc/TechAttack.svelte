@@ -28,6 +28,7 @@
     let messageButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = true; // TODO: change to a setting
     const tier = system.tier;
     const collID = `${actor.uuid}.techs`;
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
@@ -150,6 +151,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(tech), "cci", getTechIcon(tech), "-fontsize5"]}
+            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.RollTech}
             path={`itemTypes.npc_feature.${tech.index}`}

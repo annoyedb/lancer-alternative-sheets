@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getMechSheetTipEnabled, getSidebarRatio, setSidebarRatio, setThemeOverride } from "@/scripts/mech/settings";
+    import { getMechSheetTooltipEnabled, getSidebarRatio, setSidebarRatio, setThemeOverride } from "@/scripts/mech/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { TextLogHook } from "@/enums/TextLogHook";
     import SidebarRatioSlider from "@/svelte/actor/input/SidebarRatioSlider.svelte";
@@ -12,7 +12,7 @@
     }: MechSheetProps = props
     
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    const tooltipEnabled = getMechSheetTipEnabled();
+    const tooltipEnabled = getMechSheetTooltipEnabled();
 </script>
 
 <SidebarRatioSlider

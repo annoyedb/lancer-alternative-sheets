@@ -8,6 +8,7 @@
     import { ActiveTab } from "@/enums/ActiveTab";
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
         pilot,
@@ -15,15 +16,17 @@
         system,
 
         tooltipEnabled,
+        tooltipDirection,
 
         logType,
         logTypeReset,
     }: MechSheetProps & PilotSheetProps & TooltipProps & TextLogEventProps = $props();
     let active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
+    let qualityMode = true; // TODO: change this to a setting
 </script>
 
 <!-- HASE Stats -->
-{#if pilot && pilot.system.active_mech.value.uuid === actor.uuid || !pilot && actor.type === "pilot"}
+{#if actor.type === "pilot" || pilot && pilot.system.active_mech.value.uuid === actor.uuid}
 <div class="la-hasegroup -positionabsolute -widthnone
         {active === "statistics" ? "" : "-displaynone"}"
 >
@@ -35,6 +38,7 @@
                 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.grit.tooltip")}
+                tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 logText={getLocalized("LA.grit.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -48,7 +52,7 @@
                 innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
                 buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
                 outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize4", "-lineheight11", "-glow-header"]}
+                innerTextStyle={["-fontsize4", "-lineheight11", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
         </div>
         <div class="la-combine-h -aligncenter">
@@ -58,6 +62,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.agility.tooltip")}
+                tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 logText={getLocalized("LA.agility.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -70,7 +75,7 @@
                 innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
                 buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
                 outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                innerTextStyle={["-fontsize3", "-lineheight10", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
             <HexButton
                 text={getLocalized("LA.hull.short")}
@@ -78,6 +83,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.hull.tooltip")}
+                tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 logText={getLocalized("LA.hull.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -90,7 +96,7 @@
                 innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
                 buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
                 outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                innerTextStyle={["-fontsize3", "-lineheight10", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
         </div>
         <div class="la-combine-h -aligncenter">
@@ -100,6 +106,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.systems.tooltip")}
+                tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 logText={getLocalized("LA.systems.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -112,7 +119,7 @@
                 innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
                 buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
                 outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                innerTextStyle={["-fontsize3", "-lineheight10", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
         </div>
         <div class="la-combine-h -aligncenter">
@@ -123,6 +130,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.engineering.tooltip")}
+                tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 logText={getLocalized("LA.engineering.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -135,7 +143,7 @@
                 innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
                 buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
                 outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                innerTextStyle={["-fontsize3", "-lineheight10", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
         </div>
     </div>

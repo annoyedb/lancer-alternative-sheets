@@ -67,11 +67,11 @@
     }
 </script>
 <script lang="ts" module>
-    const _ICON_BG_STYLE = `-positionabsolute -fontsize9 la-text-scrollbar-secondary`;
+    const _ICON_BG_STYLE = `-fontsize9 la-text-scrollbar-secondary`;
 </script>
 
 <button type="button"
-    class="la-properties la-combine-v -fontsize3 la-anim-accent
+    class="la-properties la-combine-v -fontsize3 la-anim-accent -justifycenter
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
@@ -99,7 +99,7 @@
 {/if}
 {#if !disabled && damage?.length}
     <i 
-        class="fal fa-dice-d20 
+        class="fal fa-dice-d20 -positionabsolute 
             {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
         style="z-index: -1;"
     ></i>

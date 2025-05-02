@@ -41,9 +41,11 @@
 <div class="la-limited la-combine-h la-text-header -aligncenter -padding1-lr
         {style?.join(' ') || _STYLE}"
 >
+    {#if name}
     <span class="la-hexarray__span -fontsize1">
         {name}
     </span>
+    {/if}
 {#each {length: usesMax} as _, index}
     <!-- (#2) onclick has issues bubbling events, on:click does not -->
     <!-- svelte-ignore event_directive_deprecated -->

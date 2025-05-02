@@ -8,13 +8,13 @@ $gmsdark-theme: (
 
     // Main
     primary: #991E2A,
-    secondary: #283593,
+    secondary: #193c87, //#283593,
     active: #d93f4e,
     accent: #8c1420,
-    background: #111111,
+    background: #161c27,
 
     // Misc.
-    pilot: #424242,
+    pilot: #2e2e2e, //#555555
     exotic: #673AB7,
 
     action--downtime: #37474F,
@@ -45,6 +45,7 @@ $gmsdark-theme: (
     text: #f4f4f4,
     header: #f4f4f4,
     header-anti: #212121,
+    tabs: #0f2554,
     bar-back: oc.$oc-gray-8,
     bar-health: oc.$oc-lime-9,
     bar-shield: oc.$oc-cyan-9,
@@ -55,5 +56,5 @@ $gmsdark-theme: (
     card: oc.$oc-gray-9,
     shadow: rgba(5, 5, 5, 0.2),
     scrollbar-primary: rgba(#991E2A, 0.5), // primary
-    scrollbar-secondary: rgba(#283593, 0.5) // secondary
+    scrollbar-secondary: rgba(#193c87, 0.5) // secondary
 );

@@ -16,16 +16,21 @@
         class="la-header la-bg-scroll -flex0
             sheet-header"
     >
-        <div class="la-SVELTE-HEADER">
+        <div 
+            class="
+                la-SVELTE-HEADER"
+        >
         </div>
         {{!-- (#1) --}}
         <!-- Navigation -->
         <div class="la-nav__island la-combine-h -justifyend -gap1 la-dropshadow -widthfull">
-            <div class="la-SVELTE-ADVANCEDNAV la-combine-h -gap1">
+            <div class="la-combine-h -gap1
+                la-SVELTE-ADVANCEDNAV "
+            >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <nav 
-                class="la-tabs la-combine-h la-bckg-pilot clipped-alt" 
+                class="la-tabs la-combine-h la-bckg-tabs clipped-alt" 
                 data-group="primary"
             >
                 <button type="button"
@@ -48,7 +53,7 @@
         <section class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull">
             <div class="la-nav-secondary__island la-combine-h -justifystart -positionabsolute -left0 -top0">
                 <nav 
-                    class="la-tabs-secondary la-combine-h la-bckg-active clipped-bot" 
+                    class="la-tabs-secondary la-combine-h la-bckg-tabs clipped-bot" 
                     data-group="secondary"
                     style="z-index: 1;"
                 >
@@ -66,18 +71,22 @@
                     </button>
                 </nav>
             </div>
-            <section class="la-content-secondary LA_SCROLL_SIDEBAR -widthfull -heightfull"
+            <section 
+                class="la-content-secondary -widthfull -heightfull
+                    la-SCROLL_SIDEBAR "
                 data-group="secondary"
             >
-                <div class="la-SVELTE-SIDEBARSTATISTICS la-sidebar__statistics
-                        tab"
+                <div 
+                    class="la-sidebar__statistics
+                        la-SVELTE-SIDEBARSTATISTICS tab"
                     data-tab="statistics"
                 >
                     {{!-- (#1) --}}
                     {{!-- Svelte is injected in-place here --}}
                 </div>
-                <div class="la-SVELTE-SIDEBARACTIVITY la-sidebar__activity
-                        tab"
+                <div 
+                    class="la-sidebar__activity
+                        la-SVELTE-SIDEBARACTIVITY tab"
                     data-tab="activity"
                 >
                     {{!-- (#1) --}}
@@ -87,27 +96,33 @@
         </section>
         <div class="la-ruler">&nbsp;</div>
         <section 
-            class="la-content -widthfull -heightfull LA_SCROLL_BODY
-                sheet-body"
+            class="la-content -widthfull -heightfull 
+                la-SCROLL_BODY sheet-body"
             data-group="primary" 
         >
             {{!-- (#1) --}}
-            <div class="la-SVELTE-HASE">
-                {{!-- Svelte is injected in-place here --}}
-            </div>
-            <div class="la-SVELTE-ADVANCED -positionabsolute -bottom0 -width5 -displayflex -direction-column -gap1">
+            <div 
+                class="
+                    la-SVELTE-HASE"
+            >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <div 
-                class="la-SVELTE-STATUS la-status la-tab la-dropshadow -fontsize2 -margin3-t
-                    tab" 
+                class="-positionabsolute -bottom0 -width5 -displayflex -direction-column -gap1
+                    la-SVELTE-ADVANCED "
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div 
+                class="la-status la-tab la-dropshadow -fontsize2 -margin3-t
+                    la-SVELTE-STATUS tab" 
                 data-tab="status"
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             <div 
-                class="la-SVELTE-LOADOUT la-loadout la-tab la-dropshadow -fontsize2 -margin3-t
-                    tab" 
+                class="la-loadout la-tab la-dropshadow -fontsize2 -margin3-t
+                    la-SVELTE-LOADOUT tab" 
                 data-tab="loadout"
             >
                 {{!-- Svelte is injected in-place here --}}

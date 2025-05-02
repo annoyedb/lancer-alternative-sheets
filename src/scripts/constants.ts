@@ -91,3 +91,21 @@ export const SYSTEM_LOCALIZE_MAP: { [key: string]: string } = {
     "System"    : "LA.mech.system.system.label",
     "Tech"      : "LA.mech.system.tech.label"
 }
+
+export const RESERVE_LOCALIZE_MAP: { [key: string]: string } = {
+    "Resources"     : "LA.pilot.reserve.resources.label",
+    "Tactical"      : "LA.pilot.reserve.tactical.label",
+    "Mech"          : "LA.pilot.reserve.mech.label",
+    "Project"       : "LA.pilot.reserve.project.label",
+    "Organization"  : "LA.pilot.reserve.organization.label",
+    "Bonus"         : "LA.pilot.reserve.bonus.label",
+}
+
+export const RESERVE_ICON_MAP: { [key: string]: string } = {
+    "Resources"     : "cci-orbit",
+    "Tactical"      : "cci-reserve-tac",
+    "Mech"          : "cci-reserve-mech",
+    "Project"       : "cci-ship",
+    "Organization"  : "cci-orbital",
+    "Bonus"         : "cci-npc-feature",
+}

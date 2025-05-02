@@ -1,0 +1,53 @@
+@use "@/styles/mech/hase-display" as mech-hase;
+
+.la-pilot
+{
+    .la-hasegroup>.la-hase
+    {
+        display: flex;
+        translate: -1rem 1rem;
+        
+        >.la-combine-h
+        {
+            pointer-events: none;
+
+            >.-grit
+            {
+                @include mech-hase.mdiAbsolute;
+                height: 3.75rem; // 60px / 16
+                width: 4rem; // 64px / 16
+                font-size: 5.25rem; // 84px / 16
+                
+                >.la-combine-v
+                {
+                    height: 2.6875rem; // 43px / 16
+                    width: 3.25rem; // 52px / 16
+                    >.la-label__span
+                    {
+                        font-size: 0.75rem; // 12px / 16
+                    }
+                }
+            }
+
+            >.-hull
+            {
+                @include mech-hase.mdiAbsolute;
+            }
+
+            >.-agi
+            {
+                @include mech-hase.mdiAbsolute;
+            }
+
+            >.-sys
+            {
+                @include mech-hase.mdiAbsolute;
+            }
+
+            >.-eng
+            {
+                @include mech-hase.mdiAbsolute;
+            }
+        }
+    }
+}
