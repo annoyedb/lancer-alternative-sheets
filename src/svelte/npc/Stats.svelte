@@ -13,7 +13,7 @@
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
-    import { getSheetStore } from "@/scripts/store/store";
+    import { getSheetStore } from "@/scripts/store/module-store";
 
     const props = $props();
     const {

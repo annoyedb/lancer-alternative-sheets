@@ -1,7 +1,7 @@
 // Bridge module and foundryvtt-lancer system
 import type { HelperOptions } from "handlebars";
 import { Logger } from "@/classes/Logger";
-import { resolveHelperDotpath } from './lancer/helpers/common';
+import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { LancerAlternative } from "@/enums/LancerAlternative";
 
 const localizeMap: { [key: string]: string } = {};
@@ -62,4 +62,14 @@ export function getModuleVersion()
 {
     // @ts-expect-error
     return game.modules.get(LancerAlternative.Name).version;
+}
+
+// Loop data around into a temporary cache so that we don't need to call getData() on ever render. 
+// Functionally, probably worse than just calling getData(), but because it calls a console log, it 
+// gets a bit spammy and some people may get scared of it.
+// This runs even on rerenders, so there is no chance of its own key not existing by the time the Svelte components are mounted.
+export const dataMap: { [key: string]: any } = {};
+export function forwardData(data: any, _options: HelperOptions)
+{
+    dataMap[data.actor.uuid] = data;
 }

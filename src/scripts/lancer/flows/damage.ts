@@ -36,7 +36,7 @@ export async function rollDamageCallback(event: JQuery.ClickEvent)
         ui.notifications?.error("Invalid attacker for damage roll");
         return;
     }
-    if (!actor.isOwner)
+    if (!actor.owner)
     {
         ui.notifications?.error(`You do not own ${actor.name}, so you cannot roll damage for them`);
         return;
@@ -162,7 +162,7 @@ export async function applyDamage(event: JQuery.ClickEvent)
         ui.notifications?.error("Invalid target for damage application, no actor found");
         return;
     }
-    if (!actor.isOwner)
+    if (!actor.owner)
     {
         ui.notifications?.error("You cannot apply damage to an actor you do not own");
         return;
@@ -199,7 +199,7 @@ export async function undoDamage(event: JQuery.ClickEvent)
         ui.notifications?.error("Damage undo button has no target");
         return;
     }
-    if (!target.isOwner)
+    if (!target.owner)
     {
         ui.notifications?.error("You cannot undo damage to an actor you do not own");
         return;

@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    // import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+    // import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
@@ -7,7 +8,6 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { ActiveTab } from "@/enums/ActiveTab";
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
-    import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     const {
@@ -20,13 +20,13 @@
 
         logType,
         logTypeReset,
-    }: MechSheetProps & PilotSheetProps & TooltipProps & TextLogEventProps = $props();
+    }: {pilot?: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
     let active = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
     let qualityMode = true; // TODO: change this to a setting
 </script>
 
 <!-- HASE Stats -->
-{#if actor.type === "pilot" || pilot && pilot.system.active_mech.value.uuid === actor.uuid}
+{#if actor.type === "pilot" || pilot && pilot.system.active_mech?.value.uuid === actor.uuid}
 <div class="la-hasegroup -positionabsolute -widthnone
         {active === "statistics" ? "" : "-displaynone"}"
 >

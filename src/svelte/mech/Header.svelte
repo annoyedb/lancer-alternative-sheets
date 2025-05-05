@@ -17,9 +17,9 @@
         actor, 
         pilot 
     }: MechSheetProps = props
-
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    
 </script>
 
 <!-- Header -->
@@ -71,11 +71,11 @@
         <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.search.label")}</span><!--
     ---><span class="la-cursor la-anim-header -fadein"></span>
     {/if}
-    {#if pilot?.system.active_mech.value.uuid !== actor.uuid}
+    {#if pilot?.system.active_mech?.value.uuid !== actor.uuid}
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}
     </div>
-    {#if pilot?.system.active_mech.value.uuid === actor.uuid}
+    {#if pilot?.system.active_mech?.value.uuid === actor.uuid}
     <span 
         class="la-textlog__wrapper -left0 -positionabsolute -padding1
             -pointerdisable"

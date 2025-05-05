@@ -6,7 +6,7 @@
     import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { getLocalized } from "@/scripts/helpers";
     import { getSidebarImageTheme } from "@/scripts/theme";
-    import { getSheetStore } from '@/scripts/store/store';
+    import { getSheetStore } from '@/scripts/store/module-store';
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getMechSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";

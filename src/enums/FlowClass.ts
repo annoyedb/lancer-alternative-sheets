@@ -14,7 +14,7 @@ export enum FlowClass
     ContextMenu = "lancer-context-menu",
     Skill = "skill-flow",
     BondPower = "bond-power-flow",
-    BondTallyXP = "bond-xp-button",
+    BondTallyXP = "bond-xp-button", // Please RA, don't use this
     BondPowerRefresh = "refresh-powers-button",
     DeleteActiveEffect = "", // No flow class for this
     Inventory= "", // No flow class for this

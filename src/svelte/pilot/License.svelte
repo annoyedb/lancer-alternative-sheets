@@ -33,25 +33,20 @@
         });
     });
 
-    function fetchLicenseDescription(license: any, index: number) {
-        getLicenseItem(license.system.key).then((item: any) => {
-            getCompendiumFrame(item.uuid).then((frame: any) => {
-                updateLicenseDescription(index, frame?.system.description);
-            });
-        });
+    async function fetchLicenseDescription(license: any, index: number) 
+    {
+        try {
+            const item = await (game.lancer as any).fromLid(license.system.key);
+            const frame = await fromUuid(item.uuid) as any;
+            updateLicenseDescription(index, frame?.system.description || "");
+        } catch (error) {
+            console.error(`Failed to fetch license description for index ${index}:`, error);
+        }
     }
 
-    function getLicenseItem(key: string): Promise<any> {
-        return (game.lancer as any).fromLid(key);
-    }
-
-    function getCompendiumFrame(uuid: string): Promise<any> {
-        return fromUuid(uuid);
-    }
-
-    function updateLicenseDescription(index: number, description: string) {
+    function updateLicenseDescription(index: number, description: string) 
+    {
         licenseDescriptions[index] = description;
-        licenseDescriptions = [...licenseDescriptions];
     }
 
     function getLicensePath(index: number)

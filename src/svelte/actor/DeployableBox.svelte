@@ -4,7 +4,7 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { getSheetStore } from "@/scripts/store/store";
+    import { getSheetStore } from "@/scripts/store/module-store";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";

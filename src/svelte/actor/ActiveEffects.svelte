@@ -2,7 +2,7 @@
     import { Logger } from "@/classes/Logger";
     import { getBrightness } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
-    import { getSheetStore } from "@/scripts/store/store";
+    import { getSheetStore } from "@/scripts/store/module-store";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";

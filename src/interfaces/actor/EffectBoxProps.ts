@@ -4,11 +4,11 @@ export interface EffectBoxProps
 
     name: string;
     effect?: string;
-    hasFlow?: Boolean;
+    hasFlow?: boolean;
 
     innerStyle?: Array<string>;
     outerStyle?: Array<string>;
 
-    editOption?: Boolean;
+    editOption?: boolean;
     editPath?: string;
 }

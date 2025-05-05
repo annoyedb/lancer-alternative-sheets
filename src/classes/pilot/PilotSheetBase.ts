@@ -2,11 +2,11 @@ import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/store/advanced";
-import { getLocalized } from "@/scripts/helpers";
+import { getLocalized, dataMap } from "@/scripts/helpers";
 import { setIntroRun } from "@/scripts/store/text-log";
 import { getPilotSheetTooltipEnabled, getThemeOverride } from "@/scripts/pilot/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
-import { getSheetStore, setSheetStore } from "@/scripts/store/store";
+import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
 import { TextLogHook } from "@/enums/TextLogHook";
@@ -108,9 +108,6 @@ export class PilotSheetBase
             override async getData(): Promise<PilotSheetProps>
             {
                 let data = await super.getData() as any;
-                data.effectCategories = data.effect_categories;
-                data.isLimited = data.limited;
-                data.isOwner = data.owner;
                 return data as PilotSheetProps;
             }
 
@@ -122,7 +119,7 @@ export class PilotSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = await this.getData() as any;
+                let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
 
@@ -133,7 +130,8 @@ export class PilotSheetBase
             {
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
-                let data = await this.getData() as any;
+                
+                let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
 
@@ -181,7 +179,8 @@ export class PilotSheetBase
                 mount(HaseDisplay, {
                     target: html.find(".la-SVELTE-HASE")[0],
                     props: {
-                        ...data,
+                        actor: data.actor,
+                        system: data.system,
                         tooltipEnabled: getPilotSheetTooltipEnabled(),
                         logType: TextLogHook.PilotHeader,
                         logTypeReset: TextLogHook.PilotHeaderReset,

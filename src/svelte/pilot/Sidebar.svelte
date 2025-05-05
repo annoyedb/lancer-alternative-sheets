@@ -7,7 +7,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetSensorsEnabled, getPilotSheetTechAttackEnabled, getPilotSheetTooltipEnabled, getSidebarExecutables, getSidebarRatio, setSidebarExecutables } from "@/scripts/pilot/settings";
-    import { getSheetStore } from "@/scripts/store/store";
+    import { getSheetStore } from "@/scripts/store/module-store";
     import { getSidebarImageTheme } from "@/scripts/theme";
     import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { getAdvancedState } from '@/scripts/store/advanced';

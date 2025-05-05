@@ -14,8 +14,6 @@
     const {
         actor,
         system,
-
-        bondIndex,
     } = props;
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let questionAnswer = $derived(getBondQNAMode(actor.uuid));
@@ -37,13 +35,40 @@
 
         fp.render(true);
     }
+
+    function tallyAndUpdate(event: Event)
+    {
+        event.stopPropagation();
+
+        let expTotal = 0;
+
+        // Tally XP from the checklist
+        const updatedMajorIdeals = system.bond.system.major_ideals.map((major: boolean) => {
+            if (major) expTotal++;
+            return false;
+        });
+        if (system.bond_state.xp_checklist.minor_ideal)
+            expTotal++;
+        if (system.bond_state.xp_checklist.veteran_power)
+            expTotal++;
+
+        // Update XP and set their checked state to false
+        actor.update({
+            ["system.bond_state.xp.value"]: system.bond_state.xp.value + expTotal,
+            ["system.bond_state.xp_checklist"]: {
+                major_ideals: updatedMajorIdeals,
+                minor_ideal: false,
+                veteran_power: false,
+            },
+        });
+    }
 </script>
 
 {#if system.bond}
 <div class="la-combine-v -widthfull -margin1-b la-reveal-hover">
     <!-- Bond Name -->
     <span class="-fontsize4 -letterspacing1 -upper">
-        THE TITAN
+        {system.bond.name}
     </span>
     <!-- Bond XP -->
     <div class="-widthhalf -padding0-tb">
@@ -83,6 +108,7 @@
                         <input type="checkbox"
                             class=""
                             name="system.bond_state.xp_checklist.major_ideals.{index}"
+                            checked={system.bond_state.xp_checklist.major_ideals[index]}
                         />
                         <span
                             class="-fontsize1 -lineheight3"
@@ -98,6 +124,7 @@
                     <input type="checkbox"
                         class=""
                         name="system.bond_state.xp_checklist.minor_ideal"
+                        checked={system.bond_state.xp_checklist.minor_ideal}
                     />
                 {#if advancedOptions}
                     <select
@@ -126,6 +153,7 @@
                     <input type="checkbox"
                         class=""
                         name="system.bond_state.xp_checklist.veteran_power"
+                        checked={system.bond_state.xp_checklist.veteran_power}
                     />
                     <span
                         class="-fontsize1 -lineheight3"
@@ -170,13 +198,15 @@
             text={getLocalized("LA.pilot.bond.tally.label")}
             style={["clipped", "la-bckg-secondary", "-padding0-tb", "-flex1"]}
 
-            flowClass={FlowClass.BondTallyXP}
+            flowClass={FlowClass.None}
 
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
+
+            onClick={tallyAndUpdate}
         />
     <!-- Editing -->
     {#if advancedOptions}
@@ -202,7 +232,8 @@
                 style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "la-pulse-glow-color la-anim-primary" : ""}`, "-justifycenter", "-aligncenter"]}
 
                 flowClass={FlowClass.ContextMenu}
-                path="system.bond.{bondIndex}"
+                uuid={system.bond.uuid}
+                path="itemTypes.bond"
 
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.edit.tooltip")}

@@ -15,7 +15,7 @@
     const {
         actor,
         system,
-        isOwner,
+        owner,
     } = props;
 
     let introPlayed = $derived(getIntroRun(actor.uuid));
@@ -128,7 +128,7 @@
                 <div 
                     class="la-combine-h -justifystart -widthfull"
                 >
-                {#if isOwner}
+                {#if owner}
                     <i class="mdi mdi-cable-data -fontsize4"></i>
                     <span class="-fontsize0 -aligncontentcenter">
                         {getLocalized("LA.pilot.isOwner.label")}

@@ -1,5 +1,5 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
-import { getSheetStore, setSheetStore } from "./store";
+import { getSheetStore, setSheetStore } from "./module-store";
 
 export function getActiveTab(uuid: string, tab: ActiveTab): string
 {

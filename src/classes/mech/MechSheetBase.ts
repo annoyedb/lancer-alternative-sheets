@@ -2,11 +2,11 @@ import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/store/advanced";
-import { getLocalized } from "@/scripts/helpers";
+import { dataMap, getLocalized } from "@/scripts/helpers";
 import { getMechSheetTooltipEnabled, getThemeOverride } from "@/scripts/mech/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import { setIntroRun } from "@/scripts/store/text-log";
-import { getSheetStore, setSheetStore } from "@/scripts/store/store";
+import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
 import { TextLogHook } from "@/enums/TextLogHook";
@@ -92,17 +92,9 @@ export class MechSheetBase
                 this.reapplyImgListener(html);
             }
 
-            // getData() retrieves its data from volatile memory, so this is 'fine' that it runs twice.
-            // Alternatively, we could use a Handlebars handler to loop the first getData around the 
-            // block back to the code here, but that's a bit much compared to 
-            // how short this code is here, and that solution could be completely upended in AppV2 anyway.
             override async getData(): Promise<MechSheetProps>
             {
                 let data = await super.getData() as any;
-                data.isActive = data.is_active;
-                data.effectCategories = data.effect_categories;
-                data.isLimited = data.limited;
-                data.isOwner = data.owner;
                 return data as MechSheetProps;
             }
 
@@ -114,7 +106,7 @@ export class MechSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = await this.getData() as any;
+                let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
 
@@ -125,7 +117,8 @@ export class MechSheetBase
             {
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
-                let data = await this.getData() as any;
+                
+                let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
 

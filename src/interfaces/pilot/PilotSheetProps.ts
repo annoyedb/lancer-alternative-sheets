@@ -9,9 +9,8 @@ export interface PilotSheetProps extends ActorSheet.Data<ActorSheet.Options>
     itemTypes: any,
     items: Array<any>,
     
-    pilot: any,
     system: any,
 
-    isLimited: Boolean,
-    isOwner: Boolean,
+    limited: boolean,
+    owner: boolean,
 }

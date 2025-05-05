@@ -1,4 +1,4 @@
-import { getSheetStore, setSheetStore } from "./store";
+import { getSheetStore, setSheetStore } from "./module-store";
 
 export function getBondQNAMode(uuid: string): boolean
 {

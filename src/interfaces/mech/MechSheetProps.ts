@@ -12,7 +12,7 @@ export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
     pilot: any,
     system: any,
 
-    isActive: Boolean,
-    isLimited: Boolean,
-    isOwner: Boolean,
+    is_active: boolean,
+    limited: boolean,
+    owner: boolean,
 }

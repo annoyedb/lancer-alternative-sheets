@@ -14,7 +14,6 @@
 <Passion
     actor={actor}
     system={system}
-    bondIndex={0}
 />
 <Power
     actor={actor}

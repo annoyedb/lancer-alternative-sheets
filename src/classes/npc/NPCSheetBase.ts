@@ -1,8 +1,8 @@
 import { mount } from "svelte";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-import { setSheetStore, getSheetStore } from '@/scripts/store/store';
-import { getLocalized } from "@/scripts/helpers";
+import { setSheetStore, getSheetStore } from '@/scripts/store/module-store';
+import { dataMap, getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
 import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
@@ -70,9 +70,6 @@ export class NPCSheetBase
             override async getData(): Promise<NPCSheetProps>
             {
                 let data = await super.getData() as any;
-                data.effectCategories = data.effect_categories;
-                data.isLimited = data.limited;
-                data.isOwner = data.owner;
                 return data as NPCSheetProps;
             }
 
@@ -91,7 +88,7 @@ export class NPCSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = await this.getData() as any;
+                let data = dataMap[this.actor.uuid];
 
                 this.mountComponents(html, data);
 
@@ -102,7 +99,8 @@ export class NPCSheetBase
             {
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
-                let data = await this.getData() as any;
+
+                let data = dataMap[this.actor.uuid];
 
                 this.mountComponents(html, data);
 

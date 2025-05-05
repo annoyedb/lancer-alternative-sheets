@@ -15,6 +15,8 @@
         onClick,
 
         flowClass,
+        uuid,
+        path,
         disabled,
         
         tooltipEnabled,
@@ -61,6 +63,8 @@
         class="
             {style?.join(' ')}
             {flowClass}"
+        data-uuid={uuid}
+        data-path={path}
         data-tooltip={tooltipEnabled ? tip : undefined }
         data-tooltip-class={"clipped-bot la-tooltip"}
         data-tooltip-direction={tooltipDirection}

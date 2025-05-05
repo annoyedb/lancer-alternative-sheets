@@ -12,6 +12,6 @@ export interface NPCSheetProps extends ActorSheet.Data<ActorSheet.Options>
     data: any,
     system: any,
 
-    isLimited: Boolean,
-    isOwner: Boolean,
+    limited: boolean,
+    owner: boolean,
 }

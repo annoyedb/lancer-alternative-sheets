@@ -23,7 +23,7 @@ const defaultData = {
     bondQNAMode: false,
 };
 
-export const getSheetStore = (key: string) =>
+export function getSheetStore(key: string)
 {
     const store = get(sheetStore);
     if (!(key in store))
@@ -33,7 +33,7 @@ export const getSheetStore = (key: string) =>
     return fromStore(sheetStore).current[key];
 };
 
-export const setSheetStore = (key: string, value: Partial<SheetStoreData>) =>
+export function setSheetStore(key: string, value: Partial<SheetStoreData>)
 {
     sheetStore.update(store =>
     {

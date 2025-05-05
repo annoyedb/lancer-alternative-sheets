@@ -1,4 +1,6 @@
 <form class="la-pilot la-text-text {{cssClass}} la-root flexcol" autocomplete="off">
+    {{!-- Forward data to be ready for Svelte mounting --}}
+    {{la_setDatastore @root}}
     {{!-- (#1)
     // Foundry seems to initialize nav tabs only once on the constructor,
     // but Svelte unfortunately mounts after the constructor so we must reconcile.
