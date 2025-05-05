@@ -4,7 +4,7 @@ export interface MechSheetProps extends ActorSheet.Data<ActorSheet.Options>
     collapse: any,
     deployables: any,
     document: any,
-    effectCategories: Array<any>,
+    effect_categories: Array<any>,
     effects: Array<any>,
     itemTypes: any,
     items: Array<any>,
