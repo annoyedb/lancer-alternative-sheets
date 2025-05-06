@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+    import { trackHook } from "@/scripts/store/hooks";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCollapseState } from "@/scripts/store/collapse";
@@ -15,8 +17,8 @@
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
 
     const {
-        actor,
-        sheetActor,
+        actor, // Source data (e.g. pilot)
+        sheetActor, // Presenting actor (e.g. mech | pilot)
     } : {actor: any; sheetActor?: any} = $props();
     let collapseAllButtonHoverTalent = $state(false);
     let collapseAllButtonHoverRank = $state(false);
@@ -27,6 +29,19 @@
     const isMechSheet = sheetActor?.type === "mech" || false;
     const talents = actor.itemTypes.talent;
     const collID = `${actor.uuid}.talents`;
+
+    onMount(() => {
+        if (isMechSheet)
+            trackHook(sheetActor.uuid, Hooks.on("updateItem", (item: any, _caller: any, _options: any) => 
+            {
+                if (item.type !== "talent" || item.parent.uuid !== actor.uuid)
+                    return;
+                
+                // (#6)
+                // Also for some reason, this calls twice when updating an Items document
+                Hooks.call("laForceRerender", sheetActor.uuid);
+            }), "updateItem");
+    });
 
     function getTalentCollID(talentIndex: number)
     {
@@ -41,21 +56,6 @@
     function getActionCollID(talentIndex: number, rankIndex: number)
     {
         return `${actor.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
-    }
-
-    function forceUpdateTalent(event: MouseEvent, _talent: any)
-    {
-        event.stopPropagation();
-        if (!isMechSheet)
-        {
-            return;
-        }
-
-        // Hooks.call("laOverrideTheme", actor.uuid, "");
-        setTimeout(() => {
-            Hooks.call("laOverrideTheme", sheetActor.uuid, "");
-        }, 1000);
-        console.log(actor.items, actor.itemTypes, _talent);
     }
 
     //@ts-ignore
@@ -169,7 +169,6 @@
                                 ? `system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
                                 : `itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
                             }
-                            onClick={(event) => forceUpdateTalent(event, talent)}
                             style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                             
                             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }

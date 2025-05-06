@@ -11,33 +11,38 @@
 
 @mixin generate-lancer-classes($theme-map)
 {
-    @each $name, $color in $theme-map
+    :root,
+    .la-root
     {
-        @if meta.type-of($color) == 'color' 
+        @each $name, $color in $theme-map
         {
-            .la-outl-#{$name}
-            {
-                -webkit-text-stroke: var(--size) var(--#{$name});
-            }
+            @if meta.type-of($color)=='color'
 
-            .la-bckg-#{$name}
             {
-                background-color: var(--#{$name}) !important;
-            }
+                .la-outl-#{$name}
+                {
+                    -webkit-text-stroke: var(--size) var(--#{$name});
+                }
 
-            .la-text-#{$name}
-            {
-                color: var(--#{$name}) !important;
-            }
+                .la-bckg-#{$name}
+                {
+                    background-color: var(--#{$name}) !important;
+                }
 
-            .la-brdr-#{$name}
-            {
-                border-color: var(--#{$name});
-            }
+                .la-text-#{$name}
+                {
+                    color: var(--#{$name}) !important;
+                }
 
-            .la-anim-#{$name}
-            {
-                --color: var(--#{$name});
+                .la-brdr-#{$name}
+                {
+                    border-color: var(--#{$name});
+                }
+
+                .la-anim-#{$name}
+                {
+                    --color: var(--#{$name});
+                }
             }
         }
     }
@@ -48,19 +53,23 @@
     $theme-id: map.get($theme-map, theme-id);
     $primary-color: map.get($theme-map, primary);
 
-    .la-bckg-#{$theme-id}
+    :root,
+    .la-root
     {
-        background-color: #{$primary-color} !important;
-    }
+        .la-bckg-#{$theme-id}
+        {
+            background-color: #{$primary-color} !important;
+        }
 
-    .la-text-#{$theme-id}
-    {
-        color: #{$primary-color} !important;
-    }
+        .la-text-#{$theme-id}
+        {
+            color: #{$primary-color} !important;
+        }
 
-    .la-brdr-#{$theme-id}
-    {
-        border-color: #{$primary-color};
+        .la-brdr-#{$theme-id}
+        {
+            border-color: #{$primary-color};
+        }
     }
 
     --#{$theme-id}-theme: #{$primary-color};

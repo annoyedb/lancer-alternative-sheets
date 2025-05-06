@@ -17,6 +17,8 @@
         flowClass,
         uuid,
         path,
+        action,
+        actionValue,
         disabled,
         
         tooltipEnabled,
@@ -58,24 +60,24 @@
     }
 </script>
 
-<div class="-widthfull -heightfull">
-    <button type="button"
-        class="
-            {style?.join(' ')}
-            {flowClass}"
-        data-uuid={uuid}
-        data-path={path}
-        data-tooltip={tooltipEnabled ? tip : undefined }
-        data-tooltip-class={"clipped-bot la-tooltip"}
-        data-tooltip-direction={tooltipDirection}
-        onpointerenter={ handleOnPointerEnter }
-        onpointerleave={ handleOnPointerLeave }
-        onclick={onClick}
-        aria-label={tooltip}
-        disabled={disabled}
-    >
-    {#if children}
-        {@render children()}
-    {/if}
-    </button>
-</div>
+<button type="button"
+    class="
+        {style?.join(' ')}
+        {flowClass}"
+    data-uuid={uuid}
+    data-path={path}
+    data-action={action}
+    data-action-value={actionValue}
+    data-tooltip={tooltipEnabled ? tip : undefined }
+    data-tooltip-class={"clipped-bot la-tooltip"}
+    data-tooltip-direction={tooltipDirection}
+    onpointerenter={ handleOnPointerEnter }
+    onpointerleave={ handleOnPointerLeave }
+    onclick={onClick}
+    aria-label={tooltip}
+    disabled={disabled}
+>
+{#if children}
+    {@render children()}
+{/if}
+</button>

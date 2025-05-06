@@ -70,6 +70,17 @@ export class MechSheetBase
                     this.render();
                 })
 
+                // (#6)
+                Hooks.on("laForceRerender", (uuid: string, callback?: () => void) => {
+                    if (uuid !== this.actor.uuid)
+                        return;
+
+                    console.log("LA: Force rerendering mech sheet", this.actor.uuid);
+                    this.render();
+                    if (callback)
+                        callback();
+                });
+
                 // TODO: Write a PR. Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
                 Hooks.on("closeSettingsConfig", () =>
@@ -89,7 +100,6 @@ export class MechSheetBase
                 super.activateListeners(html);
 
                 this.applyTabListener(html);
-                this.reapplyImgListener(html);
             }
 
             override async getData(): Promise<MechSheetProps>
@@ -109,8 +119,6 @@ export class MechSheetBase
                 let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
-
-                this.activateListeners(html);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -121,8 +129,7 @@ export class MechSheetBase
                 let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
-
-                this.activateListeners(html);
+                
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender
                 this._restoreScrollPositions(html);
@@ -167,14 +174,6 @@ export class MechSheetBase
                         logType: TextLogHook.MechHeader,
                         logTypeReset: TextLogHook.MechHeaderReset,
                     },
-                });
-            }
-
-            reapplyImgListener(html: JQuery<HTMLElement>)
-            {
-                html.find('img[data-edit="img"]').each((_, img) =>
-                {
-                    $(img).on('click', this._onEditImage.bind(this));
                 });
             }
 

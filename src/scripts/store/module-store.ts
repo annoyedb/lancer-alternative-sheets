@@ -9,7 +9,9 @@ interface SheetStoreData
     currentTheme: string;
     activeTabs: { [key in ActiveTab]: string };
     trackedHooks: { [key: number]: string };
+    // TODO: refactor to a pilot store
     bondQNAMode: boolean;
+    selectedMech: number;
 }
 
 const sheetStore = writable<{ [key: string]: SheetStoreData }>({});
@@ -20,7 +22,9 @@ const defaultData = {
     currentTheme: "",
     activeTabs: {} as { [key in ActiveTab]: string },
     trackedHooks: {} as { [key: number]: string },
+    
     bondQNAMode: false,
+    selectedMech: 0,
 };
 
 export function getSheetStore(key: string)

@@ -3,17 +3,101 @@
     .la-content-root
     {
         flex: 2;
+        min-width: 0px; // TODO: set to a specific value to and activate a responsive compact design
 
-        .la-content-tertiary
+        .la-content,
+        .la-content-quaternary
         {
-            .la-content,
-            .la-content-quaternary
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            .tab,
+            >.la-tab
             {
-                .tab
-                {
-                    margin-left: 2.2rem;
-                }
+                margin-left: 2.2rem;
             }
+        }
+
+        .la-available-mechs__list
+        {
+            overflow-y: hidden;
+            overflow-x: scroll;
+
+            width: inherit;
+
+            .la-available-mechs__img
+            {
+                max-height: 5rem;
+                min-height: 5rem;
+                max-width: 5rem;
+                min-width: 5rem;
+                object-fit: contain;
+            }
+        }
+
+        .la-selected-mech__img
+        {
+            max-height: 18rem;
+            min-height: 18rem;
+            object-fit: contain;
+        }
+
+        .la-selected-mech__active
+        {
+            top: 10rem;
+        }
+
+        // REQUIRED: DO NOT REMOVE
+        .la-bond__select,
+        .la-sync__select
+        {
+            width: 100%;
+        }
+
+    }
+
+    // Scrollbar
+    .la-content-tertiary
+    {
+
+        // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
+        >.la-SCROLL_BODY,
+        .la-available-mechs__list
+        {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-primary) transparent;
+        }
+
+        >.la-SCROLL_BODY::-webkit-scrollbar
+        {
+            width: 2px;
+        }
+
+        >.la-SCROLL_BODY::-webkit-scrollbar-thumb
+        {
+            background: var(--scrollbar-primary);
+            border: 0px;
+        }
+
+        >.la-SCROLL_BODY::-webkit-scrollbar-track
+        {
+            background: transparent;
+        }
+
+        >.la-SCROLL_BODY::-moz-scrollbar
+        {
+            width: 2px;
+        }
+
+        >.la-SCROLL_BODY::-moz-scrollbar-thumb
+        {
+            background: var(--scrollbar-primary);
+            border: 0px;
+        }
+
+        >.la-SCROLL_BODY::-moz-scrollbar-track
+        {
+            background: transparent;
         }
     }
 }

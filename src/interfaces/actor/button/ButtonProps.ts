@@ -62,4 +62,14 @@ export interface ButtonProps
      * Optional data value for the button. Used in `data-power-index` attribute for bonds.
      */
     powerIndex?: number;
+
+    /**
+     * Optional action type for the button. Used in `data-action` attribute for 'gen-control' events.
+     */
+    action?: string;
+
+    /**
+     * Optional action value for the button that describes the structure or type of data. Used in `data-action-value` attribute for 'gen-control' events.
+     */
+    actionValue?: string;
 }

@@ -11,6 +11,7 @@
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
+    import TerminalText from "../actor/TerminalText.svelte";
 
     const props = $props();
     const { 
@@ -46,31 +47,45 @@
     </div>
     <!-- Mech/Pilot Name -->
     <div class="la-names -flex1 -margin3">
-        <input type="text"
-            class="la-mechname__input la-text-header -upper -fontsize5
-                charname"
-            name={"name"}
-            value={actor.name}
-            placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-        />
+        <div class="la-combine-h">
+            <input type="text"
+                class="la-mechname__input la-text-header -upper -fontsize5
+                    charname"
+                name={"name"}
+                value={actor.name}
+                placeholder={getLocalized("LA.namePlaceholder")}
+                onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
+                onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            />
+            <span class="-fontsize0 lancer-text-darken-3">
+                {getLocalized("LA.name.label")}
+            </span>
+        </div>
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
-        <span class="la-pilotcallsign__span -upper la-text-header -fontsize3
-                ref set pilot click-open"
-            data-uuid={pilot?.uuid}
-            data-path={"system.pilot"}
-            data-accept-types={"pilot"}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.open.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-        >
-            {pilot?.system.callsign || getLocalized("LA.pilotPlaceholder")}
-        </span>
-    {#if pilot}
-        <span class="la-pilotlevel__span -upper la-text-header">LL{pilot.system.level} </span>
-        <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.search.label")}</span><!--
-    ---><span class="la-cursor la-anim-header -fadein"></span>
-    {/if}
+        <div class="la-combine-h">
+            <span class="la-pilotcallsign__span la-combine-h -justifystart -upper la-text-header -widthfull -overflowhidden
+                    ref set pilot click-open"
+                data-uuid={pilot?.uuid}
+                data-path={"system.pilot"}
+                data-accept-types={"pilot"}
+                onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.open.tooltip"), TextLogHook.MechHeader) }
+                onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            >
+                <TerminalText
+                    text="LL{pilot?.system.level || 0}"
+                    extensionText="--{getLocalized("LA.search.label")}"
+                    textStyle={["-fontsize1", "la-anim-header"]}
+                    disableCmdline={true}
+                >
+                    <span class="-fontsize3">
+                        {pilot?.system.callsign || getLocalized("LA.pilotPlaceholder")}
+                    </span>
+                </TerminalText>
+            </span>
+            <span class="-fontsize0 lancer-text-darken-3">
+                {getLocalized("LA.pilot.label")}
+            </span>
+        </div>
     {#if pilot?.system.active_mech?.value.uuid !== actor.uuid}
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}

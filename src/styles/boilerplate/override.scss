@@ -86,7 +86,7 @@ body.game.system-lancer>.lancer.sheet
 
 .lancer.sheet select
 {
-    width: inherit;
+    width: unset;
 }
 
 .la-root
@@ -190,7 +190,6 @@ body.game.system-lancer>.lancer.sheet
 
     i
     {
-        // font-size: inherit;
         vertical-align: middle;
     }
 

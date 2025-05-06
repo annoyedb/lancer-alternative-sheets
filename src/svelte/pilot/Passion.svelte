@@ -6,6 +6,8 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getBondImageSrc, getPilotSheetTooltipEnabled, setBondImageSrc } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getBrightness } from "@/scripts/theme";
+    import { getSheetStore } from "@/scripts/store/module-store";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
@@ -21,6 +23,11 @@
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = true; // TODO: change to a setting
+
+    function getGlowColor()
+    {
+        return getBrightness(getSheetStore(actor.uuid).currentTheme) === "dark" ? "la-anim-text" : "la-anim-primary";
+    }
 
     function browseImage()
     {
@@ -43,29 +50,31 @@
         let expTotal = 0;
 
         // Tally XP from the checklist
-        const updatedMajorIdeals = system.bond.system.major_ideals.map((major: boolean) => {
-            if (major) expTotal++;
+        const updatedMajorIdeals = system.bond_state.xp_checklist.major_ideals.map((major: boolean) => 
+        {
+            if (major === true) expTotal++;
             return false;
         });
-        if (system.bond_state.xp_checklist.minor_ideal)
+        if (system.bond_state.xp_checklist.minor_ideal === true)
             expTotal++;
-        if (system.bond_state.xp_checklist.veteran_power)
+        if (system.bond_state.xp_checklist.veteran_power === true)
             expTotal++;
 
         // Update XP and set their checked state to false
-        actor.update({
-            ["system.bond_state.xp.value"]: system.bond_state.xp.value + expTotal,
-            ["system.bond_state.xp_checklist"]: {
-                major_ideals: updatedMajorIdeals,
-                minor_ideal: false,
-                veteran_power: false,
-            },
-        });
+        if (expTotal > 0)
+            actor.update({
+                ["system.bond_state.xp.value"]: system.bond_state.xp.value + expTotal,
+                ["system.bond_state.xp_checklist"]: {
+                    major_ideals: updatedMajorIdeals,
+                    minor_ideal: false,
+                    veteran_power: false,
+                },
+            });
     }
 </script>
 
 {#if system.bond}
-<div class="la-combine-v -widthfull -margin1-b la-reveal-hover">
+<div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <!-- Bond Name -->
     <span class="-fontsize4 -letterspacing1 -upper">
         {system.bond.name}
@@ -88,7 +97,7 @@
         />
     </div>
     <div
-        class="la-bond-card la-bg-scroll-alt la-combine-h -positionrelative -widthfull -aligncenter"
+        class="la-bond-card la-combine-h -positionrelative -widthfull -aligncenter"
     >
         <!-- Bond Image -->
         <div class="la-bond-card__img-anchor -margin5-t -margin5-b"
@@ -96,7 +105,7 @@
             <img
                 class="la-bond-card__img"
                 src="{bondImageSrc}"
-                alt="BondImage"
+                alt="{getLocalized("LA.placeholder")}"
             />
         </div>
     {#if !questionAnswer}
@@ -128,7 +137,7 @@
                     />
                 {#if advancedOptions}
                     <select
-                        class="-fontsize1 -lineheight3 la-bckg-transparent la-text-text -widthfull"
+                        class="la-bond__select -fontsize1 -lineheight3 la-bckg-transparent la-text-text -widthfull"
                         name="system.bond_state.minor_ideal" 
                         data-type="String"
                     >
@@ -174,7 +183,7 @@
                     {qna.question}
                 </span>
                 <select 
-                    class="-fontsize1 -lineheight3 la-bckg-transparent la-text-text"
+                    class="la-bond__select -fontsize1 -lineheight3 la-bckg-transparent la-text-text"
                     name="system.bond_state.answers.{index}" 
                     data-type="String"
                 >
@@ -201,6 +210,7 @@
             flowClass={FlowClass.None}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.DOWN}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -208,28 +218,29 @@
 
             onClick={tallyAndUpdate}
         />
-    <!-- Editing -->
     {#if advancedOptions}
         <file-picker
             type="image"
             name=""
         ></file-picker>
         <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2">
+            <!-- Edit Bond Image -->
             <GlyphButton
-                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "la-pulse-glow-color la-anim-primary" : ""}`]}
+                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltip={getLocalized("LA.pilot.bond.swap.tooltip")}
-                logText={getLocalized(!questionAnswer ? "LA.pilot.bond.qa.tooltip" : "LA.pilot.bond.xp.tooltip")}
+                tooltip={getLocalized("LA.pilot.bond.changeImage.tooltip")}
+                logText={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
                 onClick={browseImage}
             />
+            <!-- Edit Bond -->
             <GlyphButton
-                style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "la-pulse-glow-color la-anim-primary" : ""}`, "-justifycenter", "-aligncenter"]}
+                style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
 
                 flowClass={FlowClass.ContextMenu}
                 uuid={system.bond.uuid}
@@ -245,9 +256,9 @@
     {/if}
         <div class="la-combine-h -positionabsolute -left0 -padding3-l -gap1">
             <!-- Q&A Toggle -->
-            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 la-pulse-glow-color la-anim-primary"></i>
+            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}"></i>
             <GlyphButton
-                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "la-pulse-glow-color la-anim-primary" : ""}`]}
+                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -262,7 +273,7 @@
             </GlyphButton>
             <!-- Refresh Powers -->
             <GlyphButton
-                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "la-pulse-glow-color la-anim-primary" : ""}`]}
+                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.BondPowerRefresh}
 

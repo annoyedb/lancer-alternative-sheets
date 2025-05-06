@@ -211,7 +211,7 @@
             acceptTypes={"pilot_weapon"}
 
             collapseID={weapon.uuid}
-            startCollapsed={false}
+            startCollapsed={true}
 
             renderOutsideCollapse={renderLimited(weapon) ? outerContent : undefined}
             headerContentLeft={headerTertiaryLeftOptions}

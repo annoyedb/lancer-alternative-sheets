@@ -55,8 +55,8 @@ aside.la-tooltip.active
 
     .-bordersround
     {
-        border-radius: 8px;
-        border-width: 1px;
+        border-radius: 8px 8px 8px 8px;
+        border-width: 1px 1px 1px 1px;
         border-style: solid;
 
         &.-small

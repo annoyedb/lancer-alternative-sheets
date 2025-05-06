@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { getLocalized } from "@/scripts/helpers";
+    import { trackHook } from "@/scripts/store/hooks";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -29,6 +31,19 @@
     const coreBonuses = actor.itemTypes.core_bonus;
     const collID = `${actor.uuid}.coreBonus`;
     
+    onMount(() => {
+        if (isMechSheet)
+            trackHook(sheetActor.uuid, Hooks.on("updateItem", (item: any, _caller: any, _options: any) => 
+            {
+                if (item.type !== "core_bonus" || item.parent.uuid !== actor.uuid)
+                    return;
+                
+                // (#6)
+                // Also for some reason, this calls twice when updating an Items document
+                Hooks.call("laForceRerender", sheetActor.uuid);
+            }), "updateItem");
+    });
+
     function getActionCollID(index: number)
     {
         return `${actor.uuid}.coreBonus.${index}.action`;
@@ -91,7 +106,9 @@
                     name={counter.name}
                     usesValue={counter.value}
                     usesMax={counter.max}
-                    path={`itemTypes.core_bonus.${index}.system.counters.${jndex}`}
+                    path={isMechSheet
+                        ? `system.pilot.value.itemTypes.core_bonus.${index}.system.counters.${jndex}`
+                        : `itemTypes.core_bonus.${index}.system.counters.${jndex}`}
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
 
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
@@ -173,6 +190,7 @@
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
+                <!-- TODO: maybe make a special action box or some condition that will handle getting the action... -->
                 <ActionBox
                     actions={coreBonus.system.actions}
                     uuid={coreBonus.uuid}

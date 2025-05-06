@@ -1,8 +1,12 @@
+import type { Snippet } from "svelte";
+
 /**
  * Interface representing the properties for terminal text display.
  */
 export interface TerminalTextProps
 {
+    children?: Snippet;
+
     /**
      * The text that appears on the button.
      */

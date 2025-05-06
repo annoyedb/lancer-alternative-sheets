@@ -22,7 +22,7 @@ export class PilotSheetSettings implements PilotSheetSettingsData
                 SystemButton.BasicAttack,
                 SystemButton.Damage,
             ],
-            bondImageSrc: "", // TODO: add default image
+            bondImageSrc: "modules/lancer-alternative-sheets/assets/nobond.webp",
         }
     }
 }

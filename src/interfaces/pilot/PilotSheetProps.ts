@@ -13,4 +13,8 @@ export interface PilotSheetProps extends ActorSheet.Data<ActorSheet.Options>
 
     limited: boolean,
     owner: boolean,
+
+    pilotCache: Array<any>,
+    rawID: string,
+    vaultID: string,
 }

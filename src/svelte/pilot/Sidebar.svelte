@@ -163,7 +163,7 @@
                 clipPath={"clipped"}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltip={getLocalized("LA.hitpoint.tooltip")}
+                tooltip={getLocalized("LA.pilot.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
         </div>
@@ -220,7 +220,7 @@
                 clipPath={"clipped"}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltip={getLocalized("LA.hitpoint.tooltip")}
+                tooltip={getLocalized("LA.pilot.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
         </div>
@@ -259,7 +259,7 @@
                 clipPath={"clipped-alt"}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltip={getLocalized("LA.stress.tooltip")}
+                tooltip={getLocalized("LA.pilot.stress.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
         </div>

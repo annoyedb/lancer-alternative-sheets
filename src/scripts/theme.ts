@@ -21,7 +21,6 @@ import "@/styles/mech/hase-display.scss";
 import "@/styles/pilot/body.scss";
 import "@/styles/pilot/header.scss";
 import "@/styles/pilot/sidebar.scss";
-import "@/styles/pilot/loadout.scss";
 import "@/styles/pilot/hase-display.scss";
 import "@/styles/pilot/bond.scss"
 
@@ -78,6 +77,17 @@ const THEME_LOCALIZE_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.advanced.theme.ipsn.label",
 };
 
+const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
+    [ThemeKey.GMS]: "LA.pilot.history.gms",
+    [ThemeKey.GMSDark]: "LA.pilot.history.gms",
+    [ThemeKey.MSMC]: "LA.pilot.history.msmc",
+    [ThemeKey.GALSIM]: "LA.pilot.history.gms",
+    [ThemeKey.HORUS]: "LA.pilot.history.horus",
+    [ThemeKey.HA]: "LA.pilot.history.ha",
+    [ThemeKey.SSC]: "LA.pilot.history.ssc",
+    [ThemeKey.IPSN]: "LA.pilot.history.ipsn",
+};
+
 export function getSystemTheme()
 {
     const currentTheme = game.settings.get("lancer", "uiTheme") as string;
@@ -94,6 +104,12 @@ export function getThemeName(theme?: ThemeKey | string)
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
     return getLocalized(THEME_LOCALIZE_MAP[selectedTheme]);
+}
+
+export function getThemeHistoryLabel(theme?: ThemeKey | string)
+{
+    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
+    return getLocalized(THEME_LOCALIZE_HISTORY_MAP[selectedTheme]);
 }
 
 // Yes, this is basically just a theme picker for the sidebar

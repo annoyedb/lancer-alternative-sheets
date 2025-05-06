@@ -20,6 +20,8 @@ import AdvancedSettings from "@/svelte/pilot/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/pilot/settings/AdvancedSettingsNav.svelte";
 import Activity from "@/svelte/pilot/Activity.svelte";
 import Abilities from "@/svelte/pilot/Abilities.svelte";
+import Dossier from "@/svelte/pilot/Dossier.svelte";
+import MechStorage from "@/svelte/pilot/MechStorage.svelte";
 
 export class PilotSheetBase
 {
@@ -52,7 +54,7 @@ export class PilotSheetBase
                 {
                     navSelector: ".la-tabs-quaternary",
                     contentSelector: ".la-content-quaternary",
-                    initial: "mechs"
+                    initial: "dossier"
                 }
             ],
             scrollY: [".la-SCROLL_BODY", ".la-SCROLL_SIDEBAR"],
@@ -79,7 +81,20 @@ export class PilotSheetBase
                         currentTheme: theme,
                     });
                     this.render();
-                })
+                });
+
+                // (#6): Jank-ass way of allowing pilot talents/core bonuses to update properly on mech sheets
+                // Something in the rerender call (getData? idk) actually lets (counters at least) properly update
+                // and so we just call the whole rerender on the sheet.
+                Hooks.on("laForceRerender", (uuid: string, callback?: () => void) => {
+                    if (uuid !== this.actor.uuid)
+                        return;
+
+                    console.log("I have been forced to rerender", callback == null || undefined);
+                    this.render();
+                    if (callback)
+                        callback();
+                });
 
                 // TODO: Write a PR. Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
@@ -100,7 +115,6 @@ export class PilotSheetBase
                 super.activateListeners(html);
 
                 this.applyTabListener(html);
-                this.reapplyImgListener(html);
             }
 
             // The more pressing issue is whether or not this 
@@ -122,8 +136,6 @@ export class PilotSheetBase
                 let data = dataMap[this.actor.uuid]
 
                 this.mountComponents(html, data);
-
-                this.activateListeners(html);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -135,7 +147,6 @@ export class PilotSheetBase
 
                 this.mountComponents(html, data);
 
-                this.activateListeners(html);
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender
                 this._restoreScrollPositions(html);
@@ -156,6 +167,14 @@ export class PilotSheetBase
                     target: html.find(".la-SVELTE-SIDEBARSTATISTICS")[0],
                     props: data,
                 });
+                mount(Dossier, {
+                    target: html.find(".la-SVELTE-DOSSIER")[0],
+                    props: data,
+                })
+                mount(MechStorage, {
+                    target: html.find(".la-SVELTE-MECHSTORAGE")[0],
+                    props: data,
+                })
                 mount(Activity, {
                     target: html.find(".la-SVELTE-SIDEBARACTIVITY")[0],
                     props: data,
@@ -185,14 +204,6 @@ export class PilotSheetBase
                         logType: TextLogHook.PilotHeader,
                         logTypeReset: TextLogHook.PilotHeaderReset,
                     },
-                });
-            }
-
-            reapplyImgListener(html: JQuery<HTMLElement>)
-            {
-                html.find('img[data-edit="img"]').each((_, img) =>
-                {
-                    $(img).on('click', this._onEditImage.bind(this));
                 });
             }
 

@@ -1,6 +1,5 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -10,12 +9,14 @@
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const {
         actor,
         system,
     } = $props();
     let editButtonHover = $state(false);
+    let addButtonHover = $state(false);
     
     const collID = `${actor.uuid}.clocks`;
     const clocks = system.bond_state.clocks;
@@ -29,25 +30,37 @@
 </script>
 
 {#snippet headerContent()}
-<button type="button"
-    class="mdi mdi-plus-circle-outline -fontsize3 -height2 -lineheight2 -glow-primary-hover -glow-header
-        gen-control"
-    data-path="system.bond_state.clocks"
-    data-action="append"
-    data-action-value="(struct)counter"
-    data-tooltip={tooltipEnabled ? addClockTip : undefined}
-    data-tooltip-class="clipped-bot la-tooltip"
-    data-tooltip-direction={TooltipDirection.UP}
-    aria-label={getLocalized("LA.pilot.bond.clock.add.tooltip")}
-    onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.bond.clock.add.tooltip"), TextLogHook.PilotHeader) }
-    onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-></button>
+<GlyphButton
+    style={["mdi mdi-plus-circle-outline", "-fontsize3", "-height2", "-lineheight2", "-glow-primary-hover", "-glow-header"]}
+
+    flowClass={FlowClass.GeneralControl}
+    path="system.bond_state.clocks"
+    action="append"
+    actionValue="(struct)counter"
+
+    tooltipEnabled={tooltipEnabled}
+    tooltip={addClockTip}
+    tooltipDirection={TooltipDirection.UP}
+    logText={getLocalized("LA.pilot.bond.clock.add.tooltip")}
+    logType={TextLogHook.PilotHeader}
+    logTypeReset={TextLogHook.PilotHeaderReset}
+
+    disabled={system.bond === null}
+
+    onPointerEnter={() => {addButtonHover = true;}}
+    onPointerLeave={() => {addButtonHover = false;}}
+/>
 {/snippet}
 <HeaderMain
     text={getLocalized("LA.pilot.bond.clock.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
+    extensionTextFunction={() => {
+        if (addButtonHover)
+            return `--${getLocalized("LA.add.extension")}`;
+        return undefined;
+    }}
     
     collapseID={collID}
     startCollapsed={true}

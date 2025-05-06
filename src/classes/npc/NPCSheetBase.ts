@@ -76,8 +76,6 @@ export class NPCSheetBase
             override activateListeners(html: JQuery<HTMLElement>)
             {
                 super.activateListeners(html);
-
-                this.reapplyImgListener(html);
             }
 
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
@@ -91,8 +89,6 @@ export class NPCSheetBase
                 let data = dataMap[this.actor.uuid];
 
                 this.mountComponents(html, data);
-
-                this.activateListeners(html);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -104,7 +100,6 @@ export class NPCSheetBase
 
                 this.mountComponents(html, data);
 
-                this.activateListeners(html);
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender
                 this._restoreScrollPositions(html);
@@ -133,14 +128,6 @@ export class NPCSheetBase
                         target: html.find(".la-SVELTE-ACTIVITY")[0],
                         props: data,
                     });
-            }
-
-            reapplyImgListener(html: JQuery<HTMLElement>)
-            {
-                html.find('img[data-edit="img"]').each((_, img) =>
-                {
-                    $(img).on('click', this._onEditImage.bind(this));
-                });
             }
         }
 

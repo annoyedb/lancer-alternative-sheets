@@ -3,6 +3,8 @@
     import { getLocalized } from "@/scripts/helpers";
 
     const {
+        children,
+
         text,
         extensionText,
         textStyle,
@@ -19,7 +21,7 @@
 
 <div class="la-terminaltext -whitespacenowrap -textalignleft {textStyle?.join(' ')}"><!--
 --->{#if !disableCmdline}<span class="la-cmdline -fadein">>//: </span>{/if}<!--
----><span class="">{text}</span><!--
+---><span class="">{#if children}{@render children()}{/if}{text}</span><!--
 --->{#if !disableExtension}<span class="la-extension -lower -fadein">{extensionText || `--${getLocalized("LA.scan.label")}`}</span>{/if}<!--
 --->{#if !disableCursor}<span class="la-cursor -fadein"></span>{/if}
 </div>
