@@ -16,83 +16,14 @@ In addition to the above:
 * player mech sheets display some useful pilot sheet items such as core bonuses and pilot talents.
 * player mech sheets and pilot sheets feature a sidebar where useful stats are always easily accessed at a glance
 
-<details>
-  <summary>
-    <h3>Player Sheets & Theme Previews</h3>
-  </summary>
-  <details>
-    <summary>
-      <h4>General Massive Systems (GMS)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GMS.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>General Massive Systems Dark (GMS-Dark)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GMS-Dark.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>IPS-Northstar (IPS-N)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/IPS-N.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>Smith-Shimano Corpro (SSC)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/SSC.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>HORUS</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/HORUS.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>Harrison Armory (HA)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/HA.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>Mirrorsmoke Mercenary Company (MSMC)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/MSMC.png"/>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <h4>Forecast/Galactic Sumulation (GALSIM)</h4>
-    </summary>
-    <div align="center">
-      <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/GALSIM.png"/>
-    </div>
-  </details>
-</details>
-<details>
-  <summary>
-    <h3>NPC Sheets</h3>
-  </summary>
-  <div align="center">
-    <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/NPC.png"/>
-  </div>
-</details>
+### Pilot Sheets
+<img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/pilot-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
+
+### Mech Sheets
+<img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/mech-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
+
+### NPC Sheets
+<img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/npc-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Installation
 This module can be installed:
