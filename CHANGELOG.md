@@ -1,3 +1,42 @@
+# 1.2.0
+`wake up honey, new sheets just dropped`
+
+--
+
+Now all that's left is deployables. 
+
+Note that rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. 
+
+However, if you wish to globally enable the display of tech attack or sensors stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module. `or if you just dont want the save stat to get lonely idk`
+
+## Changes
+* #35 - Fixed (?) an issue where renaming using an actor's sheet would not update properly
+* #18 - Fixed an issue where pilot talents and core bonuses would not update on the mech sheet (e.g. Leadership, Orator, etc)
+* Fixed an issue in NPC sheets where the 'edit notes' button would fail to open when the advanced options toggle was not already on before a rerender
+* Fixed visual bug where weapon mod 'added effects' actions had the wrong clip path
+* Fixed minor issue where the sheet header's fake text log would block input for a section of the sheet header's image
+* Fixed (?) a rare bug with sheets where input fields would trigger the most bizarre things, like applying damage, rolling, triggering stabilize, etc `like its haunted or something`. This bug is incredibly bizarre and very hard to pin down the exact cause. Please let me know if pressing 'enter' on any input fields continues to trigger random things and steps to recreate it, thanks
+* Fixed a bug where items with multiple actions had those actions share the same collapse ID
+* Fixed a minor style inconsistency with pilot talents in terms of how the edit button is spaced relative to its neighbors
+* Fixed a bug where sheets would display nothing if active_mech for whatever reason was null
+* Fixed visual bug where '--search' extension would not show up on correct hover over for pilots in mech sheets
+* Added Pilot sheets
+* Added a cheap '/r d20' flow for generic pilot skill rolls. This unfortunately does not show the +/- accuracy HUD that normally pops up with every roll as a design limitation. This added flow exists only so that rolls made with it can be tracked in the action log, where rolls normally made to chat do not. If anyone is more familiar with flows and know how to bring up that particular HUD, let me know! (or if you know how to initialize/expose AccDiffHudData)
+* Added `against my better judgement` display of deployables, counters, and bonuses to pilot items. These just happen to exist in the system; I'm just providing the option to display them if you have them
+* Added more context clues to buttons such as 'roll attack', 'roll damage', and 'use system' buttons for sheets. There are other context clues included for other lesser-used buttons as well
+* Added more context clues to buttons such as 'roll attack', 'roll damage' by making their backgrounds literal strobelights `if my players ask me who to roll something again the next update i will be adding arrows pointing to it in rainbow strobelights`
+* Added missing tooltip and header log tips to HASE stats
+* Added subtle indicators for what each line in the mech header represents, identically to pilot sheets 
+* Changed the pilot talent icon to something more thematically consistent to the talent rank icons
+* Changed many theme colors to stop using ones directly taken from COMP/CON. The design language of these sheets just simply do not facilitate using many of those colors directly, and makes it difficult to balance from a readability standpoint, but I hope you all find the substitutes to be inoffensive and fitting to their individual organizations. The most affected themes are: 'GMS', 'GMS-Dark', 'HORUS'. Notably, 'HA' remains offensive to the eyes because it doesn't feel the same otherwise at this point
+* Changed 'getData()' needing to get called twice in order to mount Svelte components to instead forward initial data call from the handlebars template instead
+
+## 1.1.0 -> 1.2.0 Summary
+* Added Pilot sheets
+* Added an action log to display a history of certain actions taken by that token or actor
+* Added a customizable macro list that can be dragged-and-dropped into when in advanced mode
+* Added individually applicable themes and certain customization settings
+
 # 1.1.8
 Thanks to `stormtalus` on Discord for pointing these issues out.
 
@@ -189,12 +228,13 @@ Disclaimer that I still have an active campaign on V11, so this is likely where 
 ## Known Issues
 * ~~If you use the mech inventory system, you may find problems relinking your weapons/systems to your mech. In an effort to combat a rare bug, I purge the null references left behind by using the unlinking feature. If you have issues let me know~~
 * ~~Some paths aren't linked properly so they don't do anything in their flows (I would like for them to post anything to the chat window to indicate a player has 'used' it). The ones I'm searching for how to set their correct paths are: core bonuses (e.g. The Lesson of the Held Image's reaction action), deployable actions and special actions (e.g. Turret Drones)~~
-* Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at this but nothing) please let me know!
+* ~~Leadership die counter *is* tracking properly, however the activation flow from the Lancer system does not call for a rerender on the mech sheet, so you must close and reopen the sheet to see the changes. If you know how to either: tell an item to rerender a sheet (changes to the talent rerenders the talent sheet and pilot sheet respectively, but not the mech sheet) OR force a rerender in a way that'll update the pilot items (I've made attempts at this but nothing) please let me know!~~
 * ~~Pressing enter on an NPC sheet's input box activates the on-click event for templates/classes. Genuinely have no idea, but Lancer/Foundry's input boxes in general seem kind of cursed~~
 * ~~Components that use selectors (used in all images that have black/white themes and for size/speed indicators) do not reflect theme color until a rerender (opening and closing the sheet). `it is what it is`~~
 * ~~Tooltips are currently width-restricted and minimally restyled, so there can be cases where the entire NPC Notes tooltip display won't fit~~
 
 ## 1.0.0 -> 1.1.0 Summary
+* Added NPC Sheets
 * Added GMS Dark theme
 * Finished implementing mech sheet features (deployables, talents, core bonuses, etc) to display all effects, bonuses, etc
 * Externally loaded assets `stop randomly going to grab milk between patches and never coming back`

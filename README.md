@@ -1,16 +1,20 @@
 # Lancer Alternative Sheets
 This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the [unofficial Lancer game system](https://github.com/Eranziel/foundryvtt-lancer) to provide alternative 'play-focused' sheets for the tabletop game Lancer by Massif Press.
 
-It is designed to be a player-facing sheet that provides most of the functionality carried over from the original sheet, providing an immersive and convenient way to interact with the Lancer system, and a simple-to-understand responsive layout.
+It is designed to be a player-facing sheet that provides all of the functionality carried over from the original sheet, providing an immersive and convenient way to interact with the Lancer system, and a simple-to-understand responsive layout.
 
-While the main goal is to provide aesthetic alternative sheets to the Lancer system, there are some functional features included as well:
+While the main goal was to provide aesthetic alternative sheets to the Lancer system, there are some functional features included as well:
 
 * per-sheet sheet configuration/customization
-* reminders on ruling for statuses, stats, and some actions
+* reminders on ruling for statuses, stats, and some actions; useful for new players in particular
 * view/remove applied status effects
-* run/add/remove macros
+* run/add/remove macros to the sheet
 * 'action log' that filters the sheet actor's actions into their own log
 * some stand-in implementations for features yet to be added by the system (e.g. counter display, some send-to-chat functions on various things)
+
+In addition to the above:
+* player mech sheets display some useful pilot sheet items such as core bonuses and pilot talents.
+* player mech sheets and pilot sheets feature a sidebar where useful stats are always easily accessed at a glance
 
 <details>
   <summary>
@@ -107,9 +111,18 @@ The current fully implemented sheets are as follows:
 * NPC sheets
 * Mech sheets
 
-To change the global system theme, change the LANCER system theme by going to Game Settings -> Configure Settings -> LANCER -> UI Theme. This setting is per-client, but all sheets will reflect this setting by default.
+## Frequently Asked Questions
+Q: How do I roll a weapon/system?
+A: For rollable items, such as weapons or systems there's an icon with the background of a D20 in it, that glows slightly. You can press this to roll your weapon. If you have suggestions on how to make this more obvious so this question doesn't need to be asked, please make an inquiry in the [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) or directly to me on Discord!
 
-To override or set a fixed theme per-sheet, you can activate the 'advanced toggle' in the sheet (in the sheet itself, typically near the top) and find a notebook symbol. This setting is synced across all clients.
+Q: How do I change my system theme?
+A: To change the global system theme, change the LANCER system theme by going to Game Settings -> Configure Settings -> LANCER -> UI Theme. This setting is per-client, but all sheets will reflect this setting by default.
+
+Q: How do I change the theme of a single sheet?
+A: To override or set a fixed theme per-sheet, you can activate the 'advanced toggle' in the sheet (in the sheet itself, typically near the top) and find a notebook symbol. This setting is synced across all clients.
+
+Q: How do I enable sensors or the tech attack stat on my sheet?
+A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. If you wish to enable the display of these stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module.
 
 ## Development
 This module uses Svelte 5 to render overtop of the Lancer system's current implementation of Application by mounting overtop of a Handlebars div. As such it does not extend from Application but from Lancer's ActorSheets, making it fully interchangeable between the Lancer included sheets, while allowing the reactive rendering and maintainability of using Svelte.
