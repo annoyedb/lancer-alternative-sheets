@@ -39,8 +39,9 @@ If you are on a supported version but the last-verified version does not match, 
 To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the images above) in the selected actor sheet and select "Alternative `<Type>` Sheet" to override the default sheet or to act as the new default sheet.
 
 The current fully implemented sheets are as follows:
-* NPC sheets
+* Pilot sheets
 * Mech sheets
+* NPC sheets
 
 ## Frequently Asked Questions
 Q: How do I roll a weapon/system?
