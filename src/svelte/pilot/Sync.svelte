@@ -63,7 +63,7 @@
                 </span>
             </GlyphButton>
             <div class="la-combine-v -widthfull -gap0">
-                {#if pilotCache.length}
+                {#if pilotCache?.length}
                 <select
                     class="la-sync__select -textaligncenter la-bckg-transparent la-text-text la-brdr-text"
                     name="selectCloudId"
