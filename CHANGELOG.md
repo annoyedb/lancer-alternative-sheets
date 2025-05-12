@@ -1,4 +1,8 @@
-# 1.2.0
+# 1.2.2
+## Changes
+* #37 - Fixed missing per-profile actions, affecting weapons such as the Terashima Blade's Storm Stance
+
+# 1.2.1
 `wake up honey, new sheets just dropped`
 
 --
@@ -31,7 +35,7 @@ However, if you wish to globally enable the display of tech attack or sensors st
 * Changed many theme colors to stop using ones directly taken from COMP/CON. The design language of these sheets just simply do not facilitate using many of those colors directly, and makes it difficult to balance from a readability standpoint, but I hope you all find the substitutes to be inoffensive and fitting to their individual organizations. The most affected themes are: 'GMS', 'GMS-Dark', 'HORUS'. Notably, 'HA' remains offensive to the eyes because it doesn't feel the same otherwise at this point
 * Changed 'getData()' needing to get called twice in order to mount Svelte components to instead forward initial data call from the handlebars template instead
 
-## 1.1.0 -> 1.2.0 Summary
+## 1.1.0 -> 1.2.1 Summary
 * Added Pilot sheets
 * Added an action log to display a history of certain actions taken by that token or actor
 * Added a customizable macro list that can be dragged-and-dropped into when in advanced mode

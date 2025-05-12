@@ -85,9 +85,11 @@
         return `system.loadout.weapon_mounts.${mountIndex}.slots.${index}.mod.value`
     }
     
-    function getActionCollapseID(index: number)
+    function getActionCollapseID(index: number, profileIndex?: number)
     {
-        return `${mount.uuid}_action_${index}`;
+        return profileIndex !== undefined
+            ? `${mount.uuid}.action.${index}.profile.${profileIndex}` 
+            : `${mount.uuid}.action.${index}`;
     }
 
     function renderLimited(weapon: any)
@@ -300,6 +302,18 @@
                 path={`system.actions`}
 
                 collapseID={getActionCollapseID(index)}
+                startCollapsed={false}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
+            />
+            <ActionBox
+                actions={profile.actions}
+                uuid={weapon.uuid}
+                path={`system.active_profile.actions`}
+
+                collapseID={getActionCollapseID(index, weapon.system.selected_profile_index)}
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
