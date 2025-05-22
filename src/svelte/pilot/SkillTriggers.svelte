@@ -4,6 +4,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -11,6 +12,7 @@
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -165,20 +167,11 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable skill"
-        data-accept-types="skill"
-        data-path={`itemTypes.skill.${skills.length}`}
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.skill.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.skill.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.skill.empty.label")}
+        subLabel={getLocalized("LA.pilot.skill.empty.subLabel")}
+        type={AcceptType.Skill}
+        path="itemTypes.skill.{skills.length}"
+    />
 {/if}
 </HeaderMain>

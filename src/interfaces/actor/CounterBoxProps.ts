@@ -1,9 +1,17 @@
+import type { CounterBoxType } from "@/enums/CounterBoxType";
+
 export interface CounterBoxProps
 {
-    name?: string;
+    // Optional label attached to the counter
+    text?: string;
+    // Type of counter box
+    type: CounterBoxType;
+    // Value of the counter
     usesValue: number;
+    // Maximum value of the counter
     usesMax: number;
+    // Counter data path
     path: string;
-    onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }, ...args: any[]) => void;
+    // Optional counter style
     style?: Array<string>;
 }

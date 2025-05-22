@@ -5,12 +5,13 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
 
     const {
         actor,
@@ -84,10 +85,11 @@
     {#if trait.counters?.length}
     {#each trait.counters as counter}
         <CounterBox
-            name={counter.name}
+            text={counter.name}
+            type={CounterBoxType.Counter}
             usesValue={counter.value}
             usesMax={counter.max}
-            path={`system.loadout.frame.value.system.traits.${index}.counters`}
+            path="system.loadout.frame.value.system.traits.{index}.counters"
             
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}

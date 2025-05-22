@@ -1,177 +1,182 @@
 // CSS class boilerplate that wraps the Lancer system's colors 
-.lancer-text-dark
-{
-    color: var(--dark-text)
-}
 
-.lancer-bckg-dark
+:root,
+.la-common
 {
-    background-color: var(--dark-text)
-}
+    .lancer-text-dark
+    {
+        color: var(--dark-text)
+    }
 
-.lancer-brdr-dark
-{
-    border-color: var(--dark-text)
-}
+    .lancer-bckg-dark
+    {
+        background-color: var(--dark-text)
+    }
 
-.lancer-text-light
-{
-    color: var(--light-text)
-}
+    .lancer-brdr-dark
+    {
+        border-color: var(--dark-text)
+    }
 
-.lancer-bckg-light
-{
-    background-color: var(--light-text)
-}
+    .lancer-text-light
+    {
+        color: var(--light-text)
+    }
 
-.lancer-brdr-light
-{
-    border-color: var(--light-text)
-}
+    .lancer-bckg-light
+    {
+        background-color: var(--light-text)
+    }
 
-.lancer-bckg-primary
-{
-    background-color: var(--primary-color)
-}
+    .lancer-brdr-light
+    {
+        border-color: var(--light-text)
+    }
 
-.lancer-bckg-secondary
-{
-    background-color: var(--secondary-color)
-}
+    .lancer-bckg-primary
+    {
+        background-color: var(--primary-color)
+    }
 
-.lancer-text-background
-{
-    color: var(--background-color)
-}
+    .lancer-bckg-secondary
+    {
+        background-color: var(--secondary-color)
+    }
 
-.lancer-text-darken-1
-{
-    color: var(--darken-1);
-}
+    .lancer-text-background
+    {
+        color: var(--background-color)
+    }
 
-.lancer-bckg-darken-1
-{
-    background-color: var(--darken-1);
-}
+    .lancer-text-darken-1
+    {
+        color: var(--darken-1);
+    }
 
-.lancer-brdr-darken-1
-{
-    border-color: var(--darken-1);
-}
+    .lancer-bckg-darken-1
+    {
+        background-color: var(--darken-1);
+    }
 
-.lancer-anim-darken-1
-{
-    --color: var(--darken-1);
-}
+    .lancer-brdr-darken-1
+    {
+        border-color: var(--darken-1);
+    }
 
-.lancer-outl-darken-1
-{
-    -webkit-text-stroke: var(--size) var(--darken-1);
-}
+    .lancer-anim-darken-1
+    {
+        --color: var(--darken-1);
+    }
 
-.lancer-text-darken-2
-{
-    color: var(--darken-2);
-}
+    .lancer-outl-darken-1
+    {
+        -webkit-text-stroke: var(--size) var(--darken-1);
+    }
 
-.lancer-bckg-darken-2
-{
-    background-color: var(--darken-2);
-}
+    .lancer-text-darken-2
+    {
+        color: var(--darken-2);
+    }
 
-.lancer-brdr-darken-2
-{
-    border-color: var(--darken-2);
-}
+    .lancer-bckg-darken-2
+    {
+        background-color: var(--darken-2);
+    }
 
-.lancer-anim-darken-2
-{
-    --color: var(--darken-2);
-}
+    .lancer-brdr-darken-2
+    {
+        border-color: var(--darken-2);
+    }
 
-.lancer-outl-darken-2
-{
-    -webkit-text-stroke: var(--size) var(--darken-2);
-}
+    .lancer-anim-darken-2
+    {
+        --color: var(--darken-2);
+    }
 
-.lancer-text-darken-3
-{
-    color: var(--darken-3);
-}
+    .lancer-outl-darken-2
+    {
+        -webkit-text-stroke: var(--size) var(--darken-2);
+    }
 
-.lancer-bckg-darken-3
-{
-    background-color: var(--darken-3);
-}
+    .lancer-text-darken-3
+    {
+        color: var(--darken-3);
+    }
 
-.lancer-brdr-darken-3
-{
-    border-color: var(--darken-3);
-}
+    .lancer-bckg-darken-3
+    {
+        background-color: var(--darken-3);
+    }
 
-.lancer-anim-darken-3
-{
-    --color: var(--darken-3);
-}
+    .lancer-brdr-darken-3
+    {
+        border-color: var(--darken-3);
+    }
 
-.lancer-outl-darken-3
-{
-    -webkit-text-stroke: var(--size) var(--darken-3);
-}
+    .lancer-anim-darken-3
+    {
+        --color: var(--darken-3);
+    }
 
-.lancer-text-darken-4
-{
-    color: var(--darken-4);
-}
+    .lancer-outl-darken-3
+    {
+        -webkit-text-stroke: var(--size) var(--darken-3);
+    }
 
-.lancer-bckg-darken-4
-{
-    background-color: var(--darken-4);
-}
+    .lancer-text-darken-4
+    {
+        color: var(--darken-4);
+    }
 
-.lancer-brdr-darken-4
-{
-    border-color: var(--darken-4);
-}
+    .lancer-bckg-darken-4
+    {
+        background-color: var(--darken-4);
+    }
 
-.lancer-anim-darken-4
-{
-    --color: var(--darken-4);
-}
+    .lancer-brdr-darken-4
+    {
+        border-color: var(--darken-4);
+    }
 
-.lancer-outl-darken-4
-{
-    -webkit-text-stroke: var(--size) var(--darken-4);
-}
+    .lancer-anim-darken-4
+    {
+        --color: var(--darken-4);
+    }
 
-.lancer-text-darken-5
-{
-    color: var(--darken-5);
-}
+    .lancer-outl-darken-4
+    {
+        -webkit-text-stroke: var(--size) var(--darken-4);
+    }
 
-.lancer-bckg-darken-5
-{
-    background-color: var(--darken-5);
-}
+    .lancer-text-darken-5
+    {
+        color: var(--darken-5);
+    }
 
-.lancer-brdr-darken-5
-{
-    border-color: var(--darken-5);
-}
+    .lancer-bckg-darken-5
+    {
+        background-color: var(--darken-5);
+    }
 
-.lancer-anim-darken-5
-{
-    --color: var(--darken-5);
-}
+    .lancer-brdr-darken-5
+    {
+        border-color: var(--darken-5);
+    }
 
-.lancer-outl-darken-5
-{
-    -webkit-text-stroke: var(--size) var(--darken-5);
-}
+    .lancer-anim-darken-5
+    {
+        --color: var(--darken-5);
+    }
 
-// Technically not lancer colors below
+    .lancer-outl-darken-5
+    {
+        -webkit-text-stroke: var(--size) var(--darken-5);
+    }
 
-.lancer-text-lighten-75
-{
-    color: rgba(255, 255, 255, 0.75);
+    // Technically not lancer colors below
+
+    .lancer-text-lighten-75
+    {
+        color: rgba(255, 255, 255, 0.75);
+    }
 }

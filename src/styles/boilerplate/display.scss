@@ -1,5 +1,5 @@
-.la-root,
-aside.la-tooltip.active
+:root,
+.la-common
 {
     .-verticalaligntop
     {
@@ -64,70 +64,70 @@ aside.la-tooltip.active
     .-positionabsolute
     {
         position: absolute;
+
+        &.-top0
+        {
+            top: 0;
+        }
+
+        &.-top4
+        {
+            top: 1rem;
+        }
+
+        &.-top5
+        {
+            top: 1.25rem;
+        }
+
+        &.-top6
+        {
+            top: 1.5rem;
+        }
+
+        &.-top8
+        {
+            top: 2rem;
+        }
+
+        &.-top10
+        {
+            top: 2.5rem;
+        }
+
+        &.-right0
+        {
+            right: 0;
+        }
+
+        &.-right2
+        {
+            right: 0.5rem;
+        }
+
+        &.-bottom0
+        {
+            bottom: 0;
+        }
+
+        &.-leftthird
+        {
+            left: 33.333333%;
+        }
+
+        &.-left0
+        {
+            left: 0;
+        }
+
+        &.-left2
+        {
+            left: 0.5rem;
+        }
     }
 
     .-positionrelative
     {
         position: relative;
-    }
-
-    .-top0
-    {
-        top: 0;
-    }
-
-    .-top4
-    {
-        top: 1rem;
-    }
-
-    .-top5
-    {
-        top: 1.25rem;
-    }
-
-    .-top6
-    {
-        top: 1.5rem;
-    }
-
-    .-top8
-    {
-        top: 2rem;
-    }
-
-    .-top10
-    {
-        top: 2.5rem;
-    }
-
-    .-right0
-    {
-        right: 0;
-    }
-
-    .-right2
-    {
-        right: 0.5rem;
-    }
-
-    .-bottom0
-    {
-        bottom: 0;
-    }
-
-    .-leftthird
-    {
-        left: 33.333333%;
-    }
-
-    .-left0
-    {
-        left: 0;
-    }
-
-    .-left2
-    {
-        left: 0.5rem;
     }
 }

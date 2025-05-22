@@ -1,19 +1,12 @@
 // Overrides for Foundry and Lancer
-.la-svelte
-{
-    height: inherit;
-    display: inherit;
-    flex-direction: inherit;
-}
 
 // Use default theme colors for the tooltip, 
-// since they're declared at the Foundry root level
-// and tooltips appear outside of the sheet
+// since we're not sure what the current theme is from outside a sheet
 #tooltip.la-tooltip,
 aside.la-tooltip.active
 {
     padding: unset;
-    border-color: var(--primary-color);
+    border-color: var(--color);
     background-color: var(--invade-color);
     text-align: left;
         
@@ -54,9 +47,11 @@ aside.la-tooltip.active
     }
 }
 
+// #region Sheet Window
+
 // This is so oddly specific becuase Monk's Little Details adds an oddly specific 
 // border CSS rule for some reason and dominance must be asserted :triumph:
-body.game.system-lancer>.lancer.sheet
+body.game.system-lancer>.lancer.sheet.la-common
 {
     >header.window-header
     {
@@ -65,31 +60,34 @@ body.game.system-lancer>.lancer.sheet
     }
 }
 
-.window-content:has(>.la-root)
+.la-common>.window-content:has(>.la-root)
 {
     padding: inherit;
     overflow: hidden;
 }
 
-.lancer.sheet header:not(.window-header).la-header
+.lancer.sheet.la-common header:not(.window-header).la-header
 {
     margin: unset;
     // Somewhat redundant, but just to stay mutually exclusive from the default sheets
     background-color: var(--primary); // Since this is above the actual sheets, it needs to be hard coded here
 }
 
-.lancer.sheet body:not(.window-body).la-body
+.lancer.sheet.la-common body:not(.window-body).la-body
 {
     // Somewhat redundant, but just to stay mutually exclusive from the default sheets
     background-color: var(--background);
 }
 
-.lancer.sheet select
+.lancer.sheet.la-common select
 {
     width: unset;
 }
 
-.la-root
+// #endregion
+
+// #region Generic Controls
+.la-common
 {
     height: 100%;
 
@@ -345,3 +343,5 @@ body.game.system-lancer>.lancer.sheet
         }
     }
 }
+
+// #endregion

@@ -1,33 +1,43 @@
+<!-- @component
+Special implementation of the `CounterBox` component for npc features that can be recharged
+-->
 <script lang="ts">
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import type { PointerClickProps } from "@/interfaces/actor/events/PointerClickProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { ChargedBoxProps } from "@/interfaces/npc/ChargedBoxProps";
     import { getLocalized, isRecharge } from "@/scripts/helpers";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
 
     const {
         item,
         path,
-    }: ChargedBoxProps = $props();
+        style,
+        
+        logText,
+        logType,
+        logTypeReset,
+
+        onPointerClick,
+    }: ChargedBoxProps & TextLogEventProps & PointerClickProps = $props();
     let charged = item.system.charged;
-    let usesValue = charged ? 1 : 0;
-    let usesMax = 1;
+    const log = logText || getLocalized("LA.npc.charged.tooltip")
 </script>
 
 {#if isRecharge(item)}
-<div class="la-charged la-combine-h la-text-header 
-        -aligncenter -padding1-lr">
-    <span class="la-hexarray__span -fontsize1">
-        {getLocalized("LA.npc.charged.label")}
-    </span>
-{#each {length: usesMax} as _, index}
-    <button type="button" 
-        class="-glow-header -glow-primary-hover -fontsize5"
-        aria-label={getLocalized("LA.use.label")}
-    >
-        <i class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}
-                charged-hex" 
-            data-available="{index < usesValue}" 
-            data-path="{path}">
-        </i>
-    </button>
-{/each}
-</div>
+<CounterBox
+    text={getLocalized("LA.npc.charged.label")}
+    
+    type={CounterBoxType.Charged}
+    usesValue={charged ? 1 : 0}
+    usesMax={1}
+    path={path}
+    style={style}
+
+    logText={log}
+    logType={logType}
+    logTypeReset={logTypeReset}
+
+    onPointerClick={onPointerClick}
+/>
 {/if}

@@ -6,20 +6,23 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -37,6 +40,11 @@
     const collID = systemComponents.length
         ? `${actor.uuid}.systems`
         : `${actor.uuid}.systems.empty`;
+
+    function renderOuter(component: any)
+    {
+        return !isDestroyed(component) && (component.value.system.uses.max)
+    }
     
     function getActionCollID(index: number)
     {
@@ -97,20 +105,12 @@
 </script>
 
 {#snippet emptySystems()}
-<details class="la-details -widthfull la-combine-v
-        ref set drop-settable mech_system"
-    data-accept-types="mech_system"
-    data-path="system.loadout.systems.{systemComponents.length}.value">
-    <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-        <div class="la-left la-combine-h">
-            <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-            <span class="la-name__span -fontsize2">{!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.label") : getLocalized("LA.mech.system.undermounted.label")}</span>
-        </div>
-    </summary>
-    <div class="la-details__wrapper -bordersround -bordersoff">
-        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.subLabel") : formatString(getLocalized("LA.mech.system.undermounted.subLabel"), (system.loadout.sp.max - system.loadout.sp.value).toString())} //</div>
-    </div>
-</details>
+<EmptyBox
+    label={!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.label") : getLocalized("LA.mech.system.undermounted.label")}
+    subLabel={!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.subLabel") : formatString(getLocalized("LA.mech.system.undermounted.subLabel"), (system.loadout.sp.max - system.loadout.sp.value).toString())}
+    type={AcceptType.MechWeapon}
+    path="system.loadout.systems.{systemComponents.length}.value"
+/>
 {/snippet}
 
 {#snippet headerOptions()}
@@ -153,24 +153,19 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each systemComponents as component, index}
     {#snippet outerContent()}
-        {#if !isDestroyed(component)}
-        {#if component.value.system.uses.max}
-            <div class="la-combine-v -gap0 -widthfull -padding2-l">
-            {#if component.value.system.uses.max}
-                <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
-                    <LimitedBox
-                        usesValue={component.value.system.uses.value}
-                        usesMax={component.value.system.uses.max}
-                        path={getComponentPath(index)}
+        <div class="la-combine-v -gap0 -widthfull -padding2-l">
+            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+                <!-- Limited -->
+                <LimitedBox
+                    usesValue={component.value?.system.uses.value}
+                    usesMax={component.value?.system.uses.max}
+                    path={getComponentPath(index)}
 
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
-                    />
-                </div>
-            {/if}
+                    logType={TextLogHook.MechHeader}
+                    logTypeReset={TextLogHook.MechHeaderReset}
+                />
             </div>
-        {/if}
-        {/if}
+        </div>
     {/snippet}
     {#snippet headerTertiaryLeftOptions()}
         <EffectButton
@@ -252,7 +247,7 @@
                 return undefined;
             }}
 
-            renderOutsideCollapse={outerContent}
+            renderOutsideCollapse={renderOuter(component) ? outerContent : undefined }
             headerContentLeft={headerTertiaryLeftOptions}
             headerContentRight={headerTertiaryRightOptions}
         >
@@ -262,10 +257,11 @@
                 <div class="la-combine-v -gap0 -widthfull -padding1-l">
                 {#each component.value.system.counters as counter, jndex}
                     <CounterBox
-                        name={counter.name}
+                        text={counter.name}
+                        type={CounterBoxType.Counter}
                         usesValue={counter.value}
                         usesMax={counter.max}
-                        path={`${getComponentPath(index)}.system.counters.${jndex}`}
+                        path="{getComponentPath(index)}.system.counters.{jndex}"
             
                         logType={TextLogHook.MechHeader}
                         logTypeReset={TextLogHook.MechHeaderReset}

@@ -5,11 +5,13 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -75,9 +77,10 @@
         {#snippet outerContent()}
             <div class="-padding2-l">
                 <CounterBox
+                    type={CounterBoxType.Counter}
                     usesValue={burden.value}
                     usesMax={burden.max}
-                    path={`system.bond_state.burdens.${index}`}
+                    path="system.bond_state.burdens.{index}"
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                     
                     logType={TextLogHook.PilotHeader}
@@ -126,18 +129,10 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v"
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.bond.burden.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.bond.burden.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.bond.burden.empty.label")}
+        subLabel={getLocalized("LA.pilot.bond.burden.empty.subLabel")}
+    />
 {/if}
 </HeaderMain>
 {/if}

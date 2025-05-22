@@ -6,6 +6,7 @@
     import Traits from "@/svelte/npc/Traits.svelte";
     import Reactions from "@/svelte/npc/Reactions.svelte";
     import TechAttack from "@/svelte/npc/TechAttack.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
 
     const props = $props();
@@ -49,17 +50,10 @@
 </script>
 
 {#if !system.class}
-<details class="la-details -widthfull la-combine-v">
-    <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-        <div class="la-left la-combine-h">
-            <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-            <span class="la-name__span -fontsize2">{getLocalized("LA.npc.empty.label")}</span>
-        </div>
-    </summary>
-    <div class="la-details__wrapper -bordersround -bordersoff">
-        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.npc.empty.subLabel")}</div>
-    </div>
-</details>
+<EmptyBox
+    label={getLocalized("LA.npc.empty.label")}
+    subLabel={getLocalized("LA.npc.empty.subLabel")}
+/>
 {/if}
 {#if itemTypes.npc_feature.length}
 <div class="la-combine-v -widthfull">

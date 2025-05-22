@@ -6,9 +6,9 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
@@ -19,6 +19,8 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
     import SpCostArray from "@/svelte/actor/SPCostArray.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         mount,
@@ -92,7 +94,7 @@
             : `${mount.uuid}.action.${index}`;
     }
 
-    function renderLimited(weapon: any)
+    function renderOuter(weapon: any)
     {
         return (
             weapon.system.sp || 
@@ -131,6 +133,7 @@
     {/if}
     {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
         <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
+            <!-- Loading -->
             <LoadedBox
                 item={weapon}
                 path={getWeaponPath(index)}
@@ -138,6 +141,7 @@
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
+            <!-- Limited -->
             <LimitedBox
                 usesValue={weapon.system.uses.value}
                 usesMax={weapon.system.uses.max}
@@ -256,7 +260,7 @@
             return undefined;
         }}
         
-        renderOutsideCollapse={renderLimited(weapon) ? outerContent : undefined }
+        renderOutsideCollapse={renderOuter(weapon) ? outerContent : undefined }
         headerContentLeft={headerTertiaryLeftOptions}
         headerContentRight={headerTertiaryRightOptions}
     >
@@ -340,21 +344,12 @@
 {#if index === 1 && mount.slots[0].size === "Flex" && 
     (mount.slots[0].weapon?.value.system.size !== "Auxiliary")}
 {:else}
-<details class="la-details -widthfull la-combine-v
-        ref set drop-settable mech_weapon"
-    data-accept-types="mech_weapon"
-    data-path={getWeaponPath(index)}
->
-    <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-        <div class="la-left la-combine-h">
-            <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-            <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mount.empty.label")}</span>
-        </div>
-    </summary>
-    <div class="la-details__wrapper -bordersround -bordersoff">
-        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getSlotSize(mount.slots[0].size)}</div>
-    </div>
-</details>
+<EmptyBox
+    label={getLocalized("LA.mech.mount.empty.label")}
+    subLabel={getSlotSize(mount.slots[0].size)}
+    type={AcceptType.MechWeapon}
+    path={getWeaponPath(index)}
+/>
 {/if}
 {/if}
 {/each}

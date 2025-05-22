@@ -3,6 +3,8 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -13,8 +15,9 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -30,6 +33,11 @@
     function getGearPath(index: number)
     {
         return `system.loadout.gear.${index}.value`;
+    }
+
+    function renderOuter(gear: any)
+    {
+        return gear.system.uses.max || gear.system.counters.length;
     }
 </script>
 
@@ -63,10 +71,10 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each gears as gear, index}
     {#snippet outerContent()}
-    {#if gear.system.uses.max || gear.system.counters.length}
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
         {#if gear.system.uses.max}
             <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={gear.system.uses.value}
                     usesMax={gear.system.uses.max}
@@ -77,13 +85,15 @@
                 />
             </div>
         {/if}
+        <!-- Counters -->
         {#if gear.system.counters.length}
         {#each gear.system.counters as counter, jndex}
             <CounterBox
-                name={counter.name}
+                text={counter.name}
+                type={CounterBoxType.Counter}
                 usesValue={counter.value}
                 usesMax={counter.max}
-                path={`${getGearPath(index)}.system.counters.${jndex}`}
+                path="{getGearPath(index)}.system.counters.{jndex}"
         
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
@@ -91,7 +101,6 @@
         {/each}
         {/if}
         </div>
-    {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <i class="{H2_ICON_SIZE} cci cci-system"></i>
@@ -145,7 +154,7 @@
             collapseID={gear.uuid}
             startCollapsed={true}
 
-            renderOutsideCollapse={outerContent}
+            renderOutsideCollapse={renderOuter(gear) ? outerContent : undefined}
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}
         >
@@ -192,20 +201,11 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable pilot_gear"
-        data-accept-types="pilot_gear"
-        data-path={`system.loadout.gear.${gears.length}.value`}
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.gear.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.gear.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.gear.empty.label")}
+        subLabel={getLocalized("LA.pilot.gear.empty.subLabel")}
+        type={AcceptType.PilotGear}
+        path="system.loadout.gear.{gears.length}.value"
+    />
 {/if}
 </HeaderMain>

@@ -1,10 +1,14 @@
 <script lang="ts">
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -15,9 +19,8 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -163,10 +166,11 @@
         {#if armor.system.counters.length}
         {#each armor.system.counters as counter, jndex}
             <CounterBox
-                name={counter.name}
+                text={counter.name}
+                type={CounterBoxType.Counter}
                 usesValue={counter.value}
                 usesMax={counter.max}
-                path={`${getArmorPath(index)}.system.counters.${jndex}`}
+                path="{getArmorPath(index)}.system.counters.{jndex}"
         
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
@@ -279,20 +283,11 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable pilot_armor"
-        data-accept-types="pilot_armor"
-        data-path={`system.loadout.armor.${armors.length}.value`}
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.hardsuit.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.hardsuit.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.hardsuit.empty.label")}
+        subLabel={getLocalized("LA.pilot.hardsuit.empty.subLabel")}
+        type={AcceptType.PilotArmor}
+        path="system.loadout.armor.{armors.length}.value"
+    />
 {/if}
 </HeaderMain>

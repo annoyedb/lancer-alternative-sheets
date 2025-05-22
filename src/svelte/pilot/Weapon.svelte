@@ -4,11 +4,12 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
@@ -18,8 +19,10 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import SpCostArray from "@/svelte/actor/SPCostArray.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -47,12 +50,13 @@
             weapon.name);
     }
 
-    function renderLimited(weapon: any)
+    function renderOuter(weapon: any)
     {
         return (
             weapon.system.sp || 
             isLoading(weapon) || 
-            weapon.isLimited()
+            weapon.isLimited() ||
+            weapon.system.counters.length
         );
     }
 </script>
@@ -91,6 +95,7 @@
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
         {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
             <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+                <!-- Loading -->
                 <LoadedBox
                     item={weapon}
                     path={getWeaponPath(index)}
@@ -98,6 +103,7 @@
                     logType={TextLogHook.PilotHeader}
                     logTypeReset={TextLogHook.PilotHeaderReset}
                 />
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={weapon.system.uses.value}
                     usesMax={weapon.system.uses.max}
@@ -111,13 +117,15 @@
                 />
             </div>
         {/if}
+        <!-- Counters -->
         {#if weapon.system.counters.length}
         {#each weapon.system.counters as counter, jndex}
             <CounterBox
-                name={counter.name}
+                text={counter.name}
+                type={CounterBoxType.Counter}
                 usesValue={counter.value}
                 usesMax={counter.max}
-                path={`${getWeaponPath(index)}.system.counters.${jndex}`}
+                path="{getWeaponPath(index)}.system.counters.{jndex}"
         
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
@@ -213,7 +221,7 @@
             collapseID={weapon.uuid}
             startCollapsed={true}
 
-            renderOutsideCollapse={renderLimited(weapon) ? outerContent : undefined}
+            renderOutsideCollapse={renderOuter(weapon) ? outerContent : undefined}
             headerContentLeft={headerTertiaryLeftOptions}
             headerContentRight={headerTertiaryRightOptions}
         >
@@ -260,20 +268,11 @@
     {/each}
     </div>
     {:else}
-        <details class="la-details -widthfull la-combine-v
-                ref set drop-settable pilot_weapon"
-            data-accept-types="pilot_weapon"
-            data-path={`system.loadout.weapons.${weapons.length}.value`}
-        >
-            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-                <div class="la-left la-combine-h">
-                    <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                    <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.weapon.empty.label")}</span>
-                </div>
-            </summary>
-            <div class="la-details__wrapper -bordersround -bordersoff">
-                <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.weapon.empty.subLabel")}</div>
-            </div>
-        </details>
+        <EmptyBox
+            label={getLocalized("LA.pilot.weapon.empty.label")}
+            subLabel={getLocalized("LA.pilot.weapon.empty.subLabel")}
+            type={AcceptType.PilotWeapon}
+            path="system.loadout.weapons.{weapons.length}.value"
+        />
     {/if}
 </HeaderMain>

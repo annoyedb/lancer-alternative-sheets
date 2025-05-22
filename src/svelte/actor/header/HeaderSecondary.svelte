@@ -127,7 +127,7 @@
             {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
         data-la-collapse-id={collapseID}
     >
-        <div class="la-collapsecontent la-dropshadow 
+        <div class="la-collapsecontent 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
                 {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
         >

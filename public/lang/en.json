@@ -352,7 +352,7 @@
 	"LA.pilot.reserve.empty.subLabel": "RESERVES NOT DETECTED",
 	"LA.pilot.skill.label": "SKILL TRIGGERS",
 	"LA.pilot.skill.empty.label": "NO SKILL TRIGGERS",
-	"LA.pilot.skill.empty.subLabel": "PROFICIENT TRIGGERS NOT DETECTED",
+	"LA.pilot.skill.empty.subLabel": "PROFICIENT SKILLS NOT DETECTED",
 	"LA.pilot.license.label": "LICENSES",
 	"LA.pilot.license.empty.label": "NO LICENSES",
 	"LA.pilot.license.empty.subLabel": "LICENSE NOT DETECTED",

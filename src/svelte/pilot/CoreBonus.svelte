@@ -7,9 +7,10 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
@@ -103,7 +104,8 @@
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             {#each coreBonus.system.counters as counter, jndex}
                 <CounterBox
-                    name={counter.name}
+                    text={counter.name}
+                    type={CounterBoxType.Counter}
                     usesValue={counter.value}
                     usesMax={counter.max}
                     path={isMechSheet

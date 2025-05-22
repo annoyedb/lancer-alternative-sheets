@@ -3,6 +3,8 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -13,8 +15,9 @@
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import { RESERVE_ICON_MAP } from "@/scripts/constants";
+    import EmptyBox from "../actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -65,19 +68,18 @@
     {#snippet outerContent()}
     {#if reserve.system.counters.length}
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
-        {#if reserve.system.counters.length}
         {#each reserve.system.counters as counter, jndex}
             <CounterBox
-                name={counter.name}
+                text={counter.name}
+                type={CounterBoxType.Counter}
                 usesValue={counter.value}
                 usesMax={counter.max}
-                path={`${getReservePath(index)}.system.counters.${jndex}`}
+                path="{getReservePath(index)}.system.counters.{jndex}"
         
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
         {/each}
-        {/if}
         </div>
     {/if}
     {/snippet}
@@ -180,20 +182,11 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable reserve"
-        data-accept-types="reserve"
-        data-path={`itemTypes.reserve.${reserves.length}`}
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.reserve.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.reserve.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.reserve.empty.label")}
+        subLabel={getLocalized("LA.pilot.reserve.empty.subLabel")}
+        type={AcceptType.Reserve}
+        path="itemTypes.reserve.{reserves.length}"
+    />
 {/if}
 </HeaderMain>

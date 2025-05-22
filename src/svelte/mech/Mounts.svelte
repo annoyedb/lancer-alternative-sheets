@@ -8,6 +8,7 @@
     import Weapon from "@/svelte/mech/Weapon.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import MountNames from "@/svelte/actor/decoration/MountNames.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -68,17 +69,10 @@
         headerContent={headerOptions}
     >
     {#if mount.bracing}
-        <details class="la-details -widthfull la-combine-v">
-            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-                <div class="la-left la-combine-h">
-                    <i class="la-icon mdi mdi-lock-outline -fontsize2 -margin1-lr"></i>
-                    <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mount.locked.label")}</span>
-                </div>
-            </summary>
-            <div class="la-details__wrapper -bordersround -bordersoff">
-                <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {getLocalized("LA.mech.mount.locked.subLabel")} //</div>
-            </div>
-        </details>
+        <EmptyBox
+            label={getLocalized("LA.mech.mount.locked.label")}
+            subLabel={getLocalized("LA.mech.mount.locked.subLabel")}
+        />
     {:else}
         <div class="la-combine-v -gap0 -widthfull">
             <Weapon

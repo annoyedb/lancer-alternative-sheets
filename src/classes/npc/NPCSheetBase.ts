@@ -86,9 +86,7 @@ export class NPCSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = dataMap[this.actor.uuid];
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -96,9 +94,7 @@ export class NPCSheetBase
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = dataMap[this.actor.uuid];
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
 
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender

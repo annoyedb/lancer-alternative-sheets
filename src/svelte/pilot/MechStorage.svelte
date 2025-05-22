@@ -9,6 +9,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import MechStats from "@/svelte/pilot/MechStats.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
     
     const props = $props();
     const {
@@ -195,15 +196,8 @@
     selectedMech={ownedMechs[selectedMechIndex]}
 />
 {:else}
-<details class="la-details -widthfull la-combine-v">
-    <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-        <div class="la-left la-combine-h">
-            <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-            <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.mechStorage.empty.label")}</span>
-        </div>
-    </summary>
-    <div class="la-details__wrapper -bordersround -bordersoff">
-        <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">{getLocalized("LA.pilot.mechStorage.empty.subLabel")}</div>
-    </div>
-</details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.mechStorage.empty.label")}
+        subLabel={getLocalized("LA.pilot.mechStorage.empty.subLabel")}
+    />
 {/if}

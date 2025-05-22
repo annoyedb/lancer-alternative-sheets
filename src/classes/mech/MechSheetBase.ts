@@ -15,7 +15,7 @@ import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
-import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
+import HaseDisplay from "@/svelte/actor/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import Activity from "@/svelte/mech/Activity.svelte";
@@ -116,9 +116,7 @@ export class MechSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = dataMap[this.actor.uuid]
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -126,9 +124,7 @@ export class MechSheetBase
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
                 
-                let data = dataMap[this.actor.uuid]
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
                 
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender

@@ -1,4 +1,4 @@
-import "@/styles/_mixins.scss";
+import type { Document } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/module.mjs";
 
 import "@/styles/boilerplate/override.scss";
 import "@/styles/boilerplate/typography.scss";
@@ -28,6 +28,7 @@ import "@/styles/npc/header.scss";
 import "@/styles/npc/body.scss";
 import "@/styles/npc/hase-display.scss"
 
+import "@/styles/color/_mixins.scss";
 import "@/styles/color/la-colors.scss";
 import "@/styles/color/open-color.scss";
 import "@/styles/color/themes/common.scss";
@@ -41,8 +42,9 @@ import "@/styles/color/themes/ha.scss";
 import "@/styles/color/themes/horus.scss";
 
 import { ThemeKey } from "@/enums/ThemeKey";
-import { slugify } from "./lancer/util/lid";
-import { getLocalized } from "./helpers";
+import { slugify } from "@/scripts/lancer/util/lid";
+import { getLocalized } from "@/scripts/helpers";
+import { getSheetStore } from "@/scripts/store/module-store";
 
 const THEME_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.GMS]: "la-gms",
@@ -88,6 +90,13 @@ const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.pilot.history.ipsn",
 };
 
+export function getDocumentTheme(uuid: string)
+{
+    const { currentTheme } = getSheetStore(uuid);
+    console.log(currentTheme);
+    return currentTheme ? THEME_MAP[currentTheme] : getSystemTheme();
+}
+
 export function getSystemTheme()
 {
     const currentTheme = game.settings.get("lancer", "uiTheme") as string;
@@ -127,11 +136,11 @@ export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: str
     return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `la-${type}-text`}`;
 }
 
-export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr")
+export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr" | "anim")
 {
     let manufacturer = slugify(key, "-");
 
-    if (!["gms", "ips-n", "ssc", "horus", "ha", "msmc", "galsim"].includes(manufacturer))
+    if (!["gms", "ips-n", "ipsn", "ssc", "horus", "ha", "msmc", "galsim"].includes(manufacturer))
     {
         manufacturer = "primary";
     }

@@ -4,14 +4,16 @@
     import { getManufacturerColor } from "@/scripts/theme";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "@/svelte/mech/FramePassivePower.svelte";
     import FrameTrait from "@/svelte/mech/FrameTrait.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -81,10 +83,11 @@
             <div class="la-combine-v -widthfull -padding2-l">
             {#each core.counters as counter, index}
                 <CounterBox
-                    name={counter.name}
+                    text={counter.name}
+                    type={CounterBoxType.Counter}
                     usesValue={counter.value}
                     usesMax={counter.max}
-                    path={`system.loadout.frame.value.system.core_system.counters.${index}`}
+                    path="system.loadout.frame.value.system.core_system.counters.{index}"
                     style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
                     
                     logType={TextLogHook.MechHeader}
@@ -121,16 +124,9 @@
         <FrameTrait {...props} />
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v -empty">
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.mech.frame.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {getLocalized("LA.mech.frame.empty.subLabel")} //</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.mech.frame.empty.label")}
+        subLabel={getLocalized("LA.mech.frame.empty.subLabel")}
+    />
 {/if}
 </HeaderMain>

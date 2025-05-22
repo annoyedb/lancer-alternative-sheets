@@ -33,6 +33,7 @@
     <div class="la-hase la-combine-v -justifybetween -heightnone">
         <div class="la-combine-h -aligncenter">
             <HexButton
+                docUuid={actor.uuid}
                 text={getLocalized("LA.grit.short")}
                 value={system.grit}
                 
@@ -57,6 +58,7 @@
         </div>
         <div class="la-combine-h -aligncenter">
             <HexButton
+                docUuid={actor.uuid}
                 text={getLocalized("LA.agility.short")}
                 value={system.agi}
 
@@ -78,6 +80,7 @@
                 innerTextStyle={["-fontsize3", "-lineheight10", `${qualityMode ? "la-pulse-glow-color la-anim-header" : "-glow-header"}`]}
             />
             <HexButton
+                docUuid={actor.uuid}
                 text={getLocalized("LA.hull.short")}
                 value={system.hull}
 
@@ -101,6 +104,7 @@
         </div>
         <div class="la-combine-h -aligncenter">
             <HexButton
+                docUuid={actor.uuid}
                 text={getLocalized("LA.systems.short")}
                 value={system.sys}
 
@@ -125,6 +129,7 @@
         <div class="la-combine-h -aligncenter">
             <div class="-eng -pointerdisable">&nbsp;</div>
             <HexButton
+                docUuid={actor.uuid}
                 text={getLocalized("LA.engineering.short")}
                 value={system.eng}
 

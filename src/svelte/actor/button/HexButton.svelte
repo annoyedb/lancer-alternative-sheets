@@ -2,11 +2,13 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { getDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import { getSheetStore } from "@/scripts/store/module-store";
 
     const {
         text,
@@ -34,7 +36,9 @@
         logText,
         logType,
         logTypeReset,
-    }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
+
+        docUuid
+    }: {docUuid: string} & HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
@@ -44,6 +48,8 @@
             ? (value > 0 ? `+${value}` : value) 
             : value
         : value;
+
+    console.log(getManufacturerColor(getSheetStore(docUuid).currentTheme, "anim"));
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {outerStyle?.join(' ')}">
     <div class="la-combine-v {innerStyle?.join(' ')}">
@@ -58,7 +64,7 @@
             data-flow-args={flowArgs}
             data-path={path}
             data-tooltip={tooltipEnabled ? tip : undefined }
-            data-tooltip-class={"clipped-bot la-tooltip"}
+            data-tooltip-class="clipped-bot la-tooltip {getManufacturerColor(getSheetStore(docUuid).currentTheme, "anim")}"
             data-tooltip-direction={tooltipDirection}
             onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
             onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

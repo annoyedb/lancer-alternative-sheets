@@ -1,6 +1,6 @@
-export interface LimitedBoxProps
+import type { CounterBoxProps } from "@/interfaces/actor/CounterBoxProps";
+
+export interface LimitedBoxProps extends Omit<CounterBoxProps, "text" | "type">
 {
-    usesValue: number,
-    usesMax: number,
-    path?: string,
+
 }

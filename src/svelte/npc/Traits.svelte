@@ -6,8 +6,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
@@ -15,6 +14,7 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -29,9 +29,9 @@
     const qualityMode = true; // TODO: change to a setting
     const collID = `${actor.uuid}.traits`;
 
-    function hasTraitSpecial(trait: any)
+    function renderOuter(trait: any)
     {
-        return trait.system.uses.max || isLoading(trait) || isRecharge(trait);
+        return !isDestroyed(trait) && (trait.system.uses.max || isLoading(trait) || isRecharge(trait));
     }
 
     function isDestroyed(trait: any)
@@ -84,22 +84,26 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each traits as trait}
     {#snippet outerContent()}
-        {#if !isDestroyed(trait)}
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+                <!-- Rechargeable -->
                 <ChargedBox
                     item={trait}
+                    path={`itemTypes.npc_feature.${trait.index}.system.charged`}
                 />
+                <!-- Loading -->
                 <LoadedBox
                     item={trait}
+                    path={`itemTypes.npc_feature.${trait.index}.system.loaded`}
                 />
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={trait.system.uses.value}
                     usesMax={trait.system.uses.max}
+                    path={`itemTypes.npc_feature.${trait.index}.system.uses`}
                 />
             </div>
         </div>
-        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
@@ -165,7 +169,7 @@
             
             collapseID={trait.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasTraitSpecial(trait) ? outerContent : undefined }
+            renderOutsideCollapse={renderOuter(trait) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}

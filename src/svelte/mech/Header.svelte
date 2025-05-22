@@ -86,11 +86,11 @@
                 {getLocalized("LA.pilot.label")}
             </span>
         </div>
-    {#if pilot?.system.active_mech?.value.uuid !== actor.uuid}
+    {#if pilot?.system.active_mech?.value?.uuid !== actor.uuid}
         <div>{getLocalized("LA.mech.noPilot.label")}</div>
     {/if}
     </div>
-    {#if pilot?.system.active_mech?.value.uuid === actor.uuid}
+    {#if pilot?.system.active_mech?.value?.uuid === actor.uuid}
     <span 
         class="la-textlog__wrapper -left0 -positionabsolute -padding1
             -pointerdisable"

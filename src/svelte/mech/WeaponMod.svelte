@@ -5,12 +5,13 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { AcceptType } from "@/enums/AcceptType";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
     import RangeArray from "@/svelte/actor/RangeArray.svelte";
     import DamageArray from "@/svelte/actor/DamageArray.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
-    import CounterBox from "@/svelte/actor/CounterBox.svelte";
+    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
@@ -18,6 +19,8 @@
     import EditButton from "@/svelte/actor/button/EditButton.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         mod,
@@ -105,9 +108,10 @@
         headerContentRight={headerSecondaryRightOptions}
     >
         <div class="la-generated -widthfull -gap2 la-combine-v">
-            <!-- Generated Content -->
+        <!-- Generated Content -->
         {#if !!(mod.system.uses.max || mod.system.counters.length)}
             <div class="la-combine-h">
+            <!-- Limited Use -->
             {#if mod.system.uses.max}
                 <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
                     <LimitedBox
@@ -120,13 +124,15 @@
                     />
                 </div>
             {/if}
+            <!-- Counters -->
             {#if mod.system.counters.length}
             {#each mod.system.counters as counter, index}
                 <CounterBox
-                    name={counter.name}
+                    text={counter.name}
+                    type={CounterBoxType.Counter}
                     usesValue={counter.value}
                     usesMax={counter.max}
-                    path={`${path}.system.counters.${index}`}
+                    path="{path}.system.counters.{index}"
             
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
@@ -223,18 +229,10 @@
         </div>
     </HeaderSecondary>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable weapon_mod"
-        data-accept-types="weapon_mod"
-        data-path={path}>
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.mech.mod.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull">// {getLocalized("LA.mech.mod.empty.subLabel")} //</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.mech.mod.empty.label")}
+        subLabel={getLocalized("LA.mech.mod.empty.subLabel")}
+        type={AcceptType.MechWeaponMod}
+        path={path}
+    />
 {/if}

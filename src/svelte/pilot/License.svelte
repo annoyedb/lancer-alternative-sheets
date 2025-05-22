@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { getLocalized } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { AcceptType } from "@/enums/AcceptType";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -10,8 +12,8 @@
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import { onMount } from "svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -169,20 +171,11 @@
     {/each}
     </div>
 {:else}
-    <details class="la-details -widthfull la-combine-v
-            ref set drop-settable license"
-        data-accept-types="license"
-        data-path={`itemTypes.license.${licenses.length}`}
-    >
-        <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull">
-            <div class="la-left la-combine-h">
-                <i class="la-icon mdi mdi-card-off-outline -fontsize2 -margin1-lr"></i>
-                <span class="la-name__span -fontsize2">{getLocalized("LA.pilot.license.empty.label")}</span>
-            </div>
-        </summary>
-        <div class="la-details__wrapper -bordersround -bordersoff">
-            <div class="la-warn__span la-details__span la-text-repcap -padding3 -fontsize3 -textaligncenter -widthfull -upper">{getLocalized("LA.pilot.license.empty.subLabel")}</div>
-        </div>
-    </details>
+    <EmptyBox
+        label={getLocalized("LA.pilot.license.empty.label")}
+        subLabel={getLocalized("LA.pilot.license.empty.subLabel")}
+        type={AcceptType.License}
+        path="itemTypes.license.{licenses.length}"
+    />
 {/if}
 </HeaderMain>

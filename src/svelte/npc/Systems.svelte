@@ -6,8 +6,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
@@ -15,6 +14,7 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -31,9 +31,9 @@
     const tier = system.tier;
     const collID = `${actor.uuid}.systems`;
 
-    function hasComponentSpecial(component: any)
+    function renderOuter(component: any)
     {
-        return component.system.uses.max || isLoading(component) || isRecharge(component)
+        return !isDestroyed(component) && (isLoading(component) || isRecharge(component) || component.system.uses.max);
     }
 
     function hasAccuracyBonus(component: any)
@@ -96,23 +96,26 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each systems as component}
     {#snippet outerContent()}
-        {#if !isDestroyed(component) 
-        && (isLoading(component) || isRecharge(component) || component.system.uses.max)}
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+                <!-- Rechargeable -->
                 <ChargedBox
                     item={component}
+                    path={`itemTypes.npc_feature.${component.index}.system.charged`}
                 />
+                <!-- Loading -->
                 <LoadedBox
                     item={component}
+                    path={`itemTypes.npc_feature.${component.index}.system.loaded`}
                 />
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={component.system.uses.value}
                     usesMax={component.system.uses.max}
+                    path={`itemTypes.npc_feature.${component.index}.system.uses`}
                 />
             </div>
         </div>
-        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
@@ -178,7 +181,7 @@
             
             collapseID={component.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasComponentSpecial(component) ? outerContent : undefined }
+            renderOutsideCollapse={renderOuter(component) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}

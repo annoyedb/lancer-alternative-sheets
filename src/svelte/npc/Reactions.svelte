@@ -6,8 +6,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
@@ -15,6 +14,7 @@
     import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
     import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
     import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -44,9 +44,9 @@
             return getLocalized("LA.action.reaction.tooltip");
     }
 
-    function hasReactionSpecial(reaction: any)
+    function renderOuter(reaction: any)
     {
-        return reaction.system.uses.max || isLoading(reaction) || isRecharge(reaction);
+        return !isDestroyed(reaction) && (isLoading(reaction) || isRecharge(reaction) || reaction.system.uses.max);
     }
 
     function hasAccuracyBonus(reaction: any)
@@ -109,22 +109,26 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each reactions as reaction}
     {#snippet outerContent()}
-        {#if !isDestroyed(reaction)}
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
+                <!-- Rechargeable -->
                 <ChargedBox
                     item={reaction}
+                    path={`itemTypes.npc_feature.${reaction.index}.system.charged`}
                 />
+                <!-- Loading -->
                 <LoadedBox
                     item={reaction}
+                    path={`itemTypes.npc_feature.${reaction.index}.system.loaded`}
                 />
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={reaction.system.uses.value}
                     usesMax={reaction.system.uses.max}
+                    path={`itemTypes.npc_feature.${reaction.index}.system.uses`}
                 />
             </div>
         </div>
-        {/if}
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
@@ -191,7 +195,7 @@
             
             collapseID={reaction.uuid}
             startCollapsed={true}
-            renderOutsideCollapse={hasReactionSpecial(reaction) ? outerContent : undefined }
+            renderOutsideCollapse={renderOuter(reaction) ? outerContent : undefined }
 
             headerContentLeft={headerSecondaryLeftOptions}
             headerContentRight={headerSecondaryRightOptions}

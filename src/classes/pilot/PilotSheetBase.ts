@@ -15,7 +15,7 @@ import Header from "@/svelte/pilot/Header.svelte";
 import Sidebar from "@/svelte/pilot/Sidebar.svelte";
 import Equipment from "@/svelte/pilot/Equipment.svelte";
 import Bond from "@/svelte/pilot/Bond.svelte";
-import HaseDisplay from "@/svelte/actor/HaseDisplay.svelte";
+import HaseDisplay from "@/svelte/actor/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/pilot/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/pilot/settings/AdvancedSettingsNav.svelte";
 import Activity from "@/svelte/pilot/Activity.svelte";
@@ -133,9 +133,7 @@ export class PilotSheetBase
                 });
                 applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
 
-                let data = dataMap[this.actor.uuid]
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
@@ -143,9 +141,7 @@ export class PilotSheetBase
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
                 
-                let data = dataMap[this.actor.uuid]
-
-                this.mountComponents(html, data);
+                this.mountComponents(html, dataMap[this.actor.uuid]);
 
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender

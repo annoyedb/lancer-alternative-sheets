@@ -7,8 +7,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import LoadedBox from "@/svelte/actor/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/actor/LimitedBox.svelte";
+    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
@@ -17,6 +16,7 @@
     import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
     import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
     import TagArray from "@/svelte/actor/TagArray.svelte";
+    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -36,9 +36,9 @@
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
     const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
 
-    function hasWeaponSpecial(weapon: any)
+    function renderOuter(weapon: any)
     {
-        return isRecharge(weapon) || weapon.system.uses.max || isLoading(weapon) || hasAccuracyBonus(weapon) || hasAttackBonus(weapon);
+        return !isDestroyed && (isRecharge(weapon) || weapon.system.uses.max || isLoading(weapon) || hasAccuracyBonus(weapon) || hasAttackBonus(weapon));
     }
 
     function hasAccuracyBonus(weapon: any)
@@ -115,7 +115,6 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each weapons as weapon, index}
     {#snippet outerContent()}
-        {#if !isDestroyed(weapon)}
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
             {#if hasAccuracyBonus(weapon)}
@@ -138,19 +137,24 @@
                     <i class="cci cci-reticule -fontsize2"></i>
                 </span>
             {/if}
+                <!-- Rechargeable -->
                 <ChargedBox
                     item={weapon}
+                    path={`itemTypes.npc_feature.${weapon.index}.system.charged`}
                 />
+                <!-- Loading -->
                 <LoadedBox
                     item={weapon}
+                    path={`itemTypes.npc_feature.${weapon.index}.system.loaded`}
                 />
+                <!-- Limited -->
                 <LimitedBox
                     usesValue={weapon.system.uses.value}
                     usesMax={weapon.system.uses.max}
+                    path={`itemTypes.npc_feature.${weapon.index}.system.uses`}
                 />
             </div>
         </div>
-        {/if}
     {/snippet}
     {#snippet headerTertiaryLeftOptions()}
         <AttackButton
@@ -237,7 +241,7 @@
                 return undefined;
             }}
 
-            renderOutsideCollapse={hasWeaponSpecial(weapon) ? outerContent : undefined }
+            renderOutsideCollapse={renderOuter(weapon) ? outerContent : undefined }
             headerContentLeft={headerTertiaryLeftOptions}
             headerContentRight={headerTertiaryRightOptions}
         >
