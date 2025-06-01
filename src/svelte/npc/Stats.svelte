@@ -120,7 +120,7 @@
                             <i class="cci cci-activate {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
                             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
                         </div>
-                        <div class="la-recharge -lineheight3 -width6 -height6 -glow-primary-hover">
+                        <div class="la-recharge -lineheight3 -width6 -height6 la-prmy-primary -glow-prmy-hover">
                             <button type="button"
                                 class="mdi mdi-refresh-circle la-text-secondary -fontsize6
                                     charge-macro"
@@ -152,7 +152,7 @@
                     <div class="la-combine-h -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
-                            style={["-lineheight3", "-glow-active-hover"]}
+                            style={["-lineheight3", "la-prmy-primary -glow-prmy-hover"]}
                             iconStyle={["-fontsize5"]}
 
                             tooltipEnabled={true}
@@ -172,7 +172,7 @@
                     </div>
                     <div class="la-combine-h -gap1">
                         <button type="button"
-                            class="mdi mdi-note-edit -fontsize2 -glow-active-hover {advancedOptions ? "" : "-visibilityhidden"}
+                            class="mdi mdi-note-edit -fontsize2 la-prmy-primary -glow-prmy-hover {advancedOptions ? "" : "-visibilityhidden"}
                                 popout-text-edit-button"
                             data-tooltip={notesEditTip}
                             data-tooltip-class={"clipped-bot la-tooltip"}
@@ -182,7 +182,7 @@
                         >
                         </button>
                         <button type="button"
-                            class="mdi mdi-information -fontsize2 -glow-active-hover"
+                            class="mdi mdi-information -fontsize2 la-prmy-primary -glow-prmy-hover"
                             data-tooltip={notesTip}
                             data-tooltip-class={"clipped-bot la-tooltip -scrollbar"}
                             data-tooltip-direction={TooltipDirection.UP}
@@ -200,7 +200,7 @@
                             label={getLocalized("LA.armor.short")}
                             value={system.armor}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.armor.tooltip")}
@@ -211,7 +211,7 @@
                             label={getLocalized("LA.evasion.short")}
                             value={system.evasion}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.evasion.tooltip")}
@@ -222,7 +222,7 @@
                             label={getLocalized("LA.edefense.short")}
                             value={system.edef}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.edefense.tooltip")}
@@ -267,7 +267,7 @@
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
-                            <div class="la-combine-v -divider la-anim-bar-shield -flex0 -width3ch -textaligncenter -glow-shield">
+                            <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
                                 <input class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                                     type="number" 
                                     name="system.overshield.value" 
@@ -321,7 +321,7 @@
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
-                            <div class="la-combine-v -divider la-anim-bar-burn -flex0 -width3ch -textaligncenter -glow-burn">
+                            <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
                                 <input class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
                                     type="number" 
                                     name="system.burn" 
@@ -344,7 +344,7 @@
                             label={getLocalized("LA.tattack.short")}
                             value={system.tech_attack}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.tattack.tooltip")}
@@ -355,7 +355,7 @@
                             label={getLocalized("LA.save.short")}
                             value={system.save}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.save.tooltip")}
@@ -366,7 +366,7 @@
                             label={getLocalized("LA.sensor.short")}
                             value={system.sensor_range}
                             outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltip={getLocalized("LA.sensor.tooltip")}

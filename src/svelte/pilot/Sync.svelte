@@ -47,7 +47,7 @@
     >
         <div class="la-combine-h -aligncenter -widthfull -gap1">
             <GlyphButton
-                style={["la-combine-v", "mdi mdi-cloud-download", "-fontsize5", getGlowColor(), "-glow-header", "-glow-primary-hover", "-padding1-lr"]}
+                style={["la-combine-v", "mdi mdi-cloud-download", "-fontsize5", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
                 flowClass={FlowClass.DownloadFromCloud}
                 action="download"
 

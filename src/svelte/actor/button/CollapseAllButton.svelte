@@ -77,7 +77,7 @@
     }
 </script>
 <script lang="ts" module>
-    export const MAIN_HEADER_STYLE = " -glow-header -glow-primary-hover la-text-header -fontsize3 -lineheight2 ";
+    export const MAIN_HEADER_STYLE = " la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover la-text-header -fontsize3 -lineheight2 ";
 </script>
 
 <button type="button"

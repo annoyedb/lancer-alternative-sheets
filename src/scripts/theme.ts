@@ -1,15 +1,31 @@
-import type { Document } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/module.mjs";
-
-import "@/styles/boilerplate/override.scss";
-import "@/styles/boilerplate/typography.scss";
-import "@/styles/boilerplate/space.scss";
-import "@/styles/boilerplate/misc.scss";
-import "@/styles/boilerplate/display.scss";
-
+/**
+ * Q: Why not put these in the Svelte components themselves?
+ * A: Foundry (as of V12) has a lot of quirks when not using their prescribed workflow (e.g. not Svelte).
+ *      So rather than fight the Foundry system at every turn, accomodate it where we can and use Svelte for things Foundry's tech stack does not support (e.g. reactivity).
+ *      The second reason is that Svelte does a separate transpilation of CSS declared on its components, which minimizes CSS conflicts but comes with the caveat of 
+ *      not being able to easily predict class names and such, which makes it harder for say example, we were to open the CSS to be available for use by other modules or systems.
+ *      The third reason is that CSS it's easier to maintain and reuse CSS this way by virtue of being more easily managed by IDEs.
+ */
+import "@/styles/shared/_mixins.scss";
+import "@/styles/shared/override.scss";
+import "@/styles/shared/typography.scss";
+import "@/styles/shared/space.scss";
+import "@/styles/shared/misc.scss";
+import "@/styles/shared/display.scss";
+import "@/styles/shared/pointer.scss";
+import "@/styles/shared/glow.scss";
 import "@/styles/shared/flow.scss";
 import "@/styles/shared/general.scss";
 import "@/styles/shared/container.scss";
 import "@/styles/shared/shape.scss";
+import "@/styles/shared/background.scss";
+import "@/styles/shared/shadow.scss";
+import "@/styles/shared/component.scss";
+
+import "@/styles/actor/responsive.scss"
+import "@/styles/actor/header.scss"
+import "@/styles/actor/body.scss";
+import "@/styles/actor/sidebar.scss"
 
 import "@/styles/mech/body.scss";
 import "@/styles/mech/header.scss";
@@ -41,20 +57,20 @@ import "@/styles/color/themes/msmc.scss";
 import "@/styles/color/themes/ha.scss";
 import "@/styles/color/themes/horus.scss";
 
-import { ThemeKey } from "@/enums/ThemeKey";
+import { ThemeKey, ThemeValue } from "@/enums/ThemeKey";
 import { slugify } from "@/scripts/lancer/util/lid";
 import { getLocalized } from "@/scripts/helpers";
 import { getSheetStore } from "@/scripts/store/module-store";
 
-const THEME_MAP: Record<ThemeKey | string, string> = {
-    [ThemeKey.GMS]: "la-gms",
-    [ThemeKey.GMSDark]: "la-gmsdark",
-    [ThemeKey.MSMC]: "la-msmc",
-    [ThemeKey.GALSIM]: "la-galsim",
-    [ThemeKey.HORUS]: "la-horus",
-    [ThemeKey.HA]: "la-ha",
-    [ThemeKey.SSC]: "la-ssc",
-    [ThemeKey.IPSN]: "la-ipsn",
+const THEME_MAP: Record<ThemeKey | string, ThemeValue> = {
+    [ThemeKey.GMS]: ThemeValue.GMS,
+    [ThemeKey.GMSDark]: ThemeValue.GMSDark,
+    [ThemeKey.MSMC]: ThemeValue.MSMC,
+    [ThemeKey.GALSIM]: ThemeValue.GALSIM,
+    [ThemeKey.HORUS]: ThemeValue.HORUS,
+    [ThemeKey.HA]: ThemeValue.HA,
+    [ThemeKey.SSC]: ThemeValue.SSC,
+    [ThemeKey.IPSN]: ThemeValue.IPSN,
 };
 
 const LIGHT_MAP: Record<ThemeKey | string, "light" | "dark"> = {
@@ -90,14 +106,13 @@ const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.pilot.history.ipsn",
 };
 
-export function getDocumentTheme(uuid: string)
+export function getDocumentTheme(uuid: string): ThemeValue
 {
     const { currentTheme } = getSheetStore(uuid);
-    console.log(currentTheme);
     return currentTheme ? THEME_MAP[currentTheme] : getSystemTheme();
 }
 
-export function getSystemTheme()
+export function getSystemTheme(): ThemeValue
 {
     const currentTheme = game.settings.get("lancer", "uiTheme") as string;
     return THEME_MAP[currentTheme];
@@ -136,7 +151,7 @@ export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: str
     return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `la-${type}-text`}`;
 }
 
-export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr" | "anim")
+export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr" | "prmy")
 {
     let manufacturer = slugify(key, "-");
 

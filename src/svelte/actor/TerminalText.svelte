@@ -13,13 +13,13 @@
         disableCursor
     }: TerminalTextProps = $props();
 
-    // const derivedCursorStyle = textStyle?.find(style => style.startsWith("la-text-"))?.replace("la-text-", "la-anim-");
+    // const derivedCursorStyle = textStyle?.find(style => style.startsWith("la-text-"))?.replace("la-text-", "la-prmy-");
 </script>
 <script lang="ts" module>
-    export const FLOW_BUTTON_STYLE: string = " -padding1-r -padding0-tb -height3 -letterspacing0 la-text-header la-anim-header ";
+    export const FLOW_BUTTON_STYLE: string = " -padding1-r -padding0-tb -height3 -letterspacing0 la-text-header la-prmy-header ";
 </script>
 
-<div class="la-terminaltext -whitespacenowrap -textalignleft {textStyle?.join(' ')}"><!--
+<div class="la-terminaltext -whitespacenowrap -textoverflowellipsis -textalignleft {textStyle?.join(' ')}"><!--
 --->{#if !disableCmdline}<span class="la-cmdline -fadein">>//: </span>{/if}<!--
 ---><span class="">{#if children}{@render children()}{/if}{text}</span><!--
 --->{#if !disableExtension}<span class="la-extension -lower -fadein">{extensionText || `--${getLocalized("LA.scan.label")}`}</span>{/if}<!--

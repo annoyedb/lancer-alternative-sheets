@@ -67,7 +67,7 @@
     }
 </script>
 <script lang="ts" module>
-    export const MAIN_HEADER_STYLE: string = "la-text-header la-anim-header clipped-top -padding0-tb -padding3-lr"
+    export const MAIN_HEADER_STYLE: string = "la-text-header la-prmy-header clipped-top -padding0-tb -padding3-lr"
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle?.join(' ')}

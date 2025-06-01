@@ -1,0 +1,444 @@
+@use 'mixins' as *;
+
+:root,
+.la-common
+{
+    // #region Terminal Text
+    .la-cmdline
+    {
+        font-weight: bold;
+    }
+
+    .la-cmdline,
+    .la-extension
+    {
+        @include hoverFadeOut;
+
+        &
+        {
+            display: inline;
+        }
+    }
+
+    *:hover>.la-cmdline,
+    *:hover>.la-extension
+    {
+        @include hoverFadeIn;
+    }
+
+    .la-cursor
+    {
+        display: inline-block;
+        width: 1ch;
+        height: 2px;
+        animation: blink 1s step-end infinite;
+        vertical-align: bottom;
+
+        @include blinking;
+        @include hoverFadeOut;
+    }
+
+    *:hover>.la-cursor
+    {
+        @include blinking;
+        @include hoverFadeIn;
+
+        &
+        {
+            animation: fadeIn 0.25s, blink 1s step-end infinite;
+            -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+            -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+        }
+    }
+
+    .la-reveal-hover .la-reveal
+    {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 0.25s, opacity 0.25s ease-in-out;
+    }
+
+    .la-reveal-hover:hover .la-reveal
+    {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s, opacity 0.25s ease-in-out;
+    }
+
+    .la-extension
+    {
+        display: inline-block;
+        font-size: .75em;
+    }
+    .la-divider-h
+    {
+        border: none;
+        height: 0.15rem;
+
+        &.-tiny
+        {
+            height: 1px;
+        }
+
+        &.-small
+        {
+            height: 0.1rem;
+        }
+
+        &.-medium
+        {
+            height: 0.15rem;
+        }
+
+        &.-large
+        {
+            height: 0.25rem;
+        }
+    }
+
+    .la-divider-v
+    {
+        height: 1em;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        width: 2px;
+    }
+
+    .la-spacer
+    {
+        height: 0.5rem;
+
+        &.-tiny
+        {
+            height: 0.15rem;
+        }
+
+        &.-small
+        {
+            height: 0.25rem;
+        }
+
+        &.-medium
+        {
+            height: 0.5rem;
+        }
+
+        &.-large
+        {
+            height: 1rem;
+        }
+    }
+
+    .la-bar-h
+    {
+        position: relative;
+        width: 100%;
+        height: 1rem;
+        overflow: hidden;
+
+        >.la-bar-h-current
+        {
+            position: absolute;
+            top: 0;
+            width: var(--la-percent);
+        }
+
+        >.la-bar-h-progress
+        {
+            font-size: 0.9rem;
+            height: 100%;
+
+            >.la-bar-h-progress__span
+            {
+                z-index: 3;
+                font-weight: normal;
+                text-align: left;
+                height: 100%;
+            }
+
+            >.la-bar-h-progress__input
+            {
+                z-index: 3;
+                text-align: right;
+                height: 100%;
+                width: 2ch;
+            }
+        }
+    }
+
+    .la-ruler
+    {
+        min-width: 1rem;
+        background-image: url(/assets/scale_1.png);
+        background-repeat: repeat-y;
+        animation: scroll-up 600s infinite linear;
+        -webkit-animation: scroll-up 600s infinite linear;
+        -moz-animation: scroll-up 600s infinite linear;
+
+        @include scrollUp;
+    }
+
+    // Dropdowns for Effect, Weapons, Systems, etc
+    .la-details.la-combine-v
+    {
+        // Summary
+        >.la-details__summary
+        {
+            padding: 0.5rem;
+            border-radius: 4px 0px 0px 0px;
+            cursor: pointer;
+
+            a
+            {
+                text-align: center;
+                width: 1rem;
+            }
+        }
+    }
+
+    // Generic descriptor box for effects, weapons, systems, etc
+    .la-effectbox
+    {
+        position: relative;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5em;
+
+        &.-largeheader
+        {
+            margin-top: 1rem;
+        }
+
+        >.la-effectbox__span
+        {
+            position: absolute;
+            top: -0.5rem;
+            left: 0.5rem;
+            padding: 0.1rem;
+            padding-right: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        >.la-effectbox__edit
+        {
+            position: absolute;
+            top: -0.5rem;
+            right: 0.5rem;
+            padding: 0.1rem;
+            padding-right: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .la-actionheader
+        {
+            position: absolute;
+            width: calc(100% - 1rem);
+            top: -1rem;
+        }
+    }
+
+    // Edits here are made so that when the user hovers over the header, 
+    // the anims will play regardless of whether there are additional 
+    // elements in the header
+    .la-collapsegroup
+    {
+        >.la-summary
+        {
+            &:hover
+            {
+                .la-terminaltext>.la-cmdline,
+                .la-terminaltext>.la-extension
+                {
+                    @include hoverFadeIn;
+                }
+
+                .la-terminaltext>.la-cursor
+                {
+                    @include blinking;
+                    @include hoverFadeIn;
+
+                    &
+                    {
+                        animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                    }
+                }
+            }
+        }
+    }
+
+    .la-statusbar
+    {
+        >.la-bar-h>.la-tempvalue
+        {
+            height: 0.3em;
+            top: 0.15em;
+
+            &.-shield
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+            }
+
+            &.-burn
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+            }
+        }
+
+        >.la-bar-h>.la-tempvaluealt
+        {
+            height: 0.3em;
+            top: -0.1em;
+
+            &.-shield
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
+            }
+
+            &.-burn
+            {
+                filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
+            }
+        }
+    }
+
+    .la-textlog
+    {
+        &.-scrolling
+        {
+            .la-textlog__typeit
+            {
+                display: flex;
+                flex-direction: column-reverse;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: gray transparent;
+                min-height: 100%;
+                
+                ::before
+                {
+                    content: none;
+                    display: none;
+                }
+            }
+        }
+
+        .la-textlog__ruler
+        {
+            background-image: url(/assets/scale_1.png);
+        }
+
+        .la-textlog-left__current
+        {
+            height: 16px;
+            background-image: url(/assets/sb_l.png);
+            background-repeat: no-repeat;
+        }
+
+        .la-textlog-right__current
+        {
+            height: 16px;
+            background-image: url(/assets/sb_r.png);
+            background-repeat: no-repeat;
+        }
+    }
+
+    .la-actionlog
+    {
+        scrollbar-width: thin;
+
+        &.-main
+        {
+            overflow-y: auto;
+            scrollbar-color: var(--la-scrollbar-secondary) transparent;
+        }
+    }
+
+    .la-boundimage
+    {
+        >.la-boundimage__image
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // Slider override when 'la-range' is added to input element
+    // Note that Chrome and Firefox definitions are separated intentionally
+    // and it does not work if they share selectors (idk why)
+    .la-range
+    {
+        ::-webkit-slider-thumb
+        {
+            width: 12px;
+            height: 12px;
+            background: var(--la-primary);
+            box-shadow: unset;
+            border: 3px solid var(--la-header);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        ::-moz-range-thumb
+        {
+            width: 8px;
+            height: 8px;
+            background: var(--la-primary);
+            box-shadow: unset;
+            border: 3px solid var(--la-header);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    
+        ::-webkit-slider-runnable-track
+        {
+            height: 4px;
+            background: var(--la-header);
+            border: unset;
+            box-shadow: unset;
+            padding-left: 2px;
+            padding-right: 2px;
+            border-radius: 2px;
+        }
+
+        ::-moz-range-track
+        {
+            height: 4px;
+            background: var(--la-header);
+            border: unset;
+            box-shadow: unset;
+            padding-left: 2px;
+            padding-right: 2px;
+            border-radius: 2px;
+        }
+    }
+
+    button.la-tab
+    {
+        letter-spacing: 0.2rem;
+        text-align: center;
+
+        transition: all 0.15s ease-in;
+
+        &:hover
+        {
+            background-color: var(--darken-1);
+        }
+
+        &.active
+        {
+            background-color: var(--darken-2);
+        }
+    }
+}

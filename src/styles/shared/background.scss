@@ -1,0 +1,26 @@
+@use 'mixins' as *;
+
+:root,
+.la-common
+{
+    .la-bg-scroll
+    {
+        background: url(/assets/grid.png);
+
+        @include scrollDiagonally;
+    }
+
+    .la-bg-scroll-alt
+    {
+        background: url(/assets/dots.png);
+
+        @include scrollDiagonally;
+    }
+
+    .la-bg-scroll-alt-vertical
+    {
+        background: url(/assets/dots.png);
+
+        @include scrollUp;
+    }
+}

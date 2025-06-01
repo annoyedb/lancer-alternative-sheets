@@ -69,8 +69,8 @@
     function getHeaderStyle(tech: any)
     {
         return isDestroyed(tech)
-            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
+            : "la-text-header la-prmy-header";
     }
 
     function getIconStyle(tech: any)
@@ -155,7 +155,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(tech), "cci", getTechIcon(tech), "-fontsize5"]}
-            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.RollTech}
             path={`itemTypes.npc_feature.${tech.index}`}

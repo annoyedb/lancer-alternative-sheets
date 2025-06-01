@@ -46,7 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
-    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     onClick={sendToChat}
@@ -65,7 +65,7 @@
     text={core.passive_name}
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
-    textStyle={["la-text-header", "la-anim-header"]}
+    textStyle={["la-text-header", "la-prmy-header"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
             return `--${getLocalized("LA.use.label")}`;

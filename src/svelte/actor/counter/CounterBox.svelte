@@ -50,7 +50,7 @@
     <button type="button"
         class="la-counterbox__button
             mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} 
-            -glow-header -glow-primary-hover -fontsize5 
+            la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize5 
             {type}"
         data-available={index < usesValue}
         data-path={path}

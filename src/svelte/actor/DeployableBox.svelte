@@ -158,7 +158,7 @@
                         />
                     {/each}
                     </div>
-                    <img class="-height10 click-open -glow-secondary -glow-primary-hover" 
+                    <img class="-height10 click-open la-prmy-secondary -glow-prmy la-scdy-primary -glow-scdy-hover" 
                         src={getThemeImg(deployable)}
                         alt={getLocalized("LA.placeholder")}
                         data-tooltip={tooltipEnabled ? tip : undefined}

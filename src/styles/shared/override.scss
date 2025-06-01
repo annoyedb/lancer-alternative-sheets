@@ -1,13 +1,11 @@
 // Overrides for Foundry and Lancer
 
-// Use default theme colors for the tooltip, 
-// since we're not sure what the current theme is from outside a sheet
 #tooltip.la-tooltip,
 aside.la-tooltip.active
 {
     padding: unset;
-    border-color: var(--color);
-    background-color: var(--invade-color);
+    border-color: var(--la-primary-color);
+    background-color: var(--darken-5);
     text-align: left;
         
     >.la-tooltip__content
@@ -21,7 +19,7 @@ aside.la-tooltip.active
     {    
         margin: unset;
         border: unset;
-        background-color: var(--primary-color);
+        background-color: var(--la-primary-color);
         box-shadow: inset 0px 0px 2px 0px var(--background-color);
         text-transform: uppercase;
         padding: 5px;
@@ -37,51 +35,49 @@ aside.la-tooltip.active
         overflow-y: auto;
         max-height: 500px;
         scrollbar-width: thin;
-        scrollbar-color: var(--primary-color) var(--invade-color);
-    }
-
-    // TODO: find a better way to reimplement this
-    &.-widthfull
-    {
-        width: 100%;
+        scrollbar-color: var(--la-primary-color) var(--invade-color);
     }
 }
 
 // #region Sheet Window
 
-// This is so oddly specific becuase Monk's Little Details adds an oddly specific 
+// This is so oddly specific because Monk's Little Details adds an oddly specific 
 // border CSS rule for some reason and dominance must be asserted :triumph:
-body.game.system-lancer>.lancer.sheet.la-common
+:root body.game.system-lancer>.lancer.sheet.la-common
 {
     >header.window-header
     {
-        background-color: var(--primary);
+        background-color: var(--la-primary);
         border: unset;
     }
 }
 
-.la-common>.window-content:has(>.la-root)
+.lancer.sheet.la-common 
 {
-    padding: inherit;
-    overflow: hidden;
-}
+    // Padding around sheets
+    >.window-content:has(>.la-root)
+    {
+        padding: inherit;
+        overflow: hidden;
+    }
 
-.lancer.sheet.la-common header:not(.window-header).la-header
-{
-    margin: unset;
-    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
-    background-color: var(--primary); // Since this is above the actual sheets, it needs to be hard coded here
-}
+    // Padding around headers
+    header:not(.window-header).la-header
+    {
+        margin: unset;
+    }
 
-.lancer.sheet.la-common body:not(.window-body).la-body
-{
-    // Somewhat redundant, but just to stay mutually exclusive from the default sheets
-    background-color: var(--background);
-}
+    // Can't be section below, because Lancer system has odd specificity requirements
+    select
+    {
+        width: unset;
 
-.lancer.sheet.la-common select
-{
-    width: unset;
+        >option
+        {
+            background-color: unset;
+            color: unset;
+        }
+    }
 }
 
 // #endregion
@@ -89,8 +85,6 @@ body.game.system-lancer>.lancer.sheet.la-common
 // #region Generic Controls
 .la-common
 {
-    height: 100%;
-
     img
     {
         border: unset;
@@ -103,56 +97,6 @@ body.game.system-lancer>.lancer.sheet.la-common
         background: unset;
         clip-path: unset;
         -webkit-clip-path: unset;
-    }
-
-    // Slider override when 'la-range' is added to input element
-    // Note that Chrome and Firefox definitions are separated intentionally
-    // and it does not work if they share selectors (idk why)
-    .la-range
-    {
-        ::-webkit-slider-thumb
-        {
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            box-shadow: unset;
-            border: 3px solid var(--header);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        ::-moz-range-thumb
-        {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            box-shadow: unset;
-            border: 3px solid var(--header);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-    
-        ::-webkit-slider-runnable-track
-        {
-            height: 4px;
-            background: var(--header);
-            border: unset;
-            box-shadow: unset;
-            padding-left: 2px;
-            padding-right: 2px;
-            border-radius: 2px;
-        }
-
-        ::-moz-range-track
-        {
-            height: 4px;
-            background: var(--header);
-            border: unset;
-            box-shadow: unset;
-            padding-left: 2px;
-            padding-right: 2px;
-            border-radius: 2px;
-        }
     }
 
     button
@@ -290,7 +234,7 @@ body.game.system-lancer>.lancer.sheet.la-common
         >.lancer-damage-apply
         {
             border-radius: 0px 4px 4px 0px;
-            border-color: var(--secondary);
+            border-color: var(--la-secondary);
             border-width: 1px 1px 1px 0px;
             border-style: solid;
             background-color: var(--darken-3);
@@ -301,45 +245,45 @@ body.game.system-lancer>.lancer.sheet.la-common
         >.lancer-damage-apply-select
         {
             border-radius: 4px 0px 0px 4px;
-            border-color: var(--secondary);
-            background-color: var(--secondary);
-            color: var(--header);
+            border-color: var(--la-secondary);
+            background-color: var(--la-secondary);
+            color: var(--la-header);
         }
     }
 
     .mini-weapon-profile
     {
         background-color: var(--darken-1);
-        color: var(--text);
+        color: var(--la-text);
         font-size: 1.25rem;
     }
 
     .lancer-mini-header
     {
-        background-color: var(--pilot);
-        color: var(--header);
+        background-color: var(--la-pilot);
+        color: var(--la-header);
     }
 
     .lancer-damage-flow
     {
-        background-color: var(--secondary);
-        color: var(--header);
+        background-color: var(--la-secondary);
+        color: var(--la-header);
     }
 
     .lancer-header
     {
-        background-color: var(--primary);
-        color: var(--header);
+        background-color: var(--la-primary);
+        color: var(--la-header);
     }
 
     .compact-tag
     {
-        background-color: var(--primary);
-        color: var(--header);
+        background-color: var(--la-primary);
+        color: var(--la-header);
 
         >i
         {
-            color: var(--header);
+            color: var(--la-header);
         }
     }
 }

@@ -54,8 +54,8 @@
     function getHeaderStyle(component: any)
     {
         return isDestroyed(component)
-            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
+            : "la-text-header la-prmy-header";
     }
 
     function getIconStyle(component: any)
@@ -80,7 +80,7 @@
 <HeaderMain
     text={getLocalized("LA.systems.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize2", "-overflowhidden", "-upper"]}
     borderStyle={["la-brdr-system", "-gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -120,7 +120,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(component), "cci", "cci-system", "-fontsize5"]}
-            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${component.index}`}

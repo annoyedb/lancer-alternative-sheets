@@ -54,8 +54,8 @@
     }
 </script>
 <script lang="ts" module>
-    export const HEADER_SECONDARY_STYLE = "-glow-header -glow-primary-hover -fontsize2";
-    const _STYLE = "-glow-header -glow-primary-hover -fontsize2";
+    export const HEADER_SECONDARY_STYLE = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize2";
+    const _STYLE = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize2";
 </script>
 
 <button type="button"

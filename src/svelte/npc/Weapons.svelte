@@ -66,15 +66,15 @@
     function getSubtitleStyle(weapon:any)
     {
         return isDestroyed(weapon)
-            ? "la-text-error la-anim-error horus--very--subtle"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-prmy-error horus--very--subtle"
+            : "la-text-header la-prmy-header";
     }
 
     function getIconStyle(weapon: any)
     {
         return isDestroyed(weapon)
             ? "la-text-repcap"
-            : "la-text-header -glow-header -glow-primary-hover";
+            : "la-text-header la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover";
     }
 
     function getRollWeaponTip(weapon: any)
@@ -98,9 +98,9 @@
 {#if weapons.length}
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
-    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-mech-weapon"]}
+    headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
     textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
-    borderStyle={["la-brdr-mech-weapon", "-gap0"]}
+    borderStyle={["la-brdr-weapon", "-gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
             return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -159,7 +159,7 @@
     {#snippet headerTertiaryLeftOptions()}
         <AttackButton
             iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.RollAttack}
             path={`system.loadout.weapon_mounts.${index}`}
@@ -179,7 +179,7 @@
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
             iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-            iconBackgroundStyle={["-fontsize7", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}

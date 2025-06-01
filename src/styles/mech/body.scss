@@ -1,70 +1,13 @@
-// TODO: move this to a more generalized location, since it describes both mech and pilot sheets
-.la-root
+.la-root.la-mech
 {
-    // Body
-    .la-body
+    .la-content-body
     {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        overflow: auto;
-        position: relative;
-        overflow-y: hidden;
-    }
-
-    .la-content
-    {
-        flex: 2;
-
         overflow-y: scroll;
         overflow-x: hidden;
 
         >.la-tab
         {
-            margin-left: 2.2rem;
-        }
-    }
-
-    // Scrollbar
-    .la-body
-    {
-        // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-        >.la-SCROLL_BODY
-        {
-            scrollbar-width: thin;
-            scrollbar-color: var(--scrollbar-primary) transparent;
-        }
-
-        >.la-SCROLL_BODY::-webkit-scrollbar
-        {
-            width: 2px;
-        }
-
-        >.la-SCROLL_BODY::-webkit-scrollbar-thumb
-        {
-            background: var(--scrollbar-primary);
-            border: 0px;
-        }
-
-        >.la-SCROLL_BODY::-webkit-scrollbar-track
-        {
-            background: transparent;
-        }
-
-        >.la-SCROLL_BODY::-moz-scrollbar
-        {
-            width: 2px;
-        }
-
-        >.la-SCROLL_BODY::-moz-scrollbar-thumb
-        {
-            background: var(--scrollbar-primary);
-            border: 0px;
-        }
-
-        >.la-SCROLL_BODY::-moz-scrollbar-track
-        {
-            background: transparent;
+            margin-left: 2.25rem;
         }
     }
 }

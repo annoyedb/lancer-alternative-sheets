@@ -57,7 +57,7 @@ export class PilotSheetBase
                     initial: "dossier"
                 }
             ],
-            scrollY: [".la-SCROLL_BODY", ".la-SCROLL_SIDEBAR"],
+            scrollY: [".la-SCROLL-BODY", "la-SCROLL-BODY-ABILITIES", "la-SCROLL-BODY-EQUIPMENT", ".la-SCROLL-SIDEBAR"],
         }
     }
 
@@ -89,8 +89,6 @@ export class PilotSheetBase
                 Hooks.on("laForceRerender", (uuid: string, callback?: () => void) => {
                     if (uuid !== this.actor.uuid)
                         return;
-
-                    console.log("I have been forced to rerender", callback == null || undefined);
                     this.render();
                     if (callback)
                         callback();
@@ -194,6 +192,7 @@ export class PilotSheetBase
                 mount(HaseDisplay, {
                     target: html.find(".la-SVELTE-HASE")[0],
                     props: {
+                        pilot: data.actor,
                         actor: data.actor,
                         system: data.system,
                         tooltipEnabled: getPilotSheetTooltipEnabled(),
@@ -205,7 +204,25 @@ export class PilotSheetBase
 
             applyTabListener(html: JQuery<HTMLElement>)
             {
-                html.find('.la-nav__island>.la-tabs>.la-tab').each((_, button) =>
+                html.find('.la-nav__island .la-tabs-tertiary>.la-tab').each((_, button) =>
+                {
+                    $(button).on('click', (event) =>
+                    {
+                        const tab = $(event.currentTarget).data('tab');
+                        setActiveTab(this.actor.uuid, ActiveTab.Tertiary, tab);
+                    });
+                });
+
+                html.find('.la-tabs>.la-tab').each((_, button) =>
+                {
+                    $(button).on('click', (event) =>
+                    {
+                        const tab = $(event.currentTarget).data('tab');
+                        setActiveTab(this.actor.uuid, ActiveTab.Primary, tab);
+                    });
+                });
+
+                html.find('.la-tabs-quaternary>.la-tab').each((_, button) =>
                 {
                     $(button).on('click', (event) =>
                     {

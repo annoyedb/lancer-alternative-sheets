@@ -7,9 +7,9 @@
         // But only if the button is not disabled
         .la-properties:not([disabled]):hover>.la-damage>.la-number__span
         {
-            filter: drop-shadow(0px 0px 5px var(--primary));
-            -webkit-filter: drop-shadow(0px 0px 5px var(--primary));
-            -moz-filter: drop-shadow(0px 0px 5px var(--primary));
+            filter: drop-shadow(0px 0px 5px var(--la-primary));
+            -webkit-filter: drop-shadow(0px 0px 5px var(--la-primary));
+            -moz-filter: drop-shadow(0px 0px 5px var(--la-primary));
         }
     }
 }

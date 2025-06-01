@@ -4,14 +4,14 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
+    import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { TextLogIntro } from "@/enums/TextLogIntro";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import TerminalText from "@/svelte/actor/TerminalText.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
-    import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
-    import { TextLogIntro } from "@/enums/TextLogIntro";
-    import { TextLogHook } from "@/enums/TextLogHook";
-    import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
-    import TerminalText from "../actor/TerminalText.svelte";
 
     const props = $props();
     const { 
@@ -28,7 +28,7 @@
     <!-- Advanced Options Toggle -->
     <div 
         class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" 
-        style="z-index: 1;"
+        style="z-index: 3;"
     >
         <AdvancedButton
             uuid={actor.uuid}
@@ -46,10 +46,12 @@
     {/if}
     </div>
     <!-- Mech/Pilot Name -->
-    <div class="la-names -flex1 -margin3">
+    <div class="la-names -margin3 -alignselfstart -flex1"
+        style="z-index: 2;"
+    >
         <div class="la-combine-h">
             <input type="text"
-                class="la-mechname__input la-text-header -upper -fontsize5
+                class="la-actorname__input la-text-header -upper -fontsize5 -bold -letterspacing1
                     charname"
                 name={"name"}
                 value={actor.name}
@@ -57,7 +59,7 @@
                 onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
                 onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             />
-            <span class="-fontsize0 lancer-text-darken-3">
+            <span class="-fontsize0 la-text-darken-3">
                 {getLocalized("LA.name.label")}
             </span>
         </div>
@@ -74,7 +76,7 @@
                 <TerminalText
                     text="LL{pilot?.system.level || 0}"
                     extensionText="--{getLocalized("LA.search.label")}"
-                    textStyle={["-fontsize1", "la-anim-header"]}
+                    textStyle={["-fontsize1", "la-prmy-header"]}
                     disableCmdline={true}
                 >
                     <span class="-fontsize3">
@@ -82,7 +84,7 @@
                     </span>
                 </TerminalText>
             </span>
-            <span class="-fontsize0 lancer-text-darken-3">
+            <span class="-fontsize0 la-text-darken-3">
                 {getLocalized("LA.pilot.label")}
             </span>
         </div>

@@ -70,7 +70,7 @@
 </script>
 <script lang="ts" module>
     export const H3_ICON_SIZE: string = "-fontsize7";
-    export const H3_HEADER_STYLE = "clipped-bot-alt -padding0-tb la-text-header la-anim-accent"
+    export const H3_HEADER_STYLE = "clipped-bot-alt -padding0-tb la-text-header la-prmy-accent"
 
 </script>
 

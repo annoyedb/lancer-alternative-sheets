@@ -24,7 +24,7 @@ export interface TerminalTextProps
 
     /**
      * Optional array of style class names to apply to the button's icon, text, and cursor.
-     * Use `anim` prefixed color classes to apply the `--color` CSS attribute.
+     * Use `anim` prefixed color classes to apply the `--la-primary-color` CSS attribute.
      */
     textStyle?: Array<string>;
 

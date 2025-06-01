@@ -1,0 +1,27 @@
+:root,
+.la-common
+{
+    .-pointerdisable
+    {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .-pointercursor
+    {
+        cursor: pointer;
+        pointer-events: all;
+    }
+
+    .-pointermove
+    {
+        cursor: move;
+        pointer-events: all;
+    }
+
+    .-pointergrab
+    {
+        cursor: grab;
+        pointer-events: all;
+    }
+}

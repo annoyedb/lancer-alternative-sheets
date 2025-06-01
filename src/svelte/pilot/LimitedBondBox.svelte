@@ -27,7 +27,7 @@
     </span>
 {#each {length: usesMax} as _, index}
     <button type="button" 
-        class="-glow-header -glow-primary-hover -fontsize5"
+        class="la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize5"
         onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         aria-label={getLocalized("LA.use.label")}

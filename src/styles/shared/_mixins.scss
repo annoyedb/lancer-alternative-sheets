@@ -1,0 +1,437 @@
+// #region: Animations
+@mixin hoverFadeOut
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --fade-out-time: 0.25s;
+
+        animation: fade-out var(--fade-out-time) forwards;
+        -webkit-animation: fade-out var(--fade-out-time) forwards;
+        -moz-animation: fade-out var(--fade-out-time) forwards;
+    }
+
+    &.-fadein
+    {
+        visibility: hidden;
+    }
+
+    @keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-moz-keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+}
+
+@mixin hoverFadeIn
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --fade-in-time: 0.25s;
+
+        animation: fade-in var(--fade-in-time) forwards;
+        -webkit-animation: fade-in var(--fade-in-time) forwards;
+        -moz-animation: fade-in var(--fade-in-time) forwards;
+    }
+
+    &.-fadein
+    {
+        visibility: visible;
+    }
+
+    @keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-moz-keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin blinking
+{
+    @keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+
+    @-webkit-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+
+    @-moz-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+}
+
+@mixin scrollDiagonally
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        animation: 400s scroll infinite linear;
+        -webkit-animation: 400s scroll infinite linear;
+        -moz-animation: 400s scroll infinite linear;
+    }
+
+    @keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+
+    @-webkit-keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+
+    @-moz-keyframes scroll
+    {
+        100%
+        {
+            background-position: -3000px -3000px;
+        }
+    }
+}
+
+@mixin scrollUp
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        animation: scroll-up 600s infinite linear;
+        -webkit-animation: scroll-up 600s infinite linear;
+        -moz-animation: scroll-up 600s infinite linear;
+    }
+
+    @keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+
+    @-webkit-keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+
+    @-moz-keyframes scroll-up
+    {
+        from
+        {
+            background-position: 0 3000px;
+        }
+
+        to
+        {
+            background-position: 0 -3000px;
+        }
+    }
+}
+
+// Reusing animations require declaring new keyframe names; or at least in this case, since the keyframes use $color as a var.
+// TODO: add transitionary color as a var name
+@mixin pulseColor($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+}
+
+
+@mixin pulseBackground($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+
+        &.-fast
+        {
+            --pulse-time: 1.5s;
+        }
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var(transparent);
+        }
+
+        50%
+        {
+            background-color: var($color);
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var(transparent);
+        }
+
+        50%
+        {
+            background-color: var($color);
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var(transparent);
+        }
+
+        50%
+        {
+            background-color: var($color);
+        }
+    }
+}
+
+@mixin pulseGlowColor($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-glow-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            filter: drop-shadow(0px 0px 1.5px var($color));
+            -webkit-filter: drop-shadow(0px 0px 1.5px var($color));
+            -moz-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            filter: drop-shadow(0px 0px 3px var($color));
+            -webkit-filter: drop-shadow(0px 0px 3px var($color));
+            -moz-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            -webkit-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            -webkit-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+
+        0%,
+        100%
+        {
+            -moz-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            -moz-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+}
+
+@mixin glowColor($color, $radius)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        filter: drop-shadow(0px 0px $radius var($color));
+        -webkit-filter: drop-shadow(0px 0px $radius var($color));
+        -moz-filter: drop-shadow(0px 0px $radius var($color));
+    }
+}
+
+@mixin collapseFadeOut()
+{
+    --collapse-fade-time: 0.25s;
+    transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+    -webkit-transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+    -moz-transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+}
+// #endregion

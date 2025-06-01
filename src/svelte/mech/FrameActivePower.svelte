@@ -46,7 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", ACTIVATION_ICON_MAP[core.activation]]}
-    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     
@@ -74,7 +74,7 @@
         disabled={!system.core_energy}
     >
         <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize13"></i>
-        <span class="la-corepower__span {system.core_energy ? "-glow-header -glow-primary-hover" : "la-dropshadow"} -upper -flexthird -textwrapnowrap">
+        <span class="la-corepower__span {system.core_energy ? "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover" : "la-dropshadow"} -upper -flexthird -textwrapnowrap">
             {name}
         </span>
         <div class="-flexthird">
@@ -86,7 +86,7 @@
     text={core.name}
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
-    textStyle={["la-text-header", "la-anim-header"]}
+    textStyle={["la-text-header", "la-prmy-header"]}
 
     collapseID={collID}
 

@@ -42,8 +42,8 @@
     function getHeaderStyle(reaction: any)
     {
         return isDestroyed(reaction)
-            ? "la-text-error la-anim-error horus--very--subtle -strikethrough"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
+            : "la-text-header la-prmy-header";
     }
 
     function getIconStyle(reaction: any)
@@ -108,7 +108,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={[getIconStyle(trait), "cci", "cci-trait", "-fontsize5"]}
-            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}

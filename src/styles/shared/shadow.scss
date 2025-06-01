@@ -1,0 +1,42 @@
+:root,
+.la-common
+{
+    // General
+    .la-shadow
+    {
+        &.-xsoft
+        {
+            box-shadow: 0px 2px 8px 0px rgba(99, 99, 99, 0.2);
+
+            &.-inset
+            {
+                box-shadow: inset 0px 2px 8px 0px rgba(99, 99, 99, 0.2);
+            }
+        }
+
+        &.-soft
+        {
+            box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+
+            &.-inset
+            {
+                box-shadow: inset 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+            }
+        }
+
+        &.-medium
+        {
+            &.-inset
+            {
+                box-shadow: rgba(50, 50, 93, 0.25) -3px 3px 3px 1px inset, rgba(50, 50, 93, 0.2) 2px 0px 2px 0px inset;
+            }
+        }
+    }
+
+    .la-dropshadow
+    {
+        filter: drop-shadow(-3px 3px 1px var(--la-shadow));
+        -webkit-filter: drop-shadow(-3px 3px 1px var(--la-shadow));
+        -moz-filter: drop-shadow(-3px 3px 1px var(--la-shadow));
+    }
+}

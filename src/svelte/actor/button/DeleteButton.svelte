@@ -28,7 +28,7 @@
     const log = logText || getLocalized("LA.delete.tooltip");
 </script>
 <script lang="ts" module>
-    const _STYLE = "-glow-header -glow-primary-hover -fontsize2";
+    const _STYLE = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize2";
 </script>
 
 <button type="button"

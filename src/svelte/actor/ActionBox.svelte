@@ -116,7 +116,7 @@
     <EffectButton
         style={["-positionabsolute", "-left0", "-top0", "-padding0-l"]}
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
-        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-anim-secondary", `${qualityMode ? `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
 
         flowClass={action && uuid && path 
             ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
@@ -142,7 +142,7 @@
     <HeaderQuinary
         text={action.name}
         headerStyle={[ACTIVATION_COLOR_MAP[action.activation], "-padding0-l"]}
-        textStyle={["la-text-header", "la-anim-header", "-lineheight5"]}
+        textStyle={["la-text-header", "la-prmy-header", "-lineheight5"]}
         extensionTextFunction={() => {
             if (effectButtonHover)
                 return `--${getLocalized("LA.chat.extension")}`;

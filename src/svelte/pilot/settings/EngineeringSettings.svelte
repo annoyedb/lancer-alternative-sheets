@@ -1,0 +1,76 @@
+<script lang="ts">
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
+    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getLocalized } from "@/scripts/helpers";
+    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/pilot/settings/AdvancedSettings.svelte";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    
+    const props: PilotSheetProps = $props();
+    const {
+        actor,
+        document,
+        system,
+    } = props;
+
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+
+    const tooltipEnabled = getPilotSheetTooltipEnabled();
+
+    function levelUp(event : MouseEvent)
+    {
+        event.stopPropagation();
+        document.update({
+            "system.eng": system.eng + 1, 
+        })
+    }
+
+    function levelDown(event : MouseEvent)
+    {
+        event.stopPropagation();
+        document.update({
+            "system.eng": Math.max(system.eng - 1, 0), 
+        })
+    }
+</script>
+
+<div class="-heightfull
+    {advancedOptions ? "la-combine-h" : "-displaynone"}"
+>
+    <span class="{SETTINGS_HEADER_STYLE} -alignend -capitalize">
+        {getLocalized("LA.engineering.label")}
+    </span>
+    <div class="la-combine-v -alignstart -padding1-b -heightfull">
+        <GlyphButton
+            style={[SETTINGS_BUTTON_STYLE, "mdi mdi-plus-box", "-verticalaligntop"]}
+            
+            flowClass={FlowClass.None}
+            
+            tooltip={getLocalized("LA.pilot.engineering.up.tooltip")}
+            tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.RIGHT}
+            logText={getLocalized("LA.pilot.engineering.up.tooltip")}
+            logType={TextLogHook.PilotHeader}
+            logTypeReset={TextLogHook.PilotHeaderReset}
+
+            onClick={levelUp}
+        />
+        <GlyphButton
+            style={[SETTINGS_BUTTON_STYLE, "mdi mdi-minus-box", "-verticalaligntop"]}
+            
+            flowClass={FlowClass.None}
+            
+            tooltip={getLocalized("LA.pilot.engineering.down.tooltip")}
+            tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.RIGHT}
+            logText={getLocalized("LA.pilot.engineering.down.tooltip")}
+            logType={TextLogHook.PilotHeader}
+            logTypeReset={TextLogHook.PilotHeaderReset}
+
+            onClick={levelDown}
+        />
+    </div>
+</div>

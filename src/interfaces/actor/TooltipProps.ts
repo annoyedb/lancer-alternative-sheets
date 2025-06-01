@@ -1,3 +1,4 @@
+import type { ThemeKey } from '@/enums/ThemeKey';
 import { TooltipDirection } from '@/enums/TooltipDirection';
 
 /**
@@ -29,4 +30,9 @@ export interface TooltipProps
      * Optional tooltip style class. Used in `data-tooltip-class` attribute in addition to default styles.
      */
     tooltipClass?: string;
+
+    /**
+     * Optional theme for the tooltip. This can be a key from the ThemeKey enum or a custom string but must define a `--la-primary-color` css attribute.
+     */
+    tooltipTheme?: ThemeKey | string;
 }

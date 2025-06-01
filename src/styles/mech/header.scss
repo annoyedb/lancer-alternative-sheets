@@ -1,47 +1,8 @@
 // Header
-.la-root
+.la-root.la-mech
 {
     .la-header
     {
-        min-height: 10rem;
-        max-height: 10rem;
-        height: 10rem;
-        position: relative;
-
-        >.la-nav__island
-        {
-            position: absolute;
-            z-index: 1;
-            top: 8.25rem;
-        }
-
-        .la-header-content
-        {
-            >.la-names
-            {
-                align-self: flex-start;
-                min-width: 15rem;
-                z-index: 2;
-
-                >.la-mechname__input
-                {
-                    pointer-events: auto;
-                    font-weight: bold;
-                    letter-spacing: 0.25rem;
-                    text-overflow: ellipsis;
-                }
-            }
-
-            .la-textlog__wrapper
-            {
-                top: 5rem;
-                z-index: 1;
-                height: 5rem;
-                width: calc(100% - 15rem);
-                mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
-                -webkit-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
-                -moz-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
-            }
-        }
+        
     }
 }

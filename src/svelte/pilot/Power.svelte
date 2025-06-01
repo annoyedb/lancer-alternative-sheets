@@ -101,7 +101,7 @@
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
             iconStyle={["la-text-header", "-fontsize4", "mdi", "mdi-weather-sunny"]}
-            iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.BondPower}
             uuid={bondUUID}
@@ -150,7 +150,7 @@
         <HeaderSecondary
             text={power.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-anim-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

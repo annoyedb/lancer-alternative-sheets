@@ -205,7 +205,7 @@
 
         <!-- (#5*) -->
         <button type="button"
-            class="lancer-bckg-secondary lancer-text-light -fontsize1 -letterspacing0"
+            class="la-bckg-secondary la-text-light -fontsize1 -letterspacing0"
             onclick={(event) => handleSelection(event, dropdownContent, index)}
         >
             {getLocalized(mountNames[index])}

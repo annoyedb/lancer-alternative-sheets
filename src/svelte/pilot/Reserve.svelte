@@ -1,6 +1,7 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { RESERVE_ICON_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -16,8 +17,7 @@
     import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import { RESERVE_ICON_MAP } from "@/scripts/constants";
-    import EmptyBox from "../actor/EmptyBox.svelte";
+    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
         actor,
@@ -117,7 +117,7 @@
         <HeaderSecondary
             text={reserve.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-anim-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

@@ -1,10 +1,7 @@
 .la-root.la-pilot
 {
-    .la-content-root
+    .la-content-body
     {
-        flex: 2;
-        min-width: 0px; // TODO: set to a specific value to and activate a responsive compact design
-
         .la-content,
         .la-content-quaternary
         {
@@ -14,7 +11,7 @@
             .tab,
             >.la-tab
             {
-                margin-left: 2.2rem;
+                margin-left: 2.25rem;
             }
         }
 
@@ -56,48 +53,47 @@
 
     }
 
-    // Scrollbar
-    .la-content-tertiary
-    {
+    // // Scrollbar
+    // .la-content-tertiary
+    // {
+    //     // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
+    //     >.la-SCROLL_BODY,
+    //     .la-available-mechs__list
+    //     {
+    //         scrollbar-width: thin;
+    //         scrollbar-color: var(--la-scrollbar-primary) transparent;
+    //     }
 
-        // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-        >.la-SCROLL_BODY,
-        .la-available-mechs__list
-        {
-            scrollbar-width: thin;
-            scrollbar-color: var(--scrollbar-primary) transparent;
-        }
+    //     >.la-SCROLL_BODY::-webkit-scrollbar
+    //     {
+    //         width: 2px;
+    //     }
 
-        >.la-SCROLL_BODY::-webkit-scrollbar
-        {
-            width: 2px;
-        }
+    //     >.la-SCROLL_BODY::-webkit-scrollbar-thumb
+    //     {
+    //         background: var(--la-scrollbar-primary);
+    //         border: 0px;
+    //     }
 
-        >.la-SCROLL_BODY::-webkit-scrollbar-thumb
-        {
-            background: var(--scrollbar-primary);
-            border: 0px;
-        }
+    //     >.la-SCROLL_BODY::-webkit-scrollbar-track
+    //     {
+    //         background: transparent;
+    //     }
 
-        >.la-SCROLL_BODY::-webkit-scrollbar-track
-        {
-            background: transparent;
-        }
+    //     >.la-SCROLL_BODY::-moz-scrollbar
+    //     {
+    //         width: 2px;
+    //     }
 
-        >.la-SCROLL_BODY::-moz-scrollbar
-        {
-            width: 2px;
-        }
+    //     >.la-SCROLL_BODY::-moz-scrollbar-thumb
+    //     {
+    //         background: var(--la-scrollbar-primary);
+    //         border: 0px;
+    //     }
 
-        >.la-SCROLL_BODY::-moz-scrollbar-thumb
-        {
-            background: var(--scrollbar-primary);
-            border: 0px;
-        }
-
-        >.la-SCROLL_BODY::-moz-scrollbar-track
-        {
-            background: transparent;
-        }
-    }
+    //     >.la-SCROLL_BODY::-moz-scrollbar-track
+    //     {
+    //         background: transparent;
+    //     }
+    // }
 }

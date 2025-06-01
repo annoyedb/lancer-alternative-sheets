@@ -137,7 +137,7 @@
         {#snippet headerTertiaryLeftOptions()}
             <AttackButton
                 iconStyle={[H3_ICON_SIZE, "la-text-header", "cci", "cci-weapon"]}
-                iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+                iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
                 flowClass={FlowClass.RollAttack}
                 path={getWeaponPath(index)}
@@ -155,7 +155,7 @@
         {/snippet}
         {#snippet headerTertiaryRightOptions()}
         <DamageButton
-            iconBackgroundStyle={["-fontsize7", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -197,7 +197,7 @@
         <HeaderTertiary
             text={weapon.name}
             subText={getLocalized("LA.weapons.label")}
-            subHeaderFontStyle={["la-text-header", "la-anim-header", "-fontsize0"]}
+            subHeaderFontStyle={["la-text-header", "la-prmy-header", "-fontsize0"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (attackButtonHover)

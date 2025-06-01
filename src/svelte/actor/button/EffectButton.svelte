@@ -70,7 +70,7 @@
 </script>
 
 <button type="button"
-    class="
+    class="-positionrelative
         {style?.join(' ')}
         {flowClass || FlowClass.SendEffectToChat}"
     style="z-index: 1;"

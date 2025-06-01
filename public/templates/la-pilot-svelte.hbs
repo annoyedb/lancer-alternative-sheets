@@ -1,4 +1,4 @@
-<form class="la-pilot la-text-text {{cssClass}} la-root flexcol" autocomplete="off">
+<form class="la-root la-pilot la-text-text {{cssClass}} -heightfull" autocomplete="off">
     {{!-- Forward data to be ready for Svelte mounting --}}
     {{la_setDatastore @root}}
     {{!-- (#1)
@@ -15,15 +15,19 @@
     // listener can be added through the activateListeners() override, or hooks, etc
     --}}
     <header 
-        class="la-header la-bg-scroll -flex0
+        class="la-header la-bckg-primary la-bg-scroll -flex0 -positionrelative
             sheet-header"
     >
-        <div class="
-            la-SVELTE-HEADER">
+        <div 
+            class="-heightfull
+                la-SVELTE-HEADER"
+        >
+            {{!-- Svelte is injected in-place here --}}
         </div>
         {{!-- (#1) --}}
         <!-- Navigation -->
-        <div class="la-nav__island la-combine-h -justifyend -gap1 la-dropshadow -widthfull">
+        <div class="la-nav__island la-combine-h -justifyend -gap1 la-dropshadow -widthfull -positionabsolute"
+            style="z-index: 1;">
             <div 
                 class="la-combine-h -gap1
                     la-SVELTE-ADVANCEDNAV "
@@ -52,9 +56,12 @@
             </div>
         </div>
     </header>
-    <div class="la-body la-combine-h la-bckg-background -heightfull">
+    <div class="la-body la-combine-h la-bckg-background -heightfull -positionrelative">
         <!-- Sidebar -->
-        <section class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull">
+        <section 
+            class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull
+                "
+        >
             <div class="la-nav-secondary__island la-combine-h -justifystart -positionabsolute -left0 -top0">
                 <nav 
                     class="la-tabs-secondary la-combine-h la-bckg-tabs clipped-bot" 
@@ -76,9 +83,9 @@
                     </button>
                 </nav>
             </div>
-            <section 
+            <div 
                 class="la-content-secondary -widthfull -heightfull
-                    la-SCROLL_SIDEBAR "
+                    la-SCROLL-SIDEBAR"
                 data-group="secondary"
             >
                 <div 
@@ -97,11 +104,11 @@
                     {{!-- (#1) --}}
                     {{!-- Svelte is injected in-place here --}}
                 </div>
-            </section>
+            </div>
         </section>
         <div class="la-ruler">&nbsp;</div>
         <section 
-            class="la-content-root -widthfull -heightfull
+            class="la-content-body -widthfull -heightfull
                 sheet-body"
         >
             {{!-- (#1) --}}
@@ -123,7 +130,7 @@
             >
                 {{!-- Primary Content --}}
                 <div class="la-content-quaternary -widthfull -heightfull
-                        la-SCROLL_BODY tab"
+                        la-SCROLL-BODY tab"
                     data-group="tertiary"
                     data-tab="status"
                 >
@@ -167,7 +174,7 @@
                 </div>
                 {{!-- Loadout Content --}}
                 <div class="la-content -widthfull -heightfull
-                        la-SCROLL_BODY tab"
+                        la-SCROLL-BODY tab"
                     data-group="tertiary"
                     data-tab="loadout"
                 >

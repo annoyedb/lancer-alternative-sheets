@@ -65,7 +65,7 @@
 </script>
 
 <button type="button" 
-    class="
+    class="-positionrelative
         {style?.join(' ')}
         {flowClass || FlowClass.RollAttack}"
     data-tooltip={tooltipEnabled && !disabled ? tip : undefined }

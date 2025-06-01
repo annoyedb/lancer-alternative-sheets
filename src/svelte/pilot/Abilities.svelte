@@ -22,7 +22,9 @@
 />
 <CoreBonus
     actor={actor}
+    sheetActor={actor}
 />
 <Talents
     actor={actor}
+    sheetActor={actor}
 />

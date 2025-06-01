@@ -1,0 +1,39 @@
+// Shared styling between mech/pilot/large sheets
+.la-root
+{
+    .la-header
+    {
+        height: 10rem;
+
+        .la-header-content
+        {
+            .la-names
+            {
+                min-width: 20rem;
+
+                .la-actorname__input
+                {
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        
+        >.la-nav__island
+        {
+            top: 8.25rem;
+        }
+
+        .la-header-content
+        {
+            .la-textlog__wrapper
+            {
+                top: 5rem;
+                height: 5rem;
+                width: calc(100% - 15rem);
+                mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+                -moz-mask-image: linear-gradient(to top, black 50%,rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+            }
+        }
+    }
+}

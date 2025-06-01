@@ -20,7 +20,7 @@
     const {
         actor, // Source data (e.g. pilot)
         sheetActor, // Presenting actor (e.g. mech | pilot)
-    } : {actor: any; sheetActor?: any} = $props();
+    } : {actor: any; sheetActor: any} = $props();
     let collapseAllButtonHoverTalent = $state(false);
     let collapseAllButtonHoverRank = $state(false);
     let messageButtonHover = $state(false);
@@ -29,7 +29,7 @@
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const isMechSheet = sheetActor?.type === "mech" || false;
     const talents = actor.itemTypes.talent;
-    const collID = `${actor.uuid}.talents`;
+    const collID = `${sheetActor.uuid}.talents`;
 
     onMount(() => {
         if (isMechSheet)
@@ -46,17 +46,17 @@
 
     function getTalentCollID(talentIndex: number)
     {
-        return `${actor.uuid}.talents.${talentIndex}`;
+        return `${collID}.${talentIndex}`;
     }
 
     function getRankCollID(talentIndex: number, rankIndex: number)
     {
-        return `${actor.uuid}.talents.${talentIndex}.ranks.${rankIndex}`;
+        return `${collID}.${talentIndex}.ranks.${rankIndex}`;
     }
     
     function getActionCollID(talentIndex: number, rankIndex: number)
     {
-        return `${actor.uuid}.talents.${talentIndex}.ranks.${rankIndex}.action`;
+        return `${collID}.${talentIndex}.ranks.${rankIndex}.action`;
     }
 
     //@ts-ignore
@@ -159,7 +159,7 @@
                 {#snippet outerContent()}
                     {#if rank.counters.length}
                     <div class="la-combine-v -widthfull -padding2-l
-                        {getCollapseState(getRankCollID(index, jndex)) ? "" : "la-brdr-trait -borders-l -collapseFadeOut"}"
+                        {getCollapseState(getRankCollID(index, jndex)) ? "la-brdr-transparent -borders-l" : "la-brdr-trait -borders-l -collapse-fade-out"}"
                     >
                     {#each rank.counters as counter, kndex}
                         <CounterBox

@@ -6,24 +6,7 @@
         {
             >.la-sidebar__statistics
             {
-                // Macros/Flows
-                .la-macroflows
-                {
-                    .la-skilltrigger
-                    {
-                        width: calc(100% - 2rem);
-
-                        >.la-flow
-                        {
-                            width: calc(100% - 2.5rem);
-                        }
-
-                        >.la-skilltrigger__span
-                        {
-                            min-width: 2.5rem;
-                        }
-                    }
-                }
+                
             }
         }
     }

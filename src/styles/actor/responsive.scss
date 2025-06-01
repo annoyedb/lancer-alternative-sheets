@@ -1,0 +1,51 @@
+.la-common>.window-content>.la-root
+{
+    // Enable responsive display
+    // container-type: inline-size;
+    // @container (max-width: 30rem)
+    // {
+    //     .la-body
+    //     {
+    //         .la-sidebar
+    //         {
+    //             height: 20rem;
+    //             min-width: 100%;
+    //         }
+
+    //         .la-content
+    //         {
+    //             min-width: 100%;
+
+    //             >.la-tab
+    //             {
+    //                 margin-left: 0.5rem;
+    //             }
+    //         }
+
+    //         .la-ruler
+    //         {
+    //             display: none;
+    //         }
+    //     }
+
+    //     .la-header
+    //     {
+    //         .la-header__container
+    //         {
+    //             display: none;
+    //         }
+    //     }
+    // }
+
+    .la-header-content
+    {
+        container-type: inline-size;
+        @container (max-width: 37.5rem)
+        {
+            .la-boundimage
+            {
+                display: none;
+            }
+        }
+    }
+}

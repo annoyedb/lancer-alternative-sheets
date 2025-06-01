@@ -15,27 +15,29 @@ interface SheetStoreData
 }
 
 const sheetStore = writable<{ [key: string]: SheetStoreData }>({});
-const defaultData = {
-    advancedState: false,
-    introPlayed: false,
-    headerOffsetY: 0,
-    currentTheme: "",
-    activeTabs: {} as { [key in ActiveTab]: string },
-    trackedHooks: {} as { [key: number]: string },
-    
-    bondQNAMode: false,
-    selectedMech: 0,
-};
+function createDefaultData(): SheetStoreData
+{
+    return {
+        advancedState: false,
+        introPlayed: false,
+        headerOffsetY: 0,
+        currentTheme: "",
+        activeTabs: {} as { [key in ActiveTab]: string },
+        trackedHooks: {} as { [key: number]: string },
+        bondQNAMode: false,
+        selectedMech: 0,
+    };
+}
 
 export function getSheetStore(key: string)
 {
     const store = get(sheetStore);
     if (!(key in store))
     {
-        store[key] = { ...defaultData };
+        store[key] = createDefaultData();
     }
     return fromStore(sheetStore).current[key];
-};
+}
 
 export function setSheetStore(key: string, value: Partial<SheetStoreData>)
 {
@@ -43,7 +45,7 @@ export function setSheetStore(key: string, value: Partial<SheetStoreData>)
     {
         if (!store[key])
         {
-            store[key] = { ...defaultData };
+            store[key] = createDefaultData();
         }
         store[key] = { ...store[key], ...value };
         return store;

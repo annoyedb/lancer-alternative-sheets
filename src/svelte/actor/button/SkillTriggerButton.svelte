@@ -27,8 +27,8 @@
         logType={logType}
         logTypeReset={logTypeReset}
     />
-    <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary lancer-bckg-darken-2">
-        <div class="la-skilltrigger__inner -bordersround-rtb -small lancer-brdr-darken-2 la-text-text -fontsize2 -textaligncenter -overflowhidden -height3">
+    <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary la-bckg-darken-2">
+        <div class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize2 -textaligncenter -overflowhidden -height3">
         {#if item.system.curr_rank !== 0}
             {item.system.curr_rank > 0 ? `+${item.system.curr_rank * 2}` : `${item.system.curr_rank * 2}`}
         {:else}

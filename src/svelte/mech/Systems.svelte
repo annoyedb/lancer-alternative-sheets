@@ -59,15 +59,15 @@
     function getTitleStyle(component: any)
     {
         return isDestroyed(component)
-            ? "la-text-repcap la-anim-accent -strikethrough"
-            : "la-text-header la-anim-accent";
+            ? "la-text-repcap la-prmy-accent -strikethrough"
+            : "la-text-header la-prmy-accent";
     }
 
     function getSubtitleStyle(component: any)
     {
         return isDestroyed(component)
-            ? "la-text-error la-anim-error horus--very--subtle"
-            : "la-text-header la-anim-header";
+            ? "la-text-error la-prmy-error horus--very--subtle"
+            : "la-text-header la-prmy-header";
     }
 
     function getIconStyle(component: any)
@@ -75,7 +75,7 @@
         let icon = SYSTEM_ICON_MAP[component.value.system.type] || "cci-system";
         return isDestroyed(component)
             ? `cci ${icon} la-text-repcap`
-            : `cci ${icon} -glow-header -glow-primary-hover`;
+            : `cci ${icon} la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover`;
     }
 
     function getSPStyle(component: any)
@@ -170,7 +170,7 @@
     {#snippet headerTertiaryLeftOptions()}
         <EffectButton
             iconStyle={[H3_ICON_SIZE, getIconStyle(component)]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={component.value.system.effect 
                 ? FlowClass.SendEffectToChat 

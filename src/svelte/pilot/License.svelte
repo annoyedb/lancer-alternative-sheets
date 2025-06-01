@@ -138,7 +138,7 @@
         <HeaderSecondary
             text={`${license.system.manufacturer} ${license.name}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-anim-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

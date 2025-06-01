@@ -45,7 +45,7 @@
     {#snippet headerSecondaryLeftOptions()}
     <EffectButton
         iconStyle={["cci", "cci-weaponmod", "-fontsize5"]}
-        iconBackgroundStyle={["-padding0-l", "-fontsize5", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
         flowClass={FlowClass.SendEffectToChat}
         path={path}
@@ -84,33 +84,9 @@
     />
     {/snippet}
 
-    <HeaderSecondary
-        uuid={mod.uuid}
-        path={path}
-        acceptTypes={"weapon_mod"}
-
-        text={mod.name}
-        headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
-        textStyle={[H2_TEXT_SIZE]}
-        borderStyle={["la-brdr-weapon-mod"]}
-        extensionTextFunction={() => {
-            if (effectButtonHover)
-                return `--${getLocalized("LA.use.label")}`;
-            if (editButtonHover)
-                return `--${getLocalized("LA.edit.extension")}`;
-            return undefined;
-        }}
-        
-        collapseID={mod.uuid}
-        startCollapsed={true}
-
-        headerContentLeft={headerSecondaryLeftOptions}
-        headerContentRight={headerSecondaryRightOptions}
-    >
-        <div class="la-generated -widthfull -gap2 la-combine-v">
-        <!-- Generated Content -->
+    {#snippet outerContent()}
         {#if !!(mod.system.uses.max || mod.system.counters.length)}
-            <div class="la-combine-h">
+            <div class="la-combine-v -gap0 -widthfull">
             <!-- Limited Use -->
             {#if mod.system.uses.max}
                 <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
@@ -141,6 +117,34 @@
             {/if}
             </div>
         {/if}
+    {/snippet}
+
+    <HeaderSecondary
+        uuid={mod.uuid}
+        path={path}
+        acceptTypes={"weapon_mod"}
+
+        text={mod.name}
+        headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
+        textStyle={[H2_TEXT_SIZE]}
+        borderStyle={["la-brdr-weapon-mod"]}
+        extensionTextFunction={() => {
+            if (effectButtonHover)
+                return `--${getLocalized("LA.use.label")}`;
+            if (editButtonHover)
+                return `--${getLocalized("LA.edit.extension")}`;
+            return undefined;
+        }}
+        
+        collapseID={mod.uuid}
+        startCollapsed={true}
+
+        renderOutsideCollapse={outerContent}
+        headerContentLeft={headerSecondaryLeftOptions}
+        headerContentRight={headerSecondaryRightOptions}
+    >
+        <div class="la-generated -widthfull -gap2 la-combine-v">
+        <!-- Generated Content -->
         {#if mod.system.added_range.length || mod.system.added_damage.length}
             <div class="la-combine-h -widthfull">
             {#if mod.system.added_range.length}

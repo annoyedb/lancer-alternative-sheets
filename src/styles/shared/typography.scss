@@ -32,6 +32,11 @@
         text-transform: lowercase;
     }
 
+    .-capitalize
+    {
+        text-transform: capitalize;
+    }
+
     .-fontsizeinherit
     {
         font-size: inherit;
@@ -186,6 +191,12 @@
     {
         white-space: nowrap;
         text-wrap: nowrap;
+    }
+
+    .-textoverflowellipsis
+    {
+        text-overflow: ellipsis;
+        overflow: clip;
     }
 
     .-bold

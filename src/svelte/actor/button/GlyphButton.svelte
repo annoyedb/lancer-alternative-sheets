@@ -23,6 +23,8 @@
         
         tooltipEnabled,
         tooltip,
+        tooltipClass,
+        tooltipTheme,
         tooltipHeader,
         tooltipDirection,
 
@@ -68,8 +70,8 @@
     data-path={path}
     data-action={action}
     data-action-value={actionValue}
-    data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={"clipped-bot la-tooltip"}
+    data-tooltip={tooltipEnabled && !disabled ? tip : undefined }
+    data-tooltip-class="{tooltipClass || "clipped-bot la-tooltip"} {tooltipTheme}"
     data-tooltip-direction={tooltipDirection}
     onpointerenter={ handleOnPointerEnter }
     onpointerleave={ handleOnPointerLeave }

@@ -24,9 +24,10 @@
         tooltipHeader,
         tooltip,
         tooltipDirection,
+        tooltipTheme,
 
         disableSlide,
-        disableCmdline: disableTerminal,
+        disableCmdline,
         disableExtension,
         disableCursor,
 
@@ -56,7 +57,7 @@
     data-flow-args={flowArgs}
     data-path={path}
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={"clipped-bot la-tooltip"}
+    data-tooltip-class="clipped-bot la-tooltip {tooltipTheme}"
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
@@ -67,7 +68,7 @@
         text={text}
         extensionText={randomExtension()}
         textStyle={textStyle || [FLOW_BUTTON_STYLE]}
-        disableCmdline={disableTerminal}
+        disableCmdline={disableCmdline}
         disableExtension={disableExtension}
         disableCursor={disableCursor}
     />

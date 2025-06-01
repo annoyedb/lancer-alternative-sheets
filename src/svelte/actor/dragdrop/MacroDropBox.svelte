@@ -17,6 +17,8 @@
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
     import SkillTriggerButton from '@/svelte/actor/button/SkillTriggerButton.svelte';
     import { SkillTriggerOtherBase } from '@/classes/flows/SkillTriggerOther';
+    import { getSheetStore } from '@/scripts/store/module-store';
+    import { getManufacturerColor } from '@/scripts/theme';
 
     const {
         uuid,
@@ -126,7 +128,7 @@
     }
 </script>
 
-<div class="la-combine-v -widthfull {hintDropArea ? "-divider la-anim-accent" : ""}">
+<div class="la-combine-v -widthfull {hintDropArea ? "-divider la-prmy-accent" : ""}">
 {#if hintDropArea}
     {#if allowDrop}
         <div 
@@ -141,7 +143,7 @@
             <i class="mdi mdi-arrow-down-right"></i>
         </div>
     {:else}
-        <span class="la-anim-transparent -fontsize0">&nbsp;</span>
+        <span class="la-prmy-transparent -fontsize0">&nbsp;</span>
     {/if}
 {/if}
     <div class="la-macroflows la-dropshadow la-combine-v -widthfull
@@ -199,8 +201,8 @@
                                 .startFlow(uuid, {} as any);
                         }}
                     />
-                    <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary lancer-bckg-darken-2">
-                        <div class="la-skilltrigger__inner -bordersround-rtb -small lancer-brdr-darken-2 la-text-text -fontsize2 -textaligncenter -overflowhidden -height3">
+                    <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary la-bckg-darken-2">
+                        <div class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize2 -textaligncenter -overflowhidden -height3">
                             0
                         </div>
                     </span>
@@ -216,6 +218,7 @@
                     tooltipEnabled={tooltipEnabled}
                     tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                     tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
+                    tooltipTheme={getManufacturerColor(getSheetStore(uuid).currentTheme, "prmy")}
                     logText={ButtonFactory.getSystemButtonTip(type, uuid)}
                     logType={logType}
                     logTypeReset={logTypeReset}
@@ -223,7 +226,7 @@
             {/if}
         {:else}
             <FlowButton
-                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-anim-header", ...(buttonStyle || [])]}
+                textStyle={["-padding1-r", "-padding0-tb", "-height3", "-letterspacing0", "la-text-header", "la-prmy-header", ...(buttonStyle || [])]}
                 text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {

@@ -26,7 +26,7 @@
 
     function getGlowColor()
     {
-        return getBrightness(getSheetStore(actor.uuid).currentTheme) === "dark" ? "la-anim-text" : "la-anim-primary";
+        return getBrightness(getSheetStore(actor.uuid).currentTheme) === "dark" ? "la-prmy-text" : "la-prmy-primary";
     }
 
     function browseImage()
@@ -111,7 +111,7 @@
     {#if !questionAnswer}
         <div class="la-bond-card__content la-combine-v -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Major Ideals -->
-            <div class="la-bond-major la-combine-v -alignstart lancer-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
+            <div class="la-bond-major la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
                 {#each system.bond.system.major_ideals as major, index}
                     <div class="la-combine-h">
                         <input type="checkbox"
@@ -128,7 +128,7 @@
                 {/each}
             </div>
             <!-- Minor Ideals -->
-            <div class="la-bond-minor la-combine-v -alignstart lancer-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
+            <div class="la-bond-minor la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
                 <div class="la-combine-h -widthfull">
                     <input type="checkbox"
                         class=""
@@ -176,7 +176,7 @@
         <div class="la-bond-card__content la-combine-v -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Q&A -->
             {#each system.bond.system.questions as qna, index}
-            <div class="la-bond-question la-combine-v -alignstart lancer-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
+            <div class="la-bond-question la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
                 <span
                     class="-fontsize1 -lineheight3"
                 >
@@ -218,15 +218,14 @@
 
             onClick={tallyAndUpdate}
         />
-    {#if advancedOptions}
         <file-picker
             type="image"
             name=""
         ></file-picker>
-        <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2">
+        <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
             <!-- Edit Bond Image -->
             <GlyphButton
-                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -240,7 +239,7 @@
             />
             <!-- Edit Bond -->
             <GlyphButton
-                style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
+                style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
 
                 flowClass={FlowClass.ContextMenu}
                 uuid={system.bond.uuid}
@@ -253,12 +252,11 @@
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
         </div>
-    {/if}
         <div class="la-combine-h -positionabsolute -left0 -padding3-l -gap1">
             <!-- Q&A Toggle -->
-            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}"></i>
+            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"></i>
             <GlyphButton
-                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
+                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -273,7 +271,7 @@
             </GlyphButton>
             <!-- Refresh Powers -->
             <GlyphButton
-                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.BondPowerRefresh}
 

@@ -26,8 +26,8 @@
 <div class="la-limited la-combine-h {style?.join(' ') || _STYLE}">
 {#each profiles as profile, index}
     <button type="button" 
-        class="-glow-primary-hover -height5
-            gen-control {index === weapon.system.selected_profile_index ? "-glow-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
+        class="la-prmy-primary -glow-prmy-hover -height5
+            gen-control {index === weapon.system.selected_profile_index ? "-pulse-glow-prmy la-prmy-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
@@ -35,7 +35,7 @@
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
-        <span class="-padding1-lr -fontsize1 -upper {index === weapon.system.selected_profile_index ? "-glow-header -bold" : ""}">{profile.name}</span>
+        <span class="-padding1-lr -fontsize1 -upper {index === weapon.system.selected_profile_index ? "-pulse-glow-prmy la-prmy-header -bold" : ""}">{profile.name}</span>
     </button>
 {/each}
 </div>

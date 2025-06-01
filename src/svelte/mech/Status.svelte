@@ -104,7 +104,7 @@
                 <div class="la-combine-h -aligncenter">
                     <i class="cci cci-structure la-dropshadow -fontsize9 -displayinline"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
-                    <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
                         <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                         <span class="la-top__span -width2ch">{system.structure.value}</span><!--
                     ---><span class="la-bottom__span">{system.structure.max}</span>
@@ -114,7 +114,7 @@
                 <div class="la-combine-h -aligncenter">
                     <i class="cci cci-repair la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
-                    <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
                             name="system.repairs.value"
@@ -127,7 +127,7 @@
                 <div class="la-combine-h -aligncenter">
                     <i class="cci cci-reactor la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.stress.label")}</span>
-                    <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
                         <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                         <span class="la-top__span -width2ch">{system.stress.value}</span>
                         <span class="la-bottom__span">{system.stress.max}</span>
@@ -143,7 +143,7 @@
                 <!-- Overcharge -->
                 <div class="la-combine-h -aligncenter">
                     <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
-                    <div class="la-combine-v -divider la-anim-accent -fontsize4 -textaligncenter">
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
                         <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
                         <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
                         <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>

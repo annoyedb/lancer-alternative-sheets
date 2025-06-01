@@ -1,0 +1,92 @@
+.la-root
+{
+    .la-body>.la-sidebar
+    {
+        min-width: 15rem;
+        flex: 1; // Baseline flex value. Overwritten by user settings
+
+        >.la-content-secondary
+        {
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            >.la-sidebar__statistics
+            {
+                .la-actor__img
+                {
+                    max-height: 15rem;
+                }
+            }
+        }
+        
+        // Macros/Flows
+        .la-macroflows
+        {
+            .la-skilltrigger
+            {
+                width: calc(100% - 2rem);
+
+                >.la-flow
+                {
+                    width: calc(100% - 2.5rem);
+                }
+
+                >.la-skilltrigger__span
+                {
+                    min-width: 2.5rem;
+                }
+            }
+            
+            .la-flow
+            {
+                width: calc(100% - 2rem);
+            }
+        }
+    }
+
+    // Scrollbar
+    .la-SCROLL-SIDEBAR
+    {
+        // #region Browser
+        &.la-content-secondary
+        {
+            scrollbar-width: thin;
+            scrollbar-color: var(--la-scrollbar-secondary) transparent;
+        }
+        // #endregion
+
+        // #region Electron
+        &.la-content-secondary::-webkit-scrollbar
+        {
+            width: 2px;
+        }
+
+        &.la-content-secondary::-webkit-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-secondary);
+            border: 0px;
+        }
+
+        &.la-content-secondary::-webkit-scrollbar-track
+        {
+            background: transparent;
+        }
+
+        &.la-content-secondary::-moz-scrollbar
+        {
+            width: 2px;
+        }
+
+        &.la-content-secondary::-moz-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-secondary);
+            border: 0px;
+        }
+
+        &.la-content-secondary::-moz-scrollbar-track
+        {
+            background: transparent;
+        }
+        // #endregion
+    }
+}

@@ -24,13 +24,13 @@
     startCollapsed={true}
 >
 <div class="la-combine-v -widthfull clipped-bot-alt">
-    <div class="la-combine-h -justifyevenly -widthfull lancer-bckg-darken-1 -padding0-tb">
+    <div class="la-combine-h -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
         <StatComboShort
             icon={"cci cci-role-defender -alignselfcenter"}
             label={getLocalized("LA.armor.short")}
             value={selectedMech.system.armor}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.armor.tooltip")}
@@ -41,7 +41,7 @@
             label={getLocalized("LA.evasion.short")}
             value={selectedMech.system.evasion}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.evasion.tooltip")}
@@ -52,7 +52,7 @@
             label={getLocalized("LA.edefense.short")}
             value={selectedMech.system.edef}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.edefense.tooltip")}
@@ -65,7 +65,7 @@
             label={getLocalized("LA.hitpoint.short")}
             value={selectedMech.system.hp.max}
             outerStyle={["la-text-text", "-fontsize4"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.hitpoint.tooltip")}
@@ -76,7 +76,7 @@
             label={getLocalized("LA.structure.label")}
             value={selectedMech.system.structure.max}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.structure.tooltip")}
@@ -87,7 +87,7 @@
             label={getLocalized("LA.heat.label")}
             value={selectedMech.system.heat.max}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.heat.tooltip")}
@@ -98,20 +98,20 @@
             label={getLocalized("LA.stress.label")}
             value={selectedMech.system.stress.max}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.stress.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
     </div>
-    <div class="la-combine-h -justifyevenly -widthfull lancer-bckg-darken-1 -padding0-tb">
+    <div class="la-combine-h -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
         <StatComboShort
             icon={"cci cci-tech-full -alignselfcenter"}
             label={getLocalized("LA.tattack.short")}
             value={selectedMech.system.tech_attack}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.tattack.tooltip")}
@@ -122,7 +122,7 @@
             label={getLocalized("LA.save.short")}
             value={selectedMech.system.save}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.save.tooltip")}
@@ -133,7 +133,7 @@
             label={getLocalized("LA.sensor.short")}
             value={selectedMech.system.sensor_range}
             outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-anim-accent", "-textaligncenter", "-bold"]}
+            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltip={getLocalized("LA.sensor.tooltip")}

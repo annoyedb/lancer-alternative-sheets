@@ -22,7 +22,7 @@
     const {
         actor,
         sheetActor,
-    } : {actor: any; sheetActor?: any} = $props();
+    } : {actor: any; sheetActor: any} = $props();
     let collapseAllButtonHover = $state(false);
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
@@ -30,7 +30,7 @@
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const isMechSheet = sheetActor?.type === "mech" || false;
     const coreBonuses = actor.itemTypes.core_bonus;
-    const collID = `${actor.uuid}.coreBonus`;
+    const collID = `${sheetActor.uuid}.coreBonus`;
     
     onMount(() => {
         if (isMechSheet)
@@ -47,7 +47,7 @@
 
     function getActionCollID(index: number)
     {
-        return `${actor.uuid}.coreBonus.${index}.action`;
+        return `${collID}.${index}.action`;
     }
 
     // (#4) Not a deployable but same idea

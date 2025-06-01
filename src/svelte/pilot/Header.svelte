@@ -2,7 +2,6 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    // import { TextLogIntro } from "@/enums/TextLogIntro";
     import { getLocalized } from "@/scripts/helpers";
     import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetX, setImageOffsetY } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
@@ -25,7 +24,10 @@
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Advanced Options Toggle -->
-    <div class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" style="z-index: 2;">
+    <div 
+        class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        style="z-index: 2;"
+    >
         <AdvancedButton
             uuid={actor.uuid}
             tooltipEnabled={getPilotSheetTooltipEnabled()}
@@ -41,10 +43,10 @@
         ></i>
     {/if}
     </div>
-    <div class="la-pilotnames -margin3-l -margin3-t">
+    <div class="la-names -margin3-l -margin3-t -flex1">
         <div class="la-combine-h">
             <input type="text"
-                class="la-pilotalias__input la-text-header -fontsize4 -upper -letterspacing1
+                class="la-actorname__input la-text-header -fontsize4 -upper -letterspacing1
                     charname"
                 name={"name"}
                 value={actor.name}
@@ -52,7 +54,7 @@
                 onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.alias.tooltip"), TextLogHook.PilotHeader) }
                 onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
             />
-            <span class="-fontsize0 lancer-text-darken-3">
+            <span class="-fontsize0 la-text-darken-3">
                 {getLocalized("LA.pilot.alias.label")}
             </span>
         </div>
@@ -67,7 +69,7 @@
                 onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.callsign.tooltip"), TextLogHook.PilotHeader) }
                 onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
             />
-            <span class="-fontsize0 lancer-text-darken-3">
+            <span class="-fontsize0 la-text-darken-3">
                 {getLocalized("LA.pilot.callsign.label")}
             </span>
         </div>
@@ -81,7 +83,7 @@
                 onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.background.tooltip"), TextLogHook.PilotHeader) }
                 onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
             />
-            <span class="-fontsize0 lancer-text-darken-3">
+            <span class="-fontsize0 la-text-darken-3">
                 {getLocalized("LA.pilot.background.label")}
             </span>
         </div>
@@ -109,13 +111,13 @@
         <div
             class="la-pilotfluff la-combine-h -positionabsolute la-combine-v -padding0-lr"
         >
-            <span class="lancer-text-darken-2 -textalignjustify -flex1">
+            <span class="la-text-darken-2 -textalignjustify -flex1">
                 {getLocalized("LA.pilot.fluff.1")}
             </span>
         </div>
         <div class="-positionrelative">
             <div 
-                class="la-combine-v -positionabsolute -margin3-t -margin1-lr lancer-text-lighten-75"
+                class="la-combine-v -positionabsolute -margin3-t -margin1-lr la-text-lighten-7"
             >
                 <div 
                     class="la-combine-h -justifystart -widthfull"

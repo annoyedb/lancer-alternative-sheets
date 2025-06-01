@@ -14,7 +14,7 @@
     const {
         effects,
         actor,
-        isOwner,
+        owner,
 
         tooltipEnabled,
         logType,
@@ -33,7 +33,7 @@
     function deleteActiveEffect(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement })
     {
         event.stopPropagation();
-        if (!isOwner)
+        if (!owner)
         {
             Logger.error("User is not the owner of this actor.");
             return;
@@ -51,14 +51,12 @@
     }
 </script>
 
-<!-- TODO: effect.name needs a localization map -->
-<!-- TODO: effect.description needs a localization map-->
 <div class="la-combine-v -gap0 -widthfull">
 {#if effects.length}
 {#each effects as effect, index}
     {#snippet headerOptions()}
     <DeleteButton
-        style={["-glow-primary-hover", "-fontsize2", "-height2", "-lineheight2"]}
+        style={["la-prmy-primary -glow-prmy-hover", "-fontsize2", "-height2", "-lineheight2"]}
         iconStyle={["-fontsize2", "la-text-header-anti"]}
 
         uuid={effect._id}
@@ -73,7 +71,7 @@
     <HeaderMain 
         text={effect.name}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning", "clipped-bot-alt"]}
-        textStyle={["la-text-header-anti", "la-anim-header-anti", "-fontsize1", "-lineheight2"]}
+        textStyle={["la-text-header-anti", "la-prmy-header-anti", "-fontsize1", "-lineheight2"]}
         borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         

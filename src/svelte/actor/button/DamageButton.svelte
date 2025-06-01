@@ -71,7 +71,7 @@
 </script>
 
 <button type="button"
-    class="la-properties la-combine-v -fontsize3 la-anim-accent -justifycenter
+    class="la-properties la-combine-v -fontsize3 la-prmy-accent -justifycenter -positionrelative
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
@@ -94,7 +94,7 @@
 {#if damage}
     <DamageArray
         damages={damage}
-        style={[...iconStyle || [], disabled ? "" : "-glow-header -glow-primary-hover"]}
+        style={[...iconStyle || [], disabled ? "" : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
     />
 {/if}
 {#if !disabled && damage?.length}

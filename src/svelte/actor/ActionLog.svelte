@@ -143,7 +143,7 @@
     <HeaderSecondary
         text={extractedNames[filteredMessages.length - 1 - index]}
         headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
-        textStyle={["la-text-header", "la-anim-header", "-fontsize1", "-upper"]}
+        textStyle={["la-text-header", "la-prmy-header", "-fontsize1", "-upper"]}
         borderStyle={["la-brdr-header-anti"]}
         
         itemID={message.id}

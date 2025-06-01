@@ -1,3 +1,3 @@
 <script lang="ts" module>
-    export const CLICKABLE_HOVER = "-glow-primary-hover -glow-header";
+    export const CLICKABLE_HOVER = "la-scdy-primary -glow-scdy-hover la-prmy-header -glow-prmy";
 </script>

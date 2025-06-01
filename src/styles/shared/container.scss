@@ -1,4 +1,4 @@
-@use './general' as *;
+@use 'mixins' as *;
 
 :root,
 .la-common
@@ -82,18 +82,16 @@
         border-color: transparent;
     }
 
-    @mixin collapseFadeOut
+    .-collapse-fade-out
     {
-        transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
-        -webkit-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
-        -moz-transition: max-height 0.20s, opacity 0.25s, padding 0.5s ease-in;
+        @include collapseFadeOut();
     }
 
     // Collapse group
     .collapse-wrapper
     {
-        @include collapseFadeOut;
         max-height: 100%;
+        @include collapseFadeOut();
 
         &.collapsed
         {
@@ -257,12 +255,17 @@
         {
             >*:first-child 
             {
-                border-bottom: var(--thickness, 2px) solid var(--color);
+                border-bottom: var(--thickness, 2px) solid var(--la-primary-color);
             }
 
             &.-thickness1
             {
                 --thickness: 1px;
+            }
+
+            &.-thickness2
+            {
+                --thickness: 2px;
             }
         }
     }
@@ -287,220 +290,6 @@
         &.-horizontal3
         {
             grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    // Dropdowns for Effect, Weapons, Systems, etc
-    .la-details.la-combine-v
-    {
-        // Summary
-        >.la-details__summary
-        {
-            padding: 0.5rem;
-            border-radius: 4px 0px 0px 0px;
-            cursor: pointer;
-
-            a
-            {
-                text-align: center;
-                width: 1rem;
-            }
-        }
-    }
-
-    // Generic descriptor box for effects, weapons, systems, etc
-    .la-effectbox
-    {
-        position: relative;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        padding-top: 1rem;
-        padding-bottom: 0.5em;
-
-        &.-largeheader
-        {
-            margin-top: 1rem;
-        }
-
-        >.la-effectbox__span
-        {
-            position: absolute;
-            top: -0.5rem;
-            left: 0.5rem;
-            padding: 0.1rem;
-            padding-right: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        >.la-effectbox__edit
-        {
-            position: absolute;
-            top: -0.5rem;
-            right: 0.5rem;
-            padding: 0.1rem;
-            padding-right: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        .la-actionheader
-        {
-            position: absolute;
-            width: calc(100% - 1rem);
-            top: -1rem;
-        }
-    }
-
-    // Edits here are made so that when the user hovers over the header, 
-    // the anims will play regardless of whether there are additional 
-    // elements in the header
-    .la-collapsegroup
-    {
-        >.la-summary
-        {
-            &:hover
-            {
-                .la-terminaltext>.la-cmdline,
-                .la-terminaltext>.la-extension
-                {
-                    @include hoverFadeIn;
-                }
-
-                .la-terminaltext>.la-cursor
-                {
-                    @include blinking;
-                    @include hoverFadeIn;
-
-                    &
-                    {
-                        animation: fadeIn 0.25s, blink 1s step-end infinite;
-                        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
-                        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
-                    }
-                }
-            }
-        }
-    }
-
-    .la-statusbar
-    {
-        >.la-bar-h>.la-tempvalue
-        {
-            height: 0.3em;
-            top: 0.15em;
-
-            &.-shield
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-            }
-
-            &.-burn
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-            }
-        }
-
-        >.la-bar-h>.la-tempvaluealt
-        {
-            height: 0.3em;
-            top: -0.1em;
-
-            &.-shield
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-            }
-
-            &.-burn
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-            }
-        }
-    }
-
-    .la-textlog
-    {
-        &.-scrolling
-        {
-            .la-textlog__typeit
-            {
-                display: flex;
-                flex-direction: column-reverse;
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: gray transparent;
-                min-height: 100%;
-                
-                ::before
-                {
-                    content: none;
-                    display: none;
-                }
-            }
-        }
-
-        .la-textlog__ruler
-        {
-            background-image: url(/assets/scale_1.png);
-        }
-
-        .la-textlog-left__current
-        {
-            height: 16px;
-            background-image: url(/assets/sb_l.png);
-            background-repeat: no-repeat;
-        }
-
-        .la-textlog-right__current
-        {
-            height: 16px;
-            background-image: url(/assets/sb_r.png);
-            background-repeat: no-repeat;
-        }
-    }
-
-    .la-actionlog
-    {
-        scrollbar-width: thin;
-
-        &.-main
-        {
-            overflow-y: auto;
-            scrollbar-color: var(--scrollbar-secondary) transparent;
-        }
-    }
-
-    .la-boundimage
-    {
-        >.la-boundimage__image
-        {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    button.la-tab
-    {
-        letter-spacing: 0.2rem;
-        text-align: center;
-
-        transition: all 0.15s ease-in;
-
-        &:hover
-        {
-            background-color: var(--darken-1);
-        }
-
-        &.active
-        {
-            background-color: var(--darken-2);
         }
     }
 }

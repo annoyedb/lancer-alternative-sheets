@@ -66,15 +66,15 @@
     function getSubtitleStyle(weapon:any)
     {
         return isDestroyed(weapon)
-            ? "la-text-error la-anim-error horus--very--subtle -upper"
-            : "la-text-header la-anim-header -upper";
+            ? "la-text-error la-prmy-error horus--very--subtle -upper"
+            : "la-text-header la-prmy-header -upper";
     }
 
     function getIconStyle(weapon: any)
     {
         return isDestroyed(weapon)
-            ? `la-text-repcap`
-            : `-glow-header -glow-primary-hover`;
+            ? "la-text-repcap"
+            : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover";
     }
 
     function getWeaponPath(index: number)
@@ -169,7 +169,7 @@
 {#snippet headerTertiaryLeftOptions()}
     <AttackButton
         iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-        iconBackgroundStyle={[H3_ICON_SIZE, "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
@@ -190,7 +190,7 @@
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
         iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-        iconBackgroundStyle={["-fontsize7", "la-anim-secondary", `${qualityMode ? "la-pulse-color" : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
         
         flowClass={FlowClass.RollDamage}
         range={weapon.system.active_profile.all_range}

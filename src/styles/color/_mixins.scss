@@ -5,7 +5,7 @@
 {
     @each $name, $color in $theme-map
     {
-        --#{$name}: #{$color};
+        --la-#{$name}: #{$color};
     }
 }
 
@@ -18,27 +18,37 @@
         {
             .la-outl-#{$name}
             {
-                -webkit-text-stroke: var(--size) var(--#{$name});
+                -webkit-text-stroke: var(--la-size) var(--la-#{$name});
             }
 
             .la-bckg-#{$name}
             {
-                background-color: var(--#{$name}) !important;
+                background-color: var(--la-#{$name}) !important;
             }
 
             .la-text-#{$name}
             {
-                color: var(--#{$name}) !important;
+                color: var(--la-#{$name}) !important;
             }
 
             .la-brdr-#{$name}
             {
-                border-color: var(--#{$name});
+                border-color: var(--la-#{$name});
             }
 
-            .la-anim-#{$name}
+            .la-prmy-#{$name}
             {
-                --color: var(--#{$name});
+                --la-primary-color: var(--la-#{$name});
+            }
+
+            .la-scdy-#{$name}
+            {
+                --la-secondary-color: var(--la-#{$name});
+            }
+
+            .la-trty-#{$name}
+            {
+                --la-tertiary-color: var(--la-#{$name});
             }
         }
     }
@@ -64,9 +74,9 @@
         border-color: #{$primary-color};
     }
 
-    .la-anim-#{$theme-id}
+    .la-prmy-#{$theme-id}
     {
-        --color: #{$primary-color};
+        --la-primary-color: #{$primary-color};
     }
 
     --#{$theme-id}-theme: #{$primary-color};

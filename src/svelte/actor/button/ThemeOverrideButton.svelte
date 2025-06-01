@@ -76,14 +76,14 @@
     <div class="la-combine-v -widthfull -gap0 -padding0">
     {#each Object.values(ThemeKey) as theme}
         <button type="button"
-            class="lancer-bckg-secondary la-text-header"
+            class="la-bckg-secondary la-text-header"
             onclick={event => handleThemeOverride(event, theme)}
         >
             {getThemeName(theme)}
         </button>
     {/each}
         <button type="button"
-            class="lancer-bckg-secondary la-text-header"
+            class="la-bckg-secondary la-text-header"
             onclick={event => handleThemeOverride(event, "default")}
         >
             {getLocalized("LA.advanced.theme.default.label")}
@@ -93,7 +93,7 @@
 
 {#if !disabled}
 <button type="button"
-    class="{style?.join(' ')} -glow-active-hover"
+    class="{style?.join(' ')} la-prmy-primary -glow-prmy-hover"
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}

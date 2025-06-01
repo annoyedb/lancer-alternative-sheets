@@ -90,7 +90,7 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="la-combine-h -widthfull -aligncenter
+<div class="la-combine-h -widthfull -aligncenter -positionrelative
         {style?.join(' ')}"
     ondragstart={handleDragStart}
     ondrop={handleDrop}
@@ -98,7 +98,7 @@
     bind:this={component}
 >
 {#if !disabled}
-    <i class="fas fa-grip-lines -positionabsolute -left0 -pointergrab -glow-primary-hover {iconStyle?.join(' ')}"
+    <i class="fas fa-grip-lines -positionabsolute -left0 -pointergrab la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
         onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         aria-label={getLocalized("LA.advanced.reorderMacro.tooltip")}
@@ -110,7 +110,7 @@
 {/if}
 {#if !disabled && !deleteDisabled}
     <button type="button"
-        class="fas fa-delete-left -positionabsolute -right0 -glow-primary-hover {iconStyle?.join(' ')}"
+        class="fas fa-delete-left -positionabsolute -right0 la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
         onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         onclick={handleOnDelete}

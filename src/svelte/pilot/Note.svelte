@@ -21,7 +21,7 @@
 
 {#snippet headerOptions()}
 <GlyphButton
-    style={["fas fa-edit", "-fontsize2", "-height2", "-lineheight2", "-glow-primary-hover", "-glow-header"]}
+    style={["fas fa-edit", "-fontsize2", "-height2", "-lineheight2", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
 
     flowClass={FlowClass.EditText}
     path="system.notes"

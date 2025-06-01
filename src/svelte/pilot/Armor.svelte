@@ -113,7 +113,7 @@
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull -justifyevenly">
                 {#if armorBonuses[index].pilot_hp}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr -padding1-tb la-text-header -gap0"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr -padding0-tb la-text-header -gap0"
                     data-tooltip={tooltipEnabled ? healthTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -123,7 +123,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_armor}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0 la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? armorTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -133,7 +133,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_evasion}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0 la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? evasionTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -143,7 +143,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_edef}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0 la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? edefenseTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -153,7 +153,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_speed}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0 la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? speedTip : undefined}
                     data-tooltip-class={"clipped-bot la-tooltip"}
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -216,7 +216,7 @@
         <HeaderSecondary
             text={armor.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-anim-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

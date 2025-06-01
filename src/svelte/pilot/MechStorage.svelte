@@ -36,7 +36,7 @@
     
     function getGlowColor()
     {
-        return isInactive() ? "la-anim-system" : "la-anim-text";
+        return isInactive() ? "la-prmy-system" : "la-prmy-text";
     }
 
     function getSizeTip()
@@ -85,7 +85,7 @@
 {#if ownedMechs.length}
 <div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <div class="-positionrelative -widthfull la-reveal">
-        <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} -textaligncenter -letterspacing1 -widthfull -height3 -lineheight3 lancer-bckg-darken-2">
+        <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height3 -lineheight3 la-bckg-darken-2">
         {#if isInactive()}
             {getLocalized("LA.pilot.mechstorage.inactive.label")}
         {:else}
@@ -138,7 +138,7 @@
         <button type="button"
             class="la-combine-h -widthfull -fontsize10 -positionabsolute -bottom0 
                 {isInactive() ? "cci cci-activate la-text-system" : "cci cci-deactivate la-text-weapon"} 
-                {qualityMode ? "-glow-color -glow-primary-hover " + getGlowColor() : ""}"
+                {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"
             data-tooltip={tooltipEnabled 
                 ? isInactive() ? activateTip : deactivateTip 
                 : undefined}

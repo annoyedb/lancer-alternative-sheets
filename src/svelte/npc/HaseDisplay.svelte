@@ -34,10 +34,10 @@
                     path={"system.hull"}
 
                     outerStyle={["-hull"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter -pointerdisable">
@@ -57,10 +57,10 @@
                     path={"system.agi"}
 
                     outerStyle={["-agi"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter">
@@ -79,10 +79,10 @@
                     path={"system.sys"}
 
                     outerStyle={["-sys"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter -pointerdisable">
@@ -102,10 +102,10 @@
                     path={"system.eng"}
 
                     outerStyle={["-eng"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-anim-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "-glow-primary-hover"]}
+                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
+                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "-glow-header"]}
+                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
                 />
             </div>
         </div>

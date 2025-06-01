@@ -1,0 +1,61 @@
+// Shared styling between mech/pilot/large sheets
+.la-root
+{
+    // Body
+    .la-body
+    {
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        height: calc(100% - 10rem);
+
+        
+        .la-content-body
+        {
+            flex: 2;
+            min-width: 0px; // TODO: set to a specific value to and activate a responsive compact design
+        }
+        
+        // #region Browser
+        .la-SCROLL-BODY
+        {
+            scrollbar-width: thin;
+            scrollbar-color: var(--la-scrollbar-primary) transparent;
+        }
+        // #endregion
+        
+        // #region Electron
+        >.la-SCROLL-BODY::-webkit-scrollbar
+        {
+            width: 2px;
+        }
+
+        >.la-SCROLL-BODY::-webkit-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-primary);
+            border: 0px;
+        }
+
+        >.la-SCROLL-BODY::-webkit-scrollbar-track
+        {
+            background: transparent;
+        }
+
+        >.la-SCROLL-BODY::-moz-scrollbar
+        {
+            width: 2px;
+        }
+
+        >.la-SCROLL-BODY::-moz-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-primary);
+            border: 0px;
+        }
+
+        >.la-SCROLL-BODY::-moz-scrollbar-track
+        {
+            background: transparent;
+        }
+        // #endregion
+    }
+}

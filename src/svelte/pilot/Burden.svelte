@@ -34,7 +34,7 @@
 {#if system.bond}
 {#snippet headerContent()}
 <GlyphButton
-    style={["mdi mdi-plus-circle-outline", "-fontsize3", "-height2", "-lineheight2", "-glow-primary-hover", "-glow-header"]}
+    style={["mdi mdi-plus-circle-outline", "-fontsize3", "-height2", "-lineheight2", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
 
     flowClass={FlowClass.GeneralControl}
     path="system.bond_state.burdens"
@@ -109,7 +109,7 @@
             <HeaderSecondary
                 text={burden.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header", "la-anim-header", "-fontsize2", "-overflowhidden"]}
+                textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)

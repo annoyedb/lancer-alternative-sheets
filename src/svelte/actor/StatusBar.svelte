@@ -37,7 +37,7 @@
     --->{name}<!--
 ---></span>
     {/if}
-    <div class="la-bar-h lancer-bckg-darken-3 -flex1 {clipPath}">
+    <div class="la-bar-h la-bckg-darken-3 -flex1 {clipPath}">
         <div class="la-bar-h-progress la-combine-h">
             <input class="la-bar-h-progress__input -flex1 {textStyle?.join(' ')}"
                 type="number" 
@@ -48,14 +48,14 @@
             <span class="la-bar-h-progress__span -flex1">{maxValue}</span>
         </div>
         <div class="la-bar-h-progress la-bar-h-current {barStyle?.join(" ")}"
-            style="--percent:{currentValue / maxValue * 100}%"></div>
+            style="--la-percent:{currentValue / maxValue * 100}%"></div>
         {#if currentValueSecondary && maxValueSecondary}
         <div class="la-tempvalue la-bar-h-progress la-bar-h-current {barStyleSecondary?.join(" ")}"
-            style="--percent:{currentValueSecondary / maxValueSecondary * 100}%"></div>
+            style="--la-percent:{currentValueSecondary / maxValueSecondary * 100}%"></div>
         {/if}
         {#if currentValueTertiary && maxValueTertiary}
         <div class="la-tempvaluealt la-bar-h-progress la-bar-h-current {barStyleTertiary?.join(" ")}"
-            style="--percent:{currentValueTertiary / maxValueTertiary * 100}%"></div>
+            style="--la-percent:{currentValueTertiary / maxValueTertiary * 100}%"></div>
         {/if}
     </div>
 </div>

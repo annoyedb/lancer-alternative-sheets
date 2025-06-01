@@ -15,13 +15,13 @@ export interface HexButtonProps
 
     /**
      * Optional array of style class names to apply to the text that hovers above the value.
-     * Use `anim` prefixed color classes to apply the `--color` CSS attribute.
+     * Use `anim` prefixed color classes to apply the `--la-primary-color` CSS attribute.
      */
     outerTextStyle?: Array<string>;
     
     /**
      * Optional array of style class names to apply to the button's value text.
-     * Use `anim` prefixed color classes to apply the `--color` CSS attribute.
+     * Use `anim` prefixed color classes to apply the `--la-primary-color` CSS attribute.
      */
     innerTextStyle?: Array<string>;
     

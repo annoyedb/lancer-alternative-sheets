@@ -66,7 +66,7 @@
     bind:this={component}
 >
     <input type="range"
-        class="-glow-active-hover"
+        class="la-prmy-primary -glow-prmy-hover"
         min={0.5}
         max={2}
         value={ratio}

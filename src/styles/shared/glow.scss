@@ -1,0 +1,156 @@
+@use 'mixins' as *;
+
+:root,
+.la-common
+{
+    .-pulse-prmy
+    {
+        @include pulseColor('pulsePrimary', --la-primary-color);
+    }
+
+    .-pulse-bckg-prmy
+    {
+        @include pulseBackground('pulseBackgroundPrimary', --la-primary-color);
+    }
+
+    .-pulse-glow-prmy
+    {
+        @include pulseGlowColor('pulseGlowPrimary', --la-primary-color);
+    }
+
+    .-glow-prmy
+    {
+        @include glowColor(--la-primary-color, 1.5px);
+    }
+
+    .-glow-prmy-active
+    {
+        &:active
+        {
+            @include glowColor(--la-primary-color, 5px);
+        }
+    }
+
+    .-glow-prmy-hover
+    {
+        &:hover
+        {
+            @include glowColor(--la-primary-color, 5px);
+        }
+    }
+
+    .-pulse-bckg-scdy
+    {
+        @include pulseBackground('pulseBackgroundSecondary', --la-secondary-color);
+    }
+
+    .-pulse-scdy
+    {
+        @include pulseColor('pulseSecondary', --la-secondary-color);
+    }
+
+    .-pulse-glow-scdy
+    {
+        @include pulseGlowColor('pulseGlowSecondary', --la-secondary-color);
+    }
+
+    .-glow-scdy
+    {
+        @include glowColor(--la-secondary-color, 1.5px);
+    }
+
+    .-glow-scdy-active
+    {
+        &:active
+        {
+            @include glowColor(--la-secondary-color, 5px);
+        }
+    }
+
+    .-glow-scdy-hover
+    {
+        &:hover
+        {
+            @include glowColor(--la-secondary-color, 5px);
+        }
+    }
+
+    .-pulse-trty
+    {
+        @include pulseColor('pulseTertiary', --la-tertiary-color);
+    }
+
+    .-pulse-bckg-trty
+    {
+        @include pulseBackground('pulseBackgroundTertiary', --la-tertiary-color);
+    }
+
+    .-pulse-glow-trty
+    {
+        @include pulseGlowColor('pulseGlowTertiary', --la-tertiary-color);
+    }
+
+    .-glow-trty
+    {
+        @include glowColor(--la-tertiary-color, 1.5px);
+    }
+
+    .-glow-trty-active
+    {
+        &:active
+        {
+            @include glowColor(--la-tertiary-color, 5px);
+        }
+    }
+
+    .-glow-trty-hover
+    {
+        &:hover
+        {
+            @include glowColor(--la-tertiary-color, 5px);
+        }
+    }
+
+    // TODO: replace with one of the above, once I figure out where its used
+    .-glow-kinetic
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--kinetic));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--kinetic));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--la-damage--kinetic));
+    }
+
+    .-glow-energy
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--energy));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--energy));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--la-damage--energy));
+    }
+
+    .-glow-explosive
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--explosive));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--explosive));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--la-damage--explosive));
+    }
+
+    .-glow-burn
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--burn));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--burn));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--la-damage--burn));
+    }
+
+    .-glow-heat
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--heat));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--heat));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--damage--heat));
+    }
+
+    .-glow-variable
+    {
+        filter: drop-shadow(0px 0px 1.5px var(--la-damage--variable));
+        -webkit-filter: drop-shadow(0px 0px 1.5px var(--la-damage--variable));
+        -moz-filter: drop-shadow(0px 0px 1.5px var(--la-damage--variable));
+    }
+}

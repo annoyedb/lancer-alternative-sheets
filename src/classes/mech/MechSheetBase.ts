@@ -44,7 +44,7 @@ export class MechSheetBase
                     initial: "statistics"
                 }
             ],
-            scrollY: [".la-SCROLL_BODY", ".la-SCROLL_SIDEBAR"],
+            scrollY: [".la-SCROLL-BODY", ".la-SCROLL-SIDEBAR"],
         }
     }
 
@@ -74,8 +74,6 @@ export class MechSheetBase
                 Hooks.on("laForceRerender", (uuid: string, callback?: () => void) => {
                     if (uuid !== this.actor.uuid)
                         return;
-
-                    console.log("LA: Force rerendering mech sheet", this.actor.uuid);
                     this.render();
                     if (callback)
                         callback();
@@ -165,7 +163,9 @@ export class MechSheetBase
                 mount(HaseDisplay, {
                     target: html.find(".la-SVELTE-HASE")[0],
                     props: {
-                        ...data,
+                        pilot: data.pilot,
+                        actor: data.actor,
+                        system: data.system,
                         tooltipEnabled: getMechSheetTooltipEnabled(),
                         logType: TextLogHook.MechHeader,
                         logTypeReset: TextLogHook.MechHeaderReset,
