@@ -9,12 +9,6 @@
     const props: PilotSheetProps = $props();
     const {
     } = props;
-
-    //@ts-ignore
-    function log(any: any)
-    {
-        console.log(any);
-    }
 </script>
 <script lang="ts" module>
     export const SETTINGS_BUTTON_STYLE = " la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -height2";

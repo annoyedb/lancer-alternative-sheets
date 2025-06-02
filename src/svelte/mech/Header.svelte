@@ -12,6 +12,7 @@
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
+    import { getDocumentTheme } from "@/scripts/theme";
 
     const props = $props();
     const { 
@@ -33,6 +34,7 @@
         <AdvancedButton
             uuid={actor.uuid}
             tooltipEnabled={getMechSheetTooltipEnabled()}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
@@ -40,7 +42,7 @@
         <i 
             class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
             data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-            data-tooltip-class={"la-tooltip clipped-bot"}
+            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}
         ></i>
     {/if}

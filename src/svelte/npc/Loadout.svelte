@@ -41,12 +41,6 @@
                 break;
         }
     });
-
-    //@ts-ignore
-    function log(any: any)
-    {
-        console.log(any);
-    }
 </script>
 
 {#if !system.class}

@@ -3,6 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
@@ -45,6 +46,7 @@
     <CollapseAllButton
         collapseID={getCollapseID(index)}
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -76,6 +78,7 @@
     {:else}
         <div class="la-combine-v -gap0 -widthfull">
             <Weapon
+                actor={actor}
                 mount={mount}
                 mountIndex={index}
             />

@@ -23,6 +23,7 @@
     import TagArray from "@/svelte/actor/TagArray.svelte";
     import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import { getDocumentTheme } from "@/scripts/theme";
 
     const props: MechSheetProps = $props();  
     const {
@@ -96,12 +97,6 @@
     {
         return `system.loadout.systems.${index}.value`;
     }
-
-    //@ts-ignore
-    function log(any: any)
-    {
-        console.log(any);
-    }
 </script>
 
 {#snippet emptySystems()}
@@ -124,6 +119,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -178,8 +174,9 @@
             path={getComponentPath(index)}
 
             tooltipEnabled={tooltipEnabled}
-            tooltip={component.value.system.effect}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.LEFT}
+            tooltip={component.value.system.effect}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
             
@@ -203,6 +200,7 @@
                 flowClass={FlowClass.SendToChat}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -214,6 +212,7 @@
                 path={getComponentPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -290,6 +289,7 @@
                     startCollapsed={false}
 
                     tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -300,6 +300,7 @@
                     sheetUUID={actor.uuid}
 
                     tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />

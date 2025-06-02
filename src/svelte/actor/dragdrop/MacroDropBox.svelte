@@ -8,6 +8,8 @@
     import { TooltipFactory } from '@/classes/TooltipFactory';
     import { ButtonFactory } from '@/classes/ButtonFactory';
     import { RunMacroBase } from '@/classes/flows/RunMacro';
+    import { SkillTriggerOtherBase } from '@/classes/flows/SkillTriggerOther';
+    import { getDocumentTheme } from '@/scripts/theme';
     import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
     import { LADataType } from '@/enums/LADataType';
     import { SystemButton } from '@/enums/SystemButton';
@@ -16,9 +18,6 @@
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/actor/dragdrop/DragDropHandle.svelte';
     import SkillTriggerButton from '@/svelte/actor/button/SkillTriggerButton.svelte';
-    import { SkillTriggerOtherBase } from '@/classes/flows/SkillTriggerOther';
-    import { getSheetStore } from '@/scripts/store/module-store';
-    import { getManufacturerColor } from '@/scripts/theme';
 
     const {
         uuid,
@@ -161,7 +160,7 @@
             root={component}
             data={buildFlowData(type, index)}
             style={["-justifyend"]}
-            iconStyle={["-fontsize2", "-padding1-lr", "-padding0-tb", ...(iconStyle || [])]}
+            iconStyle={["-fontsize2", "-padding1-lr", ...(iconStyle || [])]}
             onDrop={handleFlowDrop}
             onDelete={event => handleDelete(event, index)}
 
@@ -175,6 +174,7 @@
             <SkillTriggerButton
                 item={fromUuidSync(type)}
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(uuid)}
                 tooltipHeader={tooltipHeader}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -189,6 +189,7 @@
                         uuid={uuid}
 
                         tooltipEnabled={tooltipEnabled}
+                        tooltipTheme={getDocumentTheme(uuid)}
                         tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                         tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                         logText={ButtonFactory.getSystemButtonTip(type, uuid)}
@@ -216,9 +217,9 @@
                     flowType={type}
 
                     tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(uuid)}
                     tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                     tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
-                    tooltipTheme={getManufacturerColor(getSheetStore(uuid).currentTheme, "prmy")}
                     logText={ButtonFactory.getSystemButtonTip(type, uuid)}
                     logType={logType}
                     logTypeReset={logTypeReset}
@@ -235,6 +236,7 @@
                 }}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(uuid)}
                 logType={logType}
                 logTypeReset={logTypeReset}
             />
@@ -247,7 +249,7 @@
                 data-tooltip={tooltipEnabled 
                     ? allowDrop ? tipAlt : tipMain 
                     : undefined}
-                data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+                data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getDocumentTheme(uuid)}`}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
                 onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
                 onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

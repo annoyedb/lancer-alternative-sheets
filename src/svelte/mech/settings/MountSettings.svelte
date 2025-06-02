@@ -14,6 +14,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
+    import { getDocumentTheme } from "@/scripts/theme";
 
     const props: MechSheetProps = $props();
     const {
@@ -78,7 +79,7 @@
                 { content: snippet },
                 {
                     direction: TooltipDirection.UP, 
-                    cssClass: "la-tooltip -widthfull",
+                    cssClass: `la-tooltip -widthfull ${getDocumentTheme(actor.uuid)}`,
                     locked: true,
                 }
             )
@@ -157,7 +158,7 @@
                 },
                 {
                     direction: TooltipDirection.RIGHT,
-                    cssClass: "la-tooltip -widthfull",
+                    cssClass: `la-tooltip -widthfull ${getDocumentTheme(actor.uuid)}`,
                     locked: true,
                 }
             );
@@ -205,7 +206,7 @@
 
         <!-- (#5*) -->
         <button type="button"
-            class="la-bckg-secondary la-text-light -fontsize1 -letterspacing0"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
             onclick={(event) => handleSelection(event, dropdownContent, index)}
         >
             {getLocalized(mountNames[index])}
@@ -228,12 +229,15 @@
         {getLocalized("LA.advanced.mount.label")}
     </span>
     <div class="la-combine-v -alignstart -padding0-b -heightfull">
-        <MountAdd/>
+        <MountAdd
+            tooltipEnabled={getMechSheetTooltipEnabled()}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+        />
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
             data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
-            data-tooltip-class={"la-tooltip clipped-bot"}
+            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.remove.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleRemove(event, removeMount)}
@@ -247,7 +251,7 @@
             class={SETTINGS_BUTTON_STYLE}
             data-tooltip={tooltipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
-            data-tooltip-class={"la-tooltip clipped-bot"}
+            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.edit.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleEdit(event, editMount)}

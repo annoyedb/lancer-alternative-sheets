@@ -23,6 +23,8 @@
         sheetUUID,
 
         tooltipEnabled,
+        tooltipClass,
+        tooltipTheme,
         logType,
         logTypeReset,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
@@ -150,9 +152,10 @@
                             onClick={(event) => sendDeployableActionToChat(event, action, deployable)}
 
                             tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={tooltipTheme}
+                            tooltipDirection={TooltipDirection.LEFT}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
-                            tooltipDirection={TooltipDirection.LEFT}
                             logType={logType}
                             logTypeReset={logTypeReset}
                         />
@@ -162,7 +165,7 @@
                         src={getThemeImg(deployable)}
                         alt={getLocalized("LA.placeholder")}
                         data-tooltip={tooltipEnabled ? tip : undefined}
-                        data-tooltip-class="clipped-bot la-tooltip"
+                        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
                         data-tooltip-direction={TooltipDirection.LEFT}
                         onpointerenter={ logType ? event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), logType) : undefined }
                         onpointerleave={ logTypeReset ? event => resetLog(event, logTypeReset) : undefined }
@@ -185,6 +188,7 @@
                 onClick={uuid ? sendActionToChat : undefined }
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={tooltipTheme}
                 logType={logType}
                 logTypeReset={logTypeReset}
             />

@@ -30,6 +30,7 @@
         disableLeftButton,
 
         tooltipEnabled,
+        tooltipTheme,
         logType,
         logTypeReset
     }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
@@ -60,12 +61,6 @@
         else
             return `${action.detail}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`;
     }
-
-    //@ts-ignore
-    function log(any: any)
-    {
-        console.log(any);
-    }
 </script>
 
 {#if actions.length > 0}
@@ -83,9 +78,10 @@
         }
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={tooltipTheme}
+        tooltipDirection={undefined}
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}
-        tooltipDirection={undefined}
         logType={logType}
         logTypeReset={logTypeReset}
     />
@@ -127,6 +123,7 @@
         onClick={onClick ? (event) => onClick(event, action) : undefined }
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={tooltipTheme}
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}

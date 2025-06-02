@@ -20,14 +20,19 @@
     {
         display: flex;
 
-        &.-direction-column
+        &.-directioncolumn
         {
             flex-direction: column;
         }
 
-        &.-direction-row
+        &.-directionrow
         {
             flex-direction: row;
+        }
+
+        &.-directioncolumnreverse
+        {
+            flex-direction: column-reverse;
         }
     }
 

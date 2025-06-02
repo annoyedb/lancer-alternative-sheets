@@ -4,8 +4,8 @@
 aside.la-tooltip.active
 {
     padding: unset;
-    border-color: var(--la-primary-color);
-    background-color: var(--darken-5);
+    border-color: var(--la-primary);
+    background-color: var(--la-darken-9);
     text-align: left;
         
     >.la-tooltip__content
@@ -19,10 +19,20 @@ aside.la-tooltip.active
     {    
         margin: unset;
         border: unset;
-        background-color: var(--la-primary-color);
-        box-shadow: inset 0px 0px 2px 0px var(--background-color);
+        background-color: var(--la-primary);
+        box-shadow: inset 0px 0px 2px 0px var(--la-background);
         text-transform: uppercase;
         padding: 5px;
+    }
+
+    button:hover
+    {
+        box-shadow: unset;
+    }
+
+    button:active
+    {
+        box-shadow: unset;
     }
 
     &.-wide
@@ -35,7 +45,7 @@ aside.la-tooltip.active
         overflow-y: auto;
         max-height: 500px;
         scrollbar-width: thin;
-        scrollbar-color: var(--la-primary-color) var(--invade-color);
+        scrollbar-color: var(--la-primary) transparent;
     }
 }
 
@@ -43,12 +53,26 @@ aside.la-tooltip.active
 
 // This is so oddly specific because Monk's Little Details adds an oddly specific 
 // border CSS rule for some reason and dominance must be asserted :triumph:
-:root body.game.system-lancer>.lancer.sheet.la-common
+:root body.game.system-lancer>.lancer.sheet.la-common.app.window-app
 {
     >header.window-header
     {
         background-color: var(--la-primary);
         border: unset;
+    }
+    
+    >.window-resizable-handle
+    {
+        background-color: var(--la-darken-5);
+        border-color: var(--la-accent);
+        bottom: 0px;
+        cursor: se-resize;
+
+        >i
+        {
+            // color: var(--la-text);
+            padding-bottom: 0.25rem;
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+<!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -15,6 +16,8 @@
 
         tooltipEnabled,
         tooltipDirection,
+        tooltipClass,
+        tooltipTheme,
 
         style,
         iconStyle,
@@ -63,7 +66,7 @@
         {flowClass || 'lancer-context-menu'}"
     data-path={path}
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={"clipped-bot la-tooltip"}
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ handleOnPointerEnter }
     onpointerleave={ handleOnPointerLeave }

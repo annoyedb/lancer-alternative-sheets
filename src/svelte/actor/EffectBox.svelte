@@ -1,3 +1,4 @@
+<!-- TODO: get rid of hasFlow -->
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import type { EffectBoxProps } from "@/interfaces/actor/EffectBoxProps";
@@ -18,6 +19,7 @@
         editPath,
 
         tooltipEnabled,
+        tooltipTheme,
 
         logType,
         logTypeReset,
@@ -44,6 +46,7 @@
             flowClass={FlowClass.SendEffectToChat}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={tooltipTheme}
             logType={logType}
             logTypeReset={logTypeReset}
         />

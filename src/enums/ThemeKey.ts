@@ -69,7 +69,7 @@ export enum ThemeValue
     /**
      * GALSIM - Forecast/Galactic Simulation
      */
-    GALSIM = "la-gal",
+    GALSIM = "la-galsim",
 
     /**
      * HORUS - HORUS

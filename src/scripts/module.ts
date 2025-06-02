@@ -3,14 +3,17 @@ import { forwardData, logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
+import { DeployableSheetBase } from "@/classes/deployable/DeployableSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { registerModuleSettings } from "@/scripts/settings";
 import { registerMechSheetSettings, resetMechSheetData, resetMechSheetLocalData } from "@/scripts/mech/settings";
 import { registerNPCSheetSettings, resetNPCSheetData } from "@/scripts/npc/settings";
 import { registerPilotSheetSettings, resetPilotSheetData, resetPilotSheetLocalData } from "@/scripts/pilot/settings";
+import { registerDeployableSheetSettings, resetDeployableSheetData } from "@/scripts/deployable/settings";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { SkillTriggerOtherBase } from "@/classes/flows/SkillTriggerOther";
+import { Logger } from "@/classes/Logger";
 
 Hooks.once("init", () =>
 {
@@ -27,7 +30,8 @@ Hooks.once("setup", async () =>
     registerFlows();
 });
 
-Hooks.once("ready", async () => {
+Hooks.once("ready", async () =>
+{
     // @ts-expect-error It's not undefined; it's lying
     game.modules.get(LancerAlternative.Name).api = {
         settings: {
@@ -36,6 +40,7 @@ Hooks.once("ready", async () => {
             resetNPCSheetData,
             resetPilotSheetLocalData,
             resetPilotSheetData,
+            resetDeployableSheetData,
         },
     };
 });
@@ -52,6 +57,7 @@ function registerSettings()
     registerMechSheetSettings();
     registerNPCSheetSettings();
     registerPilotSheetSettings();
+    registerDeployableSheetSettings();
 }
 
 function registerFlows()
@@ -65,7 +71,7 @@ function registerFlows()
         RunMacroBase.getInstance().setupFlow(),
         SkillTriggerOtherBase.getInstance().setupFlow(),
     ];
-    
+
     const customSteps = [
         ...SendUnknownToChatBase.getInstance().setupFlowSteps(),
         ...RunMacroBase.getInstance().setupFlowSteps(),
@@ -84,12 +90,8 @@ function registerFlows()
         flowSteps.set(step.name, step);
     }
 
-    console.info("Lancer Alternative Sheets | Registered flows: ", 
-        customFlows.map(flow => flow.name).join(", ")
-    );
-    console.info("Lancer Alternative Sheets | Registered steps: ", 
-        customSteps.map(flowStep => flowStep.name).join(", ")
-    );
+    Logger.log(`Registered flows: ${customFlows.map(flow => flow.name).join(", ")}`);
+    Logger.log(`Registered steps: ${customSteps.map(flowStep => flowStep.name).join(", ")}`);
 }
 
 function setupSheets()
@@ -99,9 +101,10 @@ function setupSheets()
     MechSheetBase.setupSheet();
     NPCSheetBase.setupSheet();
     PilotSheetBase.setupSheet();
+    DeployableSheetBase.setupSheet();
 }
 
 function setupEventListeners()
 {
-    
+
 }

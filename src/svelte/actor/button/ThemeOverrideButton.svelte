@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
-    import { getThemeName } from "@/scripts/theme";
+    import { getDocumentTheme, getSystemTheme, getThemeName, translateTheme } from "@/scripts/theme";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
@@ -27,7 +27,6 @@
         logType,
         logTypeReset,
     }: ThemeOverrideButtonProps & IconButtonProps & TooltipProps & TextLogEventProps = $props();
-
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 
@@ -53,7 +52,7 @@
                 },
                 {
                     direction: TooltipDirection.DOWN,
-                    cssClass: "la-tooltip -widthfull",
+                    cssClass: `la-tooltip -widthfull ${getDocumentTheme(uuid)}`,
                     locked: true,
                 }
             );
@@ -66,6 +65,16 @@
     {
         event.stopPropagation();
         const selectedTheme = theme === "default" ? "" : theme;
+        if (optionElement) 
+        {
+            const currentThemeClass = getDocumentTheme(uuid);
+            
+            optionElement.classList.remove(currentThemeClass);
+            if (selectedTheme)
+                optionElement.classList.add(translateTheme(selectedTheme));
+            else
+                optionElement.classList.add(getSystemTheme());
+        }
         
         setOverride(uuid, selectedTheme);
     }
@@ -76,14 +85,14 @@
     <div class="la-combine-v -widthfull -gap0 -padding0">
     {#each Object.values(ThemeKey) as theme}
         <button type="button"
-            class="la-bckg-secondary la-text-header"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover"
             onclick={event => handleThemeOverride(event, theme)}
         >
             {getThemeName(theme)}
         </button>
     {/each}
         <button type="button"
-            class="la-bckg-secondary la-text-header"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
             onclick={event => handleThemeOverride(event, "default")}
         >
             {getLocalized("LA.advanced.theme.default.label")}
@@ -95,7 +104,7 @@
 <button type="button"
     class="{style?.join(' ')} la-prmy-primary -glow-prmy-hover"
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getDocumentTheme(uuid)}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

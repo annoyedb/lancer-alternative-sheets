@@ -9,8 +9,14 @@ export interface StatusBarProps
     name?: string,
     dataName?: string,
     barStyle?: Array<string>,
+    barEditStyle?: Array<string>,
     barStyleSecondary?: Array<string>,
+    barEditStyleSecondary?: Array<string>,
     barStyleTertiary?: Array<string>,
+    barEditStyleTertiary?: Array<string>,
     textStyle?: Array<string>,
     clipPath?: string,
+
+    editSecondary?: boolean;
+    editTertiary?: boolean;
 }

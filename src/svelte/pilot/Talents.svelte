@@ -4,6 +4,8 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCollapseState } from "@/scripts/store/collapse";
+    import { getDocumentTheme } from "@/scripts/theme";
+    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -26,8 +28,8 @@
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
     
-    const tooltipEnabled = getMechSheetTooltipEnabled();
     const isMechSheet = sheetActor?.type === "mech" || false;
+    const tooltipEnabled = isMechSheet ? getMechSheetTooltipEnabled() : getPilotSheetTooltipEnabled();
     const talents = actor.itemTypes.talent;
     const collID = `${sheetActor.uuid}.talents`;
 
@@ -58,18 +60,13 @@
     {
         return `${collID}.${talentIndex}.ranks.${rankIndex}.action`;
     }
-
-    //@ts-ignore
-    function log(...args: any[])
-    {
-        console.log(...args);
-    }
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 
@@ -120,6 +117,7 @@
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
@@ -190,6 +188,7 @@
                         rank={jndex}
 
                         tooltipEnabled={tooltipEnabled}
+                        tooltipTheme={getDocumentTheme(actor.uuid)}
                         logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                         logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
@@ -241,6 +240,8 @@
                             collapseID={getActionCollID(index, jndex)}
                             startCollapsed={false}
 
+                            tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={getDocumentTheme(sheetActor.uuid)}
                             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                         />

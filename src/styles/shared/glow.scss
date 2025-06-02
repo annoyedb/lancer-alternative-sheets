@@ -31,6 +31,14 @@
         }
     }
 
+    .-glow-prmy-focus
+    {
+        &:focus
+        {
+            @include glowColor(--la-primary-color, 5px);
+        }
+    }
+
     .-glow-prmy-hover
     {
         &:hover
@@ -67,6 +75,14 @@
         }
     }
 
+    .-glow-scdy-focus
+    {
+        &:focus
+        {
+            @include glowColor(--la-secondary-color, 5px);
+        }
+    }
+
     .-glow-scdy-hover
     {
         &:hover
@@ -98,6 +114,14 @@
     .-glow-trty-active
     {
         &:active
+        {
+            @include glowColor(--la-tertiary-color, 5px);
+        }
+    }
+
+    .-glow-trty-focus
+    {
+        &:focus
         {
             @include glowColor(--la-tertiary-color, 5px);
         }

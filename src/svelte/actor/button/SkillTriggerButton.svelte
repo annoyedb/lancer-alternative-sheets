@@ -9,6 +9,7 @@
         item,
 
         tooltipEnabled,
+        tooltipTheme,
         logType,
         logTypeReset,
     } : {item : any} & TooltipProps & TextLogEventProps = $props();
@@ -21,8 +22,9 @@
         uuid={item.uuid}
 
         tooltipEnabled={tooltipEnabled}
-        tooltip={item.system.description}
+        tooltipTheme={tooltipTheme}
         tooltipHeader={getLocalized("LA.pilot.skillTrigger.label")}
+        tooltip={item.system.description}
         logText={item.system.description}
         logType={logType}
         logTypeReset={logTypeReset}

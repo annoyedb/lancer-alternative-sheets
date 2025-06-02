@@ -5,6 +5,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -30,6 +31,7 @@
 <CollapseAllButton
     collapseID={activeEffectsCollID}
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -75,9 +77,10 @@
             flowClass={FlowClass.RechargeFeatures}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipDirection={TooltipDirection.UP}
             tooltip={getLocalized("LA.npc.recharge.tooltip")}
             tooltipHeader={getLocalized("LA.action.startofturn.label")}
-            tooltipDirection={TooltipDirection.UP}
         />
         <div class="la-combine-h -wrapwrap -widthfull -gap0">
             <div class="la-combine-v -gap0 -flex1 -widthfull">
@@ -90,8 +93,9 @@
                     flowType={"BasicAttack"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     tooltipDirection={TooltipDirection.UP}
+                    tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                 />
                 <FlowButton 
                     style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
@@ -102,8 +106,9 @@
                     flowType={"Damage"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     tooltipDirection={TooltipDirection.UP}
+                    tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                 />
             </div>
             <div class="la-combine-v -gap0 -flex1 -widthfull">
@@ -116,8 +121,9 @@
                     flowType={"TechAttack"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     tooltipDirection={TooltipDirection.UP}
+                    tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                 />
                 <FlowButton
                     style={["clipped", "-widthfull", "la-bckg-secondary"]}
@@ -128,9 +134,10 @@
                     flowType={"Burn"}
 
                     tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipDirection={TooltipDirection.UP}
                     tooltipHeader={getLocalized("LA.action.endofturn.label")}
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}
-                    tooltipDirection={TooltipDirection.UP}
                 />
             </div>
         </div>

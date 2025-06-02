@@ -12,6 +12,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { getDocumentTheme } from "@/scripts/theme";
 
     const {
         actor,
@@ -46,6 +47,7 @@
     index={index}
     
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -109,6 +111,7 @@
             startCollapsed={false}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
@@ -119,6 +122,7 @@
             sheetUUID={actor.uuid}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />

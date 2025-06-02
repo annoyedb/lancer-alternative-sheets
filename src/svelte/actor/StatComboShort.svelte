@@ -13,7 +13,9 @@
         tooltipEnabled,
         tooltip,
         tooltipHeader,
-        tooltipDirection
+        tooltipDirection,
+        tooltipClass,
+        tooltipTheme,
     }: StatComboProps & TooltipProps = $props()
 
     let tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
@@ -24,7 +26,7 @@
     <i class="{icon}"></i>
     <div class="la-combine-v {innerStyle?.join(' ')}"
         data-tooltip={tooltipEnabled ? tip : undefined}
-        data-tooltip-class="clipped-bot la-tooltip"
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
     >
         <span class="-widthfull">{value}</span>

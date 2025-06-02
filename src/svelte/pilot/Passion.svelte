@@ -6,7 +6,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getBondImageSrc, getPilotSheetTooltipEnabled, setBondImageSrc } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
-    import { getBrightness } from "@/scripts/theme";
+    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
     import { getSheetStore } from "@/scripts/store/module-store";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
@@ -210,6 +210,7 @@
             flowClass={FlowClass.None}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.DOWN}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}

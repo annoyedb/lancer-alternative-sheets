@@ -106,6 +106,12 @@ const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.pilot.history.ipsn",
 };
 
+// Translates the keys stored by this module into their CSS class
+export function translateTheme(key: ThemeKey | string): ThemeValue
+{
+    return THEME_MAP[key];
+}
+
 export function getDocumentTheme(uuid: string): ThemeValue
 {
     const { currentTheme } = getSheetStore(uuid);

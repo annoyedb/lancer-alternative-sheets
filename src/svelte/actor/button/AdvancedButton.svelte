@@ -1,3 +1,4 @@
+<!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { getAdvancedState, setAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
@@ -22,6 +23,7 @@
         tooltip,
         tooltipHeader,
         tooltipClass,
+        tooltipTheme,
         tooltipDirection,
     }: {uuid: string} & IconButtonProps & TextLogEventProps & TooltipProps = $props();
     let advancedOptions = $derived(getAdvancedState(uuid));
@@ -42,7 +44,7 @@
     class="{style?.join(' ') || '-fontsize3'}"
     aria-label={getLocalized("LA.advanced.tooltip")}
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

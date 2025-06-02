@@ -24,6 +24,7 @@
         tooltipHeader,
         tooltip,
         tooltipDirection,
+        tooltipClass,
         tooltipTheme,
 
         disableSlide,
@@ -57,7 +58,7 @@
     data-flow-args={flowArgs}
     data-path={path}
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class="clipped-bot la-tooltip {tooltipTheme}"
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

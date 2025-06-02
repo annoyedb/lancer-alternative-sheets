@@ -26,8 +26,9 @@
         disabled,
         deleteDisabled,
 
-        tooltipClass,
         tooltipDirection,
+        tooltipClass,
+        tooltipTheme,
 
         logType,
         logTypeReset,
@@ -115,7 +116,7 @@
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         onclick={handleOnDelete}
         data-tooltip={deleteTip}
-        data-tooltip-class={tooltipClass || "clipped-bot la-tooltip"}
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.RIGHT}
         aria-label={getLocalized("LA.delete.tooltip")}
     ></button>

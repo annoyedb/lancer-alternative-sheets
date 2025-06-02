@@ -8,6 +8,8 @@
     const {
         system,
         tooltipEnabled,
+        tooltipClass,
+        tooltipTheme,
     }: any = $props();
     
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.core.available.tooltip"));
@@ -19,7 +21,7 @@
     type="checkbox" 
     data-dtype="Boolean"
     data-tooltip={tooltipEnabled ? tip : undefined}
-    data-tooltip-class="clipped-bot la-tooltip"
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction="RIGHT"
     onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.core.available.tooltip"), TextLogHook.MechHeader) }
     onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }

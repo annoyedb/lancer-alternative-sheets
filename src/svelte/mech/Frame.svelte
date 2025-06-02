@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getManufacturerColor } from "@/scripts/theme";
+    import { getDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -37,18 +37,13 @@
     const collID = frame
         ? `${actor.uuid}.frame.${frame.id}`
         : `${actor.uuid}.frame.empty`;
-
-    //@ts-ignore
-    function log(...args: any[])
-    {
-        console.log(args);
-    }
 </script>
 
 {#snippet headerOptions()}
     <CollapseAllButton
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 

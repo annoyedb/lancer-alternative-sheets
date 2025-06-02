@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
@@ -98,6 +99,7 @@
                 style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 

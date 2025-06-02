@@ -2,6 +2,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { RESERVE_ICON_MAP } from "@/scripts/constants";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -40,6 +41,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -94,6 +96,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -107,6 +110,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -150,6 +154,7 @@
                 sheetUUID={actor.uuid}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
@@ -162,6 +167,7 @@
                 startCollapsed={true}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />

@@ -32,7 +32,7 @@ export interface TooltipProps
     tooltipClass?: string;
 
     /**
-     * Optional theme for the tooltip. This can be a key from the ThemeKey enum or a custom string but must define a `--la-primary-color` css attribute.
+     * Optional theme for the tooltip. This is appended onto `tooltipClass` or its default value (e.g. `.la-tooltip`)
      */
     tooltipTheme?: ThemeKey | string;
 }

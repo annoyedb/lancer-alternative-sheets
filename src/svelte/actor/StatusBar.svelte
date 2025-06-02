@@ -13,16 +13,24 @@
         name,
         dataName,
         barStyle,
+        barEditStyle,
         barStyleSecondary,
+        barEditStyleSecondary,
         barStyleTertiary,
+        barEditStyleTertiary,
         textStyle,
         clipPath,
+        editSecondary,
+        editTertiary,
 
         tooltipEnabled,
+        tooltipClass,
+        tooltipTheme,
+        tooltipDirection,
         tooltip,
         tooltipHeader,
-        tooltipDirection
     } : StatusBarProps & TooltipProps = $props();
+    let editing = $state(false);
 
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 </script>
@@ -31,31 +39,46 @@
     {#if name}
     <span class="la-damage__span -fontsize0 -flexbasis13 -textalignright"
         data-tooltip={tooltipEnabled ? tip : undefined}
-        data-tooltip-class="clipped-bot la-tooltip"
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
     ><!--
     --->{name}<!--
 ---></span>
     {/if}
     <div class="la-bar-h la-bckg-darken-3 -flex1 {clipPath}">
-        <div class="la-bar-h-progress la-combine-h">
-            <input class="la-bar-h-progress__input -flex1 {textStyle?.join(' ')}"
-                type="number" 
+        <div class="la-bar-h-progress la-combine-h -widthfull">
+            <input type="number" 
+                class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter {editing ? textStyle?.join(' ') : "la-text-transparent"}"
                 name="{dataName}"
                 data-dtype="Number" 
-                value="{currentValue}">
-            <span class="la-bar-h-progress__span -flex0">/</span>
-            <span class="la-bar-h-progress__span -flex1">{maxValue}</span>
+                value="{currentValue}"
+                onfocus={() => {editing=true;}}
+                onblur={() => {editing=false;}}
+            >
+            <span 
+                class="la-bar-h-progress__span -lineheight1 -positionabsolute -pointerdisable  {editing ? "-visibilityhidden" : ""}"
+            >
+                {currentValue}/{maxValue}
+            </span>
         </div>
-        <div class="la-bar-h-progress la-bar-h-current {barStyle?.join(" ")}"
-            style="--la-percent:{currentValue / maxValue * 100}%"></div>
+        <div 
+            class="la-bar-h-progress la-bar-h-current 
+                {editing ? `${barEditStyle?.join(" ")} -pulse-bckg-prmy -fast` : barStyle?.join(" ")}"
+            style="--la-percent:{currentValue / maxValue * 100}%"
+        ></div>
         {#if currentValueSecondary && maxValueSecondary}
-        <div class="la-tempvalue la-bar-h-progress la-bar-h-current {barStyleSecondary?.join(" ")}"
-            style="--la-percent:{currentValueSecondary / maxValueSecondary * 100}%"></div>
+        <div 
+            class="la-tempvalue la-bar-h-progress la-bar-h-current 
+                {editSecondary || false ? `${barEditStyleSecondary?.join(" ")} -pulse-bckg-prmy -fast` : barStyleSecondary?.join(" ")}"
+            style="--la-percent:{currentValueSecondary / maxValueSecondary * 100}%"
+        ></div>
         {/if}
         {#if currentValueTertiary && maxValueTertiary}
-        <div class="la-tempvaluealt la-bar-h-progress la-bar-h-current {barStyleTertiary?.join(" ")}"
-            style="--la-percent:{currentValueTertiary / maxValueTertiary * 100}%"></div>
+        <div 
+            class="la-tempvaluealt la-bar-h-progress la-bar-h-current 
+                {editTertiary || false ? `${barEditStyleTertiary?.join(" ")} -pulse-bckg-prmy -fast` : barStyleTertiary?.join(" ")}"
+            style="--la-percent:{currentValueTertiary / maxValueTertiary * 100}%"
+        ></div>
         {/if}
     </div>
 </div>

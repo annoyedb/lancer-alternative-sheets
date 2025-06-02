@@ -2,6 +2,7 @@
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -23,6 +24,7 @@
     import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
+        actor,
         mod,
         path,
     }: WeaponModProps = $props();
@@ -32,13 +34,6 @@
     const collID = mod ? `${mod.uuid}.action` : "empty";
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = true; // TODO: change to a setting
-
-    //@ts-ignore
-    function log(any: any)
-    {
-        console.log(any);
-    }
-
 </script>
 
 {#if mod}
@@ -51,8 +46,9 @@
         path={path}
 
         tooltipEnabled={tooltipEnabled}
-        tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.LEFT}
+        tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
@@ -76,6 +72,7 @@
         path={path}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -212,6 +209,7 @@
                     flowClass={FlowClass.SendEffectToChat}
 
                     tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -227,6 +225,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />

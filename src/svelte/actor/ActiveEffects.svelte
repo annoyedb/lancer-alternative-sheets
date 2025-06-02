@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Logger } from "@/classes/Logger";
-    import { getBrightness } from "@/scripts/theme";
+    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
     import { getSheetStore } from "@/scripts/store/module-store";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
@@ -64,6 +64,7 @@
         onClick={deleteActiveEffect}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={logType}
         logTypeReset={logTypeReset}
     />

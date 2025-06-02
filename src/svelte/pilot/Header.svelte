@@ -6,6 +6,7 @@
     import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetX, setImageOffsetY } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { getDocumentTheme } from "@/scripts/theme";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
@@ -31,6 +32,7 @@
         <AdvancedButton
             uuid={actor.uuid}
             tooltipEnabled={getPilotSheetTooltipEnabled()}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
         />
@@ -38,7 +40,7 @@
         <i 
             class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
             data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-            data-tooltip-class={"la-tooltip clipped-bot"}
+            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}
         ></i>
     {/if}

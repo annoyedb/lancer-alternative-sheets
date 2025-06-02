@@ -30,6 +30,11 @@
     @include generate-lancer-classes(alpha.$alpha);
     @include generate-lancer-classes(gms.$gms-theme);
 
+    .la-text-transparent
+    {
+        color: transparent !important;
+    }
+
     .la-bckg-transparent
     {
         background-color: transparent !important;
@@ -46,42 +51,42 @@
     }
 
     // Themes
-    &.la-gms
+    .la-gms
     {
         @include theme(gms.$gms-theme);
     }
 
-    &.la-gmsdark
+    .la-gmsdark
     {
         @include theme(gmsdark.$gmsdark-theme);
     }
 
-    &.la-ipsn
+    .la-ipsn
     {
         @include theme(ipsn.$ipsn-theme);
     }
 
-    &.la-ssc
+    .la-ssc
     {
         @include theme(ssc.$ssc-theme);
     }
 
-    &.la-horus
+    .la-horus
     {
         @include theme(horus.$horus-theme);
     }
 
-    &.la-ha
+    .la-ha
     {
         @include theme(ha.$ha-theme);
     }
 
-    &.la-galsim
+    .la-galsim
     {
         @include theme(galsim.$galsim-theme);
     }
 
-    &.la-msmc
+    .la-msmc
     {
         @include theme(msmc.$msmc-theme);
     }

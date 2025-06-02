@@ -3,6 +3,7 @@
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -23,6 +24,7 @@
     import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
 
     const {
+        actor,
         mount,
         mountIndex,
     }: MountSlotProps = $props();
@@ -111,12 +113,6 @@
             getLocalized("LA.flow.rollAttack.template.tooltip"), 
             weapon.name);
     }
-
-    //@ts-ignore
-    function log(...args: any[])
-    {
-        console.log(...args);
-    }
 </script>
 
 {#each mount.slots as slot, index}
@@ -127,6 +123,7 @@
     <div class="la-combine-v -gap0 -widthfull -padding2-l">
     {#if slot.size !== "Integrated" && weapon.system.mod}
         <WeaponMod
+            actor={actor}
             mod={weapon.system.mod}
             path={`${getModPath(index)}`}
         />
@@ -175,8 +172,9 @@
         path={`system.loadout.weapon_mounts.${index}`}
 
         tooltipEnabled={tooltipEnabled}
-        tooltip={getRollWeaponTip(weapon)}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.LEFT}
+        tooltip={getRollWeaponTip(weapon)}
         logText={getRollWeaponTip(weapon)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
@@ -197,6 +195,7 @@
         damage={weapon.system.active_profile.all_damage}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.UP}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
@@ -212,6 +211,7 @@
             uuid={weapon.uuid}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -223,6 +223,7 @@
             path={getWeaponPath(index)}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -309,6 +310,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
@@ -321,11 +323,14 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
         {#if slot.size !== "Integrated" && !weapon.system.mod}
+        <!-- RAW integrated weapons can't have weapon mods but whatever -->
             <WeaponMod
+                actor={actor}
                 mod={weapon.system.mod}
                 path={`${getModPath(index)}`}
             />

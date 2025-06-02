@@ -40,7 +40,7 @@
 
 <!-- (#5*) -->
 <button type="button"
-    class="la-bckg-secondary la-text-light -fontsize1 -letterspacing0
+    class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus
         gen-control"
     data-action={"splice"}
     data-path={`system.loadout.weapon_mounts.${mountIndex}`}

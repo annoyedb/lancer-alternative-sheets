@@ -117,14 +117,6 @@
         const spanElement = jQuery(headerElement).find('span').get(0) as HTMLElement | null;
         return spanElement?.textContent?.trim() || getLocalized("LA.placeholder");
     }
-
-    function* reverse()
-    {
-        for (let i = filteredMessages.length - 1; i >= 0; i--) 
-        {
-            yield filteredMessages[i];
-        }
-    }
 </script>
 
 {#snippet headerSecondaryLeftOptions()}
@@ -132,16 +124,16 @@
 {/snippet}
 
 <div
-    class="la-actionlog -main la-combine-v -gap0 -widthfull"
+    class="la-actionlog -main la-combine-v -gap0 -widthfull -displayflex -directioncolumnreverse"
     style={maxHeight ? `max-height: ${maxHeight}rem;` : ""}
     bind:this={component}
 >
-{#each reverse() as message, index}
+{#each filteredMessages as message, index}
 {#snippet headerSecondaryRightOptions()}
-    <span class="-fontsize0">{extractedTimes[filteredMessages.length - 1 - index]}</span>
+    <span class="-fontsize0">{extractedTimes[index]}</span>
 {/snippet}
     <HeaderSecondary
-        text={extractedNames[filteredMessages.length - 1 - index]}
+        text={extractedNames[index]}
         headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
         textStyle={["la-text-header", "la-prmy-header", "-fontsize1", "-upper"]}
         borderStyle={["la-brdr-header-anti"]}

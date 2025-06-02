@@ -2,16 +2,18 @@
     import { onMount } from "svelte";
     import { rebindButtons } from "@/scripts/action-log";
 
-    const {
+    let {
         messageData,
     } = $props();
 
-    let component: HTMLElement | null = $state(null);
+    let component: HTMLElement | null = null;
         
     onMount(() =>
     {
         if (component)
+        {
             rebindButtons(messageData, component);
+        }
     });
 </script>
 

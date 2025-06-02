@@ -1,3 +1,4 @@
+<!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -22,6 +23,8 @@
         tooltip,
         tooltipHeader,
         tooltipDirection,
+        tooltipClass,
+        tooltipTheme,
 
         logText,
         logType,
@@ -39,7 +42,7 @@
             {style?.join(' ')}
             {flowClass}"
         data-tooltip={tooltipEnabled ? tip : undefined }
-        data-tooltip-class={"clipped-bot la-tooltip"}
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.RIGHT}
         onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

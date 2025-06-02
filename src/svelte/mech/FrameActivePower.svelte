@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getManufacturerColor } from "@/scripts/theme";
+    import { getDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { slugify } from "@/scripts/lancer/util/lid";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
@@ -51,8 +51,9 @@
     flowClass={FlowClass.None}
     
     tooltipEnabled={tooltipEnabled}
-    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     tooltipDirection={TooltipDirection.LEFT}
+    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -68,7 +69,7 @@
         data-uuid={frame.uuid}
         data-path={"system.core_system"}
         data-tooltip={tip}
-        data-tooltip-class={"clipped-bot la-tooltip"}
+        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
         data-tooltip-direction={TooltipDirection.LEFT}
         aria-label={name}
         disabled={!system.core_energy}
@@ -111,6 +112,7 @@
         startCollapsed={false}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />
@@ -121,6 +123,7 @@
         sheetUUID={actor.uuid}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

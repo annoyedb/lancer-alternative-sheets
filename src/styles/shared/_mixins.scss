@@ -248,11 +248,11 @@
 {
     & // NOTE: DO NOT REMOVE; this is a SASS requirement
     {
-        --pulse-time: 2.5s;
+        --pulse-background-time: 2.5s;
 
-        animation: $keyframeName var(--pulse-time) ease-in-out infinite;
-        -webkit-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
-        -moz-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
     }
 
     @keyframes #{$keyframeName}
@@ -303,15 +303,20 @@
 {
     & // NOTE: DO NOT REMOVE; this is a SASS requirement
     {
-        --pulse-time: 2.5s;
+        --pulse-background-time: 2.5s;
 
-        animation: $keyframeName var(--pulse-time) ease-in-out infinite;
-        -webkit-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
-        -moz-animation: $keyframeName var(--pulse-time) ease-in-out infinite;
+        animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
 
         &.-fast
         {
-            --pulse-time: 1.5s;
+            --pulse-background-time: 1.5s;
+        }
+
+        &.-slow
+        {
+            --pulse-background-time: 3.5s;
         }
     }
 
@@ -320,12 +325,12 @@
         0%,
         100%
         {
-            background-color: var(transparent);
+            background-color: var($color);
         }
 
         50%
         {
-            background-color: var($color);
+            background-color: transparent;
         }
     }
 
@@ -334,12 +339,12 @@
         0%,
         100%
         {
-            background-color: var(transparent);
+            background-color: var($color);
         }
 
         50%
         {
-            background-color: var($color);
+            background-color: transparent;
         }
     }
 
@@ -348,12 +353,12 @@
         0%,
         100%
         {
-            background-color: var(transparent);
+            background-color: var($color);
         }
 
         50%
         {
-            background-color: var($color);
+            background-color: transparent;
         }
     }
 }

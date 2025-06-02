@@ -18,6 +18,8 @@
         style,
 
         tooltipEnabled,
+        tooltipClass,
+        tooltipTheme,
 
         logText,
         logType,
@@ -72,7 +74,7 @@
         value={ratio}
         step={0.1}
         data-tooltip={tooltipEnabled ? tip : undefined }
-        data-tooltip-class={"la-tooltip clipped-bot"}
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}

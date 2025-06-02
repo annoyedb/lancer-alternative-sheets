@@ -101,6 +101,7 @@ function handleDamageFlow(messageData: any, button: JQuery<HTMLButtonElement>)
 
         flow.begin();
     }
+
     button.on('click', async () =>
     {
         runDamageFlow();
@@ -166,7 +167,6 @@ function handleCascadeFlow(messageData: any, button: JQuery<HTMLButtonElement>):
 {
     async function runCascadeFlow(): Promise<void>
     {
-        console.log(`Actor.${messageData.speaker.actor}`);
         const CascadeFlow = (game.lancer.flows as Map<string, any>).get("CascadeFlow") as any;
         const flow = new CascadeFlow(`Actor.${messageData.speaker.actor}`);
 

@@ -23,6 +23,7 @@
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import { getDocumentTheme } from "@/scripts/theme";
 
     const {
         actor,
@@ -65,6 +66,7 @@
     <CollapseAllButton
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getDocumentTheme(actor.uuid)}
         logType={TextLogHook.PilotHeader}
         logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -143,8 +145,9 @@
                 path={getWeaponPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltip={getRollWeaponTip(weapon)}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltipDirection={TooltipDirection.LEFT}
+                tooltip={getRollWeaponTip(weapon)}
                 logText={getRollWeaponTip(weapon)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
@@ -163,6 +166,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -175,6 +179,7 @@
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -186,6 +191,7 @@
                 path={getWeaponPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -236,6 +242,7 @@
                 sheetUUID={actor.uuid}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
@@ -248,6 +255,7 @@
                 startCollapsed={true}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
