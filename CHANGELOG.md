@@ -4,9 +4,9 @@ With the addition of the deployables sheet, there will be no more sheets made fo
 In addition, if you are fluent in language other than English and would be interested in helping me localize this module, please let me know! If you already know how localization works in the context of Foundry VTT modules, I'm always open to pull requests on the GitHub page --and thank you in advance!
 
 ## Changes
-* #40 - Health, stress, etc can now be edited from clicking anywhere on their bar, rather than only the left side 
+* #40 - Health, stress, etc can now be edited from clicking anywhere on their bar, rather than only the left side. Thank you @sealtrowitz!
 * #39 - Swapped Hull and Agility hexes in HASE display for mechs and pilot sheets
-* #38 - Added way to edit HASE stats via the 'advanced toggle' button in pilot sheets
+* #38 - Added way to edit HASE stats via the 'advanced toggle' button in pilot sheets. Thank you @LostDeep!
 * Added deployables sheet
 * Fixed a critical bug where datastores were accidentally sharing the same object instance, leading to some unexpected behaviour between sheets
 * Fixed an issue where weapons with a counter but lacking a loading, limited, or SP cost would not display the counter
