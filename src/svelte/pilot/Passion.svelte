@@ -219,10 +219,6 @@
 
             onClick={tallyAndUpdate}
         />
-        <file-picker
-            type="image"
-            name=""
-        ></file-picker>
         <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
             <!-- Edit Bond Image -->
             <GlyphButton
