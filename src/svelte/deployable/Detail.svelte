@@ -97,7 +97,7 @@
     {@render headerOptions(`${collID}.actions`)}
 {/snippet}
 
-<div class="la-combine-v">
+<div class="la-combine-v -widthfull">
 {#if system.detail}
     <HeaderMain
         text={getLocalized("LA.deployable.effects.label")}
