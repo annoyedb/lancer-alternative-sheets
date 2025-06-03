@@ -27,7 +27,7 @@ In addition to the above:
 <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/npc-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ### Deployable Sheets
-<img src="" style="display: block; margin-left: auto; margin-right: auto;"/>
+<img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/deployable-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Installation
 This module can be installed:
