@@ -25,6 +25,8 @@ In addition, if you are fluent in language other than English and would be inter
 * Changed CSS definitions to mitigate future potential conflicts (e.g. Anarchist Overlay) and added style classes to root documents
 * Changed collapse ID of pilot & mech sheets to be mutually exclusive from each other to be in line with 'expected behavior'
 * Changed hitbox of draggable handles for macros/flows in the sidebar
+## Known Issues
+* Since apparently it has been added, certain flows (particularly those added by this module) do not show up in the Action Log. This breaks intended interaction with items Deployable sheets in particular which only use the flows added by this module and various Systems, Gear, etc that use those flows as fallbacks when the system's are not available
 
 # 1.2.2
 ## Changes
