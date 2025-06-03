@@ -22,6 +22,7 @@
     
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
     const collID = `${actor.uuid}.systems`;
+    const actions = getDeployableActions(actor);
 
     function getDeployableActions(deployable: StoredDocument<any>)
     {
@@ -137,26 +138,91 @@
     >
         <div class="la-combine-v -gap0 -widthfull -fontsize2">
             <EffectBox
+                name={getLocalized("LA.npc.utilities.label")}
+            >
+                <div class="la-combine-h -wrapwrap -widthfull -gap0">
+                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                        <FlowButton 
+                            style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                            text={getLocalized("LA.flow.rollAttack.label")}
+
+                            uuid={actor.uuid}
+                            flowClass={FlowClass.Standard}
+                            flowType={"BasicAttack"}
+
+                            tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipDirection={TooltipDirection.UP}
+                            tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
+                        />
+                    </div>
+                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                        <FlowButton 
+                            style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                            text={getLocalized("LA.flow.rollDamage.label")}
+
+                            uuid={actor.uuid}
+                            flowClass={FlowClass.Standard}
+                            flowType={"Damage"}
+
+                            tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipDirection={TooltipDirection.UP}
+                            tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
+                        />
+                    </div>
+                </div>
+            </EffectBox>
+            {#if actions.length}
+            <EffectBox
                 name={getLocalized("LA.deployable.deployment.label")}
             >
-            {#each getDeployableActions(actor) as action}
-                <FlowButton
-                    text={getLocalized(action.label)}
-                    style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                <div class="la-combine-h -wrapwrap -widthfull -gap0">
+                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                    {#each actions as action, index}
+                    {#if index % 2 == 0}
+                        <FlowButton
+                            text={getLocalized(action.label)}
+                            style={["clipped-alt", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
-                    uuid={actor.uuid}
-                    path={`system.lid`}
-                    flowClass={FlowClass.None}
-                    onClick={(event) => sendDeployableActionToChat(event, action, actor)}
+                            uuid={actor.uuid}
+                            path={`system.lid`}
+                            flowClass={FlowClass.None}
+                            onClick={(event) => sendDeployableActionToChat(event, action, actor)}
 
-                    tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
-                    tooltipDirection={TooltipDirection.UP}
-                    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
-                    tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
-                />
-            {/each}
+                            tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipDirection={TooltipDirection.UP}
+                            tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
+                            tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
+                        />
+                    {/if}
+                    {/each}
+                    </div>
+                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                    {#each actions as action, index}
+                    {#if index % 2 != 0}
+                        <FlowButton
+                            text={getLocalized(action.label)}
+                            style={["clipped", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+
+                            uuid={actor.uuid}
+                            path={`system.lid`}
+                            flowClass={FlowClass.None}
+                            onClick={(event) => sendDeployableActionToChat(event, action, actor)}
+
+                            tooltipEnabled={tooltipEnabled}
+                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipDirection={TooltipDirection.UP}
+                            tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
+                            tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
+                        />
+                    {/if}
+                    {/each}
+                    </div>
+                </div>
             </EffectBox>
+            {/if}
             <ActionBox
                 actions={system.actions}
                 collapseID={`${collID}.actions.list`}
