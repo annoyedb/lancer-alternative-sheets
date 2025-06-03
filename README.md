@@ -15,6 +15,7 @@ While the main goal was to provide aesthetic alternative sheets to the Lancer sy
 In addition to the above:
 * player mech sheets display some useful pilot sheet items such as core bonuses and pilot talents.
 * player mech sheets and pilot sheets feature a sidebar where useful stats are always easily accessed at a glance
+* deployable sheets list all their available actions and activations
 
 ### Pilot Sheets
 <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/pilot-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
@@ -24,6 +25,9 @@ In addition to the above:
 
 ### NPC Sheets
 <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/npc-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
+
+### Deployable Sheets
+<img src="" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Installation
 This module can be installed:
@@ -38,10 +42,11 @@ If you are on a supported version but the last-verified version does not match, 
 ## Using the sheet
 To use the sheet, you must select the "Sheet" configuration (to the left of "Close" in the images above) in the selected actor sheet and select "Alternative `<Type>` Sheet" to override the default sheet or to act as the new default sheet.
 
-The current fully implemented sheets are as follows:
+The implemented sheets are as follows:
 * Pilot sheets
 * Mech sheets
 * NPC sheets
+* Deployable sheets
 
 ## Frequently Asked Questions
 Q: How do I roll a weapon/system?

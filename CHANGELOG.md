@@ -1,3 +1,31 @@
+# 1.3.0
+With the addition of the deployables sheet, there will be no more sheets made for this module for the foreseeable future and any updates hereafter will be enhancements or bug fixes to the current sheets. Thank you to everyone who has helped contribute through bug reports, pull requests, and suggestions!
+
+In addition, if you are fluent in language other than English and would be interested in helping me localize this module, please let me know! If you already know how localization works in the context of Foundry VTT modules, I'm always open to pull requests on the GitHub page --and thank you in advance!
+
+## Changes
+* #40 - Health, stress, etc can now be edited from clicking anywhere on their bar, rather than only the left side 
+* #39 - Swapped Hull and Agility hexes in HASE display for mechs and pilot sheets
+* #38 - Added way to edit HASE stats via the 'advanced toggle' button in pilot sheets
+* Added deployables sheet
+* Fixed a critical bug where datastores were accidentally sharing the same object instance, leading to some unexpected behaviour between sheets
+* Fixed an issue where weapons with a counter but lacking a loading, limited, or SP cost would not display the counter
+* Fixed an issue where a mech without an assigned pilot would prevent the mech sheet from loading
+* Fixed an issue where Active Effects referenced an old name changed from a recent refactor, preventing some functionality such as deletion `big oopsie`
+* Fixed an issue where sheet rerenders would not preserve sidebar scroll Y
+* Fixed an issue where Pilot Core Bonus and Pilot Talents would not respect their tooltip display settings on their respective sheets
+* Fixed an issue where new entries added in the Action Log of sheets would require a rerender to use their buttons if the number of items in the log was greater than one
+* Fixed styling issue where drop shadows would multiply with each collapsable, making some shadows much harsher than intended
+* Fixed styling issue where text-overflowed names on mechs and pilots would not overflow into ellipsed text
+* Fixed styling issue where when scrolled to the very bottom of the sidebar and toggling off advanced options, there would be a slight shift in the scrollbar Y position
+* Changed stylization of vacant weapons/systems/etc 
+* Changed stylization of tooltips (and by extension certain popouts like NPC notes, mount editing, and theme overrides), which also now reflect the current sheet's primary theme. Unless it's a tag or hamburger menu option from the original sheet, in which case they'll be changed in a later patch
+* Changed sidebar image max-height to prioritize consistency across sheets 
+* Changed counters on weapon mods to always be displayed for design consistency
+* Changed CSS definitions to mitigate future potential conflicts (e.g. Anarchist Overlay) and added style classes to root documents
+* Changed collapse ID of pilot & mech sheets to be mutually exclusive from each other to be in line with 'expected behavior'
+* Changed hitbox of draggable handles for macros/flows in the sidebar
+
 # 1.2.2
 ## Changes
 * #37 - Fixed missing per-profile actions, affecting weapons such as the Terashima Blade's Storm Stance
@@ -5,7 +33,7 @@
 # 1.2.1
 `wake up honey, new sheets just dropped`
 
---
+https://github.com/user-attachments/assets/99cf532b-ff94-40e6-8e13-c84447e574ac
 
 Now all that's left is deployables. 
 
