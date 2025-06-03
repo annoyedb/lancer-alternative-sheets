@@ -1,0 +1,22 @@
+.la-deployable
+{
+    .la-SVELTE-HEADER
+    {
+        flex-basis: 18rem;
+
+        .la-deployable__img
+        {
+            max-height: 12rem;
+            min-height: 12rem;
+            max-width: 12rem;
+            min-width: 12rem;
+            object-fit: contain;
+        }
+
+        .la-stat__island
+        {
+            z-index: 1;
+            margin-top: -1.5rem;
+        }
+    }
+}

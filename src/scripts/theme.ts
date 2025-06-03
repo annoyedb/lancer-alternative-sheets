@@ -44,6 +44,9 @@ import "@/styles/npc/header.scss";
 import "@/styles/npc/body.scss";
 import "@/styles/npc/hase-display.scss"
 
+import "@/styles/deployable/header.scss";
+import "@/styles/deployable/body.scss";
+
 import "@/styles/color/_mixins.scss";
 import "@/styles/color/la-colors.scss";
 import "@/styles/color/open-color.scss";

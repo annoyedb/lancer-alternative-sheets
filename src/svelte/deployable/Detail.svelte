@@ -1,0 +1,173 @@
+<script lang="ts">
+    import { getLocalized } from "@/scripts/helpers";
+    import { getDocumentTheme } from "@/scripts/theme";
+    import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
+    import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
+    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+
+    const {
+        actor,
+        system,
+    }: DeployableSheetProps = $props();
+    let collapseAllButtonHover = $state(false);
+    
+    const tooltipEnabled = getDeployableSheetTooltipEnabled();
+    const collID = `${actor.uuid}.systems`;
+
+    function getDeployableActions(deployable: StoredDocument<any>)
+    {
+        return [
+            { 
+                label: "LA.mech.system.deployable.activate.label", 
+                tooltip: "LA.mech.system.deployable.activate.tooltip",
+                deployableAction: deployable.system.activation 
+            },
+            { 
+                label: "LA.mech.system.deployable.deactivate.label", 
+                tooltip: "LA.mech.system.deployable.deactivate.tooltip",
+                deployableAction: deployable.system.deactivation 
+            },
+            { 
+                label: "LA.mech.system.deployable.recall.label", 
+                tooltip: "LA.mech.system.deployable.recall.tooltip",
+                deployableAction: deployable.system.recall 
+            },
+            { 
+                label: "LA.mech.system.deployable.redeploy.label", 
+                tooltip: "LA.mech.system.deployable.redeploy.tooltip",
+                deployableAction: deployable.system.redeploy 
+            },
+        ].filter(a => !!a.deployableAction);
+    }
+    
+    // (#4) Temporary until Lancer system implements proper deployable actions
+    function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
+    {
+        event.stopPropagation();
+        if (action)
+        {
+            let description = `${action.detail}`;
+            if (action.trigger)
+                description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
+            let chatData = {
+                title: action.name, 
+                description: description
+            } as ChatData 
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+    }
+
+    // (#4) Temporary until Lancer system implements proper deployable actions
+    function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
+    {
+        event.stopPropagation();
+        if (action)
+        {
+            const description = `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`;
+            let chatData = {
+                title: deployable.name, 
+                description: description
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+    }
+</script>
+
+{#snippet headerOptions(collID: string)}
+<CollapseAllButton
+    collapseID={collID}
+    tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
+
+    onPointerEnter={() => {collapseAllButtonHover = true;}}
+    onPointerLeave={() => {collapseAllButtonHover = false;}}
+/>
+{/snippet}
+{#snippet headerActions()}
+    {@render headerOptions(`${collID}.actions`)}
+{/snippet}
+
+<div class="la-combine-v">
+{#if system.detail}
+    <HeaderMain
+        text={getLocalized("LA.deployable.effects.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden", "-upper"]}
+        borderStyle={["la-brdr-primary", "-gap0"]}
+        extensionTextFunction={() => {
+            if (collapseAllButtonHover)
+                return `--${getLocalized("LA.collapseAll.extension")}`;
+            return undefined;
+        }}
+        
+        collapseID="{collID}.details"
+        startCollapsed={true}
+    >
+        <EffectBox
+            name={getLocalized("LA.mech.system.effect.label")}
+        >
+            {@html system.detail}
+        </EffectBox>
+    </HeaderMain>
+{/if}
+    <HeaderMain
+        text={getLocalized("LA.deployable.actions.label")}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
+        textStyle={["la-text-header", "-fontsize2", "-overflowhidden", "-upper"]}
+        borderStyle={["la-brdr-primary", "-gap0"]}
+        extensionTextFunction={() => {
+            if (collapseAllButtonHover)
+                return `--${getLocalized("LA.collapseAll.extension")}`;
+            return undefined;
+        }}
+        
+        collapseID="{collID}.actions"
+        startCollapsed={true}
+
+        headerContent={headerActions}
+    >
+        <div class="la-combine-v -gap0 -widthfull -fontsize2">
+            <EffectBox
+                name={getLocalized("LA.deployable.deployment.label")}
+            >
+            {#each getDeployableActions(actor) as action}
+                <FlowButton
+                    text={getLocalized(action.label)}
+                    style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+
+                    uuid={actor.uuid}
+                    path={`system.lid`}
+                    flowClass={FlowClass.None}
+                    onClick={(event) => sendDeployableActionToChat(event, action, actor)}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipDirection={TooltipDirection.UP}
+                    tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
+                    tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
+                />
+            {/each}
+            </EffectBox>
+            <ActionBox
+                actions={system.actions}
+                collapseID={`${collID}.actions.list`}
+                startCollapsed={false}
+                
+                uuid={actor.uuid}
+                onClick={sendActionToChat}
+
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
+            />
+        </div>
+    </HeaderMain>
+</div>
