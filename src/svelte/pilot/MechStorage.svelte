@@ -41,12 +41,12 @@
 
     function getSizeTip()
     {
-        return TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${ownedMechs[selectedMechIndex].system.size}`);
+        return TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${ownedMechs[selectedMechIndex].system.size}`);
     }
 
     function getSpeedTip()
     {
-        return TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${ownedMechs[selectedMechIndex].system.speed}`);
+        return TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${ownedMechs[selectedMechIndex].system.speed}`);
     }
 
     function handleMechSelect(event: Event, index: number)

@@ -39,8 +39,8 @@
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
     const showTechAttack = getPilotSheetTechAttackEnabled();
-    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
-    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
+    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
+    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
 
@@ -188,7 +188,7 @@
         </div>
         <!-- SHIELD (VALUE) -->
         <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
-            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+            <input class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
@@ -206,7 +206,7 @@
         </div>
         <!-- BURN (VALUE) -->
         <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
-            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+            <input class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
                 data-dtype={"Number"}
@@ -260,7 +260,7 @@
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
         ---></span>
-            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrb -small -bordersoff"
+            <input class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrb -small -bordersoff"
                 type={"number"}
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
@@ -298,7 +298,7 @@
         </div>
         <!-- BURN (VALUE) -->
         <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
-            <input class="la-damage__input la-shadow la-text-text -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+            <input class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
                 data-dtype={"Number"}

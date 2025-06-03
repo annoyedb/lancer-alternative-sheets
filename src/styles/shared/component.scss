@@ -129,41 +129,6 @@
         }
     }
 
-    .la-bar-h
-    {
-        position: relative;
-        width: 100%;
-        height: 1rem;
-        overflow: hidden;
-
-        >.la-bar-h-current
-        {
-            position: absolute;
-            top: 0;
-            width: var(--la-percent);
-        }
-
-        >.la-bar-h-progress
-        {
-            font-size: 0.9rem;
-            height: 100%;
-
-            >.la-bar-h-progress__span
-            {
-                z-index: 3;
-                font-weight: normal;
-                text-align: left;
-                height: 100%;
-            }
-
-            >.la-bar-h-progress__input
-            {
-                z-index: 3;
-                height: 100%;
-            }
-        }
-    }
-
     .la-ruler
     {
         min-width: 1rem;
@@ -269,11 +234,33 @@
 
     .la-statusbar
     {
-        >.la-bar-h>.la-tempvalue
+        >.la-bar-h
         {
-            height: 0.3em;
-            top: 0.15em;
+            >.la-bar-h-current
+            {
+                width: var(--la-percent);
+            }
 
+            >.la-bar-h-progress
+            {
+                font-size: 0.9rem;
+
+                >.la-bar-h-progress__span
+                {
+                    z-index: 3;
+                    font-weight: normal;
+                }
+
+                >.la-bar-h-progress__input
+                {
+                    z-index: 3;
+                }
+            }
+        }
+        
+        >.la-bar-h>.-secondary,
+        >.la-bar-h>.-tertiary
+        {
             &.-shield
             {
                 filter: drop-shadow(0px 0px 2px var(--bar-shield));
@@ -289,24 +276,16 @@
             }
         }
 
-        >.la-bar-h>.la-tempvaluealt
+        >.la-bar-h>.-secondary
+        {
+            height: 0.3em;
+            top: 0.15em;
+        }
+
+        >.la-bar-h>.-tertiary
         {
             height: 0.3em;
             top: -0.1em;
-
-            &.-shield
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-shield));
-            }
-
-            &.-burn
-            {
-                filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -webkit-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-                -moz-filter: drop-shadow(0px 0px 2px var(--bar-burn));
-            }
         }
     }
 

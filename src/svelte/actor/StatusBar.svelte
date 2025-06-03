@@ -45,10 +45,11 @@
     --->{name}<!--
 ---></span>
     {/if}
-    <div class="la-bar-h la-bckg-darken-3 -flex1 {clipPath}">
-        <div class="la-bar-h-progress la-combine-h -widthfull">
+    <div class="la-bar-h la-bckg-darken-3 -flex1 -positionrelative -widthfull -height1 -overflowhidden {clipPath}">
+        <div class="la-bar-h-progress la-combine-h -widthfull -heightfull">
             <input type="number" 
-                class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter {editing ? textStyle?.join(' ') : "la-text-transparent"}"
+                class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter 
+                    {editing ? textStyle?.join(' ') : "la-text-transparent"}"
                 name="{dataName}"
                 data-dtype="Number" 
                 value="{currentValue}"
@@ -56,27 +57,34 @@
                 onblur={() => {editing=false;}}
             >
             <span 
-                class="la-bar-h-progress__span -lineheight1 -positionabsolute -pointerdisable  {editing ? "-visibilityhidden" : ""}"
+                class="la-bar-h-progress__span -lineheight1 -positionabsolute -pointerdisable 
+                    {editing ? "-visibilityhidden" : ""}"
             >
                 {currentValue}/{maxValue}
             </span>
         </div>
         <div 
-            class="la-bar-h-progress la-bar-h-current 
-                {editing ? `${barEditStyle?.join(" ")} -pulse-bckg-prmy -fast` : barStyle?.join(" ")}"
+            class="la-bar-h-progress la-bar-h-current -positionabsolute -top0 -heightfull 
+                {editing && barEditStyle
+                    ? `${barEditStyle?.join(" ")} -pulse-bckg-prmy -fast` 
+                    : barStyle?.join(" ")}"
             style="--la-percent:{currentValue / maxValue * 100}%"
         ></div>
         {#if currentValueSecondary && maxValueSecondary}
         <div 
-            class="la-tempvalue la-bar-h-progress la-bar-h-current 
-                {editSecondary || false ? `${barEditStyleSecondary?.join(" ")} -pulse-bckg-prmy -fast` : barStyleSecondary?.join(" ")}"
+            class="la-bar-h-progress -secondary la-bar-h-current -positionabsolute -top0 -heightfull 
+                {editSecondary && barEditStyleSecondary 
+                    ? `${barEditStyleSecondary?.join(" ")} -pulse-bckg-prmy -fast` 
+                    : barStyleSecondary?.join(" ")}"
             style="--la-percent:{currentValueSecondary / maxValueSecondary * 100}%"
         ></div>
         {/if}
         {#if currentValueTertiary && maxValueTertiary}
         <div 
-            class="la-tempvaluealt la-bar-h-progress la-bar-h-current 
-                {editTertiary || false ? `${barEditStyleTertiary?.join(" ")} -pulse-bckg-prmy -fast` : barStyleTertiary?.join(" ")}"
+            class="la-bar-h-progress -tertiary la-bar-h-current -positionabsolute -top0 -heightfull 
+                {editTertiary && barEditStyleTertiary 
+                    ? `${barEditStyleTertiary?.join(" ")} -pulse-bckg-prmy -fast` 
+                    : barStyleTertiary?.join(" ")}"
             style="--la-percent:{currentValueTertiary / maxValueTertiary * 100}%"
         ></div>
         {/if}

@@ -27,8 +27,8 @@
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
-    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `Size ${system.size}`);
-    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `Speed ${system.speed}`);
+    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
+    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`);
     const activateTip = TooltipFactory.buildTooltip(getLocalized("LA.activate.tooltip"), `Activations ${system.activations}`);
     const tierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.tooltip"), `Tier ${system.tier}`);
     const setTierTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.tier.set.tooltip"))
@@ -56,7 +56,7 @@
 <div class="la-bg-scroll la-bckg-background la-shadow -medium -inset -widthfull -heightfull">
     <div class="la-combine-h la-dropshadow -justifyevenly">
     <!-- Left Side -->
-        <div class="la-combine-v">
+        <div class="la-combine-v -gap1">
             <!-- Tier Options -->
             <div class="la-combine-h -height2 ">
                 <div class="">
@@ -148,7 +148,7 @@
         </div>
         <!-- Right Side -->
         <div class="la-combine-h -padding1-r">
-            <div class="la-combine-v">
+            <div class="la-combine-v -gap1">
                 <div class="la-combine-h -height2 -justifybetween -widthfull">
                     <!-- Advanced options, theme override, notes, etc -->
                     <div class="la-combine-h -gap1">
@@ -257,8 +257,9 @@
                                     editSecondary={editingShield}
                                     
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltip={getLocalized("LA.hitpoint.tooltip")}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
+                                    tooltip={getLocalized("LA.hitpoint.tooltip")}
                                 />
                                 <div class="la-spacer -tiny"></div>
                                 <!-- STRUCTURE -->
@@ -273,14 +274,15 @@
                                     clipPath={"clipped-alt"}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltip={getLocalized("LA.structure.tooltip")}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
+                                    tooltip={getLocalized("LA.structure.tooltip")}
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
                             <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
                                 <input type="number" 
-                                    class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+                                    class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.overshield.value" 
                                     data-dtype="Number"
                                     value="{system.overshield.value}"
@@ -318,8 +320,9 @@
                                     editSecondary={editingBurn}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltip={getLocalized("LA.heat.tooltip")}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
+                                    tooltip={getLocalized("LA.heat.tooltip")}
                                 />
                                 <div class="la-spacer -tiny"></div>
                                 <!-- STRESS, BURN (BAR) -->
@@ -334,14 +337,15 @@
                                     clipPath={"clipped-alt"}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltip={getLocalized("LA.stress.tooltip")}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
+                                    tooltip={getLocalized("LA.stress.tooltip")}
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
                             <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
                                 <input type="number" 
-                                    class="la-damage__input la-text-text la-shadow -medium -inset -heightfull -bordersround-lrt -small -bordersoff"
+                                    class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.burn" 
                                     data-dtype="Number"
                                     value="{system.burn}"
