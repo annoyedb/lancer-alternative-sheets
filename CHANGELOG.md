@@ -1,3 +1,8 @@
+# 1.3.1
+## Changes
+* Fixed styling issue where Chromium cannot interpret stringified SASS mixin names, causing certain animated elements to appear as solid white.
+* Fixed styling issue where the scrollbar on pilot sheet's mech list were missing rules for Electron and browsers alike
+
 # 1.3.0
 With the addition of the deployables sheet, there will be no more sheets made for this module for the foreseeable future and any updates hereafter will be enhancements or bug fixes to the current sheets. Thank you to everyone who has helped contribute through bug reports, pull requests, and suggestions!
 

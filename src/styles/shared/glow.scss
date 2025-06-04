@@ -5,17 +5,17 @@
 {
     .-pulse-prmy
     {
-        @include pulseColor('pulsePrimary', --la-primary-color);
+        @include pulseColor(pulsePrimary, --la-primary-color);
     }
 
     .-pulse-bckg-prmy
     {
-        @include pulseBackground('pulseBackgroundPrimary', --la-primary-color);
+        @include pulseBackground(pulseBackgroundPrimary, --la-primary-color);
     }
 
     .-pulse-glow-prmy
     {
-        @include pulseGlowColor('pulseGlowPrimary', --la-primary-color);
+        @include pulseGlowColor(pulseGlowPrimary, --la-primary-color);
     }
 
     .-glow-prmy
@@ -49,17 +49,17 @@
 
     .-pulse-bckg-scdy
     {
-        @include pulseBackground('pulseBackgroundSecondary', --la-secondary-color);
+        @include pulseBackground(pulseBackgroundSecondary, --la-secondary-color);
     }
 
     .-pulse-scdy
     {
-        @include pulseColor('pulseSecondary', --la-secondary-color);
+        @include pulseColor(pulseSecondary, --la-secondary-color);
     }
 
     .-pulse-glow-scdy
     {
-        @include pulseGlowColor('pulseGlowSecondary', --la-secondary-color);
+        @include pulseGlowColor(pulseGlowSecondary, --la-secondary-color);
     }
 
     .-glow-scdy
@@ -93,17 +93,17 @@
 
     .-pulse-trty
     {
-        @include pulseColor('pulseTertiary', --la-tertiary-color);
+        @include pulseColor(pulseTertiary, --la-tertiary-color);
     }
 
     .-pulse-bckg-trty
     {
-        @include pulseBackground('pulseBackgroundTertiary', --la-tertiary-color);
+        @include pulseBackground(pulseBackgroundTertiary, --la-tertiary-color);
     }
 
     .-pulse-glow-trty
     {
-        @include pulseGlowColor('pulseGlowTertiary', --la-tertiary-color);
+        @include pulseGlowColor(pulseGlowTertiary, --la-tertiary-color);
     }
 
     .-glow-trty

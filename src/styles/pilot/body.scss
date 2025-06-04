@@ -53,47 +53,47 @@
 
     }
 
-    // // Scrollbar
-    // .la-content-tertiary
-    // {
-    //     // WHERE IS MY WEB KIT???????? AAAAAAAAAAAAAAAAAAAAAAAAA
-    //     >.la-SCROLL_BODY,
-    //     .la-available-mechs__list
-    //     {
-    //         scrollbar-width: thin;
-    //         scrollbar-color: var(--la-scrollbar-primary) transparent;
-    //     }
+    // Scrollbar
+    .la-content-tertiary
+    {
+        // Browser
+        .la-available-mechs__list
+        {
+            scrollbar-width: thin;
+            scrollbar-color: var(--la-scrollbar-primary) transparent;
+        }
 
-    //     >.la-SCROLL_BODY::-webkit-scrollbar
-    //     {
-    //         width: 2px;
-    //     }
+        // Electron
+        .la-available-mechs__list::-webkit-scrollbar
+        {
+            width: 2px;
+        }
 
-    //     >.la-SCROLL_BODY::-webkit-scrollbar-thumb
-    //     {
-    //         background: var(--la-scrollbar-primary);
-    //         border: 0px;
-    //     }
+        .la-available-mechs__list::-webkit-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-primary);
+            border: 0px;
+        }
 
-    //     >.la-SCROLL_BODY::-webkit-scrollbar-track
-    //     {
-    //         background: transparent;
-    //     }
+        .la-available-mechs__list::-webkit-scrollbar-track
+        {
+            background: transparent;
+        }
 
-    //     >.la-SCROLL_BODY::-moz-scrollbar
-    //     {
-    //         width: 2px;
-    //     }
+        .la-available-mechs__list::-moz-scrollbar
+        {
+            width: 2px;
+        }
 
-    //     >.la-SCROLL_BODY::-moz-scrollbar-thumb
-    //     {
-    //         background: var(--la-scrollbar-primary);
-    //         border: 0px;
-    //     }
+        .la-available-mechs__list::-moz-scrollbar-thumb
+        {
+            background: var(--la-scrollbar-primary);
+            border: 0px;
+        }
 
-    //     >.la-SCROLL_BODY::-moz-scrollbar-track
-    //     {
-    //         background: transparent;
-    //     }
-    // }
+        .la-available-mechs__list::-moz-scrollbar-track
+        {
+            background: transparent;
+        }
+    }
 }

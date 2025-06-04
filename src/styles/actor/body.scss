@@ -25,34 +25,34 @@
         // #endregion
         
         // #region Electron
-        >.la-SCROLL-BODY::-webkit-scrollbar
+        .la-SCROLL-BODY::-webkit-scrollbar
         {
             width: 2px;
         }
 
-        >.la-SCROLL-BODY::-webkit-scrollbar-thumb
+        .la-SCROLL-BODY::-webkit-scrollbar-thumb
         {
             background: var(--la-scrollbar-primary);
             border: 0px;
         }
 
-        >.la-SCROLL-BODY::-webkit-scrollbar-track
+        .la-SCROLL-BODY::-webkit-scrollbar-track
         {
             background: transparent;
         }
 
-        >.la-SCROLL-BODY::-moz-scrollbar
+        .la-SCROLL-BODY::-moz-scrollbar
         {
             width: 2px;
         }
 
-        >.la-SCROLL-BODY::-moz-scrollbar-thumb
+        .la-SCROLL-BODY::-moz-scrollbar-thumb
         {
             background: var(--la-scrollbar-primary);
             border: 0px;
         }
 
-        >.la-SCROLL-BODY::-moz-scrollbar-track
+        .la-SCROLL-BODY::-moz-scrollbar-track
         {
             background: transparent;
         }
