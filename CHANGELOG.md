@@ -1,3 +1,7 @@
+# 1.3.2
+## Changes
+* #41 - Fixed issue where having multiple successive socket calls would kill all but the last, affecting moving around the pilot sheet header image. Thank you @sealtrowitz!
+
 # 1.3.1
 ## Changes
 * Fixed styling issue where Chromium cannot interpret stringified SASS mixin names, causing certain animated elements to appear as solid white.
