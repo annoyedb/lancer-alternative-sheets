@@ -7,6 +7,7 @@
         children,
         image,
         uuid,
+        xySetter,
         yGetter,
         ySetter,
         xGetter,
@@ -54,6 +55,12 @@
     function handleAssignment(event: PointerEvent)
     {
         handlePointerUp(event, () => {
+            // NOTE: Better to just handle these seperately the avoid weird (threading?race?idk) conditions
+            // in any case, it's better to just handle it one call over the network anyway
+            if (xySetter)
+            {
+                xySetter(uuid, position.x, position.y);
+            }
             if (ySetter) 
             {
                 ySetter(uuid, position.y);
@@ -79,8 +86,8 @@
         src={image} 
         alt={`modules/${moduleID}/assets/assets/nodata.png`}
         style="
-            margin-top: { ySetter ? position.y : 0 }px;
-            margin-right: { xSetter ? -position.x : 0 }px;
+            margin-top: { xySetter || ySetter ? position.y : 0 }px;
+            margin-right: { xySetter || xSetter ? -position.x : 0 }px;
             mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
             -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
             -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));"

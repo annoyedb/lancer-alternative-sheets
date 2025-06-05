@@ -3,7 +3,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
-    import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetX, setImageOffsetY } from "@/scripts/pilot/settings";
+    import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetXY } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
     import { getDocumentTheme } from "@/scripts/theme";
@@ -106,9 +106,8 @@
         image={actor.img}
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
-        ySetter={setImageOffsetY}
         xGetter={getImageOffsetX}
-        xSetter={setImageOffsetX}
+        xySetter={setImageOffsetXY}
     >
         <div
             class="la-pilotfluff la-combine-h -positionabsolute la-combine-v -padding0-lr"

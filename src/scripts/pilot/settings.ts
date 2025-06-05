@@ -265,6 +265,24 @@ export function setPilotSheetData(encoded: Array<number>)
     ]);
 }
 
+export function setImageOffsetXY(uuid: string, x: number, y: number)
+{
+    const data = getPilotSheetData();
+    if (!data[uuid])
+        data[uuid] = PilotSheetSettings.emptyContent();
+    data[uuid].headerImgOffsetX = x;
+    data[uuid].headerImgOffsetY = y;
+
+    SocketManager.getInstance().runAsGM(
+        setPilotSheetData,
+        () =>
+        {
+            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) for ${uuid}`);
+        },
+        encodePilotSheetData(data),
+    );
+}
+
 export function getImageOffsetY(uuid: string): number
 {
     const data = getPilotSheetData();
