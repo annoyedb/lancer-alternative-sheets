@@ -46,20 +46,29 @@ export function formatString(template: string, ...values: string[]): string
     });
 }
 
-export function getFoundryVersion()
+export function getFoundryVersion(split: boolean = false)
 {
+    if (split)
+        // @ts-expect-error
+        return game.release.version.split('.');
     // @ts-expect-error
     return game.release.version;
 }
 
-export function getLancerVersion()
+export function getLancerVersion(split: boolean = false)
 {
+    if (split)
+        // @ts-expect-error
+        return game.system.version.split('.');
     // @ts-expect-error
     return game.system.version;
 }
 
-export function getModuleVersion()
+export function getModuleVersion(split: boolean = false)
 {
+    if (split)
+        // @ts-expect-error
+        return game.modules.get(LancerAlternative.Name).version.split('.');
     // @ts-expect-error
     return game.modules.get(LancerAlternative.Name).version;
 }
