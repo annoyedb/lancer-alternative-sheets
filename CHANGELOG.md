@@ -1,6 +1,7 @@
 # 1.3.2
 ## Changes
 * #41 - Fixed issue where having multiple successive socket calls would kill all but the last, affecting moving around the pilot sheet header image. Thank you @sealtrowitz!
+* Fixed issue where in V12 flows added by this module would not show up in the Action Log. Because the new check is technically more broad in scope, it should catch *most* flows --even those not added by this module. Because the system does not discriminate chat message types, this is the best I can do for now. You can technically force a chat message to appear using a HTML injection into chat, but I imagine the scenario in this happening would either be deliberate or exceptionally rare for the common player (or GM for that matter)
 
 # 1.3.1
 ## Changes
@@ -35,7 +36,7 @@ In addition, if you are fluent in language other than English and would be inter
 * Changed collapse ID of pilot & mech sheets to be mutually exclusive from each other to be in line with 'expected behavior'
 * Changed hitbox of draggable handles for macros/flows in the sidebar
 ## Known Issues
-* Since apparently it has been added, certain flows (particularly those added by this module) do not show up in the Action Log in V12. This breaks intended interaction with items Deployable sheets in particular which only use the flows added by this module and various Systems, Gear, etc that use those flows as fallbacks when the system's are not available. This is not an issue in V11
+* ~~Since apparently it has been added, certain flows (particularly those added by this module) do not show up in the Action Log in V12. This breaks intended interaction with items Deployable sheets in particular which only use the flows added by this module and various Systems, Gear, etc that use those flows as fallbacks when the system's are not available. This is not an issue in V11~~
 
 # 1.2.2
 ## Changes
