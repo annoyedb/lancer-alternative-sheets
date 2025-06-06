@@ -49,16 +49,16 @@ The implemented sheets are as follows:
 * Deployable sheets
 
 ## Frequently Asked Questions
-Q: How do I roll a weapon/system?
+Q: How do I roll a weapon/system?  
 A: For rollable items, such as weapons or systems there's an icon with the background of a D20 in it, that glows slightly. You can press this to roll your weapon. If you have suggestions on how to make this more obvious so this question doesn't need to be asked, please make an inquiry in the [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) or directly to me on Discord!
 
-Q: How do I change my system theme?
+Q: How do I change my system theme?  
 A: To change the global system theme, change the LANCER system theme by going to Game Settings -> Configure Settings -> LANCER -> UI Theme. This setting is per-client, but all sheets will reflect this setting by default.
 
-Q: How do I change the theme of a single sheet?
+Q: How do I change the theme of a single sheet?  
 A: To override or set a fixed theme per-sheet, you can activate the 'advanced toggle' in the sheet (in the sheet itself, typically near the top) and find a notebook symbol. This setting is synced across all clients.
 
-Q: How do I enable sensors or the tech attack stat on my sheet?
+Q: How do I enable sensors or the tech attack stat on my sheet?  
 A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. If you wish to enable the display of these stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module.
 
 ## Development
