@@ -66,7 +66,7 @@
 
     function getArmorPath(index: number)
     {
-        return `system.loadout.armor.${index}.value`;
+        return `itemTypes.pilot_armor.${index}`;
     }
     
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, armor: any)
