@@ -39,7 +39,7 @@
 
     function renderOuter(weapon: any)
     {
-        return !isDestroyed && (isRecharge(weapon) || weapon.system.uses.max || isLoading(weapon) || hasAccuracyBonus(weapon) || hasAttackBonus(weapon));
+        return !isDestroyed(weapon) && (isRecharge(weapon) || weapon.system.uses.max || isLoading(weapon) || hasAccuracyBonus(weapon) || hasAttackBonus(weapon));
     }
 
     function hasAccuracyBonus(weapon: any)
