@@ -1,6 +1,10 @@
 # 1.3.3
 Boy, I sure love waking up to the sight of `fatal bugs` in the morning. `aaaaaaaaaaAAAAAAAAAAAAAAAA`
 
+Now introducing the first localization of these sheets to this module! Big thank you to @hazmole for their [pull request](github.com/annoyedb/lancer-alternative-sheets/pull/45/commits/358faf1f26dc7dd8f5059c04834da85e1e136249) of the **Traditional Chinese** localization! If you prefer to play Lancer on Foundry in this language, check out their [localizations for Lancer using the Babele module](https://foundryvtt.com/packages/lancer-compendium-zhtw)!
+
+As always, if you'd like to contribute to localization, please let me know!
+
 ## Changes
 * #44 - Fixed critical typo made during refactors in 1.3.x that prevented loading, limited, etc items to appear on NPC sheets. Thank you @Jonoth777!
 * #43 - Fixed issue where the method of defining the data path prevented the system from injecting the appropriate button event into the edit button for specifically pilot sheet armor. Thank you @msprijatelj!
