@@ -1,3 +1,13 @@
+# 1.3.3
+Boy, I sure love waking up to the sight of `fatal bugs` in the morning. `aaaaaaaaaaAAAAAAAAAAAAAAAA`
+
+## Changes
+* #44 - Fixed critical typo made during refactors in 1.3.x that prevented loading, limited, etc items to appear on NPC sheets. Thank you @Jonoth777!
+* #43 - Fixed issue where the method of defining the data path prevented the system from injecting the appropriate button event into the edit button for specifically pilot sheet armor. Thank you @msprijatelj!
+* #42 - (Only available on Lancer v2.9.0) Added display for the new 'effect' variable in Pilot Weapons, Pilot Armor, and Pilot Gear. Thank you @msprijatelj!
+* #45 - Added localization support for Traditional Chinese (zh-tw). Big thank you to @hazmole!
+* Fixed missing localization paths for deployable sheet's settings `a little embarassing directly following the above, i must admit`
+
 # 1.3.2
 ## Changes
 * #41 - Fixed issue where having multiple successive socket calls would kill all but the last, affecting moving around the pilot sheet header image. Thank you @sealtrowitz!
