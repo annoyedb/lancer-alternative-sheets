@@ -198,6 +198,16 @@
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
+        {#if gear.system.effect}
+            <EffectBox
+                name={getLocalized("LA.mech.system.effect.label")}
+                effect={gear.system.effect}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.PilotHeader}
+                logTypeReset={TextLogHook.PilotHeaderReset}
+            />
+        {/if}
             <TagArray 
                 tags={gear.system.tags}
                 path={`${getGearPath(index)}.system.tags`}

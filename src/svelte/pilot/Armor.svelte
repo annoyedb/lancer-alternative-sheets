@@ -280,6 +280,16 @@
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
+        {#if armor.system.effect}
+            <EffectBox
+                name={getLocalized("LA.mech.system.effect.label")}
+                effect={armor.system.effect}
+
+                tooltipEnabled={tooltipEnabled}
+                logType={TextLogHook.PilotHeader}
+                logTypeReset={TextLogHook.PilotHeaderReset}
+            />
+        {/if}
             <TagArray 
                 tags={armor.system.tags}
                 path={`${getArmorPath(index)}.system.tags`}
