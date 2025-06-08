@@ -1,3 +1,6 @@
+# 1.3.4
+* Fixed unintended lockout for adding personal clocks when a player does not have a Bond
+
 # 1.3.3
 Boy, I sure love waking up to the sight of `fatal bugs` in the morning. `aaaaaaaaaaAAAAAAAAAAAAAAAA`
 

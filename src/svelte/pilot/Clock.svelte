@@ -48,8 +48,6 @@
     logType={TextLogHook.PilotHeader}
     logTypeReset={TextLogHook.PilotHeaderReset}
 
-    disabled={system.bond === null}
-
     onPointerEnter={() => {addButtonHover = true;}}
     onPointerLeave={() => {addButtonHover = false;}}
 />
