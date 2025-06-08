@@ -57,7 +57,7 @@
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
-    disabled={true}
+    disabled={system.core_energy === 0}
 />
 {/snippet}
 {#snippet outerContent()}
