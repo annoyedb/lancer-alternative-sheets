@@ -1,7 +1,7 @@
 # 1.3.6
 Three releases in one day `AKA i got a session today and im finding bugs aaaaaaaAAAAAAA`
 ## Changes
-* Fixed styling issue where NPC HASE tooltips did not have a theme applied to t hem
+* Fixed styling issue where NPC HASE tooltips did not have a theme applied to them
 
 # 1.3.5
 ## Changes
