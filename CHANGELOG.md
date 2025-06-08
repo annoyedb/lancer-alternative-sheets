@@ -1,4 +1,5 @@
 # 1.3.4
+## Changes
 * Fixed unintended lockout for adding personal clocks when a player does not have a Bond
 
 # 1.3.3

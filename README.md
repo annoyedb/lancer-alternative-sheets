@@ -61,6 +61,9 @@ A: To override or set a fixed theme per-sheet, you can activate the 'advanced to
 Q: How do I enable sensors or the tech attack stat on my sheet?  
 A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. If you wish to enable the display of these stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module.
 
+Q: How do I change my minor ideal in the character sheet?  
+A: It'll be available to edit when you toggle the 'advanced toggle' in the sheet (top-right toggle in the pilot sheet). When this is enabled, hovering over the minor ideal will reveal a drop-down where you can select your minor ideal for the session.
+
 ## Development
 This module uses Svelte 5 to render overtop of the Lancer system's current implementation of Application by mounting overtop of a Handlebars div. As such it does not extend from Application but from Lancer's ActorSheets, making it fully interchangeable between the Lancer included sheets, while allowing the reactive rendering and maintainability of using Svelte.
 
@@ -87,6 +90,10 @@ Contact me if you know how. :eye::lips::eye:
 Contributions are welcome and issues can be posted [here](https://github.com/annoyedb/lancer-alternative-sheets/issues/) or tagging me (`annoying`) in the Lancer Discord (AKA Pilot NET).
 
 Please take a look at the [change log](/CHANGELOG.md) and/or [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) to see currently the known issues first.
+
+The sheet utilizes [Foundry's localization implementation](https://foundryvtt.com/article/localization/) to display text. If you wish to contribute to localization for a language and help accommodate for players of a non-English speaking community, I am always open to pull requests!
+
+If you are looking to contribute to localization but do not have the technical experience to know where to start, please contact me on Pilot NET!
 
 ### Acknowledgements
 * [League of Foundry Developers](https://github.com/League-of-Foundry-Developers/foundry-vtt-types) - Type definitions for Foundry
