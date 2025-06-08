@@ -1,3 +1,8 @@
+# 1.3.6
+Three releases in one day `AKA i got a session today and im finding bugs aaaaaaaAAAAAAA`
+## Changes
+* Fixed styling issue where NPC HASE tooltips did not have a theme applied to t hem
+
 # 1.3.5
 ## Changes
 * Fixed unintended lockout for core powers on header button even if a core power is active.
