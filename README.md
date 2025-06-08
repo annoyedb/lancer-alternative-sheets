@@ -91,6 +91,10 @@ Contributions are welcome and issues can be posted [here](https://github.com/ann
 
 Please take a look at the [change log](/CHANGELOG.md) and/or [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) to see currently the known issues first.
 
+The sheet utilizes [Foundry's localization implementation](https://foundryvtt.com/article/localization/) to display text. If you wish to contribute to localization for a language and help accommodate for players of a non-English speaking community, I am always open to pull requests!
+
+If you are looking to contribute to localization but do not have the technical experience to know where to start, please contact me on Pilot NET!
+
 ### Acknowledgements
 * [League of Foundry Developers](https://github.com/League-of-Foundry-Developers/foundry-vtt-types) - Type definitions for Foundry
 * [COMP/CON](https://github.com/massif-press/compcon) - [Color themes](./src/styles/themes/), design inspiration, and [some assets](./src/assets/)
