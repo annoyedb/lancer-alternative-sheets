@@ -19,6 +19,7 @@
     import BonusBox from "@/svelte/actor/BonusBox.svelte";
     import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
     import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import LimitedBox from "../actor/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -34,6 +35,19 @@
     function getReservePath(index: number)
     {
         return `itemTypes.reserve.${index}`;
+    }
+
+    function updateReserveUses(reserve: any)
+    {
+        reserve.system.used = !reserve.system.used;
+        actor.updateEmbeddedDocuments("Item", reserve);
+    }
+    
+    function getHeaderStyle(reserve: any)
+    {
+        return reserve.system.used
+            ? "la-text-repcap -strikethrough"
+            : "la-text-header";
     }
 </script>
 
@@ -68,8 +82,21 @@
     <div class="la-combine-v -gap0 -widthfull">
     {#each reserves as reserve, index}
     {#snippet outerContent()}
-    {#if reserve.system.counters.length}
+    {#if reserve.system.counters.length || reserve.system.consumable }
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
+        {#if reserve.system.consumable}
+            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+                <LimitedBox
+                    usesValue={reserve.system.used ? 0 : 1}
+                    usesMax={1}
+                    path="{getReservePath(index)}.system.used"
+                    onPointerClick={updateReserveUses}
+
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            </div>
+        {/if}
         {#each reserve.system.counters as counter, jndex}
             <CounterBox
                 text={counter.name}
@@ -121,7 +148,7 @@
         <HeaderSecondary
             text={reserve.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={[getHeaderStyle(reserve), "-fontsize2", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

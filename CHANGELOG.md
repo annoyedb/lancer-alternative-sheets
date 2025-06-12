@@ -1,3 +1,8 @@
+# 1.3.7
+## Changes
+* #46 - Added missing text in zh-tw localization. Thank you @hazmole!
+* #47 - Added missing implementation for consumable reserves. Thank you @sealtrowitz!
+
 # 1.3.6
 Three releases in one day `AKA i got a session today and im finding bugs aaaaaaaAAAAAAA`
 ## Changes
