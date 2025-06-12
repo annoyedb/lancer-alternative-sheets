@@ -1,6 +1,6 @@
 # 1.3.8
 ## Changes
-* #48 - Fixed styling issue where gradient start did not account for y portrait shifts
+* #48 - Fixed styling issue where gradient start did not account for y portrait shifts. Thanks @hylandpad!
 
 # 1.3.7
 ## Changes
