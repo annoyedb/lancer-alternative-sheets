@@ -1,3 +1,7 @@
+# 1.3.8
+## Changes
+* #48 - Fixed styling issue where gradient start did not account for y portrait shifts
+
 # 1.3.7
 ## Changes
 * #46 - Added missing text in zh-tw localization. Thank you @hazmole!

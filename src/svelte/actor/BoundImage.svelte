@@ -88,9 +88,9 @@
         style="
             margin-top: { xySetter || ySetter ? position.y : 0 }px;
             margin-right: { xySetter || xSetter ? -position.x : 0 }px;
-            mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
-            -webkit-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));
-            -moz-mask-image: linear-gradient(to bottom, black 6.6rem, transparent calc(10rem - { position.y }px));"
+            mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));
+            -webkit-mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));
+            -moz-mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));"
         on:pointerdown={event => handlePointerDown(event)}
         on:pointermove={event => handlePointerMove(event)}
         on:pointerup={ handleAssignment }
