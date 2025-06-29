@@ -1,3 +1,7 @@
+# 1.3.9
+## Changes
+* #49 - Added missing implementation for Lancer system's damage undo button. Thanks @tw-blob!
+
 # 1.3.8
 ## Changes
 * #48 - Fixed styling issue where gradient start did not account for y portrait shifts. Thanks @hylandpad!
