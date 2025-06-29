@@ -22,6 +22,10 @@ export function rebindButtons(messageData: any, messageContainer: HTMLElement): 
         {
             handleDamageApply(messageData, button);
         }
+        else if (button.hasClass('lancer-damage-undo'))
+        {
+            handleDamageUndo(messageData, button);
+        }
         else if (button.hasClass('flow-button'))
         {
             const flowType = button.data('flow-type');
@@ -43,7 +47,7 @@ export function rebindButtons(messageData: any, messageContainer: HTMLElement): 
                 {
                     Logger.warn(`Unknown flow button class: ${flowType}. Please report this to Lancer Alternative Sheets author with the action in the chat that caused it. Like for realsies.`, button);
                 }
-            } 
+            }
             else
             {
                 Logger.warn(`Flow button missing [data-flow-type] attribute`);
@@ -160,6 +164,53 @@ function handleDamageApply(messageData: any, button: JQuery<HTMLButtonElement>):
     button.on('click', async (event) =>
     {
         runApplyDamageFlow(event);
+    });
+}
+
+function handleDamageUndo(_messageData: any, button: JQuery<HTMLButtonElement>)
+{
+    // This is not a Flow
+    async function runDamageUndo(event: JQuery.ClickEvent): Promise<void>
+    {
+        const overshieldDelta = parseInt(event.currentTarget.dataset.overshieldDelta);
+        const hpDelta = parseInt(event.currentTarget.dataset.hpDelta);
+        const heatDelta = parseInt(event.currentTarget.dataset.heatDelta);
+        const burnDelta = event.currentTarget.dataset.addBurn === "true"
+            ? parseInt(event.currentTarget.dataset.burnDelta)
+            : 0;
+
+        if (!overshieldDelta && !hpDelta && !burnDelta && !heatDelta)
+        {
+            ui.notifications?.error("Damage undo button has no damage to undo!");
+            return;
+        }
+
+        const target = await fromUuid(event.currentTarget.dataset.uuid) as any;
+        if (!target)
+        {
+            ui.notifications?.error("Damage undo button has no target");
+            return;
+        }
+        const updateData: any = {
+            system: {
+                "overshield.value": target.system.overshield.value + overshieldDelta,
+                "hp.value": target.system.hp.value + hpDelta,
+                burn: target.system.burn - burnDelta,
+            },
+        };
+
+        // This is not a flow
+        if (target.is_mech() || target.is_npc() || target.is_deployable())
+            updateData.system["heat.value"] = target.system.heat.value - heatDelta;
+        await target.update(updateData);
+
+        // It feels a bit superfluous to delete the button as it does in original code, 
+        // especially given the context of this being an action log. So don't bother. 
+        // If the button was done from chat, it'll be deleted on rerender anyway.
+    }
+
+    button.on('click', async (event) => {
+        runDamageUndo(event);
     });
 }
 
