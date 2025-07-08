@@ -28,6 +28,7 @@
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const sidebarExes = getSidebarExecutables(actor.uuid);
+    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
     const frame = system.loadout.frame?.value;
     const frameName = frame 
         ? `${frame.system.manufacturer} ${frame.name}`
@@ -113,9 +114,9 @@
     <div class="la-combine-h">
         <!-- Mech Image -->
         <img class="la-actor__img" 
-            src={actor.img}
+            src={actorImg}
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
-            data-edit={"img"}
+            data-edit={"prototypeToken.texture.src"}
             data-uuid={actor.uuid}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }

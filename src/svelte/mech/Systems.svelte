@@ -103,7 +103,7 @@
 <EmptyBox
     label={!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.label") : getLocalized("LA.mech.system.undermounted.label")}
     subLabel={!system.loadout.sp.value ? getLocalized("LA.mech.system.empty.subLabel") : formatString(getLocalized("LA.mech.system.undermounted.subLabel"), (system.loadout.sp.max - system.loadout.sp.value).toString())}
-    type={AcceptType.MechWeapon}
+    type={AcceptType.MechSystem}
     path="system.loadout.systems.{systemComponents.length}.value"
 />
 {/snippet}

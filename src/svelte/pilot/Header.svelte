@@ -1,7 +1,9 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
     import { getLocalized } from "@/scripts/helpers";
     import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetXY } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
@@ -10,39 +12,76 @@
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const props = $props();
     const {
         actor,
         system,
         owner,
-    } = props;
-
+    } : PilotSheetProps = props;
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let actorImageSrc = $state(actor.img);
+
+    const tooltipEnabled = getPilotSheetTooltipEnabled();
+
+    function browseImage(_event: MouseEvent)
+    {
+        const fp = new FilePicker({
+            current: actor.img,
+            type: "image",
+            callback: (path) => {
+                actorImageSrc = path;
+                actor.update({
+                    "img": path
+                })
+            },
+        });
+
+        fp.render(true);
+    }
 </script>
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Advanced Options Toggle -->
     <div 
-        class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        class="la-combine-v -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
         style="z-index: 2;"
     >
-        <AdvancedButton
-            uuid={actor.uuid}
-            tooltipEnabled={getPilotSheetTooltipEnabled()}
+        <div
+            class="la-combine-h"
+        >
+        {#if advancedOptions}
+            <i 
+                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
+                data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
+                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-direction={TooltipDirection.LEFT}
+            ></i>
+        {/if}
+            <AdvancedButton
+                uuid={actor.uuid}
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
+                logType={TextLogHook.PilotHeader}
+                logTypeReset={TextLogHook.PilotHeaderReset}
+            />
+        </div>
+    {#if advancedOptions}
+        <GlyphButton
+            flowClass={FlowClass.None}
+            style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5"]}
+            onClick={browseImage}
+            tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.image.tooltip")}
+            tooltipDirection={TooltipDirection.LEFT}
+            logText={getLocalized("LA.edit.image.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
         />
-    {#if advancedOptions}
-        <i 
-            class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
-            data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-            data-tooltip-direction={TooltipDirection.LEFT}
-        ></i>
     {/if}
     </div>
     <div class="la-names -margin3-l -margin3-t -flex1">
@@ -103,7 +142,7 @@
         />
     </span>
     <BoundImage
-        image={actor.img}
+        image={actorImageSrc}
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
         xGetter={getImageOffsetX}

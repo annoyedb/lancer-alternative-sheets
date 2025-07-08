@@ -1,8 +1,10 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
+    import { getDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -12,39 +14,76 @@
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const props = $props();
-    const { 
-        actor, 
+    const {
+        actor,
         pilot 
     }: MechSheetProps = props
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    
+    let actorImageSrc = $state(actor.img);
+
+    const tooltipEnabled = getMechSheetTooltipEnabled();
+
+    function browseImage(_event: MouseEvent)
+    {
+        const fp = new FilePicker({
+            current: actor.img,
+            type: "image",
+            callback: (path) => {
+                actorImageSrc = path;
+                actor.update({
+                    "img": path
+                })
+            },
+        });
+
+        fp.render(true);
+    }
 </script>
 
 <!-- Header -->
 <div class="la-header-content la-combine-h">
     <!-- Advanced Options Toggle -->
     <div 
-        class="la-combine-v la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        class="la-combine-v -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
         style="z-index: 3;"
     >
-        <AdvancedButton
-            uuid={actor.uuid}
-            tooltipEnabled={getMechSheetTooltipEnabled()}
+        <div
+            class="la-combine-h"
+        >
+        {#if advancedOptions}
+            <i 
+                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header -width5"
+                data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
+                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-direction={TooltipDirection.LEFT}
+            ></i>
+        {/if}
+            <AdvancedButton
+                style={["-fontsize3", "-width5"]}
+                uuid={actor.uuid}
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
+            />
+        </div>
+    {#if advancedOptions}
+        <GlyphButton
+            flowClass={FlowClass.None}
+            style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5"]}
+            onClick={browseImage}
+            tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.image.tooltip")}
+            tooltipDirection={TooltipDirection.LEFT}
+            logText={getLocalized("LA.edit.image.tooltip")}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
-    {#if advancedOptions}
-        <i 
-            class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header"
-            data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-            data-tooltip-direction={TooltipDirection.LEFT}
-        ></i>
     {/if}
     </div>
     <!-- Mech/Pilot Name -->
@@ -110,7 +149,7 @@
     </span>
     {/if}
     <BoundImage
-        image={actor.img}
+        image={actorImageSrc}
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
         ySetter={setImageOffsetY}

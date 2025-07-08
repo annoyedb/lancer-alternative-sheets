@@ -227,6 +227,7 @@
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logText={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -243,6 +244,7 @@
                 path="itemTypes.bond"
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -258,14 +260,14 @@
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.swap.tooltip")}
                 logText={getLocalized(!questionAnswer ? "LA.pilot.bond.qa.tooltip" : "LA.pilot.bond.xp.tooltip")}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
                 onClick={() => { setBondQNAMode(actor.uuid, !questionAnswer); }}
-            >
-            </GlyphButton>
+            />
             <!-- Refresh Powers -->
             <GlyphButton
                 style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
@@ -273,6 +275,7 @@
                 flowClass={FlowClass.BondPowerRefresh}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logText={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logType={TextLogHook.PilotHeader}

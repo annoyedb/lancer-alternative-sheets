@@ -8,6 +8,7 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/pilot/settings/AdvancedSettings.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import { getDocumentTheme } from "@/scripts/theme";
     
     const props: PilotSheetProps = $props();
     const {
@@ -49,8 +50,9 @@
             
             flowClass={FlowClass.None}
             
-            tooltip={getLocalized("LA.pilot.engineering.up.tooltip")}
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.pilot.engineering.up.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.engineering.up.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -63,8 +65,9 @@
             
             flowClass={FlowClass.None}
             
-            tooltip={getLocalized("LA.pilot.engineering.down.tooltip")}
             tooltipEnabled={tooltipEnabled}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.pilot.engineering.down.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.engineering.down.tooltip")}
             logType={TextLogHook.PilotHeader}

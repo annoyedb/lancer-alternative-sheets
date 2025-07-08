@@ -1,13 +1,14 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getThemeHistoryLabel } from "@/scripts/theme";
+    import { getDocumentTheme, getThemeHistoryLabel } from "@/scripts/theme";
+    import { getSheetStore } from "@/scripts/store/module-store";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
-    import { getSheetStore } from "@/scripts/store/module-store";
 
     const {
         actor,
@@ -27,7 +28,9 @@
     path="system.history"
 
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     tooltip={getLocalized("LA.edit.tooltip")}
+    tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.edit.tooltip")}
     logType={TextLogHook.PilotHeader}
     logTypeReset={TextLogHook.PilotHeaderReset}

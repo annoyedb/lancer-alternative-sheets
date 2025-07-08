@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getBrightness } from "@/scripts/theme";
+    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
     import { getSheetStore } from "@/scripts/store/module-store";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -52,6 +52,7 @@
                 action="download"
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
                 tooltipDirection={TooltipDirection.LEFT}
                 logText={getLocalized("LA.pilot.sync.download.tooltip")}

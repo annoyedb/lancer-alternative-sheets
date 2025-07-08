@@ -1,3 +1,14 @@
+# 1.3.10
+Separated actor and token artwork on mech sheets and pilot sheets!
+
+Now you too can showcase all the hard work you and your fellow pilots put into your token art *and* character art!
+
+## Changes
+* #50 - Fixed an issue where mech sheet's Systems section did not have the correct acceptable types, causing odd bugs when trying to assign a system to mechs. Thanks @Jonoth777!
+* Fixed missing tooltip stylings affecting glyph buttons
+* Added a way to change actor artwork through a button on mech and pilot sheets
+* Changed sidebar images to use/update token artwork instead of actor artwork as originally intended on mech sheets and pilot sheets
+
 # 1.3.9
 ## Changes
 * #49 - Added missing implementation for Lancer system's damage undo button. Thanks @tw-blob!

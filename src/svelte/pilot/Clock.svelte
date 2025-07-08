@@ -42,6 +42,7 @@
     actionValue="(struct)counter"
 
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     tooltip={addClockTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.clock.add.tooltip")}

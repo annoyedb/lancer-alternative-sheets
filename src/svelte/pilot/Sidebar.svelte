@@ -39,6 +39,7 @@
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
     const showTechAttack = getPilotSheetTechAttackEnabled();
+    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
@@ -105,9 +106,9 @@
     <div class="la-combine-h">
         <!-- Mech Image -->
         <img class="la-actor__img" 
-            src={actor.img}
+            src={actorImg}
             alt={`modules/${moduleID}/assets/assets/nodata.png`}
-            data-edit={"img"}
+            data-edit={"prototypeToken.texture.src"}
             data-uuid={actor.uuid}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.PilotHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }

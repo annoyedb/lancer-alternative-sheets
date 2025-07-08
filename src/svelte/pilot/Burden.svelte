@@ -43,6 +43,7 @@
     actionValue="(struct)counter"
 
     tooltipEnabled={tooltipEnabled}
+    tooltipTheme={getDocumentTheme(actor.uuid)}
     tooltip={addBurdenTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.burden.add.tooltip")}
