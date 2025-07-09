@@ -1,7 +1,7 @@
 <script lang="ts">
     import { id as moduleID } from "@/module.json";
     import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { setThemeOverride } from "@/scripts/deployable/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
@@ -265,8 +265,9 @@
                                     name="system.overshield.value" 
                                     data-dtype="Number"
                                     value="{system.overshield.value}"
-                                    onfocus={() => {editingShield = true;}}
+                                    onfocus={(event) => {event.currentTarget.select(); editingShield = true;}}
                                     onblur={() => {editingShield = false;}}
+                                    onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
                                 >
                             </div>
                         </div>
@@ -301,8 +302,9 @@
                                     name="system.burn" 
                                     data-dtype="Number"
                                     value="{system.burn}"
-                                    onfocus={() => {editingBurn = true;}}
+                                    onfocus={(event) => {event.currentTarget.select(); editingBurn = true;}}
                                     onblur={() => {editingBurn = false;}}
+                                    onchange={(event) => handleRelativeDataInput(event, system.burn)}
                                 >
                                 <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}

@@ -28,14 +28,14 @@ export function logData(path: string, options: HelperOptions)
 
 export function isLoading(item: any): boolean
 {
-    return item.system.all_tags?.some((t: {is_loading: boolean;}) => t.is_loading) 
-        || item.system.tags?.some((t: {is_loading: boolean;}) => t.is_loading);
+    return item.system.all_tags?.some((t: { is_loading: boolean; }) => t.is_loading)
+        || item.system.tags?.some((t: { is_loading: boolean; }) => t.is_loading);
 }
 
 export function isRecharge(item: any): boolean
 {
-    return item.system.all_tags?.some((t: {is_recharge: boolean;}) => t.is_recharge) 
-        || item.system.tags?.some((t: {is_recharge: boolean;}) => t.is_recharge);
+    return item.system.all_tags?.some((t: { is_recharge: boolean; }) => t.is_recharge)
+        || item.system.tags?.some((t: { is_recharge: boolean; }) => t.is_recharge);
 }
 
 export function formatString(template: string, ...values: string[]): string
@@ -81,4 +81,30 @@ export const dataMap: { [key: string]: any } = {};
 export function forwardData(data: any, _options: HelperOptions)
 {
     dataMap[data.actor.uuid] = data;
+}
+
+export function handleRelativeDataInput(event: Event & { currentTarget: EventTarget & HTMLInputElement; }, previous: number)
+{
+    event.preventDefault();
+    const inputValue = (event.target as HTMLInputElement)?.value;
+    let newValue = previous;
+
+    if (inputValue)
+    {
+        if (inputValue.startsWith('+'))
+        {
+            newValue = previous + Number(inputValue.slice(1));
+        } 
+        else if (inputValue.startsWith('-'))
+        {
+            newValue = previous - Number(inputValue.slice(1));
+        } 
+        else
+        {
+            newValue = Number(inputValue);
+        }
+    }
+
+    event.currentTarget.value = newValue.toString();
+    event.currentTarget.blur();
 }

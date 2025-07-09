@@ -5,7 +5,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { 
         getPilotSheetSensorsEnabled, 
         getPilotSheetTechAttackEnabled, 
@@ -194,8 +194,9 @@
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
-                onfocus={() => {editingShield = true;}}
+                onfocus={(event) => {event.currentTarget.select(); editingShield = true;}}
                 onblur={() => {editingShield = false;}}
+                onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
@@ -212,8 +213,9 @@
                 name={"system.burn"}
                 data-dtype={"Number"}
                 value={system.burn}
-                onfocus={() => {editingBurn = true;}}
+                onfocus={(event) => {event.currentTarget.select(); editingBurn = true;}}
                 onblur={() => {editingBurn = false;}}
+                onchange={(event) => handleRelativeDataInput(event, system.burn)}
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
@@ -266,8 +268,9 @@
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
-                onfocus={() => {editingShield = true;}}
+                onfocus={(event) => {event.currentTarget.select(); editingShield = true;}}
                 onblur={() => {editingShield = false;}}
+                onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
             >
         </div>
     </div>
@@ -304,8 +307,9 @@
                 name={"system.burn"}
                 data-dtype={"Number"}
                 value={system.burn}
-                onfocus={() => {editingBurn = true;}}
+                onfocus={(event) => {event.currentTarget.select(); editingBurn = true;}}
                 onblur={() => {editingBurn = false;}}
+                onchange={(event) => handleRelativeDataInput(event, system.burn)}
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}

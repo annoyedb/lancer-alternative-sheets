@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { StatusBarProps } from "@/interfaces/actor/StatusBarProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import { handleRelativeDataInput } from "@/scripts/helpers";
 
     const {
         currentValue,
@@ -53,8 +54,9 @@
                 name="{dataName}"
                 data-dtype="Number" 
                 value="{currentValue}"
-                onfocus={() => {editing=true;}}
+                onfocus={(event) => {event.currentTarget.select(); editing=true;}}
                 onblur={() => {editing=false;}}
+                onchange={(event) => handleRelativeDataInput(event, currentValue)}
             >
             <span 
                 class="la-bar-h-progress__span -lineheight1 -positionabsolute -pointerdisable 
