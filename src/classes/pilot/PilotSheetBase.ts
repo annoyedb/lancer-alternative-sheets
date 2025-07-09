@@ -134,6 +134,17 @@ export class PilotSheetBase
                 this.mountComponents(html, dataMap[this.actor.uuid]);
             }
 
+            // (#10)
+            // @ts-expect-error We're overriding a function in LancerActorSheet
+            override _propagateData(formData: any)
+            {
+                // @ts-expect-error We're overriding a function in LancerActorSheet
+                super._propagateData(formData);
+
+                if (!formData["prototypeToken.texture.src"])
+                    delete formData["prototypeToken.texture.src"];
+            }
+
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
