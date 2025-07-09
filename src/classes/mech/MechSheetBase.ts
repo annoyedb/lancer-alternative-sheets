@@ -106,6 +106,28 @@ export class MechSheetBase
                 return data as MechSheetProps;
             }
 
+            
+            /** (#10) - As of V12, there's a section of code in the Lancer system that bugs out actor/token image assignment in the AppV1 LancerActorSheet
+             * ...
+             * // Update token image if it matches the old actor image - keep in sync
+             * if (this.actor.img === token.texture.src && this.actor.img !== formData["img"]) {
+             *   formData["prototypeToken.texture.src"] = formData["img"];
+             * }
+             * ...
+             * 
+             * But formData["img"] does not exist. This is a dirty fix to prevent an update that is unnecessary.
+             * When AppV2 rolls around, see to it that this disappears
+             */
+            // @ts-expect-error We're overriding a function in LancerActorSheet
+            override _propagateData(formData: any)
+            {
+                // @ts-expect-error We're overriding a function in LancerActorSheet
+                super._propagateData(formData);
+
+                if (!formData["prototypeToken.texture.src"])
+                    delete formData["prototypeToken.texture.src"];
+            }
+
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
