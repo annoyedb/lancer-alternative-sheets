@@ -1,8 +1,8 @@
 # 1.3.11
 ## Changes
 * #34 - Added relative data input to HP, heat, structure, stress, shields, and burn for all sheets. You can now type in "+4", "-2", etc and it will do the math for you. Naturally this means that setting these values to negative will require doing the math to set them there, but I will assume most people would not generally need negative values for these stats
-* Added auto-highlighting for inputs
 * Fixed prototype token assignment introduced in 1.3.10. Big thank you to @BoltsJ!
+* Added auto-highlighting for inputs
 
 # 1.3.10
 Separated actor and token artwork on mech sheets and pilot sheets!
