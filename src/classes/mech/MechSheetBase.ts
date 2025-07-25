@@ -121,11 +121,15 @@ export class MechSheetBase
             // @ts-expect-error We're overriding a function in LancerActorSheet
             override _propagateData(formData: any)
             {
+                const toRestore = formData["prototypeToken.texture.src"];
+
                 // @ts-expect-error We're overriding a function in LancerActorSheet
                 super._propagateData(formData);
 
                 if (!formData["prototypeToken.texture.src"])
-                    delete formData["prototypeToken.texture.src"];
+                {
+                    formData["prototypeToken.texture.src"] = toRestore;
+                }
             }
 
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>

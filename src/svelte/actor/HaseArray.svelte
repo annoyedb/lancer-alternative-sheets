@@ -26,7 +26,7 @@
 
 <!-- HASE Stats -->
 {#if actor.type === "pilot" || 
-    actor.type === "mech" && pilot.system.active_mech?.value.uuid === actor.uuid}
+    actor.type === "mech" && pilot?.system.active_mech?.value.uuid === actor.uuid}
 <div class="la-hasegroup -positionabsolute -widthnone
         {activeTab === "statistics" ? "" : "-displaynone"}"
 >

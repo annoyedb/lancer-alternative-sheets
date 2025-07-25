@@ -13,11 +13,13 @@
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionLog from "@/svelte/actor/ActionLog.svelte";
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
 
     const props: MechSheetProps = $props();
     const {
         actor,
         system,
+        document
     } = props;
     let collapseAllButtonHover = $state(false);
     
@@ -26,11 +28,33 @@
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
     const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
+    const overchargePlusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.increase.tooltip'));
+    const overchargeMinusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.decrease.tooltip'));
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
     const overchargeStage = actor.system.overcharge;
     const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
-
     const collID = `${actor.uuid}.status.activeEffects`;
+
+    function updateDocument(event: Event & { currentTarget: EventTarget & HTMLInputElement; }, path: any)
+    {
+        document.update({[path]: event.currentTarget.valueAsNumber});
+    }
+
+    function handleOverchargeIncrease(event: MouseEvent) 
+    {
+        event.stopPropagation();
+        actor.update({
+            "system.overcharge": Math.min(overchargeStage + 1, overchargeSequence.length - 1)
+        });
+    }
+
+    function handleOverchargeDecrease(event: MouseEvent) 
+    {
+        event.stopPropagation();
+        actor.update({
+            "system.overcharge": Math.max(overchargeStage - 1, 0)
+        });
+    }
 </script>
 
 {#snippet headerOptions()}
@@ -107,8 +131,14 @@
                     <i class="cci cci-structure la-dropshadow -fontsize9 -displayinline"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
                     <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
-                        <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
-                        <span class="la-top__span -width2ch">{system.structure.value}</span><!--
+                        <!-- #11 Lancer base sheets make it currently impossible to use the 'name' property as intended, 
+                        forcing it to send it back as an array; so we handle the update in a roundabout way -->
+                        <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
+                            type="number" 
+                            value={system.structure.value}
+                            onfocus={event => event.currentTarget.select()}
+                            onchange={event => updateDocument(event, "system.structure.value")}
+                        /><!--
                     ---><span class="la-bottom__span">{system.structure.max}</span>
                     </div>
                 </div>
@@ -121,6 +151,7 @@
                             type="number" 
                             name="system.repairs.value"
                             data-dtype="Number" value={system.repairs.value}
+                            onfocus={event => event.currentTarget.select()}
                         />
                         <span class="la-bottom__span">{system.repairs.max}</span>
                     </div>
@@ -130,8 +161,13 @@
                     <i class="cci cci-reactor la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.stress.label")}</span>
                     <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
-                        <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
-                        <span class="la-top__span -width2ch">{system.stress.value}</span>
+                        <!-- (#11) -->
+                        <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
+                            type="number" 
+                            value={system.stress.value}
+                            onfocus={event => event.currentTarget.select()}
+                            onchange={event => updateDocument(event, "system.stress.value")}
+                        />
                         <span class="la-bottom__span">{system.stress.max}</span>
                     </div>
                 </div>
@@ -139,16 +175,40 @@
                 <div class="la-combine-h -aligncenter">
                     <i class="cci cci-burn la-dropshadow -fontsize9"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.burn.label")}</span>
-                    <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
-                    <span class="la-value__button -fontsize4 -textaligncenter -width2ch">{system.burn}</span>
+                    <!-- (#11) -->
+                    <input class="la-top__input -width2ch la-shadow -fontsize4 -medium -inset la-text-text"
+                        type="number" 
+                        value={system.burn}
+                        onfocus={event => event.currentTarget.select()}
+                        onchange={event => updateDocument(event, "system.burn")}
+                    />
                 </div>
                 <!-- Overcharge -->
                 <div class="la-combine-h -aligncenter">
-                    <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
-                        <!-- There exists a bug where when more than one input for a certain name exists it no longer returns a number (likely an array) -->
-                        <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
-                        <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>
+                    <div class="la-combine-h -alignselfcenter -positionrelative">
+                        <button type="button"
+                            class="mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
+                            style="left: -1rem;"
+                            data-tooltip={tooltipEnabled ? overchargeMinusTip : undefined}
+                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-direction={TooltipDirection.UP}
+                            onclick={event => handleOverchargeDecrease(event)}
+                            aria-label={getLocalized("LA.overcharge.decrease.tooltip")}
+                        ></button>
+                        <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
+                        <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
+                            <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
+                            <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>
+                        </div>
+                        <button type="button"
+                            class="mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
+                            style="right: -1.5rem;"
+                            data-tooltip={tooltipEnabled ? overchargePlusTip : undefined}
+                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-direction={TooltipDirection.UP}
+                            onclick={event => handleOverchargeIncrease(event)}
+                            aria-label={getLocalized("LA.overcharge.increase.tooltip")}
+                        ></button>
                     </div>
                 </div>
             </div>

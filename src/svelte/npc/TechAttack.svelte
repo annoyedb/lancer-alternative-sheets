@@ -155,11 +155,12 @@
         </div>
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
+        <!-- Only 'tech attacks' need to pull up the tech attack flow, just 'use' otherwise -->
         <EffectButton
             iconStyle={[getIconStyle(tech), "cci", getTechIcon(tech), "-fontsize5"]}
             iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
-            flowClass={FlowClass.RollTech}
+            flowClass={tech.system.attack_bonus.every((bonus: number) => bonus === 0) ? FlowClass.SendEffectToChat : FlowClass.RollTech}
             path={`itemTypes.npc_feature.${tech.index}`}
 
             tooltipEnabled={tooltipEnabled}
