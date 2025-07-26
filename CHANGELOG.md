@@ -2,7 +2,7 @@
 Cleaning up the issues tracker!
 
 ## Changes
-* #14 - Added inputs to allow changing struct, stress, and stress to mech sheets in Status -> Integrity and added auto highlight text quality-of-life (since these numbers are less than two digits 95% of the time) `unless you're based and cool like Lancaster`. Additionally I've added the overcharge inc/decrementors to the overwatch section
+* #14 - Added inputs to allow changing struct, stress, and stress to mech sheets in Status -> Integrity and added auto highlight text quality-of-life (since these numbers are less than two digits 95% of the time) `unless you're based and cool like Lancaster`. Additionally I've added the overcharge inc/decrementors to the overcharge section
 * #27 - Added improved 'Send to Chat' functionality for Mech weapons. Now it should display all relevant data to that weapon's active profile
 * #28 - Added improved 'Send to Chat' functionality for NPC weapons. Now it should display all relevant effects of that weapon, such as effects, on hit, and triggers (just remember to be in the right chat mode so the players can see it)
 * #52 - Changed NPC tech attacks to only prompt the tech attack flow if said NPC has an attack_bonus attribute defined to avoid unnecessary prompts for save-or-bust or other tech-attacks that do not make an explicit attack roll. Thanks @msprijatelj!
