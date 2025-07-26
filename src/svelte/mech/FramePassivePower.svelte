@@ -35,7 +35,7 @@
         event.stopPropagation();
         let chatData = {
             title: core.passive_name, 
-            description: core.passive_effect
+            effect: core.passive_effect,
         } as ChatData
         SendUnknownToChatBase.getInstance().startFlow(frame.uuid, chatData);
     }
@@ -46,7 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
-    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     onClick={sendToChat}

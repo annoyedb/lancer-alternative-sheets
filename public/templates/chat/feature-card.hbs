@@ -1,0 +1,57 @@
+<div class="card clipped-bot" style="margin: 0px;">
+    {{#if color}}
+    <div class="lancer-header {{color}}">// {{upper-case title}} //</div>
+    {{else}}
+    <div class="lancer-header lancer-primary">// {{upper-case title}} //</div>
+    {{/if}}
+    <div style="padding: 5px">
+        {{#if attackBonus}}
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{localize "LA.npc.attackBonus.label"}}: {{attackBonus}}<i class="cci cci-reticule -fontsize1"></i>
+        </div>
+        {{/if}}
+        {{#if accuracyBonus}}
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{localize "LA.npc.accuracy.label"}}: {{accuracyBonus}}<i class="cci cci-accuracy -fontsize2"></i>
+        </div>
+        {{/if}}
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{description}}}
+        </div>
+        {{#if trigger}}
+        <div class="lancer-mini-header">{{localize "LA.trigger.label"}}</div>
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{trigger}}}
+        </div>
+        {{/if}}
+        {{#if effect}}
+        <div class="lancer-mini-header">{{localize "LA.mech.system.effect.label"}}</div>
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{effect}}}
+        </div>
+        {{/if}}
+        {{#if onAttack}}
+        <div class="lancer-mini-header">{{localize "LA.effect.attack.label"}}</div>
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{onAttack}}}
+        </div>
+        {{/if}}
+        {{#if onHit}}
+        <div class="lancer-mini-header">{{localize "LA.effect.hit.label"}}</div>
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{onHit}}}
+        </div>
+        {{/if}}
+        {{#if onCrit}}
+        <div class="lancer-mini-header">{{localize "LA.effect.crit.label"}}</div>
+        <div class="effect-text" style="grid-area: 2/1/3/3">
+            {{{onCrit}}}
+        </div>
+        {{/if}}
+
+        {{#if roll}}
+        {{{lancer-dice-roll roll roll_tt roll_icon}}}
+        {{/if}}
+        {{{tag-list "tags"}}}
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
-import { FlowBase } from "./FlowBase";
 import { getLocalized } from "@/scripts/helpers";
+import { FlowBase } from "./FlowBase";
 
 // Boiler plate mostly and an example of how this module extends flows
 export class SkillTriggerOtherBase extends FlowBase

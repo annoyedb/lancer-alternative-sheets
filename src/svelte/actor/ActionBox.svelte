@@ -114,9 +114,11 @@
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
         iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
 
-        flowClass={action && uuid && path 
-            ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
-            : getActivationClass(action.activation)
+        flowClass={onClick
+            ? FlowClass.None
+            : action && uuid && path 
+                ? `${FlowClass.CoreActivation} ${getActivationClass(action.activation)}`
+                : getActivationClass(action.activation)
         }
         uuid={uuid}
         path={`${path}.${index}`}

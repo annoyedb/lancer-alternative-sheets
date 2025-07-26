@@ -46,7 +46,7 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", ACTIVATION_ICON_MAP[core.activation]]}
-    iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
     
     flowClass={FlowClass.None}
     

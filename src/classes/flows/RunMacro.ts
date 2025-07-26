@@ -1,8 +1,8 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
 import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
-import { FlowBase } from "./FlowBase";
 import type { UUIDData } from "@/interfaces/flows/UUIDData";
 import { Logger } from "@/classes/Logger";
+import { FlowBase } from "./FlowBase";
 
 // Boiler plate mostly and an example of how this module extends flows
 export class RunMacroBase extends FlowBase
@@ -62,6 +62,7 @@ export class RunMacroBase extends FlowBase
         {
             (item as Macro).execute();
         });
+        
         return true;
     }
 }

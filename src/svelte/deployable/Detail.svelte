@@ -56,12 +56,10 @@
         event.stopPropagation();
         if (action)
         {
-            let description = `${action.detail}`;
-            if (action.trigger)
-                description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
             let chatData = {
                 title: action.name, 
-                description: description
+                trigger: action.trigger,
+                effect: action.detail
             } as ChatData 
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }

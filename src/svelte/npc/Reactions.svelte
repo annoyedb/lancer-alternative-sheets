@@ -2,6 +2,8 @@
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getDocumentTheme } from "@/scripts/theme";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -77,6 +79,23 @@
         return isDestroyed(reaction)
             ? "la-text-repcap"
             : "la-text-header";
+    }
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, reaction: any)
+    {
+        event.preventDefault();
+        if (actor && reaction)
+        {
+            let chatData = {
+                title: reaction.name, 
+                trigger: reaction.system.trigger,
+                effect: reaction.system.effect,
+                tags: reaction.system.tags,
+                color: "lancer-reaction"
+            } as ChatData;
+            console.log(chatData);
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
     }
 </script>
 
@@ -166,7 +185,7 @@
             onPointerLeave={() => {editButtonHover = false;}}
         />
         <MessageButton
-            flowClass={FlowClass.SendToChat}
+            flowClass={FlowClass.None}
             uuid={reaction.uuid}
 
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
@@ -174,6 +193,7 @@
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
 
+            onClick={event => sendToChat(event, reaction)}
             onPointerEnter={() => {messageButtonHover = true;}}
             onPointerLeave={() => {messageButtonHover = false;}}
         />

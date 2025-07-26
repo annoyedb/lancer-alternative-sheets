@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
@@ -8,6 +9,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { AcceptType } from "@/enums/AcceptType";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -113,6 +115,23 @@
             getLocalized("LA.flow.rollAttack.template.tooltip"), 
             weapon.name);
     }
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, weapon: any)
+    {
+        event.stopPropagation();
+        if (actor && weapon)
+        {
+            let chatData = {
+                title: weapon.name, 
+                effect: weapon.system.active_profile.effect,
+                onAttack: weapon.system.active_profile.on_attack,
+                onHit: weapon.system.active_profile.on_hit,
+                onCrit: weapon.system.active_profile.on_crit,
+                tags: weapon.system.active_profile.tags,
+            } as ChatData;
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+    }
 </script>
 
 {#each mount.slots as slot, index}
@@ -207,7 +226,7 @@
     />
     <div class="la-combine-v -margin3-lr">
         <MessageButton
-            flowClass={FlowClass.SendToChat}
+            flowClass={FlowClass.None}
             uuid={weapon.uuid}
 
             tooltipEnabled={tooltipEnabled}
@@ -215,6 +234,7 @@
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
+            onClick={event => sendToChat(event, weapon)}
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
         />

@@ -1,9 +1,11 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getDocumentTheme } from "@/scripts/theme";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -83,6 +85,26 @@
         return formatString(
             getLocalized("LA.flow.rollAttack.template.tooltip"), 
             weapon.name);
+    }
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, weapon: any)
+    {
+        console.log(weapon.system.attack_bonus[tier - 1], weapon.system.accuracy[tier - 1])
+        event.stopPropagation();
+        if (actor && weapon)
+        {
+            let chatData = {
+                title: weapon.name, 
+                trigger: weapon.system.trigger,
+                effect: weapon.system.effect,
+                onHit: weapon.system.on_hit,
+                attackBonus: weapon.system.attack_bonus[tier - 1],
+                accuracyBonus: weapon.system.accuracy[tier - 1],
+                tags: weapon.system.tags,
+            } as ChatData;
+            console.log(chatData);
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
     }
 </script>
 
@@ -199,12 +221,13 @@
         />
         <div class="la-combine-v -margin3-lr">
             <MessageButton
-                flowClass={FlowClass.SendToChat}
+                flowClass={FlowClass.None}
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={getDocumentTheme(actor.uuid)}
 
+                onClick={event => sendToChat(event, weapon)}
                 onPointerEnter={() => {messageButtonHover = true;}}
                 onPointerLeave={() => {messageButtonHover = false;}}
             />

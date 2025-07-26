@@ -1,5 +1,5 @@
 import { preloadTemplates } from "./loader";
-import { forwardData, logData } from "./helpers";
+import { forwardData, logConsole, logData } from "./helpers";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
@@ -48,6 +48,7 @@ Hooks.once("ready", async () =>
 function registerHandlebarsHelpers()
 {
     Handlebars.registerHelper("la_logData", logData);
+    Handlebars.registerHelper("la_logConsole", logConsole)
     Handlebars.registerHelper("la_setDatastore", forwardData);
 }
 

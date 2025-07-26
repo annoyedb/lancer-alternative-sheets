@@ -57,12 +57,12 @@
         return `itemTypes.license.${index}`;
     }
 
-    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, license: any)
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, license: any, index: number)
     {
         event.stopPropagation();
         let chatData = {
             title: `${license.name} ${license.system.curr_rank}`, 
-            description: ""
+            description: licenseDescriptions[index] || "",
         } as ChatData
         SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
     }
@@ -136,7 +136,7 @@
             onPointerEnter={() => {messageButtonHover = true;}}
             onPointerLeave={() => {messageButtonHover = false;}}
 
-            onClick={event => sendToChat(event, license)}
+            onClick={event => sendToChat(event, license, index)}
         />
     {/snippet}
         <HeaderSecondary

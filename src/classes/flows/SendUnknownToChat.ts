@@ -1,5 +1,8 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
+import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
 import type { ChatData } from "@/interfaces/flows/ChatData";
+import { TEMPLATE_PATHS } from "@/scripts/loader";
+import { renderTemplateStep } from "@/scripts/lancer/flows/_render";
 import { FlowBase } from "./FlowBase";
 
 // Boiler plate mostly and an example of how this module extends flows
@@ -9,16 +12,20 @@ export class SendUnknownToChatBase extends FlowBase
 
     setupFlow()
     {
-        const SendUnknownToChat = class extends (game.lancer.flows as any).get("SimpleTextFlow")
+        const SendUnknownToChat = class extends (game.lancer.Flow as any)<any>
         {
-            static steps = ["printGenericCard"];
+            static steps = ["printFeatureCard"];
 
             constructor(uuid: string, data: ChatData)
             {
                 super(uuid, {
                     title: data.title,
                     description: data.description,
-                    tags: [],
+                    trigger: data.trigger,
+                    effect: data.effect,
+                    onHit: data.onHit,
+                    onCrit: data.onCrit,
+                    tags: data.tags,
                 });
             }
         }
@@ -29,7 +36,9 @@ export class SendUnknownToChatBase extends FlowBase
 
     setupFlowSteps(): any[]
     {
-        return [];
+        return [
+            this.printFeatureCard,
+        ];
     }
 
     /**
@@ -46,7 +55,20 @@ export class SendUnknownToChatBase extends FlowBase
             uuid,
             data
         );
+
         flow.begin();
     }
 
+    async printFeatureCard(state: FlowState<any>, options?: { template?: string }): Promise<boolean>
+    {
+        if (!state.data) throw new TypeError(`Flow state missing!`);
+        
+        renderTemplateStep(
+            state.actor,
+            options?.template || TEMPLATE_PATHS.featureCard,
+            state.data
+        );
+        
+        return true;
+    }
 }

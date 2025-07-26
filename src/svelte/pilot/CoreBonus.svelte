@@ -53,17 +53,15 @@
     }
 
     // (#4) Not a deployable but same idea
-    function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
     {
         event.stopPropagation();
         if (actor && action)
         {
-            let description = `${action.detail}`;
-            if (action.trigger)
-                description = `${getLocalized("LA.trigger.label")}: ${action.trigger}<br><br>${getLocalized("LA.mech.system.effect.label")}: ${description}`;
             let chatData = {
                 title: action.name, 
-                description: description
+                trigger: action.trigger,
+                effect: action.detail
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
@@ -197,7 +195,6 @@
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
-                <!-- TODO: maybe make a special action box or some condition that will handle getting the action... -->
                 <ActionBox
                     actions={coreBonus.system.actions}
                     uuid={coreBonus.uuid}
@@ -208,7 +205,7 @@
                     collapseID={getActionCollID(index)}
 
                     startCollapsed={false}
-                    onClick={sendActionToChat}
+                    onClick={sendToChat}
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={getDocumentTheme(sheetActor.uuid)}

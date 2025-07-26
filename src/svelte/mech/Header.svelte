@@ -56,14 +56,14 @@
         >
         {#if advancedOptions}
             <i 
-                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header -width5"
+                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header -width5 -glow-prmy la-prmy-primary"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
                 data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}
             ></i>
         {/if}
             <AdvancedButton
-                style={["-fontsize3", "-width5"]}
+                style={["-fontsize3", "-width5", "-glow-prmy", "la-prmy-primary"]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={getDocumentTheme(actor.uuid)}
@@ -74,7 +74,7 @@
     {#if advancedOptions}
         <GlyphButton
             flowClass={FlowClass.None}
-            style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5"]}
+            style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
             onClick={browseImage}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
