@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { id as moduleID } from '@/module.json';
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
@@ -108,7 +109,7 @@
     </span>
     <img
         class="la-selected-mech__img"
-        src={ ownedMechs[selectedMechIndex].img === "systems/lancer/assets/icons/mech.svg" ? "modules/lancer-alternative-sheets/assets/nodata.png" : ownedMechs[selectedMechIndex].img }
+        src={ ownedMechs[selectedMechIndex].img === "systems/lancer/assets/icons/mech.svg" ? `modules/${moduleID}/assets/nodata.png` : ownedMechs[selectedMechIndex].img }
         alt={getLocalized("LA.placeholder")}
     />
     <div class="la-combine-v -positionabsolute -right0">

@@ -139,7 +139,7 @@
                 <img class="la-npc__img
                         profile-img ref set"
                     src="{actor.img}"
-                    alt={`modules/${moduleID}/assets/assets/nodata.png`}
+                    alt={`modules/${moduleID}/assets/nodata.png`}
                     data-edit="img" 
                     data-uuid="{actor.uuid}"
                 />

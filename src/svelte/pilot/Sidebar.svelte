@@ -107,7 +107,7 @@
         <!-- Mech Image -->
         <img class="la-actor__img" 
             src={actorImg}
-            alt={`modules/${moduleID}/assets/assets/nodata.png`}
+            alt={`modules/${moduleID}/assets/nodata.png`}
             data-edit={"prototypeToken.texture.src"}
             data-uuid={actor.uuid}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.PilotHeader) }

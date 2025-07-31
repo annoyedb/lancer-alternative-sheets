@@ -84,7 +84,7 @@
         class="la-boundimage__image -heightfull -overflowhidden -float-r
             {advancedOptions ? "-pointermove" : ""}" 
         src={image} 
-        alt={`modules/${moduleID}/assets/assets/nodata.png`}
+        alt={`modules/${moduleID}/assets/nodata.png`}
         style="
             margin-top: { xySetter || ySetter ? position.y : 0 }px;
             margin-right: { xySetter || xSetter ? -position.x : 0 }px;
