@@ -3,14 +3,16 @@ This is a module for [Foundry Virtual Tabletop](https://foundryvtt.com/) and the
 
 It is designed to be a player-facing sheet that provides all of the functionality carried over from the original sheet, providing an immersive and convenient way to interact with the Lancer system, and a simple-to-understand responsive layout.
 
-While the main goal was to provide aesthetic alternative sheets to the Lancer system, there are some functional features included as well:
+While the main goal was to provide aesthetic alternative sheets to the Lancer system, there are many functional features included as well:
 
 * per-sheet sheet configuration/customization
 * reminders on ruling for statuses, stats, and some actions; useful for new players in particular
 * view/remove applied status effects
 * run/add/remove macros to the sheet
 * 'action log' that filters the sheet actor's actions into their own log
-* some stand-in implementations for features yet to be added by the system (e.g. counter display, some send-to-chat functions on various things)
+* counter/clock display on talents, core bonuses, and frame traits
+* more detailed send-to-chat for various Lancer items (such as weapons and NPC features)
+* configure and display bond, token, and actor art separately (also supports animated token display in the sheets)
 
 In addition to the above:
 * player mech sheets display some useful pilot sheet items such as core bonuses and pilot talents.
@@ -35,7 +37,7 @@ This module can be installed:
 * through the latest manifest link - `https://github.com/annoyedb/lancer-alternative-sheets/releases/latest/download/module.json`
 * downloaded and installed manually (from module.zip) found in the [Releases](https://github.com/annoyedb/lancer-alternative-sheets/releases) page
 
-This module is supported on Foundry V11 (Lancer 2.4.3 - 2.5.0) and Foundry V12 (Lancer 2.6.0+). 
+This module is supported on Foundry V11 (Lancer 2.4.3 - 2.5.0) and Foundry V12 (Lancer 2.6.0 - 2.11.x). 
 
 If you are on a supported version but the last-verified version does not match, it is because the last-verified version is whatever my campaign is currently using. :eyes:
 
@@ -63,6 +65,21 @@ A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by e
 
 Q: How do I change my minor ideal in the character sheet?  
 A: It'll be available to edit when you toggle the 'advanced toggle' in the sheet (top-right toggle in the pilot sheet). When this is enabled, hovering over the minor ideal will reveal a drop-down where you can select your minor ideal for the session.
+
+Q: What is the difference between the image on the sidebar (side) and the image shown on the header (top)?
+A: Functionally, the image on the sidebar is the token (or prototype token) art and the image on the header is the actor art. In layman's the side image is what appears when you drag a token onto a scene or your 'play token' on Foundry and the top is the image that appears on the actor list or your 'main art' for your character (and is often used by modules such as [Carousel Combat Tracker](https://foundryvtt.com/packages/combat-tracker-dock) among many others to represent your character over the token)
+
+Q: Help something broke and I need to wipe the module's settings data!
+A: In the event that for some reason you need to completely reset this module's settings data there are some functions that I've written that can help with that
+```
+resetMechSheetLocalData(uuid?: string);
+resetMechSheetData(uuid?: string);
+resetNPCSheetData(uuid?: string);
+resetPilotSheetLocalData(uuid?: string);
+resetPilotSheetData(uuid?: string);
+resetDeployableSheetData(uuid?: string);
+```
+You can open a browser's console to access these functions. For example, to reset pilot sheet data for the pilot (header img offsets, theme override, macros, and bond image source) with a UUID of `'Actor.WxLln2hSz8EtXcLc'` (it's often just "Actor." + "ID of your actor", accessible within Foundry's native UI) would be to use `resetPilotSheetData` so the command would be: `game.modules.get("lancer-alternative-sheets").api.settings.resetPilotSheetData('Actor.WxLln2hSz8EtXcLc')`. Not defining a UUID will clear all pilot data rather than a specific one. If this sounds too technical for you, I don't recommend you fiddling with these commands and instead contacting me on PilotNET.
 
 ## Development
 This module uses Svelte 5 to render overtop of the Lancer system's current implementation of Application by mounting overtop of a Handlebars div. As such it does not extend from Application but from Lancer's ActorSheets, making it fully interchangeable between the Lancer included sheets, while allowing the reactive rendering and maintainability of using Svelte.
