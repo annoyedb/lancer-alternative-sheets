@@ -93,7 +93,6 @@
                 tags: reaction.system.tags,
                 color: "lancer-reaction"
             } as ChatData;
-            console.log(chatData);
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
     }

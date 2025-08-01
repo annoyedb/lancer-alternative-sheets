@@ -9,6 +9,7 @@ interface SheetStoreData
     currentTheme: string;
     activeTabs: { [key in ActiveTab]: string };
     trackedHooks: { [key: number]: string };
+    selectedTokenImage: string; // (#12)
     // TODO: refactor to a pilot store
     bondQNAMode: boolean;
     selectedMech: number;
@@ -24,6 +25,8 @@ function createDefaultData(): SheetStoreData
         currentTheme: "",
         activeTabs: {} as { [key in ActiveTab]: string },
         trackedHooks: {} as { [key: number]: string },
+        selectedTokenImage: "", // (#12)
+        // TODO: refactor to a pilot store
         bondQNAMode: false,
         selectedMech: 0,
     };

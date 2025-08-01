@@ -89,7 +89,6 @@
 
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, weapon: any)
     {
-        console.log(weapon.system.attack_bonus[tier - 1], weapon.system.accuracy[tier - 1])
         event.stopPropagation();
         if (actor && weapon)
         {
@@ -102,7 +101,6 @@
                 accuracyBonus: weapon.system.accuracy[tier - 1],
                 tags: weapon.system.tags,
             } as ChatData;
-            console.log(chatData);
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
     }

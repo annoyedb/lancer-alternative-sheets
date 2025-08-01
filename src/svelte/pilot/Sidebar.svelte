@@ -5,7 +5,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
+    import { getLocalized, getMimeType, handleRelativeDataInput } from "@/scripts/helpers";
     import { 
         getPilotSheetSensorsEnabled, 
         getPilotSheetTechAttackEnabled, 
@@ -29,17 +29,19 @@
         actor,
         itemTypes
     }: PilotSheetProps = props;
+    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
+
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);
     let editingShield = $state(false);
+    let tokenVideoMimeType = $state(getMimeType(actorImg));
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const sidebarExes = getSidebarExecutables(actor.uuid);
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
     const showTechAttack = getPilotSheetTechAttackEnabled();
-    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
@@ -66,6 +68,29 @@
         sidebarExes.unshift(...newUuids);
 
         return sidebarExes;
+    }
+
+    function browseImageVideo(event: MouseEvent)
+    {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const fp = new FilePicker({
+            current: actor.prototypeToken.texture.src,
+            type: "imagevideo",
+            callback: (path) => {
+                // (#12) One day, in V13 or whenever I decide to update FoundryVTT types and it doesn't break this whole project,
+                // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
+                // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
+                // But today, we're just going to throw it in a data store and call it a day.
+                getSheetStore(actor.uuid).selectedTokenImage = path;
+                actor.update({
+                    "prototypeToken.texture.src": path
+                });
+            },
+        });
+
+        fp.render(true);
     }
 </script>
 
@@ -105,14 +130,31 @@
     </div>
     <div class="la-combine-h">
         <!-- Mech Image -->
-        <img class="la-actor__img" 
-            src={actorImg}
-            alt={`modules/${moduleID}/assets/nodata.png`}
-            data-edit={"prototypeToken.texture.src"}
-            data-uuid={actor.uuid}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.PilotHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-        />
+        {#if tokenVideoMimeType}
+        <!-- svelte-ignore a11y_media_has_caption -->
+        <video autoplay loop
+            class="la-actor__img -pointercursor"
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            onclick={event => browseImageVideo(event)}
+        >
+            <source src={actorImg} type={tokenVideoMimeType}>
+        </video>
+        {:else}
+        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- (#11) -->
+        <img 
+            class="la-actor__img -pointercursor" 
+            src={actorImg === "systems/lancer/assets/icons/mech.svg" || actorImg === "icons/svg/mystery-man.svg" 
+                ? `modules/${moduleID}/assets/nodata.png` 
+                : actorImg}
+            alt={getLocalized("LA.placeholder")}
+            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
+            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            onclick={event => browseImageVideo(event)}
+        >
+        {/if}
     </div>
 </div>
 <!-- Mech Stats 1 -->

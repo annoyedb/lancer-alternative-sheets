@@ -1,4 +1,4 @@
-// Bridge module and foundryvtt-lancer system
+// Bridge module and foundryvtt-lancer system and any exported function I don't want to categorize
 import type { HelperOptions } from "handlebars";
 import { Logger } from "@/classes/Logger";
 import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
@@ -112,4 +112,13 @@ export function handleRelativeDataInput(event: Event & { currentTarget: EventTar
 
     event.currentTarget.value = newValue.toString();
     event.currentTarget.blur();
+}
+
+export function getMimeType(path: string)
+{
+    const validTypes = ['webm', 'mp4', 'm4v']; // https://foundryvtt.com/article/media/
+    const extension = path.split('.').pop()?.toLowerCase();
+    if (extension && validTypes.includes(extension))
+        return `video/${extension === 'm4v' ? 'mp4' : extension}`;
+    return null;
 }

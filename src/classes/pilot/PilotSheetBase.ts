@@ -138,14 +138,13 @@ export class PilotSheetBase
             // @ts-expect-error We're overriding a function in LancerActorSheet
             override _propagateData(formData: any)
             {
-                const toRestore = formData["prototypeToken.texture.src"];
-
                 // @ts-expect-error We're overriding a function in LancerActorSheet
                 super._propagateData(formData);
-
-                if (!formData["prototypeToken.texture.src"])
+                
+                const updateToken = getSheetStore(this.actor.uuid).selectedTokenImage; // (#12)
+                if (updateToken)
                 {
-                    formData["prototypeToken.texture.src"] = toRestore;
+                    formData["prototypeToken.texture.src"] = updateToken;
                 }
             }
 

@@ -1,8 +1,11 @@
 // Sidebar
-.la-root
+.la-root.la-mech
 {
-    .la-body>.la-sidebar
+    .la-body>.la-sidebar>.la-content-secondary>.la-sidebar__statistics
     {
-        
+        .la-actor__img
+        {
+            min-height: 11rem;
+        }
     }
 }
