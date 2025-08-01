@@ -2,8 +2,8 @@
 Animated token support!
 
 ## Changes
+* #53 Added support for rendering video files on the mech sheet and pilot sheet's sidebar when the prototype token is a video. Thanks @MechaMaria64 for the reminder!
 * Fixed incorrect path for alt paths used in exceptions where image paths are undefined. In most cases this just means it will default to the image used for GMS mechs such as the Everest, Sagarmantha, and Chomolungma `rather than the dreaded mystery-man and cci-mech`
-* Added support for rendering video files on the mech sheet and pilot sheet's sidebar when the prototype token is a video
 * Added minimum height to sidebar token images, to prevent edge cases where the core power, speed, or size may spill into the stats of pilots and mech sheets
 * Removed some testing code that made it to the build `oups`
 
