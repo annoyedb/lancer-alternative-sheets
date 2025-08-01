@@ -51,25 +51,25 @@ The implemented sheets are as follows:
 * Deployable sheets
 
 ## Frequently Asked Questions
-Q: How do I roll a weapon/system?  
+**Q: How do I roll a weapon/system?**
 A: For rollable items, such as weapons or systems there's an icon with the background of a D20 in it, that glows slightly. You can press this to roll your weapon. If you have suggestions on how to make this more obvious so this question doesn't need to be asked, please make an inquiry in the [issues page](https://github.com/annoyedb/lancer-alternative-sheets/issues/) or directly to me on Discord!
 
-Q: How do I change my system theme?  
+**Q: How do I change my system theme?**
 A: To change the global system theme, change the LANCER system theme by going to Game Settings -> Configure Settings -> LANCER -> UI Theme. This setting is per-client, but all sheets will reflect this setting by default.
 
-Q: How do I change the theme of a single sheet?  
+**Q: How do I change the theme of a single sheet?**
 A: To override or set a fixed theme per-sheet, you can activate the 'advanced toggle' in the sheet (in the sheet itself, typically near the top) and find a notebook symbol. This setting is synced across all clients.
 
-Q: How do I enable sensors or the tech attack stat on my sheet?  
+**Q: How do I enable sensors or the tech attack stat on my sheet?**
 A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. If you wish to enable the display of these stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module.
 
-Q: How do I change my minor ideal in the character sheet?  
+**Q: How do I change my minor ideal in the character sheet?**
 A: It'll be available to edit when you toggle the 'advanced toggle' in the sheet (top-right toggle in the pilot sheet). When this is enabled, hovering over the minor ideal will reveal a drop-down where you can select your minor ideal for the session.
 
-Q: What is the difference between the image on the sidebar (side) and the image shown on the header (top)?
+**Q: What is the difference between the image on the sidebar (side) and the image shown on the header (top)?**
 A: Functionally, the image on the sidebar is the token (or prototype token) art and the image on the header is the actor art. In layman's the side image is what appears when you drag a token onto a scene or your 'play token' on Foundry and the top is the image that appears on the actor list or your 'main art' for your character (and is often used by modules such as [Carousel Combat Tracker](https://foundryvtt.com/packages/combat-tracker-dock) among many others to represent your character over the token)
 
-Q: Help something broke and I need to wipe the module's settings data!
+**Q: Help something broke and I need to wipe the module's settings data!**
 A: In the event that for some reason you need to completely reset this module's settings data there are some functions that I've written that can help with that
 ```
 resetMechSheetLocalData(uuid?: string);
