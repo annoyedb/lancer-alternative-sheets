@@ -4,7 +4,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { resetLog, sendToLog } from '@/scripts/store/text-log';
-    import { getLocalized, getMimeType, handleRelativeDataInput } from "@/scripts/helpers";
+    import { browseTokenImage, getLocalized, getMimeType, handleRelativeDataInput } from "@/scripts/helpers";
     import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
     import { getSheetStore } from '@/scripts/store/module-store';
     import { getAdvancedState } from '@/scripts/store/advanced';
@@ -74,29 +74,6 @@
             "system.overcharge": Math.max(overchargeStage - 1, 0)
         });
     }
-
-    function browseImageVideo(event: MouseEvent)
-    {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const fp = new FilePicker({
-            current: actor.prototypeToken.texture.src,
-            type: "imagevideo",
-            callback: (path) => {
-                // (#12) One day, in V13 or whenever I decide to update FoundryVTT types and it doesn't break this whole project,
-                // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
-                // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
-                // But today, we're just going to throw it in a data store and call it a day.
-                getSheetStore(actor.uuid).selectedTokenImage = path;
-                actor.update({
-                    "prototypeToken.texture.src": path
-                });
-            },
-        });
-
-        fp.render(true);
-    }
 </script>
 
 <!-- Frame Name -->
@@ -136,19 +113,20 @@
             tooltipTheme={getDocumentTheme(actor.uuid)}
         />
     </div>
+    <!-- (#13) -->
     <div class="la-combine-h">
         <!-- Mech Image -->
-        {#if tokenVideoMimeType}
+    {#if tokenVideoMimeType}
         <!-- svelte-ignore a11y_media_has_caption -->
         <video autoplay loop
             class="la-actor__img -pointercursor"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-            onclick={event => browseImageVideo(event)}
+            onclick={event => browseTokenImage(event, actor)}
         >
             <source src={actorImg} type={tokenVideoMimeType}>
         </video>
-        {:else}
+    {:else}
         <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <!-- svelte-ignore a11y_click_events_have_key_events -->
         <!-- (#11) -->
@@ -160,9 +138,9 @@
             alt={getLocalized("LA.placeholder")}
             onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-            onclick={event => browseImageVideo(event)}
+            onclick={event => browseTokenImage(event, actor)}
         >
-        {/if}
+    {/if}
     </div>
 </div>
 <!-- Mech Stats 1 -->

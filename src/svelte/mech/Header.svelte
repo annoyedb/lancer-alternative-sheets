@@ -3,7 +3,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { browseActorImage, getLocalized } from "@/scripts/helpers";
     import { getDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
@@ -23,25 +23,8 @@
     }: MechSheetProps = props
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let actorImageSrc = $state(actor.img);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
-
-    function browseImage(_event: MouseEvent)
-    {
-        const fp = new FilePicker({
-            current: actor.img,
-            type: "image",
-            callback: (path) => {
-                actorImageSrc = path;
-                actor.update({
-                    "img": path
-                })
-            },
-        });
-
-        fp.render(true);
-    }
 </script>
 
 <!-- Header -->
@@ -75,7 +58,7 @@
         <GlyphButton
             flowClass={FlowClass.None}
             style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
-            onClick={browseImage}
+            onClick={event => browseActorImage(event, actor)}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.edit.image.tooltip")}
@@ -149,7 +132,7 @@
     </span>
     {/if}
     <BoundImage
-        image={actorImageSrc}
+        image={actor.img}
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
         ySetter={setImageOffsetY}

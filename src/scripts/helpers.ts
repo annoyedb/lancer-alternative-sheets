@@ -3,14 +3,11 @@ import type { HelperOptions } from "handlebars";
 import { Logger } from "@/classes/Logger";
 import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { LancerAlternative } from "@/enums/LancerAlternative";
+import { getSheetStore } from "@/scripts/store/module-store";
 
-const localizeMap: { [key: string]: string } = {};
 export function getLocalized(key: string): string
 {
-    if (!(key in localizeMap))
-        localizeMap[key] = HandlebarsHelpers.localize(key, {} as HelperOptions);
-    return localizeMap[key];
-    // return HandlebarsHelpers.localize(key, {} as HelperOptions);
+    return HandlebarsHelpers.localize(key, {} as HelperOptions);
 }
 
 export function randomExtension(): string
@@ -121,4 +118,39 @@ export function getMimeType(path: string)
     if (extension && validTypes.includes(extension))
         return `video/${extension === 'm4v' ? 'mp4' : extension}`;
     return null;
+}
+
+export function browseTokenImage(_event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+{
+    const fp = new FilePicker({
+        current: actor.prototypeToken.texture.src,
+        type: "imagevideo",
+        callback: (path) => {
+            // (#12) One day, in V13 or whenever I decide to update FoundryVTT types and it doesn't break this whole project,
+            // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
+            // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
+            // But today, we're just going to throw it in a data store and call it a day.
+            getSheetStore(actor.uuid).selectedTokenImage = path;
+            actor.update({
+                "prototypeToken.texture.src": path
+            });
+        },
+    });
+
+    fp.render(true);
+}
+
+export function browseActorImage(_event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+{
+    const fp = new FilePicker({
+        current: actor.img,
+        type: "image",
+        callback: (path) => {
+            actor.update({
+                "img": path
+            })
+        },
+    });
+
+    fp.render(true);
 }

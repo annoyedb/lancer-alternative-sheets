@@ -4,7 +4,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import { getLocalized } from "@/scripts/helpers";
+    import { browseActorImage, getLocalized } from "@/scripts/helpers";
     import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetXY } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -22,25 +22,8 @@
     } : PilotSheetProps = props;
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let actorImageSrc = $state(actor.img);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
-
-    function browseImage(_event: MouseEvent)
-    {
-        const fp = new FilePicker({
-            current: actor.img,
-            type: "image",
-            callback: (path) => {
-                actorImageSrc = path;
-                actor.update({
-                    "img": path
-                })
-            },
-        });
-
-        fp.render(true);
-    }
 </script>
 
 <!-- Header -->
@@ -74,7 +57,7 @@
         <GlyphButton
             flowClass={FlowClass.None}
             style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
-            onClick={browseImage}
+            onClick={event => browseActorImage(event, actor)}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.edit.image.tooltip")}
@@ -143,7 +126,7 @@
         />
     </span>
     <BoundImage
-        image={actorImageSrc}
+        image={actor.img}
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
         xGetter={getImageOffsetX}
