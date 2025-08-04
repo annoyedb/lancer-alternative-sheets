@@ -267,7 +267,9 @@ export async function parse_control_val(raw_val: string): Promise<{ success: boo
 // There's a lot of jank with the way we handle Lancer 
 // system function imports, but this one is the most concerning 
 // because it can break the system if the type is `struct`, as 
-// that case has been modified to be completely ignored
+// that case has been modified to be completely ignored. 
+// 
+// When types importing is properly implemented in v13 remove this.
 export function handleGenControls(
     html: JQuery,
     // Retrieves the data that we will operate on

@@ -73,8 +73,6 @@
     }
 
 </script>
-<!-- (#2) -->
-<!-- svelte-ignore event_directive_deprecated -->
 <div class="la-boundimage -flex1 -widthfull -heightfull"
     >
     {#if children}
@@ -91,10 +89,10 @@
             mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));
             -webkit-mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));
             -moz-mask-image: linear-gradient(to bottom, black calc(6.6rem - { position.y }px), transparent calc(10rem - { position.y }px));"
-        on:pointerdown={event => handlePointerDown(event)}
-        on:pointermove={event => handlePointerMove(event)}
-        on:pointerup={ handleAssignment }
-        on:pointerleave={ handleAssignment }
+        onpointerdown={event => handlePointerDown(event)}
+        onpointermove={event => handlePointerMove(event)}
+        onpointerup={ handleAssignment }
+        onpointerleave={ handleAssignment }
         draggable={false}
     />
 </div>

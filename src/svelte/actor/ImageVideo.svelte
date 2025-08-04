@@ -16,13 +16,13 @@
 
 <div class="la-combine-h">
 {#if tokenVideoMimeType}
-    <!-- svelte-ignore a11y_media_has_caption -->
     <video autoplay loop
         class="la-actor__img -pointercursor"
         onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
         onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
         onclick={event => browseTokenImage(event, actor)}
     >
+        <track kind="captions">
         <source src={actorImgVid} type={tokenVideoMimeType}>
     </video>
 {:else}

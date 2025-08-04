@@ -20,7 +20,7 @@
 
     let filteredMessages: Array<any> = $state(messages?.filter((m: any) => {
         const msgActorID = m.speaker.token || m.speaker.actor;
-        return idParts.includes(msgActorID) && m.content?.trim().startsWith('<div c'); // (#9) I hate this check. But the system doesn't offer any other way to distinguish between chat and actions and using the DOM api to check HTML content would be slower
+        return idParts.includes(msgActorID) && m.content?.trim().startsWith('<div c'); // (#9) I hate this check, but nothing can be done until flags are properly used. The system doesn't offer any other way to distinguish between chat and actions and using the DOM api to check HTML content would be slower
     }) || []);
     let component: HTMLElement | null = $state(null);
     let extractedTimes: Array<string> = $state([]);

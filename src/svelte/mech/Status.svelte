@@ -114,7 +114,7 @@
                     <i class="cci cci-structure la-dropshadow -fontsize9 -displayinline"></i>
                     <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
                     <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
-                        <!-- #11 Lancer base sheets make it currently impossible to use the 'name' property as intended, 
+                        <!-- (#11) Lancer base sheets make it currently impossible to use the 'name' property as intended, 
                         forcing it to send it back as an array; so we handle the update in a roundabout way -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 

@@ -79,7 +79,7 @@
     data-accept-types={acceptTypes}
 >
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-    <!-- (#2) -->
+    <!-- (#2) - On FireFox for some reason onclick vs on:click does not work properly -->
     <!-- svelte-ignore event_directive_deprecated -->
     <h1 class="la-summary la-combine-h la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 

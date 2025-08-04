@@ -90,8 +90,8 @@
     }
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="la-combine-h -widthfull -aligncenter -positionrelative
+<div role="mark"
+    class="la-combine-h -widthfull -aligncenter -positionrelative
         {style?.join(' ')}"
     ondragstart={handleDragStart}
     ondrop={handleDrop}

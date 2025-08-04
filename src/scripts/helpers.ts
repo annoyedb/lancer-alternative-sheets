@@ -129,7 +129,7 @@ export function browseTokenImage(event: MouseEvent & { currentTarget: EventTarge
         type: "imagevideo",
         callback: (path) =>
         {
-            // (#12) One day, in V13 or whenever I decide to update FoundryVTT types and it doesn't break this whole project,
+            // (#12) When the Lancer system fixes its types in v13 and they can be exported properly
             // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
             // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
             // But today, we're just going to throw it in a data store and call it a day.
