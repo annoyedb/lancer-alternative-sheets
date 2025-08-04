@@ -1,10 +1,12 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { EditMode } from "@/enums/EditMode";
+    import { FlowClass } from "@/enums/FlowClass";
+    import type { ContentSidesProps } from "@/interfaces/actor/decoration/ContentSidesProps";
     import type { PointerClickProps } from "@/interfaces/actor/events/PointerClickProps";
     import type { StatComboProps } from "@/interfaces/actor/StatComboProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const {
         icon,
@@ -23,7 +25,10 @@
         tooltipTheme,
 
         onPointerClick,
-    }: StatComboProps & TooltipProps & PointerClickProps = $props();
+
+        contentLeft,
+        contentRight,
+    }: StatComboProps & TooltipProps & PointerClickProps & ContentSidesProps = $props();
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 
     function handleSubtract(event: MouseEvent)
@@ -41,39 +46,36 @@
 
 {#snippet renderEditable()}
 <div class="-widthfull -positionrelative">
-    <div class="la-combine-h {editable ? "" : "-displaynone"}"><!--
-    ---><button type="button"
-            class="la-bckg-secondary -width1
-                clicker-minus-button input-update"
-            data-tooltip={tooltipEnabled ? undefined : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {tooltipTheme}"
-            data-tooltip-direction={"UP"}
-            aria-label={getLocalized("LA.subtract.label")}
-            onclick={event => handleSubtract(event)}
-        >-</button><!--
-    ---><input type="number"
+    <div class="la-combine-h {editable ? "" : "-displaynone"}">
+        <GlyphButton
+            style={["la-bckg-secondary -width1", "clicker-minus-button input-update"]}
+            flowClass={FlowClass.None}
+            tooltipEnabled={false}
+            onClick={handleSubtract}
+        >-</GlyphButton>
+        <input type="number"
             class="la-text-text -bold -width3ch -height1"
             name={valuePath}
             value={value}
             data-dtype={"Number"}
-        /><!--
-    ---><button type="button"
-            class="la-bckg-secondary -width1
-                clicker-plus-button input-update"
-            data-tooltip={tooltipEnabled ? undefined : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {tooltipTheme}"
-            data-tooltip-direction={"UP"}
-            aria-label={getLocalized("LA.add.label")}
-            onclick={event => handleAddition(event)}
-        >+</button><!--
----></div>
+            onfocus={event => event.currentTarget.select()}
+        />
+        <GlyphButton
+            style={["la-bckg-secondary -width1", "clicker-plus-button input-update"]}
+            flowClass={FlowClass.None}
+            tooltipEnabled={false}
+            onClick={handleAddition}
+        >+</GlyphButton>
+    </div>
     <span class="-widthfull {editable ? "-displaynone" : ""}">{value}</span>
 </div>
 {/snippet}
 
 <div class="la-shortstat la-combine-h {outerStyle?.join(' ')}">
-    <!-- the mdi shield is a bit larger than the cci icons -->
     <i class="{icon}"></i>
+    {#if contentLeft}
+        {@render contentLeft()}
+    {/if}
     <div class="la-combine-v {innerStyle?.join(' ')}"
         data-tooltip={tooltipEnabled && !editable ? tip : undefined}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
@@ -86,4 +88,7 @@
     {/if}
         <span class="">{label}</span>
     </div>
+    {#if contentRight}
+        {@render contentRight()}
+    {/if}
 </div>

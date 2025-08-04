@@ -123,6 +123,7 @@ export class MechSheetBase
                 // @ts-expect-error We're overriding a function in LancerActorSheet
                 super._propagateData(formData);
                 
+                delete formData["prototypeToken.texture.src"]; // GO AWAY MYSTERY MAN AAAAAAA
                 const updateToken = getSheetStore(this.actor.uuid).selectedTokenImage; // (#12)
                 if (updateToken)
                 {

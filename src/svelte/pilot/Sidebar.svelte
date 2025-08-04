@@ -1,11 +1,10 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { id as moduleID } from '@/module.json';
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { browseTokenImage, getLocalized, getMimeType, handleRelativeDataInput } from "@/scripts/helpers";
+    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { 
         getPilotSheetSensorsEnabled, 
         getPilotSheetTechAttackEnabled, 
@@ -16,11 +15,11 @@
     } from "@/scripts/pilot/settings";
     import { getSheetStore } from "@/scripts/store/module-store";
     import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
-    import { resetLog, sendToLog } from '@/scripts/store/text-log';
     import { getAdvancedState } from '@/scripts/store/advanced';
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
+    import ImageVideo from "../actor/ImageVideo.svelte";
 
 
     const props = $props();
@@ -29,13 +28,10 @@
         actor,
         itemTypes
     }: PilotSheetProps = props;
-    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
-
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    let tokenVideoMimeType = $state(getMimeType(actorImg));
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const sidebarExes = getSidebarExecutables(actor.uuid);
@@ -105,35 +101,10 @@
             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{system.speed}</span>
         </div>
     </div>
-        <!-- (#13) Move to a component -->
-    <div class="la-combine-h">
-        <!-- Pilot Image -->
-    {#if tokenVideoMimeType}
-        <!-- svelte-ignore a11y_media_has_caption -->
-        <video autoplay loop
-            class="la-actor__img -pointercursor"
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-            onclick={event => browseTokenImage(event, actor)}
-        >
-            <source src={actorImg} type={tokenVideoMimeType}>
-        </video>
-    {:else}
-        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-        <!-- svelte-ignore a11y_click_events_have_key_events -->
-        <!-- (#11) -->
-        <img 
-            class="la-actor__img -pointercursor" 
-            src={actorImg === "systems/lancer/assets/icons/mech.svg" || actorImg === "icons/svg/mystery-man.svg" 
-                ? `modules/${moduleID}/assets/nodata.png` 
-                : actorImg}
-            alt={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.PilotHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-            onclick={event => browseTokenImage(event, actor)}
-        >
-    {/if}
-    </div>
+    <!-- Pilot Image -->
+    <ImageVideo
+        actor={actor}
+    />
 </div>
 <!-- Mech Stats 1 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly">

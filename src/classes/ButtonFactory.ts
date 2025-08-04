@@ -6,7 +6,7 @@ import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
 import { TextLogHook } from "@/enums/TextLogHook";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { Logger } from "@/classes/Logger";
-import { formatString, getLocalized } from "@/scripts/helpers";
+import { formatString, getCurrentOvercharge, getLocalized } from "@/scripts/helpers";
 import FlowButton from '@/svelte/actor/button/FlowButton.svelte';
 
 /**
@@ -65,9 +65,7 @@ export class ButtonFactory
             const actor = fromUuidSync(ownerUUID) as any;
             if (actor && actor.type === "mech")
             {
-                const overchargeSequence = actor.system.overcharge_sequence.split(",");
-                const overchargeStage = actor.system.overcharge;
-                return formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
+                return formatString(getLocalized("LA.flow.overcharge.tooltip"), getCurrentOvercharge(actor));
             }
             Logger.error("Actor required to get overcharge sequence for tooltip.");
         }

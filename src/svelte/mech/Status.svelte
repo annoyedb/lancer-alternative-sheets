@@ -1,9 +1,11 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { formatString, getLocalized } from "@/scripts/helpers";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { formatString, getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease } from "@/scripts/helpers";
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight, getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getDocumentTheme } from "@/scripts/theme";
+    import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -12,8 +14,7 @@
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import ActionLog from "@/svelte/actor/ActionLog.svelte";
-    import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -30,30 +31,12 @@
     const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
     const overchargePlusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.increase.tooltip'));
     const overchargeMinusTip = TooltipFactory.buildTooltip(getLocalized('LA.overcharge.decrease.tooltip'));
-    const overchargeSequence = actor.system.overcharge_sequence.split(",");
-    const overchargeStage = actor.system.overcharge;
-    const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), overchargeSequence[overchargeStage]);
+    const overchargeText = formatString(getLocalized("LA.flow.overcharge.tooltip"), getCurrentOvercharge(actor));
     const collID = `${actor.uuid}.status.activeEffects`;
 
     function updateDocument(event: Event & { currentTarget: EventTarget & HTMLInputElement; }, path: any)
     {
         document.update({[path]: event.currentTarget.valueAsNumber});
-    }
-
-    function handleOverchargeIncrease(event: MouseEvent) 
-    {
-        event.stopPropagation();
-        actor.update({
-            "system.overcharge": Math.min(overchargeStage + 1, overchargeSequence.length - 1)
-        });
-    }
-
-    function handleOverchargeDecrease(event: MouseEvent) 
-    {
-        event.stopPropagation();
-        actor.update({
-            "system.overcharge": Math.max(overchargeStage - 1, 0)
-        });
     }
 </script>
 
@@ -186,29 +169,31 @@
                 <!-- Overcharge -->
                 <div class="la-combine-h -aligncenter">
                     <div class="la-combine-h -alignselfcenter -positionrelative">
-                        <button type="button"
-                            class="mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
-                            style="left: -1rem;"
-                            data-tooltip={tooltipEnabled ? overchargeMinusTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-                            data-tooltip-direction={TooltipDirection.UP}
-                            onclick={event => handleOverchargeDecrease(event)}
-                            aria-label={getLocalized("LA.overcharge.decrease.tooltip")}
-                        ></button>
                         <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
                         <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
-                            <span class="la-top__span -widthfull">{overchargeSequence[overchargeStage]}</span>
+                            <span class="la-top__span -widthfull">
+                                <GlyphButton type="button"
+                                    flowClass={FlowClass.None}
+                                    style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+                                    tooltip={overchargeMinusTip}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipDirection={TooltipDirection.UP}
+                                    onClick={event => handleOverchargeDecrease(event, actor)}
+                                >
+                                </GlyphButton>
+                                    {getCurrentOvercharge(actor)}
+                                <GlyphButton type="button"
+                                    flowClass={FlowClass.None}
+                                    style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+                                    tooltip={overchargePlusTip}
+                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipDirection={TooltipDirection.UP}
+                                    onClick={event => handleOverchargeIncrease(event, actor)}
+                                >
+                                </GlyphButton>
+                            </span>
                             <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>
                         </div>
-                        <button type="button"
-                            class="mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
-                            style="right: -1.5rem;"
-                            data-tooltip={tooltipEnabled ? overchargePlusTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-                            data-tooltip-direction={TooltipDirection.UP}
-                            onclick={event => handleOverchargeIncrease(event)}
-                            aria-label={getLocalized("LA.overcharge.increase.tooltip")}
-                        ></button>
                     </div>
                 </div>
             </div>

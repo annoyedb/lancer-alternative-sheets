@@ -96,11 +96,11 @@ export function handleRelativeDataInput(event: Event & { currentTarget: EventTar
         if (inputValue.startsWith('+'))
         {
             newValue = previous + Number(inputValue.slice(1));
-        } 
+        }
         else if (inputValue.startsWith('-'))
         {
             newValue = previous - Number(inputValue.slice(1));
-        } 
+        }
         else
         {
             newValue = Number(inputValue);
@@ -120,12 +120,15 @@ export function getMimeType(path: string)
     return null;
 }
 
-export function browseTokenImage(_event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+export function browseTokenImage(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
 {
+    event.stopPropagation();
+
     const fp = new FilePicker({
         current: actor.prototypeToken.texture.src,
         type: "imagevideo",
-        callback: (path) => {
+        callback: (path) =>
+        {
             // (#12) One day, in V13 or whenever I decide to update FoundryVTT types and it doesn't break this whole project,
             // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
             // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
@@ -140,12 +143,15 @@ export function browseTokenImage(_event: MouseEvent & { currentTarget: EventTarg
     fp.render(true);
 }
 
-export function browseActorImage(_event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+export function browseActorImage(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
 {
+    event.stopPropagation();
+
     const fp = new FilePicker({
         current: actor.img,
         type: "image",
-        callback: (path) => {
+        callback: (path) =>
+        {
             actor.update({
                 "img": path
             })
@@ -153,4 +159,33 @@ export function browseActorImage(_event: MouseEvent & { currentTarget: EventTarg
     });
 
     fp.render(true);
+}
+
+export function getCurrentOvercharge(actor: any)
+{
+    const overchargeSequence = actor.system.overcharge_sequence.split(",");
+    const overchargeStage = actor.system.overcharge;
+
+    return overchargeSequence[overchargeStage]
+}
+
+export function handleOverchargeIncrease(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any) 
+{
+    event.stopPropagation();
+
+    const overchargeStage = actor.system.overcharge;
+    const overchargeSequence = actor.system.overcharge_sequence.split(",");
+    actor.update({
+        "system.overcharge": Math.min(overchargeStage + 1, overchargeSequence.length - 1)
+    });
+}
+
+export function handleOverchargeDecrease(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any) 
+{
+    event.stopPropagation();
+    
+    const overchargeStage = actor.system.overcharge;
+    actor.update({
+        "system.overcharge": Math.max(overchargeStage - 1, 0)
+    });
 }

@@ -1,33 +1,31 @@
 <script lang="ts">
-    import { id as moduleID } from '@/module.json';
     import { onMount } from 'svelte';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { resetLog, sendToLog } from '@/scripts/store/text-log';
-    import { browseTokenImage, getLocalized, getMimeType, handleRelativeDataInput } from "@/scripts/helpers";
+    import { getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease, handleRelativeDataInput } from "@/scripts/helpers";
     import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
     import { getSheetStore } from '@/scripts/store/module-store';
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getMechSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { FlowClass } from '@/enums/FlowClass';
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
     import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
+    import ImageVideo from '@/svelte/actor/ImageVideo.svelte';
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
 
     const props = $props();
     const { 
         system,
         actor,
     }: MechSheetProps = props;
-    const actorImg = actor.prototypeToken?.texture.src ?? actor.img;
-    
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    let tokenVideoMimeType = $state(getMimeType(actorImg));
 
     const themeOverride = getSheetStore(actor.uuid).currentTheme;
     const sidebarExes = getSidebarExecutables(actor.uuid);
@@ -36,8 +34,6 @@
         ? `${frame.system.manufacturer} ${frame.name}`
         : getLocalized("LA.placeholder");
     const frameUUID = frame ? frame.uuid : "";
-    const overchargeSequence = actor.system.overcharge_sequence.split(",");
-    const overchargeStage = actor.system.overcharge;
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
@@ -58,22 +54,6 @@
                 sidebar.css('flex', ratio.toString());
         }
     });
-
-    function handleOverchargeIncrease(event: MouseEvent) 
-    {
-        event.stopPropagation();
-        actor.update({
-            "system.overcharge": Math.min(overchargeStage + 1, overchargeSequence.length - 1)
-        });
-    }
-
-    function handleOverchargeDecrease(event: MouseEvent) 
-    {
-        event.stopPropagation();
-        actor.update({
-            "system.overcharge": Math.max(overchargeStage - 1, 0)
-        });
-    }
 </script>
 
 <!-- Frame Name -->
@@ -113,35 +93,9 @@
             tooltipTheme={getDocumentTheme(actor.uuid)}
         />
     </div>
-    <!-- (#13) -->
-    <div class="la-combine-h">
-        <!-- Mech Image -->
-    {#if tokenVideoMimeType}
-        <!-- svelte-ignore a11y_media_has_caption -->
-        <video autoplay loop
-            class="la-actor__img -pointercursor"
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-            onclick={event => browseTokenImage(event, actor)}
-        >
-            <source src={actorImg} type={tokenVideoMimeType}>
-        </video>
-    {:else}
-        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-        <!-- svelte-ignore a11y_click_events_have_key_events -->
-        <!-- (#11) -->
-        <img 
-            class="la-actor__img -pointercursor" 
-            src={actorImg === "systems/lancer/assets/icons/mech.svg" || actorImg === "icons/svg/mystery-man.svg" 
-                ? `modules/${moduleID}/assets/nodata.png` 
-                : actorImg}
-            alt={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.edit.image.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
-            onclick={event => browseTokenImage(event, actor)}
-        >
-    {/if}
-    </div>
+    <ImageVideo
+        actor={actor}
+    />
 </div>
 <!-- Mech Stats 1 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly">
@@ -352,19 +306,32 @@
 <!-- Mech Stats 3 -->
 <div class="la-stats la-dropshadow la-combine-h -justifyevenly -margin1-t">
     <div class="la-combine-h -alignselfcenter -positionrelative">
-        <button type="button"
-            class="mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
-            style="left: -1rem;"
-            data-tooltip={tooltipEnabled ? overchargeMinusTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-            data-tooltip-direction={TooltipDirection.UP}
-            onclick={event => handleOverchargeDecrease(event)}
-            aria-label={getLocalized("LA.overcharge.decrease.tooltip")}
-        ></button>
+    {#snippet overchargeContentLeft()}
+        <GlyphButton type="button"
+            flowClass={FlowClass.None}
+            style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+            tooltip={overchargeMinusTip}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipDirection={TooltipDirection.UP}
+            onClick={event => handleOverchargeDecrease(event, actor)}
+        >
+        </GlyphButton>
+    {/snippet}
+    {#snippet overchargeContentRight()}
+        <GlyphButton type="button"
+            flowClass={FlowClass.None}
+            style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+            tooltip={overchargePlusTip}
+            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipDirection={TooltipDirection.UP}
+            onClick={event => handleOverchargeIncrease(event, actor)}
+        >
+        </GlyphButton>
+    {/snippet}
         <StatComboShort
-            icon={"cci cci-overcharge -alignselfcenter"}
+            icon={"cci cci-overcharge -alignselfcenter -width3"}
             label={getLocalized("LA.overcharge.short")}
-            value={overchargeSequence[overchargeStage]}
+            value={getCurrentOvercharge(actor)}
             outerStyle={["la-text-text", "-fontsize5"]}
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
@@ -372,16 +339,10 @@
             tooltipTheme={getDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.overcharge.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
+
+            contentLeft={overchargeContentLeft}
+            contentRight={overchargeContentRight}
         />
-        <button type="button"
-            class="mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -positionabsolute -fontsize3 -alignselfcenter"
-            style="right: -1.5rem;"
-            data-tooltip={tooltipEnabled ? overchargePlusTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
-            data-tooltip-direction={TooltipDirection.UP}
-            onclick={event => handleOverchargeIncrease(event)}
-            aria-label={getLocalized("LA.overcharge.increase.tooltip")}
-        ></button>
     </div>
     <StatComboShort
         icon={"cci cci-repair -alignselfcenter"}
