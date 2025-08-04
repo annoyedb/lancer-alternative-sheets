@@ -124,8 +124,8 @@
                 uuid={burden.uuid}
 
                 renderOutsideCollapse={outerContent}
-                headerContentLeft={headerSecondaryLeftOptions}
-                headerContentRight={headerSecondaryRightOptions}
+                contentLeft={headerSecondaryLeftOptions}
+                contentRight={headerSecondaryRightOptions}
             >
             </HeaderSecondary>
         </div>

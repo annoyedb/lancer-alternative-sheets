@@ -239,8 +239,8 @@
             startCollapsed={true}
 
             renderOutsideCollapse={outerContent}
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             {#if otherBonuses.length}
             <BonusBox

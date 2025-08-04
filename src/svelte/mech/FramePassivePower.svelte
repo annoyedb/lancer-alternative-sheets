@@ -75,7 +75,7 @@
 
     collapseID={collID}
 
-    headerContentLeft={headerQuinaryLeftOptions}
+    contentLeft={headerQuinaryLeftOptions}
 >
     <div class="la-divider-h la-bckg-primary -margin0-tb -margin2-b"></div>
 {#if core.passive_effect}

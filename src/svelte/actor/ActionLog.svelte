@@ -143,8 +143,8 @@
         startCollapsed={startCollapsed}
         dontSaveCollapse={dontSaveCollapse}
 
-        headerContentLeft={headerSecondaryLeftOptions}
-        headerContentRight={headerSecondaryRightOptions}
+        contentLeft={headerSecondaryLeftOptions}
+        contentRight={headerSecondaryRightOptions}
     >
         <ActionLogMessage
             messageData={message}

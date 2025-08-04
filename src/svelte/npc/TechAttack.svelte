@@ -225,8 +225,8 @@
             startCollapsed={true}
             renderOutsideCollapse={renderOuter(tech) ? outerContent : undefined }
 
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}

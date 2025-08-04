@@ -160,8 +160,8 @@
             collapseID={license.uuid}
             startCollapsed={true}
 
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.description.label")}

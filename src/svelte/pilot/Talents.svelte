@@ -148,8 +148,8 @@
             collapseID={getTalentCollID(index)}
             startCollapsed={true}
 
-            headerContentLeft={headerSecondaryTalentLeftOptions}
-            headerContentRight={headerSecondaryTalentRightOptions}
+            contentLeft={headerSecondaryTalentLeftOptions}
+            contentRight={headerSecondaryTalentRightOptions}
         >
             <div class="la-combine-v -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
@@ -213,8 +213,8 @@
                     startCollapsed={false}
                     
                     renderOutsideCollapse={outerContent}
-                    headerContentLeft={headerSecondaryRankLeftOptions}
-                    headerContentRight={headerSecondaryRankRightOptions}
+                    contentLeft={headerSecondaryRankLeftOptions}
+                    contentRight={headerSecondaryRankRightOptions}
                 >
                     <div class="la-generated -widthfull -gap2 la-combine-v">
                         <BonusBox

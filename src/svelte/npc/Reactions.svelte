@@ -221,8 +221,8 @@
             startCollapsed={true}
             renderOutsideCollapse={renderOuter(reaction) ? outerContent : undefined }
 
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
         {#if hasAttackBonus(reaction) || hasAccuracyBonus(reaction)}
             <div class="la-combine-h -gap0 -widthfull">

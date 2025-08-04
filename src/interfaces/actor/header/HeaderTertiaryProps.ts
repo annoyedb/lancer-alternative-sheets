@@ -2,8 +2,6 @@ import type { Snippet } from "svelte";
 
 export interface HeaderTertiaryProps
 {
-    headerContentLeft?: Snippet;
-    headerContentRight?: Snippet;
     renderOutsideCollapse?: Snippet;
     
     subText: string;

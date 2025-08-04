@@ -188,8 +188,8 @@
             startCollapsed={true}
             renderOutsideCollapse={renderOuter(component) ? outerContent : undefined }
 
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
         {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
             <div class="la-combine-h -gap0 -widthfull">

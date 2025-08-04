@@ -3,6 +3,7 @@
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
     import type { HeaderQuinaryProps } from "@/interfaces/actor/header/HeaderQuinaryProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import type { ContentSidesProps } from "@/interfaces/actor/decoration/ContentSidesProps";
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
@@ -18,11 +19,7 @@
         collapseID,
         startCollapsed,
         dontSaveCollapse,
-
-        headerContentLeft,
-        headerContentRight,
         renderOutsideCollapse,
-
 
         headerStyle,
         borderStyle,
@@ -31,7 +28,10 @@
         textStyle,
         extensionText,
         extensionTextFunction,
-    }: HeaderProps & HeaderQuinaryProps & TerminalTextProps = $props();
+
+        contentLeft,
+        contentRight,
+    }: HeaderProps & HeaderQuinaryProps & TerminalTextProps & ContentSidesProps = $props();
     
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
@@ -94,8 +94,8 @@
         on:click={(event) => toggleCollapse(event)}
     >
         <div class="-flexthird -justifystart">
-            {#if headerContentLeft}
-                {@render headerContentLeft()}
+            {#if contentLeft}
+                {@render contentLeft()}
             {/if}
         </div>
         <div class="-flexthird -justifycenter">
@@ -106,8 +106,8 @@
             />
         </div>
         <div class="la-combine-h -flexthird -justifyend -height3">
-            {#if headerContentRight}
-                {@render headerContentRight()}
+            {#if contentRight}
+                {@render contentRight()}
             {/if}
         </div>
     </div>

@@ -103,7 +103,7 @@
             startCollapsed={true}
 
             renderOutsideCollapse={outerContent}
-            headerContentLeft={headerSecondaryLeftOptions}
+            contentLeft={headerSecondaryLeftOptions}
         >
             <div class="la-combine-v -widthfull -gap0">
                 <FrameActivePower {...props} />

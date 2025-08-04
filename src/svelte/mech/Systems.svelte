@@ -247,8 +247,8 @@
             }}
 
             renderOutsideCollapse={renderOuter(component) ? outerContent : undefined }
-            headerContentLeft={headerTertiaryLeftOptions}
-            headerContentRight={headerTertiaryRightOptions}
+            contentLeft={headerTertiaryLeftOptions}
+            contentRight={headerTertiaryRightOptions}
         >
         {#if !isDestroyed(component)}
             <div class="la-generated -widthfull -gap2 la-combine-v">

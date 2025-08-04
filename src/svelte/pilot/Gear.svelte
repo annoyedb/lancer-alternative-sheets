@@ -159,8 +159,8 @@
             startCollapsed={true}
 
             renderOutsideCollapse={renderOuter(gear) ? outerContent : undefined}
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             <BonusBox
                 bonuses={gear.system.bonuses}

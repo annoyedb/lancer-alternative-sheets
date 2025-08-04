@@ -167,8 +167,8 @@
             startCollapsed={true}
 
             renderOutsideCollapse={outerContent}
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             <BonusBox
                 bonuses={reserve.system.bonuses}

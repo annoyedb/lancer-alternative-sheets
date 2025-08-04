@@ -2,6 +2,7 @@
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
     import type { HeaderTertiaryProps } from "@/interfaces/actor/header/HeaderTertiaryProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import type { ContentSidesProps } from "@/interfaces/actor/decoration/ContentSidesProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
@@ -18,8 +19,6 @@
         startCollapsed,
         dontSaveCollapse,
         
-        headerContentLeft,
-        headerContentRight,
         renderOutsideCollapse,
         subText,
 
@@ -31,11 +30,14 @@
         text,
         extensionText,
         extensionTextFunction,
-    }: HeaderProps & HeaderTertiaryProps & TerminalTextProps = $props();
+
+        contentLeft,
+        contentRight,
+    }: HeaderProps & HeaderTertiaryProps & TerminalTextProps & ContentSidesProps = $props();
 
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
-    const extraOptions = headerContentRight ? true : false;
+    const extraOptions = contentRight ? true : false;
     
     // (#3)
     onMount(() => 
@@ -97,8 +99,8 @@
     >
         <!-- Icon, Name -->
         <div class="la-left la-combine-h -aligncenter">
-        {#if headerContentLeft}
-            {@render headerContentLeft()}
+        {#if contentLeft}
+            {@render contentLeft()}
         {/if}
             <div class="la-combine-v -alignstart -justifycenter -divider">
                 <span class="la-top__span {headerFontStyle?.join(' ') || "-fontsize3"}">{text}</span>
@@ -113,8 +115,8 @@
         <!-- Options -->
     {#if extraOptions}
         <div class="la-right la-combine-h -aligncenter">
-        {#if headerContentRight}
-            {@render headerContentRight()}
+        {#if contentRight}
+            {@render contentRight()}
         {/if}
         </div>
     {/if}

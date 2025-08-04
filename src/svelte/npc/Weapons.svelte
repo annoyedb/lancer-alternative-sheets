@@ -269,8 +269,8 @@
             }}
 
             renderOutsideCollapse={renderOuter(weapon) ? outerContent : undefined }
-            headerContentLeft={headerTertiaryLeftOptions}
-            headerContentRight={headerTertiaryRightOptions}
+            contentLeft={headerTertiaryLeftOptions}
+            contentRight={headerTertiaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}

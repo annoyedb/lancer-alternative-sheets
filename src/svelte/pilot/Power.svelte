@@ -171,8 +171,8 @@
             startCollapsed={true}
 
             renderOutsideCollapse={outerContent}
-            headerContentLeft={headerSecondaryLeftOptions}
-            headerContentRight={headerSecondaryRightOptions}
+            contentLeft={headerSecondaryLeftOptions}
+            contentRight={headerSecondaryRightOptions}
         >
             <EffectBox
                 name={getLocalized("LA.description.label")}

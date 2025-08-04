@@ -282,8 +282,8 @@
         }}
         
         renderOutsideCollapse={renderOuter(weapon) ? outerContent : undefined }
-        headerContentLeft={headerTertiaryLeftOptions}
-        headerContentRight={headerTertiaryRightOptions}
+        contentLeft={headerTertiaryLeftOptions}
+        contentRight={headerTertiaryRightOptions}
     >
     {#if !weapon.system.destroyed}
         {@const profile = weapon.system.active_profile}

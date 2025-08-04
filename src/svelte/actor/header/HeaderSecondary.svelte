@@ -2,6 +2,7 @@
     import type { HeaderProps } from "@/interfaces/actor/header/HeaderProps";
     import type { HeaderSecondaryProps } from "@/interfaces/actor/header/HeaderSecondaryProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
+    import type { ContentSidesProps } from "@/interfaces/actor/decoration/ContentSidesProps";
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import TerminalText from "@/svelte/actor/TerminalText.svelte";
@@ -17,9 +18,6 @@
         collapseID,
         startCollapsed,
         dontSaveCollapse,
-
-        headerContentLeft,
-        headerContentRight,
         renderOutsideCollapse,
 
         headerStyle,
@@ -33,11 +31,14 @@
         disableCmdline,
         disableCursor,
         disableExtension,
-    }: HeaderProps & HeaderSecondaryProps & TerminalTextProps = $props();
+
+        contentLeft,
+        contentRight,
+    }: HeaderProps & HeaderSecondaryProps & TerminalTextProps & ContentSidesProps = $props();
     
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
-    const extraOptions =  headerContentRight ? true : false;
+    const extraOptions =  contentRight ? true : false;
 
     // (#3)
     onMount(() => 
@@ -97,8 +98,8 @@
     >
         <!-- Icon, Name -->
         <div class="la-left la-combine-h -justifystart -aligncenter -gap1 -widthfull -overflowhidden">
-            {#if headerContentLeft}
-                {@render headerContentLeft()}
+            {#if contentLeft}
+                {@render contentLeft()}
             {/if}
             <TerminalText
                 text={collapseID || !extensionText ? `${text} ` : text}
@@ -113,8 +114,8 @@
     {#if extraOptions}
         <!-- Options -->
         <div class="la-right la-combine-h -aligncenter">
-        {#if headerContentRight}
-            {@render headerContentRight()}
+        {#if contentRight}
+            {@render contentRight()}
         {/if}
         </div>
     {/if}

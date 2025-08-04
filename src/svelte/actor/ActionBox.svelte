@@ -153,8 +153,8 @@
         collapseID={`${collapseID}.${index}`}
         startCollapsed={startCollapsed}
 
-        headerContentLeft={headerQuinaryLeftOptions}
-        headerContentRight={headerQuinaryRightOptions}
+        contentLeft={headerQuinaryLeftOptions}
+        contentRight={headerQuinaryRightOptions}
         renderOutsideCollapse={outercontent}
     >    
     <!-- Action Box Content -->

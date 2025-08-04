@@ -71,8 +71,8 @@
     collapseID={getCollapseID(index)}
     startCollapsed={true}
 
-    headerContentLeft={headerSecondaryLeftOptions}
-    headerContentRight={headerSecondaryRightOptions}
+    contentLeft={headerSecondaryLeftOptions}
+    contentRight={headerSecondaryRightOptions}
 >
     <div class="la-generated -widthfull -gap2 la-combine-v">
         <EffectBox
