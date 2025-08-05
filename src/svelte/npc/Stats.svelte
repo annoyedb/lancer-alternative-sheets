@@ -209,7 +209,7 @@
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-                                tooltip={getLocalized("LA.edit.actor.tooltip")}
+                                tooltip={getLocalized("LA.edit.image.actor.tooltip")}
                                 tooltipDirection={TooltipDirection.UP}
                             />
                         {/if}
