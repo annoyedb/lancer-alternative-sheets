@@ -63,9 +63,6 @@ A: To override or set a fixed theme per-sheet, you can activate the 'advanced to
 **Q: How do I enable sensors or the tech attack stat on my sheet?**
 A: Rules-as-written for Lancer, player pilots do not have tech attacks, and by extension have no use for either stat, excepting the 'Search' action, which states an explicit range of 5. If you wish to enable the display of these stats on the pilot sheets anyway and you are a GM, you can do so in the settings page of this module.
 
-**Q: How do I change my minor ideal in the character sheet?**
-A: It'll be available to edit when you toggle the 'advanced toggle' in the sheet (top-right toggle in the pilot sheet). When this is enabled, hovering over the minor ideal will reveal a drop-down where you can select your minor ideal for the session.
-
 **Q: What is the difference between the image on the sidebar (side) and the image shown on the header (top)?**
 A: Functionally, the image on the sidebar is the token (or prototype token) art and the image on the header is the actor art. In layman's the side image is what appears when you drag a token onto a scene or your 'play token' on Foundry and the top is the image that appears on the actor list or your 'main art' for your character (and is often used by modules such as [Carousel Combat Tracker](https://foundryvtt.com/packages/combat-tracker-dock) among many others to represent your character over the token)
 
