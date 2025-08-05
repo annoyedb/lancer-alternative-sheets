@@ -157,6 +157,19 @@ function getRoot(uuid: string): string | null
     return actorMatch;
 }
 
+/**
+ * If default behavior is ambiguous or a setting has a side effect that would affect the system 
+ * as a whole, determine the default settings in a more sophisticated way.
+ * @param uuid 
+ * @param data 
+ */
+function migratedDefaults(uuid: string, data: DeployableSheetSettings)
+{
+    const defaultSettings = DeployableSheetSettings.emptyContent();
+    defaultSettings.syncActorTokenImages = determineActorTokenSync(uuid, data);
+    return defaultSettings;
+}
+
 export function encodeDeployableSheetData(data: DeployableSheetSettings): Array<number>
 {
     const encoded: Uint8Array = msgPackEncoder.encode(data);
@@ -184,7 +197,7 @@ export function setThemeOverride(uuid: string, value: string)
     const workingUUID = getRoot(uuid) ?? uuid;
 
     if (!data[workingUUID])
-        data[workingUUID] = DeployableSheetSettings.emptyContent();
+        data[workingUUID] = migratedDefaults(workingUUID, data);
 
     data[workingUUID].themeOverride = value;
 
@@ -212,13 +225,57 @@ export function setSidebarExecutables(uuid: string, macros: Array<string>)
     const workingUUID = getRoot(uuid) ?? uuid;
 
     if (!data[workingUUID])
-        data[workingUUID] = DeployableSheetSettings.emptyContent();
+        data[workingUUID] = migratedDefaults(workingUUID, data);
 
     data[workingUUID].sidebarExes = macros;
     SocketManager.getInstance().runAsGM(
         setDeployableSheetData,
         () => {
             Logger.log(`Sidebar executables set to ${macros.join(", ")} for ${uuid}`);
+        },
+        encodeDeployableSheetData(data),
+    );
+}
+
+export function getActorTokenSync(uuid: string): boolean
+{
+    const data = getDeployableSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    return determineActorTokenSync(workingUUID, data);
+}
+
+function determineActorTokenSync(uuid: string, data: DeployableSheetSettings): boolean
+{
+    // Find an appropriate default setting for token-actor image relationship 
+    // if newly applying sheet or from old version
+    if (data[uuid]?.syncActorTokenImages === undefined || data[uuid]?.syncActorTokenImages === null)
+    {
+        Logger.log("Determining default syncActorTokenImages setting for a new or unsaved deployable/old module version");
+
+        const actor = fromUuidSync(uuid) as any;
+        if (actor.prototypeToken?.texture?.src && actor.img)
+            return actor.img === actor.prototypeToken.texture.src;
+        
+        return true;
+    }
+    else
+        return data[uuid].syncActorTokenImages;
+}
+
+export function setActorTokenSync(uuid: string, value: boolean)
+{
+    const data = getDeployableSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = migratedDefaults(workingUUID, data);
+
+    data[workingUUID].syncActorTokenImages = value;
+    SocketManager.getInstance().runAsGM(
+        setDeployableSheetData,
+        () => {
+            Logger.log(`Sync actor-token images set to ${value} for ${uuid}`);
         },
         encodeDeployableSheetData(data),
     );

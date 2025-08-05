@@ -1,18 +1,20 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { browseActorImage, getLocalized } from "@/scripts/helpers";
-    import { getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setImageOffsetXY } from "@/scripts/pilot/settings";
-    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getActorTokenSync, getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setActorTokenSync, setImageOffsetXY } from "@/scripts/pilot/settings";
+    import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/actor/BoundImage.svelte";
     import TextLog from "@/svelte/actor/TextLog.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import LockImageButton from "@/svelte/actor/button/LockImageButton.svelte";
 
     const props = $props();
     const {
@@ -22,8 +24,13 @@
     } : PilotSheetProps = props;
     let introPlayed = $derived(getIntroRun(actor.uuid));
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+
+    onMount(() => {
+        setTokenImageLock(actor.uuid, getActorTokenSync(actor.uuid));
+    });
 </script>
 
 <!-- Header -->
@@ -54,18 +61,32 @@
             />
         </div>
     {#if advancedOptions}
-        <GlyphButton
-            flowClass={FlowClass.None}
-            style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
-            onClick={event => browseActorImage(event, actor)}
+        
+    {#if advancedOptions}
+        <LockImageButton
+            style="-fontsize5 la-text-header la-prmy-primary -glow-prmy"
+            actor={actor}
+            setState={setActorTokenSync}
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltip={getLocalized("LA.edit.image.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
-            logText={getLocalized("LA.edit.image.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
         />
+        {#if !tokenImageLocked}
+            <GlyphButton
+                flowClass={FlowClass.None}
+                style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
+                onClick={event => browseActorImage(event, actor)}
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.image.actor.tooltip")}
+                tooltipDirection={TooltipDirection.LEFT}
+                logText={getLocalized("LA.edit.image.actor.tooltip")}
+                logType={TextLogHook.PilotHeader}
+                logTypeReset={TextLogHook.PilotHeaderReset}
+            />
+        {/if}
+    {/if}
     {/if}
     </div>
     <div class="la-names -margin3-l -margin3-t -flex1">

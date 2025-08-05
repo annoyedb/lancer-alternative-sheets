@@ -1,12 +1,12 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getCSSSystemTheme } from "@/scripts/theme";
-import { setActiveTab } from "@/scripts/store/advanced";
-import { getLocalized, dataMap } from "@/scripts/helpers";
+import { getSelectedTokenImage, setActiveTab, setSelectedTokenImage } from "@/scripts/store/advanced";
+import { getLocalized, dataMap, isValidImageContainer } from "@/scripts/helpers";
 import { setIntroRun } from "@/scripts/store/text-log";
-import { getPilotSheetTooltipEnabled, getThemeOverride } from "@/scripts/pilot/settings";
+import { getActorTokenSync, getPilotSheetTooltipEnabled, getThemeOverride } from "@/scripts/pilot/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
-import { SheetStore } from "@/scripts/store/module-store";
+import { getThemeKey, setThemeKey } from "@/scripts/store/theme";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
 import { TextLogHook } from "@/enums/TextLogHook";
@@ -77,9 +77,8 @@ export class PilotSheetBase
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-                    SheetStore.set(this.actor.uuid, {
-                        currentTheme: theme,
-                    });
+                    
+                    setThemeKey(this.actor.uuid, theme);
                     this.render();
                 });
 
@@ -92,6 +91,18 @@ export class PilotSheetBase
                     this.render();
                     if (callback)
                         callback();
+                });
+                                
+                Hooks.on("updateActor", (document: any, changes: any) => {                    
+                    if (document.uuid === this.actor.uuid && changes.prototypeToken?.texture?.src && 
+                        getActorTokenSync(this.actor.uuid) && // Actor-token image sync enabled
+                        isValidImageContainer(changes.prototypeToken.texture.src))
+                    {
+                        setSelectedTokenImage(this.actor.uuid, changes.prototypeToken.texture.src);
+                        this.actor.update({
+                            "img": changes.prototypeToken.texture.src
+                        });
+                    }
                 });
 
                 // TODO: Write a PR. Until a Lancer settings/theme hook is available, 
@@ -126,10 +137,9 @@ export class PilotSheetBase
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                SheetStore.set(this.actor.uuid, {
-                    currentTheme: getThemeOverride(this.actor.uuid)
-                });
-                applyThemeTo(this.element, SheetStore.get(this.actor.uuid).currentTheme);
+
+                setThemeKey(this.actor.uuid, getThemeOverride(this.actor.uuid));
+                applyThemeTo(this.element, getThemeKey(this.actor.uuid));
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
             }
@@ -142,7 +152,7 @@ export class PilotSheetBase
                 super._propagateData(formData);
                 
                 delete formData["prototypeToken.texture.src"]; // GO AWAY MYSTERY MAN AAAAAAA
-                const updateToken = SheetStore.get(this.actor.uuid).selectedTokenImage; // (#12)
+                const updateToken = getSelectedTokenImage(this.actor.uuid); // (#12)
                 if (updateToken)
                 {
                     formData["prototypeToken.texture.src"] = updateToken;
@@ -152,7 +162,7 @@ export class PilotSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element, SheetStore.get(this.actor.uuid).currentTheme);
+                applyThemeTo(element, getThemeKey(this.actor.uuid));
                 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
 

@@ -7,6 +7,7 @@ export class MechSheetSettings implements MechSheetSettingsData
         headerImgOffsetY: number;
         themeOverride: string;
         sidebarExes: Array<string>;
+        syncActorTokenImages: boolean;
     };
 
     static emptyContent()
@@ -21,6 +22,7 @@ export class MechSheetSettings implements MechSheetSettingsData
                 SystemButton.Damage,
                 SystemButton.TechAttack,
             ],
+            syncActorTokenImages: true,
         }
     }
 }

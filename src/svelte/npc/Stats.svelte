@@ -1,13 +1,19 @@
 <script lang="ts">
-    import { id as moduleID } from "@/module.json";
+    import { onMount } from "svelte";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
-    import { setThemeOverride } from "@/scripts/npc/settings";
-    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { 
+        browseActorImage, 
+        browseActorImageSync, 
+        browseTokenImage, 
+        getLocalized, 
+        handleRelativeDataInput
+    } from "@/scripts/helpers";
+    import { getActorTokenSync, setActorTokenSync, setThemeOverride } from "@/scripts/npc/settings";
+    import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
     import { getThemeKey } from "@/scripts/store/theme";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
@@ -15,6 +21,9 @@
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
+    import ImageVideo from "@/svelte/actor/ImageVideo.svelte";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import LockImageButton from "@/svelte/actor/button/LockImageButton.svelte";
 
     const props = $props();
     const {
@@ -22,8 +31,11 @@
         system,
     }: NPCSheetProps = props;
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
+
+    const isInstanced = actor.parent && actor.type === "npc";
     const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
@@ -36,10 +48,15 @@
     const notesEditTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.edit.tooltip"));
     const notesTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.notes.tooltip"));
     const notesContent = TooltipFactory.buildTooltip(system.notes, getLocalized("LA.npc.notes.label"));
-    const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
-    const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
+    const shieldTip = TooltipFactory.buildTooltip(getLocalized("LA.overshield.tooltip"));
+    const burnTip = TooltipFactory.buildTooltip(getLocalized("LA.burn.tooltip"));
+    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.token.error"));
+
+    onMount(() => {
+        setTokenImageLock(actor.uuid, getActorTokenSync(actor.uuid));
+    });
     
-    function handleShowNotes(event: MouseEvent)
+    function handleShowNotes(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
         event.stopPropagation();
         TooltipFactory.renderTooltip(
@@ -50,6 +67,16 @@
                 locked: true,
             } 
         );
+    }
+
+    function handleEditToken(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
+    {
+        event.stopPropagation();
+        
+        if (tokenImageLocked)
+            browseActorImageSync(event, actor);
+        else
+            browseTokenImage(event, actor);
     }
 </script>
 
@@ -136,13 +163,18 @@
                     </div>
                 </div>
                 <!-- Actor Image -->
-                <img class="la-npc__img
-                        profile-img ref set"
-                    src="{actor.img}"
-                    alt={`modules/${moduleID}/assets/nodata.png`}
-                    data-edit="img" 
-                    data-uuid="{actor.uuid}"
-                />
+                <div class="la-npc__img -aligncontentcenter
+                        ref set"
+                    data-uuid={actor.uuid}
+                >
+                    <ImageVideo
+                        actor={actor}
+                        editDisabled={isInstanced}
+                        tooltipEnabled={tooltipEnabled}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                        onPointerClick={handleEditToken}
+                    />
+                </div>
                 <HaseDisplay {...props} />
             </div>
         </div>
@@ -157,10 +189,36 @@
                             style={["-lineheight3", "la-prmy-primary -glow-prmy-hover"]}
                             iconStyle={["-fontsize5"]}
 
-                            tooltipEnabled={getPilotSheetTooltipEnabled()}
+                            tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />
+                    {#if advancedOptions && !isInstanced}
+                        <LockImageButton
+                            style="-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"
+                            actor={actor}
+                            setState={setActorTokenSync}
+                            tooltipEnabled={tooltipEnabled}
+                        />
+                    {/if}
+                    {#if !isInstanced}
+                        {#if !tokenImageLocked}
+                            <GlyphButton
+                                flowClass={FlowClass.None}
+                                style={["mdi mdi-image-edit", "-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"]}
+                                onClick={event => browseActorImage(event, actor)}
+                                tooltipEnabled={tooltipEnabled}
+                                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                tooltip={getLocalized("LA.edit.actor.tooltip")}
+                                tooltipDirection={TooltipDirection.UP}
+                            />
+                        {/if}
+                    {:else}
+                        <i class="mdi mdi-creation la-text-text -fontsize2 la-prmy-warning -glow-prmy"
+                            data-tooltip={tooltipEnabled ? tokenErrorTip : undefined}
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                            data-tooltip-direction={TooltipDirection.DOWN}></i>
+                    {/if}
                     {#if advancedOptions}
                         <ThemeOverrideButton
                             uuid={actor.uuid}
@@ -168,7 +226,7 @@
                             iconStyle={["-fontsize2"]}
                             setOverride={setThemeOverride}
 
-                            tooltipEnabled={getPilotSheetTooltipEnabled()}
+                            tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />

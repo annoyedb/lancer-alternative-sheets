@@ -24,4 +24,10 @@
         cursor: grab;
         pointer-events: all;
     }
+
+    .-pointerblock
+    {
+        cursor: not-allowed;
+        pointer-events: all;
+    }
 }

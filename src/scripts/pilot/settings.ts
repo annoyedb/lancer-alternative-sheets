@@ -251,6 +251,20 @@ export function getPilotSheetData()
     }
 }
 
+/**
+ * If default behavior is ambiguous or a setting has a side effect that would affect the system 
+ * as a whole, determine the default settings in a more sophisticated way.
+ * @param uuid 
+ * @param data 
+ */
+function migratedDefaults(uuid: string, data: PilotSheetSettings)
+{
+    const defaultSettings = PilotSheetSettings.emptyContent();
+    defaultSettings.syncActorTokenImages = determineActorTokenSync(uuid, data);
+    return defaultSettings;
+}
+
+
 export function encodePilotSheetData(data: PilotSheetSettings): Array<number>
 {
     const encoded: Uint8Array = msgPackEncoder.encode(data);
@@ -269,7 +283,7 @@ export function setImageOffsetXY(uuid: string, x: number, y: number)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].headerImgOffsetX = x;
     data[uuid].headerImgOffsetY = y;
 
@@ -293,7 +307,7 @@ export function setImageOffsetY(uuid: string, value: number)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].headerImgOffsetY = value;
 
     SocketManager.getInstance().runAsGM(
@@ -316,7 +330,7 @@ export function setImageOffsetX(uuid: string, value: number)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].headerImgOffsetX = value;
 
     SocketManager.getInstance().runAsGM(
@@ -339,7 +353,7 @@ export function setThemeOverride(uuid: string, value: string)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].themeOverride = value;
     SocketManager.getInstance().runAsGM(
         setPilotSheetData,
@@ -355,14 +369,14 @@ export function setThemeOverride(uuid: string, value: string)
 export function getSidebarExecutables(uuid: string): Array<string>
 {
     const data = getPilotSheetData();
-    return data[uuid]?.sidebarExes ?? PilotSheetSettings.emptyContent().sidebarExes;
+    return data[uuid]?.sidebarExes ?? migratedDefaults(uuid, data).sidebarExes;
 }
 
 export function setSidebarExecutables(uuid: string, macros: Array<string>)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].sidebarExes = macros;
     SocketManager.getInstance().runAsGM(
         setPilotSheetData,
@@ -377,20 +391,62 @@ export function setSidebarExecutables(uuid: string, macros: Array<string>)
 export function getBondImageSrc(uuid: string): string
 {
     const data = getPilotSheetData();
-    return data[uuid]?.bondImageSrc ?? PilotSheetSettings.emptyContent().bondImageSrc;
+    return data[uuid]?.bondImageSrc ?? migratedDefaults(uuid, data).bondImageSrc;
 }
 
 export function setBondImageSrc(uuid: string, src: string)
 {
     const data = getPilotSheetData();
     if (!data[uuid])
-        data[uuid] = PilotSheetSettings.emptyContent();
+        data[uuid] = migratedDefaults(uuid, data);
     data[uuid].bondImageSrc = src;
     SocketManager.getInstance().runAsGM(
         setPilotSheetData,
         () =>
         {
             Logger.log(`Bond image src set to ${src} for ${uuid}`);
+        },
+        encodePilotSheetData(data),
+    );
+}
+
+export function getActorTokenSync(uuid: string): boolean
+{
+    const data = getPilotSheetData();
+
+    return determineActorTokenSync(uuid, data);
+}
+
+function determineActorTokenSync(uuid: string, data: PilotSheetSettings): boolean
+{
+    // Find an appropriate default setting for token-actor image relationship 
+    // if newly applying sheet or from old version
+    if (data[uuid]?.syncActorTokenImages === undefined || data[uuid]?.syncActorTokenImages === null)
+    {
+        Logger.log("Determining default syncActorTokenImages setting for a new or unsaved pilot/old module version");
+        
+        const actor = fromUuidSync(uuid) as any;
+        if (actor.prototypeToken?.texture?.src && actor.img)
+            return actor.img === actor.prototypeToken.texture.src;
+        
+        return true;
+    }
+    else
+        return data[uuid].syncActorTokenImages;
+}
+
+export function setActorTokenSync(uuid: string, value: boolean)
+{
+    const data = getPilotSheetData();
+
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+
+    data[uuid].syncActorTokenImages = value;
+    SocketManager.getInstance().runAsGM(
+        setPilotSheetData,
+        () => {
+            Logger.log(`Sync actor-token images set to ${value} for ${uuid}`);
         },
         encodePilotSheetData(data),
     );

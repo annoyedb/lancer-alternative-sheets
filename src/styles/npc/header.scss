@@ -6,11 +6,15 @@
 
         .la-npc__img
         {
-            max-height: 12rem;
-            min-height: 12rem;
-            max-width: 12rem;
-            min-width: 12rem;
-            object-fit: contain;
+            img,
+            video
+            {
+                max-height: 12rem;
+                min-height: 12rem;
+                max-width: 12rem;
+                min-width: 12rem;
+                object-fit: scale-down;
+            }
         }
 
         .la-stat__island

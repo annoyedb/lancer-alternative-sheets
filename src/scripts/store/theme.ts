@@ -6,7 +6,7 @@ export function getThemeKey(uuid: string): ThemeKey | string
     return SheetStore.get(uuid).currentTheme;
 }
 
-export function setThemeKey(uuid: string, theme: ThemeKey)
+export function setThemeKey(uuid: string, theme: ThemeKey | string)
 {
     SheetStore.set(uuid, { currentTheme: theme });
 }

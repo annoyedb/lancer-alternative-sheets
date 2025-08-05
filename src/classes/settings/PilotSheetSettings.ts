@@ -9,6 +9,7 @@ export class PilotSheetSettings implements PilotSheetSettingsData
         themeOverride: string;
         sidebarExes: Array<string>;
         bondImageSrc: string;
+        syncActorTokenImages: boolean;
     };
 
     static emptyContent()
@@ -23,6 +24,7 @@ export class PilotSheetSettings implements PilotSheetSettingsData
                 SystemButton.Damage,
             ],
             bondImageSrc: "modules/lancer-alternative-sheets/assets/nobond.webp",
+            syncActorTokenImages: true,
         }
     }
 }

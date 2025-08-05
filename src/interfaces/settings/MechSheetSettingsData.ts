@@ -4,5 +4,6 @@ export interface MechSheetSettingsData
         headerImgOffsetY: number;
         themeOverride: string;
         sidebarExes: Array<string>;
+        syncActorTokenImages: boolean;
     }
 }

@@ -5,6 +5,7 @@ export class NPCSheetSettings implements NPCSheetSettingsData
     [uuid: string]: {
         themeOverride: string;
         sidebarExes: Array<string>;
+        syncActorTokenImages: boolean;
     };
 
     static emptyContent()
@@ -13,6 +14,7 @@ export class NPCSheetSettings implements NPCSheetSettingsData
             themeOverride: "",
             sidebarExes: [
             ],
+            syncActorTokenImages: true,
         }
     }
 }

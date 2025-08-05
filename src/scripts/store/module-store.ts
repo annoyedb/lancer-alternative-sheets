@@ -10,6 +10,7 @@ interface SheetStoreData
     currentTheme: string | ThemeKey;
     activeTabs: { [key in ActiveTab]: string };
     trackedHooks: { [key: number]: string };
+    tokenImageLock: boolean;
     selectedTokenImage: string; // (#12)
 }
 
@@ -24,6 +25,7 @@ export class SheetStore
             currentTheme: "",
             activeTabs: {} as { [key in ActiveTab]: string },
             trackedHooks: {} as { [key: number]: string },
+            tokenImageLock: true,
             selectedTokenImage: "", // (#12)
         };
     }

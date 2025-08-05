@@ -1,9 +1,10 @@
 // Bridge module and foundryvtt-lancer system and any exported function I don't want to categorize
 import type { HelperOptions } from "handlebars";
 import { Logger } from "@/classes/Logger";
-import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { LancerAlternative } from "@/enums/LancerAlternative";
+import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { SheetStore } from "@/scripts/store/module-store";
+import { getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
 
 export function getLocalized(key: string): string
 {
@@ -85,7 +86,9 @@ export function forwardData(data: any, _options: HelperOptions)
     dataMap[data.actor.uuid] = data;
 }
 
-export function handleRelativeDataInput(event: Event & { currentTarget: EventTarget & HTMLInputElement; }, previous: number)
+export function handleRelativeDataInput(
+    event: Event & { currentTarget: EventTarget & HTMLInputElement; }, 
+    previous: number)
 {
     event.preventDefault();
     const inputValue = (event.target as HTMLInputElement)?.value;
@@ -111,7 +114,14 @@ export function handleRelativeDataInput(event: Event & { currentTarget: EventTar
     event.currentTarget.blur();
 }
 
-export function getMimeType(path: string)
+export function isValidVideoContainer(path: string): boolean
+{
+    const validTypes = ['webm', 'mp4', 'm4v']; // https://foundryvtt.com/article/media/
+    const extension = path.split('.').pop()?.toLowerCase();
+    return validTypes.includes(extension ?? "");
+}
+
+export function getVideoMimeType(path: string): string | null
 {
     const validTypes = ['webm', 'mp4', 'm4v']; // https://foundryvtt.com/article/media/
     const extension = path.split('.').pop()?.toLowerCase();
@@ -120,7 +130,16 @@ export function getMimeType(path: string)
     return null;
 }
 
-export function browseTokenImage(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+export function isValidImageContainer(path: string): boolean
+{
+    const validTypes = ['avif', 'jpg', 'jpeg', 'png', 'svg', 'webp', 'gif']; // https://foundryvtt.com/article/media/, but .gif is certainly supported
+    const extension = path.split('.').pop()?.toLowerCase();
+    return validTypes.includes(extension ?? "");
+}
+
+export function browseTokenImage(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, 
+    actor: any)
 {
     event.stopPropagation();
 
@@ -143,7 +162,9 @@ export function browseTokenImage(event: MouseEvent & { currentTarget: EventTarge
     fp.render(true);
 }
 
-export function browseActorImage(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+export function browseActorImage(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, 
+    actor: any)
 {
     event.stopPropagation();
 
@@ -161,6 +182,31 @@ export function browseActorImage(event: MouseEvent & { currentTarget: EventTarge
     fp.render(true);
 }
 
+/**
+ * Browses the actor image but syncs the prototype token and actor image together
+ */
+export function browseActorImageSync(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, 
+    actor: any)
+{
+    event.stopPropagation();
+
+    const fp = new FilePicker({
+        current: actor.img,
+        type: "image",
+        callback: (path) =>
+        {
+            SheetStore.get(actor.uuid).selectedTokenImage = path; // (#12)
+            actor.update({
+                "img": path,
+                "prototypeToken.texture.src": path
+            })
+        },
+    });
+
+    fp.render(true);
+}
+
 export function getCurrentOvercharge(actor: any)
 {
     const overchargeSequence = actor.system.overcharge_sequence.split(",");
@@ -169,7 +215,9 @@ export function getCurrentOvercharge(actor: any)
     return overchargeSequence[overchargeStage]
 }
 
-export function handleOverchargeIncrease(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any) 
+export function handleOverchargeIncrease(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, 
+    actor: any) 
 {
     event.stopPropagation();
 
@@ -180,7 +228,9 @@ export function handleOverchargeIncrease(event: MouseEvent & { currentTarget: Ev
     });
 }
 
-export function handleOverchargeDecrease(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any) 
+export function handleOverchargeDecrease(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, 
+    actor: any) 
 {
     event.stopPropagation();
     
@@ -188,4 +238,49 @@ export function handleOverchargeDecrease(event: MouseEvent & { currentTarget: Ev
     actor.update({
         "system.overcharge": Math.max(overchargeStage - 1, 0)
     });
+}
+
+export async function handleToggleImageSync(
+    event: MouseEvent & { currentTarget: EventTarget & HTMLElement },
+    actor: any, 
+    setState: (uuid: string, value: boolean) => void,
+)
+{
+    const lockState = getTokenImageLock(actor.uuid);
+    event.stopPropagation();
+
+    if (!lockState)
+    {
+        // @ts-expect-error
+        const confirm = await foundry.applications.api.DialogV2.confirm({
+            window: { title: getLocalized("LA.confirm") },
+            content: getLocalized("LA.advanced.lock.subLabel"),
+        });
+
+        if (confirm)
+        {
+            setTokenImageLock(actor.uuid, !lockState);
+            setState(actor.uuid, !lockState);
+        
+            if (isValidImageContainer(actor.prototypeToken.texture.src))
+                actor.update({
+                    "img": actor.prototypeToken.texture.src
+                });
+        }
+    }
+    else
+    {
+        setTokenImageLock(actor.uuid, !lockState);
+        setState(actor.uuid, !lockState);
+    }
+}
+
+export function handleEditToken(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, actor: any)
+{
+    event.stopPropagation();
+    
+    if (getTokenImageLock(actor.uuid))
+        browseActorImageSync(event, actor);
+    else
+        browseTokenImage(event, actor);
 }

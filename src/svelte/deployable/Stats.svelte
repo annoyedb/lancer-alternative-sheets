@@ -1,20 +1,29 @@
 <script lang="ts">
-    import { id as moduleID } from "@/module.json";
+    import { onMount } from "svelte";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
-    import { setThemeOverride } from "@/scripts/deployable/settings";
-    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { 
+        browseActorImage, 
+        browseActorImageSync, 
+        browseTokenImage, 
+        getLocalized, 
+        handleRelativeDataInput
+    } from "@/scripts/helpers";
+    import { getActorTokenSync, setActorTokenSync, setThemeOverride } from "@/scripts/deployable/settings";
+    import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
     import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
     import { getThemeKey } from "@/scripts/store/theme";
-    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { EditMode } from "@/enums/EditMode";
+    import { FlowClass } from "@/enums/FlowClass";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
     import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
-    import { EditMode } from "@/enums/EditMode";
+    import ImageVideo from "@/svelte/actor/ImageVideo.svelte";
+    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import LockImageButton from "@/svelte/actor/button/LockImageButton.svelte";
 
     const props = $props();
     const {
@@ -23,9 +32,11 @@
         system,
     }: DeployableSheetProps = props;
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
     
+    const isInstanced = actor.parent && actor.type === "deployable";
     const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
 
@@ -33,6 +44,11 @@
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.stats.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
+    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.token.error"));
+
+    onMount(() => {
+        setTokenImageLock(actor.uuid, getActorTokenSync(actor.uuid));
+    });
 
     function handleEditStat(event: MouseEvent, value: number, valuePath: string, mod: EditMode)
     {
@@ -51,6 +67,16 @@
                 });
                 break;
         }
+    }
+
+    function handleEditToken(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
+    {
+        event.stopPropagation();
+        
+        if (tokenImageLocked)
+            browseActorImageSync(event, actor);
+        else
+            browseTokenImage(event, actor);
     }
 </script>
 
@@ -130,14 +156,19 @@
                     </div>
                 </div>
                 <!-- Actor Image -->
-                <img class="la-deployable__img
-                        profile-img ref set"
-                    src="{actor.img}"
-                    alt={`modules/${moduleID}/assets/nodata.png`}
-                    data-edit="img" 
+                <div
+                    class="la-deployable__img -aligncontentcenter
+                        ref set"
                     data-uuid="{actor.uuid}"
-                />
-                <!-- <HaseDisplay {...props} /> -->
+                >
+                    <ImageVideo
+                        actor={actor}
+                        editDisabled={isInstanced}
+                        tooltipEnabled={tooltipEnabled}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                        onPointerClick={handleEditToken}
+                    />
+                </div>
             </div>
         </div>
         <!-- Right Side -->
@@ -151,10 +182,36 @@
                             style={["-lineheight3", "la-prmy-primary -glow-prmy-hover"]}
                             iconStyle={["-fontsize5"]}
 
-                            tooltipEnabled={getPilotSheetTooltipEnabled()}
+                            tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />
+                    {#if advancedOptions && !isInstanced}
+                        <LockImageButton
+                            style="-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"
+                            actor={actor}
+                            setState={setActorTokenSync}
+                            tooltipEnabled={tooltipEnabled}
+                        />
+                    {/if}
+                    {#if !isInstanced}
+                        {#if !tokenImageLocked}
+                            <GlyphButton
+                                flowClass={FlowClass.None}
+                                style={["mdi mdi-image-edit", "-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"]}
+                                onClick={event => browseActorImage(event, actor)}
+                                tooltipEnabled={tooltipEnabled}
+                                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                tooltip={getLocalized("LA.edit.actor.tooltip")}
+                                tooltipDirection={TooltipDirection.UP}
+                            />
+                        {/if}
+                    {:else}
+                        <i class="mdi mdi-creation la-text-text -fontsize2 la-prmy-warning -glow-prmy"
+                            data-tooltip={tooltipEnabled ? tokenErrorTip : undefined}
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                            data-tooltip-direction={TooltipDirection.DOWN}></i>
+                    {/if}
                     {#if advancedOptions}
                         <ThemeOverrideButton
                             uuid={actor.uuid}
@@ -162,7 +219,7 @@
                             iconStyle={["-fontsize2"]}
                             setOverride={setThemeOverride}
 
-                            tooltipEnabled={getPilotSheetTooltipEnabled()}
+                            tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />

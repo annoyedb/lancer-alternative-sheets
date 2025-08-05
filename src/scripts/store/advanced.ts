@@ -22,3 +22,23 @@ export function setAdvancedState(uuid: string, enabled: boolean)
 {
     SheetStore.set(uuid, { advancedState: enabled });
 }
+
+export function getSelectedTokenImage(uuid: string): string
+{
+    return SheetStore.get(uuid).selectedTokenImage ?? "";
+}
+
+export function setSelectedTokenImage(uuid: string, value: string)
+{
+    SheetStore.set(uuid, { selectedTokenImage: value });
+}
+
+export function getTokenImageLock(uuid: string): boolean
+{
+    return SheetStore.get(uuid).tokenImageLock ?? true;
+}
+
+export function setTokenImageLock(uuid: string, value: boolean)
+{
+    SheetStore.set(uuid, { tokenImageLock: value })
+}

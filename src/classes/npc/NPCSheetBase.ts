@@ -1,13 +1,14 @@
 import { mount } from "svelte";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-import { SheetStore } from '@/scripts/store/module-store';
-import { dataMap, getLocalized } from "@/scripts/helpers";
+import { dataMap, getLocalized, isValidImageContainer } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
-import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
+import { getActorTokenSync, getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
 import { applyThemeTo, getCSSSystemTheme } from "@/scripts/theme";
 import { getThemeOverride } from '@/scripts/npc/settings';
 import { unregisterTrackedHooks } from '@/scripts/store/hooks';
+import { getSelectedTokenImage, setSelectedTokenImage } from "@/scripts/store/advanced";
+import { getThemeKey, setThemeKey } from "@/scripts/store/theme";
 import Loadout from "@/svelte/npc/Loadout.svelte";
 import Header from "@/svelte/npc/Header.svelte";
 import Activity from '@/svelte/npc/Activity.svelte';
@@ -48,11 +49,21 @@ export class NPCSheetBase
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-                    SheetStore.set(this.actor.uuid, {
-                        currentTheme: theme,
-                    });
+                    setThemeKey(this.actor.uuid, theme);
                     this.render();
                 })
+                
+                Hooks.on("updateActor", (document: any, changes: any) => {
+                    if (document.uuid === this.actor.uuid && changes.prototypeToken?.texture?.src && 
+                        getActorTokenSync(this.actor.uuid) && // Actor-token image sync enabled
+                        isValidImageContainer(changes.prototypeToken.texture.src))
+                    {
+                        setSelectedTokenImage(this.actor.uuid, changes.prototypeToken.texture.src);
+                        this.actor.update({
+                            "img": changes.prototypeToken.texture.src
+                        });
+                    }
+                });
 
                 // TODO: Until a Lancer settings/theme hook is available, 
                 // this blasts on every single time the settings close
@@ -73,18 +84,26 @@ export class NPCSheetBase
                 return data as NPCSheetProps;
             }
 
-            override activateListeners(html: JQuery<HTMLElement>)
+            // (#10)
+            // @ts-expect-error We're overriding a function in LancerActorSheet
+            override _propagateData(formData: any)
             {
-                super.activateListeners(html);
+                // @ts-expect-error We're overriding a function in LancerActorSheet
+                super._propagateData(formData);
+                
+                delete formData["prototypeToken.texture.src"]; // GO AWAY MYSTERY MAN AAAAAAA
+                const updateToken = getSelectedTokenImage(this.actor.uuid); // (#12)
+                if (updateToken)
+                {
+                    formData["prototypeToken.texture.src"] = updateToken;
+                }
             }
 
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                SheetStore.set(this.actor.uuid, {
-                    currentTheme: getThemeOverride(this.actor.uuid)
-                });
-                applyThemeTo(this.element, SheetStore.get(this.actor.uuid).currentTheme);
+                setThemeKey(this.actor.uuid, getThemeOverride(this.actor.uuid));
+                applyThemeTo(this.element, getThemeKey(this.actor.uuid));
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
             }
@@ -92,7 +111,7 @@ export class NPCSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element, SheetStore.get(this.actor.uuid).currentTheme);
+                applyThemeTo(element, getThemeKey(this.actor.uuid));
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
 

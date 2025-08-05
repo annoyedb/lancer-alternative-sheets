@@ -6,5 +6,6 @@ export interface PilotSheetSettingsData
         themeOverride: string;
         sidebarExes: Array<string>;
         bondImageSrc: string;
+        syncActorTokenImages: boolean;
     }
 }

@@ -1,4 +1,4 @@
 export interface PointerClickProps
 {
-    onPointerClick?: (event: MouseEvent, ...args: any[]) => void;
+    onPointerClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, ...args: any[]) => void;
 }

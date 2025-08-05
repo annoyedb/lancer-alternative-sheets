@@ -4,7 +4,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
+    import { getLocalized, handleEditToken, handleRelativeDataInput } from "@/scripts/helpers";
     import { 
         getPilotSheetSensorsEnabled, 
         getPilotSheetTechAttackEnabled, 
@@ -104,6 +104,14 @@
     <!-- Pilot Image -->
     <ImageVideo
         actor={actor}
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltip={getLocalized("LA.edit.image.token.tooltip")}
+        tooltipDirection={TooltipDirection.RIGHT}
+        logText={getLocalized("LA.edit.image.token.tooltip")}
+        logType={TextLogHook.PilotHeader}
+        logTypeReset={TextLogHook.PilotHeaderReset}
+        onPointerClick={event => handleEditToken(event, actor)}
     />
 </div>
 <!-- Mech Stats 1 -->

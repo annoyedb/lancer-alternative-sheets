@@ -2,11 +2,23 @@
     import { onMount } from 'svelte';
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
-    import { getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease, handleRelativeDataInput } from "@/scripts/helpers";
+    import { 
+        getCurrentOvercharge, 
+        getLocalized, 
+        handleEditToken, 
+        handleOverchargeDecrease, 
+        handleOverchargeIncrease, 
+        handleRelativeDataInput 
+    } from "@/scripts/helpers";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getThemeKey } from '@/scripts/store/theme';
-    import { getMechSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
+    import { 
+        getMechSheetTooltipEnabled, 
+        getSidebarExecutables, 
+        setSidebarExecutables, 
+        getSidebarRatio 
+    } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from '@/enums/FlowClass';
@@ -95,6 +107,14 @@
     </div>
     <ImageVideo
         actor={actor}
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltip={getLocalized("LA.edit.image.token.tooltip")}
+        tooltipDirection={TooltipDirection.RIGHT}
+        logText={getLocalized("LA.edit.image.token.tooltip")}
+        logType={TextLogHook.MechHeader}
+        logTypeReset={TextLogHook.MechHeaderReset}
+        onPointerClick={event => handleEditToken(event, actor)}
     />
 </div>
 <!-- Mech Stats 1 -->
