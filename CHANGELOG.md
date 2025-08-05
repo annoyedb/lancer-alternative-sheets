@@ -4,6 +4,7 @@ Second of all: even more robust animated token support!
 
 I've tried my best to clearly communicate the difference between actor images and token images, as well as instanced tokens and prototype tokens on the sheets.
 
+
 ## Changes
 * Fixed the mystery-man/prototype token bug for the final time `i have no joke for this and am actually tweaking`
 * Fixed a typo that would cause the tooltip for deployable's change theme tooltip to appear at the top-left of the screen
@@ -11,8 +12,8 @@ I've tried my best to clearly communicate the difference between actor images an
 * Added missing styling on pilot sheet's bond section. When 'dark' themes were selected for a sheet they would use the default text (which would be white/bright) and made it hard to see against the background. It should be legible regardless of theme now
 * Added animated token support on sheets for deployables and NPCs but added restrictions in how token images are assigned to mitigate potential accidents
 * Added individual actor image editing to deployables and NPC sheets now that strictly *tokens* are shown on sheets
-* Added a 'lock actor and token image' button (represented by a lock) under the advanced toggle to force the actor/token synchronization on/off. This setting is enabled by default ('normal Lancer system behavior') on all sheets, unless your token and actor are different images to begin with. Please note that while this is enabled selecting a token image will be restricted to *image formats* only. Disabling this sync will allow you to select videos *or* images `if you didn't understand anything from this bullet and the phrase "animated tokens" means nothing to you, i don't need to know or my soul will leave my body in the same amount of pieces my heart will be shattered into`
-* Added a button to specifically change the actor's image on deployable and NPC sheets if actor sync is unlocked aaaaaaaa
+* Added a 'link actor and token image' button (represented by a link) under the advanced toggle to force the actor/token synchronization on/off. This setting is enabled by default ('normal Lancer system behavior') on all sheets, unless your token and actor are different images to begin with. Please note that while this is enabled selecting a token image will be restricted to *image formats* only. Disabling this sync will allow you to select videos *or* images `if you didn't understand anything from this bullet and the phrase "animated tokens" means nothing to you, i don't need to know or my soul will leave my body in the same amount of pieces my heart will be shattered into`
+* Added an indicator to mark the editing of an instanced NPC or deployable actor and restrictions on editing images from said instances
 * Added select-all QoL when selecting input boxes in deployables
 * Changed token image selector to only target prototype tokens for deployable and NPC sheets
 * Removed requirement of toggling the 'advanced' button in order to edit the minor ideal option for easier access. Originally this was to lightly prevent players 'accidentally' changing it mid-session `but i'm not your mother, do what you want`
