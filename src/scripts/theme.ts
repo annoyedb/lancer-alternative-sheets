@@ -173,21 +173,6 @@ export function getThemeHistoryLabel(theme?: ThemeKey | string)
     return getLocalized(THEME_LOCALIZE_HISTORY_MAP[selectedTheme]);
 }
 
-// Yes, this is basically just a theme picker for the sidebar
-// No, it does not deal with the dark themes, because they apparently already have good contrasting colors
-// Yes, this is biased
-// No, I'm not sorry
-//
-// 'la-icon-swap' is a class used to identify items with classes that need to be checked 
-// against the current LIGHT_MAP theme
-// As of this moment this isn't really utilized due to a rewrite that happened a while back, but its kept here just in case someone else needs it? idk. The correct class is redetermined because we call a rerender on theme changes now
-export function getSidebarImageTheme(type: "bckg" | "text" | "brdr", theme?: string)
-{
-    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
-    const isLightTheme = LIGHT_MAP[selectedTheme] === "light";
-    return `la-icon-swap ${isLightTheme ? `la-${type}-primary` : `la-${type}-text`}`;
-}
-
 export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "text" | "brdr" | "prmy")
 {
     let manufacturer = slugify(key, "-");

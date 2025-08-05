@@ -1,10 +1,11 @@
 <script lang="ts">
     import { id as moduleID } from "@/module.json";
-    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { setThemeOverride } from "@/scripts/deployable/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
+    import { getThemeKey } from "@/scripts/store/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -24,7 +25,8 @@
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    const themeOverride = getCSSDocumentTheme(actor.uuid);
+    
+    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
 
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.stats.size}`);
@@ -66,12 +68,12 @@
                         <!-- Size -->
                         <div class="{advancedOptions ? "-displaynone" : ""}">
                         {#if system.stats.size < 1}
-                            <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+                            <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                                 data-tooltip={tooltipEnabled ? sizeTip : undefined}
                                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}></i>
                         {:else}
-                            <i class="cci cci-size-{system.stats.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+                            <i class="cci cci-size-{system.stats.size} {themeOverride} la-outl-shadow"
                                 data-tooltip={tooltipEnabled ? sizeTip : undefined}
                                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}></i>
@@ -102,8 +104,8 @@
                                 data-tooltip={tooltipEnabled ? speedTip : undefined}
                                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}>
-                                <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
-                                <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.stats.speed}</span>
+                                <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize6"></i>
+                                <span class="{themeOverride} la-outl-shadow -fontsize6 -bold">{system.stats.speed}</span>
                             </div>
                         </div>
                         <div class="{advancedOptions ? "" : "-displaynone"}">

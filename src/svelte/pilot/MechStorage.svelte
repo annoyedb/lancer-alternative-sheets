@@ -4,7 +4,8 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { PilotStore } from "@/scripts/store/module-store";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getThemeKey } from '@/scripts/store/theme';
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -24,7 +25,7 @@
     let selectedMechIndex = $state(PilotStore.get(actor.uuid).selectedMech);
 
     const qualityMode = true; // TODO: change to a setting
-    const themeOverride = getCSSDocumentTheme(actor.uuid);
+    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const collID = `${actor.uuid}.mechStorage`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const activateTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.mechStorage.activate.tooltip"));
@@ -115,12 +116,12 @@
     <div class="la-combine-v -positionabsolute -right0">
         <div class=" -fontsize13">
         {#if ownedMechs[selectedMechIndex].system.size < 1}
-            <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+            <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {:else}
-            <i class="cci cci-size-{ownedMechs[selectedMechIndex].system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+            <i class="cci cci-size-{ownedMechs[selectedMechIndex].system.size} {themeOverride} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
@@ -130,8 +131,8 @@
             data-tooltip={tooltipEnabled ? getSpeedTip() : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}>
-            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
-            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{ownedMechs[selectedMechIndex].system.speed}</span>
+            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow"></i>
+            <span class="{themeOverride} la-outl-shadow -bold">{ownedMechs[selectedMechIndex].system.speed}</span>
         </div>
     </div>
     <div class="-positionrelative">

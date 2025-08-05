@@ -13,12 +13,13 @@
         getSidebarRatio, 
         setSidebarExecutables 
     } from "@/scripts/pilot/settings";
-    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from '@/scripts/store/advanced';
+    import { getThemeKey } from "@/scripts/store/theme";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
-    import ImageVideo from "../actor/ImageVideo.svelte";
+    import ImageVideo from "@/svelte/actor/ImageVideo.svelte";
 
 
     const props = $props();
@@ -32,7 +33,7 @@
     let editingBurn = $state(false);
     let editingShield = $state(false);
 
-    const themeOverride = getCSSDocumentTheme(actor.uuid);
+    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const sidebarExes = getSidebarExecutables(actor.uuid);
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
@@ -82,12 +83,12 @@
     <!-- Size, Speed, & Core Availability -->
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
-        <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+        <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
-        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+        <i class="cci cci-size-{system.size} {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
@@ -96,8 +97,8 @@
             data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
-            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
-            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{system.speed}</span>
+            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow"></i>
+            <span class="{themeOverride} la-outl-shadow -bold">{system.speed}</span>
         </div>
     </div>
     <!-- Pilot Image -->

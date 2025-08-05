@@ -1,9 +1,10 @@
 <script lang="ts">
     import { id as moduleID } from "@/module.json";
-    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { setThemeOverride } from "@/scripts/npc/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getThemeKey } from "@/scripts/store/theme";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -23,7 +24,7 @@
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    const themeOverride = getCSSDocumentTheme(actor.uuid);
+    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
@@ -92,17 +93,17 @@
                 <!-- Left Side Floating Stats -->
                 <div class="la-stat__island -positionrelative la-dropshadow">
                     <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
-                        <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+                        <i class="cci cci-npc-tier-{system.tier} {themeOverride} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? tierTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {#if system.size < 1}
-                        <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+                        <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {:else}
-                        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+                        <i class="cci cci-size-{system.size} {themeOverride} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
@@ -111,15 +112,15 @@
                             data-tooltip={tooltipEnabled ? speedTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
-                            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
+                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize6"></i>
+                            <span class="{themeOverride} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
                         </div>
                         <div class="la-combine-h -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="cci cci-activate {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
-                            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
+                            <i class="cci cci-activate {themeOverride} la-outl-shadow -fontsize6"></i>
+                            <span class="{themeOverride} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
                         </div>
                         <div class="la-recharge -lineheight3 -width6 -height6 la-prmy-primary -glow-prmy-hover">
                             <button type="button"
