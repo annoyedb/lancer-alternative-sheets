@@ -59,9 +59,9 @@
         onClick={event => handleToggleImageSync(event, actor, setState)}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-        tooltip={getLocalized("LA.advanced.unlock.tooltip")}
+        tooltip={getLocalized("LA.advanced.unlink.tooltip")}
         tooltipDirection={tooltipDirection || TooltipDirection.UP}
-        logText={getLocalized("LA.advanced.unlock.tooltip")}
+        logText={getLocalized("LA.advanced.unlink.tooltip")}
         logType={logType}
         logTypeReset={logTypeReset}
     />
