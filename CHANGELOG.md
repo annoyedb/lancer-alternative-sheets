@@ -4,7 +4,6 @@ Second of all: even more robust animated token support!
 
 I've tried my best to clearly communicate the difference between actor images and token images, as well as instanced tokens and prototype tokens on the sheets.
 
-
 ## Changes
 * Fixed the mystery-man/prototype token bug for the final time `i have no joke for this and am actually tweaking`
 * Fixed a typo that would cause the tooltip for deployable's change theme tooltip to appear at the top-left of the screen
