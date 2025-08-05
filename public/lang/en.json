@@ -109,7 +109,7 @@
 	"LA.advanced.link.tooltip": "Actor and token art is linked to each other",
 	"LA.advanced.link.subLabel": "Linking actor and token art together will set the current actor image to the current token image (if the token is an image format)",
 	"LA.advanced.link.error": "Actor and token art is linked to each other, but the actor's image is a video type",
-	"LA.advanced.unlink.tooltip": "Actor and token art is separate from each other",
+	"LA.advanced.unlink.tooltip": "Actor and token art is unlinked from each other",
 	"LA.collapseAll.tooltip": "Collapse or expand this header and all its subheaders",
 	"LA.collapseAll.extension": "toggle_all",
 	"LA.name.label": "NAME",
