@@ -6,7 +6,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getDocumentTheme, getManufacturerColor } from "@/scripts/theme";
+    import { getCSSDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
     import ActionBox from "@/svelte/actor/ActionBox.svelte";
     import EffectBox from "@/svelte/actor/EffectBox.svelte";
@@ -52,7 +52,7 @@
     onClick={sendToChat}
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     tooltipDirection={TooltipDirection.LEFT}
     tooltip={tip}
     logType={TextLogHook.MechHeader}
@@ -98,7 +98,7 @@
         startCollapsed={false}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

@@ -4,10 +4,10 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { getSheetStore } from "@/scripts/store/module-store";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
+    import { getThemeKey } from "@/scripts/store/theme";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -28,7 +28,7 @@
         logType,
         logTypeReset,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
-    const themeOverride = getSheetStore(sheetUUID).currentTheme;
+    const themeOverride = getThemeKey(sheetUUID);
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)

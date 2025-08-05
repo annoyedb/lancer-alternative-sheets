@@ -1,24 +1,24 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
-import { getSheetStore, setSheetStore } from "./module-store";
+import { SheetStore } from "./module-store";
 
 export function getActiveTab(uuid: string, tab: ActiveTab): string
 {
-    return getSheetStore(uuid).activeTabs[tab] ?? "";
+    return SheetStore.get(uuid).activeTabs[tab] ?? "";
 }
 
 export function setActiveTab(uuid: string, tab: ActiveTab, value: string)
 {
-    const tabs = getSheetStore(uuid).activeTabs;
+    const tabs = SheetStore.get(uuid).activeTabs;
     tabs[tab] = value;
-    setSheetStore(uuid, { activeTabs: tabs });
+    SheetStore.set(uuid, { activeTabs: tabs });
 }
 
 export function getAdvancedState(uuid: string): boolean
 {
-    return getSheetStore(uuid).advancedState;
+    return SheetStore.get(uuid).advancedState;
 }
 
 export function setAdvancedState(uuid: string, enabled: boolean)
 {
-    setSheetStore(uuid, { advancedState: enabled });
+    SheetStore.set(uuid, { advancedState: enabled });
 }

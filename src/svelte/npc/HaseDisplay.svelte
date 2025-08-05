@@ -2,7 +2,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import HexButton from "@/svelte/actor/button/HexButton.svelte";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
@@ -25,7 +25,7 @@
                     value={system.hull}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                     tooltip={getLocalized("LA.hull.tooltip")}
                     logText={getLocalized("LA.hull.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -49,7 +49,7 @@
                     value={system.agi}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                     tooltip={getLocalized("LA.agility.tooltip")}
                     logText={getLocalized("LA.agility.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -72,7 +72,7 @@
                     value={system.sys}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                     tooltip={getLocalized("LA.systems.tooltip")}
                     logText={getLocalized("LA.systems.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -96,7 +96,7 @@
                     value={system.eng}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                     tooltip={getLocalized("LA.engineering.tooltip")}
                     logText={getLocalized("LA.engineering.tooltip")}
                     logType={TextLogHook.MechHeader}

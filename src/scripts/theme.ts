@@ -63,7 +63,7 @@ import "@/styles/color/themes/horus.scss";
 import { ThemeKey, ThemeValue } from "@/enums/ThemeKey";
 import { slugify } from "@/scripts/lancer/util/lid";
 import { getLocalized } from "@/scripts/helpers";
-import { getSheetStore } from "@/scripts/store/module-store";
+import { SheetStore } from "@/scripts/store/module-store";
 
 const THEME_MAP: Record<ThemeKey | string, ThemeValue> = {
     [ThemeKey.GMS]: ThemeValue.GMS,
@@ -109,36 +109,64 @@ const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.pilot.history.ipsn",
 };
 
-// Translates the keys stored by this module into their CSS class
-export function translateTheme(key: ThemeKey | string): ThemeValue
+/**
+ * Translates the keys stored by this module into their CSS class
+ * @param key e.g. `gms` or `gmsDark`
+ * @returns CSS class as a `ThemeValue` enum value (e.g. `la-gms` or `la-gmsdark`)
+ */
+export function convertToCSSTheme(key: ThemeKey | string): ThemeValue
 {
     return THEME_MAP[key];
 }
 
-export function getDocumentTheme(uuid: string): ThemeValue
+/**
+ * Get a document's CSS theme
+ * @param uuid document UUID
+ * @returns CSS class as a `ThemeValue` enum value (e.g. `la-gms` or `la-gmsdark`)
+ */
+export function getCSSDocumentTheme(uuid: string): ThemeValue
 {
-    const { currentTheme } = getSheetStore(uuid);
-    return currentTheme ? THEME_MAP[currentTheme] : getSystemTheme();
+    const { currentTheme } = SheetStore.get(uuid);
+    return currentTheme ? THEME_MAP[currentTheme] : getCSSSystemTheme();
 }
 
-export function getSystemTheme(): ThemeValue
+/**
+ * Get the Lancer system's CSS theme
+ * @returns CSS class as a `ThemeValue` enum value (e.g. `la-gms` or `la-gmsdark`)
+ */
+export function getCSSSystemTheme(): ThemeValue
 {
     const currentTheme = game.settings.get("lancer", "uiTheme") as string;
     return THEME_MAP[currentTheme];
 }
 
+/**
+ * Determine the theme as 'light' or 'dark'
+ * @param theme 
+ * @returns 
+ */
 export function getBrightness(theme?: ThemeKey | string): "light" | "dark"
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
     return LIGHT_MAP[selectedTheme];
 }
 
+/**
+ * Get the theme name localized to their title
+ * @param theme 
+ * @returns 
+ */
 export function getThemeName(theme?: ThemeKey | string)
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
     return getLocalized(THEME_LOCALIZE_MAP[selectedTheme]);
 }
 
+/**
+ * Get the localized flavor-text label (appears in pilot dossier) 
+ * @param theme 
+ * @returns 
+ */
 export function getThemeHistoryLabel(theme?: ThemeKey | string)
 {
     const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;

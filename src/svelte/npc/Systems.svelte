@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -71,7 +71,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -128,7 +128,7 @@
             path={`itemTypes.npc_feature.${component.index}`}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
 
@@ -146,7 +146,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onPointerEnter={() => {editButtonHover = true;}}
             onPointerLeave={() => {editButtonHover = false;}}
@@ -158,7 +158,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onPointerEnter={() => {messageButtonHover = true;}}
             onPointerLeave={() => {messageButtonHover = false;}}

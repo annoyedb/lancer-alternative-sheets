@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme, getManufacturerColor } from "@/scripts/theme";
+    import { getCSSDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -43,7 +43,7 @@
     <CollapseAllButton
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 

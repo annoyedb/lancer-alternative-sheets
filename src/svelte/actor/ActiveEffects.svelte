@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Logger } from "@/classes/Logger";
-    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
+    import { getThemeKey } from "@/scripts/store/theme";
     import { getLocalized } from "@/scripts/helpers";
-    import { getSheetStore } from "@/scripts/store/module-store";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
@@ -20,7 +20,7 @@
         logType,
         logTypeReset,
     }: ActiveEffectsProps & TooltipProps & TextLogEventProps = $props();
-    const themeOverride = getSheetStore(actor.uuid).currentTheme;
+    const themeOverride = getThemeKey(actor.uuid);
 
     function getThemedIcon(effect: any)
     {
@@ -64,7 +64,7 @@
         onClick={deleteActiveEffect}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         logType={logType}
         logTypeReset={logTypeReset}
     />

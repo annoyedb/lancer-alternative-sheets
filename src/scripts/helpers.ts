@@ -3,7 +3,7 @@ import type { HelperOptions } from "handlebars";
 import { Logger } from "@/classes/Logger";
 import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { LancerAlternative } from "@/enums/LancerAlternative";
-import { getSheetStore } from "@/scripts/store/module-store";
+import { SheetStore } from "@/scripts/store/module-store";
 
 export function getLocalized(key: string): string
 {
@@ -133,7 +133,7 @@ export function browseTokenImage(event: MouseEvent & { currentTarget: EventTarge
             // https://foundryvtt.com/api/classes/foundry.applications.apps.FilePicker.html#default_options
             // Use the `form` attribute to hopefully handle the weird override requirement of (#10).
             // But today, we're just going to throw it in a data store and call it a day.
-            getSheetStore(actor.uuid).selectedTokenImage = path;
+            SheetStore.get(actor.uuid).selectedTokenImage = path;
             actor.update({
                 "prototypeToken.texture.src": path
             });

@@ -1,8 +1,8 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
-    import { getSheetStore } from "@/scripts/store/module-store";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
+    import { getThemeKey } from "@/scripts/store/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -29,7 +29,7 @@
 
     function getGlowColor()
     {
-        return getBrightness(getSheetStore(actor.uuid).currentTheme) === "dark" ? "la-text-text" : "la-text-secondary";
+        return getBrightness(getThemeKey(actor.uuid)) === "dark" ? "la-text-text" : "la-text-secondary";
     }
 </script>
 
@@ -52,7 +52,7 @@
                 action="download"
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
                 tooltipDirection={TooltipDirection.LEFT}
                 logText={getLocalized("LA.pilot.sync.download.tooltip")}

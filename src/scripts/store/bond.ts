@@ -1,11 +1,11 @@
-import { getSheetStore, setSheetStore } from "./module-store";
+import { PilotStore } from "./module-store";
 
 export function getBondQNAMode(uuid: string): boolean
 {
-    return getSheetStore(uuid).bondQNAMode;
+    return PilotStore.get(uuid).bondQNAMode;
 }
 
 export function setBondQNAMode(uuid: string, enabled: boolean)
 {
-    setSheetStore(uuid, { bondQNAMode: enabled });
+    PilotStore.set(uuid, { bondQNAMode: enabled });
 }

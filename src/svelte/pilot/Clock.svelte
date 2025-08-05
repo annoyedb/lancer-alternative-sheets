@@ -2,7 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
@@ -42,7 +42,7 @@
     actionValue="(struct)counter"
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     tooltip={addClockTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.clock.add.tooltip")}
@@ -98,7 +98,7 @@
                 style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 

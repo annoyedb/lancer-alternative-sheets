@@ -3,7 +3,7 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -110,7 +110,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -142,7 +142,7 @@
             {#if hasAccuracyBonus(weapon)}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
                     data-tooltip={tooltipEnabled ? accuracyTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {weapon.system.accuracy[tier - 1]}
@@ -152,7 +152,7 @@
             {#if hasAttackBonus(weapon)}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
                     data-tooltip={tooltipEnabled ? attackTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {weapon.system.attack_bonus[tier - 1]}
@@ -187,7 +187,7 @@
             path={`system.loadout.weapon_mounts.${index}`}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             tooltip={ weapon.system.effect
                 ? `${getRollWeaponTip(weapon)}<br><br>${weapon.system.effect}` 
@@ -210,7 +210,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             disabled={isDestroyed(weapon)}
 
@@ -223,7 +223,7 @@
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
                 onClick={event => sendToChat(event, weapon)}
                 onPointerEnter={() => {messageButtonHover = true;}}
@@ -234,7 +234,7 @@
                 path={`itemTypes.npc_feature.${weapon.index}`}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
                 onPointerEnter={() => {editButtonHover = true;}}
                 onPointerLeave={() => {editButtonHover = false;}}

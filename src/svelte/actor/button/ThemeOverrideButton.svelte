@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme, getSystemTheme, getThemeName, translateTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme, getCSSSystemTheme, getThemeName, convertToCSSTheme } from "@/scripts/theme";
     import { ThemeKey } from "@/enums/ThemeKey";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ThemeOverrideButtonProps } from "@/interfaces/actor/button/ThemeOverrideButtonProps";
@@ -52,7 +52,7 @@
                 },
                 {
                     direction: TooltipDirection.DOWN,
-                    cssClass: `la-tooltip -widthfull ${getDocumentTheme(uuid)}`,
+                    cssClass: `la-tooltip -widthfull ${getCSSDocumentTheme(uuid)}`,
                     locked: true,
                 }
             );
@@ -67,13 +67,13 @@
         const selectedTheme = theme === "default" ? "" : theme;
         if (optionElement) 
         {
-            const currentThemeClass = getDocumentTheme(uuid);
+            const currentThemeClass = getCSSDocumentTheme(uuid);
             
             optionElement.classList.remove(currentThemeClass);
             if (selectedTheme)
-                optionElement.classList.add(translateTheme(selectedTheme));
+                optionElement.classList.add(convertToCSSTheme(selectedTheme));
             else
-                optionElement.classList.add(getSystemTheme());
+                optionElement.classList.add(getCSSSystemTheme());
         }
         
         setOverride(uuid, selectedTheme);
@@ -104,7 +104,7 @@
 <button type="button"
     class="{style?.join(' ')} la-prmy-primary -glow-prmy-hover"
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getDocumentTheme(uuid)}`}
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getCSSDocumentTheme(uuid)}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }

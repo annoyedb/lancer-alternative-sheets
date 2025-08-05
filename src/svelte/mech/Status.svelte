@@ -4,7 +4,7 @@
     import { formatString, getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease } from "@/scripts/helpers";
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight, getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -44,7 +44,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -176,7 +176,7 @@
                                     flowClass={FlowClass.None}
                                     style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
                                     tooltip={overchargeMinusTip}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.UP}
                                     onClick={event => handleOverchargeDecrease(event, actor)}
                                 >
@@ -186,7 +186,7 @@
                                     flowClass={FlowClass.None}
                                     style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
                                     tooltip={overchargePlusTip}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.UP}
                                     onClick={event => handleOverchargeIncrease(event, actor)}
                                 >
@@ -209,7 +209,7 @@
                         flowType={"Structure"}
     
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltipDirection={TooltipDirection.LEFT}
                         tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
                         logText={getLocalized("LA.flow.structureDamage.tooltip")}
@@ -225,7 +225,7 @@
                         flowType={"Overheat"}
     
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.reactorStress.tooltip")}
@@ -241,7 +241,7 @@
                         flowType={"FullRepair"}
     
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.fullRepair.tooltip")}
@@ -259,7 +259,7 @@
                         flowType={"Overcharge"}
 
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltipHeader={getLocalized("LA.action.overcharge.label")}
                         tooltip={overchargeText}
                         tooltipDirection={TooltipDirection.LEFT}
@@ -275,7 +275,7 @@
                         flowClass={FlowClass.ResetOvercharge}
 
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.overchargeReset.tooltip")}
@@ -291,7 +291,7 @@
                         flowType={"Stabilize"}
     
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltipHeader={getLocalized("LA.action.full.label")}
                         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
@@ -308,7 +308,7 @@
                         flowType={"Burn"}
     
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         tooltipHeader={getLocalized("LA.action.endofturn.label")}
                         tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}

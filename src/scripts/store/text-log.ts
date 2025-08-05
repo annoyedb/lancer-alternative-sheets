@@ -5,16 +5,16 @@ import { TextLogIntro } from "@/enums/TextLogIntro";
 import { TextLogHook } from "@/enums/TextLogHook";
 import { formatString, getFoundryVersion, getLancerVersion, getLocalized, getModuleVersion } from "@/scripts/helpers";
 import { trackHook } from "@/scripts/store/hooks";
-import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
+import { SheetStore } from "@/scripts/store/module-store";
 
 export function setIntroRun(uuid: string, enabled: boolean)
 {
-    setSheetStore(uuid, { introPlayed: enabled });
+    SheetStore.set(uuid, { introPlayed: enabled });
 }
 
 export function getIntroRun(uuid: string): boolean
 {
-    return getSheetStore(uuid)?.introPlayed;
+    return SheetStore.get(uuid)?.introPlayed;
 }
 
 export class TypedWriter

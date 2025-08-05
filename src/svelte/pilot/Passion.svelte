@@ -6,8 +6,8 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getBondImageSrc, getPilotSheetTooltipEnabled, setBondImageSrc } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
-    import { getBrightness, getDocumentTheme } from "@/scripts/theme";
-    import { getSheetStore } from "@/scripts/store/module-store";
+    import { getThemeKey } from "@/scripts/store/theme";
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import StatusBar from "@/svelte/actor/StatusBar.svelte";
     import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
     import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
@@ -26,7 +26,7 @@
 
     function getGlowColor()
     {
-        return getBrightness(getSheetStore(actor.uuid).currentTheme) === "dark" ? "la-prmy-text" : "la-prmy-primary";
+        return getBrightness(getThemeKey(actor.uuid)) === "dark" ? "la-prmy-text" : "la-prmy-primary";
     }
 
     function browseImage()
@@ -135,7 +135,6 @@
                         name="system.bond_state.xp_checklist.minor_ideal"
                         checked={system.bond_state.xp_checklist.minor_ideal}
                     />
-                {#if advancedOptions}
                     <select
                         class="la-bond__select -fontsize1 -lineheight3 la-bckg-transparent la-text-text -widthfull"
                         name="system.bond_state.minor_ideal" 
@@ -143,6 +142,7 @@
                     >
                     {#each system.bond.system.minor_ideals as minor}
                         <option
+                            style="color: black"
                             value="{minor}"
                             selected={minor === system.bond_state.minor_ideal}
                         >
@@ -150,13 +150,6 @@
                         </option>
                     {/each}
                     </select>
-                {:else}
-                    <span
-                        class="-fontsize1 -lineheight3 -widthfull"
-                    >
-                        {system.bond_state.minor_ideal}
-                    </span>
-                {/if}
                 </div>
                 <div class="la-combine-h">
                     <input type="checkbox"
@@ -210,7 +203,7 @@
             flowClass={FlowClass.None}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.DOWN}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}
@@ -227,7 +220,7 @@
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logText={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -244,7 +237,7 @@
                 path="itemTypes.bond"
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -260,7 +253,7 @@
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.swap.tooltip")}
                 logText={getLocalized(!questionAnswer ? "LA.pilot.bond.qa.tooltip" : "LA.pilot.bond.xp.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -275,7 +268,7 @@
                 flowClass={FlowClass.BondPowerRefresh}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logText={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logType={TextLogHook.PilotHeader}

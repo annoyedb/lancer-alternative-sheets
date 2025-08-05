@@ -1,12 +1,12 @@
 import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
-import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
+import { applyThemeTo, getCSSSystemTheme } from "@/scripts/theme";
 import { setActiveTab } from "@/scripts/store/advanced";
 import { getLocalized, dataMap } from "@/scripts/helpers";
 import { setIntroRun } from "@/scripts/store/text-log";
 import { getPilotSheetTooltipEnabled, getThemeOverride } from "@/scripts/pilot/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
-import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
+import { SheetStore } from "@/scripts/store/module-store";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
 import { TextLogHook } from "@/enums/TextLogHook";
@@ -30,7 +30,7 @@ export class PilotSheetBase
         return {
             classes: [
                 "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "pilot", getSystemTheme()
+                "lancer", "sheet", "actor", "pilot", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.pilotSheetSvelte,
             width: 900,
@@ -77,7 +77,7 @@ export class PilotSheetBase
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-                    setSheetStore(this.actor.uuid, {
+                    SheetStore.set(this.actor.uuid, {
                         currentTheme: theme,
                     });
                     this.render();
@@ -126,10 +126,10 @@ export class PilotSheetBase
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                setSheetStore(this.actor.uuid, {
+                SheetStore.set(this.actor.uuid, {
                     currentTheme: getThemeOverride(this.actor.uuid)
                 });
-                applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
+                applyThemeTo(this.element, SheetStore.get(this.actor.uuid).currentTheme);
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
             }
@@ -142,7 +142,7 @@ export class PilotSheetBase
                 super._propagateData(formData);
                 
                 delete formData["prototypeToken.texture.src"]; // GO AWAY MYSTERY MAN AAAAAAA
-                const updateToken = getSheetStore(this.actor.uuid).selectedTokenImage; // (#12)
+                const updateToken = SheetStore.get(this.actor.uuid).selectedTokenImage; // (#12)
                 if (updateToken)
                 {
                     formData["prototypeToken.texture.src"] = updateToken;
@@ -152,7 +152,7 @@ export class PilotSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
+                applyThemeTo(element, SheetStore.get(this.actor.uuid).currentTheme);
                 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
 

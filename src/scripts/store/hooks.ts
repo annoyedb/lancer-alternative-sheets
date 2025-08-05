@@ -1,18 +1,18 @@
-import { getSheetStore, setSheetStore } from '@/scripts/store/module-store';
+import { SheetStore } from '@/scripts/store/module-store';
 
 export function trackHook(uuid: string, key: number, value: string)
 {
-    const hooks = getSheetStore(uuid).trackedHooks;
+    const hooks = SheetStore.get(uuid).trackedHooks;
     hooks[key] = value;
-    setSheetStore(uuid, { trackedHooks: hooks });
+    SheetStore.set(uuid, { trackedHooks: hooks });
 }
 
 export function unregisterTrackedHooks(uuid: string)
 {
-    const hooks = getSheetStore(uuid).trackedHooks;
+    const hooks = SheetStore.get(uuid).trackedHooks;
     for (const [key, value] of Object.entries(hooks))
     {
         Hooks.off(value, Number(key));
     }
-    setSheetStore(uuid, { trackedHooks: {} });
+    SheetStore.set(uuid, { trackedHooks: {} });
 }

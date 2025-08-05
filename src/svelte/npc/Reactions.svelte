@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
@@ -102,7 +102,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -159,7 +159,7 @@
             path={`itemTypes.npc_feature.${reaction.index}`}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             tooltipHeader={getLocalized("LA.action.reaction.label")}
             tooltip={getReactionTooltip(reaction)}
@@ -178,7 +178,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onPointerEnter={() => {editButtonHover = true;}}
             onPointerLeave={() => {editButtonHover = false;}}
@@ -190,7 +190,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onClick={event => sendToChat(event, reaction)}
             onPointerEnter={() => {messageButtonHover = true;}}

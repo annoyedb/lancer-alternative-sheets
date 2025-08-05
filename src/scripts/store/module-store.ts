@@ -1,4 +1,5 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
+import type { ThemeKey } from "@/enums/ThemeKey";
 import { fromStore, get, writable } from "svelte/store";
 
 interface SheetStoreData
@@ -6,51 +7,91 @@ interface SheetStoreData
     advancedState: boolean;
     introPlayed: boolean;
     headerOffsetY: number;
-    currentTheme: string;
+    currentTheme: string | ThemeKey;
     activeTabs: { [key in ActiveTab]: string };
     trackedHooks: { [key: number]: string };
     selectedTokenImage: string; // (#12)
-    // TODO: refactor to a pilot store
+}
+
+export class SheetStore
+{
+    static createDefaultData(): SheetStoreData
+    {
+        return {
+            advancedState: false,
+            introPlayed: false,
+            headerOffsetY: 0,
+            currentTheme: "",
+            activeTabs: {} as { [key in ActiveTab]: string },
+            trackedHooks: {} as { [key: number]: string },
+            selectedTokenImage: "", // (#12)
+        };
+    }
+
+    static store = writable<{ [key: string]: SheetStoreData }>({});
+
+    static get(key: string): SheetStoreData
+    {
+        const store = get(SheetStore.store);
+        if (!(key in store))
+        {
+            store[key] = SheetStore.createDefaultData();
+        }
+        return fromStore(SheetStore.store).current[key];
+    }
+
+    static set(key: string, value: Partial<SheetStoreData>): void
+    {
+        SheetStore.store.update(store =>
+        {
+            if (!store[key])
+            {
+                store[key] = SheetStore.createDefaultData();
+            }
+            store[key] = { ...store[key], ...value };
+            return store;
+        });
+    }
+}
+
+interface PilotStoreData
+{
     bondQNAMode: boolean;
     selectedMech: number;
 }
 
-const sheetStore = writable<{ [key: string]: SheetStoreData }>({});
-function createDefaultData(): SheetStoreData
+export class PilotStore
 {
-    return {
-        advancedState: false,
-        introPlayed: false,
-        headerOffsetY: 0,
-        currentTheme: "",
-        activeTabs: {} as { [key in ActiveTab]: string },
-        trackedHooks: {} as { [key: number]: string },
-        selectedTokenImage: "", // (#12)
-        // TODO: refactor to a pilot store
-        bondQNAMode: false,
-        selectedMech: 0,
-    };
-}
-
-export function getSheetStore(key: string)
-{
-    const store = get(sheetStore);
-    if (!(key in store))
+    static createDefaultData(): PilotStoreData
     {
-        store[key] = createDefaultData();
+        return {
+            bondQNAMode: false,
+            selectedMech: 0,
+        };
     }
-    return fromStore(sheetStore).current[key];
-}
 
-export function setSheetStore(key: string, value: Partial<SheetStoreData>)
-{
-    sheetStore.update(store =>
+    static store = writable<{ [key: string]: PilotStoreData }>({});
+
+    static get(key: string): PilotStoreData
     {
-        if (!store[key])
+        const store = get(PilotStore.store);
+        if (!(key in store))
         {
-            store[key] = createDefaultData();
+            store[key] = PilotStore.createDefaultData();
         }
-        store[key] = { ...store[key], ...value };
-        return store;
-    });
-};
+        return fromStore(PilotStore.store).current[key];
+    }
+
+    static set(key: string, value: Partial<PilotStoreData>): void
+    {
+        PilotStore.store.update(store =>
+        {
+            if (!store[key])
+            {
+                store[key] = PilotStore.createDefaultData();
+            }
+            store[key] = { ...store[key], ...value };
+            return store;
+        });
+    }
+}

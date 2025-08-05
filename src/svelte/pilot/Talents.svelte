@@ -4,7 +4,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCollapseState } from "@/scripts/store/collapse";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -66,7 +66,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 
@@ -117,7 +117,7 @@
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
@@ -188,7 +188,7 @@
                         rank={jndex}
 
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getDocumentTheme(actor.uuid)}
+                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                         logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                         logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
@@ -241,7 +241,7 @@
                             startCollapsed={false}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(sheetActor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(sheetActor.uuid)}
                             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                         />

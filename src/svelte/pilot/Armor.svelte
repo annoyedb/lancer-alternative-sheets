@@ -3,7 +3,7 @@
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -84,7 +84,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -117,7 +117,7 @@
                 {#if armorBonuses[index].pilot_hp}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr -padding0-tb la-text-header -gap0"
                     data-tooltip={tooltipEnabled ? healthTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_hp}
@@ -127,7 +127,7 @@
                 {#if armorBonuses[index].pilot_armor}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? armorTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_armor}
@@ -137,7 +137,7 @@
                 {#if armorBonuses[index].pilot_evasion}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? evasionTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_evasion}
@@ -147,7 +147,7 @@
                 {#if armorBonuses[index].pilot_edef}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? edefenseTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_edef}
@@ -157,7 +157,7 @@
                 {#if armorBonuses[index].pilot_speed}
                 <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? speedTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_speed}
@@ -193,7 +193,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -207,7 +207,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -255,7 +255,7 @@
                 sheetUUID={actor.uuid}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
@@ -268,7 +268,7 @@
                 startCollapsed={true}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />

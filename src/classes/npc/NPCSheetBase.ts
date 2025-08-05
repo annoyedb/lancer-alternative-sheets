@@ -1,11 +1,11 @@
 import { mount } from "svelte";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-import { setSheetStore, getSheetStore } from '@/scripts/store/module-store';
+import { SheetStore } from '@/scripts/store/module-store';
 import { dataMap, getLocalized } from "@/scripts/helpers";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { getNPCSheetHeight, getNPCSheetWidth } from "@/scripts/npc/settings";
-import { applyThemeTo, getSystemTheme } from "@/scripts/theme";
+import { applyThemeTo, getCSSSystemTheme } from "@/scripts/theme";
 import { getThemeOverride } from '@/scripts/npc/settings';
 import { unregisterTrackedHooks } from '@/scripts/store/hooks';
 import Loadout from "@/svelte/npc/Loadout.svelte";
@@ -20,7 +20,7 @@ export class NPCSheetBase
         return {
             classes: [
                 "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "npc", getSystemTheme()
+                "lancer", "sheet", "actor", "npc", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.npcSheetSvelte,
             width: getNPCSheetWidth() || 500,
@@ -48,7 +48,7 @@ export class NPCSheetBase
                 {
                     if (uuid !== this.actor.uuid)
                         return;
-                    setSheetStore(this.actor.uuid, {
+                    SheetStore.set(this.actor.uuid, {
                         currentTheme: theme,
                     });
                     this.render();
@@ -81,10 +81,10 @@ export class NPCSheetBase
             override async _injectHTML(html: JQuery<HTMLElement>): Promise<void>
             {
                 super._injectHTML(html);
-                setSheetStore(this.actor.uuid, {
+                SheetStore.set(this.actor.uuid, {
                     currentTheme: getThemeOverride(this.actor.uuid)
                 });
-                applyThemeTo(this.element, getSheetStore(this.actor.uuid).currentTheme);
+                applyThemeTo(this.element, SheetStore.get(this.actor.uuid).currentTheme);
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
             }
@@ -92,7 +92,7 @@ export class NPCSheetBase
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element, getSheetStore(this.actor.uuid).currentTheme);
+                applyThemeTo(element, SheetStore.get(this.actor.uuid).currentTheme);
 
                 this.mountComponents(html, dataMap[this.actor.uuid]);
 

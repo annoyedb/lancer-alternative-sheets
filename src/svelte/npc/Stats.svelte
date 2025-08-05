@@ -1,11 +1,10 @@
 <script lang="ts">
     import { id as moduleID } from "@/module.json";
-    import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
     import { getLocalized, handleRelativeDataInput } from "@/scripts/helpers";
     import { setThemeOverride } from "@/scripts/npc/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getSheetStore } from "@/scripts/store/module-store";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -24,7 +23,7 @@
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    const themeOverride = getSheetStore(actor.uuid).currentTheme;
+    const themeOverride = getCSSDocumentTheme(actor.uuid);
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
@@ -64,7 +63,7 @@
                         class="la-bckg-secondary -width2
                             clicker-minus-button input-update"
                         data-tooltip={tooltipEnabled ? setTierTip : undefined}
-                        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"UP"}
                         aria-label={getLocalized("LA.subtract.label")}
                     >-</button><!--
@@ -76,14 +75,14 @@
                         value={`${system.tier}`}
                         name={`system.tier`}
                         data-tooltip={tooltipEnabled ? setTierTip : undefined}
-                        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"UP"}
                     /><!--
                 ---><button type="button"
                         class="la-bckg-secondary -width2
                             clicker-plus-button input-update"
                         data-tooltip={tooltipEnabled ? setTierTip : undefined}
-                        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"UP"}
                         aria-label={getLocalized("LA.add.label")}
                     >+</button>
@@ -95,29 +94,29 @@
                     <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
                         <i class="cci cci-npc-tier-{system.tier} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? tierTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {#if system.size < 1}
                         <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {:else}
                         <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {/if}
                         <div class="la-combine-h" 
                             data-tooltip={tooltipEnabled ? speedTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
                             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
                         </div>
                         <div class="la-combine-h -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="cci cci-activate {getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6"></i>
                             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
@@ -127,7 +126,7 @@
                                 class="mdi mdi-refresh-circle la-text-secondary -fontsize6
                                     charge-macro"
                                 data-tooltip={tooltipEnabled ? rechargeTip : undefined}
-                                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}
                                 aria-label={getLocalized("LA.npc.recharge.tooltip")}
                             >
@@ -158,7 +157,7 @@
                             iconStyle={["-fontsize5"]}
 
                             tooltipEnabled={getPilotSheetTooltipEnabled()}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />
                     {#if advancedOptions}
@@ -169,7 +168,7 @@
                             setOverride={setThemeOverride}
 
                             tooltipEnabled={getPilotSheetTooltipEnabled()}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                         />
                     {/if}
@@ -179,7 +178,7 @@
                             class="mdi mdi-note-edit -fontsize2 la-prmy-primary -glow-prmy-hover {advancedOptions ? "" : "-visibilityhidden"}
                                 popout-text-edit-button"
                             data-tooltip={notesEditTip}
-                            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.UP}
                             aria-label={getLocalized("LA.npc.notes.tooltip")}
                             data-path={`system.notes`}
@@ -188,7 +187,7 @@
                         <button type="button"
                             class="mdi mdi-information -fontsize2 la-prmy-primary -glow-prmy-hover"
                             data-tooltip={notesTip}
-                            data-tooltip-class="clipped-bot la-tooltip -scrollbar {getDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip -scrollbar {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.UP}
                             aria-label={getLocalized("LA.npc.notes.label")}
                             onclick={(event) => handleShowNotes(event)}
@@ -207,7 +206,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.armor.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                             />
@@ -219,7 +218,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.evasion.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -231,7 +230,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.edefense.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -257,7 +256,7 @@
                                     editSecondary={editingShield}
                                     
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.hitpoint.tooltip")}
                                 />
@@ -274,7 +273,7 @@
                                     clipPath={"clipped-alt"}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.structure.tooltip")}
                                 />
@@ -292,7 +291,7 @@
                                 >
                                 <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
-                                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                     data-tooltip-direction="LEFT"
                                 ><!--
                                 --->{getLocalized("LA.overshield.short")}<!--
@@ -321,7 +320,7 @@
                                     editSecondary={editingBurn}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.heat.tooltip")}
                                 />
@@ -338,7 +337,7 @@
                                     clipPath={"clipped-alt"}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.stress.tooltip")}
                                 />
@@ -356,7 +355,7 @@
                                 >
                                 <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
-                                    data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                     data-tooltip-direction="LEFT"
                                 ><!--
                                 --->{getLocalized("LA.burn.short")}<!--
@@ -374,7 +373,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.tattack.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -386,7 +385,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.save.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
@@ -398,7 +397,7 @@
                             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltip={getLocalized("LA.sensor.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
                         />

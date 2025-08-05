@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
     import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
@@ -85,7 +85,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -149,7 +149,7 @@
                             flowType={"BasicAttack"}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                             tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                         />
@@ -164,7 +164,7 @@
                             flowType={"Damage"}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                             tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                         />
@@ -189,7 +189,7 @@
                             onClick={(event) => sendDeployableActionToChat(event, action, actor)}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
@@ -210,7 +210,7 @@
                             onClick={(event) => sendDeployableActionToChat(event, action, actor)}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getDocumentTheme(actor.uuid)}
+                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                             tooltipDirection={TooltipDirection.UP}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
@@ -230,7 +230,7 @@
                 onClick={sendActionToChat}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             />
         </div>
     </HeaderMain>

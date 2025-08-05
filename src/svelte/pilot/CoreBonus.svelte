@@ -5,7 +5,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { trackHook } from "@/scripts/store/hooks";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -72,7 +72,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 
@@ -134,7 +134,7 @@
                 iconStyle={["-lineheight3"]}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                 logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
@@ -148,7 +148,7 @@
                 style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                 logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
     
@@ -208,7 +208,7 @@
                     onClick={sendToChat}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(sheetActor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(sheetActor.uuid)}
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
@@ -219,7 +219,7 @@
                     sheetUUID={sheetActor?.uuid}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(sheetActor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(sheetActor.uuid)}
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />

@@ -4,7 +4,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { browseActorImage, getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getImageOffsetY, getMechSheetTooltipEnabled, setImageOffsetY } from "@/scripts/mech/settings";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -41,7 +41,7 @@
             <i 
                 class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header -width5 -glow-prmy la-prmy-primary"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}
             ></i>
         {/if}
@@ -49,7 +49,7 @@
                 style={["-fontsize3", "-width5", "-glow-prmy", "la-prmy-primary"]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
@@ -60,7 +60,7 @@
             style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
             onClick={event => browseActorImage(event, actor)}
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.edit.image.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
             logText={getLocalized("LA.edit.image.tooltip")}

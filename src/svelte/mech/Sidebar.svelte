@@ -3,9 +3,9 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease, handleRelativeDataInput } from "@/scripts/helpers";
-    import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
-    import { getSheetStore } from '@/scripts/store/module-store';
+    import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from '@/scripts/store/advanced';
+    import { getThemeKey } from '@/scripts/store/theme';
     import { getMechSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables, getSidebarRatio } from "@/scripts/mech/settings";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -27,7 +27,7 @@
     let editingBurn = $state(false);
     let editingShield = $state(false);
 
-    const themeOverride = getSheetStore(actor.uuid).currentTheme;
+    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const sidebarExes = getSidebarExecutables(actor.uuid);
     const frame = system.loadout.frame?.value;
     const frameName = frame 
@@ -71,26 +71,26 @@
     <!-- Size, Speed, & Core Availability -->
     <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
     {#if system.size < 1}
-        <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+        <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
-        <i class="cci cci-size-{system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
+        <i class="cci cci-size-{system.size} {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
         <div class="la-combine-h -fontsize7" 
             data-tooltip={tooltipEnabled ? speedTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
-            <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
-            <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{system.speed}</span>
+            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow"></i>
+            <span class="{themeOverride} la-outl-shadow -bold">{system.speed}</span>
         </div>
         <CoreAvailability {system} 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         />
     </div>
     <ImageVideo
@@ -107,7 +107,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.armor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -119,7 +119,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.evasion.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -131,7 +131,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.edefense.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -157,7 +157,7 @@
                 editSecondary={editingShield}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -174,7 +174,7 @@
                 clipPath={"clipped-alt"}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.structure.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -192,7 +192,7 @@
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
@@ -221,7 +221,7 @@
                 editSecondary={editingBurn}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.heat.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
                 />
@@ -238,7 +238,7 @@
                 clipPath={"clipped-alt"}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 tooltip={getLocalized("LA.stress.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
                 />
@@ -256,7 +256,7 @@
             >
             <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.burn.short")}<!--
@@ -274,7 +274,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.tattack.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -286,7 +286,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.save.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -298,7 +298,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.sensor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -311,7 +311,7 @@
             flowClass={FlowClass.None}
             style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
             tooltip={overchargeMinusTip}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             onClick={event => handleOverchargeDecrease(event, actor)}
         >
@@ -322,7 +322,7 @@
             flowClass={FlowClass.None}
             style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
             tooltip={overchargePlusTip}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             onClick={event => handleOverchargeIncrease(event, actor)}
         >
@@ -336,7 +336,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.overcharge.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
 
@@ -352,7 +352,7 @@
         innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltip={getLocalized("LA.repair.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />

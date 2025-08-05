@@ -4,7 +4,7 @@
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -191,7 +191,7 @@
         path={`system.loadout.weapon_mounts.${index}`}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={getRollWeaponTip(weapon)}
         logText={getRollWeaponTip(weapon)}
@@ -214,7 +214,7 @@
         damage={weapon.system.active_profile.all_damage}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.UP}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
@@ -230,7 +230,7 @@
             uuid={weapon.uuid}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -243,7 +243,7 @@
             path={getWeaponPath(index)}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -330,7 +330,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
@@ -343,7 +343,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />

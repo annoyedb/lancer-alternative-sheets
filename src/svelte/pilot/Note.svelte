@@ -1,8 +1,7 @@
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getDocumentTheme, getThemeHistoryLabel } from "@/scripts/theme";
-    import { getSheetStore } from "@/scripts/store/module-store";
+    import { getCSSDocumentTheme, getThemeHistoryLabel } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -28,7 +27,7 @@
     path="system.notes"
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
     tooltip={getLocalized("LA.edit.tooltip")}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.edit.tooltip")}
@@ -57,7 +56,7 @@
     headerContent={headerOptions}
 >
     <EffectBox
-        name={getThemeHistoryLabel(getSheetStore(actor.uuid).currentTheme)}
+        name={getThemeHistoryLabel(getCSSDocumentTheme(actor.uuid))}
         effect={ system.notes ? system.notes : getLocalized("LA.placeholder") }
     />
 </HeaderMain>

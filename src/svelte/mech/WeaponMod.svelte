@@ -2,7 +2,7 @@
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -46,7 +46,7 @@
         path={path}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
@@ -72,7 +72,7 @@
         path={path}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getDocumentTheme(actor.uuid)}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -209,7 +209,7 @@
                     flowClass={FlowClass.SendEffectToChat}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getDocumentTheme(actor.uuid)}
+                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -225,7 +225,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getDocumentTheme(actor.uuid)}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />

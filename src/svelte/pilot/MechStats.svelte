@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getLocalized } from "@/scripts/helpers";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
@@ -34,7 +34,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.armor.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -46,7 +46,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.evasion.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -58,7 +58,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.edefense.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -72,7 +72,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.hitpoint.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -84,7 +84,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.structure.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -96,7 +96,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.heat.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -108,7 +108,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.stress.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -122,7 +122,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.tattack.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -134,7 +134,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.save.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />
@@ -146,7 +146,7 @@
             innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.sensor.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
         />

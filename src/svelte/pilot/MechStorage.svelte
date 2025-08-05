@@ -2,9 +2,9 @@
     import { id as moduleID } from '@/module.json';
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getSheetStore, setSheetStore } from "@/scripts/store/module-store";
+    import { PilotStore } from "@/scripts/store/module-store";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import { getDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme, getSidebarImageTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -21,10 +21,10 @@
         mech.type === "mech" && 
         mech.system.pilot?.status === "resolved" && 
         mech.system.pilot.value.id === actor.id) ?? [];
-    let selectedMechIndex = $state(getSheetStore(actor.uuid).selectedMech);
+    let selectedMechIndex = $state(PilotStore.get(actor.uuid).selectedMech);
 
     const qualityMode = true; // TODO: change to a setting
-    const themeOverride = getSheetStore(actor.uuid).currentTheme;
+    const themeOverride = getCSSDocumentTheme(actor.uuid);
     const collID = `${actor.uuid}.mechStorage`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const activateTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.mechStorage.activate.tooltip"));
@@ -55,7 +55,7 @@
         event.stopPropagation();
 
         selectedMechIndex = index;
-        setSheetStore(actor.uuid, {
+        PilotStore.set(actor.uuid, {
             selectedMech: index
         });
     }
@@ -117,18 +117,18 @@
         {#if ownedMechs[selectedMechIndex].system.size < 1}
             <i class="cci cci-size-half {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {:else}
             <i class="cci cci-size-{ownedMechs[selectedMechIndex].system.size} {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {/if}
         </div>
         <div class=" la-combine-h -fontsize7" 
             data-tooltip={tooltipEnabled ? getSpeedTip() : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {getSidebarImageTheme("text", themeOverride)} la-outl-shadow"></i>
             <span class="{getSidebarImageTheme("text", themeOverride)} la-outl-shadow -bold">{ownedMechs[selectedMechIndex].system.speed}</span>
@@ -142,7 +142,7 @@
             data-tooltip={tooltipEnabled 
                 ? isInactive() ? activateTip : deactivateTip 
                 : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.DOWN}
             onpointerenter={ event => sendToLog(event, isInactive()
                     ? getLocalized("LA.pilot.mechStorage.activate.tooltip") 

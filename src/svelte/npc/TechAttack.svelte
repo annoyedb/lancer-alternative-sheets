@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import { getDocumentTheme } from "@/scripts/theme";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
@@ -86,7 +86,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getDocumentTheme(actor.uuid)}
+    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -118,7 +118,7 @@
                 {#if hasAccuracyBonus(tech)}
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
                         data-tooltip={accuracyTip}
-                        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"DOWN"}
                     >
                         {tech.system.accuracy[tier - 1]}
@@ -128,7 +128,7 @@
                 {#if hasAttackBonus(tech)}
                     <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
                         data-tooltip={attackTip}
-                        data-tooltip-class="clipped-bot la-tooltip {getDocumentTheme(actor.uuid)}"
+                        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"DOWN"}
                     >
                         {tech.system.attack_bonus[tier - 1]}
@@ -164,7 +164,7 @@
             path={`itemTypes.npc_feature.${tech.index}`}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
             tooltipHeader={getTechTipHeader(tech)}
             tooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
@@ -183,7 +183,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onPointerEnter={() => {editButtonHover = true;}}
             onPointerLeave={() => {editButtonHover = false;}}
@@ -195,7 +195,7 @@
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getDocumentTheme(actor.uuid)}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
 
             onPointerEnter={() => {messageButtonHover = true;}}
             onPointerLeave={() => {messageButtonHover = false;}}
