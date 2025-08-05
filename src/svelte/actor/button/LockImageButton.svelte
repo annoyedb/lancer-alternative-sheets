@@ -28,26 +28,26 @@
     {#if isVideo}    
         <GlyphButton
             flowClass={FlowClass.None}
-            style={["mdi mdi-lock-alert", style]}
+            style={["mdi mdi-link-variant-remove", style]}
             onClick={event => handleToggleImageSync(event, actor, setState)}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltip={getLocalized("LA.advanced.lock.error")}
+            tooltip={getLocalized("LA.advanced.link.error")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
-            logText={getLocalized("LA.advanced.lock.error")}
+            logText={getLocalized("LA.advanced.link.error")}
             logType={logType}
             logTypeReset={logTypeReset}
         />
     {:else}
         <GlyphButton
             flowClass={FlowClass.None}
-            style={["mdi mdi-lock", style]}
+            style={["mdi mdi-link-variant", style]}
             onClick={event => handleToggleImageSync(event, actor, setState)}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltip={getLocalized("LA.advanced.lock.tooltip")}
+            tooltip={getLocalized("LA.advanced.link.tooltip")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
-            logText={getLocalized("LA.advanced.lock.tooltip")}
+            logText={getLocalized("LA.advanced.link.tooltip")}
             logType={logType}
             logTypeReset={logTypeReset}
         />
@@ -55,7 +55,7 @@
 {:else}
     <GlyphButton
         flowClass={FlowClass.None}
-        style={["mdi mdi-lock-off", style]}
+        style={["mdi mdi-link-variant-off", style]}
         onClick={event => handleToggleImageSync(event, actor, setState)}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}

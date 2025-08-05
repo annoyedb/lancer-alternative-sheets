@@ -2,7 +2,7 @@ import { mount } from "svelte";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { applyThemeTo, getCSSSystemTheme } from "@/scripts/theme";
 import { getSelectedTokenImage, setActiveTab, setSelectedTokenImage } from "@/scripts/store/advanced";
-import { dataMap, getLocalized, isValidImageContainer, isValidVideoContainer } from "@/scripts/helpers";
+import { dataMap, getLocalized, isValidImageContainer } from "@/scripts/helpers";
 import { getActorTokenSync, getMechSheetTooltipEnabled, getThemeOverride } from "@/scripts/mech/settings";
 import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import { setIntroRun } from "@/scripts/store/text-log";

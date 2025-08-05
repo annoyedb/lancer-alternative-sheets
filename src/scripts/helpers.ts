@@ -254,7 +254,7 @@ export async function handleToggleImageSync(
         // @ts-expect-error
         const confirm = await foundry.applications.api.DialogV2.confirm({
             window: { title: getLocalized("LA.confirm") },
-            content: getLocalized("LA.advanced.lock.subLabel"),
+            content: getLocalized("LA.advanced.link.subLabel"),
         });
 
         if (confirm)

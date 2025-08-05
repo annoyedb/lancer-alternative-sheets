@@ -54,14 +54,14 @@ export class NPCSheetBase
                 })
                 
                 Hooks.on("updateActor", (document: any, changes: any) => {
-                    if (document.uuid === this.actor.uuid && changes.prototypeToken?.texture?.src && 
-                        getActorTokenSync(this.actor.uuid) && // Actor-token image sync enabled
-                        isValidImageContainer(changes.prototypeToken.texture.src))
+                    if (document.uuid === this.actor.uuid && 
+                        changes.prototypeToken?.texture?.src && 
+                        getActorTokenSync(this.actor.uuid) // Actor-token image sync enabled
+                    )
                     {
                         setSelectedTokenImage(this.actor.uuid, changes.prototypeToken.texture.src);
-                        this.actor.update({
-                            "img": changes.prototypeToken.texture.src
-                        });
+                        if (isValidImageContainer(changes.prototypeToken.texture.src))
+                            this.actor.update({"img": changes.prototypeToken.texture.src});
                     }
                 });
 
