@@ -1,3 +1,8 @@
+# 1.3.15
+## Changes
+* #54 - Added an edit option I forgot to turn on for deployables' 'effect' description. Thanks @hylandpad!
+* Fixed a typo in frame traits that would prevent any counters from properly updating themselves, fixing frames such as the Gilgamesh
+
 # 1.3.14
 First of all: an apology for the mystery man bug that's been a plague for weeks now
 Second of all: even more robust animated token support!
