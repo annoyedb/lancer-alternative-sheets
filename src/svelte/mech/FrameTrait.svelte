@@ -85,13 +85,13 @@
         />
         <!-- Generated Content -->
     {#if trait.counters?.length}
-    {#each trait.counters as counter}
+    {#each trait.counters as counter, jndex}
         <CounterBox
             text={counter.name}
             type={CounterBoxType.Counter}
             usesValue={counter.value}
             usesMax={counter.max}
-            path="system.loadout.frame.value.system.traits.{index}.counters"
+            path="system.loadout.frame.value.system.traits.{index}.counters.{jndex}"
             
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}

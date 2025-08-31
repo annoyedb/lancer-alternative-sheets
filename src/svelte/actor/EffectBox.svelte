@@ -34,7 +34,7 @@
 --->{#if editOption}
         <!-- TODO: allow edit details -->
         <button type="button" 
-            class="fas fa-edit popout-text-edit-button" 
+            class="fas fa-edit popout-text-edit-button -padding0-l" 
             data-path={editPath}
             aria-label={getLocalized("LA.edit.label")}>
         </button><!--

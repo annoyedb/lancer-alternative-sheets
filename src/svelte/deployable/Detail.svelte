@@ -113,6 +113,9 @@
     >
         <EffectBox
             name={getLocalized("LA.mech.system.effect.label")}
+
+            editOption={true}
+            editPath="system.detail"
         >
             {@html system.detail}
         </EffectBox>
