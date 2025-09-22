@@ -36,7 +36,12 @@
       "lang": "zh-tw",
       "name": "正體中文",
       "path": "lang/zhtw.json"
-    }
+    },
+     {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "lang/pt-BR.json"
+        }
   ],
   "esmodules": [
     "lancer-alternative-sheets.mjs"
