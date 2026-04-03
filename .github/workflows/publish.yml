@@ -42,20 +42,51 @@ jobs:
     - name: Extract release notes from CHANGELOG.md
       id: extract_release_notes
       run: |
-        RELEASE_NOTES=$(awk "/^# [0-9]+\.[0-9]+\.[0-9]+/{if (p) exit; p=1; next} p" RS="\n# " ORS="\n# " CHANGELOG.md)
-        echo "::set-output name=notes::$RELEASE_NOTES"
+        # Extract the heading text
+        HEADING=$(awk -v ver="$VERSION" '
+          /^# / {
+            title = substr($0, 3)
+            split(title, parts, " ")
+            if (parts[1] == ver) {
+              print title
+              exit
+            }
+          }
+        ' CHANGELOG.md)
+
+        # Extract the body content beneath the matching version heading
+        BODY=$(awk -v ver="$VERSION" '
+          /^# / {
+            split(substr($0, 3), parts, " ")
+            if (found) exit
+            if (parts[1] == ver) { found=1; next }
+          }
+          found { print }
+        ' CHANGELOG.md)
+
+        # Build release name "v" + heading
+        RELEASE_NAME="v${HEADING}"
+
+        # Write body
+        EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+        {
+          echo "notes<<$EOF"
+          echo "$BODY"
+          echo "$EOF"
+          echo "release_name=$RELEASE_NAME"
+        } >> $GITHUB_OUTPUT
         
     - name: Update release with files
       id: create_version_release
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
-        name: ${{ github.event.release.name }}
-        draft: ${{ github.event.release.unpublished }}
-        prerelease: ${{ github.event.release.prerelease }}
+        name: ${{ steps.extract_release_notes.outputs.release_name }}
+        draft: false
+        prerelease: false
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: "./dist/module.json, ./dist/module.zip"
-        tag: ${{ github.event.release.tag_name }}
+        tag: ${{ github.ref_name }}
         body: |
           ${{ steps.extract_release_notes.outputs.notes }}
 
