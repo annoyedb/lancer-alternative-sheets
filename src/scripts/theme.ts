@@ -14,13 +14,16 @@ import "@/styles/shared/misc.scss";
 import "@/styles/shared/display.scss";
 import "@/styles/shared/pointer.scss";
 import "@/styles/shared/glow.scss";
+import "@/styles/shared/glow-mixins.scss";
 import "@/styles/shared/flow.scss";
 import "@/styles/shared/general.scss";
 import "@/styles/shared/container.scss";
+import "@/styles/shared/container-mixins.scss";
 import "@/styles/shared/shape.scss";
 import "@/styles/shared/background.scss";
 import "@/styles/shared/shadow.scss";
 import "@/styles/shared/component.scss";
+import "@/styles/shared/component-mixins.scss";
 
 import "@/styles/actor/responsive.scss"
 import "@/styles/actor/header.scss"

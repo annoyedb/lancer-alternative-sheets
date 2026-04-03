@@ -5,7 +5,7 @@
 
 ## Technical Changes
 ### Svelte
-* Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files
+* Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files (see `theme.ts` for commentary)
 ### CSS
 * `-margin` is now implemented via mixins and generates l, r, t, b, lr, and tb variants
 * `-margin` incrementing is now completely linear
@@ -26,6 +26,7 @@
 * `-fontsize1` is now `-fontsizemedium`
 * `-fontsize0` is now `-fontsizesmall`
 * `-letterspacing` is now implemented via mixins
+* `_mixins` fragmented into several smaller files, `component-mixins`, `container-mixins`, and `glow-mixins`
 
 # 1.3.15
 ## Changes

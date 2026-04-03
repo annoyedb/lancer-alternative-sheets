@@ -1,0 +1,190 @@
+
+@mixin glowColor($color, $radius)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        filter: drop-shadow(0px 0px $radius var($color));
+        -webkit-filter: drop-shadow(0px 0px $radius var($color));
+        -moz-filter: drop-shadow(0px 0px $radius var($color));
+    }
+}
+
+@mixin pulseGlowColor($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-glow-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-glow-time) ease-in-out infinite;
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            filter: drop-shadow(0px 0px 1.5px var($color));
+            -webkit-filter: drop-shadow(0px 0px 1.5px var($color));
+            -moz-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            filter: drop-shadow(0px 0px 3px var($color));
+            -webkit-filter: drop-shadow(0px 0px 3px var($color));
+            -moz-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            -webkit-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            -webkit-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+
+        0%,
+        100%
+        {
+            -moz-filter: drop-shadow(0px 0px 1.5px var($color));
+        }
+
+        50%
+        {
+            -moz-filter: drop-shadow(0px 0px 3px var($color));
+        }
+    }
+}
+
+@mixin pulseBackground($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-background-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+
+        &.-fast
+        {
+            --pulse-background-time: 1.5s;
+        }
+
+        &.-slow
+        {
+            --pulse-background-time: 3.5s;
+        }
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var($color);
+        }
+
+        50%
+        {
+            background-color: transparent;
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var($color);
+        }
+
+        50%
+        {
+            background-color: transparent;
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            background-color: var($color);
+        }
+
+        50%
+        {
+            background-color: transparent;
+        }
+    }
+}
+
+// Reusing animations require declaring new keyframe names; or at least in this case, since the keyframes use $color as a var.
+// TODO: add transitionary color as a var name
+@mixin pulseColor($keyframeName, $color)
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --pulse-background-time: 2.5s;
+
+        animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -webkit-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+        -moz-animation: $keyframeName var(--pulse-background-time) ease-in-out infinite;
+    }
+
+    @keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+
+    @-webkit-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+
+    @-moz-keyframes #{$keyframeName}
+    {
+        0%,
+        100%
+        {
+            color: var(--la-darken-5);
+        }
+
+        50%
+        {
+            color: var($color);
+        }
+    }
+}
+

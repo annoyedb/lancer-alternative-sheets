@@ -1,0 +1,7 @@
+@mixin collapseFadeOut()
+{
+    --collapse-fade-time: 0.25s;
+    transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+    -webkit-transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+    -moz-transition: max-height 0.20s, opacity var(--collapse-fade-time), padding 0.5s ease-in;
+}

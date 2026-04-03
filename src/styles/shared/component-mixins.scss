@@ -1,0 +1,159 @@
+@mixin hoverFadeOut
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --fade-out-time: 0.25s;
+
+        animation: fade-out var(--fade-out-time) forwards;
+        -webkit-animation: fade-out var(--fade-out-time) forwards;
+        -moz-animation: fade-out var(--fade-out-time) forwards;
+    }
+
+    &.-fadein
+    {
+        visibility: hidden;
+    }
+
+    @keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+
+    @-moz-keyframes fade-out
+    {
+        0%
+        {
+            opacity: 1;
+        }
+
+        100%
+        {
+            opacity: 0;
+        }
+    }
+}
+
+@mixin hoverFadeIn
+{
+    & // NOTE: DO NOT REMOVE; this is a SASS requirement
+    {
+        --fade-in-time: 0.25s;
+
+        animation: fade-in var(--fade-in-time) forwards;
+        -webkit-animation: fade-in var(--fade-in-time) forwards;
+        -moz-animation: fade-in var(--fade-in-time) forwards;
+    }
+
+    &.-fadein
+    {
+        visibility: visible;
+    }
+
+    @keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+
+    @-moz-keyframes fade-in
+    {
+        0%
+        {
+            opacity: 0;
+        }
+
+        100%
+        {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin blinking
+{
+    @keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+
+    @-webkit-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+
+    @-moz-keyframes blink
+    {
+
+        from,
+        to
+        {
+            background-color: transparent;
+        }
+
+        50%
+        {
+            background-color: var(--la-primary-color);
+        }
+    }
+}
