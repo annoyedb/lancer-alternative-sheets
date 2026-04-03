@@ -1,6 +1,6 @@
 import type { SvelteTooltipProps } from "@/interfaces/actor/SvelteTooltipProps";
 import type { TooltipSettings } from "@/interfaces/foundry/TooltipSettings";
-import Tooltip from "@/svelte/actor/tooltip/Tooltip.svelte";
+import Tooltip from "@/svelte/shared/tooltip/Tooltip.svelte";
 import { mount } from "svelte";
 
 export class TooltipFactory

@@ -22,12 +22,12 @@
 {#if usesMax}
 <div class="la-limited la-combine-h la-text-header 
         -aligncenter -padding1-lr">
-    <span class="la-hexarray__span -fontsize1">
+    <span class="la-hexarray__span -fontsizemedium">
         {getLocalized("LA.limited.label")}
     </span>
 {#each {length: usesMax} as _, index}
     <button type="button" 
-        class="la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize5"
+        class="la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize7"
         onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         aria-label={getLocalized("LA.use.label")}

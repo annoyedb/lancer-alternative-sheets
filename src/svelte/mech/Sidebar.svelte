@@ -22,12 +22,12 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from '@/enums/FlowClass';
-    import StatusBar from "@/svelte/actor/StatusBar.svelte";
-    import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
-    import CoreAvailability from "@/svelte/actor/input/CoreAvailability.svelte";
-    import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
-    import ImageVideo from '@/svelte/actor/ImageVideo.svelte';
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import StatusBar from "@/svelte/shared/StatusBar.svelte";
+    import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
+    import CoreAvailability from "@/svelte/shared/input/CoreAvailability.svelte";
+    import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
+    import ImageVideo from '@/svelte/shared/ImageVideo.svelte';
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
     const props = $props();
     const { 
@@ -72,7 +72,7 @@
 <div class="la-framename la-dropshadow -overflowhidden"
     bind:this={component}
 >
-    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height3 -margin5-t -margin1-l" 
+    <div class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height5 -margin7-t -margin1-l" 
         data-uuid="{frameUUID}">
         <span class="la-cmdline la-text-header -fadein">>//: </span>
         {frameName}
@@ -81,7 +81,7 @@
 </div>
 <div class="la-actor la-dropshadow -aligncontentcenter -positionrelative">
     <!-- Size, Speed, & Core Availability -->
-    <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize13">
+    <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize19">
     {#if system.size < 1}
         <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
@@ -93,7 +93,7 @@
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
-        <div class="la-combine-h -fontsize7" 
+        <div class="la-combine-h -fontsize9" 
             data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
@@ -123,8 +123,8 @@
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -135,8 +135,8 @@
         icon={"cci cci-evasion -alignselfcenter"}
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -147,8 +147,8 @@
         icon={"cci cci-edef -alignselfcenter"}
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -202,7 +202,7 @@
         <!-- SHIELD (VALUE) -->
         <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
             <input type={"number"}
-                class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
+                class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
@@ -210,7 +210,7 @@
                 onblur={() => {editingShield = false;}}
                 onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
             >
-            <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
+            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
@@ -266,7 +266,7 @@
         <!-- BURN (VALUE) -->
         <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin0-r">
             <input type={"number"}
-                class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
+                class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.burn"}
                 data-dtype={"Number"}
                 value={system.burn}
@@ -274,7 +274,7 @@
                 onblur={() => {editingBurn = false;}}
                 onchange={(event) => handleRelativeDataInput(event, system.burn)}
             >
-            <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
+            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
@@ -290,8 +290,8 @@
         icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -302,8 +302,8 @@
         icon={"cci cci-save -alignselfcenter"}
         label={getLocalized("LA.save.short")}
         value={system.save}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -314,8 +314,8 @@
         icon={"cci cci-sensor -alignselfcenter"}
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -329,7 +329,7 @@
     {#snippet overchargeContentLeft()}
         <GlyphButton type="button"
             flowClass={FlowClass.None}
-            style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+            style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
             tooltip={overchargeMinusTip}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
@@ -340,7 +340,7 @@
     {#snippet overchargeContentRight()}
         <GlyphButton type="button"
             flowClass={FlowClass.None}
-            style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+            style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
             tooltip={overchargePlusTip}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltipDirection={TooltipDirection.UP}
@@ -349,11 +349,11 @@
         </GlyphButton>
     {/snippet}
         <StatComboShort
-            icon={"cci cci-overcharge -alignselfcenter -width3"}
+            icon={"cci cci-overcharge -alignselfcenter -width5"}
             label={getLocalized("LA.overcharge.short")}
             value={getCurrentOvercharge(actor)}
-            outerStyle={["la-text-text", "-fontsize5"]}
-            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text", "-fontsize7"]}
+            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -368,8 +368,8 @@
         icon={"cci cci-repair -alignselfcenter"}
         label={getLocalized("LA.repair.short")}
         value={system.repairs.value}
-        outerStyle={["la-text-text", "-fontsize5"]}
-        innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text", "-fontsize7"]}
+        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}

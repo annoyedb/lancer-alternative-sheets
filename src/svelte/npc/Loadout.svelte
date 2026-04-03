@@ -6,7 +6,7 @@
     import Traits from "@/svelte/npc/Traits.svelte";
     import Reactions from "@/svelte/npc/Reactions.svelte";
     import TechAttack from "@/svelte/npc/TechAttack.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
 
     const props = $props();

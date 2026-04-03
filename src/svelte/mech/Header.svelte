@@ -11,12 +11,12 @@
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import TerminalText from "@/svelte/actor/TerminalText.svelte";
-    import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
-    import BoundImage from "@/svelte/actor/BoundImage.svelte";
-    import TextLog from "@/svelte/actor/TextLog.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
-    import LockImageButton from "@/svelte/actor/button/LockImageButton.svelte";
+    import TerminalText from "@/svelte/shared/TerminalText.svelte";
+    import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
+    import BoundImage from "@/svelte/shared/BoundImage.svelte";
+    import TextLog from "@/svelte/shared/TextLog.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
 
     const props = $props();
     const {
@@ -46,14 +46,14 @@
         >
         {#if advancedOptions}
             <i 
-                class="mdi mdi-mouse-move-vertical -fontsize4 -aligncontentcenter la-text-header -width5 -glow-prmy la-prmy-primary"
+                class="mdi mdi-mouse-move-vertical -fontsize6 -aligncontentcenter la-text-header -width7 -glow-prmy la-prmy-primary"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                 data-tooltip-direction={TooltipDirection.LEFT}
             ></i>
         {/if}
             <AdvancedButton
-                style={["-fontsize3", "-width5", "-glow-prmy", "la-prmy-primary"]}
+                style={["-fontsize5", "-width7", "-glow-prmy", "la-prmy-primary"]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -63,7 +63,7 @@
         </div>
     {#if advancedOptions}
         <LockImageButton
-            style="-fontsize5 la-text-header la-prmy-primary -glow-prmy"
+            style="-fontsize7 la-text-header la-prmy-primary -glow-prmy"
             actor={actor}
             setState={setActorTokenSync}
             tooltipEnabled={tooltipEnabled}
@@ -74,7 +74,7 @@
         {#if !tokenImageLocked}
             <GlyphButton
                 flowClass={FlowClass.None}
-                style={["mdi mdi-image-edit", "-fontsize4", "la-text-header", "-width5", "-glow-prmy", "la-prmy-primary"]}
+                style={["mdi mdi-image-edit", "-fontsize6", "la-text-header", "-width7", "-glow-prmy", "la-prmy-primary"]}
                 onClick={event => browseActorImage(event, actor)}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -93,7 +93,7 @@
     >
         <div class="la-combine-h">
             <input type="text"
-                class="la-actorname__input la-text-header -upper -fontsize5 -bold -letterspacing1
+                class="la-actorname__input la-text-header -upper -fontsize7 -bold -letterspacing1
                     charname"
                 name={"name"}
                 value={actor.name}
@@ -101,7 +101,7 @@
                 onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
                 onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             />
-            <span class="-fontsize0 la-text-darken-3">
+            <span class="-fontsizesmall la-text-darken-3">
                 {getLocalized("LA.name.label")}
             </span>
         </div>
@@ -118,15 +118,15 @@
                 <TerminalText
                     text="LL{pilot?.system.level || 0}"
                     extensionText="--{getLocalized("LA.search.label")}"
-                    textStyle={["-fontsize1", "la-prmy-header"]}
+                    textStyle={["-fontsizemedium", "la-prmy-header"]}
                     disableCmdline={true}
                 >
-                    <span class="-fontsize3">
+                    <span class="-fontsize5">
                         {pilot?.system.callsign || getLocalized("LA.pilotPlaceholder")}
                     </span>
                 </TerminalText>
             </span>
-            <span class="-fontsize0 la-text-darken-3">
+            <span class="-fontsizesmall la-text-darken-3">
                 {getLocalized("LA.pilot.label")}
             </span>
         </div>

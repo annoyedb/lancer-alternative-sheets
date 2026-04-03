@@ -7,12 +7,12 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
+    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
 
     const {
         actor,
@@ -100,7 +100,7 @@
     <HeaderMain
         text={getLocalized("LA.deployable.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden", "-upper"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
         borderStyle={["la-brdr-primary", "-gap0"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)
@@ -124,7 +124,7 @@
     <HeaderMain
         text={getLocalized("LA.deployable.actions.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden", "-upper"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
         borderStyle={["la-brdr-primary", "-gap0"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)
@@ -137,7 +137,7 @@
 
         headerContent={headerActions}
     >
-        <div class="la-combine-v -gap0 -widthfull -fontsize2">
+        <div class="la-combine-v -gap0 -widthfull -fontsize4">
             <EffectBox
                 name={getLocalized("LA.npc.utilities.label")}
             >

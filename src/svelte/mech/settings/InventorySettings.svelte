@@ -7,7 +7,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import InventoryButton from "@/svelte/actor/button/InventoryButton.svelte";
+    import InventoryButton from "@/svelte/shared/button/InventoryButton.svelte";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
     const props: MechSheetProps = $props();

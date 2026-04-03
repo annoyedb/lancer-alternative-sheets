@@ -2,7 +2,7 @@
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
     import { getDeployableSheetLogActionDontSaveCollapse, getDeployableSheetLogActionStartCollapsed } from "@/scripts/deployable/settings";
-    import ActionLog from "@/svelte/actor/ActionLog.svelte";
+    import ActionLog from "@/svelte/shared/ActionLog.svelte";
 
     const props = $props();
     const {

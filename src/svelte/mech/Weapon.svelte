@@ -10,20 +10,20 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { AcceptType } from "@/enums/AcceptType";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
-    import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
+    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
+    import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import WeaponMod from "@/svelte/mech/WeaponMod.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import ProfileBox from "@/svelte/actor/ProfileBox.svelte";
-    import SpCostArray from "@/svelte/actor/SPCostArray.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import ProfileBox from "@/svelte/shared/ProfileBox.svelte";
+    import SpCostArray from "@/svelte/shared/SPCostArray.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -207,7 +207,7 @@
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
         iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-        iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
         
         flowClass={FlowClass.RollDamage}
         range={weapon.system.active_profile.all_range}
@@ -264,10 +264,10 @@
 
         text={weapon.name}
         headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-        headerFontStyle={[getHeaderStyle(weapon), "-fontsize2"]}
+        headerFontStyle={[getHeaderStyle(weapon), "-fontsize4"]}
 
         subText={getSubtitle(weapon)}
-        subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
+        subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall"]}
         borderStyle={["-bordersoff"]}
         extensionTextFunction={() => {
             if (attackButtonHover)

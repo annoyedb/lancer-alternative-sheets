@@ -2,7 +2,7 @@
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { getNPCSheetLogActionDontSaveCollapse, getNPCSheetLogActionStartCollapsed } from "@/scripts/npc/settings";
-    import ActionLog from "@/svelte/actor/ActionLog.svelte";
+    import ActionLog from "@/svelte/shared/ActionLog.svelte";
 
     const props = $props();
     const {

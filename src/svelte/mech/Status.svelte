@@ -9,12 +9,12 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import ActionLog from "@/svelte/actor/ActionLog.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import ActionLog from "@/svelte/shared/ActionLog.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
     const props: MechSheetProps = $props();
     const {
@@ -59,7 +59,7 @@
     <HeaderMain
         text={getLocalized("LA.tab.status.actionLog.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
         extensionTextFunction={() => {      
             if (collapseAllButtonHover)
@@ -83,7 +83,7 @@
     <HeaderMain 
         text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
         collapseID={collID}
@@ -101,7 +101,7 @@
     <HeaderMain
         text={getLocalized("LA.tab.status.integrity.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
         borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
 
         collapseID={`${actor.uuid}.status.integrity`}
@@ -111,9 +111,9 @@
             <div class="la-combine-h -justifyevenly -wrapwrap -widthfull -heightfull -flex1">
                 <!-- Structure -->
                 <div class="la-combine-h -aligncenter">
-                    <i class="cci cci-structure la-dropshadow -fontsize9 -displayinline"></i>
-                    <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.structure.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
+                    <i class="cci cci-structure la-dropshadow -fontsize11 -displayinline"></i>
+                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.structure.label")}</span>
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) Lancer base sheets make it currently impossible to use the 'name' property as intended, 
                         forcing it to send it back as an array; so we handle the update in a roundabout way -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
@@ -127,9 +127,9 @@
                 </div>
                 <!-- Repair -->
                 <div class="la-combine-h -aligncenter">
-                    <i class="cci cci-repair la-dropshadow -fontsize9"></i>
-                    <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
+                    <i class="cci cci-repair la-dropshadow -fontsize11"></i>
+                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
                             name="system.repairs.value"
@@ -141,9 +141,9 @@
                 </div>
                 <!-- Stress -->
                 <div class="la-combine-h -aligncenter">
-                    <i class="cci cci-reactor la-dropshadow -fontsize9"></i>
-                    <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.stress.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
+                    <i class="cci cci-reactor la-dropshadow -fontsize11"></i>
+                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.stress.label")}</span>
+                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
@@ -156,10 +156,10 @@
                 </div>
                 <!-- Burn -->
                 <div class="la-combine-h -aligncenter">
-                    <i class="cci cci-burn la-dropshadow -fontsize9"></i>
-                    <span class="la-label__span -fontsize1 -writingmode-v">{getLocalized("LA.burn.label")}</span>
+                    <i class="cci cci-burn la-dropshadow -fontsize11"></i>
+                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.burn.label")}</span>
                     <!-- (#11) -->
-                    <input class="la-top__input -width2ch la-shadow -fontsize4 -medium -inset la-text-text"
+                    <input class="la-top__input -width2ch la-shadow -fontsize6 -medium -inset la-text-text"
                         type="number" 
                         value={system.burn}
                         onfocus={event => event.currentTarget.select()}
@@ -169,12 +169,12 @@
                 <!-- Overcharge -->
                 <div class="la-combine-h -aligncenter">
                     <div class="la-combine-h -alignselfcenter -positionrelative">
-                        <i class="cci cci-overcharge la-dropshadow -fontsize9"></i>
-                        <div class="la-combine-v -divider la-prmy-accent -fontsize4 -textaligncenter">
+                        <i class="cci cci-overcharge la-dropshadow -fontsize11"></i>
+                        <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
                             <span class="la-top__span -widthfull">
                                 <GlyphButton type="button"
                                     flowClass={FlowClass.None}
-                                    style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+                                    style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
                                     tooltip={overchargeMinusTip}
                                     tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.UP}
@@ -184,7 +184,7 @@
                                     {getCurrentOvercharge(actor)}
                                 <GlyphButton type="button"
                                     flowClass={FlowClass.None}
-                                    style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize3 -alignselfcenter"]}
+                                    style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
                                     tooltip={overchargePlusTip}
                                     tooltipTheme={getCSSDocumentTheme(actor.uuid)}
                                     tooltipDirection={TooltipDirection.UP}
@@ -192,7 +192,7 @@
                                 >
                                 </GlyphButton>
                             </span>
-                            <span class="la-bottom__span -fontsize1">{getLocalized("LA.flow.overcharge.label")}</span>
+                            <span class="la-bottom__span -fontsizemedium">{getLocalized("LA.flow.overcharge.label")}</span>
                         </div>
                     </div>
                 </div>

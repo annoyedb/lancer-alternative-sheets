@@ -1,3 +1,32 @@
+# 1.4.0
+*Minor version bump is due to underlying CSS refactors and project strucure. I know some people make their own custom modifications to this module, so I decided to upgrade the update to make it clear this may implement breaking changes. Technical changelog for this update is separated below functional ones.*
+## Changes
+* Minor styling changes for consistency
+
+## Technical Changes
+### Svelte
+* Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files
+### CSS
+* `-margin` is now implemented via mixins and generates l, r, t, b, lr, and tb variants
+* `-margin` incrementing is now completely linear
+* `-margin` implements greater than 3 are bumped 2 ranks
+* `-padding` is now implemented via mixins and generates l, r, t, b, lr, and tb variants
+* `-width` is now implemented via mixins
+* `-width` incrementing is now completely linear
+* `-width` implements are bumped 2 ranks
+* `-height` is now implemented via mixins
+* `-height` incrementing is now completely linear
+* `-height` implements are bumped 2 ranks
+* `-lineheight` is now implemented via mixins
+* `-lineheight` incrementing is now completely linear
+* `-lineheight` implements are bumped 2 ranks
+* `-fontsize` is now implemented via mixins
+* `-fontsize` incrementing is now completely linear
+* `-fontsize` implements are bumped 2 ranks
+* `-fontsize1` is now `-fontsizemedium`
+* `-fontsize0` is now `-fontsizesmall`
+* `-letterspacing` is now implemented via mixins
+
 # 1.3.15
 ## Changes
 * #54 - Added an edit option I forgot to turn on for deployables' 'effect' description. Thanks @hylandpad!

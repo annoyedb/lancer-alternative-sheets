@@ -16,14 +16,14 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import StatusBar from "@/svelte/actor/StatusBar.svelte";
-    import StatComboShort from "@/svelte/actor/StatComboShort.svelte";
+    import StatusBar from "@/svelte/shared/StatusBar.svelte";
+    import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import HaseDisplay from "@/svelte/npc/HaseDisplay.svelte";
-    import AdvancedButton from "@/svelte/actor/button/AdvancedButton.svelte";
-    import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
-    import ImageVideo from "@/svelte/actor/ImageVideo.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
-    import LockImageButton from "@/svelte/actor/button/LockImageButton.svelte";
+    import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
+    import ThemeOverrideButton from "@/svelte/shared/button/ThemeOverrideButton.svelte";
+    import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
 
     const props = $props();
     const {
@@ -85,10 +85,10 @@
     <!-- Left Side -->
         <div class="la-combine-v -gap1">
             <!-- Tier Options -->
-            <div class="la-combine-h -height2 ">
+            <div class="la-combine-h -height4 ">
                 <div class="">
                     <button type="button"
-                        class="la-bckg-secondary -width2
+                        class="la-bckg-secondary -width4
                             clicker-minus-button input-update"
                         data-tooltip={tooltipEnabled ? setTierTip : undefined}
                         data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -96,7 +96,7 @@
                         aria-label={getLocalized("LA.subtract.label")}
                     >-</button><!--
                 ---><input
-                        class="-height2 la-shadow -medium -inset la-text-text
+                        class="-height4 la-shadow -medium -inset la-text-text
                             lancer-stat minor"
                         type={"number"}
                         data-dtype={"Number"}
@@ -107,7 +107,7 @@
                         data-tooltip-direction={"UP"}
                     /><!--
                 ---><button type="button"
-                        class="la-bckg-secondary -width2
+                        class="la-bckg-secondary -width4
                             clicker-plus-button input-update"
                         data-tooltip={tooltipEnabled ? setTierTip : undefined}
                         data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -119,7 +119,7 @@
             <div class="la-combine-h -widthfull -heightfull">
                 <!-- Left Side Floating Stats -->
                 <div class="la-stat__island -positionrelative la-dropshadow">
-                    <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize9">
+                    <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize11">
                         <i class="cci cci-npc-tier-{system.tier} {themeOverride} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? tierTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -139,19 +139,19 @@
                             data-tooltip={tooltipEnabled ? speedTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize6"></i>
-                            <span class="{themeOverride} la-outl-shadow -fontsize6 -bold">{system.speed}</span>
+                            <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize8"></i>
+                            <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.speed}</span>
                         </div>
                         <div class="la-combine-h -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
-                            <i class="cci cci-activate {themeOverride} la-outl-shadow -fontsize6"></i>
-                            <span class="{themeOverride} la-outl-shadow -fontsize6 -bold">{system.activations}</span>
+                            <i class="cci cci-activate {themeOverride} la-outl-shadow -fontsize8"></i>
+                            <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.activations}</span>
                         </div>
-                        <div class="la-recharge -lineheight3 -width6 -height6 la-prmy-primary -glow-prmy-hover">
+                        <div class="la-recharge -lineheight5 -width8 -height8 la-prmy-primary -glow-prmy-hover">
                             <button type="button"
-                                class="mdi mdi-refresh-circle la-text-secondary -fontsize6
+                                class="mdi mdi-refresh-circle la-text-secondary -fontsize8
                                     charge-macro"
                                 data-tooltip={tooltipEnabled ? rechargeTip : undefined}
                                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -181,13 +181,13 @@
         <!-- Right Side -->
         <div class="la-combine-h -padding1-r">
             <div class="la-combine-v -gap1">
-                <div class="la-combine-h -height2 -justifybetween -widthfull">
+                <div class="la-combine-h -height4 -justifybetween -widthfull">
                     <!-- Advanced options, theme override, notes, etc -->
                     <div class="la-combine-h -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
-                            style={["-lineheight3", "la-prmy-primary -glow-prmy-hover"]}
-                            iconStyle={["-fontsize5"]}
+                            style={["-lineheight5", "la-prmy-primary -glow-prmy-hover"]}
+                            iconStyle={["-fontsize7"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -195,7 +195,7 @@
                         />
                     {#if advancedOptions && !isInstanced}
                         <LockImageButton
-                            style="-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"
+                            style="-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"
                             actor={actor}
                             setState={setActorTokenSync}
                             tooltipEnabled={tooltipEnabled}
@@ -205,7 +205,7 @@
                         {#if !tokenImageLocked}
                             <GlyphButton
                                 flowClass={FlowClass.None}
-                                style={["mdi mdi-image-edit", "-fontsize2 la-text-text la-prmy-primary -glow-prmy-hover"]}
+                                style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"]}
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -214,7 +214,7 @@
                             />
                         {/if}
                     {:else}
-                        <i class="mdi mdi-creation la-text-text -fontsize2 la-prmy-warning -glow-prmy"
+                        <i class="mdi mdi-creation la-text-text -fontsize4 la-prmy-warning -glow-prmy"
                             data-tooltip={tooltipEnabled ? tokenErrorTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.DOWN}></i>
@@ -222,8 +222,8 @@
                     {#if advancedOptions}
                         <ThemeOverrideButton
                             uuid={actor.uuid}
-                            style={["-lineheight3"]}
-                            iconStyle={["-fontsize2"]}
+                            style={["-lineheight5"]}
+                            iconStyle={["-fontsize4"]}
                             setOverride={setThemeOverride}
 
                             tooltipEnabled={tooltipEnabled}
@@ -234,7 +234,7 @@
                     </div>
                     <div class="la-combine-h -gap1">
                         <button type="button"
-                            class="mdi mdi-note-edit -fontsize2 la-prmy-primary -glow-prmy-hover {advancedOptions ? "" : "-visibilityhidden"}
+                            class="mdi mdi-note-edit -fontsize4 la-prmy-primary -glow-prmy-hover {advancedOptions ? "" : "-visibilityhidden"}
                                 popout-text-edit-button"
                             data-tooltip={notesEditTip}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -244,7 +244,7 @@
                         >
                         </button>
                         <button type="button"
-                            class="mdi mdi-information -fontsize2 la-prmy-primary -glow-prmy-hover"
+                            class="mdi mdi-information -fontsize4 la-prmy-primary -glow-prmy-hover"
                             data-tooltip={notesTip}
                             data-tooltip-class="clipped-bot la-tooltip -scrollbar {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.UP}
@@ -261,8 +261,8 @@
                             icon={"cci cci-role-defender"}
                             label={getLocalized("LA.armor.short")}
                             value={system.armor}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -273,8 +273,8 @@
                             icon={"cci cci-evasion"}
                             label={getLocalized("LA.evasion.short")}
                             value={system.evasion}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -285,8 +285,8 @@
                             icon={"cci cci-edef"}
                             label={getLocalized("LA.edefense.short")}
                             value={system.edef}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -340,7 +340,7 @@
                             <!-- SHIELD (VALUE) -->
                             <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
                                 <input type="number" 
-                                    class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
+                                    class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.overshield.value" 
                                     data-dtype="Number"
                                     value="{system.overshield.value}"
@@ -348,7 +348,7 @@
                                     onblur={() => {editingShield = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
                                 >
-                                <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
+                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                     data-tooltip-direction="LEFT"
@@ -404,7 +404,7 @@
                             <!-- BURN (VALUE) -->
                             <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
                                 <input type="number" 
-                                    class="la-damage__input la-shadow -medium -inset la-text-text -width5 -heightfull -bordersround-lrt -small -bordersoff"
+                                    class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.burn" 
                                     data-dtype="Number"
                                     value="{system.burn}"
@@ -412,7 +412,7 @@
                                     onblur={() => {editingBurn = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.burn)}
                                 >
-                                <span class="la-damage__span -fontsize0 -heightfull -lineheight1"
+                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                                     data-tooltip-direction="LEFT"
@@ -428,8 +428,8 @@
                             icon={"cci cci-tech-full"}
                             label={getLocalized("LA.tattack.short")}
                             value={system.tech_attack}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -440,8 +440,8 @@
                             icon={"cci cci-save"}
                             label={getLocalized("LA.save.short")}
                             value={system.save}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
@@ -452,8 +452,8 @@
                             icon={"cci cci-sensor"}
                             label={getLocalized("LA.sensor.short")}
                             value={system.sensor_range}
-                            outerStyle={["-fontsize5"]}
-                            innerStyle={["-divider", "-fontsize1", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            outerStyle={["-fontsize7"]}
+                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}

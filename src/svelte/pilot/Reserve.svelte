@@ -7,19 +7,19 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
-    import LimitedBox from "../actor/counter/LimitedBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -65,7 +65,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.reserve.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -148,7 +148,7 @@
         <HeaderSecondary
             text={reserve.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(reserve), "-fontsize2", "-overflowhidden"]}
+            textStyle={[getHeaderStyle(reserve), "-fontsize4", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

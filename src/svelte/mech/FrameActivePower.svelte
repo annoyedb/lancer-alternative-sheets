@@ -9,12 +9,12 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/actor/header/HeaderQuinary.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import { H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/shared/header/HeaderQuinary.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const {
         actor,
@@ -63,7 +63,7 @@
 {#snippet outerContent()}
 <div class="la-combine-h -widthfull -margin0-t">
     <button type="button"
-        class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize3 -lineheight5 -widthfull 
+        class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize5 -lineheight7 -widthfull 
             {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"} 
             activation-flow {activationClass}"
         data-uuid={frame.uuid}
@@ -74,7 +74,7 @@
         aria-label={name}
         disabled={!system.core_energy}
     >
-        <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height5 -lineheight5 -fontsize13"></i>
+        <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height7 -lineheight7 -fontsize19"></i>
         <span class="la-corepower__span {system.core_energy ? "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover" : "la-dropshadow"} -upper -flexthird -textwrapnowrap">
             {name}
         </span>

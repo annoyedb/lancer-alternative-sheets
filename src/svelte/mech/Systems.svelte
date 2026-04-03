@@ -8,21 +8,21 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     const props: MechSheetProps = $props();  
@@ -132,7 +132,7 @@
 <HeaderMain
     text={getLocalized("LA.mech.system.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-system"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -231,10 +231,10 @@
 
             text={component.value.name}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={[getTitleStyle(component), "-fontsize2"]}
+            headerFontStyle={[getTitleStyle(component), "-fontsize4"]}
 
             subText={getSubtitle(component)}
-            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsize0"]}
+            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsizesmall"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

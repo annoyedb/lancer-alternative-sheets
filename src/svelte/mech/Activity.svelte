@@ -2,7 +2,7 @@
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
-    import ActionLog from "@/svelte/actor/ActionLog.svelte";
+    import ActionLog from "@/svelte/shared/ActionLog.svelte";
 
     const props = $props();
     const {
@@ -12,7 +12,7 @@
     const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
 </script>
 
-<div class="-margin5-t">
+<div class="-margin7-t">
     <ActionLog
         uuid={actor.uuid}
         dontSaveCollapse={actionLogSaveCollapse}

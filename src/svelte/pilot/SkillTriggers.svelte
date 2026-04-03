@@ -6,14 +6,14 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -48,7 +48,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.skill.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -66,8 +66,8 @@
     {#each skills as skill, index}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={["la-text-header", "cci", "cci-skill", "-fontsize5"]}
-            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={["la-text-header", "cci", "cci-skill", "-fontsize7"]}
+            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.Skill}
             uuid={skill.uuid}
@@ -87,11 +87,11 @@
     {#snippet headerSecondaryRightOptions()}
         <span class="la-combine-h -gap0 -padding2-r">
             {#if skill.system.curr_rank > 0}
-            <span class="-fontsize2">
+            <span class="-fontsize4">
                 +
             </span>
             {:else if skill.system.curr_rank < 0}
-            <span class="-fontsize2">
+            <span class="-fontsize4">
                 -
             </span>
             {/if}
@@ -129,7 +129,7 @@
         <HeaderSecondary
             text={skill.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

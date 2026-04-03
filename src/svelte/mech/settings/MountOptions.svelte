@@ -40,7 +40,7 @@
     because of (#5), we use the non-depreciated way of applying 
     the event. If this is changed, the issue turns to (#2) -->
     <button type="button"
-        class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
+        class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
         onclick={event => swapMount(event, mountIndex, morphIndex)}
     >
         {getLocalized(MOUNT_LOCALIZE_MAP[mountType])}
@@ -53,7 +53,7 @@
             bind:checked={bracing}
         />
         <span
-            class="-lineheight4"
+            class="-lineheight6"
         >
             {getLocalized("LA.mech.mount.locked.subLabel")}
         </span>

@@ -2,7 +2,7 @@
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { getPilotSheetLogActionDontSaveCollapse, getPilotSheetLogActionStartCollapsed } from "@/scripts/pilot/settings";
-    import ActionLog from "@/svelte/actor/ActionLog.svelte";
+    import ActionLog from "@/svelte/shared/ActionLog.svelte";
 
     const props = $props();
     const {
@@ -12,7 +12,7 @@
     const actionLogStartCollapsed = getPilotSheetLogActionStartCollapsed();
 </script>
 
-<div class="-margin5-t">
+<div class="-margin7-t">
     <ActionLog
         uuid={actor.uuid}
         dontSaveCollapse={actionLogSaveCollapse}

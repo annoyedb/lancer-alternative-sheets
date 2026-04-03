@@ -7,7 +7,7 @@ Special implementation of the `CounterBox` component for npc features that can b
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { ChargedBoxProps } from "@/interfaces/npc/ChargedBoxProps";
     import { getLocalized, isRecharge } from "@/scripts/helpers";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
 
     const {
         item,

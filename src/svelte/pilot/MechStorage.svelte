@@ -10,8 +10,8 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import MechStats from "@/svelte/pilot/MechStats.svelte";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     
     const props = $props();
     const {
@@ -86,7 +86,7 @@
 {#if ownedMechs.length}
 <div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <div class="-positionrelative -widthfull la-reveal">
-        <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height3 -lineheight3 la-bckg-darken-2">
+        <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height5 -lineheight5 la-bckg-darken-2">
         {#if isInactive()}
             {getLocalized("LA.pilot.mechstorage.inactive.label")}
         {:else}
@@ -95,7 +95,7 @@
         </span>
     </div>
     <button 
-        class="-fontsize4 -letterspacing1 -upper -glow-hover-primary
+        class="-fontsize6 -letterspacing1 -upper -glow-hover-primary
             ref set click-open"
         data-uuid={ownedMechs[selectedMechIndex].uuid}
         onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.mechStorage.open.tooltip"), TextLogHook.PilotHeader) }
@@ -104,7 +104,7 @@
     >
         {ownedMechs[selectedMechIndex].name}
     </button>
-    <span class="-fontsize1 -letterspacing0 -upper">
+    <span class="-fontsizemedium -letterspacing0 -upper">
         {ownedMechs[selectedMechIndex].system.loadout.frame?.value.system.manufacturer || 
         getLocalized("LA.placeholder")}
     </span>
@@ -114,7 +114,7 @@
         alt={getLocalized("LA.placeholder")}
     />
     <div class="la-combine-v -positionabsolute -right0">
-        <div class=" -fontsize13">
+        <div class=" -fontsize19">
         {#if ownedMechs[selectedMechIndex].system.size < 1}
             <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
@@ -127,7 +127,7 @@
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {/if}
         </div>
-        <div class=" la-combine-h -fontsize7" 
+        <div class=" la-combine-h -fontsize9" 
             data-tooltip={tooltipEnabled ? getSpeedTip() : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}>
@@ -137,7 +137,7 @@
     </div>
     <div class="-positionrelative">
         <button type="button"
-            class="la-combine-h -widthfull -fontsize10 -positionabsolute -bottom0 
+            class="la-combine-h -widthfull -fontsize13 -positionabsolute -bottom0 
                 {isInactive() ? "cci cci-activate la-text-system" : "cci cci-deactivate la-text-weapon"} 
                 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"
             data-tooltip={tooltipEnabled 
@@ -159,7 +159,7 @@
 <HeaderMain
     text={getLocalized("LA.tab.mechs.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-transparent", "la-bckg-card", "clipped-bot-alt"]}
 
     collapseID={collID}
@@ -182,7 +182,7 @@
                         src={mech.img}
                         alt={getLocalized("LA.placeholder")}
                     >
-                    <span class="-fontsize0">
+                    <span class="-fontsizesmall">
                         {mech.name}
                     </span>
                 </button>

@@ -5,9 +5,9 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
     const {
         actor,
@@ -21,7 +21,7 @@
 
 {#snippet headerOptions()}
 <GlyphButton
-    style={["fas fa-edit", "-fontsize2", "-height2", "-lineheight2", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
+    style={["fas fa-edit", "-fontsize4", "-height4", "-lineheight4", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
 
     flowClass={FlowClass.EditText}
     path="system.notes"
@@ -42,7 +42,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.notes.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (editButtonHover)

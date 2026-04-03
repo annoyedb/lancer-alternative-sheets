@@ -16,10 +16,10 @@
 
 <div class="la-combine-v -widthfull -heightfull">
     <!-- Name & Templates -->
-    <div class="la-bg-scroll-alt la-bckg-primary -widthfull -height10">
+    <div class="la-bg-scroll-alt la-bckg-primary -widthfull -height15">
         <div class="la-combine-v -widthfull -heightfull -padding1-lr">
             <input type="text" 
-                class="la-actorname__input la-text-header -upper -fontsize4 -textaligncenter -heightfull"
+                class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"
                 name="name" 
                 value="{actor.name}" 
                 placeholder="{getLocalized("LA.namePlaceholder")}"

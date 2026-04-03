@@ -7,15 +7,15 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
     import LimitedBondBox from "@/svelte/pilot/LimitedBondBox.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -63,7 +63,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.bond.power.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -92,7 +92,7 @@
                 />
             {/if}
             {#if power.frequency}
-                <span class="la-text-header -aligncontentcenter -fontsize0 -upper">
+                <span class="la-text-header -aligncontentcenter -fontsizesmall -upper">
                     {power.frequency}
                 </span>
             {/if}
@@ -102,8 +102,8 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={["la-text-header", "-fontsize4", "mdi", "mdi-weather-sunny"]}
-            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={["la-text-header", "-fontsize6", "mdi", "mdi-weather-sunny"]}
+            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.BondPower}
             uuid={bondUUID}
@@ -124,12 +124,12 @@
     {#snippet headerSecondaryRightOptions()}
         <span class="la-combine-h -gap0 -padding2-r">
             {#if power.veteran}
-            <span class="-fontsize0 -letterspacing0">
+            <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.pilot.bond.power.veteran.label")}
             </span>
             {/if}
             {#if power.master}
-            <span class="-fontsize0 -letterspacing0">
+            <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.pilot.bond.power.master.label")}
             </span>
             {/if}
@@ -154,7 +154,7 @@
         <HeaderSecondary
             text={power.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

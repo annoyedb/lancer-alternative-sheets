@@ -8,13 +8,13 @@
     import { AcceptType } from "@/enums/AcceptType";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -82,7 +82,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.license.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -103,7 +103,7 @@
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
         <span class="la-combine-h -gap0 -padding2-r">
-            <span class="-fontsize0 -letterspacing0">
+            <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.rank.label")}
             </span>
             {license.system.curr_rank}
@@ -142,7 +142,7 @@
         <HeaderSecondary
             text={`${license.system.manufacturer} ${license.name}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

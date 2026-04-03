@@ -206,15 +206,15 @@
 
         <!-- (#5*) -->
         <button type="button"
-            class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
             onclick={(event) => handleSelection(event, dropdownContent, index)}
         >
             {getLocalized(mountNames[index])}
             <!-- {getLocalized(MOUNT_LOCALIZE_MAP[mount.type])} -->
         {#if toggles[index]}
-            <i class="mdi mdi-arrow-up-drop-circle-outline -positionabsolute -left2 -fontsize2"></i>
+            <i class="mdi mdi-arrow-up-drop-circle-outline -positionabsolute -left2 -fontsize4"></i>
         {:else}
-            <i class="mdi mdi-arrow-right-drop-circle-outline -positionabsolute -left2 -fontsize2"></i>
+            <i class="mdi mdi-arrow-right-drop-circle-outline -positionabsolute -left2 -fontsize4"></i>
         {/if}
         </button>
     {/each}

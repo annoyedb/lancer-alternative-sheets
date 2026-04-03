@@ -13,9 +13,9 @@
         click-open ref set"
     data-uuid={uuid}
 >
-    <span class="-upper -fontsize2">{name}</span>
+    <span class="-upper -fontsize4">{name}</span>
     <button type="button" 
-        class="fas fa-edit -fontsize0 -positionabsolute
+        class="fas fa-edit -fontsizesmall -positionabsolute
             lancer-context-menu"
         data-path={path}
         aria-label={getLocalized("LA.edit.label")}

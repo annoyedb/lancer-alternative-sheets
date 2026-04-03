@@ -15,7 +15,7 @@ import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
-import HaseDisplay from "@/svelte/actor/HaseArray.svelte";
+import HaseDisplay from "@/svelte/shared/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
 import Activity from "@/svelte/mech/Activity.svelte";

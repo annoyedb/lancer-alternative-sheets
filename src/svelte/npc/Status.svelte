@@ -7,11 +7,11 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import ActiveEffects from "@/svelte/actor/ActiveEffects.svelte";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import MacroDropBox from '@/svelte/actor/dragdrop/MacroDropBox.svelte';
+    import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
 
     const props = $props();
     const {
@@ -40,7 +40,7 @@
 <HeaderMain 
     text={getLocalized("LA.tab.status.effects.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
 
     collapseID={activeEffectsCollID}
@@ -58,7 +58,7 @@
 <HeaderMain 
     text={getLocalized("LA.npc.utilities.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -147,7 +147,7 @@
 <HeaderMain 
     text={getLocalized("LA.npc.macros.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
 
     collapseID={macrosCollID}

@@ -7,7 +7,7 @@ import { TextLogHook } from "@/enums/TextLogHook";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { Logger } from "@/classes/Logger";
 import { formatString, getCurrentOvercharge, getLocalized } from "@/scripts/helpers";
-import FlowButton from '@/svelte/actor/button/FlowButton.svelte';
+import FlowButton from '@/svelte/shared/button/FlowButton.svelte';
 
 /**
  * A factory class for creating and mounting buttons onto a target HTML element.

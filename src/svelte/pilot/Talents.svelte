@@ -9,15 +9,15 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
 
     const {
         actor, // Source data (e.g. pilot)
@@ -34,6 +34,7 @@
     const collID = `${sheetActor.uuid}.talents`;
 
     onMount(() => {
+        // TODO: try replacing with actor.updateEmbeddedDocuments; this was used to be able to update talent counters like Gunslinger
         if (isMechSheet)
             trackHook(sheetActor.uuid, Hooks.on("updateItem", (item: any, _caller: any, _options: any) => 
             {
@@ -79,7 +80,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.talent.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHoverTalent)
@@ -101,7 +102,7 @@
         <EditButton
             flowClass={FlowClass.ContextMenu}
             style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-margin0-lr"]}
-            iconStyle={["-lineheight3"]}
+            iconStyle={["-lineheight5"]}
             path={ isMechSheet
                 ? `system.pilot.value.itemTypes.talent.${index}`
                 : `itemTypes.talent.${index}`
@@ -128,7 +129,7 @@
         <HeaderSecondary
             text={`${talent.name} ${talent.system.curr_rank}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["-fontsize2"]}
+            textStyle={["-fontsize4"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (collapseAllButtonHoverRank)
@@ -199,7 +200,7 @@
                 <HeaderSecondary
                     text={rank.name}
                     headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
-                    textStyle={["-fontsize2"]}
+                    textStyle={["-fontsize4"]}
                     borderStyle={["la-brdr-trait"]}
                     extensionTextFunction={() => {
                         if (messageButtonHover)

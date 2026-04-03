@@ -15,7 +15,7 @@ import Header from "@/svelte/pilot/Header.svelte";
 import Sidebar from "@/svelte/pilot/Sidebar.svelte";
 import Equipment from "@/svelte/pilot/Equipment.svelte";
 import Bond from "@/svelte/pilot/Bond.svelte";
-import HaseDisplay from "@/svelte/actor/HaseArray.svelte";
+import HaseDisplay from "@/svelte/shared/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/pilot/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/pilot/settings/AdvancedSettingsNav.svelte";
 import Activity from "@/svelte/pilot/Activity.svelte";

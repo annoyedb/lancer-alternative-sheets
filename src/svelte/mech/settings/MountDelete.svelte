@@ -40,12 +40,12 @@
 
 <!-- (#5*) -->
 <button type="button"
-    class="la-bckg-scrollbar-secondary la-text-header -fontsize1 -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus
+    class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus
         gen-control"
     data-action={"splice"}
     data-path={`system.loadout.weapon_mounts.${mountIndex}`}
     onclick={event => deleteMount(event)}
 >
     {getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
-    <i class="mdi mdi-close-circle-outline -positionabsolute -left2 -fontsize2"></i>
+    <i class="mdi mdi-close-circle-outline -positionabsolute -left2 -fontsize4"></i>
 </button>

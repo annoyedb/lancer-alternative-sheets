@@ -5,15 +5,15 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "@/svelte/mech/FramePassivePower.svelte";
     import FrameTrait from "@/svelte/mech/FrameTrait.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -58,7 +58,7 @@
 <HeaderMain
     text={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[MAIN_HEADER_STYLE, frameColorBckg, "-upper"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={[frameColorBrdr]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -96,7 +96,7 @@
         <HeaderSecondary
             text={core.name}
             headerStyle={[H2_HEADER_STYLE, frameColorBckg]}
-            textStyle={["-fontsize2"]}
+            textStyle={["-fontsize4"]}
             borderStyle={["-bordersoff"]}
 
             collapseID={`${collID}.core`}

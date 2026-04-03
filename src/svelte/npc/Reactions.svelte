@@ -7,17 +7,17 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -113,7 +113,7 @@
 <HeaderMain
     text={getLocalized("LA.npc.reactions.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--reaction"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-action--reaction", "-gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -152,8 +152,8 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[getIconStyle(reaction), "cci", "cci-reaction", "-fontsize5"]}
-            iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={[getIconStyle(reaction), "cci", "cci-reaction", "-fontsize7"]}
+            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${reaction.index}`}
@@ -200,7 +200,7 @@
         <HeaderSecondary
             text={reaction.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(reaction), "-fontsize1"]}
+            textStyle={[getHeaderStyle(reaction), "-fontsizemedium"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)
@@ -234,9 +234,9 @@
 
                     tooltipEnabled={tooltipEnabled}
                 >
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
+                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -height3">
                         {reaction.system.attack_bonus[tier - 1]}
-                        <i class="cci cci-reticule -fontsize2"></i>
+                        <i class="cci cci-reticule -fontsize4"></i>
                     </span>
                 </EffectBox>
                 <EffectBox
@@ -244,9 +244,9 @@
 
                     tooltipEnabled={tooltipEnabled}
                 >
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -height1">
+                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -height3">
                         {reaction.system.accuracy[tier - 1]}
-                        <i class="cci cci-accuracy -fontsize4"></i>
+                        <i class="cci cci-accuracy -fontsize6"></i>
                     </span>
                 </EffectBox>
             </div>

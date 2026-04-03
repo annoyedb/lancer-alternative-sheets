@@ -6,9 +6,9 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
     const {
         actor,
@@ -36,7 +36,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.sync.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     
     collapseID={collID}
@@ -47,7 +47,7 @@
     >
         <div class="la-combine-h -aligncenter -widthfull -gap1">
             <GlyphButton
-                style={["la-combine-v", "mdi mdi-cloud-download", "-fontsize5", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
+                style={["la-combine-v", "mdi mdi-cloud-download", "-fontsize7", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
                 flowClass={FlowClass.DownloadFromCloud}
                 action="download"
 
@@ -59,7 +59,7 @@
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             >
-                <span class="-fontsize0 -upper">
+                <span class="-fontsizesmall -upper">
                     SYNC
                 </span>
             </GlyphButton>

@@ -4,7 +4,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import HexButton from "@/svelte/actor/button/HexButton.svelte";
+    import HexButton from "@/svelte/shared/button/HexButton.svelte";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
 
     const {
@@ -39,7 +39,7 @@
                     innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
                     buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
+                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter -pointerdisable">
@@ -63,7 +63,7 @@
                     innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
                     buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
+                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter">
@@ -86,7 +86,7 @@
                     innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
                     buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
+                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
             <div class="la-combine-h -aligncenter -pointerdisable">
@@ -110,7 +110,7 @@
                     innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
                     buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
                     outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize3", "-lineheight10", "la-prmy-header -glow-prmy"]}
+                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
         </div>

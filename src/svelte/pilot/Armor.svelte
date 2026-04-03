@@ -10,18 +10,18 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -94,7 +94,7 @@
 <HeaderMain
     text={getLocalized("LA.armor.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -115,53 +115,53 @@
         <div class="la-combine-v -gap0 -widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull -justifyevenly">
                 {#if armorBonuses[index].pilot_hp}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr -padding0-tb la-text-header -gap0"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr -padding0-tb la-text-header -gap0"
                     data-tooltip={tooltipEnabled ? healthTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_hp}
-                    <i class="mdi mdi-heart-half-full -fontsize3"></i>
+                    <i class="mdi mdi-heart-half-full -fontsize5"></i>
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_armor}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? armorTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_armor}
-                    <i class="cci cci-role-defender -fontsize4"></i>
+                    <i class="cci cci-role-defender -fontsize6"></i>
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_evasion}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? evasionTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_evasion}
-                    <i class="cci cci-evasion -fontsize4"></i>
+                    <i class="cci cci-evasion -fontsize6"></i>
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_edef}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? edefenseTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_edef}
-                    <i class="cci cci-edef -fontsize4"></i>
+                    <i class="cci cci-edef -fontsize6"></i>
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_speed}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr la-text-header"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? speedTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_speed}
-                    <i class="mdi mdi-arrow-right-bold-hexagon-outline -fontsize3"></i>
+                    <i class="mdi mdi-arrow-right-bold-hexagon-outline -fontsize5"></i>
                 </span>
                 {/if}
             </div>
@@ -220,7 +220,7 @@
         <HeaderSecondary
             text={armor.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

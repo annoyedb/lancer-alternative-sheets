@@ -8,18 +8,18 @@
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
-    import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
+    import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -121,7 +121,7 @@
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon", "-gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -140,23 +140,23 @@
         <div class="-widthfull -padding2-l">
             <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
             {#if hasAccuracyBonus(weapon)}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={tooltipEnabled ? accuracyTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {weapon.system.accuracy[tier - 1]}
-                    <i class="cci cci-accuracy -fontsize4"></i>
+                    <i class="cci cci-accuracy -fontsize6"></i>
                 </span>
             {/if}
             {#if hasAttackBonus(weapon)}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize3 -padding0-lr"
+                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={tooltipEnabled ? attackTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {weapon.system.attack_bonus[tier - 1]}
-                    <i class="cci cci-reticule -fontsize2"></i>
+                    <i class="cci cci-reticule -fontsize4"></i>
                 </span>
             {/if}
                 <!-- Rechargeable -->
@@ -202,7 +202,7 @@
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
             iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -251,10 +251,10 @@
 
             text={weapon.name}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={[getTitleStyle(weapon), "-fontsize1"]}
+            headerFontStyle={[getTitleStyle(weapon), "-fontsizemedium"]}
 
             subText={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
-            subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsize0"]}
+            subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (attackButtonHover)

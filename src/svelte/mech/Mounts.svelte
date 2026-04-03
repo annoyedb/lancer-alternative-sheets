@@ -5,11 +5,11 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import MountNames from "@/svelte/actor/decoration/MountNames.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import MountNames from "@/svelte/shared/decoration/MountNames.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -57,7 +57,7 @@
     <HeaderMain 
         text={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
         borderStyle={["la-brdr-primary"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)

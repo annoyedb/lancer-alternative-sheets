@@ -8,9 +8,9 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getThemeKey } from "@/scripts/store/theme";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import StatusBar from "@/svelte/actor/StatusBar.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import StatusBar from "@/svelte/shared/StatusBar.svelte";
+    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
     const props = $props();
     const {
@@ -76,7 +76,7 @@
 {#if system.bond}
 <div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <!-- Bond Name -->
-    <span class="-fontsize4 -letterspacing1 -upper">
+    <span class="-fontsize6 -letterspacing1 -upper">
         {system.bond.name}
     </span>
     <!-- Bond XP -->
@@ -100,7 +100,7 @@
         class="la-bond-card la-combine-h -positionrelative -widthfull -aligncenter"
     >
         <!-- Bond Image -->
-        <div class="la-bond-card__img-anchor -margin5-t -margin5-b"
+        <div class="la-bond-card__img-anchor -margin7-tb"
         >
             <img
                 class="la-bond-card__img"
@@ -120,7 +120,7 @@
                             checked={system.bond_state.xp_checklist.major_ideals[index]}
                         />
                         <span
-                            class="-fontsize1 -lineheight3"
+                            class="-fontsizemedium -lineheight5"
                         >
                             {major}
                         </span>
@@ -136,7 +136,7 @@
                         checked={system.bond_state.xp_checklist.minor_ideal}
                     />
                     <select
-                        class="la-bond__select -fontsize1 -lineheight3 la-bckg-transparent la-text-text -widthfull"
+                        class="la-bond__select -fontsizemedium -lineheight5 la-bckg-transparent la-text-text -widthfull"
                         name="system.bond_state.minor_ideal" 
                         data-type="String"
                     >
@@ -158,7 +158,7 @@
                         checked={system.bond_state.xp_checklist.veteran_power}
                     />
                     <span
-                        class="-fontsize1 -lineheight3"
+                        class="-fontsizemedium -lineheight5"
                     >
                         {getLocalized("LA.pilot.bond.other.label")}
                     </span>
@@ -171,12 +171,12 @@
             {#each system.bond.system.questions as qna, index}
             <div class="la-bond-question la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
                 <span
-                    class="-fontsize1 -lineheight3"
+                    class="-fontsizemedium -lineheight5"
                 >
                     {qna.question}
                 </span>
                 <select 
-                    class="la-bond__select -fontsize1 -lineheight3 la-bckg-transparent la-text-text"
+                    class="la-bond__select -fontsizemedium -lineheight5 la-bckg-transparent la-text-text"
                     name="system.bond_state.answers.{index}" 
                     data-type="String"
                 >
@@ -215,7 +215,7 @@
         <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
             <!-- Edit Bond Image -->
             <GlyphButton
-                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize7", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -230,7 +230,7 @@
             />
             <!-- Edit Bond -->
             <GlyphButton
-                style={["fas fa-edit", "la-text-secondary", "-fontsize4", "-lineheight6", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
+                style={["fas fa-edit", "la-text-secondary", "-fontsize6", "-lineheight8", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
 
                 flowClass={FlowClass.ContextMenu}
                 uuid={system.bond.uuid}
@@ -248,7 +248,7 @@
             <!-- Q&A Toggle -->
             <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"></i>
             <GlyphButton
-                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize5", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize7", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -263,7 +263,7 @@
             />
             <!-- Refresh Powers -->
             <GlyphButton
-                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize5", "-justifycenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize7", "-justifycenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.BondPowerRefresh}
 

@@ -8,20 +8,20 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import RangeArray from "@/svelte/actor/RangeArray.svelte";
-    import DamageArray from "@/svelte/actor/DamageArray.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import TotalSP from "@/svelte/actor/decoration/TotalSP.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import FlowButton from "@/svelte/actor/button/FlowButton.svelte";
-    import EffectButton from "@/svelte/actor/button/EffectButton.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import RangeArray from "@/svelte/shared/RangeArray.svelte";
+    import DamageArray from "@/svelte/shared/DamageArray.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
+    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -39,8 +39,8 @@
 {#if mod}
     {#snippet headerSecondaryLeftOptions()}
     <EffectButton
-        iconStyle={["cci", "cci-weaponmod", "-fontsize5"]}
-        iconBackgroundStyle={["-fontsize5", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+        iconStyle={["cci", "cci-weaponmod", "-fontsize7"]}
+        iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
 
         flowClass={FlowClass.SendEffectToChat}
         path={path}
@@ -147,7 +147,7 @@
             {#if mod.system.added_range.length}
                 <EffectBox
                     name={getLocalized("LA.mech.mod.range.label")}
-                    innerStyle={["-fontsize3"]}
+                    innerStyle={["-fontsize5"]}
                     outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-bordersround"] : []}
 
                     tooltipEnabled={tooltipEnabled}
@@ -162,7 +162,7 @@
             {#if mod.system.added_damage.length}
                 <EffectBox
                     name={getLocalized("LA.mech.mod.damage.label")}
-                    innerStyle={["-fontsize3"]}
+                    innerStyle={["-fontsize5"]}
 
                     tooltipEnabled={tooltipEnabled}
                     logType={TextLogHook.MechHeader}

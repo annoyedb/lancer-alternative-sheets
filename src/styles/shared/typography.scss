@@ -42,124 +42,27 @@
         font-size: inherit;
     }
 
-    .-fontsize0
+    @mixin generate-fontsize($start: 0, $end: 20, $step: 0.25rem)
+    {
+        @for $i from $start through $end
+        {
+            .-fontsize#{$i}
+            {
+                font-size: ($i + 1) * $step;
+            }
+        }
+    }
+
+    @include generate-fontsize(0, 20, 0.25rem);
+
+    .-fontsizesmall
     {
         font-size: 0.75rem;
     }
 
-    .-fontsize1
+    .-fontsizemedium
     {
         font-size: 0.9rem;
-    }
-
-    .-fontsize2
-    {
-        font-size: 1.25rem;
-
-        >.la-extension
-        {
-            font-size: 0.66em;
-        }
-    }
-
-    .-fontsize3
-    {
-        font-size: 1.5rem;
-
-        >.la-extension
-        {
-            font-size: 0.5em;
-        }
-    }
-
-    .-fontsize4
-    {
-        font-size: 1.75rem;
-
-        >.la-extension
-        {
-            font-size: 0.4em;
-        }
-    }
-
-    .-fontsize5
-    {
-        font-size: 2rem;
-
-        >.la-extension
-        {
-            font-size: 0.33em;
-        }
-    }
-
-    .-fontsize6
-    {
-        font-size: 2.25rem;
-
-        >.la-extension
-        {
-            font-size: 0.3em;
-        }
-    }
-
-    .-fontsize7
-    {
-        font-size: 2.5rem;
-
-        >.la-extension
-        {
-            font-size: 0.28em;
-        }
-    }
-
-    .-fontsize8
-    {
-        font-size: 2.75rem;
-
-        >.la-extension
-        {
-            font-size: 0.27em;
-        }
-    }
-
-    .-fontsize9
-    {
-        font-size: 3rem;
-        
-        >.la-extension
-        {
-            font-size: 0.25em;
-        }
-    }
-
-    .-fontsize10
-    {
-        font-size: 3.5rem;
-
-        >.la-extension
-        {
-            font-size: 0.22em;
-        }
-    }
-
-    .-fontsize11
-    {
-        font-size: 4rem;
-
-        >.la-extension
-        {
-            font-size: 0.2em;
-        }
-    }
-
-    .-fontsize13
-    {
-        font-size: 5rem;
-
-        >.la-extension
-        {
-            font-size: 0.2em;
-        }
     }
 
     .-strikethrough
@@ -204,13 +107,16 @@
         font-weight: bold;
     }
 
-    .-letterspacing0
+    @mixin generate-letterspacing($start: 0, $end: 10, $step: 0.1rem)
     {
-        letter-spacing: 0.1rem;
+        @for $i from $start through $end
+        {
+            .-letterspacing#{$i}
+            {
+                letter-spacing: ($i + 1) * $step;
+            }
+        }
     }
 
-    .-letterspacing1
-    {
-        letter-spacing: 0.2rem;
-    }
+    @include generate-letterspacing(0, 5, 0.1rem);
 }

@@ -7,12 +7,12 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { CounterBoxType } from "@/enums/CounterBoxType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/actor/button/EditButton.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
     const {
         actor,
@@ -35,7 +35,7 @@
 {#if system.bond}
 {#snippet headerContent()}
 <GlyphButton
-    style={["mdi mdi-plus-circle-outline", "-fontsize3", "-height2", "-lineheight2", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
+    style={["mdi mdi-plus-circle-outline", "-fontsize5", "-height4", "-lineheight4", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
 
     flowClass={FlowClass.GeneralControl}
     path="system.bond_state.burdens"
@@ -59,7 +59,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.bond.burden.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (addButtonHover)
@@ -91,7 +91,7 @@
             </div>
         {/snippet}
         {#snippet headerSecondaryLeftOptions()}
-            <i class="mdi mdi-weather-night -fontsize3 -padding0"></i>
+            <i class="mdi mdi-weather-night -fontsize5 -padding0"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
             <EditButton
@@ -112,7 +112,7 @@
             <HeaderSecondary
                 text={burden.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header", "la-prmy-header", "-fontsize2", "-overflowhidden"]}
+                textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)

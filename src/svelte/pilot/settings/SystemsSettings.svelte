@@ -7,7 +7,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/pilot/settings/AdvancedSettings.svelte";
-    import GlyphButton from "@/svelte/actor/button/GlyphButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     
     const props: PilotSheetProps = $props();
     const {

@@ -6,23 +6,23 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
-    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/actor/header/HeaderMain.svelte";
-    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/actor/header/HeaderTertiary.svelte";
-    import CollapseAllButton from "@/svelte/actor/button/CollapseAllButton.svelte";
-    import LoadedBox from "@/svelte/actor/counter/LoadedBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import EditButton from "@/svelte/actor/button/EditButton.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
-    import DamageButton from "@/svelte/actor/button/DamageButton.svelte";
-    import AttackButton from "@/svelte/actor/button/AttackButton.svelte";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import TagArray from "@/svelte/actor/TagArray.svelte";
-    import SpCostArray from "@/svelte/actor/SPCostArray.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import LimitedBox from "@/svelte/actor/counter/LimitedBox.svelte";
-    import EmptyBox from "@/svelte/actor/EmptyBox.svelte";
+    import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
+    import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
+    import SpCostArray from "@/svelte/shared/SPCostArray.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     const {
@@ -77,7 +77,7 @@
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize2", "-overflowhidden"]}
+    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -158,7 +158,7 @@
         {/snippet}
         {#snippet headerTertiaryRightOptions()}
         <DamageButton
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -203,7 +203,7 @@
         <HeaderTertiary
             text={weapon.name}
             subText={getLocalized("LA.weapons.label")}
-            subHeaderFontStyle={["la-text-header", "la-prmy-header", "-fontsize0"]}
+            subHeaderFontStyle={["la-text-header", "la-prmy-header", "-fontsizesmall"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (attackButtonHover)
@@ -217,7 +217,7 @@
                 return undefined;
             }}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={["la-text-header", "-fontsize2"]}
+            headerFontStyle={["la-text-header", "-fontsize4"]}
 
             itemID={weapon.id}
             uuid={weapon.uuid}

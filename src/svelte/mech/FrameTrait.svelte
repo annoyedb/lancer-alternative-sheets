@@ -2,13 +2,13 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import ActionBox from "@/svelte/actor/ActionBox.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/actor/header/HeaderSecondary.svelte";
-    import DeployableBox from "@/svelte/actor/DeployableBox.svelte";
-    import CounterBox from "@/svelte/actor/counter/CounterBox.svelte";
-    import BonusBox from "@/svelte/actor/BonusBox.svelte";
-    import EffectBox from "@/svelte/actor/EffectBox.svelte";
-    import MessageButton from "@/svelte/actor/button/MessageButton.svelte";
+    import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import BonusBox from "@/svelte/shared/BonusBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
+    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -60,7 +60,7 @@
 <HeaderSecondary
     text={trait.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["-fontsize2"]}
+    textStyle={["-fontsize4"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (messageButtonHover)

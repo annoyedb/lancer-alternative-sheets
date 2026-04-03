@@ -8,6 +8,12 @@
     {
         font-weight: bold;
     }
+    
+    .la-extension
+    {
+        display: inline-block;
+        font-size: .75em;
+    }
 
     .la-cmdline,
     .la-extension
@@ -65,11 +71,6 @@
         transition: visibility 0s, opacity 0.25s ease-in-out;
     }
 
-    .la-extension
-    {
-        display: inline-block;
-        font-size: .75em;
-    }
     .la-divider-h
     {
         border: none;

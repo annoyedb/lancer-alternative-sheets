@@ -4,8 +4,8 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import SidebarRatioSlider from "@/svelte/actor/input/SidebarRatioSlider.svelte";
-    import ThemeOverrideButton from "@/svelte/actor/button/ThemeOverrideButton.svelte";
+    import SidebarRatioSlider from "@/svelte/shared/input/SidebarRatioSlider.svelte";
+    import ThemeOverrideButton from "@/svelte/shared/button/ThemeOverrideButton.svelte";
 
     const props = $props();
     const {
