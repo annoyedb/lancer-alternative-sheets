@@ -61,9 +61,9 @@
 />
 {/snippet}
 {#snippet outerContent()}
-<div class="la-combine-h -widthfull -margin0-t">
+<div class="la-flexrow -widthfull -margin0-t">
     <button type="button"
-        class="la-corepower clipped la-text-header la-combine-h -padding0-tb -fontsize5 -lineheight7 -widthfull 
+        class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull 
             {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"} 
             activation-flow {activationClass}"
         data-uuid={frame.uuid}

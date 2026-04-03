@@ -81,7 +81,7 @@
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
     <!-- (#2) - On FireFox for some reason onclick vs on:click does not work properly -->
     <!-- svelte-ignore event_directive_deprecated -->
-    <h1 class="la-summary la-combine-h la-dropshadow 
+    <h1 class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || MAIN_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
@@ -95,7 +95,7 @@
         />
         <!-- Header Options -->
     {#if extraOptions}
-        <div class="la-combine-h -gap2 -aligncenter">
+        <div class="la-flexrow -gap2 -aligncenter">
         {#if headerContent}
             {@render headerContent()}
         {/if}

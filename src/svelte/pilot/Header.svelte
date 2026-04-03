@@ -34,14 +34,14 @@
 </script>
 
 <!-- Header -->
-<div class="la-header-content la-combine-h">
+<div class="la-header-content la-flexrow">
     <!-- Advanced Options Toggle -->
     <div 
-        class="la-combine-v -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        class="la-flexcol -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
         style="z-index: 2;"
     >
         <div
-            class="la-combine-h"
+            class="la-flexrow"
         >
         {#if advancedOptions}
             <i 
@@ -90,7 +90,7 @@
     {/if}
     </div>
     <div class="la-names -margin3-l -margin3-t -flex1">
-        <div class="la-combine-h">
+        <div class="la-flexrow">
             <input type="text"
                 class="la-actorname__input la-text-header -fontsize6 -upper -letterspacing1
                     charname"
@@ -105,7 +105,7 @@
             </span>
         </div>
         <hr class="la-divider-h -spacemedium -margin0-b la-bckg-header">
-        <div class="la-combine-h">
+        <div class="la-flexrow">
             <input type="text"
                 class="la-pilotcallsign__input la-text-header -upper -fontsize4 -letterspacing0
                     charname"
@@ -119,7 +119,7 @@
                 {getLocalized("LA.pilot.callsign.label")}
             </span>
         </div>
-        <div class="la-combine-h">
+        <div class="la-flexrow">
             <input type="text"
                 class="la-pilotbackground__input la-text-header -upper -fontsizemedium -letterspacing0
                     charname"
@@ -154,7 +154,7 @@
         xySetter={setImageOffsetXY}
     >
         <div
-            class="la-pilotfluff la-combine-h -positionabsolute la-combine-v -padding0-lr"
+            class="la-pilotfluff la-flexrow -positionabsolute la-flexcol -padding0-lr"
         >
             <span class="la-text-darken-2 -textalignjustify -flex1">
                 {getLocalized("LA.pilot.fluff.1")}
@@ -162,10 +162,10 @@
         </div>
         <div class="-positionrelative">
             <div 
-                class="la-combine-v -positionabsolute -margin3-t -margin1-lr la-text-lighten-7"
+                class="la-flexcol -positionabsolute -margin3-t -margin1-lr la-text-lighten-7"
             >
                 <div 
-                    class="la-combine-h -justifystart -widthfull"
+                    class="la-flexrow -justifystart -widthfull"
                 >
                     <i class="mdi mdi-fingerprint -fontsize6"></i>
                     <span class="-fontsizesmall -aligncontentcenter">
@@ -173,7 +173,7 @@
                     </span>
                 </div>
                 <div 
-                    class="la-combine-h -justifystart -widthfull"
+                    class="la-flexrow -justifystart -widthfull"
                 >
                 {#if owner}
                     <i class="mdi mdi-cable-data -fontsize6"></i>
@@ -188,7 +188,7 @@
                 {/if}
                 </div>
                 <div 
-                    class="la-combine-h -justifystart -widthfull"
+                    class="la-flexrow -justifystart -widthfull"
                 >
                 {#if system.hp.value >= system.hp.max}
                     <i class="mdi mdi-heart-pulse -fontsize6"></i>

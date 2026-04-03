@@ -124,7 +124,7 @@
 {/snippet}
 
 <div
-    class="la-actionlog -main la-combine-v -gap0 -widthfull -displayflex -directioncolumnreverse"
+    class="la-actionlog -main la-flexcol -gap0 -widthfull -displayflex -directioncolumnreverse"
     style={maxHeight ? `max-height: ${maxHeight}rem;` : ""}
     bind:this={component}
 >

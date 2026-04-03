@@ -72,7 +72,7 @@
     export const H4_ICON_LEFT_STYLE = " -height5 -lineheight5 -fontsize7 "
 </script>
 
-<div class="la-effectbox -largeheader la-collapsegroup la-combine-v -widthfull 
+<div class="la-effectbox -largeheader la-collapsegroup la-flexcol -widthfull 
         {rootStyle?.join(' ') || H4_ROOT_STYLE}
         {borderStyle?.join(' ') || H4_BORDER_STYLE}
         {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
@@ -87,7 +87,7 @@
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
     <!-- (#2) -->
     <!-- svelte-ignore event_directive_deprecated -->
-    <div class="la-actionheader la-summary la-combine-h la-text-header clipped -aligncenter
+    <div class="la-actionheader la-summary la-flexrow la-text-header clipped -aligncenter
             {headerStyle?.join(' ')}
             {collapseID ? "collapse-trigger" : ""}"
         data-la-collapse-id={collapseID}
@@ -105,7 +105,7 @@
                 extensionText={getExtensionText()}
             />
         </div>
-        <div class="la-combine-h -flexthird -justifyend -height5">
+        <div class="la-flexrow -flexthird -justifyend -height5">
             {#if contentRight}
                 {@render contentRight()}
             {/if}

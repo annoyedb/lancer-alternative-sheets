@@ -77,12 +77,12 @@
     headerContent={headerOptions}
 >
 {#if unlockedPowers.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each unlockedPowers as power}
     {#snippet outerContent()}
         {#if power.uses || power.frequency}
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
             {#if power.uses}
                 <LimitedBondBox
                     usesValue={power.uses.value}
@@ -122,7 +122,7 @@
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <span class="la-combine-h -gap0 -padding2-r">
+        <span class="la-flexrow -gap0 -padding2-r">
             {#if power.veteran}
             <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.pilot.bond.power.veteran.label")}

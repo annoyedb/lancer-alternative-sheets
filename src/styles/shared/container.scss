@@ -103,8 +103,8 @@
     }
 
     // Flexboxes
-    .la-combine-v,
-    .la-combine-h,
+    .la-flexcol,
+    .la-flexrow,
     .la-combine-grid,
     .-displayflex
     {
@@ -245,7 +245,7 @@
     }
 
     // Vertical flexbox
-    .la-combine-v
+    .la-flexcol
     {
         display: inline-flex;
         flex-direction: column;
@@ -271,7 +271,7 @@
     }
 
     // Horizontal flexbox
-    .la-combine-h
+    .la-flexrow
     {
         display: flex;
         flex-direction: row;

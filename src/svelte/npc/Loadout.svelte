@@ -50,7 +50,7 @@
 />
 {/if}
 {#if itemTypes.npc_feature.length}
-<div class="la-combine-v -widthfull">
+<div class="la-flexcol -widthfull">
     <Weapons 
         weapons={weapons}
         {...props}

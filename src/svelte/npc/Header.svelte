@@ -14,17 +14,17 @@
     const templates = itemTypes.npc_template;
 </script>
 
-<div class="la-combine-v -widthfull -heightfull">
+<div class="la-flexcol -widthfull -heightfull">
     <!-- Name & Templates -->
     <div class="la-bg-scroll-alt la-bckg-primary -widthfull -height15">
-        <div class="la-combine-v -widthfull -heightfull -padding1-lr">
+        <div class="la-flexcol -widthfull -heightfull -padding1-lr">
             <input type="text" 
                 class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"
                 name="name" 
                 value="{actor.name}" 
                 placeholder="{getLocalized("LA.namePlaceholder")}"
             />
-            <div class="la-combine-h -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
+            <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
             {#if templates.length}
             {#each templates as template, index}
                 <Template

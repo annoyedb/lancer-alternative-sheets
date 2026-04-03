@@ -38,7 +38,7 @@
     const log = logText || getLocalized("LA.edit.token.tooltip");
 </script>
 
-<div class="la-combine-h">
+<div class="la-flexrow">
 {#if tokenVideoMimeType}
     <video autoplay loop
         class="la-actor__img {editDisabled ? "-pointerdisable" : "-pointercursor"}"

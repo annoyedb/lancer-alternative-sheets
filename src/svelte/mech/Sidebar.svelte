@@ -81,7 +81,7 @@
 </div>
 <div class="la-actor la-dropshadow -aligncontentcenter -positionrelative">
     <!-- Size, Speed, & Core Availability -->
-    <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize19">
+    <div class="la-flexcol -positionabsolute -left0 -top0 -fontsize19">
     {#if system.size < 1}
         <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
@@ -93,7 +93,7 @@
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
-        <div class="la-combine-h -fontsize9" 
+        <div class="la-flexrow -fontsize9" 
             data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
@@ -118,7 +118,7 @@
     />
 </div>
 <!-- Mech Stats 1 -->
-<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
     <StatComboShort
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
@@ -158,7 +158,7 @@
 </div>
 <!-- Mech Bars -->
 <div class="la-damage la-dropshadow -margin0-lr -margin2-tb">
-    <div class="la-combine-h -gap2">
+    <div class="la-flexrow -gap2">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR) -->
             <StatusBar
@@ -200,7 +200,7 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
             <input type={"number"}
                 class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.overshield.value"}
@@ -222,7 +222,7 @@
 
     <div class="la-spacer -large"></div>
 
-    <div class="la-combine-h -gap2">
+    <div class="la-flexrow -gap2">
         <div class="la-visuals -flex5">
             <!-- HEAT, BURN (BAR) -->
             <StatusBar
@@ -264,7 +264,7 @@
                 />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin0-r">
             <input type={"number"}
                 class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.burn"}
@@ -285,7 +285,7 @@
     </div>
 </div>
 <!-- Mech Stats 2 -->
-<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
     <StatComboShort
         icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
@@ -324,8 +324,8 @@
     />
 </div>
 <!-- Mech Stats 3 -->
-<div class="la-stats la-dropshadow la-combine-h -justifyevenly -margin1-t">
-    <div class="la-combine-h -alignselfcenter -positionrelative">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly -margin1-t">
+    <div class="la-flexrow -alignselfcenter -positionrelative">
     {#snippet overchargeContentLeft()}
         <GlyphButton type="button"
             flowClass={FlowClass.None}

@@ -62,7 +62,7 @@
     headerContent={headerOptions}
 >
 {#if skills.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each skills as skill, index}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
@@ -85,7 +85,7 @@
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <span class="la-combine-h -gap0 -padding2-r">
+        <span class="la-flexrow -gap0 -padding2-r">
             {#if skill.system.curr_rank > 0}
             <span class="-fontsize4">
                 +

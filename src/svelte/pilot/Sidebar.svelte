@@ -81,7 +81,7 @@
 </div>
 <div class="la-pilot__sidebar la-dropshadow -aligncontentcenter -positionrelative">
     <!-- Size, Speed, & Core Availability -->
-    <div class="la-combine-v -positionabsolute -left0 -top0 -fontsize19">
+    <div class="la-flexcol -positionabsolute -left0 -top0 -fontsize19">
     {#if system.size < 1}
         <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
@@ -93,7 +93,7 @@
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
-        <div class="la-combine-h -fontsize9" 
+        <div class="la-flexrow -fontsize9" 
             data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
@@ -115,7 +115,7 @@
     />
 </div>
 <!-- Mech Stats 1 -->
-<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
     <StatComboShort
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
@@ -157,7 +157,7 @@
 <div class="la-damage la-dropshadow -margin0-lr -margin2-t -margin0-b">
 <!-- No KTB -->
 {#if !system.bond}
-    <div class="la-combine-h -gap2">
+    <div class="la-flexrow -gap2">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR), BURN (BAR) -->
             <StatusBar
@@ -187,7 +187,7 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.overshield.value"}
@@ -206,7 +206,7 @@
         ---></span>
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
@@ -227,7 +227,7 @@
     </div>
 <!-- KTB -->
 {:else}
-    <div class="la-combine-h -gap2 -alignend">
+    <div class="la-flexrow -gap2 -alignend">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR) -->
             <StatusBar
@@ -254,7 +254,7 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin1-r">
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -274,7 +274,7 @@
         </div>
     </div>
     <div class="la-spacer -tiny"></div>
-    <div class="la-combine-h -gap2">
+    <div class="la-flexrow -gap2">
         <div class="la-visuals -flex5">
             <div class="la-spacer -tiny"></div>
             <!-- STRESS, BURN (BAR) -->
@@ -300,7 +300,7 @@
             />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
@@ -321,10 +321,10 @@
     </div>
 {/if}
 </div>
-<div class="la-dropshadow la-combine-h -justifyevenly">
+<div class="la-dropshadow la-flexrow -justifyevenly">
 </div>
 <!-- Mech Stats 2 -->
-<div class="la-stats la-dropshadow la-combine-h -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
 {#if showTechAttack}
     <StatComboShort
         icon={"cci cci-tech-full -alignselfcenter"}

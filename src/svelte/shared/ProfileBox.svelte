@@ -23,7 +23,7 @@
 </script>
 
 {#if profiles.length > 1}
-<div class="la-limited la-combine-h {style?.join(' ') || _STYLE}">
+<div class="la-limited la-flexrow {style?.join(' ') || _STYLE}">
 {#each profiles as profile, index}
     <button type="button" 
         class="la-prmy-primary -glow-prmy-hover -height7

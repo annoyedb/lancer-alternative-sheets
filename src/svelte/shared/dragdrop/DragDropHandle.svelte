@@ -91,7 +91,7 @@
 </script>
 
 <div role="mark"
-    class="la-combine-h -widthfull -aligncenter -positionrelative
+    class="la-flexrow -widthfull -aligncenter -positionrelative
         {style?.join(' ')}"
     ondragstart={handleDragStart}
     ondrop={handleDrop}

@@ -82,7 +82,7 @@
 
 {#snippet themeOverride()}
     <h3>{getLocalized("LA.advanced.themeOverride.tooltip")}<i class="mdi mdi-arrow-down-right"></i></h3>
-    <div class="la-combine-v -widthfull -gap0 -padding0">
+    <div class="la-flexcol -widthfull -gap0 -padding0">
     {#each Object.values(ThemeKey) as theme}
         <button type="button"
             class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover"

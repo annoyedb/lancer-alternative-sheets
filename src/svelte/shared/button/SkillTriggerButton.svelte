@@ -15,7 +15,7 @@
     } : {item : any} & TooltipProps & TextLogEventProps = $props();
 </script>
 
-<div class="la-skilltrigger la-combine-h -justifyend">
+<div class="la-skilltrigger la-flexrow -justifyend">
     <FlowButton
         text={item.name}
         flowClass={FlowClass.Skill}

@@ -38,7 +38,7 @@
 
 {#if usesMax}
 <div 
-    class="la-counterbox la-combine-h -aligncenter la-text-header -padding1-lr
+    class="la-counterbox la-flexrow -aligncenter la-text-header -padding1-lr
         {style?.join(' ') || type === CounterBoxType.Counter ? _COUNTER_STYLE : ""}"
 >
 {#if text}

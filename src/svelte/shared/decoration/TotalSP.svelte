@@ -21,7 +21,7 @@
     const log = logText || getLocalized("LA.mech.system.points.total.tooltip");
 </script>
 
-<div class="la-combine-h -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
+<div class="la-flexrow -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
 >

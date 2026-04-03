@@ -11,12 +11,12 @@
 </script>
 
 <details 
-    class="la-empty -widthfull la-combine-v
+    class="la-empty -widthfull la-flexcol
         ref set drop-settable {type}"
     data-accept-types={type}
     data-path={path}>
-    <summary class="la-empty__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1 -pointercursor -widthfull">
-        <div class="la-left la-combine-h">
+    <summary class="la-empty__summary la-flexrow clipped-bot-alt la-bckg-repcap la-text-header -padding1 -pointercursor -widthfull">
+        <div class="la-left la-flexrow">
             <i class="la-icon mdi mdi-card-off-outline -fontsize4 -margin1-lr"></i>
             <span class="la-name__span -fontsize4">{label}</span>
         </div>

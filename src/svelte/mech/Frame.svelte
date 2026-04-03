@@ -72,10 +72,10 @@
     headerContent={headerOptions}
 >
 {#if frame}
-    <div class="la-generated la-combine-v -widthfull -gap0">
+    <div class="la-generated la-flexcol -widthfull -gap0">
         {#snippet outerContent()}
             {#if core.counters?.length}
-            <div class="la-combine-v -widthfull -padding2-l">
+            <div class="la-flexcol -widthfull -padding2-l">
             {#each core.counters as counter, index}
                 <CounterBox
                     text={counter.name}
@@ -105,7 +105,7 @@
             renderOutsideCollapse={outerContent}
             contentLeft={headerSecondaryLeftOptions}
         >
-            <div class="la-combine-v -widthfull -gap0">
+            <div class="la-flexcol -widthfull -gap0">
                 <FrameActivePower {...props} />
                 <FramePassivePower {...props} />
             {#if core.tags?.length}

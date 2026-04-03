@@ -10,9 +10,9 @@
 
 <!-- TODO: bonus.lid needs a localization map (but it's all over the place??) -->
 {#if bonuses.length}
-<div class="la-combine-h -widthfull">
+<div class="la-flexrow -widthfull">
 {#each bonuses as bonus, index}
-    <div class="la-effectbox la-brdr-repcap la-bckg-card la-combine-h -widthfull {index === bonuses.length - 1 ? "-bordersround-ltb" : "-bordersround"}">
+    <div class="la-effectbox la-brdr-repcap la-bckg-card la-flexrow -widthfull {index === bonuses.length - 1 ? "-bordersround-ltb" : "-bordersround"}">
         <span 
             class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -upper -fontsizesmall
                 {editable ? "editable" : ""}" 
@@ -20,7 +20,7 @@
         >
             {bonus.lid}
         </span>
-        <div class="la-combine-h -fontsize5">{bonus.val}</div>
+        <div class="la-flexrow -fontsize5">{bonus.val}</div>
     </div>
 {/each}
 </div>

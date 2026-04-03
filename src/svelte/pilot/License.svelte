@@ -96,13 +96,13 @@
     headerContent={headerOptions}
 >
 {#if licenses.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each licenses as license, index}
     {#snippet headerSecondaryLeftOptions()}
         <i class="{H2_ICON_SIZE} cci cci-license"></i>
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <span class="la-combine-h -gap0 -padding2-r">
+        <span class="la-flexrow -gap0 -padding2-r">
             <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.rank.label")}
             </span>

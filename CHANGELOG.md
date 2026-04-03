@@ -27,6 +27,8 @@
 * `-fontsize0` is now `-fontsizesmall`
 * `-letterspacing` is now implemented via mixins
 * `_mixins` fragmented into several smaller files, `component-mixins`, `container-mixins`, and `glow-mixins`
+* `la-combine-h` renamed to `la-flexrow`
+* `la-combine-v` renamed to `la-flexcol`
 
 # 1.3.15
 ## Changes

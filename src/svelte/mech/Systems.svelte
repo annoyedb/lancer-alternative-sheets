@@ -146,11 +146,11 @@
     headerContent={headerOptions}
 >
 {#if systemComponents?.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each systemComponents as component, index}
     {#snippet outerContent()}
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <!-- Limited -->
                 <LimitedBox
                     usesValue={component.value?.system.uses.value}
@@ -195,7 +195,7 @@
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
-        <div class="la-combine-v -margin3-lr">
+        <div class="la-flexcol -margin3-lr">
             <MessageButton
                 flowClass={FlowClass.SendToChat}
 
@@ -251,9 +251,9 @@
             contentRight={headerTertiaryRightOptions}
         >
         {#if !isDestroyed(component)}
-            <div class="la-generated -widthfull -gap2 la-combine-v">
+            <div class="la-generated -widthfull -gap2 la-flexcol">
                 {#if component.value.system.counters?.length}
-                <div class="la-combine-v -gap0 -widthfull -padding1-l">
+                <div class="la-flexcol -gap0 -widthfull -padding1-l">
                 {#each component.value.system.counters as counter, jndex}
                     <CounterBox
                         text={counter.name}

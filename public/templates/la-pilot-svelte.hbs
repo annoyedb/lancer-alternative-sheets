@@ -26,16 +26,16 @@
         </div>
         {{!-- (#1) --}}
         <!-- Navigation -->
-        <div class="la-nav__island la-combine-h -justifyend -gap1 la-dropshadow -widthfull -positionabsolute"
+        <div class="la-nav__island la-flexrow -justifyend -gap1 la-dropshadow -widthfull -positionabsolute"
             style="z-index: 1;">
             <div 
-                class="la-combine-h -gap1
+                class="la-flexrow -gap1
                     la-SVELTE-ADVANCEDNAV "
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
             {{!-- Tertiary Tabs (main) --}}
-            <div class="la-combine-h">
+            <div class="la-flexrow">
                 <nav 
                     class="la-tabs-tertiary la-bckg-tabs clipped-alt" 
                     data-group="tertiary"
@@ -56,15 +56,15 @@
             </div>
         </div>
     </header>
-    <div class="la-body la-combine-h la-bckg-background -heightfull -positionrelative">
+    <div class="la-body la-flexrow la-bckg-background -heightfull -positionrelative">
         <!-- Sidebar -->
         <section 
-            class="la-sidebar la-combine-v la-bg-scroll la-shadow -medium -inset -widthfull -heightfull
+            class="la-sidebar la-flexcol la-bg-scroll la-shadow -medium -inset -widthfull -heightfull
                 "
         >
-            <div class="la-nav-secondary__island la-combine-h -justifystart -positionabsolute -left0 -top0">
+            <div class="la-nav-secondary__island la-flexrow -justifystart -positionabsolute -left0 -top0">
                 <nav 
-                    class="la-tabs-secondary la-combine-h la-bckg-tabs clipped-bot" 
+                    class="la-tabs-secondary la-flexrow la-bckg-tabs clipped-bot" 
                     data-group="secondary"
                     style="z-index: 1;"
                 >
@@ -136,7 +136,7 @@
                 >
                     {{!-- Status Content --}}
                     <nav 
-                        class="la-tabs-quaternary la-combine-h -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        class="la-tabs-quaternary la-flexrow -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
                         data-group="quaternary"
                         style="z-index: 1;"
                     >
@@ -179,7 +179,7 @@
                     data-tab="loadout"
                 >
                     <nav 
-                        class="la-tabs la-combine-h -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        class="la-tabs la-flexrow -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
                         data-group="primary"
                         style="z-index: 1;"
                     >

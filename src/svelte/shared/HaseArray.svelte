@@ -30,8 +30,8 @@
 <div class="la-hasegroup -positionabsolute -widthnone
         {activeTab === "statistics" ? "" : "-displaynone"}"
 >
-    <div class="la-hase la-combine-v -justifybetween -heightnone">
-        <div class="la-combine-h -aligncenter">
+    <div class="la-hase la-flexcol -justifybetween -heightnone">
+        <div class="la-flexrow -aligncenter">
             <HexButton
                 text={getLocalized("LA.grit.short")}
                 value={system.grit}
@@ -56,7 +56,7 @@
                 innerTextStyle={["-fontsize6", "-lineheight15", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
-        <div class="la-combine-h -aligncenter">
+        <div class="la-flexrow -aligncenter">
             <HexButton
                 text={getLocalized("LA.hull.short")}
                 value={system.hull}
@@ -102,7 +102,7 @@
                 innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
-        <div class="la-combine-h -aligncenter">
+        <div class="la-flexrow -aligncenter">
             <HexButton
                 text={getLocalized("LA.systems.short")}
                 value={system.sys}
@@ -126,7 +126,7 @@
                 innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
-        <div class="la-combine-h -aligncenter">
+        <div class="la-flexrow -aligncenter">
             <div class="-eng -pointerdisable">&nbsp;</div>
             <HexButton
                 text={getLocalized("LA.engineering.short")}

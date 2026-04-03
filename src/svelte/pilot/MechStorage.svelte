@@ -84,7 +84,7 @@
 </script>
 
 {#if ownedMechs.length}
-<div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
+<div class="la-bg-scroll-alt la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <div class="-positionrelative -widthfull la-reveal">
         <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height5 -lineheight5 la-bckg-darken-2">
         {#if isInactive()}
@@ -113,7 +113,7 @@
         src={ ownedMechs[selectedMechIndex].img === "systems/lancer/assets/icons/mech.svg" ? `modules/${moduleID}/assets/nodata.png` : ownedMechs[selectedMechIndex].img }
         alt={getLocalized("LA.placeholder")}
     />
-    <div class="la-combine-v -positionabsolute -right0">
+    <div class="la-flexcol -positionabsolute -right0">
         <div class=" -fontsize19">
         {#if ownedMechs[selectedMechIndex].system.size < 1}
             <i class="cci cci-size-half {themeOverride} la-outl-shadow"
@@ -127,7 +127,7 @@
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {/if}
         </div>
-        <div class=" la-combine-h -fontsize9" 
+        <div class=" la-flexrow -fontsize9" 
             data-tooltip={tooltipEnabled ? getSpeedTip() : undefined}
             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
             data-tooltip-direction={TooltipDirection.LEFT}>
@@ -137,7 +137,7 @@
     </div>
     <div class="-positionrelative">
         <button type="button"
-            class="la-combine-h -widthfull -fontsize13 -positionabsolute -bottom0 
+            class="la-flexrow -widthfull -fontsize13 -positionabsolute -bottom0 
                 {isInactive() ? "cci cci-activate la-text-system" : "cci cci-deactivate la-text-weapon"} 
                 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"
             data-tooltip={tooltipEnabled 
@@ -165,15 +165,15 @@
     collapseID={collID}
     startCollapsed={true}
 >
-    <div class="la-combine-v -widthfull">
+    <div class="la-flexcol -widthfull">
         <div class="la-available-mechs__list"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.mechStorage.select.tooltip"), TextLogHook.PilotHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
         >
-            <div class=" la-combine-h -justifystart -padding0-b">
+            <div class=" la-flexrow -justifystart -padding0-b">
             {#each ownedMechs as mech, index}
                 <button type="button"
-                    class="la-combine-v -bordersround {selectedMechIndex === index ? "la-brdr-accent" : "la-brdr-transparent"}"
+                    class="la-flexcol -bordersround {selectedMechIndex === index ? "la-brdr-accent" : "la-brdr-transparent"}"
                     onclick={event => handleMechSelect(event, index)}
                     aria-label={getLocalized("LA.pilot.mechStorage.select.tooltip")}
                 >

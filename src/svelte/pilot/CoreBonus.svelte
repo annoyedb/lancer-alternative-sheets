@@ -98,11 +98,11 @@
 
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
         {#snippet outercontent()}
             {#if coreBonus.system.counters.length}
-            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             {#each coreBonus.system.counters as counter, jndex}
                 <CounterBox
                     text={counter.name}
@@ -182,7 +182,7 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
-            <div class="la-generated -widthfull -gap2 la-combine-v">
+            <div class="la-generated -widthfull -gap2 la-flexcol">
                 <BonusBox
                     bonuses={coreBonus.system.bonuses}
                     bonusPath={`itemTypes.core_bonus.${index}.system.bonuses`}

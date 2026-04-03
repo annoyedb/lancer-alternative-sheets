@@ -53,7 +53,7 @@
 />
 {/snippet}
 
-<div class="la-status__list la-combine-v -widthfull">
+<div class="la-status__list la-flexcol -widthfull">
     {#if actionLogEnabled}
     <!-- Action Log -->
     <HeaderMain
@@ -107,13 +107,13 @@
         collapseID={`${actor.uuid}.status.integrity`}
         startCollapsed={false}
     >
-        <div class="la-combine-v -widthfull -heightfull -padding0-r">
-            <div class="la-combine-h -justifyevenly -wrapwrap -widthfull -heightfull -flex1">
+        <div class="la-flexcol -widthfull -heightfull -padding0-r">
+            <div class="la-flexrow -justifyevenly -wrapwrap -widthfull -heightfull -flex1">
                 <!-- Structure -->
-                <div class="la-combine-h -aligncenter">
+                <div class="la-flexrow -aligncenter">
                     <i class="cci cci-structure la-dropshadow -fontsize11 -displayinline"></i>
                     <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.structure.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
+                    <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) Lancer base sheets make it currently impossible to use the 'name' property as intended, 
                         forcing it to send it back as an array; so we handle the update in a roundabout way -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
@@ -126,10 +126,10 @@
                     </div>
                 </div>
                 <!-- Repair -->
-                <div class="la-combine-h -aligncenter">
+                <div class="la-flexrow -aligncenter">
                     <i class="cci cci-repair la-dropshadow -fontsize11"></i>
                     <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
+                    <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
                             name="system.repairs.value"
@@ -140,10 +140,10 @@
                     </div>
                 </div>
                 <!-- Stress -->
-                <div class="la-combine-h -aligncenter">
+                <div class="la-flexrow -aligncenter">
                     <i class="cci cci-reactor la-dropshadow -fontsize11"></i>
                     <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.stress.label")}</span>
-                    <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
+                    <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
@@ -155,7 +155,7 @@
                     </div>
                 </div>
                 <!-- Burn -->
-                <div class="la-combine-h -aligncenter">
+                <div class="la-flexrow -aligncenter">
                     <i class="cci cci-burn la-dropshadow -fontsize11"></i>
                     <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.burn.label")}</span>
                     <!-- (#11) -->
@@ -167,10 +167,10 @@
                     />
                 </div>
                 <!-- Overcharge -->
-                <div class="la-combine-h -aligncenter">
-                    <div class="la-combine-h -alignselfcenter -positionrelative">
+                <div class="la-flexrow -aligncenter">
+                    <div class="la-flexrow -alignselfcenter -positionrelative">
                         <i class="cci cci-overcharge la-dropshadow -fontsize11"></i>
-                        <div class="la-combine-v -divider la-prmy-accent -fontsize6 -textaligncenter">
+                        <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                             <span class="la-top__span -widthfull">
                                 <GlyphButton type="button"
                                     flowClass={FlowClass.None}
@@ -198,8 +198,8 @@
                 </div>
             </div>
             <hr class="-widthfull"/>
-            <div class="la-combine-h -gap0 -wrapwrap -justifybetween -widthfull -heightfull -flex0">
-                <div class="la-combine-v -gap0 la-dropshadow -flex1 -widthfull">
+            <div class="la-flexrow -gap0 -wrapwrap -justifybetween -widthfull -heightfull -flex0">
+                <div class="la-flexcol -gap0 la-dropshadow -flex1 -widthfull">
                     <FlowButton
                         style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
                         text={getLocalized("LA.flow.structureDamage.label")}
@@ -249,7 +249,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                 </div>
-                <div class="la-combine-v -gap0 la-dropshadow -flex1">
+                <div class="la-flexcol -gap0 la-dropshadow -flex1">
                     <FlowButton 
                         style={["clipped", "-widthfull", "la-bckg-secondary"]}
                         text={getLocalized("LA.flow.overcharge.label")}

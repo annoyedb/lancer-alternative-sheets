@@ -51,7 +51,7 @@
     }
 </script>
 
-<div class="la-combine-v -gap0 -widthfull">
+<div class="la-flexcol -gap0 -widthfull">
 {#if effects.length}
 {#each effects as effect, index}
     {#snippet headerOptions()}

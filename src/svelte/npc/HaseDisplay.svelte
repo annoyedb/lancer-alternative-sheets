@@ -18,8 +18,8 @@
 <!-- Floating HASE -->
 <div class="la-haseposition -positionrelative">
     <div class="la-hasegroup -positionabsolute -widthnone">
-        <div class="la-hase la-combine-v -justifybetween -heightnone">
-            <div class="la-combine-h -aligncenter">
+        <div class="la-hase la-flexcol -justifybetween -heightnone">
+            <div class="la-flexrow -aligncenter">
                 <HexButton
                     text={getLocalized("LA.hull.short")}
                     value={system.hull}
@@ -42,7 +42,7 @@
                     innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
-            <div class="la-combine-h -aligncenter -pointerdisable">
+            <div class="la-flexrow -aligncenter -pointerdisable">
                 <div class="-agi">&nbsp;</div>
                 <HexButton
                     text={getLocalized("LA.agility.short")}
@@ -66,7 +66,7 @@
                     innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
-            <div class="la-combine-h -aligncenter">
+            <div class="la-flexrow -aligncenter">
                 <HexButton
                     text={getLocalized("LA.systems.short")}
                     value={system.sys}
@@ -89,7 +89,7 @@
                     innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
                 />
             </div>
-            <div class="la-combine-h -aligncenter -pointerdisable">
+            <div class="la-flexrow -aligncenter -pointerdisable">
                 <div class="-eng">&nbsp;</div>
                 <HexButton
                     text={getLocalized("LA.engineering.short")}

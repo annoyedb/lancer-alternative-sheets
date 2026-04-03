@@ -127,11 +127,11 @@
     }
 </script>
 
-<div class="la-combine-v -widthfull {hintDropArea ? "-divider la-prmy-accent" : ""}">
+<div class="la-flexcol -widthfull {hintDropArea ? "-divider la-prmy-accent" : ""}">
 {#if hintDropArea}
     {#if allowDrop}
         <div 
-            class="la-combine-h -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
+            class="la-flexrow -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
             onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
             onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
         >
@@ -145,7 +145,7 @@
         <span class="la-prmy-transparent -fontsizesmall">&nbsp;</span>
     {/if}
 {/if}
-    <div class="la-macroflows la-dropshadow la-combine-v -widthfull
+    <div class="la-macroflows la-dropshadow la-flexcol -widthfull
         macro-droppable"
         bind:this={component}
     >
@@ -181,7 +181,7 @@
             />
         {:else if isSystemFlow(type)}
             {#if type === SystemButton.SkillTriggerOther}
-                <div class="la-skilltrigger la-combine-h -justifyend">
+                <div class="la-skilltrigger la-flexrow -justifyend">
                     <FlowButton
                         text={ButtonFactory.getSystemButtonLabel(type)}
 
@@ -244,8 +244,8 @@
         </DragDropHandle>
     {/each}
     {:else}
-        <details class="la-details -widthfull la-combine-v">
-            <summary class="la-details__summary la-combine-h clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull"
+        <details class="la-details -widthfull la-flexcol">
+            <summary class="la-details__summary la-flexrow clipped-bot-alt la-bckg-repcap la-text-header -padding1-l -widthfull"
                 data-tooltip={tooltipEnabled 
                     ? allowDrop ? tipAlt : tipMain 
                     : undefined}
@@ -254,7 +254,7 @@
                 onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
                 onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
             >
-                <div class="la-left la-combine-h">
+                <div class="la-left la-flexrow">
                     {#if allowDrop}
                     <span class="la-name__span -fontsize4">
                         {getLocalized("LA.advanced.addMacro.subLabel")}

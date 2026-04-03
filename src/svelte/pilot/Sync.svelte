@@ -45,9 +45,9 @@
     <EffectBox
         name={getLocalized("LA.pilot.sync.download.label")}
     >
-        <div class="la-combine-h -aligncenter -widthfull -gap1">
+        <div class="la-flexrow -aligncenter -widthfull -gap1">
             <GlyphButton
-                style={["la-combine-v", "mdi mdi-cloud-download", "-fontsize7", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
+                style={["la-flexcol", "mdi mdi-cloud-download", "-fontsize7", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
                 flowClass={FlowClass.DownloadFromCloud}
                 action="download"
 
@@ -63,7 +63,7 @@
                     SYNC
                 </span>
             </GlyphButton>
-            <div class="la-combine-v -widthfull -gap0">
+            <div class="la-flexcol -widthfull -gap0">
                 {#if pilotCache?.length}
                 <select
                     class="la-sync__select -textaligncenter la-bckg-transparent la-text-text la-brdr-text"

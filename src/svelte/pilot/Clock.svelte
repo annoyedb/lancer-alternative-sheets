@@ -70,9 +70,9 @@
     headerContent={headerContent}
 >
 {#if clocks.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each clocks as clock, index}
-        <div class="la-combine-v -widthfull">
+        <div class="la-flexcol -widthfull">
         {#snippet outerContent()}
             <div class="-padding2-l">
                 <CounterBox

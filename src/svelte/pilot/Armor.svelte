@@ -108,14 +108,14 @@
     headerContent={headerOptions}
 >
 {#if armors.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each armors as armor, index}
     {#snippet outerContent()}
     {#if Object.keys(armorBonuses[index]).length}
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull -justifyevenly">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull -justifyevenly">
                 {#if armorBonuses[index].pilot_hp}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr -padding0-tb la-text-header -gap0"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr -padding0-tb la-text-header -gap0"
                     data-tooltip={tooltipEnabled ? healthTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -125,7 +125,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_armor}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? armorTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -135,7 +135,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_evasion}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? evasionTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -145,7 +145,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_edef}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? edefenseTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -155,7 +155,7 @@
                 </span>
                 {/if}
                 {#if armorBonuses[index].pilot_speed}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? speedTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}

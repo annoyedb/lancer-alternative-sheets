@@ -41,17 +41,17 @@
 </script>
 
 {#if enabled}
-<div class="la-textlog la-combine-h -justifystart {style?.join(' ')}">
-    <div class="la-combine-v -gap1 la-textlog-left -aligncontentend -overflowhidden -width4">
+<div class="la-textlog la-flexrow -justifystart {style?.join(' ')}">
+    <div class="la-flexcol -gap1 la-textlog-left -aligncontentend -overflowhidden -width4">
         <div class="la-textlog__ruler -flex1 -widthfull {introType ? "" : "-visibilityhidden"}"></div>
         <div class="la-textlog-left__current -widthfull"></div>
     </div>
-    <div class="la-combine-v la-textlog-left -justifyend -overflowhidden">
+    <div class="la-flexcol la-textlog-left -justifyend -overflowhidden">
         <div
             class="la-textlog__typeit -flex1 -justifystart -aligncontentend -widthfull"
             bind:this={typeItComponent}
         ></div>
-        <div class="la-textlog__typed la-combine-h -flex0 -justifystart -widthfull">
+        <div class="la-textlog__typed la-flexrow -flex0 -justifystart -widthfull">
             >//:&nbsp;
             <div
                 class=""
@@ -59,7 +59,7 @@
             >&nbsp;</div>
         </div>
     </div>
-    <div class="la-combine-v -gap1 la-textlog-right -aligncontentend -overflowhidden -width4">
+    <div class="la-flexcol -gap1 la-textlog-right -aligncontentend -overflowhidden -width4">
         <div class="la-textlog__ruler -flex1 -widthfull {introType ? "" : "-visibilityhidden"}"></div>
         <div class="la-textlog-right__current -widthfull"></div>
     </div>

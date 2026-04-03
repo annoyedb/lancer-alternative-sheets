@@ -46,7 +46,7 @@
 
 {#snippet renderEditable()}
 <div class="-widthfull -positionrelative">
-    <div class="la-combine-h {editable ? "" : "-displaynone"}">
+    <div class="la-flexrow {editable ? "" : "-displaynone"}">
         <GlyphButton
             style={["la-bckg-secondary -width3", "clicker-minus-button input-update"]}
             flowClass={FlowClass.None}
@@ -71,12 +71,12 @@
 </div>
 {/snippet}
 
-<div class="la-shortstat la-combine-h {outerStyle?.join(' ')}">
+<div class="la-shortstat la-flexrow {outerStyle?.join(' ')}">
     <i class="{icon}"></i>
     {#if contentLeft}
         {@render contentLeft()}
     {/if}
-    <div class="la-combine-v {innerStyle?.join(' ')}"
+    <div class="la-flexcol {innerStyle?.join(' ')}"
         data-tooltip={tooltipEnabled && !editable ? tip : undefined}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }

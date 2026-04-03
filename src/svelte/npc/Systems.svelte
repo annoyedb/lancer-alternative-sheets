@@ -95,11 +95,11 @@
 
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each systems as component}
     {#snippet outerContent()}
         <div class="-widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
                 <!-- Rechargeable -->
                 <ChargedBox
                     item={component}
@@ -192,7 +192,7 @@
             contentRight={headerSecondaryRightOptions}
         >
         {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
-            <div class="la-combine-h -gap0 -widthfull">
+            <div class="la-flexrow -gap0 -widthfull">
                 <EffectBox
                     name={getLocalized("LA.npc.attackBonus.label")}
                     outerStyle={[
@@ -201,7 +201,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                 >
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -height3">
+                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
                         {component.system.attack_bonus[tier - 1]}
                         <i class="cci cci-reticule -fontsize4"></i>
                     </span>
@@ -211,7 +211,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                 >
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -height3">
+                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
                         {component.system.accuracy[tier - 1]}
                         <i class="cci cci-accuracy -fontsize6"></i>
                     </span>

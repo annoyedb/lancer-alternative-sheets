@@ -9,7 +9,7 @@
     const props: MechSheetProps = $props();
 </script>
 
-<div class="la-mount__list la-combine-v -widthfull">
+<div class="la-mount__list la-flexcol -widthfull">
     <Frame {...props} />
     <Mounts {...props} />
     <Systems {...props} />

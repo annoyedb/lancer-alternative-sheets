@@ -79,13 +79,13 @@
     headerContent={headerOptions}
 >
 {#if reserves.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each reserves as reserve, index}
     {#snippet outerContent()}
     {#if reserve.system.counters.length || reserve.system.consumable }
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
         {#if reserve.system.consumable}
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <LimitedBox
                     usesValue={reserve.system.used ? 0 : 1}
                     usesMax={1}

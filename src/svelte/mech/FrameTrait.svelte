@@ -74,7 +74,7 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-    <div class="la-generated -widthfull -gap2 la-combine-v">
+    <div class="la-generated -widthfull -gap2 la-flexcol">
         <EffectBox
             name={getLocalized("LA.mech.frame.trait.label")}
             effect={trait.description}

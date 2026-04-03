@@ -69,7 +69,7 @@
     collapseID={utilitiesCollID}
     startCollapsed={false}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
         <FlowButton 
             style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
             text={getLocalized("LA.npc.recharge.label")}
@@ -82,8 +82,8 @@
             tooltip={getLocalized("LA.npc.recharge.tooltip")}
             tooltipHeader={getLocalized("LA.action.startofturn.label")}
         />
-        <div class="la-combine-h -wrapwrap -widthfull -gap0">
-            <div class="la-combine-v -gap0 -flex1 -widthfull">
+        <div class="la-flexrow -wrapwrap -widthfull -gap0">
+            <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
                     style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
                     text={getLocalized("LA.flow.rollAttack.label")}
@@ -111,7 +111,7 @@
                     tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                 />
             </div>
-            <div class="la-combine-v -gap0 -flex1 -widthfull">
+            <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
                     style={["clipped", "-widthfull", "la-bckg-secondary"]}
                     text={getLocalized("LA.flow.rollTechAttack.label")}

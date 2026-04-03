@@ -70,12 +70,12 @@
     headerContent={headerOptions}
 >
 {#if gears.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each gears as gear, index}
     {#snippet outerContent()}
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
         {#if gear.system.uses.max}
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <!-- Limited -->
                 <LimitedBox
                     usesValue={gear.system.uses.value}

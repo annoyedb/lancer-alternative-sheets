@@ -90,14 +90,14 @@
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
     <!-- (#2) -->
     <!-- svelte-ignore event_directive_deprecated -->
-    <div class="la-summary la-combine-h la-dropshadow 
+    <div class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || H2_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Icon, Name -->
-        <div class="la-left la-combine-h -justifystart -aligncenter -gap1 -widthfull -overflowhidden">
+        <div class="la-left la-flexrow -justifystart -aligncenter -gap1 -widthfull -overflowhidden">
             {#if contentLeft}
                 {@render contentLeft()}
             {/if}
@@ -113,7 +113,7 @@
         </div>
     {#if extraOptions}
         <!-- Options -->
-        <div class="la-right la-combine-h -aligncenter">
+        <div class="la-right la-flexrow -aligncenter">
         {#if contentRight}
             {@render contentRight()}
         {/if}

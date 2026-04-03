@@ -39,12 +39,12 @@
 </script>
 
 <div class="-heightfull
-    {advancedOptions ? "la-combine-h" : "-displaynone"}"
+    {advancedOptions ? "la-flexrow" : "-displaynone"}"
 >
     <span class="{SETTINGS_HEADER_STYLE} -alignend">
         {getLocalized("LA.pilot.level.label")}
     </span>
-    <div class="la-combine-v -alignstart -padding1-b -heightfull">
+    <div class="la-flexcol -alignstart -padding1-b -heightfull">
         <GlyphButton
             style={[SETTINGS_BUTTON_STYLE, "mdi mdi-plus-box", "-verticalaligntop"]}
             

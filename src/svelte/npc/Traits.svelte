@@ -83,11 +83,11 @@
     
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each traits as trait}
     {#snippet outerContent()}
         <div class="-widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
                 <!-- Rechargeable -->
                 <ChargedBox
                     item={trait}

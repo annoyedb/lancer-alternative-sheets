@@ -73,7 +73,7 @@
 </script>
 
 <button type="button"
-    class="la-properties la-combine-v -fontsize5 la-prmy-accent -justifycenter -positionrelative
+    class="la-properties la-flexcol -fontsize5 la-prmy-accent -justifycenter -positionrelative
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"

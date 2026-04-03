@@ -139,7 +139,7 @@
 {@const weapon = slot.weapon.value}
 <!-- Snippets -->
 {#snippet outerContent()}
-    <div class="la-combine-v -gap0 -widthfull -padding2-l">
+    <div class="la-flexcol -gap0 -widthfull -padding2-l">
     {#if slot.size !== "Integrated" && weapon.system.mod}
         <WeaponMod
             actor={actor}
@@ -148,7 +148,7 @@
         />
     {/if}
     {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
-        <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull">
+        <div class="la-flexrow clipped-alt la-bckg-header-anti -widthfull">
             <!-- Loading -->
             <LoadedBox
                 item={weapon}
@@ -224,7 +224,7 @@
         onPointerEnter={() => {damageButtonHover = true;} }
         onPointerLeave={() => {damageButtonHover = false;} }
     />
-    <div class="la-combine-v -margin3-lr">
+    <div class="la-flexcol -margin3-lr">
         <MessageButton
             flowClass={FlowClass.None}
             uuid={weapon.uuid}
@@ -287,7 +287,7 @@
     >
     {#if !weapon.system.destroyed}
         {@const profile = weapon.system.active_profile}
-        <div class="la-generated -widthfull -gap2 la-combine-v">
+        <div class="la-generated -widthfull -gap2 la-flexcol">
             <!-- Generated Content -->
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}

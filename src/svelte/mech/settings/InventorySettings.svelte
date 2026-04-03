@@ -22,12 +22,12 @@
 </script>
 
 <div class="-heightfull
-    {advancedOptions && active === "loadout" ? "la-combine-h" : "-displaynone"}"
+    {advancedOptions && active === "loadout" ? "la-flexrow" : "-displaynone"}"
 >
     <span class="{SETTINGS_HEADER_STYLE} -alignend">
         {getLocalized("LA.advanced.inventory.label")}
     </span>
-    <div class="la-combine-v -alignstart -padding0-b -heightfull">
+    <div class="la-flexcol -alignstart -padding0-b -heightfull">
         <InventoryButton
             style={[SETTINGS_BUTTON_STYLE, "mdi mdi-archive"]}
             

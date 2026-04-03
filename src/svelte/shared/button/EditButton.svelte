@@ -62,7 +62,7 @@
 </script>
 
 <button type="button"
-    class="la-combine-v {style?.join(' ') || _STYLE}
+    class="la-flexcol {style?.join(' ') || _STYLE}
         {flowClass || 'lancer-context-menu'}"
     data-path={path}
     data-tooltip={tooltipEnabled ? tip : undefined }

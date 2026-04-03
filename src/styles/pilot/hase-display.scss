@@ -7,7 +7,7 @@
         display: flex;
         translate: -1rem 1rem;
         
-        >.la-combine-h
+        >.la-flexrow
         {
             pointer-events: none;
 
@@ -18,7 +18,7 @@
                 width: 4rem; // 64px / 16
                 font-size: 5.25rem; // 84px / 16
                 
-                >.la-combine-v
+                >.la-flexcol
                 {
                     height: 2.6875rem; // 43px / 16
                     width: 3.25rem; // 52px / 16

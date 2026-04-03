@@ -74,7 +74,7 @@
 </script>
 
 {#if system.bond}
-<div class="la-bg-scroll-alt la-combine-v -widthfull -margin1-b -padding1-tb la-reveal-hover">
+<div class="la-bg-scroll-alt la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <!-- Bond Name -->
     <span class="-fontsize6 -letterspacing1 -upper">
         {system.bond.name}
@@ -97,7 +97,7 @@
         />
     </div>
     <div
-        class="la-bond-card la-combine-h -positionrelative -widthfull -aligncenter"
+        class="la-bond-card la-flexrow -positionrelative -widthfull -aligncenter"
     >
         <!-- Bond Image -->
         <div class="la-bond-card__img-anchor -margin7-tb"
@@ -109,11 +109,11 @@
             />
         </div>
     {#if !questionAnswer}
-        <div class="la-bond-card__content la-combine-v -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
+        <div class="la-bond-card__content la-flexcol -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Major Ideals -->
-            <div class="la-bond-major la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
+            <div class="la-bond-major la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
                 {#each system.bond.system.major_ideals as major, index}
-                    <div class="la-combine-h">
+                    <div class="la-flexrow">
                         <input type="checkbox"
                             class=""
                             name="system.bond_state.xp_checklist.major_ideals.{index}"
@@ -128,8 +128,8 @@
                 {/each}
             </div>
             <!-- Minor Ideals -->
-            <div class="la-bond-minor la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
-                <div class="la-combine-h -widthfull">
+            <div class="la-bond-minor la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
+                <div class="la-flexrow -widthfull">
                     <input type="checkbox"
                         class=""
                         name="system.bond_state.xp_checklist.minor_ideal"
@@ -151,7 +151,7 @@
                     {/each}
                     </select>
                 </div>
-                <div class="la-combine-h">
+                <div class="la-flexrow">
                     <input type="checkbox"
                         class=""
                         name="system.bond_state.xp_checklist.veteran_power"
@@ -166,10 +166,10 @@
             </div>
         </div>
     {:else}
-        <div class="la-bond-card__content la-combine-v -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
+        <div class="la-bond-card__content la-flexcol -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Q&A -->
             {#each system.bond.system.questions as qna, index}
-            <div class="la-bond-question la-combine-v -alignstart la-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
+            <div class="la-bond-question la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
                 <span
                     class="-fontsizemedium -lineheight5"
                 >
@@ -194,7 +194,7 @@
         </div>
     {/if}
     </div>
-    <div class="la-combine-h">
+    <div class="la-flexrow">
     <!-- Bond XP Tally -->
         <FlowButton
             text={getLocalized("LA.pilot.bond.tally.label")}
@@ -212,10 +212,10 @@
 
             onClick={tallyAndUpdate}
         />
-        <div class="la-combine-h -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
+        <div class="la-flexrow -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
             <!-- Edit Bond Image -->
             <GlyphButton
-                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize7", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
@@ -244,11 +244,11 @@
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
         </div>
-        <div class="la-combine-h -positionabsolute -left0 -padding3-l -gap1">
+        <div class="la-flexrow -positionabsolute -left0 -padding3-l -gap1">
             <!-- Q&A Toggle -->
             <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"></i>
             <GlyphButton
-                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize7", "la-combine-h", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 

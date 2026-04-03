@@ -83,10 +83,10 @@
 
     {#snippet outerContent()}
         {#if !!(mod.system.uses.max || mod.system.counters.length)}
-            <div class="la-combine-v -gap0 -widthfull">
+            <div class="la-flexcol -gap0 -widthfull">
             <!-- Limited Use -->
             {#if mod.system.uses.max}
-                <div class="la-combine-h clipped-alt la-bckg-header-anti -widthfull -margin2-l">
+                <div class="la-flexrow clipped-alt la-bckg-header-anti -widthfull -margin2-l">
                     <LimitedBox
                         usesValue={mod.system.uses.value}
                         usesMax={mod.system.uses.max}
@@ -140,10 +140,10 @@
         contentLeft={headerSecondaryLeftOptions}
         contentRight={headerSecondaryRightOptions}
     >
-        <div class="la-generated -widthfull -gap2 la-combine-v">
+        <div class="la-generated -widthfull -gap2 la-flexcol">
         <!-- Generated Content -->
         {#if mod.system.added_range.length || mod.system.added_damage.length}
-            <div class="la-combine-h -widthfull">
+            <div class="la-flexrow -widthfull">
             {#if mod.system.added_range.length}
                 <EffectBox
                     name={getLocalized("LA.mech.mod.range.label")}

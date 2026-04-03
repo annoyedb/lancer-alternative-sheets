@@ -76,7 +76,7 @@
             subLabel={getLocalized("LA.mech.mount.locked.subLabel")}
         />
     {:else}
-        <div class="la-combine-v -gap0 -widthfull">
+        <div class="la-flexcol -gap0 -widthfull">
             <Weapon
                 actor={actor}
                 mount={mount}

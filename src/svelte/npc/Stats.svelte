@@ -81,11 +81,11 @@
 </script>
 
 <div class="la-bg-scroll la-bckg-background la-shadow -medium -inset -widthfull -heightfull">
-    <div class="la-combine-h la-dropshadow -justifyevenly">
+    <div class="la-flexrow la-dropshadow -justifyevenly">
     <!-- Left Side -->
-        <div class="la-combine-v -gap1">
+        <div class="la-flexcol -gap1">
             <!-- Tier Options -->
-            <div class="la-combine-h -height4 ">
+            <div class="la-flexrow -height4 ">
                 <div class="">
                     <button type="button"
                         class="la-bckg-secondary -width4
@@ -116,10 +116,10 @@
                     >+</button>
                 </div>
             </div>
-            <div class="la-combine-h -widthfull -heightfull">
+            <div class="la-flexrow -widthfull -heightfull">
                 <!-- Left Side Floating Stats -->
                 <div class="la-stat__island -positionrelative la-dropshadow">
-                    <div class="la-combine-v -positionabsolute -top0 -left0 -fontsize11">
+                    <div class="la-flexcol -positionabsolute -top0 -left0 -fontsize11">
                         <i class="cci cci-npc-tier-{system.tier} {themeOverride} la-outl-shadow"
                             data-tooltip={tooltipEnabled ? tierTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
@@ -135,14 +135,14 @@
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}></i>
                     {/if}
-                        <div class="la-combine-h" 
+                        <div class="la-flexrow" 
                             data-tooltip={tooltipEnabled ? speedTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize8"></i>
                             <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.speed}</span>
                         </div>
-                        <div class="la-combine-h -aligncenter" 
+                        <div class="la-flexrow -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
@@ -179,11 +179,11 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="la-combine-h -padding1-r">
-            <div class="la-combine-v -gap1">
-                <div class="la-combine-h -height4 -justifybetween -widthfull">
+        <div class="la-flexrow -padding1-r">
+            <div class="la-flexcol -gap1">
+                <div class="la-flexrow -height4 -justifybetween -widthfull">
                     <!-- Advanced options, theme override, notes, etc -->
-                    <div class="la-combine-h -gap1">
+                    <div class="la-flexrow -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
                             style={["-lineheight5", "la-prmy-primary -glow-prmy-hover"]}
@@ -232,7 +232,7 @@
                         />
                     {/if}
                     </div>
-                    <div class="la-combine-h -gap1">
+                    <div class="la-flexrow -gap1">
                         <button type="button"
                             class="mdi mdi-note-edit -fontsize4 la-prmy-primary -glow-prmy-hover {advancedOptions ? "" : "-visibilityhidden"}
                                 popout-text-edit-button"
@@ -256,7 +256,7 @@
                 </div>
                 <div class="-flex1">
                     <!-- Mech Stats 1 -->
-                    <div class="la-stats la-combine-h -justifyevenly">
+                    <div class="la-stats la-flexrow -justifyevenly">
                         <StatComboShort
                             icon={"cci cci-role-defender"}
                             label={getLocalized("LA.armor.short")}
@@ -296,7 +296,7 @@
                     </div>
                     <!-- Mech Bars -->
                     <div class="la-damage -margin0-lr -margin2-tb">
-                        <div class="la-combine-h -gap2">
+                        <div class="la-flexrow -gap2">
                             <div class="la-visuals -flex5">
                                 <!-- HP, SHIELD (BAR) -->
                                 <StatusBar
@@ -338,7 +338,7 @@
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
-                            <div class="la-combine-v -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
+                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.overshield.value" 
@@ -360,7 +360,7 @@
 
                         <div class="la-spacer -large"></div>
 
-                        <div class="la-combine-h -gap2">
+                        <div class="la-flexrow -gap2">
                             <div class="la-visuals -flex5">
                                 <!-- HEAT -->
                                 <StatusBar
@@ -402,7 +402,7 @@
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
-                            <div class="la-combine-v -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
+                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.burn" 
@@ -423,7 +423,7 @@
                         </div>
                     </div>
                     <!-- Mech Stats 2 -->
-                    <div class="la-stats la-combine-h -justifyevenly">
+                    <div class="la-stats la-flexrow -justifyevenly">
                         <StatComboShort
                             icon={"cci cci-tech-full"}
                             label={getLocalized("LA.tattack.short")}

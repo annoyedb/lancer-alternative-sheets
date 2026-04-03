@@ -91,12 +91,12 @@
     headerContent={headerOptions}
 >
 {#if weapons.length}
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each weapons as weapon, index}
     {#snippet outerContent()}
-        <div class="la-combine-v -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l">
         {#if isLoading(weapon) || weapon.isLimited() || weapon.system.sp}
-            <div class="la-combine-h clipped-bot-alt la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <!-- Loading -->
                 <LoadedBox
                     item={weapon}
@@ -173,7 +173,7 @@
             onPointerEnter={() => {damageButtonHover = true;} }
             onPointerLeave={() => {damageButtonHover = false;} }
         />
-        <div class="la-combine-v -margin3-lr">
+        <div class="la-flexcol -margin3-lr">
             <MessageButton
                 flowClass={FlowClass.SendToChat}
                 uuid={weapon.uuid}

@@ -36,7 +36,7 @@
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
 </script>
 
-<div class="la-statusbar la-combine-h -fontsizemedium -gap2 {textStyle?.join(' ')}">
+<div class="la-statusbar la-flexrow -fontsizemedium -gap2 {textStyle?.join(' ')}">
     {#if name}
     <span class="la-damage__span -fontsizesmall -flexbasis13 -textalignright"
         data-tooltip={tooltipEnabled ? tip : undefined}
@@ -47,7 +47,7 @@
 ---></span>
     {/if}
     <div class="la-bar-h la-bckg-darken-3 -flex1 -positionrelative -widthfull -height3 -overflowhidden {clipPath}">
-        <div class="la-bar-h-progress la-combine-h -widthfull -heightfull">
+        <div class="la-bar-h-progress la-flexrow -widthfull -heightfull">
             <input type="number" 
                 class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter 
                     {editing ? textStyle?.join(' ') : "la-text-transparent"}"

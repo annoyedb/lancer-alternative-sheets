@@ -20,7 +20,7 @@
 
 {#if mountNames.length}
 <div 
-    class="la-combine-v la-text-header -gap0 -aligncenter -fontsizesmall -height5 -lineheight2 {style?.join(' ')}"
+    class="la-flexcol la-text-header -gap0 -aligncenter -fontsizesmall -height5 -lineheight2 {style?.join(' ')}"
     onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
 >

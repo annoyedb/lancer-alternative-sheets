@@ -95,7 +95,7 @@
     {@render headerOptions(`${collID}.actions`)}
 {/snippet}
 
-<div class="la-combine-v -widthfull">
+<div class="la-flexcol -widthfull">
 {#if system.detail}
     <HeaderMain
         text={getLocalized("LA.deployable.effects.label")}
@@ -137,12 +137,12 @@
 
         headerContent={headerActions}
     >
-        <div class="la-combine-v -gap0 -widthfull -fontsize4">
+        <div class="la-flexcol -gap0 -widthfull -fontsize4">
             <EffectBox
                 name={getLocalized("LA.npc.utilities.label")}
             >
-                <div class="la-combine-h -wrapwrap -widthfull -gap0">
-                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                <div class="la-flexrow -wrapwrap -widthfull -gap0">
+                    <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
                             style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
                             text={getLocalized("LA.flow.rollAttack.label")}
@@ -157,7 +157,7 @@
                             tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                         />
                     </div>
-                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                    <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
                             style={["clipped", "-widthfull", "la-bckg-secondary"]}
                             text={getLocalized("LA.flow.rollDamage.label")}
@@ -178,8 +178,8 @@
             <EffectBox
                 name={getLocalized("LA.deployable.deployment.label")}
             >
-                <div class="la-combine-h -wrapwrap -widthfull -gap0">
-                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                <div class="la-flexrow -wrapwrap -widthfull -gap0">
+                    <div class="la-flexcol -gap0 -flex1 -widthfull">
                     {#each actions as action, index}
                     {#if index % 2 == 0}
                         <FlowButton
@@ -200,7 +200,7 @@
                     {/if}
                     {/each}
                     </div>
-                    <div class="la-combine-v -gap0 -flex1 -widthfull">
+                    <div class="la-flexcol -gap0 -flex1 -widthfull">
                     {#each actions as action, index}
                     {#if index % 2 != 0}
                         <FlowButton

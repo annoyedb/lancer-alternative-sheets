@@ -133,11 +133,11 @@
         --->{deployable.name ? deployable.name : ""}<!--
     ---></span>
         <!-- Generated Content -->
-        <div class="la-generated -gap2 la-combine-v">
+        <div class="la-generated -gap2 la-flexcol">
             <div class="-fontsizemedium">
                 <!-- Deployable Actions -->
-                <div class="la-effectbox-buttons la-combine-h -justifybetween">
-                    <div class="la-combine-v -alignstart">
+                <div class="la-effectbox-buttons la-flexrow -justifybetween">
+                    <div class="la-flexcol -alignstart">
                     <!-- (#4) -->
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton

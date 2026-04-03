@@ -93,7 +93,7 @@
     
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each talents as talent, index}
     {#snippet headerSecondaryTalentLeftOptions()}
         <i class="{H2_ICON_SIZE} cci cci-compendium"></i>
@@ -152,12 +152,12 @@
             contentLeft={headerSecondaryTalentLeftOptions}
             contentRight={headerSecondaryTalentRightOptions}
         >
-            <div class="la-combine-v -gap0 -widthfull">
+            <div class="la-flexcol -gap0 -widthfull">
             {#each talent.system.ranks as rank, jndex}
             {#if jndex < talent.system.curr_rank}
                 {#snippet outerContent()}
                     {#if rank.counters.length}
-                    <div class="la-combine-v -widthfull -padding2-l
+                    <div class="la-flexcol -widthfull -padding2-l
                         {getCollapseState(getRankCollID(index, jndex)) ? "la-brdr-transparent -borders-l" : "la-brdr-trait -borders-l -collapse-fade-out"}"
                     >
                     {#each rank.counters as counter, kndex}
@@ -217,7 +217,7 @@
                     contentLeft={headerSecondaryRankLeftOptions}
                     contentRight={headerSecondaryRankRightOptions}
                 >
-                    <div class="la-generated -widthfull -gap2 la-combine-v">
+                    <div class="la-generated -widthfull -gap2 la-flexcol">
                         <BonusBox
                             bonuses={rank.bonuses}
                             bonusPath={ isMechSheet

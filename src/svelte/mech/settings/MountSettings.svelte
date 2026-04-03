@@ -178,7 +178,7 @@
 <!-- Remove mount snippet -->
 {#snippet removeMount()}
     <h3 class="-widthfull">{getLocalized("LA.advanced.mount.remove.label")}</h3>
-    <div class="la-combine-v -widthfull -heightfull -gap0 -padding0">
+    <div class="la-flexcol -widthfull -heightfull -gap0 -padding0">
     {#each weaponMounts as mount, index}
         <MountDelete
             actorSheet={document._sheet.actor}
@@ -193,7 +193,7 @@
 <!-- Edit mount snippet -->
 {#snippet editMount()}
     <h3 class="-widthfull">{getLocalized("LA.advanced.mount.edit.label")}</h3>
-    <div class="la-combine-v -widthfull -heightfull -gap0 -padding0">
+    <div class="la-flexcol -widthfull -heightfull -gap0 -padding0">
     {#each weaponMounts as mount, index}
         {#snippet dropdownContent()}
             <MountOptions
@@ -223,12 +223,12 @@
 
 <!-- Component -->
 <div class="-heightfull
-    {advancedOptions && active === "loadout" ? "la-combine-h" : "-displaynone"}"
+    {advancedOptions && active === "loadout" ? "la-flexrow" : "-displaynone"}"
 >    
     <span class="{SETTINGS_HEADER_STYLE} -alignend">
         {getLocalized("LA.advanced.mount.label")}
     </span>
-    <div class="la-combine-v -alignstart -padding0-b -heightfull">
+    <div class="la-flexcol -alignstart -padding0-b -heightfull">
         <MountAdd
             tooltipEnabled={getMechSheetTooltipEnabled()}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}

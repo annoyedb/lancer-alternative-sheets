@@ -20,7 +20,7 @@
 </script>
 
 {#if usesMax}
-<div class="la-limited la-combine-h la-text-header 
+<div class="la-limited la-flexrow la-text-header 
         -aligncenter -padding1-lr">
     <span class="la-hexarray__span -fontsizemedium">
         {getLocalized("LA.limited.label")}

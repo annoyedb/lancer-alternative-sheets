@@ -35,14 +35,14 @@
 </script>
 
 <!-- Header -->
-<div class="la-header-content la-combine-h">
+<div class="la-header-content la-flexrow">
     <!-- Advanced Options Toggle -->
     <div 
-        class="la-combine-v -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
+        class="la-flexcol -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
         style="z-index: 3;"
     >
         <div
-            class="la-combine-h"
+            class="la-flexrow"
         >
         {#if advancedOptions}
             <i 
@@ -91,7 +91,7 @@
     <div class="la-names -margin3 -alignselfstart -flex1"
         style="z-index: 2;"
     >
-        <div class="la-combine-h">
+        <div class="la-flexrow">
             <input type="text"
                 class="la-actorname__input la-text-header -upper -fontsize7 -bold -letterspacing1
                     charname"
@@ -106,8 +106,8 @@
             </span>
         </div>
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
-        <div class="la-combine-h">
-            <span class="la-pilotcallsign__span la-combine-h -justifystart -upper la-text-header -widthfull -overflowhidden
+        <div class="la-flexrow">
+            <span class="la-pilotcallsign__span la-flexrow -justifystart -upper la-text-header -widthfull -overflowhidden
                     ref set pilot click-open"
                 data-uuid={pilot?.uuid}
                 data-path={"system.pilot"}

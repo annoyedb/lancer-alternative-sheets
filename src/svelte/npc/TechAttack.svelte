@@ -110,13 +110,13 @@
 
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each techs as tech}
     {#snippet outerContent()}
         <div class="-widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
                 {#if hasAccuracyBonus(tech)}
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
+                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                         data-tooltip={accuracyTip}
                         data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"DOWN"}
@@ -126,7 +126,7 @@
                     </span>
                 {/if}
                 {#if hasAttackBonus(tech)}
-                    <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
+                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                         data-tooltip={attackTip}
                         data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                         data-tooltip-direction={"DOWN"}

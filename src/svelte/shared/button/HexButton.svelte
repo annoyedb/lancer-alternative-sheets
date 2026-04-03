@@ -49,7 +49,7 @@
 
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {outerStyle?.join(' ')}">
-    <div class="la-combine-v {innerStyle?.join(' ')}">
+    <div class="la-flexcol {innerStyle?.join(' ')}">
         <span class="la-label__span {outerTextStyle?.join(' ')}">
             {text}
         </span>

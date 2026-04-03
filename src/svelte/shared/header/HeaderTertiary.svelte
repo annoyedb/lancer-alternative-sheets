@@ -91,18 +91,18 @@
         related to how event handlers get attached in Lancer sheets: https://github.com/sveltejs/svelte/issues/13213 
     -->
     <!-- svelte-ignore event_directive_deprecated -->
-    <div class="la-summary la-combine-h la-dropshadow 
+    <div class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull
             {headerStyle?.join(' ') || H3_HEADER_STYLE}
             {collapseID ? "collapse-trigger" : ""}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Icon, Name -->
-        <div class="la-left la-combine-h -aligncenter">
+        <div class="la-left la-flexrow -aligncenter">
         {#if contentLeft}
             {@render contentLeft()}
         {/if}
-            <div class="la-combine-v -alignstart -justifycenter -divider">
+            <div class="la-flexcol -alignstart -justifycenter -divider">
                 <span class="la-top__span {headerFontStyle?.join(' ') || "-fontsize5"}">{text}</span>
                 <TerminalText
                     text={collapseID || !extensionText ? `${subText} ` : subText}
@@ -114,7 +114,7 @@
         </div>
         <!-- Options -->
     {#if extraOptions}
-        <div class="la-right la-combine-h -aligncenter">
+        <div class="la-right la-flexrow -aligncenter">
         {#if contentRight}
             {@render contentRight()}
         {/if}

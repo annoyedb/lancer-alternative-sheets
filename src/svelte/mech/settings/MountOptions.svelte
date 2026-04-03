@@ -32,7 +32,7 @@
     }
 </script>
 <h3>{getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}<i class="mdi mdi-arrow-down-right"></h3>
-<div class="la-combine-v -widthfull -gap0 -padding0">
+<div class="la-flexcol -widthfull -gap0 -padding0">
 {#each Object.keys(MOUNT_LOCALIZE_MAP) as mountType, morphIndex}
     <!-- (#5*) 
     * Normally (#2) would apply here, 
@@ -47,7 +47,7 @@
     </button>
 {/each}
     <div
-        class="la-combine-h"
+        class="la-flexrow"
     >
         <input type="checkbox" 
             bind:checked={bracing}

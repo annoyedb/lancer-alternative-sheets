@@ -134,13 +134,13 @@
 
     headerContent={headerOptions}
 >
-    <div class="la-combine-v -gap0 -widthfull">
+    <div class="la-flexcol -gap0 -widthfull">
     {#each weapons as weapon, index}
     {#snippet outerContent()}
         <div class="-widthfull -padding2-l">
-            <div class="la-combine-h clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
             {#if hasAccuracyBonus(weapon)}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={tooltipEnabled ? accuracyTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -150,7 +150,7 @@
                 </span>
             {/if}
             {#if hasAttackBonus(weapon)}
-                <span class="la-combine-h -justifycenter -aligncenter -fontsize5 -padding0-lr"
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={tooltipEnabled ? attackTip : undefined}
                     data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
                     data-tooltip-direction={TooltipDirection.DOWN}
@@ -217,7 +217,7 @@
             onPointerEnter={() => {damageButtonHover = true;}}
             onPointerLeave={() => {damageButtonHover = false;}}
         />
-        <div class="la-combine-v -margin3-lr">
+        <div class="la-flexcol -margin3-lr">
             <MessageButton
                 flowClass={FlowClass.None}
                 uuid={weapon.uuid}

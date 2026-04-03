@@ -24,8 +24,8 @@
     collapseID={collID}
     startCollapsed={true}
 >
-<div class="la-combine-v -widthfull clipped-bot-alt">
-    <div class="la-combine-h -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
+<div class="la-flexcol -widthfull clipped-bot-alt">
+    <div class="la-flexrow -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
         <StatComboShort
             icon={"cci cci-role-defender -alignselfcenter"}
             label={getLocalized("LA.armor.short")}
@@ -63,7 +63,7 @@
             tooltipDirection={TooltipDirection.LEFT}
         />
     </div>
-    <div class="la-combine-h -justifyevenly -widthfull -padding1-tb -fontsizemedium -bold">
+    <div class="la-flexrow -justifyevenly -widthfull -padding1-tb -fontsizemedium -bold">
         <StatComboShort
             icon={"mdi mdi-heart-flash -alignselfcenter"}
             label={getLocalized("LA.hitpoint.short")}
@@ -113,7 +113,7 @@
             tooltipDirection={TooltipDirection.LEFT}
         />
     </div>
-    <div class="la-combine-h -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
+    <div class="la-flexrow -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
         <StatComboShort
             icon={"cci cci-tech-full -alignselfcenter"}
             label={getLocalized("LA.tattack.short")}
