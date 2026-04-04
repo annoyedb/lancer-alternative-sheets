@@ -8,6 +8,12 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
 
+    type LockImageButtonProps = {
+        actor: any; 
+        style: string; 
+        setState: (uuid: string, value: boolean) => void;
+    }
+
     const {
         actor,
         style,
@@ -18,7 +24,7 @@
 
         logType,
         logTypeReset,
-    } : {actor: any; style: string; setState: (uuid: string, value: boolean) => void;} & TooltipProps & TextLogEventProps = $props();
+    } : LockImageButtonProps & TooltipProps & TextLogEventProps = $props();
     let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     
     const isVideo = isValidVideoContainer(actor.prototypeToken?.texture.src);

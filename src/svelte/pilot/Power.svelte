@@ -2,18 +2,21 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import LimitedBondBox from "@/svelte/pilot/LimitedBondBox.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import LimitedBondBox from "@/svelte/pilot/LimitedBondBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
@@ -63,7 +66,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.bond.power.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -102,8 +105,11 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={["la-text-header", "-fontsize6", "mdi", "mdi-weather-sunny"]}
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={["la-text-header -fontsize6 mdi mdi-weather-sunny"]}
+            iconBackgroundStyle={[
+                "-fontsize7 la-prmy-secondary", 
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
             
             flowClass={FlowClass.BondPower}
             uuid={bondUUID}
@@ -134,27 +140,31 @@
             </span>
             {/if}
         </span>
-        <MessageButton
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
             flowClass={FlowClass.None}
+            index={power.index}
             uuid={power.uuid}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-            
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.chat.tooltip")}
+            logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
-            onPointerEnter={() => {messageButtonHover = true;}}
-            onPointerLeave={() => {messageButtonHover = false;}}
-
             onClick={event => sendToChat(event, power)}
-        />
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
     {/snippet}
         <HeaderSecondary
             text={power.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

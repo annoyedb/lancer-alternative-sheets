@@ -1,13 +1,16 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
+
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
     import { formatString, getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
@@ -15,15 +18,14 @@
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
-    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
-    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
-    import EditButton from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import TagArray from "@/svelte/shared/TagArray.svelte";
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -132,7 +134,7 @@
 <HeaderMain
     text={getLocalized("LA.mech.system.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-system"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -166,7 +168,11 @@
     {#snippet headerTertiaryLeftOptions()}
         <EffectButton
             iconStyle={[H3_ICON_SIZE, getIconStyle(component)]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={[
+                "la-prmy-secondary",
+                H3_ICON_SIZE,  
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
             
             flowClass={component.value.system.effect 
                 ? FlowClass.SendEffectToChat 
@@ -196,29 +202,45 @@
             logTypeReset={TextLogHook.MechHeaderReset}
         />
         <div class="la-flexcol -margin3-lr">
-            <MessageButton
+            <!-- Send to chat -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE]}
                 flowClass={FlowClass.SendToChat}
+                type={"system"}
+                index={index}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.chat.tooltip")}
+                logText={getLocalized("LA.chat.tooltip")}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
 
                 onPointerEnter={() => {messageButtonHover = true;} }
                 onPointerLeave={() => {messageButtonHover = false;} }
-            />
-            <EditButton
+            >
+                <i class="mdi mdi-message"></i>
+            </GlyphButton>
+            <!-- Edit -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE]}
                 flowClass={FlowClass.ContextMenu}
                 path={getComponentPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.tooltip")}
+                logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
-            />
+            >
+                <i class="fas fa-ellipsis-v"></i>
+            </GlyphButton>
         </div>
     {/snippet}
         <HeaderTertiary

@@ -1,13 +1,16 @@
 <script lang="ts">
     import type { WeaponModProps } from "@/interfaces/mech/WeaponModProps";
+
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
+
     import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import RangeArray from "@/svelte/shared/RangeArray.svelte";
     import DamageArray from "@/svelte/shared/DamageArray.svelte";
@@ -17,11 +20,12 @@
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
-    import EditButton from "@/svelte/shared/button/EditButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -39,8 +43,11 @@
 {#if mod}
     {#snippet headerSecondaryLeftOptions()}
     <EffectButton
-        iconStyle={["cci", "cci-weaponmod", "-fontsize7"]}
-        iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+        iconStyle={["cci cci-weaponmod -fontsize7"]}
+        iconBackgroundStyle={[
+            "-fontsize7 la-prmy-secondary", 
+            qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+        ]}
 
         flowClass={FlowClass.SendEffectToChat}
         path={path}
@@ -67,18 +74,25 @@
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />
-    <EditButton
+    <!-- Edit -->
+    <GlyphButton
+        style={[H2_BUTTON_ICON_STYLE]}
         flowClass={FlowClass.ContextMenu}
         path={path}
 
         tooltipEnabled={tooltipEnabled}
+        tooltipDirection={TooltipDirection.UP}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltip={getLocalized("LA.edit.tooltip")}
+        logText={getLocalized("LA.edit.tooltip")}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 
-        onPointerEnter={() => {editButtonHover = true;}}
-        onPointerLeave={() => {editButtonHover = false;}}
-    />
+        onPointerEnter={() => {editButtonHover = true;} }
+        onPointerLeave={() => {editButtonHover = false;} }
+    >
+        <i class="fas fa-ellipsis-v"></i>
+    </GlyphButton>
     {/snippet}
 
     {#snippet outerContent()}
@@ -203,7 +217,7 @@
                 logTypeReset={TextLogHook.MechHeaderReset}
             >
                 <FlowButton
-                    style={["clipped-bot", "la-bckg-secondary"]}
+                    style={["clipped-bot la-bckg-secondary"]}
                     text={getLocalized("LA.use.label")}
 
                     flowClass={FlowClass.SendEffectToChat}

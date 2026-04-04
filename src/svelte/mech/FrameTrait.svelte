@@ -2,17 +2,20 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
+    import { FlowClass } from "@/enums/FlowClass";
+    import { TextLogHook } from "@/enums/TextLogHook";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
-    import { CounterBoxType } from "@/enums/CounterBoxType";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -40,20 +43,26 @@
 <i class="{H2_ICON_SIZE} cci cci-frame"></i>
 {/snippet}
 {#snippet headerSecondaryRightOptions()}
-<MessageButton
+<GlyphButton
+    style={[H2_BUTTON_ICON_STYLE]}
     flowClass={FlowClass.SendToChat}
     uuid={frame.uuid}
     type={"trait"}
     index={index}
-    
+
     tooltipEnabled={tooltipEnabled}
+    tooltipDirection={TooltipDirection.UP}
     tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltip={getLocalized("LA.chat.tooltip")}
+    logText={getLocalized("LA.chat.tooltip")}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
-    onPointerEnter={() => {messageButtonHover = true;}}
-    onPointerLeave={() => {messageButtonHover = false;}}
-/>
+    onPointerEnter={() => {messageButtonHover = true;} }
+    onPointerLeave={() => {messageButtonHover = false;} }
+>
+    <i class="mdi mdi-message"></i>
+</GlyphButton>
 {/snippet}
 
 <!-- Frame Traits -->

@@ -1,18 +1,21 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
+    import DamageArray from "@/svelte/shared/DamageArray.svelte";
+    import RangeArray from "@/svelte/shared/RangeArray.svelte";
+
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { WeaponProps } from "@/interfaces/actor/button/WeaponProps";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import DamageArray from "@/svelte/shared/DamageArray.svelte";
-    import RangeArray from "@/svelte/shared/RangeArray.svelte";
 
     const {
         damage,
@@ -69,11 +72,12 @@
     }
 </script>
 <script lang="ts" module>
-    const _ICON_BG_STYLE = `-fontsize11 la-text-scrollbar-secondary`;
+    const _DEFAULT_I_BACKGROUND = `-fontsize11 la-text-scrollbar-secondary`;
 </script>
 
 <button type="button"
-    class="la-properties la-flexcol -fontsize5 la-prmy-accent -justifycenter -positionrelative
+    class="
+        la-properties la-flexcol -fontsize5 la-prmy-accent -justifycenter -positionrelative
         {hasAllWeaponProperties ? "-divider" : ""} 
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
@@ -96,13 +100,16 @@
 {#if damage}
     <DamageArray
         damages={damage}
-        style={[...iconStyle || [], disabled ? "" : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
+        style={(iconStyle || []).concat(disabled 
+            ? "" 
+            : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover")
+        }
     />
 {/if}
 {#if !disabled && damage?.length}
     <i 
         class="fal fa-dice-d20 -positionabsolute 
-            {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
+            {iconBackgroundStyle?.join(' ') || _DEFAULT_I_BACKGROUND}" 
         style="z-index: -1;"
     ></i>
 {/if}

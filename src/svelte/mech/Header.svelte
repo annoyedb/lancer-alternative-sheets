@@ -53,7 +53,7 @@
             ></i>
         {/if}
             <AdvancedButton
-                style={["-fontsize5", "-width7", "-glow-prmy", "la-prmy-primary"]}
+                style={["-fontsize5 -glow-prmy la-prmy-primary"]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}

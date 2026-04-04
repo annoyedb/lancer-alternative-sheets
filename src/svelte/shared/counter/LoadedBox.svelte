@@ -31,8 +31,8 @@ Special implementation of the `CounterBox` component for items with the `Loading
             "system.loaded": !loaded,
         });
 
-        if (onPointerClick)
-            onPointerClick(event, index);
+        if (onPointerClick && event.currentTarget instanceof HTMLElement)
+            onPointerClick(event as MouseEvent & { currentTarget: EventTarget & HTMLElement }, index);
     }
 </script>
 

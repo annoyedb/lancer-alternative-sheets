@@ -1,27 +1,27 @@
 <script lang="ts">
-    import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getLocalized } from "@/scripts/helpers";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { AcceptType } from "@/enums/AcceptType";
+    import { CounterBoxType } from "@/enums/CounterBoxType";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { CounterBoxType } from "@/enums/CounterBoxType";
-    import { AcceptType } from "@/enums/AcceptType";
+    import { getLocalized } from "@/scripts/helpers";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
-    import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import TagArray from "@/svelte/shared/TagArray.svelte";
-    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
-    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import TagArray from "@/svelte/shared/TagArray.svelte";
 
     const {
         actor,
@@ -71,10 +71,30 @@
     
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, armor: any)
     {
+        const desc = `
+        ${armor.system.description}
+        <hr>
+        <div 
+            class="la-flexrow -justifybetween clipped-alt -fontsize5" 
+            style="
+                background-color: var(--weapon-color);
+                color: var(--light-text);
+                padding: 0.5rem;
+                align-items: baseline;
+            "
+        >
+            <div>${armor.system.bonuses[0].val}<i class="mdi mdi-heart-half-full" style="padding-left: 2px; padding-right: 2px;"></i></div>
+            <div class="la-flexrow">${armor.system.bonuses[1].val}<i class="cci cci-role-defender -fontsize6"></i></div>
+            <div class="la-flexrow">${armor.system.bonuses[2].val}<i class="cci cci-evasion -fontsize6"></i></div>
+            <div class="la-flexrow">${armor.system.bonuses[3].val}<i class="cci cci-edef -fontsize6"></i></div>
+            <div>${armor.system.bonuses[4].val}<i class="mdi mdi-arrow-right-bold-hexagon-outline" style="padding-left: 2px; padding-right: 2px;"></i></div>
+        </div>
+        `
         event.stopPropagation();
         let chatData = {
             title: armor.name, 
-            description: armor.system.description
+            description: desc,
+            tags: armor.system.tags,
         } as ChatData
         SendUnknownToChatBase.getInstance().startFlow(armor.uuid, chatData);
     }
@@ -94,7 +114,7 @@
 <HeaderMain
     text={getLocalized("LA.armor.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -186,41 +206,51 @@
         <i class="{H2_ICON_SIZE} cci cci-pilot"></i>
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <EditButton
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={getArmorPath(index)}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
+            logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
-            onPointerEnter={() => {editButtonHover = true;}}
-            onPointerLeave={() => {editButtonHover = false;}}
-        />
-        <MessageButton
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
+        <!-- Send to Chat -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
             flowClass={FlowClass.None}
+            index={index}
             uuid={armor.uuid}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-            
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.chat.tooltip")}
+            logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
-            onPointerEnter={() => {messageButtonHover = true;}}
-            onPointerLeave={() => {messageButtonHover = false;}}
-            
             onClick={event => sendToChat(event, armor)}
-        />
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
     {/snippet}
         <HeaderSecondary
             text={armor.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

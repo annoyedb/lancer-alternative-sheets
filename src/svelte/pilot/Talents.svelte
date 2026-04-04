@@ -1,14 +1,18 @@
 <script lang="ts">
     import { onMount } from "svelte";
+
     import { trackHook } from "@/scripts/store/hooks";
+    import { getCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getCollapseState } from "@/scripts/store/collapse";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
@@ -16,8 +20,8 @@
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor, // Source data (e.g. pilot)
@@ -61,6 +65,13 @@
     {
         return `${collID}.${talentIndex}.ranks.${rankIndex}.action`;
     }
+
+    function getTalentPath(index: number)
+    {
+        return isMechSheet
+            ? `system.pilot.value.itemTypes.talent.${index}`
+            : `itemTypes.talent.${index}`
+    }
 </script>
 
 {#snippet headerOptions()}
@@ -80,7 +91,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.talent.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHoverTalent)
@@ -99,22 +110,25 @@
         <i class="{H2_ICON_SIZE} cci cci-compendium"></i>
     {/snippet}
     {#snippet headerSecondaryTalentRightOptions()}
-        <EditButton
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow -margin0-lr"]}
             flowClass={FlowClass.ContextMenu}
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-margin0-lr"]}
-            iconStyle={["-lineheight5"]}
-            path={ isMechSheet
-                ? `system.pilot.value.itemTypes.talent.${index}`
-                : `itemTypes.talent.${index}`
-            }
+            path={getTalentPath(index)}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
+            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
+            logText={getLocalized("LA.edit.tooltip")}
             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
-            onPointerEnter={() => {editButtonHover = true;}}
-            onPointerLeave={() => {editButtonHover = false;}}
-        />
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
         <CollapseAllButton
             collapseID={getTalentCollID(index)}
             tooltipEnabled={tooltipEnabled}
@@ -139,7 +153,7 @@
                 return undefined;
             }}
             
-            rootStyle={["ref", "set", "lancer-talent", "submajor"]}
+            rootStyle={["ref set lancer-talent submajor"]}
             uuid={talent.uuid}
             path={ isMechSheet
                 ? `system.pilot.value.itemTypes.talent.${index}`
@@ -170,7 +184,7 @@
                                 ? `system.pilot.value.itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
                                 : `itemTypes.talent.${index}.system.ranks.${jndex}.counters.${kndex}`
                             }
-                            style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                            style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                             
                             logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                             logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
@@ -183,19 +197,25 @@
                     <i class="{H2_ICON_SIZE} cci cci-talent"></i>
                 {/snippet}
                     {#snippet headerSecondaryRankRightOptions()}
-                    <MessageButton
+                    <GlyphButton
+                        style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
                         flowClass={FlowClass.SendToChat}
-                        uuid={talent.uuid}
                         rank={jndex}
+                        uuid={talent.uuid}
 
                         tooltipEnabled={tooltipEnabled}
+                        tooltipDirection={TooltipDirection.UP}
                         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                        tooltip={getLocalized("LA.chat.tooltip")}
+                        logText={getLocalized("LA.chat.tooltip")}
                         logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                         logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
-                        onPointerEnter={() => {messageButtonHover = true;}}
-                        onPointerLeave={() => {messageButtonHover = false;}}
-                    />
+                        onPointerEnter={() => {messageButtonHover = true;} }
+                        onPointerLeave={() => {messageButtonHover = false;} }
+                    >
+                        <i class="mdi mdi-message"></i>
+                    </GlyphButton>
                 {/snippet}
                 <HeaderSecondary
                     text={rank.name}
@@ -208,7 +228,7 @@
                         return undefined;
                     }}
 
-                    rootStyle={["ref", "set"]}
+                    rootStyle={["ref set"]}
                     uuid={talent.uuid}
                     collapseID={getRankCollID(index, jndex)}
                     startCollapsed={false}

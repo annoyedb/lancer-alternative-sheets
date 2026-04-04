@@ -2,20 +2,27 @@
     import type { Snippet } from "svelte";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
-    import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
+    import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
 
+    type GlyphButtonProps = {
+        children?: Snippet
+    }
+
     const {
         children,
-
+        
         style,
         onClick,
 
         flowClass,
         uuid,
+        type,
+        index,
+        rank,
         path,
         action,
         actionValue,
@@ -34,7 +41,7 @@
         
         onPointerEnter,
         onPointerLeave,
-    }: {children?: Snippet} & FlowButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+    }: GlyphButtonProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
 
     const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
     const logging = logType && logTypeReset && logText;
@@ -67,6 +74,9 @@
         {style?.join(' ')}
         {flowClass}"
     data-uuid={uuid}
+    data-type={type}
+    data-index={index}
+    data-rank={rank}
     data-path={path}
     data-action={action}
     data-action-value={actionValue}

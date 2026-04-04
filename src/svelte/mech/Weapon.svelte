@@ -1,20 +1,22 @@
 <script lang="ts">
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
+
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { AcceptType } from "@/enums/AcceptType";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import EditButton from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
     import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
@@ -24,6 +26,7 @@
     import SpCostArray from "@/svelte/shared/SPCostArray.svelte";
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -175,7 +178,7 @@
             profiles={weapon.system.profiles}
             weapon={weapon}
             path={`${getWeaponPath(index)}.system.selected_profile_index`}
-            style={["-widthfull", "la-bckg-header-anti", "la-text-header", "clipped-alt"]}
+            style={["-widthfull la-bckg-header-anti la-text-header clipped-alt"]}
 
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
@@ -184,8 +187,12 @@
 {/snippet}
 {#snippet headerTertiaryLeftOptions()}
     <AttackButton
-        iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-        iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+        iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci cci-weapon"]}
+        iconBackgroundStyle={[
+            "la-prmy-secondary", 
+            H3_ICON_SIZE, 
+            qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+        ]}
 
         flowClass={FlowClass.RollAttack}
         path={`system.loadout.weapon_mounts.${index}`}
@@ -207,7 +214,10 @@
 {#snippet headerTertiaryRightOptions()}
     <DamageButton
         iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-        iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={[
+            "-fontsize9 la-prmy-secondary", 
+            qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+        ]}
         
         flowClass={FlowClass.RollDamage}
         range={weapon.system.active_profile.all_range}
@@ -225,31 +235,47 @@
         onPointerLeave={() => {damageButtonHover = false;} }
     />
     <div class="la-flexcol -margin3-lr">
-        <MessageButton
+        <!-- Overriding default flow behaviour -->
+        <!-- Send to chat -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE]}
             flowClass={FlowClass.None}
+            index={index}
             uuid={weapon.uuid}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.chat.tooltip")}
+            logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
             onClick={event => sendToChat(event, weapon)}
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
-        />
-        <EditButton
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE]}
             flowClass={FlowClass.ContextMenu}
             path={getWeaponPath(index)}
 
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
+            logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
-        />
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
     </div>
 {/snippet}
 <!-- /Snippets -->

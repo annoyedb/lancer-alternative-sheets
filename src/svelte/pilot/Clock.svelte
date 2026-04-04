@@ -7,12 +7,13 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { CounterBoxType } from "@/enums/CounterBoxType";
+    
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -34,7 +35,7 @@
 
 {#snippet headerContent()}
 <GlyphButton
-    style={["mdi mdi-plus-circle-outline", "-fontsize5", "-height4", "-lineheight4", "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
+    style={["mdi mdi-plus-circle-outline -fontsize5 -height4 -lineheight4 la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
 
     flowClass={FlowClass.GeneralControl}
     path="system.bond_state.clocks"
@@ -56,7 +57,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.bond.clock.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-weapon"]}
     extensionTextFunction={() => {
         if (addButtonHover)
@@ -80,7 +81,7 @@
                     usesValue={clock.value}
                     usesMax={clock.max}
                     path="system.bond_state.clocks.{index}"
-                    style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                    style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                     
                     logType={TextLogHook.PilotHeader}
                     logTypeReset={TextLogHook.PilotHeaderReset}
@@ -91,25 +92,30 @@
             <i class="mdi mdi-progress-clock -fontsize5 -padding0"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
-            <EditButton
+            <!-- Edit -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
                 flowClass={FlowClass.ContextMenu}
                 path={getClockPath(index)}
 
-                style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.tooltip")}
+                logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
-                onPointerEnter={() => {editButtonHover = true;}}
-                onPointerLeave={() => {editButtonHover = false;}}
-            />
+                onPointerEnter={() => {editButtonHover = true;} }
+                onPointerLeave={() => {editButtonHover = false;} }
+            >
+                <i class="fas fa-ellipsis-v"></i>
+            </GlyphButton>
         {/snippet}
             <HeaderSecondary
                 text={clock.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
+                textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)

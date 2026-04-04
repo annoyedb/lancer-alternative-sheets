@@ -5,17 +5,18 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
+    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
 
     const {
         actor,
@@ -82,8 +83,8 @@
 <HeaderMain
     text={getLocalized("LA.systems.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-system"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
-    borderStyle={["la-brdr-system", "-gap0"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden -upper"]}
+    borderStyle={["la-brdr-system -gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
             return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -121,8 +122,8 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[getIconStyle(component), "cci", "cci-system", "-fontsize7"]}
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={[getIconStyle(component), "cci cci-system -fontsize7"]}
+            iconBackgroundStyle={["-fontsize7 la-prmy-secondary", qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${component.index}`}
@@ -139,30 +140,40 @@
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <EditButton
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={`itemTypes.npc_feature.${component.index}`}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
 
-            onPointerEnter={() => {editButtonHover = true;}}
-            onPointerLeave={() => {editButtonHover = false;}}
-        />
-        <MessageButton
-            flowClass={FlowClass.SendToChat}
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
+        <!-- Send to Chat -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            flowClass={FlowClass.SendEffectToChat}
+            type={"trait"}
+            index={component.index}
             uuid={component.uuid}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-            
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.chat.tooltip")}
 
-            onPointerEnter={() => {messageButtonHover = true;}}
-            onPointerLeave={() => {messageButtonHover = false;}}
-        />
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
     {/snippet}
         <HeaderSecondary
             text={component.name}
@@ -195,9 +206,7 @@
             <div class="la-flexrow -gap0 -widthfull">
                 <EffectBox
                     name={getLocalized("LA.npc.attackBonus.label")}
-                    outerStyle={[
-                        `${hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"}`, 
-                    ]}
+                    outerStyle={[hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"]}
 
                     tooltipEnabled={tooltipEnabled}
                 >

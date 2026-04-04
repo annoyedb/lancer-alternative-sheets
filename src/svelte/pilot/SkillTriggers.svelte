@@ -2,18 +2,20 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { AcceptType } from "@/enums/AcceptType";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -48,7 +50,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.skill.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -66,8 +68,11 @@
     {#each skills as skill, index}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={["la-text-header", "cci", "cci-skill", "-fontsize7"]}
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={["la-text-header cci cci-skill -fontsize7"]}
+            iconBackgroundStyle={[
+                "-fontsize7 la-prmy-secondary", 
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
             
             flowClass={FlowClass.Skill}
             uuid={skill.uuid}
@@ -97,39 +102,50 @@
             {/if}
             {skill.system.curr_rank * 2}
         </span>
-        <EditButton
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow"]}
             flowClass={FlowClass.ContextMenu}
             path={getSkillPath(index)}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
+            logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
-            onPointerEnter={() => {editButtonHover = true;}}
-            onPointerLeave={() => {editButtonHover = false;}}
-        />
-        <MessageButton
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
+        <!-- Send to chat -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
             flowClass={FlowClass.SendToChat}
+            index={index}
             uuid={skill.uuid}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-            
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            tooltip={getLocalized("LA.chat.tooltip")}
+            logText={getLocalized("LA.chat.tooltip")}
+            logType={ TextLogHook.PilotHeader }
+            logTypeReset={ TextLogHook.PilotHeaderReset }
 
-            onPointerEnter={() => {messageButtonHover = true;}}
-            onPointerLeave={() => {messageButtonHover = false;}}
-        />
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
     {/snippet}
         <HeaderSecondary
             text={skill.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header", "la-prmy-header", "-fontsize4", "-overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

@@ -179,7 +179,7 @@
                     <div class="la-flexrow -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
-                            style={["-lineheight5", "la-prmy-primary -glow-prmy-hover"]}
+                            style={["-lineheight5 la-prmy-primary -glow-prmy-hover"]}
                             iconStyle={["-fontsize7"]}
 
                             tooltipEnabled={tooltipEnabled}

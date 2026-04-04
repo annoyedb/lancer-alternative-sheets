@@ -1,13 +1,18 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { getAdvancedState, setAdvancedState } from "@/scripts/store/advanced";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+
+    type AdvancedButtonProps = {
+        uuid: string;
+    }
 
     const {
         uuid,
@@ -25,7 +30,7 @@
         tooltipClass,
         tooltipTheme,
         tooltipDirection,
-    }: {uuid: string} & IconButtonProps & TextLogEventProps & TooltipProps = $props();
+    }: AdvancedButtonProps & IconButtonProps & TextLogEventProps & TooltipProps = $props();
     let advancedOptions = $derived(getAdvancedState(uuid));
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.tooltip"), tooltipHeader);
@@ -38,10 +43,14 @@
         setAdvancedState(uuid, !advancedOptions);
     }
 </script>
+<script lang="ts" module>
+    const _DEFAULT_BUTTON = "-fontsize5";
+    const _DEFAULT_I = "-fontsize7 la-text-header";
+</script>
 
 {#if uuid}
 <button type="button"
-    class="{style?.join(' ') || '-fontsize5'}"
+    class="{style?.join(' ') || _DEFAULT_BUTTON}"
     aria-label={getLocalized("LA.advanced.tooltip")}
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
@@ -50,7 +59,7 @@
     onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
     onclick={(event) => toggleAdvancedOptions(event)}
 >
-    <i class="mdi {iconStyle?.join(' ') || '-fontsize7 la-text-header'}
+    <i class="mdi {iconStyle?.join(' ') || _DEFAULT_I}
         {advancedOptions ? "mdi-toggle-switch" : "mdi-toggle-switch-off"}"
     ></i>
 </button>

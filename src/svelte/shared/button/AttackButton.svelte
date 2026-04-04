@@ -1,17 +1,19 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    
+    import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
+    import { H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
-    import { H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
 
     const {
         style,
@@ -62,8 +64,8 @@
     }
 </script>
 <script lang="ts" module>
-    const _ICON_BG_STYLE = `${H3_ICON_SIZE} la-text-scrollbar-secondary`;
-    const _ICON_STYLE = `${H3_ICON_SIZE}`;
+    const _DEFAULT_I_BACKGROUND = `${H3_ICON_SIZE} la-text-scrollbar-secondary`;
+    const _DEFAULT_I_FOREGROUND = `${H3_ICON_SIZE}`;
 </script>
 
 <button type="button" 
@@ -81,12 +83,12 @@
     <i 
         class="
             {disabled ? "" : CLICKABLE_HOVER}
-            {iconStyle?.join(' ') || _ICON_STYLE}"
+            {iconStyle?.join(' ') || _DEFAULT_I_FOREGROUND}"
     ></i>
 {#if !disabled}
     <i 
         class="fal fa-dice-d20 -positionabsolute -left0 
-            {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
+            {iconBackgroundStyle?.join(' ') || _DEFAULT_I_BACKGROUND}" 
         style="z-index: -1;"
     ></i>
 {/if}

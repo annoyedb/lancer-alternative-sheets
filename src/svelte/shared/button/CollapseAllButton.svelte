@@ -2,14 +2,15 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
+    import { getLocalized } from "@/scripts/helpers";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+
     import type { CollapseAllButtonProps } from "@/interfaces/actor/button/CollapseAllButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
-    import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
-    import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
     const {
         collapseID,
@@ -80,11 +81,11 @@
     }
 </script>
 <script lang="ts" module>
-    export const MAIN_HEADER_STYLE = " la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover la-text-header -fontsize5 -lineheight4 ";
+    const _DEFAULT_BUTTON = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover la-text-header -fontsize5 -lineheight4";
 </script>
 
 <button type="button"
-    class="{style?.join(' ') || MAIN_HEADER_STYLE}"
+    class="{style?.join(' ') || _DEFAULT_BUTTON}"
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
@@ -93,5 +94,7 @@
     onclick={(event) => toggleCollapseAll(event)}
     aria-label={getLocalized("LA.collapseAll.tooltip")}
 >
-    <i class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" } {iconStyle?.join(' ')}}"></i>
+    <i class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" } 
+        {iconStyle?.join(' ')}"
+    ></i>
 </button>

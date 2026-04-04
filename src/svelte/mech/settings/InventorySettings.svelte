@@ -7,8 +7,10 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import InventoryButton from "@/svelte/shared/button/InventoryButton.svelte";
+    // import InventoryButton from "@/svelte/shared/button/InventoryButton.svelte";
     import { SETTINGS_BUTTON_STYLE, SETTINGS_HEADER_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
     
     const props: MechSheetProps = $props();
     const {
@@ -28,15 +30,20 @@
         {getLocalized("LA.advanced.inventory.label")}
     </span>
     <div class="la-flexcol -alignstart -padding0-b -heightfull">
-        <InventoryButton
-            style={[SETTINGS_BUTTON_STYLE, "mdi mdi-archive"]}
-            
-            flowClass={FlowClass.Inventory}
-            
-            tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
-        />
+        <!-- This div is what actually triggers the inventory event from the Lancer system -->
+        <div class="inventory">
+            <GlyphButton
+                style={[SETTINGS_BUTTON_STYLE, "mdi mdi-archive -widthfull -heightfull"]}
+                
+                flowClass={FlowClass.Inventory}
+                
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.advanced.inventory.open.tooltip")}
+                tooltipDirection={TooltipDirection.RIGHT}
+                logType={TextLogHook.MechHeader}
+                logTypeReset={TextLogHook.MechHeaderReset}
+            ></GlyphButton>
+        </div>
     </div>
 </div>

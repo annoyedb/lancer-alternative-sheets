@@ -2,22 +2,26 @@
     import { getLocalized, randomExtension } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import type { FlowButtonProps } from "@/interfaces/actor/button/FlowButtonProps";
+
     import TerminalText, { FLOW_BUTTON_STYLE } from "@/svelte/shared/TerminalText.svelte";
+
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
 
     const {
-        text,
+        style,
+        onClick,
+
         uuid,
         flowType,
         flowArgs,
         flowClass,
         path,
         
-        style,
+        text,
         textStyle,
 
         tooltipEnabled,
@@ -35,23 +39,21 @@
         logText,
         logType,
         logTypeReset,
-
-        onClick,
-    } : FlowButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
+    } : IconButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
     const logging = logType && logTypeReset;
     const log = logText || getLocalized("LA.flow.tooltip");
 </script>
 <script lang="ts" module>
-    const _STYLE = "clipped-bot-alt la-bckg-secondary";
+    const _DEFAULT_BUTTON = "clipped-bot-alt la-bckg-secondary";
 </script>
 
 <button 
     type="button"
     class="-upper
         {disableSlide || "la-flow"} 
-        {style?.join(' ') || _STYLE} 
+        {style?.join(' ') || _DEFAULT_BUTTON} 
         {flowClass || ''}"
     data-uuid={uuid}
     data-flow-type={flowType}

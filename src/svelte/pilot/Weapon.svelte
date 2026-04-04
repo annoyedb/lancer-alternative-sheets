@@ -1,29 +1,31 @@
 <script lang="ts">
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
-    import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import EditButton from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
     import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
+    import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
+    import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import SpCostArray from "@/svelte/shared/SPCostArray.svelte";
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
-    import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
-    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor,
@@ -77,7 +79,7 @@
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -138,8 +140,12 @@
     {/snippet}
         {#snippet headerTertiaryLeftOptions()}
             <AttackButton
-                iconStyle={[H3_ICON_SIZE, "la-text-header", "cci", "cci-weapon"]}
-                iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+                iconStyle={[H3_ICON_SIZE, "la-text-header cci cci-weapon"]}
+                iconBackgroundStyle={[
+                    "la-prmy-secondary", 
+                    H3_ICON_SIZE, 
+                    qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+                ]}
 
                 flowClass={FlowClass.RollAttack}
                 path={getWeaponPath(index)}
@@ -158,7 +164,10 @@
         {/snippet}
         {#snippet headerTertiaryRightOptions()}
         <DamageButton
-            iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={[
+                "-fontsize9 la-prmy-secondary", 
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -174,36 +183,50 @@
             onPointerLeave={() => {damageButtonHover = false;} }
         />
         <div class="la-flexcol -margin3-lr">
-            <MessageButton
+            <!-- Send to chat -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE]}
                 flowClass={FlowClass.SendToChat}
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.chat.tooltip")}
+                logText={getLocalized("LA.chat.tooltip")}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
                 onPointerEnter={() => {messageButtonHover = true;} }
                 onPointerLeave={() => {messageButtonHover = false;} }
-            />
-            <EditButton
+            >
+                <i class="mdi mdi-message"></i>
+            </GlyphButton>
+            <!-- Edit -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow -margin0-lr"]}
                 flowClass={FlowClass.ContextMenu}
                 path={getWeaponPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.tooltip")}
+                logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
-            />
+            >
+                <i class="fas fa-ellipsis-v"></i>
+            </GlyphButton>
         </div>
         {/snippet}
         <HeaderTertiary
             text={weapon.name}
             subText={getLocalized("LA.weapons.label")}
-            subHeaderFontStyle={["la-text-header", "la-prmy-header", "-fontsizesmall"]}
+            subHeaderFontStyle={["la-text-header la-prmy-header -fontsizesmall"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (attackButtonHover)
@@ -217,7 +240,7 @@
                 return undefined;
             }}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={["la-text-header", "-fontsize4"]}
+            headerFontStyle={["la-text-header -fontsize4"]}
 
             itemID={weapon.id}
             uuid={weapon.uuid}

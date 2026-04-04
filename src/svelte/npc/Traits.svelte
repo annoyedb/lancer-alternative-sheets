@@ -7,15 +7,16 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+
     import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
+    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
-    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
-    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
 
     const {
         actor,
@@ -70,7 +71,7 @@
 <HeaderMain
     text={getLocalized("LA.npc.traits.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -109,8 +110,8 @@
     {/snippet}
     {#snippet headerSecondaryLeftOptions()}
         <EffectButton
-            iconStyle={[getIconStyle(trait), "cci", "cci-trait", "-fontsize7"]}
-            iconBackgroundStyle={["-fontsize7", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={[getIconStyle(trait), "cci cci-trait -fontsize7"]}
+            iconBackgroundStyle={["-fontsize7 la-prmy-secondary", qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
 
             flowClass={FlowClass.SendEffectToChat}
             path={`itemTypes.npc_feature.${trait.index}`}
@@ -127,35 +128,45 @@
         />
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <EditButton
+        <!-- Edit -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={`itemTypes.npc_feature.${trait.index}`}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.edit.tooltip")}
 
-            onPointerEnter={() => {editButtonHover = true;}}
-            onPointerLeave={() => {editButtonHover = false;}}
-        />
-        <MessageButton
-            flowClass={FlowClass.SendToChat}
+            onPointerEnter={() => {editButtonHover = true;} }
+            onPointerLeave={() => {editButtonHover = false;} }
+        >
+            <i class="fas fa-ellipsis-v"></i>
+        </GlyphButton>
+        <!-- Send to Chat -->
+        <GlyphButton
+            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            flowClass={FlowClass.SendEffectToChat}
+            type={"trait"}
+            index={trait.index}
             uuid={trait.uuid}
 
-            style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-            
             tooltipEnabled={tooltipEnabled}
+            tooltipDirection={TooltipDirection.UP}
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltip={getLocalized("LA.chat.tooltip")}
 
-            onPointerEnter={() => {messageButtonHover = true;}}
-            onPointerLeave={() => {messageButtonHover = false;}}
-        />
+            onPointerEnter={() => {messageButtonHover = true;} }
+            onPointerLeave={() => {messageButtonHover = false;} }
+        >
+            <i class="mdi mdi-message"></i>
+        </GlyphButton>
     {/snippet}
         <HeaderSecondary
             text={trait.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(trait), "-fontsizemedium", "-overflowhidden"]}
+            textStyle={[getHeaderStyle(trait), "-fontsizemedium -overflowhidden"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

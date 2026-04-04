@@ -1,25 +1,28 @@
 <script lang="ts">
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
+
     import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EditButton from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import DamageButton from "@/svelte/shared/button/DamageButton.svelte";
     import AttackButton from "@/svelte/shared/button/AttackButton.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
 
     const {
         actor,
@@ -121,8 +124,8 @@
 <HeaderMain
     text={getLocalized("LA.weapons.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-    borderStyle={["la-brdr-weapon", "-gap0"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+    borderStyle={["la-brdr-weapon -gap0"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
             return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -180,8 +183,12 @@
     {/snippet}
     {#snippet headerTertiaryLeftOptions()}
         <AttackButton
-            iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci", "cci-weapon"]}
-            iconBackgroundStyle={[H3_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconStyle={[H3_ICON_SIZE, getIconStyle(weapon), "cci cci-weapon"]}
+            iconBackgroundStyle={[
+                "la-prmy-secondary", 
+                H3_ICON_SIZE, 
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
 
             flowClass={FlowClass.RollAttack}
             path={`system.loadout.weapon_mounts.${index}`}
@@ -202,7 +209,10 @@
     {#snippet headerTertiaryRightOptions()}
         <DamageButton
             iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
-            iconBackgroundStyle={["-fontsize9", "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+            iconBackgroundStyle={[
+                "-fontsize9 la-prmy-secondary", 
+                qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
+            ]}
             
             flowClass={FlowClass.RollDamage}
             range={weapon.system.range}
@@ -218,27 +228,40 @@
             onPointerLeave={() => {damageButtonHover = false;}}
         />
         <div class="la-flexcol -margin3-lr">
-            <MessageButton
+            <!-- Send to Chat -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE]}
                 flowClass={FlowClass.None}
                 uuid={weapon.uuid}
+                index={weapon.index}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.chat.tooltip")}
 
                 onClick={event => sendToChat(event, weapon)}
-                onPointerEnter={() => {messageButtonHover = true;}}
-                onPointerLeave={() => {messageButtonHover = false;}}
-            />
-            <EditButton
+                onPointerEnter={() => {messageButtonHover = true;} }
+                onPointerLeave={() => {messageButtonHover = false;} }
+            >
+                <i class="mdi mdi-message"></i>
+            </GlyphButton>
+            <!-- Edit -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
                 flowClass={FlowClass.ContextMenu}
                 path={`itemTypes.npc_feature.${weapon.index}`}
 
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.tooltip")}
 
-                onPointerEnter={() => {editButtonHover = true;}}
-                onPointerLeave={() => {editButtonHover = false;}}
-            />
+                onPointerEnter={() => {editButtonHover = true;} }
+                onPointerLeave={() => {editButtonHover = false;} }
+            >
+                <i class="fas fa-ellipsis-v"></i>
+            </GlyphButton>
         </div>
     {/snippet}
         <HeaderTertiary

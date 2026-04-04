@@ -13,10 +13,9 @@
 </script>
 
 {#if damages.length}
-<span class={
-    "la-damage la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1"
-    + style?.join(' ')
-}
+<span class="
+    la-damage la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1 
+    {style?.join(' ')}"
 >
     {#each damages as damage}
         <span class="la-number-weapon__span">{damage.val.replace(/\s/g, "")}</span><!--

@@ -1,17 +1,19 @@
-<!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { FlowClass } from "@/enums/FlowClass";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
-    import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
-    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
-    import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
-    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { FlowClass } from "@/enums/FlowClass";
+
     import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
+
+    import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
+    import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+    import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
 
     const {
         style,
@@ -67,8 +69,8 @@
     }
 </script>
 <script lang="ts" module>
-    const _ICON_BG_STYLE = `${H2_ICON_SIZE} la-text-scrollbar-secondary -padding0-l`
-    const _ICON_STYLE = `${H2_ICON_SIZE}`
+    const _DEFAULT_BACKGROUND = `${H2_ICON_SIZE} la-text-scrollbar-secondary -padding0-l`
+    const _DEFAULT_FOREGROUND = `${H2_ICON_SIZE}`
 </script>
 
 <button type="button"
@@ -91,11 +93,11 @@
     <i 
         class="
             {disabled ? "" : CLICKABLE_HOVER}
-            {iconStyle?.join(' ') || _ICON_STYLE}"
+            {iconStyle?.join(' ') || _DEFAULT_FOREGROUND}"
     ></i>
 {#if !disabled}
     <i class="fal fa-dice-d20 -positionabsolute -left0 
-            {iconBackgroundStyle?.join(' ') || _ICON_BG_STYLE}" 
+            {iconBackgroundStyle?.join(' ') || _DEFAULT_BACKGROUND}" 
         style="z-index: -1;"
     ></i>
 {/if}

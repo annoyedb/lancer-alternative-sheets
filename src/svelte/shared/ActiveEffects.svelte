@@ -7,7 +7,7 @@
     import type { ActiveEffectsProps } from "@/interfaces/actor/ActiveEffectsProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { FlowClass } from "@/enums/FlowClass";
-    import DeleteButton from "@/svelte/shared/button/DeleteButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
 
@@ -55,9 +55,8 @@
 {#if effects.length}
 {#each effects as effect, index}
     {#snippet headerOptions()}
-    <DeleteButton
+    <GlyphButton
         style={["la-prmy-primary -glow-prmy-hover", "-fontsize4", "-height4", "-lineheight3"]}
-        iconStyle={["-fontsize4", "la-text-header-anti"]}
 
         uuid={effect._id}
         flowClass={FlowClass.DeleteActiveEffect}
@@ -65,9 +64,12 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        logText={getLocalized("LA.delete.tooltip")}
         logType={logType}
         logTypeReset={logTypeReset}
-    />
+    >
+        <i class="mdi mdi-close-circle -fontsize4 la-text-header-anti"></i>
+    </GlyphButton>
     {/snippet}
     <HeaderMain 
         text={effect.name}

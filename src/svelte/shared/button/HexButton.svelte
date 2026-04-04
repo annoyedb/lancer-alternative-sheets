@@ -3,10 +3,48 @@
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
-    import type { HexButtonProps } from "@/interfaces/actor/button/HexButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
+
+    type HexButtonProps = {
+        /**
+         * The number value of the property name.
+         */
+        value: number;
+        
+        /**
+         * Whether the value should be displayed as a signed number.
+         */
+        sign?: boolean;
+
+        /**
+         * Optional array of style class names to apply to the text that hovers above the value.
+         * Use `anim` prefixed color classes to apply the `--la-primary-color` CSS attribute.
+         */
+        outerTextStyle?: Array<string>;
+        
+        /**
+         * Optional array of style class names to apply to the button's value text.
+         * Use `anim` prefixed color classes to apply the `--la-primary-color` CSS attribute.
+         */
+        innerTextStyle?: Array<string>;
+        
+        /**
+         * Optional array of style class names to apply to the wrapper the entire element.
+         */
+        outerStyle?: Array<string>;
+
+        /**
+         * Optional array of style class names to apply to the wrapper of the button and outer text span.
+         */
+        innerStyle?: Array<string>;
+        
+        /**
+         * Optional array of style class names to apply to the button itself.
+         */
+        buttonStyle?: Array<string>;
+    }
 
     const {
         text,
@@ -15,7 +53,6 @@
         flowType,
         flowArgs,
         flowClass,
-
         uuid,
         path,
         sign,

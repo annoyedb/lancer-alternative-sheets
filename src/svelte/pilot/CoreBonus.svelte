@@ -1,15 +1,20 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
-    import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { getLocalized } from "@/scripts/helpers";
-    import { trackHook } from "@/scripts/store/hooks";
-    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+
+    import { getLocalized } from "@/scripts/helpers";
+    import { trackHook } from "@/scripts/store/hooks";
+    import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
+    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
@@ -18,8 +23,8 @@
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EditButton, { HEADER_SECONDARY_STYLE as HEADER_SECONDARY_ICON_OPTION_STYLE } from "@/svelte/shared/button/EditButton.svelte";
-    import MessageButton from "@/svelte/shared/button/MessageButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
 
     const {
         actor, // Source data (e.g. pilot)
@@ -66,6 +71,13 @@
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
     }
+
+    function getCoreBonusPath(index: number)
+    {
+        return isMechSheet 
+            ? `system.pilot.value.itemTypes.core_bonus.${index}`
+            : `itemTypes.core_bonus.${index}`
+    }
 </script>
 
 {#snippet headerOptions()}
@@ -85,7 +97,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.coreBonus.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-action--downtime"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-action--downtime"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -112,7 +124,7 @@
                     path={isMechSheet
                         ? `system.pilot.value.itemTypes.core_bonus.${index}.system.counters.${jndex}`
                         : `itemTypes.core_bonus.${index}.system.counters.${jndex}`}
-                    style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                    style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
 
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
@@ -125,36 +137,45 @@
             <i class="{H2_ICON_SIZE} cci cci-corebonus"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
-            <EditButton
+            <!-- Edit -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexcol"]}
                 flowClass={FlowClass.ContextMenu}
-                path={ isMechSheet 
-                    ? `system.pilot.value.itemTypes.core_bonus.${index}`
-                    : `itemTypes.core_bonus.${index}`
-                }
-                iconStyle={["-lineheight5"]}
-                
+                path={getCoreBonusPath(index)}
+
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.edit.tooltip")}
+                logText={getLocalized("LA.edit.tooltip")}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                 logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
 
-                onPointerEnter={() => {editButtonHover = true;}}
-                onPointerLeave={() => {editButtonHover = false;}}
-            />
-            <MessageButton
+                onPointerEnter={() => {editButtonHover = true;} }
+                onPointerLeave={() => {editButtonHover = false;} }
+            >
+                <i class="fas fa-ellipsis-v"></i>
+            </GlyphButton>
+            <!-- Send to chat -->
+            <GlyphButton
+                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
                 flowClass={FlowClass.SendToChat}
+                index={index}
                 uuid={coreBonus.uuid}
-    
-                style={[HEADER_SECONDARY_ICON_OPTION_STYLE, "-padding0-lr"]}
-                
+
                 tooltipEnabled={tooltipEnabled}
+                tooltipDirection={TooltipDirection.UP}
                 tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltip={getLocalized("LA.chat.tooltip")}
+                logText={getLocalized("LA.chat.tooltip")}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                 logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
-    
-                onPointerEnter={() => {messageButtonHover = true;}}
-                onPointerLeave={() => {messageButtonHover = false;}}
-            />
+
+                onPointerEnter={() => {messageButtonHover = true;} }
+                onPointerLeave={() => {messageButtonHover = false;} }
+            >
+                <i class="mdi mdi-message"></i>
+            </GlyphButton>
         {/snippet}
         <HeaderSecondary
             text={coreBonus.name}
@@ -169,7 +190,7 @@
                 return undefined;
             }}
             
-            rootStyle={["ref", "set"]}
+            rootStyle={["ref set"]}
             uuid={coreBonus.uuid}
             path={ isMechSheet 
                 ? `system.pilot.value.itemTypes.core_bonus.${index}`

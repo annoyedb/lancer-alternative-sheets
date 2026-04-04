@@ -1,11 +1,24 @@
 # 1.4.0
 *Minor version bump is due to underlying CSS refactors and project strucure. I know some people make their own custom modifications to this module, so I decided to upgrade the update to make it clear this may implement breaking changes. Technical changelog for this update is separated below functional ones.*
 ## Changes
+* Expanded to-chat functionality for pilot armor; it now shows the armor stats and tags
 * Minor styling changes for consistency
 
 ## Technical Changes
+### Github Workflow
+* Yet another attempt to rip CHANGELOG.md into automatic release notes
 ### Svelte
 * Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files (see `theme.ts` for commentary)
+* Added `data-rank`, `data-index`, and `data-type` HTML data-embed support to `GlyphButton` to help deprecate redundant button components
+* Refactored `HexButtonProps.ts` into `HexButton.svelte`
+* Deprecate `FlowButtonProps.ts` in favor of `IconButtonProps.ts`
+* Deprecate `InventoryButton` in favor of `GlyphButton`
+* Deprecate `MessageButton` in favor of `GlyphButton`
+* Deprecate `DeleteButton` in favor of `GlyphButton`
+* Deprecate `EditButton` in favor of `GlyphButton`
+* Refactored `H2_BUTTON_ICON_STYLE` in `EditButton.svelte` to `H2_BUTTON_ICON_STYLE` in `Button.svelte`
+* Reduced join lengths and slightly confusing reading experience by merging strings where available
+* Other changes for consistency
 ### CSS
 * `-margin` is now implemented via mixins and generates l, r, t, b, lr, and tb variants
 * `-margin` incrementing is now completely linear
