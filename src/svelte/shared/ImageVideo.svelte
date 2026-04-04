@@ -31,11 +31,11 @@
         : actorImgVid
     const tokenVideoMimeType = getVideoMimeType(actorImgVid);
     
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.edit.token.tooltip"), tooltipHeader);
-    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.token.error"))
+    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.edit.image.token.tooltip"), tooltipHeader);
+    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.image.token.error"))
 
     const logging = logType && logTypeReset && !editDisabled;
-    const log = logText || getLocalized("LA.edit.token.tooltip");
+    const log = logText || getLocalized("LA.edit.image.token.tooltip");
 </script>
 
 <div class="la-flexrow">

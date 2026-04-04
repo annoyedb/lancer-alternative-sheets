@@ -44,7 +44,7 @@
     const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.stats.speed}`);
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
-    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.token.error"));
+    const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.image.token.error"));
 
     onMount(() => {
         setTokenImageLock(actor.uuid, getActorTokenSync(actor.uuid));

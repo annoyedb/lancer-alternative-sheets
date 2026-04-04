@@ -1,6 +1,7 @@
 # 1.4.0
 *Minor version bump is due to underlying CSS refactors and project strucure. I know some people make their own custom modifications to this module, so I decided to upgrade the update to make it clear this may implement breaking changes. Technical changelog for this update is separated below functional ones.*
 ## Changes
+* #60 - Fixed localization string issue. Thanks to the user on Discord who brought this up originally!
 * Abilities gained by core bonuses, frames, and deployables now have a to-chat button. You may be wondering: 'doesn't the left side button usually do this'? Yeah but only usually, according to the default Lancer system behaviour, which is also sometimes nothing; so I added another seemingly redundant button that will most certainly always send something to chat `this way the system defined behavior will still be there, nobody is happy, and someone is gonna press the wrong one anyway`. Notably, using this button won't 'activate' the item (e.g. consume uses).
 * Expanded to-chat functionality for deployable actions: it now includes the deployable's effect (if any) and color-coded activation
 * Expanded to-chat functionality for pilot armor: it now shows the armor stats and tags
