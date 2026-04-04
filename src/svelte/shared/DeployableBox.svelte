@@ -117,7 +117,6 @@
     function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
     {
         event.stopPropagation();
-        console.log(deployable);
         if (uuid && action)
         {
             const effect = `

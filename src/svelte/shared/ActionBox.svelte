@@ -118,7 +118,6 @@
             Logger.error("Tried to call LAS sendToChat without an actor UUID");
             return;
         }
-        console.log(item)
         if (item && item)
         {
             let chatData = null;
