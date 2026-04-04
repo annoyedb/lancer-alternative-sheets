@@ -4,14 +4,15 @@
 
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { SLOT_LOCALIZE_MAP } from "@/scripts/constants";
+    import { CHAT_CARD_COLOR_MAP, SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { AcceptType } from "@/enums/AcceptType";
-    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import { ChatCardType } from "@/enums/ChatCardType";
 
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
     import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
@@ -131,6 +132,7 @@
                 onHit: weapon.system.active_profile.on_hit,
                 onCrit: weapon.system.active_profile.on_crit,
                 tags: weapon.system.active_profile.tags,
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Weapon],
             } as ChatData;
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
@@ -349,6 +351,7 @@
             />
             <ActionBox
                 actions={weapon.system.actions}
+                actor={actor}
                 uuid={weapon.uuid}
                 path={`system.actions`}
 
@@ -362,6 +365,7 @@
             />
             <ActionBox
                 actions={profile.actions}
+                actor={actor}
                 uuid={weapon.uuid}
                 path={`system.active_profile.actions`}
 

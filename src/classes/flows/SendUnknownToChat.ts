@@ -26,6 +26,7 @@ export class SendUnknownToChatBase extends FlowBase
                     onHit: data.onHit,
                     onCrit: data.onCrit,
                     tags: data.tags,
+                    color: data.color,
                 });
             }
         }

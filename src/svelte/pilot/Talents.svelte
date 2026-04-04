@@ -255,6 +255,7 @@
                         />
                         <ActionBox
                             actions={rank.actions}
+                            actor={sheetActor}
                             uuid={talent.uuid}
                             path={`system.ranks.${jndex}.actions`}
 

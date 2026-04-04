@@ -218,6 +218,7 @@
                 />
                 <ActionBox
                     actions={coreBonus.system.actions}
+                    actor={actor}
                     uuid={coreBonus.uuid}
                     path={ isMechSheet 
                         ? `system.pilot.value.itemTypes.core_bonus.${index}.system.actions`

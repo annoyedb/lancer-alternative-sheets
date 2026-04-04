@@ -2,12 +2,14 @@
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
 
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { ChatCardType } from "@/enums/ChatCardType";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
@@ -93,7 +95,7 @@
                 trigger: reaction.system.trigger,
                 effect: reaction.system.effect,
                 tags: reaction.system.tags,
-                color: "lancer-reaction"
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Reaction],
             } as ChatData;
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }

@@ -106,6 +106,7 @@
     <ActionBox
         uuid={frame.uuid}
         actions={core.active_actions}
+        actor={actor}
         path={'system.core_system.active_actions'}
 
         collapseID={actionCollID}

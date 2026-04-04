@@ -1,23 +1,66 @@
 <script lang="ts">
-    import type { ActionBoxProps } from "@/interfaces/actor/ActionBoxProps";
+    import type { Snippet } from "svelte";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { ACTIVATION_COLOR_MAP, ACTIVATION_ICON_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
+    import { 
+        ACTIVATION_COLOR_MAP, 
+        ACTIVATION_ICON_MAP, 
+        ACTIVATION_LOCALIZE_MAP, 
+        ACTIVATION_TOOLTIP_LOCALIZE_MAP, 
+        CHAT_CARD_ACTIVATION_COLOR_MAP, 
+    } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { slugify } from "@/scripts/lancer/util/lid";
+
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import HeaderQuinary from "@/svelte/shared/header/HeaderQuinary.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
+    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import { Logger } from "@/classes/Logger";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { TextLogHook } from "@/enums/TextLogHook";
+
+    export type ActionBoxProps = {
+        children?: Snippet;
+        flowButton?: Snippet;
+
+        actions: Array<any>;
+        actor?: any; // Not really used but mandatory for Flows (send-to-chat, edit, etc)
+        path?: string;
+        uuid?: string;
+        
+        editable?: boolean;
+        editDetails?: boolean;
+
+        collapseID?: string;
+        startCollapsed?: boolean;
+
+        /**
+         * Optional event handler for when the user clicks on the left button component.
+         * @param event 
+         * @returns 
+         */
+        onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any) => void;
+
+        /**
+         * Optional parameter to disable the left button component.
+         */
+        disableLeftButton?: boolean;
+    }
 
     const {
         children,
         flowButton,
 
         actions,
+        actor,
         path,
         uuid,
 
@@ -34,8 +77,11 @@
         logType,
         logTypeReset
     }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
-    let effectButtonHover = $state(false);
 
+    let effectButtonHover = $state(false);
+    let messageButtonHover = $state(false);
+
+    const isMechSheet = actor?.type === "mech" || false;
     const qualityMode = true; // TODO: change to a setting
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
@@ -60,6 +106,41 @@
                 ${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`;
         else
             return `${action.detail}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}`;
+    }
+
+    // Once actor uuids are no longer required in the Lancer to activate flows, refactor this component to stop using it
+    // (literally only pulled in for this)
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, item: any)
+    {
+        event.stopPropagation();
+        if (!actor?.uuid)
+        {
+            Logger.error("Tried to call LAS sendToChat without an actor UUID");
+            return;
+        }
+        console.log(item)
+        if (item && item)
+        {
+            let chatData = null;
+            if (item.trigger)
+            {
+                chatData = {
+                    title: item.name,
+                    trigger: item.trigger,
+                    effect: item.detail,
+                    color: CHAT_CARD_ACTIVATION_COLOR_MAP[item.activation] || '',
+                } as ChatData;
+            }
+            else
+            {
+                chatData = {
+                    title: item.name,
+                    description: item.detail,
+                    color: CHAT_CARD_ACTIVATION_COLOR_MAP[item.activation] || '',
+                } as ChatData;
+            }
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
     }
 </script>
 
@@ -107,6 +188,29 @@
         >
         </button>
     {/if}
+    <!-- Send to chat -->
+    {#if actor}
+    <GlyphButton
+        style={[H2_BUTTON_ICON_STYLE, "-margin2-r"]}
+        flowClass={FlowClass.None}
+        uuid={uuid}
+        path={path}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipDirection={TooltipDirection.UP}
+        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltip={getLocalized("LA.chat.tooltip")}
+        logText={getLocalized("LA.chat.tooltip")}
+        logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
+        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+        
+        onClick={event => sendToChat(event, action)}
+        onPointerEnter={() => {messageButtonHover = true;} }
+        onPointerLeave={() => {messageButtonHover = false;} }
+    >
+        <i class="mdi mdi-message"></i>
+    </GlyphButton>
+    {/if}
 {/snippet}
 {#snippet headerQuinaryLeftOptions()}
     <EffectButton
@@ -144,6 +248,8 @@
         textStyle={["la-text-header", "la-prmy-header", "-lineheight7"]}
         extensionTextFunction={() => {
             if (effectButtonHover)
+                return `--${getLocalized("LA.chat.extension")}`;
+            if (messageButtonHover)
                 return `--${getLocalized("LA.chat.extension")}`;
             return undefined;
         }}

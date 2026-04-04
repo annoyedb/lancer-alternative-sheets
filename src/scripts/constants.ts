@@ -109,3 +109,33 @@ export const RESERVE_ICON_MAP: { [key: string]: string } = {
     "Organization"  : "cci-orbital",
     "Bonus"         : "cci-npc-feature",
 }
+
+import { ChatCardType } from "@/enums/ChatCardType";
+// Since the chat window is outside the scope of the sheets, most 
+// of the CSS is unavailable, so we fallback onto the base Lancer system's
+export const CHAT_CARD_COLOR_MAP: Record<ChatCardType | string, string> = {
+    [ChatCardType.Weapon]: "lancer-weapon",
+    [ChatCardType.Gear]: "lancer-weapon",
+    [ChatCardType.Armor]: "lancer-weapon",
+    [ChatCardType.System]: "lancer-system",
+    [ChatCardType.Tech]: "lancer-tech",
+    [ChatCardType.Trait]: "lancer-trait",
+    [ChatCardType.Reaction]: "lancer-reaction",
+    [ChatCardType.Quick]: "lancer-quick",
+    [ChatCardType.Full]: "lancer-full",
+    [ChatCardType.Protocol]: "lancer-protocol",
+    [ChatCardType.Free]: "lancer-free",
+    [ChatCardType.Primary]: "lancer-primary",
+    [ChatCardType.Secondary]: "lancer-secondary",
+};
+
+export const CHAT_CARD_ACTIVATION_COLOR_MAP: { [key: string]: string } = {
+    "Full"      : CHAT_CARD_COLOR_MAP[ChatCardType.Full],
+    "Quick"     : CHAT_CARD_COLOR_MAP[ChatCardType.Quick],
+    "Reaction"  : CHAT_CARD_COLOR_MAP[ChatCardType.Reaction],
+    "Protocol"  : CHAT_CARD_COLOR_MAP[ChatCardType.Protocol],
+    "Free"      : CHAT_CARD_COLOR_MAP[ChatCardType.Free],
+    "Full Tech" : CHAT_CARD_COLOR_MAP[ChatCardType.Tech],
+    "Quick Tech": CHAT_CARD_COLOR_MAP[ChatCardType.Tech],
+    "Invade"    : CHAT_CARD_COLOR_MAP[ChatCardType.Tech],
+}

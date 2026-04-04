@@ -2,8 +2,12 @@
     import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { ChatCardType } from "@/enums/ChatCardType";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     
@@ -80,6 +84,25 @@
         return isDestroyed(tech)
             ? "la-text-repcap"
             : "la-text-header";
+    }
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, tech: any)
+    {
+        event.stopPropagation();
+        if (actor && tech)
+        {
+            let chatData = {
+                title: tech.name, 
+                trigger: tech.system.trigger,
+                effect: tech.system.effect,
+                onHit: tech.system.on_hit,
+                attackBonus: tech.system.attack_bonus[tier - 1],
+                accuracyBonus: tech.system.accuracy[tier - 1],
+                tags: tech.system.tags,
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Tech],
+            } as ChatData;
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
     }
 </script>
 
@@ -196,8 +219,7 @@
         <!-- Send to Chat -->
         <GlyphButton
             style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
-            flowClass={FlowClass.SendEffectToChat}
-            type={"trait"}
+            flowClass={FlowClass.None}
             index={tech.index}
             uuid={tech.uuid}
 
@@ -206,6 +228,7 @@
             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
             tooltip={getLocalized("LA.chat.tooltip")}
 
+            onClick={event => sendToChat(event, tech)}
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
         >

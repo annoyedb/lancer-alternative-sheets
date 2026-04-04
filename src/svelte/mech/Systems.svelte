@@ -305,6 +305,7 @@
                 <ActionBox
                     uuid={component.value.uuid}
                     actions={component.value.system.actions}
+                    actor={actor}
                     path={`system.actions`}
 
                     collapseID={getActionCollID(index)}

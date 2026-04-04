@@ -5,11 +5,13 @@
     import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
 
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
+    import { ChatCardType } from "@/enums/ChatCardType";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderTertiary, { H3_HEADER_STYLE, H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
@@ -103,6 +105,7 @@
                 attackBonus: weapon.system.attack_bonus[tier - 1],
                 accuracyBonus: weapon.system.accuracy[tier - 1],
                 tags: weapon.system.tags,
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Weapon],
             } as ChatData;
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }

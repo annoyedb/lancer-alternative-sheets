@@ -192,6 +192,7 @@
             />
             <ActionBox
                 actions={gear.system.actions}
+                actor={actor}
                 uuid={gear.uuid}
                 path={`system.actions`}
 

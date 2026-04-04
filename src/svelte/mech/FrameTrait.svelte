@@ -114,6 +114,7 @@
         <ActionBox
             uuid={frame.uuid}
             actions={trait.actions}
+            actor={actor}
             path={`system.traits.${index}.actions`}
 
             collapseID={getActionCollapseID(index)}

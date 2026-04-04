@@ -36,8 +36,6 @@
     }: HeaderProps & HeaderTertiaryProps & TerminalTextProps & ContentSidesProps = $props();
 
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
-
-    const extraOptions = contentRight ? true : false;
     
     // (#3)
     onMount(() => 
@@ -113,11 +111,9 @@
             </div>
         </div>
         <!-- Options -->
-    {#if extraOptions}
+    {#if contentRight}
         <div class="la-right la-flexrow -aligncenter">
-        {#if contentRight}
             {@render contentRight()}
-        {/if}
         </div>
     {/if}
     </div>

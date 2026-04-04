@@ -1,7 +1,10 @@
 # 1.4.0
 *Minor version bump is due to underlying CSS refactors and project strucure. I know some people make their own custom modifications to this module, so I decided to upgrade the update to make it clear this may implement breaking changes. Technical changelog for this update is separated below functional ones.*
 ## Changes
-* Expanded to-chat functionality for pilot armor; it now shows the armor stats and tags
+* Abilities gained by core bonuses, frames, and deployables now have a to-chat button. You may be wondering: 'doesn't the left side button usually do this'? Yeah but only usually, according to the default Lancer system behaviour, which is also sometimes nothing; so I added another seemingly redundant button that will most certainly always send something to chat `this way the system defined behavior will still be there, nobody is happy, and someone is gonna press the wrong one anyway`. Notably, using this button won't 'activate' the item (e.g. consume uses).
+* Expanded to-chat functionality for deployable actions: it now includes the deployable's effect (if any) and color-coded activation
+* Expanded to-chat functionality for pilot armor: it now shows the armor stats and tags
+* Expanded to-chat functionality to color code their cards
 * Minor styling changes for consistency
 
 ## Technical Changes
@@ -11,7 +14,8 @@
 * Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files (see `theme.ts` for commentary)
 * Added `data-rank`, `data-index`, and `data-type` HTML data-embed support to `GlyphButton` to help deprecate redundant button components
 * Refactored `HexButtonProps.ts` into `HexButton.svelte`
-* Deprecate `FlowButtonProps.ts` in favor of `IconButtonProps.ts`
+* Refactored `ActionBoxProps.ts` into `ActionBox.svelte`
+* Refactored `FlowButtonProps.ts` in favor of `IconButtonProps.ts`
 * Deprecate `InventoryButton` in favor of `GlyphButton`
 * Deprecate `MessageButton` in favor of `GlyphButton`
 * Deprecate `DeleteButton` in favor of `GlyphButton`

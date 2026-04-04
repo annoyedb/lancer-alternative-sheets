@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { ChatCardType } from "@/enums/ChatCardType";
     import { AcceptType } from "@/enums/AcceptType";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { FlowClass } from "@/enums/FlowClass";
@@ -7,6 +8,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { ChatData } from "@/interfaces/flows/ChatData";
@@ -95,6 +97,7 @@
             title: armor.name, 
             description: desc,
             tags: armor.system.tags,
+            color: CHAT_CARD_COLOR_MAP[ChatCardType.Armor],
         } as ChatData
         SendUnknownToChatBase.getInstance().startFlow(armor.uuid, chatData);
     }
@@ -291,6 +294,7 @@
             />
             <ActionBox
                 actions={armor.system.actions}
+                actor={actor}
                 uuid={armor.uuid}
                 path={`system.actions`}
 

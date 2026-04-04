@@ -271,6 +271,7 @@
             />
             <ActionBox
                 actions={weapon.system.actions}
+                actor={actor}
                 uuid={weapon.uuid}
                 path={`system.actions`}
 

@@ -2,7 +2,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getDeployableSheetTooltipEnabled } from "@/scripts/deployable/settings";
-    import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
+    import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP, CHAT_CARD_ACTIVATION_COLOR_MAP } from "@/scripts/constants";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
@@ -13,6 +13,7 @@
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import { Logger } from "@/classes/Logger";
 
     const {
         actor,
@@ -69,12 +70,41 @@
     function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
     {
         event.stopPropagation();
+        if (!actor?.uuid)
+        {
+            Logger.error("Tried to call LAS sendToChat without an actor UUID");
+            return;
+        }
+        
         if (action)
         {
-            const description = `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`;
+            const description = `
+                <details>
+                    <summary>
+                    ${getLocalized("LA.mech.system.effect.label")}
+                    </summary>
+                    ${deployable.system.detail}
+                </details>
+                <hr>
+                <div 
+                    class="clipped lancer-header ${CHAT_CARD_ACTIVATION_COLOR_MAP[action.deployableAction]}"
+                    style="
+                        padding: 0.25rem;
+                    "
+                >
+                    ${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
+                </div>
+                <div
+                    style="
+                        padding-top: 0.25rem;
+                    "
+                >
+                ${getLocalized(action.tooltip)}
+                </div>
+            `;
             let chatData = {
                 title: deployable.name, 
-                description: description
+                description: description,
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
@@ -230,6 +260,7 @@
                 startCollapsed={false}
                 
                 uuid={actor.uuid}
+                actor={actor}
                 onClick={sendActionToChat}
 
                 tooltipEnabled={tooltipEnabled}

@@ -200,6 +200,7 @@
             />
             <ActionBox
                 actions={reserve.system.actions}
+                actor={actor}
                 uuid={reserve.uuid}
                 path={`system.actions`}
 

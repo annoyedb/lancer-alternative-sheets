@@ -232,6 +232,7 @@
             </EffectBox>
             <ActionBox
                 actions={mod.system.actions}
+                actor={actor}
                 uuid={mod.uuid}
                 path={`system.actions`}
 

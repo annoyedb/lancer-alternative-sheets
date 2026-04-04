@@ -4,15 +4,25 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { ACTIVATION_COLOR_MAP, ACTIVATION_LOCALIZE_MAP, ACTIVATION_TOOLTIP_LOCALIZE_MAP } from "@/scripts/constants";
+
+    import { 
+        ACTIVATION_COLOR_MAP, 
+        ACTIVATION_LOCALIZE_MAP, 
+        ACTIVATION_TOOLTIP_LOCALIZE_MAP, 
+        CHAT_CARD_ACTIVATION_COLOR_MAP 
+    } from "@/scripts/constants";
+
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
     import { getThemeKey } from "@/scripts/store/theme";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
+
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
 
@@ -96,7 +106,8 @@
             let chatData = {
                 title: action.name, 
                 trigger: action.trigger,
-                effect: action.detail
+                effect: action.detail,
+                color: CHAT_CARD_ACTIVATION_COLOR_MAP[action.activation],
             } as ChatData 
             SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
@@ -106,12 +117,38 @@
     function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
     {
         event.stopPropagation();
+        console.log(deployable);
         if (uuid && action)
         {
-            const description = `${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}: ${getLocalized(action.tooltip)}`;
+            const effect = `
+                <details>
+                    <summary>
+                    ${getLocalized("LA.mech.system.effect.label")}
+                    </summary>
+                    ${deployable.system.detail}
+                </details>
+            `;
+            const description = `
+                <hr>
+                <div 
+                    class="clipped lancer-header ${CHAT_CARD_ACTIVATION_COLOR_MAP[action.deployableAction]}"
+                    style="
+                        padding: 0.25rem;
+                    "
+                >
+                    ${getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
+                </div>
+                <div
+                    style="
+                        padding-top: 0.25rem;
+                    "
+                >
+                ${getLocalized(action.tooltip)}
+                </div>
+            `;
             let chatData = {
                 title: deployable.name, 
-                description: description
+                description: deployable.system.detail ? effect + description : description,
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
@@ -180,8 +217,10 @@
                 actions={deployable.system.actions}
                 collapseID={`${deployable.uuid}.actions`}
                 startCollapsed={false}
-                
+                path={`system.actions`}
+
                 uuid={uuid || deployable.uuid}
+                actor={source}
                 disableLeftButton={uuid ? false : true}
                 onClick={uuid ? sendActionToChat : undefined }
 
