@@ -1,19 +1,50 @@
 # 1.4.0
+Hello everyone, it's been a while!
+
+In the practical sense, this update is a fairly minor one, but I managed to squeeze in some QoL additions I hope you'll enjoy.
+
+Big thank you to @LPfontes' [pull request](https://github.com/annoyedb/lancer-alternative-sheets/pull/56) for their **Brazilian Portuguese** localization!
+
+Please note, that due to the most recent changes, both the PT-BR and ZH-TW localizations are only up-to-date according to version 1.3.15. If you are fluent in Traditional Chinese or Brazilian Portguese, please see the [full changelog (under 'Technical Changes')](https://github.com/annoyedb/lancer-alternative-sheets/blob/master/CHANGELOG.md) as to what needs to be added as of 1.4.0!
+
 *Minor version bump is due to underlying CSS refactors and project strucure. I know some people make their own custom modifications to this module, so I decided to upgrade the update to make it clear this may implement breaking changes. Technical changelog for this update is separated below functional ones.*
 ## Changes
+* #56 - Added localization support for Brazilian Portuguese (pt-br). Huge thank you to @LPfontes!
+* #59 - Added ability to pin Traits, Systems, Tech Attacks, and Reactions on NPC sheets to reduce 'feature bloat' when applying multiple NPC templates. Naturally, unpinned items can be collapsed and hidden away `so now it should be easier to run that Veteran Ultra Exotic Industrial Horror Spec-Ops Commander Strider sitting in your reserves`.
 * #60 - Fixed localization string issue. Thanks to the user on Discord who brought this up originally!
 * Abilities gained by core bonuses, frames, and deployables now have a to-chat button. You may be wondering: 'doesn't the left side button usually do this'? Yeah but only usually, according to the default Lancer system behaviour, which is also sometimes nothing; so I added another seemingly redundant button that will most certainly always send something to chat `this way the system defined behavior will still be there, nobody is happy, and someone is gonna press the wrong one anyway`. Notably, using this button won't 'activate' the item (e.g. consume uses).
+* Fixed an issue with NPC reactions' send-to-chat button where pressing it would propogate the click to expand/contract the underlying header
 * Expanded to-chat functionality for deployable actions: it now includes the deployable's effect (if any) and color-coded activation
-* Expanded to-chat functionality for pilot armor: it now shows the armor stats and tags
-* Expanded to-chat functionality to color code their cards
+* Expanded to-chat functionality for pilot armor: it now includes the stats, tags, and description
+* Expanded to-chat functionality for pilot weapons: it now includes the stats and description
+* Expanded to-chat functionality for mech weapons: it now includes the stats and description
+* Expanded to-chat functionality for NPC weapons: it now includes the stats
+* Expanded to-chat functionality for NPC tech attacks: it now includes the stats
+* Expanded to-chat functionality to color code their headers
 * Minor styling changes for consistency
 
 ## Technical Changes
+### Localization
+Additions:
++ "LA.pin.pinned.label": "PINNED",
++ "LA.pin.unpinned.label": "OTHER",
++ "LA.pin.pinned.tooltip": "Pin this item to the top",
++ "LA.pin.pinned.extension": "pin_item",
++ "LA.pin.unpinned.tooltip": "Unpin this item from the top",
++ "LA.pin.unpinned.extension": "unpin_item",
 ### Github Workflow
 * Yet another attempt to rip CHANGELOG.md into automatic release notes
+### Settings
+* Added pinned data for reactions, systems, traits, and tech attacks to NPC serialization
 ### Svelte
 * Changed Svelte `actor` folder to `shared` to more accurately reflect what it is and to fall in-line with its CSS reflections. And yes: it is a deliberate choice to not embed the CSS in the Svelte files (see `theme.ts` for commentary)
+* Added pinned data for reactions, systems, traits, and tech attacks to NPC stores
 * Added `data-rank`, `data-index`, and `data-type` HTML data-embed support to `GlyphButton` to help deprecate redundant button components
+* Split NPC's `Systems.svelte` into new component `SystemItem.svelte` 
+* Split NPC's `TechAttack.svelte` into new component `TechAttackItem.svelte`
+* Split NPC's `Traits.svelte` into new component `TraitItem.svelte` 
+* Split NPC's `Weapons.svelte` into new component `WeaponItem.svelte` 
+* Split NPC's `Reactions.svelte` into new component `ReactionItem.svelte` 
 * Refactored `HexButtonProps.ts` into `HexButton.svelte`
 * Refactored `ActionBoxProps.ts` into `ActionBox.svelte`
 * Refactored `FlowButtonProps.ts` in favor of `IconButtonProps.ts`
@@ -23,7 +54,8 @@
 * Deprecate `EditButton` in favor of `GlyphButton`
 * Refactored `H2_BUTTON_ICON_STYLE` in `EditButton.svelte` to `H2_BUTTON_ICON_STYLE` in `Button.svelte`
 * Reduced join lengths and slightly confusing reading experience by merging strings where available
-* Other changes for consistency
+* Added logging to `sendToChat` functions
+* Other minor changes for consistency
 ### CSS
 * `-margin` is now implemented via mixins and generates l, r, t, b, lr, and tb variants
 * `-margin` incrementing is now completely linear

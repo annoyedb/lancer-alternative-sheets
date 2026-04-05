@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { Logger } from "@/classes/Logger";
 
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -61,7 +62,7 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
     {
         event.stopPropagation();
-        if (actor && action)
+        if (actor?.uuid && action)
         {
             let chatData = {
                 title: action.name, 
@@ -70,6 +71,8 @@
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 
     function getCoreBonusPath(index: number)

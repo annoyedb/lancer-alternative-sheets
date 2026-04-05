@@ -6,6 +6,7 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { CHAT_CARD_COLOR_MAP, SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
     import { FlowClass } from "@/enums/FlowClass";
@@ -123,10 +124,36 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, weapon: any)
     {
         event.stopPropagation();
-        if (actor && weapon)
+        if (actor?.uuid && weapon)
         {
+            let range = "";
+            weapon.system.active_profile.all_range.map((rng: any) => {
+                range += `<div class="la-flexrow">${rng.val}<i class="cci cci-${rng.type.toLowerCase()} -fontsize6"></i></div>`
+            });
+            let damage = "";
+            weapon.system.active_profile.all_damage.map((dmg: any) => {
+                damage += `<div class="la-flexrow">${dmg.val}<i class="cci cci-${dmg.type.toLowerCase()} -fontsize6"></i></div>`;
+            });
+            const description = `
+                <div>
+                    ${weapon.system.active_profile.description}
+                </div>
+                <hr>
+                <div 
+                    class="la-flexrow -justifyevenly clipped-alt -fontsize5 -padding0-tb -padding1-lr"
+                    style="
+                        background-color: var(--weapon-color);
+                        color: var(--light-text);
+                        align-items: baseline;
+                    "
+                >
+                    ${range}
+                    ${damage}
+                </div>
+            `;
             let chatData = {
-                title: weapon.name, 
+                title: weapon.name,
+                description: description,
                 effect: weapon.system.active_profile.effect,
                 onAttack: weapon.system.active_profile.on_attack,
                 onHit: weapon.system.active_profile.on_hit,
@@ -136,6 +163,8 @@
             } as ChatData;
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

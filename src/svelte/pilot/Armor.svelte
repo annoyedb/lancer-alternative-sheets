@@ -9,6 +9,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
+    import { Logger } from "@/classes/Logger";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { ChatData } from "@/interfaces/flows/ChatData";
@@ -73,33 +74,37 @@
     
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, armor: any)
     {
-        const desc = `
-        ${armor.system.description}
-        <hr>
-        <div 
-            class="la-flexrow -justifybetween clipped-alt -fontsize5" 
-            style="
-                background-color: var(--weapon-color);
-                color: var(--light-text);
-                padding: 0.5rem;
-                align-items: baseline;
-            "
-        >
-            <div>${armor.system.bonuses[0].val}<i class="mdi mdi-heart-half-full" style="padding-left: 2px; padding-right: 2px;"></i></div>
-            <div class="la-flexrow">${armor.system.bonuses[1].val}<i class="cci cci-role-defender -fontsize6"></i></div>
-            <div class="la-flexrow">${armor.system.bonuses[2].val}<i class="cci cci-evasion -fontsize6"></i></div>
-            <div class="la-flexrow">${armor.system.bonuses[3].val}<i class="cci cci-edef -fontsize6"></i></div>
-            <div>${armor.system.bonuses[4].val}<i class="mdi mdi-arrow-right-bold-hexagon-outline" style="padding-left: 2px; padding-right: 2px;"></i></div>
-        </div>
-        `
         event.stopPropagation();
-        let chatData = {
-            title: armor.name, 
-            description: desc,
-            tags: armor.system.tags,
-            color: CHAT_CARD_COLOR_MAP[ChatCardType.Armor],
-        } as ChatData
-        SendUnknownToChatBase.getInstance().startFlow(armor.uuid, chatData);
+        if (actor?.uuid && armor)
+        {
+            const description = `
+                ${armor.system.description}
+                <hr>
+                <div 
+                    class="la-flexrow -justifyevenly clipped-alt -fontsize5 -padding0-tb -padding1-lr" 
+                    style="
+                        background-color: var(--weapon-color);
+                        color: var(--light-text);
+                        align-items: baseline;
+                    "
+                >
+                    <div>${armor.system.bonuses[0].val}<i class="mdi mdi-heart-half-full" style="padding-left: 2px; padding-right: 2px;"></i></div>
+                    <div class="la-flexrow">${armor.system.bonuses[1].val}<i class="cci cci-role-defender -fontsize6"></i></div>
+                    <div class="la-flexrow">${armor.system.bonuses[2].val}<i class="cci cci-evasion -fontsize6"></i></div>
+                    <div class="la-flexrow">${armor.system.bonuses[3].val}<i class="cci cci-edef -fontsize6"></i></div>
+                    <div>${armor.system.bonuses[4].val}<i class="mdi mdi-arrow-right-bold-hexagon-outline" style="padding-left: 2px; padding-right: 2px;"></i></div>
+                </div>
+            `
+            let chatData = {
+                title: armor.name, 
+                description: description,
+                tags: armor.system.tags,
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Armor],
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(armor.uuid, chatData);        
+        }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

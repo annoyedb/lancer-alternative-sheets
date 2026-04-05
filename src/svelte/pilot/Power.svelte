@@ -19,6 +19,7 @@
     import LimitedBondBox from "@/svelte/pilot/LimitedBondBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import { Logger } from "@/classes/Logger";
 
     const {
         actor,
@@ -44,11 +45,16 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, power: any)
     {
         event.stopPropagation();
-        let chatData = {
-            title: power.name, 
-            description: power.description
-        } as ChatData
-        SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        if (actor?.uuid && power)
+        {
+            let chatData = {
+                title: power.name, 
+                description: power.description
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

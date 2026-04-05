@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
@@ -8,6 +9,7 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
+    
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/shared/header/HeaderQuinary.svelte";
@@ -33,11 +35,16 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
         event.stopPropagation();
-        let chatData = {
-            title: core.passive_name, 
-            effect: core.passive_effect,
-        } as ChatData
-        SendUnknownToChatBase.getInstance().startFlow(frame.uuid, chatData);
+        if (actor?.uuid && core)
+        {
+            let chatData = {
+                title: core.passive_name, 
+                effect: core.passive_effect,
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(frame.uuid, chatData);
+        }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

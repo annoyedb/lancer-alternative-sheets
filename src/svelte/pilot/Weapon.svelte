@@ -1,8 +1,12 @@
 <script lang="ts">
+    import { Logger } from "@/classes/Logger";
+    import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
+    import type { ChatData } from "@/interfaces/flows/ChatData";
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-
+    import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
+    import { ChatCardType } from "@/enums/ChatCardType";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -61,6 +65,51 @@
             weapon.isLimited() ||
             weapon.system.counters.length
         );
+    }
+
+    function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, weapon: any)
+    {
+        event.stopPropagation();
+        if (actor?.uuid && weapon)
+        {
+            let range = "";
+            weapon.system.range.map((rng: any) => {
+                range += `<div class="la-flexrow">${rng.val}<i class="cci cci-${rng.type.toLowerCase()} -fontsize6"></i></div>`
+            });
+            let damage = "";
+            weapon.system.damage.map((dmg: any) => {
+                damage += `<div class="la-flexrow">${dmg.val}<i class="cci cci-${dmg.type.toLowerCase()} -fontsize6"></i></div>`;
+            });
+            const description = `
+                <div>
+                    ${weapon.system.description}
+                </div>
+                <hr>
+                <div 
+                    class="la-flexrow -justifyevenly clipped-alt -fontsize5 -padding0-tb -padding1-lr"
+                    style="
+                        background-color: var(--weapon-color);
+                        color: var(--light-text);
+                        align-items: baseline;
+                    "
+                >
+                    ${range}
+                    ${damage}
+                </div>
+            `;
+            let chatData = {
+                title: weapon.name, 
+                description: description,
+                trigger: weapon.system.trigger,
+                effect: weapon.system.effect,
+                onHit: weapon.system.on_hit,
+                tags: weapon.system.tags,
+                color: CHAT_CARD_COLOR_MAP[ChatCardType.Weapon],
+            } as ChatData;
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+        else 
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 
@@ -186,7 +235,7 @@
             <!-- Send to chat -->
             <GlyphButton
                 style={[H2_BUTTON_ICON_STYLE]}
-                flowClass={FlowClass.SendToChat}
+                flowClass={FlowClass.None}
                 uuid={weapon.uuid}
 
                 tooltipEnabled={tooltipEnabled}
@@ -197,6 +246,7 @@
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
 
+                onClick={(event) => sendToChat(event, weapon)}
                 onPointerEnter={() => {messageButtonHover = true;} }
                 onPointerLeave={() => {messageButtonHover = false;} }
             >

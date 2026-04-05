@@ -113,12 +113,7 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, item: any)
     {
         event.stopPropagation();
-        if (!actor?.uuid)
-        {
-            Logger.error("Tried to call LAS sendToChat without an actor UUID");
-            return;
-        }
-        if (item && item)
+        if (actor?.uuid && item)
         {
             let chatData = null;
             if (item.trigger)
@@ -140,6 +135,8 @@
             }
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
+        else 
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

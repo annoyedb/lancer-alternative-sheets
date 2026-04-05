@@ -1,6 +1,16 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
 import type { ThemeKey } from "@/enums/ThemeKey";
 import { fromStore, get, writable } from "svelte/store";
+import { 
+    getPinnedTraits, 
+    setPinnedTraits, 
+    getPinnedSystems, 
+    setPinnedSystems, 
+    getPinnedTechs, 
+    setPinnedTechs, 
+    getPinnedReactions,
+    setPinnedReactions,
+} from '@/scripts/npc/settings';
 
 interface SheetStoreData
 {
@@ -93,6 +103,70 @@ export class PilotStore
                 store[key] = PilotStore.createDefaultData();
             }
             store[key] = { ...store[key], ...value };
+            return store;
+        });
+    }
+}
+
+/**
+ * All string arrays store LIDs
+ * 
+ * These are stored as a stop-gap for asynchronous data sync between the server and client.
+ * The stop-gap helps maintain reactivity within Svelte.
+ */
+interface NPCStoreData
+{
+    pinnedTraits: string[];
+    pinnedSystems: string[];
+    pinnedTechs: string[];
+    pinnedReactions: string[];
+}
+
+export class NPCStore
+{
+    static createDefaultData(): NPCStoreData
+    {
+        return {
+            pinnedTraits: [],
+            pinnedSystems: [],
+            pinnedTechs: [],
+            pinnedReactions: [],
+        };
+    }
+
+    static store = writable<{ [key: string]: NPCStoreData }>({});
+
+    static get(key: string): NPCStoreData
+    {
+        const store = get(NPCStore.store);
+        if (!(key in store))
+        {
+            store[key] = NPCStore.createDefaultData();
+            store[key].pinnedTraits = getPinnedTraits(key);  // Persistent storage
+            store[key].pinnedSystems = getPinnedSystems(key);  // Persistent storage
+            store[key].pinnedTechs = getPinnedTechs(key);  // Persistent storage
+            store[key].pinnedReactions = getPinnedReactions(key);  // Persistent storage
+        }
+        return fromStore(NPCStore.store).current[key];
+    }
+
+    static set(key: string, value: Partial<NPCStoreData>): void
+    {
+        NPCStore.store.update(store =>
+        {
+            if (!store[key])
+            {
+                store[key] = NPCStore.createDefaultData();
+            }
+            store[key] = { ...store[key], ...value };
+            if (value.pinnedTraits !== undefined)
+                setPinnedTraits(key, store[key].pinnedTraits); // Persistent storage
+            if (value.pinnedSystems !== undefined)
+                setPinnedSystems(key, store[key].pinnedSystems); // Persistent storage
+            if (value.pinnedTechs !== undefined)
+                setPinnedTechs(key, store[key].pinnedTechs); // Persistent storage
+            if (value.pinnedReactions !== undefined)
+                setPinnedReactions(key, store[key].pinnedReactions); // Persistent storage
             return store;
         });
     }

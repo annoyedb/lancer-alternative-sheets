@@ -25,6 +25,8 @@ export class SendUnknownToChatBase extends FlowBase
                     effect: data.effect,
                     onHit: data.onHit,
                     onCrit: data.onCrit,
+                    attackBonus: data?.attackBonus, // NPCs only
+                    accuracyBonus: data?.accuracyBonus, // NPCs only
                     tags: data.tags,
                     color: data.color,
                 });

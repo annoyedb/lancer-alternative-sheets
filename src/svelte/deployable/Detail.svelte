@@ -55,7 +55,7 @@
     function sendActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any)
     {
         event.stopPropagation();
-        if (action)
+        if (actor?.uuid && action)
         {
             let chatData = {
                 title: action.name, 
@@ -64,19 +64,15 @@
             } as ChatData 
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 
     // (#4) Temporary until Lancer system implements proper deployable actions
     function sendDeployableActionToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, action: any, deployable: any)
     {
         event.stopPropagation();
-        if (!actor?.uuid)
-        {
-            Logger.error("Tried to call LAS sendToChat without an actor UUID");
-            return;
-        }
-        
-        if (action)
+        if (actor?.uuid && action)
         {
             const description = `
                 <details>
@@ -108,6 +104,8 @@
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

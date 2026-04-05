@@ -17,6 +17,7 @@
     import { getThemeKey } from "@/scripts/store/theme";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
 
+    import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
 
@@ -111,6 +112,8 @@
             } as ChatData 
             SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 
     // (#4) Temporary until Lancer system implements proper deployable actions
@@ -151,6 +154,8 @@
             } as ChatData
             SendUnknownToChatBase.getInstance().startFlow(uuid, chatData);
         }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 

@@ -6,6 +6,10 @@ export class NPCSheetSettings implements NPCSheetSettingsData
         themeOverride: string;
         sidebarExes: Array<string>;
         syncActorTokenImages: boolean;
+        pinnedTraits: Array<string>; // LIDs
+        pinnedSystems: Array<string>; // LIDs
+        pinnedTechs: Array<string>; // LIDs
+        pinnedReactions: Array<string>; // LIDs
     };
 
     static emptyContent()
@@ -15,6 +19,14 @@ export class NPCSheetSettings implements NPCSheetSettingsData
             sidebarExes: [
             ],
             syncActorTokenImages: true,
+            pinnedTraits: [
+            ],
+            pinnedSystems: [
+            ],
+            pinnedTechs: [
+            ],
+            pinnedReactions: [
+            ],
         }
     }
 }

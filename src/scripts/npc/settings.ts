@@ -279,3 +279,103 @@ export function setActorTokenSync(uuid: string, value: boolean)
         encodeNPCSheetData(data),
     );
 }
+
+export function getPinnedTraits(uuid: string): Array<string>
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.pinnedTraits ?? [];
+}
+
+export function setPinnedTraits(uuid: string, lids: Array<string>)
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = migratedDefaults(workingUUID, data);
+
+    data[workingUUID].pinnedTraits = lids;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () => {
+            Logger.log(`Pinned traits set to ${lids.join(", ")} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
+}
+
+export function getPinnedSystems(uuid: string): Array<string>
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.pinnedSystems ?? [];
+}
+
+export function setPinnedSystems(uuid: string, lids: Array<string>)
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = migratedDefaults(workingUUID, data);
+
+    data[workingUUID].pinnedSystems = lids;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () => {
+            Logger.log(`Pinned systems set to ${lids.join(", ")} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
+}
+
+export function getPinnedTechs(uuid: string): Array<string>
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.pinnedTechs ?? [];
+}
+
+export function setPinnedTechs(uuid: string, lids: Array<string>)
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = migratedDefaults(workingUUID, data);
+
+    data[workingUUID].pinnedTechs = lids;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () => {
+            Logger.log(`Pinned tech attacks set to ${lids.join(", ")} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
+}
+
+export function getPinnedReactions(uuid: string): Array<string>
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+    return data[workingUUID]?.pinnedReactions ?? [];
+}
+
+export function setPinnedReactions(uuid: string, lids: Array<string>)
+{
+    const data = getNPCSheetData();
+    const workingUUID = getRoot(uuid) ?? uuid;
+
+    if (!data[workingUUID])
+        data[workingUUID] = migratedDefaults(workingUUID, data);
+
+    data[workingUUID].pinnedReactions = lids;
+    SocketManager.getInstance().runAsGM(
+        setNPCSheetData,
+        () => {
+            Logger.log(`Pinned reactions set to ${lids.join(", ")} for ${uuid}`);
+        },
+        encodeNPCSheetData(data),
+    );
+}

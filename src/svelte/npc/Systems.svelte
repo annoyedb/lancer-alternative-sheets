@@ -1,71 +1,40 @@
 <script lang="ts">
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import { getLocalized } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { NPCStore } from "@/scripts/store/module-store";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import { FlowClass } from "@/enums/FlowClass";
-    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import type { PinItem } from "@/interfaces/npc/PinInfo";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
-    import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
-    import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
-    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import LoadedBox from "@/svelte/shared/counter/LoadedBox.svelte";
-    import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
-    import EffectBox from "@/svelte/shared/EffectBox.svelte";
-    import TagArray from "@/svelte/shared/TagArray.svelte";
-    import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import SystemItem from "./SystemItem.svelte";
+    import HeaderSecondary from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const {
         actor,
-        system,
-        systems,
+        system, // The `system` object in the NPC object
+        systems, // The actual NPC systems (the gameplay mechanic)
     }: NPCSheetProps & {systems : Array<any>} = $props();
-    let collapseAllButtonHover = $state(false);
-    let effectButtonHover = $state(false);
-    let editButtonHover = $state(false);
-    let messageButtonHover = $state(false);
     
     const tooltipEnabled = getNPCSheetTooltipEnabled(); 
-    const qualityMode = true; // TODO: change to a setting
-    const tier = system.tier;
     const collID = `${actor.uuid}.systems`;
+    const pinCollID = `${actor.uuid}.systems.pins`
+    const nonpinCollID = `${actor.uuid}.systems.nonpins`
 
-    function renderOuter(component: any)
-    {
-        return !isDestroyed(component) && (isLoading(component) || isRecharge(component) || component.system.uses.max);
-    }
-
-    function hasAccuracyBonus(component: any)
-    {
-        return component.system.accuracy.some((accuracy: number) => accuracy !== 0);
-    }
-
-    function hasAttackBonus(component: any)
-    {
-        return component.system.attack_bonus.some((bonus: number) => bonus !== 0);
-    } 
-
-    function isDestroyed(component: any)
-    {
-        return component.system.destroyed;
-    }
-
-    function getHeaderStyle(component: any)
-    {
-        return isDestroyed(component)
-            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
-            : "la-text-header la-prmy-header";
-    }
-
-    function getIconStyle(component: any)
-    {
-        return isDestroyed(component)
-            ? "la-text-repcap"
-            : "la-text-header";
-    }
+    let pinnedItems = $derived.by(() => {
+        const serializedLIDs = NPCStore.get(actor.uuid).pinnedSystems;
+        let pinned: any[] = [];
+        let unpinned: any[] = [];
+        systems.map((component: any) => {
+            if (serializedLIDs.includes(component.system.lid))
+                pinned.push(component);
+            else
+                unpinned.push(component);
+        });
+        return {pinned, unpinned} as PinItem;
+    });
+    let collapseAllButtonHover = $state(false);
 </script>
 
 {#snippet headerOptions()}
@@ -97,156 +66,56 @@
     headerContent={headerOptions}
 >
     <div class="la-flexcol -gap0 -widthfull">
-    {#each systems as component}
-    {#snippet outerContent()}
-        <div class="-widthfull -padding2-l">
-            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
-                <!-- Rechargeable -->
-                <ChargedBox
-                    item={component}
-                    path={`itemTypes.npc_feature.${component.index}.system.charged`}
-                />
-                <!-- Loading -->
-                <LoadedBox
-                    item={component}
-                    path={`itemTypes.npc_feature.${component.index}.system.loaded`}
-                />
-                <!-- Limited -->
-                <LimitedBox
-                    usesValue={component.system.uses.value}
-                    usesMax={component.system.uses.max}
-                    path={`itemTypes.npc_feature.${component.index}.system.uses`}
-                />
-            </div>
-        </div>
-    {/snippet}
-    {#snippet headerSecondaryLeftOptions()}
-        <EffectButton
-            iconStyle={[getIconStyle(component), "cci cci-system -fontsize7"]}
-            iconBackgroundStyle={["-fontsize7 la-prmy-secondary", qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
-
-            flowClass={FlowClass.SendEffectToChat}
-            path={`itemTypes.npc_feature.${component.index}`}
-
-            tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltipDirection={TooltipDirection.UP}
-            tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
-
-            disabled={isDestroyed(component)}
-
-            onPointerEnter={() => {effectButtonHover = true;}}
-            onPointerLeave={() => {effectButtonHover = false;}}
-        />
-    {/snippet}
-    {#snippet headerSecondaryRightOptions()}
-        <!-- Edit -->
-        <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
-            flowClass={FlowClass.ContextMenu}
-            path={`itemTypes.npc_feature.${component.index}`}
-
-            tooltipEnabled={tooltipEnabled}
-            tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltip={getLocalized("LA.edit.tooltip")}
-
-            onPointerEnter={() => {editButtonHover = true;} }
-            onPointerLeave={() => {editButtonHover = false;} }
-        >
-            <i class="fas fa-ellipsis-v"></i>
-        </GlyphButton>
-        <!-- Send to Chat -->
-        <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
-            flowClass={FlowClass.SendEffectToChat}
-            type={"trait"}
-            index={component.index}
-            uuid={component.uuid}
-
-            tooltipEnabled={tooltipEnabled}
-            tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-            tooltip={getLocalized("LA.chat.tooltip")}
-
-            onPointerEnter={() => {messageButtonHover = true;} }
-            onPointerLeave={() => {messageButtonHover = false;} }
-        >
-            <i class="mdi mdi-message"></i>
-        </GlyphButton>
-    {/snippet}
+    <!-- Pinned -->
+    {#if pinnedItems.pinned.length}
         <HeaderSecondary
-            text={component.name}
-            headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(component), "-fontsizemedium"]}
-            borderStyle={["-bordersoff"]}
-            extensionTextFunction={() => {
-                if (effectButtonHover)
-                    return `--${getLocalized("LA.use.label")}`;
-                if (messageButtonHover)
-                    return `--${getLocalized("LA.chat.extension")}`;
-                if (editButtonHover)
-                    return `--${getLocalized("LA.edit.extension")}`;
-                return undefined;
-            }}
+            text={getLocalized("LA.pin.pinned.label")}
+            headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
 
-            itemID={component.id}
-            uuid={component.uuid}
-            path={`itemTypes.npc_feature.${component.index}`}
-            acceptTypes={"npc_feature"}
-            
-            collapseID={component.uuid}
-            startCollapsed={true}
-            renderOutsideCollapse={renderOuter(component) ? outerContent : undefined }
-
-            contentLeft={headerSecondaryLeftOptions}
-            contentRight={headerSecondaryRightOptions}
+            collapseID={pinCollID}
+            startCollapsed={false}
         >
-        {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
-            <div class="la-flexrow -gap0 -widthfull">
-                <EffectBox
-                    name={getLocalized("LA.npc.attackBonus.label")}
-                    outerStyle={[hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"]}
-
-                    tooltipEnabled={tooltipEnabled}
-                >
-                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                        {component.system.attack_bonus[tier - 1]}
-                        <i class="cci cci-reticule -fontsize4"></i>
-                    </span>
-                </EffectBox>
-                <EffectBox
-                    name={getLocalized("LA.npc.accuracy.label")}
-
-                    tooltipEnabled={tooltipEnabled}
-                >
-                    <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                        {component.system.accuracy[tier - 1]}
-                        <i class="cci cci-accuracy -fontsize6"></i>
-                    </span>
-                </EffectBox>
+            <div class="la-flexcol -gap0 -widthfull">
+            {#each pinnedItems.pinned as component}
+                <SystemItem
+                    actor={actor}
+                    system={system}
+                    component={component}
+                    pinned={true}
+                ></SystemItem>
+            {/each}
             </div>
-        {/if}
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-
-                tooltipEnabled={tooltipEnabled}
-            >
-                {@html component.system.effect}
-            </EffectBox>
-            <EffectBox
-                name={getLocalized("LA.effect.hit.label")}
-                effect={component.system.on_hit}
-
-                tooltipEnabled={tooltipEnabled}
-            />
-            <TagArray
-                tags={component.system.tags}
-                path={`itemTypes.npc_feature.${component.index}.system.tags`}
-                justify={"start"}
-            />
         </HeaderSecondary>
-    {/each}
+        <div></div>
+        <HeaderSecondary
+            text={getLocalized("LA.pin.unpinned.label")}
+            headerStyle={["clipped-bot-alt la-bckg-weapon -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
+
+            collapseID={nonpinCollID}
+            startCollapsed={false}
+        >
+            <div class="la-flexcol -gap0 -widthfull">
+            {#each pinnedItems.unpinned as component}
+                <SystemItem
+                    actor={actor}
+                    system={system}
+                    component={component}
+                    pinned={false}
+                ></SystemItem>
+            {/each}
+            </div>
+        </HeaderSecondary>
+    {:else}
+        <!-- Non-pinned -->
+        {#each pinnedItems.unpinned as component}
+            <SystemItem
+                actor={actor}
+                    system={system}
+                    component={component}
+                pinned={false}
+            ></SystemItem>
+        {/each}
+    {/if}
     </div>
 </HeaderMain>
 {/if}

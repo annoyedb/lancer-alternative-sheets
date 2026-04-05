@@ -8,6 +8,7 @@
     import { AcceptType } from "@/enums/AcceptType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ChatData } from "@/interfaces/flows/ChatData";
+    import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
@@ -62,11 +63,16 @@
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, license: any, index: number)
     {
         event.stopPropagation();
-        let chatData = {
-            title: `${license.name} ${license.system.curr_rank}`, 
-            description: licenseDescriptions[index] || "",
-        } as ChatData
-        SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        if (actor?.uuid && license)
+        {
+            let chatData = {
+                title: `${license.name} ${license.system.curr_rank}`, 
+                description: licenseDescriptions[index] || "",
+            } as ChatData
+            SendUnknownToChatBase.getInstance().startFlow(actor.uuid, chatData);
+        }
+        else
+            Logger.error("Tried to call LAS sendToChat without either an actor's UUID or associated object");
     }
 </script>
 
