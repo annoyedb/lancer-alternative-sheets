@@ -1,3 +1,8 @@
+# 1.4.1
+My git apparently does not recognize capitalization differences
+## Changes
+* Actually commit `pt-BR.json` change into `pt-br.json`
+
 # 1.4.0
 Hello everyone, it's been a while!
 
