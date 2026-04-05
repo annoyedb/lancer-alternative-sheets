@@ -33,15 +33,15 @@
       "flags": {}
     },
     {
-      "lang": "zh-tw",
+      "lang": "zh-TW",
       "name": "正體中文",
-      "path": "lang/zhtw.json"
+      "path": "lang/zh-tw.json"
     },
-     {
-            "lang": "pt-BR",
-            "name": "Português (Brasil)",
-            "path": "lang/pt-BR.json"
-        }
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-br.json"
+    }
   ],
   "esmodules": [
     "lancer-alternative-sheets.mjs"
