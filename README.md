@@ -100,7 +100,6 @@ Now any changes to `.hbs` templates, `.json` localization files, and source code
 Some things to note: 
 * [module manifests](/dist/module.json) may become 'stale' if adding anything new that is declared in them, in which case Foundry (and by extension the Vite server) needs to be returned to the Setup menu to reload the manifest.
 * events newly assigned to Svelte components (e.g. on:click/onclick) may not be assigned until a manual refresh
-* localization strings are cached, so require a refresh to display changes
 
 Included is a (probably) outdated bunch of type definitions generated from [foundryvtt-lancer](https://github.com/Eranziel/foundryvtt-lancer), but aside from some globally defined constants I haven't found a way to get Vite to roll-up the definitions in a working build.
 
