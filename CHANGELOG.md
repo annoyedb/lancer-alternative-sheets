@@ -1,3 +1,12 @@
+# 1.4.2
+## Changes
+* #64 - Fixed NPC tech attack referring to an effectively unused actor attribute to instead use system instead
+* Added clarification to what the tech attack stat on NPCs represent
+## Technical Changes
+### Localization
+Additions:
++ "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
+
 # 1.4.1
 My git apparently does not recognize capitalization differences
 ## Changes

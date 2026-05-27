@@ -6,9 +6,12 @@ import { resolveHelperDotpath } from '@/scripts/lancer/helpers/common';
 import { SheetStore } from "@/scripts/store/module-store";
 import { getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
 
-export function getLocalized(key: string): string
+export function getLocalized(keys: string | string[], separator?: string): string
 {
-    return HandlebarsHelpers.localize(key, {} as HelperOptions);
+    if (Array.isArray(keys)) {
+        return keys.map(k => HandlebarsHelpers.localize(k, {} as HelperOptions)).join(separator ? separator : "<br><br>");
+    }
+    return HandlebarsHelpers.localize(keys, {} as HelperOptions);
 }
 
 export function randomExtension(): string

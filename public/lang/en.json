@@ -142,6 +142,7 @@
 	"LA.evasion.tooltip": "Evasion determines the threshold needed to hit a target with a ranged or melee attack",
 	"LA.tattack.short": "T-ATK",
 	"LA.tattack.tooltip": "Tech Attack is used in place of Grit when making a Tech Attack or conducting electronic warfare",
+	"LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
 	"LA.sensor.short": "SNSR",
 	"LA.sensor.tooltip": "Sensors is the maximum distance from the edge of a character's space that they can detect enemies, make tech attacks, and use electronic systems<br><br>They are aware of all other characters within their sensor range so long as those characters are not hiding, even if there is no direct line-of-sight",
 	"LA.save.short": "SAVE",

@@ -427,13 +427,13 @@
                         <StatComboShort
                             icon={"cci cci-tech-full"}
                             label={getLocalized("LA.tattack.short")}
-                            value={system.tech_attack}
+                            value={system.sys}
                             outerStyle={["-fontsize7"]}
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={getCSSDocumentTheme(actor.uuid)}
-                            tooltip={getLocalized("LA.tattack.tooltip")}
+                            tooltip={getLocalized(["LA.tattack.tooltip", "LA.tattack.append.tooltip.npc"])}
                             tooltipDirection={TooltipDirection.LEFT}
                         />
                         <StatComboShort
