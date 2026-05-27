@@ -92,7 +92,7 @@ This module uses MessagePack to serialize settings data before it gets saved to 
 ### Building
 This project uses [Vite](https://vite.dev/guide/) to build and package the module and makes use of it's HMR feature for development.
 
-To set up hot-reloading, first build the module, then symlink the dist folder into your foundry data folder as `modules/lancer-alternative-sheets`. 
+To set up hot-reloading, first build the module, then symlink the `dist` folder into your foundry data folder as `modules/lancer-alternative-sheets`. 
 Make sure your Foundry Virtual Tabletop server is running and have the ['Hot-Reload Package Files' enabled](/docs/HotReload.png) in your Foundry settings, run `yarn serve` at the module development folder and your browser will automatically open to the Vite development server.
 
 Now any changes to `.hbs` templates, `.json` localization files, and source code will automatically load into Foundry development server.
