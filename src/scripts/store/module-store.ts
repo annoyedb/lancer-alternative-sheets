@@ -47,7 +47,7 @@ export class SheetStore
         const store = get(SheetStore.store);
         if (!(key in store))
         {
-            store[key] = SheetStore.createDefaultData();
+            SheetStore.set(key, {});
         }
         return fromStore(SheetStore.store).current[key];
     }
@@ -89,7 +89,7 @@ export class PilotStore
         const store = get(PilotStore.store);
         if (!(key in store))
         {
-            store[key] = PilotStore.createDefaultData();
+            PilotStore.set(key, {});
         }
         return fromStore(PilotStore.store).current[key];
     }
@@ -141,7 +141,7 @@ export class NPCStore
         const store = get(NPCStore.store);
         if (!(key in store))
         {
-            store[key] = NPCStore.createDefaultData();
+            NPCStore.set(key, {});
             store[key].pinnedTraits = getPinnedTraits(key);  // Persistent storage
             store[key].pinnedSystems = getPinnedSystems(key);  // Persistent storage
             store[key].pinnedTechs = getPinnedTechs(key);  // Persistent storage
