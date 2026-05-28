@@ -5,7 +5,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import { browseActorImage, getLocalized } from "@/scripts/helpers";
+    import {browseActorImage, getLocalized, photosensitiveStyling} from "@/scripts/helpers";
     import { getActorTokenSync, getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setActorTokenSync, setImageOffsetXY } from "@/scripts/pilot/settings";
     import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
@@ -181,8 +181,8 @@
                         {getLocalized("LA.pilot.isOwner.label")}
                     </span>
                 {:else}
-                    <i class="mdi mdi-cable-data -fontsize6 horus--subtle"></i>
-                    <span class="-fontsizesmall -aligncontentcenter horus--subtle">
+                    <i class="mdi mdi-cable-data -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
+                    <span class="-fontsizesmall -aligncontentcenter {photosensitiveStyling('horus--subtle')}">
                         {getLocalized("LA.pilot.isLimited.label")}
                     </span>
                 {/if}
@@ -201,23 +201,23 @@
                         {getLocalized("LA.pilot.activity.2.label")}
                     </span>
                 {:else if system.hp.value <= system.hp.max * 0.75 && system.hp.value > system.hp.max * 0.5}
-                    <i class="mdi mdi-heart-pulse -fontsize6 horus--subtle"></i>
+                    <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
                     <span class="-fontsizesmall -aligncontentcenter horus--very--subtle">
                         {getLocalized("LA.pilot.activity.3.label")}
                     </span>
                 {:else if system.hp.value <= system.hp.max * 0.5 && system.hp.value > system.hp.max * 0.25}
-                    <i class="mdi mdi-heart-pulse -fontsize6 horus--subtle"></i>
+                    <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
                     <span class="-fontsizesmall -aligncontentcenter horus--very--subtle">
                         {getLocalized("LA.pilot.activity.4.label")}
                     </span>
                 {:else if system.hp.value <= system.hp.max * 0.25 && system.hp.value > 0}
-                    <i class="mdi mdi-heart-pulse -fontsize6 horus--subtle"></i>
-                    <span class="-fontsizesmall -aligncontentcenter horus--subtle">
+                    <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
+                    <span class="-fontsizesmall -aligncontentcenter {photosensitiveStyling('horus--subtle')}">
                         {getLocalized("LA.pilot.activity.5.label")}
                     </span>
                 {:else}
-                    <i class="mdi mdi-heart-pulse -fontsize6 horus--subtle"></i>
-                    <span class="-fontsizesmall -aligncontentcenter horus--subtle">
+                    <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
+                    <span class="-fontsizesmall -aligncontentcenter {photosensitiveStyling('horus--subtle')}">
                         {getLocalized("LA.pilot.activity.6.label")}
                     </span>
                 {/if}

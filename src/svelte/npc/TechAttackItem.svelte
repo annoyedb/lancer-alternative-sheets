@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Logger } from "@/classes/Logger";
     import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import {getLocalized, isLoading, isRecharge, photosensitiveStyling} from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { NPCStore } from "@/scripts/store/module-store";
@@ -82,7 +82,7 @@
     function getHeaderStyle(tech: any)
     {
         return isDestroyed(tech)
-            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
+            ? `la-text-error la-prmy-error ${photosensitiveStyling('horus--very--subtle')}`
             : "la-text-header la-prmy-header";
     }
 

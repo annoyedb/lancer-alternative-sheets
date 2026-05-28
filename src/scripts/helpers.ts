@@ -8,10 +8,19 @@ import { getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
 
 export function getLocalized(keys: string | string[], separator?: string): string
 {
-    if (Array.isArray(keys)) {
+    if (Array.isArray(keys))
+    {
         return keys.map(k => HandlebarsHelpers.localize(k, {} as HelperOptions)).join(separator ? separator : "<br><br>");
     }
     return HandlebarsHelpers.localize(keys, {} as HelperOptions);
+}
+
+/**
+ * If the Foundry core setting 'Photosensitivity Mode' is enabled, disables this styling
+ */
+export function photosensitiveStyling(text: string): string
+{
+    return game.settings.get("core", "photosensitiveMode") ? "" : text;
 }
 
 export function randomExtension(): string

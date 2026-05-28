@@ -2,7 +2,7 @@
     import type { MountSlotProps } from "@/interfaces/mech/MountSlotProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
 
-    import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
+    import {formatString, getLocalized, isLoading, photosensitiveStyling} from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { CHAT_CARD_COLOR_MAP, SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -75,7 +75,7 @@
     function getSubtitleStyle(weapon:any)
     {
         return isDestroyed(weapon)
-            ? "la-text-error la-prmy-error horus--very--subtle -upper"
+            ? `la-text-error la-prmy-error -upper ${photosensitiveStyling('horus--very--subtle')}`
             : "la-text-header la-prmy-header -upper";
     }
 

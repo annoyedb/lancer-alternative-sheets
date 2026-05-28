@@ -2,10 +2,28 @@
 ## Changes
 * #64 - Fixed NPC tech attack referring to an effectively unused actor attribute to instead use system instead
 * #61 - Added support for adding/editing deployable effects if there is none
+* #62 - Added disabling HORUS glitchy text within these sheets when Foundry photosensitivity mode is enabled
 * Added clarification to what the tech attack stat on NPCs represent
 ## Technical Changes
 ### Localization
 Additions:
++ "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
+### Localization Requirements:
+zh-tw:
++ "LA.pin.pinned.label": "PINNED",
++ "LA.pin.unpinned.label": "OTHER",
++ "LA.pin.pinned.tooltip": "Pin this item to the top",
++ "LA.pin.pinned.extension": "pin_item",
++ "LA.pin.unpinned.tooltip": "Unpin this item from the top",
++ "LA.pin.unpinned.extension": "unpin_item",
++ "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
+pt-br:
++ "LA.pin.pinned.label": "PINNED",
++ "LA.pin.unpinned.label": "OTHER",
++ "LA.pin.pinned.tooltip": "Pin this item to the top",
++ "LA.pin.pinned.extension": "pin_item",
++ "LA.pin.unpinned.tooltip": "Unpin this item from the top",
++ "LA.pin.unpinned.extension": "unpin_item",
 + "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
 
 # 1.4.1

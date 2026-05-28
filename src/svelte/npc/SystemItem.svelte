@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Logger } from "@/classes/Logger";
-    import { getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import {getLocalized, isLoading, isRecharge, photosensitiveStyling} from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { NPCStore } from "@/scripts/store/module-store";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -63,7 +63,7 @@
     function getHeaderStyle(item: any)
     {
         return isDestroyed(item)
-            ? "la-text-error la-prmy-error horus--very--subtle -strikethrough"
+            ? `la-text-error la-prmy-error -strikethrough ${photosensitiveStyling('horus--very--subtle')}`
             : "la-text-header la-prmy-header";
     }
 

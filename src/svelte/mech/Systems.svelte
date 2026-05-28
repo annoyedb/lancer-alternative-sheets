@@ -2,7 +2,7 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
-    import { formatString, getLocalized } from "@/scripts/helpers";
+    import {formatString, getLocalized, photosensitiveStyling} from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
@@ -69,7 +69,7 @@
     function getSubtitleStyle(component: any)
     {
         return isDestroyed(component)
-            ? "la-text-error la-prmy-error horus--very--subtle"
+            ? `la-text-error la-prmy-error ${photosensitiveStyling('horus--very--subtle')}`
             : "la-text-header la-prmy-header";
     }
 

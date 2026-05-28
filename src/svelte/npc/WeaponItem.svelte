@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { ChatData } from "@/interfaces/flows/ChatData";
-    import { formatString, getLocalized, isLoading, isRecharge } from "@/scripts/helpers";
+    import {formatString, getLocalized, isLoading, isRecharge, photosensitiveStyling} from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
@@ -76,7 +76,7 @@
     function getSubtitleStyle(item:any)
     {
         return isDestroyed(item)
-            ? "la-text-error la-prmy-error horus--very--subtle"
+            ? `la-text-error la-prmy-error ${photosensitiveStyling('horus--very--subtle')}`
             : "la-text-header la-prmy-header";
     }
 
