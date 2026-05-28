@@ -1,6 +1,7 @@
 # 1.4.2
 ## Changes
 * #64 - Fixed NPC tech attack referring to an effectively unused actor attribute to instead use system instead
+* #61 - Added support for adding/editing deployable effects if there is none
 * Added clarification to what the tech attack stat on NPCs represent
 ## Technical Changes
 ### Localization

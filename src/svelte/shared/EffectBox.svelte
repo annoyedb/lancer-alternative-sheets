@@ -31,14 +31,13 @@
 <div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -fontsizemedium -bordersround-ltb {outerStyle?.join(' ')}">
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsizesmall">
         {name}<!--
---->{#if editOption}
-        <!-- TODO: allow edit details -->
-        <button type="button" 
-            class="fas fa-edit popout-text-edit-button -padding0-l" 
-            data-path={editPath}
-            aria-label={getLocalized("LA.edit.label")}>
-        </button><!--
---->{/if}<!--
+---><button type="button"
+        class="fas fa-edit popout-text-edit-button -padding0-l
+            {editOption ? '' : '-displaynone'}"
+        data-path={editPath}
+        aria-label={getLocalized("LA.edit.label")}>
+    </button><!--
+---><!--
 ---></span>
     {#if hasFlow}
         <FlowButton

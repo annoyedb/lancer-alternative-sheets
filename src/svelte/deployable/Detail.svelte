@@ -14,11 +14,13 @@
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import { Logger } from "@/classes/Logger";
+    import {getAdvancedState} from "@/scripts/store/advanced";
 
     const {
         actor,
         system,
     }: DeployableSheetProps = $props();
+    let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let collapseAllButtonHover = $state(false);
     
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
@@ -124,8 +126,8 @@
 {/snippet}
 
 <div class="la-flexcol -widthfull">
-{#if system.detail}
     <HeaderMain
+        rootStyle ={[`${ system.detail || advancedOptions ? "" : "-displaynone" }`]}
         text={getLocalized("LA.deployable.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
         textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
@@ -135,20 +137,19 @@
                 return `--${getLocalized("LA.collapseAll.extension")}`;
             return undefined;
         }}
-        
+
         collapseID="{collID}.details"
         startCollapsed={true}
     >
         <EffectBox
             name={getLocalized("LA.mech.system.effect.label")}
 
-            editOption={true}
+            editOption={advancedOptions}
             editPath="system.detail"
         >
             {@html system.detail}
         </EffectBox>
     </HeaderMain>
-{/if}
     <HeaderMain
         text={getLocalized("LA.deployable.actions.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
