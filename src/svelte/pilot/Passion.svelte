@@ -11,6 +11,7 @@
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const {
@@ -22,7 +23,7 @@
     let bondImageSrc = $state(getBondImageSrc(actor.uuid));
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
 
     function getGlowColor()
     {

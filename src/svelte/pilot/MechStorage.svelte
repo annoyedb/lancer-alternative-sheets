@@ -12,6 +12,7 @@
     import MechStats from "@/svelte/pilot/MechStats.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
     
     const props = $props();
     const {
@@ -24,7 +25,7 @@
         mech.system.pilot.value.id === actor.id) ?? [];
     let selectedMechIndex = $state(PilotStore.get(actor.uuid).selectedMech);
 
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const collID = `${actor.uuid}.mechStorage`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();

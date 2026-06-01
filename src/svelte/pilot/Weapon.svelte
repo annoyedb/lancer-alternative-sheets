@@ -30,6 +30,7 @@
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -43,7 +44,7 @@
     
     const collID = `${actor.uuid}.weapons`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     
     function getWeaponPath(index: number)
     {

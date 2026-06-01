@@ -16,6 +16,7 @@
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     type TraitItemProps = {
         actor: any;
@@ -28,8 +29,8 @@
         trait,
         pinned,
     } : TraitItemProps = $props();
-    
-    const qualityMode = true; // TODO: change to a setting
+
+    const qualityMode = getExtraEffectsEnabled();
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     let effectButtonHover = $state(false);

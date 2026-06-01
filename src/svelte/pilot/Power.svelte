@@ -20,6 +20,7 @@
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { Logger } from "@/classes/Logger";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -33,7 +34,7 @@
         .map((power: any, index: number) => ({ ...power, index }))
         .filter((power: any) => power.unlocked) || [];
     const tooltipEnabled = getPilotSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const bondUUID = system.bond?.uuid;
     const collID = `${actor.uuid}.powers`;
     

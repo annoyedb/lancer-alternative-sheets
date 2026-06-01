@@ -17,6 +17,8 @@ zh-tw:
 + "LA.pin.unpinned.tooltip": "Unpin this item from the top",
 + "LA.pin.unpinned.extension": "unpin_item",
 + "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
+  "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
+  "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
 pt-br:
 + "LA.pin.pinned.label": "PINNED",
 + "LA.pin.unpinned.label": "OTHER",
@@ -25,6 +27,8 @@ pt-br:
 + "LA.pin.unpinned.tooltip": "Unpin this item from the top",
 + "LA.pin.unpinned.extension": "unpin_item",
 + "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
+  "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
+  "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
 
 # 1.4.1
 My git apparently does not recognize capitalization differences

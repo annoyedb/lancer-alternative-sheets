@@ -29,6 +29,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -41,7 +42,7 @@
     let editButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
 
     function getSlotSize(size: string)
     {

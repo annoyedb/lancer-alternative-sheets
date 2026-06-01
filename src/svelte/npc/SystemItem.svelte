@@ -16,6 +16,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     type SystemItemProps = {
         actor: any;
@@ -31,7 +32,7 @@
         pinned,
     }: SystemItemProps = $props();
 
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const tier = system.tier;
     const tooltipEnabled = getNPCSheetTooltipEnabled(); 
 

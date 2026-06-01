@@ -15,13 +15,14 @@
     import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/shared/header/HeaderQuinary.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
         system,
     }: MechSheetProps = $props();
     const tooltipEnabled = getMechSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
 
     const frame: any = system.loadout.frame!.value;
     const core: any = frame.system.core_system;

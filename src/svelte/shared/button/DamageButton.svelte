@@ -16,6 +16,7 @@
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         damage,
@@ -42,7 +43,7 @@
         onPointerEnter,
         onPointerLeave,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
-    
+    const qualityMode = getExtraEffectsEnabled();
     const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
     const hasAllWeaponProperties = damage?.length && range?.length;
     const rollable = !disabled && (damage?.length > 0);
@@ -102,7 +103,9 @@
         damages={damage}
         style={(iconStyle || []).concat(disabled 
             ? "" 
-            : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover")
+            : `la-prmy-header
+                ${ qualityMode ? "-glow-prmy la-scdy-primary -glow-scdy-hover" : "" }
+            `)
         }
     />
 {/if}

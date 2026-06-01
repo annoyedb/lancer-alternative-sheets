@@ -2,14 +2,6 @@
 {
     .la-loadout.la-tab
     {
-        // Make only the damage glow on hovering the button
-        // to indicate what is actually being rolled
-        // But only if the button is not disabled
-        .la-properties:not([disabled]):hover>.la-damage>.la-number__span
-        {
-            filter: drop-shadow(0px 0px 5px var(--la-primary));
-            -webkit-filter: drop-shadow(0px 0px 5px var(--la-primary));
-            -moz-filter: drop-shadow(0px 0px 5px var(--la-primary));
-        }
+        
     }
 }

@@ -26,6 +26,7 @@
     import { Logger } from "@/classes/Logger";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     export type ActionBoxProps = {
         children?: Snippet;
@@ -82,7 +83,7 @@
     let messageButtonHover = $state(false);
 
     const isMechSheet = actor?.type === "mech" || false;
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
     function getActivationClass(activation: string): string 

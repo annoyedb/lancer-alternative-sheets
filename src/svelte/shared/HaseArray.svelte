@@ -8,6 +8,7 @@
     import HexButton from "@/svelte/shared/button/HexButton.svelte";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         pilot,
@@ -21,7 +22,8 @@
         logTypeReset,
     }: {pilot: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
     let activeTab = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
-    let qualityMode = true; // TODO: change this to a setting
+
+    const qualityMode = getExtraEffectsEnabled();
 </script>
 
 <!-- HASE Stats -->
@@ -50,10 +52,10 @@
                 sign={true}
                 
                 outerStyle={["-grit"]}
-                innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize6", "-lineheight15", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                outerTextStyle={["-widthfull -textaligncenter"]}
+                innerTextStyle={["-fontsize6 -lineheight15", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -74,10 +76,10 @@
                 path={"system.hull"}
 
                 outerStyle={["-hull"]}
-                innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                outerTextStyle={["-widthfull -textaligncenter"]}
+                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
             <HexButton
                 text={getLocalized("LA.agility.short")}
@@ -96,10 +98,10 @@
                 path={"system.agi"}
 
                 outerStyle={["-agi"]}
-                innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                outerTextStyle={["-widthfull -textaligncenter"]}
+                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -120,10 +122,10 @@
                 path={"system.sys"}
 
                 outerStyle={["-sys"]}
-                innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                outerTextStyle={["-widthfull -textaligncenter"]}
+                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -145,10 +147,10 @@
                 path={"system.eng"}
 
                 outerStyle={["-eng"]}
-                innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                outerTextStyle={["-widthfull", "-textaligncenter"]}
-                innerTextStyle={["-fontsize5", "-lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                outerTextStyle={["-widthfull -textaligncenter"]}
+                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
             />
         </div>
     </div>

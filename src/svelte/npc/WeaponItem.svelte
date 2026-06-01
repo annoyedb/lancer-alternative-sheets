@@ -21,6 +21,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
     
     type WeaponItemProps = {
         actor: any;
@@ -38,7 +39,7 @@
 
     const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
     const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const tooltipEnabled = getNPCSheetTooltipEnabled();
 
     let attackButtonHover = $state(false);

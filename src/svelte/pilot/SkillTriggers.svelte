@@ -16,6 +16,7 @@
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -28,7 +29,7 @@
 
     const collID = `${actor.uuid}.skills`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
 
     function getSkillPath(index: number)
     {

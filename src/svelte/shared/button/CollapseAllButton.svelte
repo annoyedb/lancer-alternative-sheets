@@ -94,7 +94,7 @@
     onclick={(event) => toggleCollapseAll(event)}
     aria-label={getLocalized("LA.collapseAll.tooltip")}
 >
-    <i class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" } 
+    <i class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" }
         {iconStyle?.join(' ')}"
     ></i>
 </button>

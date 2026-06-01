@@ -1,4 +1,8 @@
 <script lang="ts" module>
-    export const CLICKABLE_HOVER = "la-scdy-primary -glow-scdy-hover la-prmy-header -glow-prmy";
-    export const H2_BUTTON_ICON_STYLE = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize4";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
+
+    let qualityMode = $state(getExtraEffectsEnabled());
+
+    export const CLICKABLE_HOVER = `la-scdy-primary ${ qualityMode ? "-glow-scdy-hover la-prmy-header -glow-prmy" : "" }`;
+    export const H2_BUTTON_ICON_STYLE = `la-prmy-header -fontsize4 ${ qualityMode ? "-glow-prmy la-scdy-primary -glow-scdy-hover" : "" }`;
 </script>

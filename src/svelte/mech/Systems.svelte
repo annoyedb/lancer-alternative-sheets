@@ -26,6 +26,7 @@
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props: MechSheetProps = $props();  
     const {
@@ -38,7 +39,7 @@
     let messageButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
-    const qualityMode = true; // TODO: change to a setting
+    const qualityMode = getExtraEffectsEnabled();
     const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
     const collID = systemComponents.length
         ? `${actor.uuid}.systems`

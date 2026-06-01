@@ -14,9 +14,23 @@ export function registerModuleSettings()
         type: Boolean,
         default: false,
     } as ClientSettings.PartialSetting<boolean>);
+
+    game.settings.register(LancerAlternative.Name, `settings-enable-effects`, {
+        name: "LA.SETTINGS.enableEffects.label",
+        hint: "LA.SETTINGS.enableEffects.subLabel",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    } as ClientSettings.PartialSetting<boolean>);
 }
 
 export function getVerboseLoggingEnabled(): boolean
 {
     return game.settings.get(LancerAlternative.Name, `settings-verbose-logging`) as boolean;
+}
+
+export function getExtraEffectsEnabled(): boolean
+{
+    return game.settings.get(LancerAlternative.Name, `settings-enable-effects`) as boolean;
 }

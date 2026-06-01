@@ -5,6 +5,8 @@
 	"LA.SHEET.deployable.label": "Alternative Deployable Sheet",
 	"LA.SETTINGS.debug.label": "Verbose Debugging",
 	"LA.SETTINGS.debug.subLabel": "Enable verbose debugging for sheets.",
+	"LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
+	"LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
 	"LA.SETTINGS.mech.enableEffects.label": "Enable Mech Sheet Effects",
 	"LA.SETTINGS.mech.enableEffects.subLabel": "Enable the display of CSS effects such as animations and drop shadows in mech sheets.",
 	"LA.SETTINGS.mech.enableTooltip.label": "Enable Mech Sheet Tooltips",
