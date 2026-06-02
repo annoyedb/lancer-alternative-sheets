@@ -115,7 +115,7 @@
 >
     <div class="la-flexcol -gap0 -widthfull">
     {#each coreBonuses as coreBonus, index}
-        {#snippet outercontent()}
+        {#snippet outerContent()}
             {#if coreBonus.system.counters.length}
             <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
             {#each coreBonus.system.counters as counter, jndex}
@@ -202,7 +202,7 @@
             collapseID={`${collID}.${index}`}
             startCollapsed={true}
 
-            renderOutsideCollapse={outercontent}
+            renderOutsideCollapse={outerContent}
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >

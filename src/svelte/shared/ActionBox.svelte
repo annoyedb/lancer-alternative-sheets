@@ -164,7 +164,7 @@
         logTypeReset={logTypeReset}
     />
 {/snippet}
-{#snippet outercontent()}    
+{#snippet outerContent()}
     {#if flowButton}
         {@render flowButton()}
     {/if}
@@ -258,7 +258,7 @@
 
         contentLeft={headerQuinaryLeftOptions}
         contentRight={headerQuinaryRightOptions}
-        renderOutsideCollapse={outercontent}
+        renderOutsideCollapse={outerContent}
     >    
     <!-- Action Box Content -->
     {#if action.trigger}
