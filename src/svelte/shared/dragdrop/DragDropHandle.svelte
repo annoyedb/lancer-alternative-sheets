@@ -36,7 +36,7 @@
     let component: HTMLElement | null = $state(null);
 
     const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
-    const logging = logType && logTypeReset;
+    const logging = $derived(logType && logTypeReset);
 
     function handleDragStart(event: DragEvent): void 
     {
@@ -90,7 +90,7 @@
     }
 </script>
 
-<div role="mark"
+<div role="none"
     class="la-flexrow -widthfull -aligncenter -positionrelative
         {style?.join(' ')}"
     ondragstart={handleDragStart}
@@ -99,10 +99,10 @@
     bind:this={component}
 >
 {#if !disabled}
-    <i class="fas fa-grip-lines -positionabsolute -left0 -pointergrab la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
-        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
-        aria-label={getLocalized("LA.advanced.reorderMacro.tooltip")}
+    <i role="none"
+        class="fas fa-grip-lines -positionabsolute -left0 -pointergrab la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
+        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         style="z-index: 1;"
     ></i>
 {/if}
@@ -112,8 +112,8 @@
 {#if !disabled && !deleteDisabled}
     <button type="button"
         class="fas fa-delete-left -positionabsolute -right0 la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
-        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         onclick={handleOnDelete}
         data-tooltip={deleteTip}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}

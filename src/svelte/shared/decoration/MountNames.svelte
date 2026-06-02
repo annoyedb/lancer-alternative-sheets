@@ -14,15 +14,15 @@
         logTypeReset,
     }: MountNamesProps & TextLogEventProps = $props();
 
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.rollAttack.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.rollAttack.tooltip"));
 </script>
 
 {#if mountNames.length}
-<div 
+<div role="none"
     class="la-flexcol la-text-header -gap0 -aligncenter -fontsizesmall -height5 -lineheight2 {style?.join(' ')}"
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
 >
 {#each mountNames as mountName}
     <span class="-widthfull -textalignright {textStyle?.join(' ')}">{mountName}</span>

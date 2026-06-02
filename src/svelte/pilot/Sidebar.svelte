@@ -27,19 +27,21 @@
         system,
         actor,
         itemTypes
-    }: PilotSheetProps = props;
+    }: PilotSheetProps = $derived(props);
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);
     let editingShield = $state(false);
 
-    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
-    const sidebarExes = getSidebarExecutables(actor.uuid);
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
     const showTechAttack = getPilotSheetTechAttackEnabled();
-    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`);
-    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`);
+    const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
+    const sidebarExes = $derived(getSidebarExecutables(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
+    const sizeTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`));
+    const speedTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`));
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
 
@@ -85,17 +87,17 @@
     {#if system.size < 1}
         <i class="cci cci-size-half {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {:else}
         <i class="cci cci-size-{system.size} {themeOverride} la-outl-shadow"
             data-tooltip={tooltipEnabled ? sizeTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
         <div class="la-flexrow -fontsize9" 
             data-tooltip={tooltipEnabled ? speedTip : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow"></i>
             <span class="{themeOverride} la-outl-shadow -bold">{system.speed}</span>
@@ -105,7 +107,7 @@
     <ImageVideo
         actor={actor}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.image.token.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
         logText={getLocalized("LA.edit.image.token.tooltip")}
@@ -124,7 +126,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.armor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -136,7 +138,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.evasion.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -148,7 +150,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.edefense.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -181,7 +183,7 @@
                 editTertiary={editingBurn}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -199,7 +201,7 @@
             >
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
@@ -218,7 +220,7 @@
             >
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.burn.short")}<!--
@@ -248,7 +250,7 @@
                 editSecondary={editingShield}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.hitpoint.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -257,7 +259,7 @@
         <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin1-r">
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.overshield.short")}<!--
@@ -294,7 +296,7 @@
                 editSecondary={editingBurn}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.stress.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
             />
@@ -312,7 +314,7 @@
             >
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
             ><!--
             --->{getLocalized("LA.burn.short")}<!--
@@ -334,7 +336,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.tattack.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -347,7 +349,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.save.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />
@@ -360,7 +362,7 @@
         innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.sensor.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
     />

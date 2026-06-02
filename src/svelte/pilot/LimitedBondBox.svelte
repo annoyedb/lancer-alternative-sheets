@@ -15,8 +15,8 @@
         logTypeReset,
     }: LimitedBondBoxProps & TextLogEventProps = $props();
 
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.limited.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.limited.tooltip"));
 </script>
 
 {#if usesMax}
@@ -28,11 +28,11 @@
 {#each {length: usesMax} as _, index}
     <button type="button" 
         class="la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize7"
-        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
-        <i class="mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"}
+        <i class="mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}
                 power-uses-hex" 
             data-available="{index < usesValue}"
             data-uuid={uuid}

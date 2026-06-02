@@ -74,8 +74,8 @@
 
 </script>
 
-<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
+<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ''}
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ''}
         collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
@@ -92,7 +92,7 @@
     <div class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull
             {headerStyle?.join(' ') || H3_HEADER_STYLE}
-            {collapseID ? "collapse-trigger" : ""}"
+            {collapseID ? 'collapse-trigger' : ''}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Icon, Name -->
@@ -101,7 +101,7 @@
             {@render contentLeft()}
         {/if}
             <div class="la-flexcol -alignstart -justifycenter -divider">
-                <span class="la-top__span {headerFontStyle?.join(' ') || "-fontsize5"}">{text}</span>
+                <span class="la-top__span {headerFontStyle?.join(' ') || '-fontsize5'}">{text}</span>
                 <TerminalText
                     text={collapseID || !extensionText ? `${subText} ` : subText}
                     textStyle={subHeaderFontStyle || ["-fontsizesmall"]}
@@ -121,12 +121,12 @@
         {@render renderOutsideCollapse()}
     {/if}
     <div class="la-collapsegroup__wrapper
-            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+            {collapseID ? 'collapse-wrapper' : ''} {isCollapsed ? 'collapsed' : ''}"
         data-la-collapse-id={collapseID}
     >
         <div class="la-collapsecontent 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
-                {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
+                {borderStyle ? borderStyle.join(' ') : 'la-brdr-primary'}"
         >
             {#if children}
                 {@render children()}

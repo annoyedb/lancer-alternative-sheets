@@ -7,7 +7,7 @@
     const props = $props();
     const {
         actor
-    }: MechSheetProps = props;
+    }: MechSheetProps = $derived(props);
     const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getMechSheetLogActionStartCollapsed();
 </script>

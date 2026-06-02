@@ -15,16 +15,16 @@
     const props: MechSheetProps = $props();
     const {
         actor,
-    } = props;
-
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
+    } = $derived(props);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <div class="-heightfull
-    {advancedOptions && active === "loadout" ? "la-flexrow" : "-displaynone"}"
+    {advancedOptions && active === 'loadout' ? 'la-flexrow' : '-displaynone'}"
 >
     <span class="{SETTINGS_HEADER_STYLE} -alignend">
         {getLocalized("LA.advanced.inventory.label")}
@@ -38,7 +38,7 @@
                 flowClass={FlowClass.Inventory}
                 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.advanced.inventory.open.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
                 logType={TextLogHook.MechHeader}

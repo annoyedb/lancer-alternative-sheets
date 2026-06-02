@@ -27,9 +27,10 @@
     let messageButtonHover = $state(false);
     let effectButtonHover = $state(false);
 
-    const collID = `${actor.uuid}.skills`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
+    const collID = $derived(`${actor.uuid}.skills`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function getSkillPath(index: number)
     {
@@ -41,7 +42,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -79,7 +80,7 @@
             uuid={skill.uuid}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={skill.system.description}
             tooltipHeader={getLocalized("LA.pilot.skillTrigger.label")}
@@ -111,7 +112,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -131,7 +132,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
             logType={ TextLogHook.PilotHeader }

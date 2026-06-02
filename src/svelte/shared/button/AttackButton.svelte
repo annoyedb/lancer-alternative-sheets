@@ -7,7 +7,6 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     
     import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
-    import { H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
 
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
@@ -37,9 +36,10 @@
         onPointerEnter,
         onPointerLeave,
     }: IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollAttack.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.rollAttack.tooltip");
+
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollAttack.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.rollAttack.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
     {
@@ -47,7 +47,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType);
+            sendToLog(event, log, logType!);
         else
             return undefined;
     }
@@ -58,12 +58,14 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset);
+            resetLog(event, logTypeReset!);
         else
             return undefined;
     }
 </script>
 <script lang="ts" module>
+    import { H3_ICON_SIZE } from "@/svelte/shared/header/HeaderTertiary.svelte";
+    
     const _DEFAULT_I_BACKGROUND = `${H3_ICON_SIZE} la-text-scrollbar-secondary`;
     const _DEFAULT_I_FOREGROUND = `${H3_ICON_SIZE}`;
 </script>
@@ -82,7 +84,7 @@
 >
     <i 
         class="
-            {disabled ? "" : CLICKABLE_HOVER}
+            {disabled ? '' : CLICKABLE_HOVER}
             {iconStyle?.join(' ') || _DEFAULT_I_FOREGROUND}"
     ></i>
 {#if !disabled}

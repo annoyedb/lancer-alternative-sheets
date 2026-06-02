@@ -15,11 +15,11 @@
         actor,
         document,
         system,
-    } = props;
-
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    } = $derived(props);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function levelUp(event : MouseEvent)
     {
@@ -39,7 +39,7 @@
 </script>
 
 <div class="-heightfull
-    {advancedOptions ? "la-flexrow" : "-displaynone"}"
+    {advancedOptions ? 'la-flexrow' : '-displaynone'}"
 >
     <span class="{SETTINGS_HEADER_STYLE} -alignend -capitalize">
         {getLocalized("LA.agility.label")}
@@ -51,7 +51,7 @@
             flowClass={FlowClass.None}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.pilot.level.up.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.level.up.tooltip")}
@@ -66,7 +66,7 @@
             flowClass={FlowClass.None}
             
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.pilot.agility.down.tooltip")}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.agility.down.tooltip")}

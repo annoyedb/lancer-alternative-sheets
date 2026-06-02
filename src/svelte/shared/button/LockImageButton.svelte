@@ -25,9 +25,10 @@
         logType,
         logTypeReset,
     } : LockImageButtonProps & TooltipProps & TextLogEventProps = $props();
-    let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
-    
-    const isVideo = isValidVideoContainer(actor.prototypeToken?.texture.src);
+
+    const isVideo = $derived(isValidVideoContainer(actor.prototypeToken?.texture.src));
+    const tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#if tokenImageLocked}
@@ -37,7 +38,7 @@
             style={["mdi mdi-link-variant-remove", style]}
             onClick={event => handleToggleImageSync(event, actor, setState)}
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.advanced.link.error")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
             logText={getLocalized("LA.advanced.link.error")}
@@ -50,7 +51,7 @@
             style={["mdi mdi-link-variant", style]}
             onClick={event => handleToggleImageSync(event, actor, setState)}
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.advanced.link.tooltip")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
             logText={getLocalized("LA.advanced.link.tooltip")}
@@ -64,7 +65,7 @@
         style={["mdi mdi-link-variant-off", style]}
         onClick={event => handleToggleImageSync(event, actor, setState)}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.advanced.unlink.tooltip")}
         tooltipDirection={tooltipDirection || TooltipDirection.UP}
         logText={getLocalized("LA.advanced.unlink.tooltip")}

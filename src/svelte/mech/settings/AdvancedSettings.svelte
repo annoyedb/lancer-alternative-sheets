@@ -5,7 +5,7 @@
 
     const props: MechSheetProps = $props();
     const {
-    } = props;
+    } = $derived(props);
 </script>
 <script lang="ts" module>
     export const SETTINGS_BUTTON_STYLE = " la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -height4";

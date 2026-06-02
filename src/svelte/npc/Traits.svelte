@@ -15,13 +15,15 @@
         actor,
         traits,
     }: NPCSheetProps & {traits : Array<any>} = $props();
+    let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
-    const collID = `${actor.uuid}.traits`;
-    const pinCollID = `${actor.uuid}.traits.pins`
-    const nonpinCollID = `${actor.uuid}.traits.nonpins`
+    const collID = $derived(`${actor.uuid}.traits`);
+    const pinCollID = $derived(`${actor.uuid}.traits.pins`);
+    const nonpinCollID = $derived(`${actor.uuid}.traits.nonpins`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
-    let pinnedItems = $derived.by(() => {
+    const pinnedItems = $derived.by(() => {
         const serializedLIDs = NPCStore.get(actor.uuid).pinnedTraits;
         let pinned: any[] = [];
         let unpinned: any[] = [];
@@ -33,14 +35,13 @@
         });
         return {pinned, unpinned} as PinItem;
     });
-    let collapseAllButtonHover = $state(false);
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}

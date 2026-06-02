@@ -15,8 +15,9 @@
     } = $props();
     let editButtonHover = $state(false);
 
-    const collID = `${actor.uuid}.notes`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.notes`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#snippet headerOptions()}
@@ -27,7 +28,7 @@
     path="system.notes"
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltip={getLocalized("LA.edit.tooltip")}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.edit.tooltip")}
@@ -56,7 +57,7 @@
     headerContent={headerOptions}
 >
     <EffectBox
-        name={getThemeHistoryLabel(getCSSDocumentTheme(actor.uuid))}
+        name={getThemeHistoryLabel(theme)}
         effect={ system.notes ? system.notes : getLocalized("LA.placeholder") }
     />
 </HeaderMain>

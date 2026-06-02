@@ -22,12 +22,13 @@
     const {
         actor,
         pilot 
-    }: MechSheetProps = props
-    let introPlayed = $derived(getIntroRun(actor.uuid));
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
+    }: MechSheetProps = $derived(props);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const introPlayed = $derived(getIntroRun(actor.uuid));
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     onMount(() => {
         setTokenImageLock(actor.uuid, getActorTokenSync(actor.uuid));
@@ -48,7 +49,7 @@
             <i 
                 class="mdi mdi-mouse-move-vertical -fontsize6 -aligncontentcenter la-text-header -width7 -glow-prmy la-prmy-primary"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.LEFT}
             ></i>
         {/if}
@@ -56,14 +57,14 @@
                 style={["-fontsize5 -glow-prmy la-prmy-primary"]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />
         </div>
     {#if advancedOptions}
         <LockImageButton
-            style="-fontsize7 la-text-header la-prmy-primary -glow-prmy"
+            style={"-fontsize7 la-text-header la-prmy-primary -glow-prmy"}
             actor={actor}
             setState={setActorTokenSync}
             tooltipEnabled={tooltipEnabled}
@@ -77,7 +78,7 @@
                 style={["mdi mdi-image-edit", "-fontsize6", "la-text-header", "-width7", "-glow-prmy", "la-prmy-primary"]}
                 onClick={event => browseActorImage(event, actor)}
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.image.actor.tooltip")}
                 tooltipDirection={TooltipDirection.LEFT}
                 logText={getLocalized("LA.edit.image.actor.tooltip")}
@@ -107,7 +108,9 @@
         </div>
         <hr class="la-divider-h -large -spacemedium -margin0-b la-bckg-header">
         <div class="la-flexrow">
-            <span class="la-pilotcallsign__span la-flexrow -justifystart -upper la-text-header -widthfull -overflowhidden
+            <span
+                role="none"
+                class="la-pilotcallsign__span la-flexrow -justifystart -upper la-text-header -widthfull -overflowhidden
                     ref set pilot click-open"
                 data-uuid={pilot?.uuid}
                 data-path={"system.pilot"}
@@ -117,7 +120,7 @@
             >
                 <TerminalText
                     text="LL{pilot?.system.level || 0}"
-                    extensionText="--{getLocalized("LA.search.label")}"
+                    extensionText={`--${getLocalized('LA.search.label')}`}
                     textStyle={["-fontsizemedium", "la-prmy-header"]}
                     disableCmdline={true}
                 >

@@ -31,15 +31,15 @@
         component,
         pinned,
     }: SystemItemProps = $props();
-
-    const qualityMode = getExtraEffectsEnabled();
-    const tier = system.tier;
-    const tooltipEnabled = getNPCSheetTooltipEnabled(); 
-
     let effectButtonHover = $state(false);
     let editButtonHover = $state(false);
     let messageButtonHover = $state(false);
     let pinButtonHover = $state(false);
+
+    const qualityMode = getExtraEffectsEnabled();
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const tier = $derived(system.tier);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function renderOuter(item: any)
     {
@@ -133,7 +133,7 @@
         path={`itemTypes.npc_feature.${component.index}`}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltipDirection={TooltipDirection.UP}
         tooltip={component.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
 
@@ -152,7 +152,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized(pinned ? "LA.pin.unpinned.tooltip" : "LA.pin.pinned.tooltip")}
 
         onClick={(event) => {pinned ? unpinItem(event, component) : pinItem(event, component)}}
@@ -173,7 +173,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.tooltip")}
 
         onPointerEnter={() => {editButtonHover = true;} }
@@ -191,7 +191,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.chat.tooltip")}
 
         onPointerEnter={() => {messageButtonHover = true;} }

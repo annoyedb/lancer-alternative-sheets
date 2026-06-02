@@ -13,6 +13,7 @@
     }: NPCSheetProps = $props();
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <!-- Floating HASE -->
@@ -25,7 +26,7 @@
                     value={system.hull}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltip={getLocalized("LA.hull.tooltip")}
                     logText={getLocalized("LA.hull.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -49,7 +50,7 @@
                     value={system.agi}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltip={getLocalized("LA.agility.tooltip")}
                     logText={getLocalized("LA.agility.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -72,7 +73,7 @@
                     value={system.sys}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltip={getLocalized("LA.systems.tooltip")}
                     logText={getLocalized("LA.systems.tooltip")}
                     logType={TextLogHook.MechHeader}
@@ -96,7 +97,7 @@
                     value={system.eng}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltip={getLocalized("LA.engineering.tooltip")}
                     logText={getLocalized("LA.engineering.tooltip")}
                     logType={TextLogHook.MechHeader}

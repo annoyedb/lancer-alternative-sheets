@@ -33,7 +33,7 @@
     let collapseAllButtonHover = $state(false);
     let editButtonHover = $state(false);
     let messageButtonHover = $state(false);
-    let [armorBonuses, otherBonuses] = armors.map((armor: any) => {
+    const [armorBonuses, otherBonuses] = $derived.by(() => armors.map((armor: any) => {
         // Separate bonuses into armor-related and other-related categories
         return armor.system.bonuses.reduce(
             (bonusCategories: { armorBonuses: { [key: string]: any }; otherBonuses: { [key: string]: any } }, bonus: { lid: string; val: any }) => {
@@ -47,7 +47,7 @@
     }).reduce(
         (
             [armorBns, otherBns]: [{ [key: string]: number }[], { [key: string]: number }[]],
-            { armorBonuses, otherBonuses }: { armorBonuses: { [key: string]: number }; otherBonuses: { [key: string]: number } }
+            { armorBonuses, otherBonuses }: { armorBonuses: { [_key: string]: number }; otherBonuses: { [_key: string]: number } }
         ) => {
             // Accumulate armor-related and other-related bonuses
             if (Object.keys(armorBonuses).length > 0)
@@ -57,10 +57,12 @@
             return [armorBns, otherBns];
         },
         [[], []]
-    );
+    ));
 
-    const collID = `${actor.uuid}.armors`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.armors`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
     const healthTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.hardsuit.health.tooltip"));
     const evasionTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.hardsuit.evasion.tooltip"));
     const edefenseTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.hardsuit.edefense.tooltip"));
@@ -112,7 +114,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -145,7 +147,7 @@
                 {#if armorBonuses[index].pilot_hp}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr -padding0-tb la-text-header -gap0"
                     data-tooltip={tooltipEnabled ? healthTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_hp}
@@ -155,7 +157,7 @@
                 {#if armorBonuses[index].pilot_armor}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? armorTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_armor}
@@ -165,7 +167,7 @@
                 {#if armorBonuses[index].pilot_evasion}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? evasionTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_evasion}
@@ -175,7 +177,7 @@
                 {#if armorBonuses[index].pilot_edef}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? edefenseTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_edef}
@@ -185,7 +187,7 @@
                 {#if armorBonuses[index].pilot_speed}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr la-text-header"
                     data-tooltip={tooltipEnabled ? speedTip : undefined}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={TooltipDirection.DOWN}
                 >
                     {armorBonuses[index].pilot_speed}
@@ -222,7 +224,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -242,7 +244,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -293,7 +295,7 @@
                 sheetUUID={actor.uuid}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
@@ -307,7 +309,7 @@
                 startCollapsed={true}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />

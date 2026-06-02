@@ -24,16 +24,17 @@
         logText,
         logType,
         logTypeReset,
-    }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = props
+    }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = $derived(props)
     
     let advancedOptions = $derived(getAdvancedState(uuid));
+    // svelte-ignore state_referenced_locally
     let ratio = $state(ratioGetter(uuid));
     let component: HTMLElement | null = $state(null);
     let sidebar: JQuery<HTMLElement> | null = null;
         
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.advanced.sidebarRatio.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.advanced.sidebarRatio.tooltip"));
 
     // Force the sidebar to update its flex value based on the changes we make to ratio
     onMount(() => 
@@ -78,8 +79,8 @@
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>

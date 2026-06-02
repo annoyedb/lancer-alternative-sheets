@@ -16,13 +16,15 @@
         system,
         reactions,
     }: NPCSheetProps & {reactions : Array<any>} = $props();
+    let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
-    const collID = `${actor.uuid}.reactions`;
-    const pinCollID = `${actor.uuid}.reactions.pins`
-    const nonpinCollID = `${actor.uuid}.reactions.nonpins`
+    const collID = $derived(`${actor.uuid}.reactions`);
+    const pinCollID = $derived(`${actor.uuid}.reactions.pins`);
+    const nonpinCollID = $derived(`${actor.uuid}.reactions.nonpins`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
-    let pinnedItems = $derived.by(() => {
+    const pinnedItems = $derived.by(() => {
         const serializedLIDs = NPCStore.get(actor.uuid).pinnedReactions;
         let pinned: any[] = [];
         let unpinned: any[] = [];
@@ -34,14 +36,13 @@
         });
         return {pinned, unpinned} as PinItem;
     });
-    let collapseAllButtonHover = $state(false);
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}

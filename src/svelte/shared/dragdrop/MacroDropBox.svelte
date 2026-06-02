@@ -37,18 +37,21 @@
         logType,
         logTypeReset,
     }: MacroDropBoxProps & TooltipProps & TextLogEventProps = $props();
+    interface LocalDropData { type: string; index: number; }
+
     let component: HTMLElement | null = $state(null);
+    // svelte-ignore state_referenced_locally
     let executables = $state(getExes);
 
     const systemTypes = Object.values(SystemButton);
-    interface LocalDropData { type: string; index: number; }
+    const theme = $derived(getCSSDocumentTheme(uuid))
 
-    const tipMain = TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.0"), tooltipHeader);
-    const tipAlt = TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.1"), tooltipHeader);
-    const logging = logType && logTypeReset;
+    const tipMain = $derived(TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.0"), tooltipHeader));
+    const tipAlt = $derived(TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.1"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
     const logMain = getLocalized("LA.advanced.addMacro.tooltip.0");
     const logAlt = getLocalized("LA.advanced.addMacro.tooltip.1");
-    const log = allowDrop ? logAlt : logMain;
+    const log = $derived(allowDrop ? logAlt : logMain);
 
     onMount(() => {
         if (component)
@@ -127,13 +130,13 @@
     }
 </script>
 
-<div class="la-flexcol -widthfull {hintDropArea ? "-divider la-prmy-accent" : ""}">
+<div class="la-flexcol -widthfull {hintDropArea ? '-divider la-prmy-accent' : ''}">
 {#if hintDropArea}
     {#if allowDrop}
-        <div 
+        <div role="none"
             class="la-flexrow -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
-            onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-            onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+            onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+            onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         >
             <i class="mdi mdi-arrow-down-left"></i>
             <span>
@@ -174,7 +177,7 @@
             <SkillTriggerButton
                 item={fromUuidSync(type)}
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(uuid)}
+                tooltipTheme={theme}
                 tooltipHeader={tooltipHeader}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -189,7 +192,7 @@
                         uuid={uuid}
 
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getCSSDocumentTheme(uuid)}
+                        tooltipTheme={theme}
                         tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                         tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                         logText={ButtonFactory.getSystemButtonTip(type, uuid)}
@@ -217,7 +220,7 @@
                     flowType={type}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(uuid)}
+                    tooltipTheme={theme}
                     tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                     tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                     logText={ButtonFactory.getSystemButtonTip(type, uuid)}
@@ -236,7 +239,7 @@
                 }}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(uuid)}
+                tooltipTheme={theme}
                 logType={logType}
                 logTypeReset={logTypeReset}
             />
@@ -249,10 +252,10 @@
                 data-tooltip={tooltipEnabled 
                     ? allowDrop ? tipAlt : tipMain 
                     : undefined}
-                data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getCSSDocumentTheme(uuid)}`}
+                data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-                onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-                onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+                onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+                onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
             >
                 <div class="la-left la-flexrow">
                     {#if allowDrop}

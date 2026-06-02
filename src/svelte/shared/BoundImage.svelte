@@ -19,6 +19,7 @@
     // Dragging ---------------------------------------------------------------
     let dragging = false;
     let offset = { x: 0, y: 0 };
+    // svelte-ignore state_referenced_locally
     let position = $state({ 
         x: xGetter ? xGetter(uuid) : 0, 
         y: yGetter ? yGetter(uuid) : 0 
@@ -80,7 +81,7 @@
     {/if}
     <img 
         class="la-boundimage__image -heightfull -overflowhidden -float-r
-            {advancedOptions ? "-pointermove" : ""}" 
+            {advancedOptions ? '-pointermove' : ''}"
         src={image} 
         alt={`modules/${moduleID}/assets/nodata.png`}
         style="

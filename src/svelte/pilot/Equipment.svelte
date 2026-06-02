@@ -9,7 +9,7 @@
     const {
         actor,
         itemTypes
-    } : PilotSheetProps = props;
+    } : PilotSheetProps = $derived(props);
 </script>
 
 <Weapon

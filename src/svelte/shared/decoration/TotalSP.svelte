@@ -17,13 +17,14 @@
         logTypeReset,
     }: TotalSPProps & TextLogEventProps = $props();
 
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.mech.system.points.total.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.mech.system.points.total.tooltip"));
 </script>
 
-<div class="la-flexrow -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+<div role="none"
+    class="la-flexrow -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
+    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
 >
     <span class="{textStyle?.join(' ')}">
     {#if max}

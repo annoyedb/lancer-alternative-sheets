@@ -39,12 +39,14 @@
         logType,
         logTypeReset,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
-    const themeOverride = getThemeKey(sheetUUID);
-    const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
+
+    const themeOverride = $derived(getThemeKey(sheetUUID));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
     );
-    
+
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
+
     function lidSourceHasDeployable(deployable: StoredDocument<LancerActor>)
     {
         return lidSource.deployables?.includes(deployable.system.lid) ?? false;
@@ -225,7 +227,7 @@
 
                 uuid={uuid || deployable.uuid}
                 actor={source}
-                disableLeftButton={uuid ? false : true}
+                disableLeftButton={!uuid}
                 onClick={uuid ? sendActionToChat : undefined }
 
                 tooltipEnabled={tooltipEnabled}

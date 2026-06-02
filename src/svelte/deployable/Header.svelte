@@ -7,7 +7,7 @@
     const {
         actor,
         system,
-    }: DeployableSheetProps = props;
+    }: DeployableSheetProps = $derived(props);
 </script>
 
 <div class="la-flexcol -widthfull -heightfull">
@@ -18,7 +18,7 @@
                 class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"
                 name="name" 
                 value="{actor.name}" 
-                placeholder="{getLocalized("LA.placeholder")}"
+                placeholder={getLocalized("LA.placeholder")}
             />
             <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
                 <!-- 'id' in this case is actually the uuid -->

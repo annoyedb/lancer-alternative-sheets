@@ -15,11 +15,12 @@
     const {
         actor,
         system,
-    } = props;
+    } = $derived(props);
     let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
-    const weaponMounts = system.loadout.weapon_mounts;
+    const weaponMounts = $derived(system.loadout.weapon_mounts);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
     
     function getCollapseID(index: number)
     {
@@ -46,7 +47,7 @@
     <CollapseAllButton
         collapseID={getCollapseID(index)}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 

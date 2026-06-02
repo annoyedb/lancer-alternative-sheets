@@ -18,17 +18,20 @@
     const {
         actor,
         system,
-    } = props;
+    } = $derived(props);
     const ownedMechs: any[] = game.actors?.filter((mech: any) => 
         mech.type === "mech" && 
         mech.system.pilot?.status === "resolved" && 
         mech.system.pilot.value.id === actor.id) ?? [];
+    // svelte-ignore state_referenced_locally
     let selectedMechIndex = $state(PilotStore.get(actor.uuid).selectedMech);
 
     const qualityMode = getExtraEffectsEnabled();
-    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
-    const collID = `${actor.uuid}.mechStorage`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
+    const collID = $derived(`${actor.uuid}.mechStorage`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
     const activateTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.mechStorage.activate.tooltip"));
     const deactivateTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.mechStorage.deactivate.tooltip"));
 
@@ -87,7 +90,9 @@
 {#if ownedMechs.length}
 <div class="la-bg-scroll-alt la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover">
     <div class="-positionrelative -widthfull la-reveal">
-        <span class="la-selected-mech__active -positionabsolute {isInactive() ? "la-text-error" : "la-text-system"} la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height5 -lineheight5 la-bckg-darken-2">
+        <span class="la-selected-mech__active -positionabsolute la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height5 -lineheight5 la-bckg-darken-2
+            {isInactive() ? 'la-text-error' : 'la-text-system'}"
+        >
         {#if isInactive()}
             {getLocalized("LA.pilot.mechstorage.inactive.label")}
         {:else}
@@ -119,18 +124,18 @@
         {#if ownedMechs[selectedMechIndex].system.size < 1}
             <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {:else}
             <i class="cci cci-size-{ownedMechs[selectedMechIndex].system.size} {themeOverride} la-outl-shadow"
                 data-tooltip={tooltipEnabled ? getSizeTip() : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.LEFT}></i>
         {/if}
         </div>
         <div class=" la-flexrow -fontsize9" 
             data-tooltip={tooltipEnabled ? getSpeedTip() : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.LEFT}>
             <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow"></i>
             <span class="{themeOverride} la-outl-shadow -bold">{ownedMechs[selectedMechIndex].system.speed}</span>
@@ -139,12 +144,12 @@
     <div class="-positionrelative">
         <button type="button"
             class="la-flexrow -widthfull -fontsize13 -positionabsolute -bottom0 
-                {isInactive() ? "cci cci-activate la-text-system" : "cci cci-deactivate la-text-weapon"} 
-                {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"
+                {isInactive() ? 'cci cci-activate la-text-system' : 'cci cci-deactivate la-text-weapon'}
+                {qualityMode ? '-glow-prmy la-prmy-primary -glow-prmy-hover' + getGlowColor() : ''}"
             data-tooltip={tooltipEnabled 
                 ? isInactive() ? activateTip : deactivateTip 
                 : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.DOWN}
             onpointerenter={ event => sendToLog(event, isInactive()
                     ? getLocalized("LA.pilot.mechStorage.activate.tooltip") 
@@ -167,14 +172,15 @@
     startCollapsed={true}
 >
     <div class="la-flexcol -widthfull">
-        <div class="la-available-mechs__list"
+        <div role="none"
+            class="la-available-mechs__list"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.mechStorage.select.tooltip"), TextLogHook.PilotHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
         >
             <div class=" la-flexrow -justifystart -padding0-b">
             {#each ownedMechs as mech, index}
                 <button type="button"
-                    class="la-flexcol -bordersround {selectedMechIndex === index ? "la-brdr-accent" : "la-brdr-transparent"}"
+                    class="la-flexcol -bordersround {selectedMechIndex === index ? 'la-brdr-accent' : 'la-brdr-transparent'}"
                     onclick={event => handleMechSelect(event, index)}
                     aria-label={getLocalized("LA.pilot.mechStorage.select.tooltip")}
                 >

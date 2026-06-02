@@ -21,11 +21,12 @@
     } = $props();
     let editButtonHover = $state(false);
     let addButtonHover = $state(false);
-    
-    const collID = `${actor.uuid}.clocks`;
-    const clocks = system.bond_state.clocks;
+
     const addClockTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.bond.clock.add.tooltip"))
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.clocks`);
+    const clocks = $derived(system.bond_state.clocks);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
     
     function getClockPath(index: number)
     {
@@ -43,7 +44,7 @@
     actionValue="(struct)counter"
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltip={addClockTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.clock.add.tooltip")}
@@ -100,7 +101,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}

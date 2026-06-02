@@ -8,7 +8,7 @@
     const {
         actor,
         system,
-    } = props;
+    } = $derived(props);
 </script>
 
 <Passion

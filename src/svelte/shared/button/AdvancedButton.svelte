@@ -33,9 +33,9 @@
     }: AdvancedButtonProps & IconButtonProps & TextLogEventProps & TooltipProps = $props();
     let advancedOptions = $derived(getAdvancedState(uuid));
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.advanced.tooltip");
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.advanced.tooltip"));
 
     function toggleAdvancedOptions(event: MouseEvent)
     {
@@ -55,12 +55,12 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
     onclick={(event) => toggleAdvancedOptions(event)}
 >
     <i class="mdi {iconStyle?.join(' ') || _DEFAULT_I}
-        {advancedOptions ? "mdi-toggle-switch" : "mdi-toggle-switch-off"}"
+        {advancedOptions ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off'}"
     ></i>
 </button>
 {/if}

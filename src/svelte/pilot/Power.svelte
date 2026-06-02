@@ -30,13 +30,14 @@
     let effectButtonHover = $state(false);
     let messageButtonHover = $state(false);
 
-    const unlockedPowers = system.bond?.system.powers
-        .map((power: any, index: number) => ({ ...power, index }))
-        .filter((power: any) => power.unlocked) || [];
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
-    const bondUUID = system.bond?.uuid;
-    const collID = `${actor.uuid}.powers`;
+    const unlockedPowers = $derived(system.bond?.system.powers
+        .map((power: any, index: number) => ({ ...power, index }))
+        .filter((power: any) => power.unlocked) || []);
+    const bondUUID = $derived(system.bond?.uuid);
+    const collID = $derived(`${actor.uuid}.powers`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
     
     function getPowerCollapseID(index: number)
     {
@@ -64,7 +65,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -123,7 +124,7 @@
             powerIndex={power.index}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={power.description}
             tooltipHeader={getLocalized("LA.pilot.bond.power.subLabel")}
@@ -155,7 +156,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.PilotHeader}

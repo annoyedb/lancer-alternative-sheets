@@ -33,7 +33,7 @@
     } : StatusBarProps & TooltipProps = $props();
     let editing = $state(false);
 
-    const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
+    const tip = $derived(tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined);
 </script>
 
 <div class="la-statusbar la-flexrow -fontsizemedium -gap2 {textStyle?.join(' ')}">
@@ -50,7 +50,7 @@
         <div class="la-bar-h-progress la-flexrow -widthfull -heightfull">
             <input type="number" 
                 class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter 
-                    {editing ? textStyle?.join(' ') : "la-text-transparent"}"
+                    {editing ? textStyle?.join(' ') : 'la-text-transparent'}"
                 name="{dataName}"
                 data-dtype="Number" 
                 value="{currentValue}"
@@ -60,7 +60,7 @@
             >
             <span 
                 class="la-bar-h-progress__span -lineheight3 -positionabsolute -pointerdisable 
-                    {editing ? "-visibilityhidden" : ""}"
+                    {editing ? '-visibilityhidden' : ''}"
             >
                 {currentValue}/{maxValue}
             </span>
@@ -68,16 +68,16 @@
         <div 
             class="la-bar-h-progress la-bar-h-current -positionabsolute -top0 -heightfull 
                 {editing && barEditStyle
-                    ? `${barEditStyle?.join(" ")} -pulse-bckg-prmy -fast` 
-                    : barStyle?.join(" ")}"
+                    ? `${barEditStyle?.join(' ')} -pulse-bckg-prmy -fast`
+                    : barStyle?.join(' ')}"
             style="--la-percent:{currentValue / maxValue * 100}%"
         ></div>
         {#if currentValueSecondary && maxValueSecondary}
         <div 
             class="la-bar-h-progress -secondary la-bar-h-current -positionabsolute -top0 -heightfull 
                 {editSecondary && barEditStyleSecondary 
-                    ? `${barEditStyleSecondary?.join(" ")} -pulse-bckg-prmy -fast` 
-                    : barStyleSecondary?.join(" ")}"
+                    ? `${barEditStyleSecondary?.join(' ')} -pulse-bckg-prmy -fast`
+                    : barStyleSecondary?.join(' ')}"
             style="--la-percent:{currentValueSecondary / maxValueSecondary * 100}%"
         ></div>
         {/if}
@@ -85,8 +85,8 @@
         <div 
             class="la-bar-h-progress -tertiary la-bar-h-current -positionabsolute -top0 -heightfull 
                 {editTertiary && barEditStyleTertiary 
-                    ? `${barEditStyleTertiary?.join(" ")} -pulse-bckg-prmy -fast` 
-                    : barStyleTertiary?.join(" ")}"
+                    ? `${barEditStyleTertiary?.join(' ')} -pulse-bckg-prmy -fast`
+                    : barStyleTertiary?.join(' ')}"
             style="--la-percent:{currentValueTertiary / maxValueTertiary * 100}%"
         ></div>
         {/if}

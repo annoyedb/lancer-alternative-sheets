@@ -33,7 +33,7 @@
         contentRight,
     }: HeaderProps & HeaderQuinaryProps & TerminalTextProps & ContentSidesProps = $props();
     
-    let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
+    const isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
     
     // (#3)
     onMount(() => 
@@ -75,7 +75,7 @@
 <div class="la-effectbox -largeheader la-collapsegroup la-flexcol -widthfull 
         {rootStyle?.join(' ') || H4_ROOT_STYLE}
         {borderStyle?.join(' ') || H4_BORDER_STYLE}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ''}
         collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
@@ -89,7 +89,7 @@
     <!-- svelte-ignore event_directive_deprecated -->
     <div class="la-actionheader la-summary la-flexrow la-text-header clipped -aligncenter
             {headerStyle?.join(' ')}
-            {collapseID ? "collapse-trigger" : ""}"
+            {collapseID ? 'collapse-trigger' : ''}"
         data-la-collapse-id={collapseID}
         on:click={(event) => toggleCollapse(event)}
     >
@@ -116,7 +116,7 @@
     {@render renderOutsideCollapse()}
 {/if}
     <div class="la-collapsegroup__wrapper -widthfull
-            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+            {collapseID ? 'collapse-wrapper' : ''} {isCollapsed ? 'collapsed' : ''}"
         data-la-collapse-id={collapseID}
     >
         {#if children}

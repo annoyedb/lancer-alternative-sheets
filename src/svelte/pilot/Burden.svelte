@@ -21,11 +21,13 @@
     } = $props();
     let editButtonHover = $state(false);
     let addButtonHover = $state(false);
-    
-    const collID = `${actor.uuid}.burdens`;
-    const burdens = system.bond_state.burdens;
-    const addBurdenTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.bond.burden.add.tooltip"))
+
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.burdens`);
+    const burdens = $derived(system.bond_state.burdens);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
+    const addBurdenTip = TooltipFactory.buildTooltip(getLocalized("LA.pilot.bond.burden.add.tooltip"))
     
     function getBurdenPath(index: number)
     {
@@ -44,7 +46,7 @@
     actionValue="(struct)counter"
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltip={addBurdenTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.burden.add.tooltip")}
@@ -103,7 +105,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}

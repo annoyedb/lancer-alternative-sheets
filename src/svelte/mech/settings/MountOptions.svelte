@@ -31,7 +31,7 @@
         mountNames[mountIndex] = localizationString;
     }
 </script>
-<h3>{getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}<i class="mdi mdi-arrow-down-right"></h3>
+<h3>{getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}<i class="mdi mdi-arrow-down-right"></i></h3>
 <div class="la-flexcol -widthfull -gap0 -padding0">
 {#each Object.keys(MOUNT_LOCALIZE_MAP) as mountType, morphIndex}
     <!-- (#5*) 

@@ -6,7 +6,6 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
 
-    import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
 
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
@@ -42,9 +41,9 @@
         onPointerLeave,
     } : IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.effect.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.effect.tooltip");
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.effect.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.effect.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
     {
@@ -52,7 +51,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType);
+            sendToLog(event, log, logType!);
         else
             return undefined;
     }
@@ -63,12 +62,13 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset);
+            resetLog(event, logTypeReset!);
         else
             return undefined;
     }
 </script>
 <script lang="ts" module>
+    import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     const _DEFAULT_BACKGROUND = `${H2_ICON_SIZE} la-text-scrollbar-secondary -padding0-l`
     const _DEFAULT_FOREGROUND = `${H2_ICON_SIZE}`
 </script>
@@ -92,7 +92,7 @@
 >
     <i 
         class="
-            {disabled ? "" : CLICKABLE_HOVER}
+            {disabled ? '' : CLICKABLE_HOVER}
             {iconStyle?.join(' ') || _DEFAULT_FOREGROUND}"
     ></i>
 {#if !disabled}

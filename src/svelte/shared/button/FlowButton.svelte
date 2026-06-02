@@ -41,9 +41,9 @@
         logTypeReset,
     } : IconButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.tooltip");
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.tooltip"));
 </script>
 <script lang="ts" module>
     const _DEFAULT_BUTTON = "clipped-bot-alt la-bckg-secondary";
@@ -52,7 +52,7 @@
 <button 
     type="button"
     class="-upper
-        {disableSlide || "la-flow"} 
+        {disableSlide || 'la-flow'} 
         {style?.join(' ') || _DEFAULT_BUTTON} 
         {flowClass || ''}"
     data-uuid={uuid}
@@ -62,8 +62,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
     onclick={(event) => onClick && onClick(event)}
     aria-label={text}
 >

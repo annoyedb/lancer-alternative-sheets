@@ -43,8 +43,8 @@
         onPointerLeave,
     }: GlyphButtonProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
 
-    const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
-    const logging = logType && logTypeReset && logText;
+    const tip = $derived(tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined);
+    const logging = $derived(logType && logTypeReset && logText);
 
     function handleOnPointerEnter(event: PointerEvent) 
     {
@@ -52,7 +52,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, logText, logType);
+            sendToLog(event, logText!, logType!);
         else
             return undefined;
     }
@@ -63,7 +63,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset);
+            resetLog(event, logTypeReset!);
         else
             return undefined;
     }

@@ -21,8 +21,8 @@
         onPointerClick,
     }: CounterBoxProps & TextLogEventProps & PointerClickProps = $props();
     
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.counter.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.counter.tooltip"));
 
     function handleOnClick(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, index: number)
     {
@@ -39,7 +39,7 @@
 {#if usesMax}
 <div 
     class="la-counterbox la-flexrow -aligncenter la-text-header -padding1-lr
-        {style?.join(' ') || type === CounterBoxType.Counter ? _COUNTER_STYLE : ""}"
+        {style?.join(' ') || type === CounterBoxType.Counter ? _COUNTER_STYLE : ''}"
 >
 {#if text}
     <span class="la-counterbox__span -fontsizemedium">
@@ -49,15 +49,15 @@
 {#each {length: usesMax} as _, index}
     <button type="button"
         class="la-counterbox__button
-            mdi {index < usesValue ? "mdi-hexagon-slice-6" : "mdi-hexagon-outline"} 
+            mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}
             la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize7 
             {type}"
         data-available={index < usesValue}
         data-path={path}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         onclick={event => handleOnClick(event, index)}
-        aria-label="{getLocalized("LA.use.label")} {text}"
+        aria-label="{getLocalized('LA.use.label')} {text}"
     ></button>
 {/each}
 </div>

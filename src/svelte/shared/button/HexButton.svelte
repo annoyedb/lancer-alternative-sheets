@@ -75,14 +75,14 @@
         logTypeReset,
     }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.tooltip");
-    const parsedValue = value 
-        ? sign 
-            ? (value > 0 ? `+${value}` : value) 
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.tooltip"));
+    const parsedValue = $derived(value
+        ? sign
+            ? (value > 0 ? `+${value}` : value)
             : value
-        : value;
+        : value);
 
 </script>
 <div class="la-attribute la-text-secondary mdi mdi-hexagon {outerStyle?.join(' ')}">
@@ -100,8 +100,8 @@
             data-tooltip={tooltipEnabled ? tip : undefined }
             data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
             data-tooltip-direction={tooltipDirection}
-            onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-            onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+            onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+            onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
             aria-label={text}
         >
             <span class="la-value__span {innerTextStyle?.join(' ')}"><!--

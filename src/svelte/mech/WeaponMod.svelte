@@ -36,9 +36,10 @@
     let effectButtonHover = $state(false);
     let editButtonHover = $state(false);
 
-    const collID = mod ? `${mod.uuid}.action` : "empty";
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
+    const collID = $derived(mod ? `${mod.uuid}.action` : "empty");
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#if mod}
@@ -54,7 +55,7 @@
         path={path}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
@@ -83,7 +84,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.tooltip")}
         logText={getLocalized("LA.edit.tooltip")}
         logType={TextLogHook.MechHeader}
@@ -224,7 +225,7 @@
                     flowClass={FlowClass.SendEffectToChat}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -241,7 +242,7 @@
                 startCollapsed={false}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.MechHeader}
                 logTypeReset={TextLogHook.MechHeaderReset}
             />

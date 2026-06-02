@@ -7,7 +7,7 @@
     const props = $props();
     const {
         actor,
-    }: DeployableSheetProps = props;
+    }: DeployableSheetProps = $derived(props);
 
     const actionLogSaveCollapse = getDeployableSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getDeployableSheetLogActionStartCollapsed();

@@ -15,10 +15,12 @@
         system,
         pilotCache,
     } = $props();
+    // svelte-ignore state_referenced_locally
     let cloudID = $state(system.cloud_id || "");
 
-    const collID = `${actor.uuid}.sync`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.sync`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function overridePilotIDWithCloudID(event: Event)
     {
@@ -52,7 +54,7 @@
                 action="download"
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
                 tooltipDirection={TooltipDirection.LEFT}
                 logText={getLocalized("LA.pilot.sync.download.tooltip")}

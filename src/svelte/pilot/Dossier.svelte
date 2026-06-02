@@ -9,9 +9,9 @@
     const props = $props();
     const {
         actor
-    } = props;
+    } = $derived(props);
 
-    const collID = `${actor.uuid}.status.activeEffects`;
+    const collID = $derived(`${actor.uuid}.status.activeEffects`);
 </script>
 
 <Sync

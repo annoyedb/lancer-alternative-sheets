@@ -30,18 +30,19 @@
         document,
         actor,
         system,
-    }: DeployableSheetProps = props;
+    }: DeployableSheetProps = $derived(props);
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
     
-    const isInstanced = actor.parent && actor.type === "deployable";
-    const themeOverride = getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text';
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
+    const isInstanced = $derived(actor.parent && actor.type === "deployable");
+    const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
-    const sizeTip = TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.stats.size}`);
-    const speedTip = TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.stats.speed}`);
+    const sizeTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.stats.size}`));
+    const speedTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.stats.speed}`));
     const shieldTip = TooltipFactory.buildTooltip(getLocalized('LA.overshield.tooltip'));
     const burnTip = TooltipFactory.buildTooltip(getLocalized('LA.burn.tooltip'));
     const tokenErrorTip = TooltipFactory.buildTooltip(getLocalized("LA.edit.image.token.error"));
@@ -92,20 +93,20 @@
                 <div class="la-stat__island -positionrelative la-dropshadow">
                     <div class="la-flexcol -positionabsolute -top0 -left0 -fontsize13 -heightfull -margin3-t">
                         <!-- Size -->
-                        <div class="{advancedOptions ? "-displaynone" : ""}">
+                        <div class="{advancedOptions ? '-displaynone' : ''}">
                         {#if system.stats.size < 1}
                             <i class="cci cci-size-half {themeOverride} la-outl-shadow"
                                 data-tooltip={tooltipEnabled ? sizeTip : undefined}
-                                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                                data-tooltip-class="clipped-bot la-tooltip {theme}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}></i>
                         {:else}
                             <i class="cci cci-size-{system.stats.size} {themeOverride} la-outl-shadow"
                                 data-tooltip={tooltipEnabled ? sizeTip : undefined}
-                                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                                data-tooltip-class="clipped-bot la-tooltip {theme}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}></i>
                         {/if}
                         </div>
-                        <div class="{advancedOptions ? "" : "-displaynone"}">
+                        <div class="{advancedOptions ? '' : '-displaynone'}">
                             <!-- Edit Size -->
                             <StatComboShort
                                 icon={""}
@@ -116,7 +117,7 @@
                                 innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                                 tooltipEnabled={tooltipEnabled}
-                                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                tooltipTheme={theme}
                                 tooltip={getLocalized("LA.size.tooltip")}
                                 tooltipDirection={TooltipDirection.LEFT}
 
@@ -124,17 +125,17 @@
                                 onPointerClick={handleEditStat}
                             />
                         </div>
-                        <div class="{advancedOptions ? "-displaynone" : ""}">
+                        <div class="{advancedOptions ? '-displaynone' : ''}">
                             <!-- Speed -->
                             <div class="la-flexrow" 
                                 data-tooltip={tooltipEnabled ? speedTip : undefined}
-                                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                                data-tooltip-class="clipped-bot la-tooltip {theme}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}>
                                 <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize8"></i>
                                 <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.stats.speed}</span>
                             </div>
                         </div>
-                        <div class="{advancedOptions ? "" : "-displaynone"}">
+                        <div class="{advancedOptions ? '' : '-displaynone'}">
                             <!-- Edit Speed -->
                             <StatComboShort
                                 icon={""}
@@ -145,7 +146,7 @@
                                 innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                                 tooltipEnabled={tooltipEnabled}
-                                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                tooltipTheme={theme}
                                 tooltip={getLocalized("LA.speed.tooltip")}
                                 tooltipDirection={TooltipDirection.LEFT}
 
@@ -165,7 +166,7 @@
                         actor={actor}
                         editDisabled={isInstanced}
                         tooltipEnabled={tooltipEnabled}
-                        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                        tooltipTheme={theme}
                         onPointerClick={handleEditToken}
                     />
                 </div>
@@ -183,12 +184,12 @@
                             iconStyle={["-fontsize7"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltipDirection={TooltipDirection.UP}
                         />
                     {#if advancedOptions && !isInstanced}
                         <LockImageButton
-                            style="-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"
+                            style={"-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"}
                             actor={actor}
                             setState={setActorTokenSync}
                             tooltipEnabled={tooltipEnabled}
@@ -201,7 +202,7 @@
                                 style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"]}
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
-                                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                tooltipTheme={theme}
                                 tooltip={getLocalized("LA.edit.image.actor.tooltip")}
                                 tooltipDirection={TooltipDirection.UP}
                             />
@@ -209,7 +210,7 @@
                     {:else}
                         <i class="mdi mdi-creation la-text-text -fontsize4 la-prmy-warning -glow-prmy"
                             data-tooltip={tooltipEnabled ? tokenErrorTip : undefined}
-                            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                            data-tooltip-class="clipped-bot la-tooltip {theme}"
                             data-tooltip-direction={TooltipDirection.DOWN}></i>
                     {/if}
                     {#if advancedOptions}
@@ -220,7 +221,7 @@
                             setOverride={setThemeOverride}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltipDirection={TooltipDirection.UP}
                         />
                     {/if}
@@ -241,7 +242,7 @@
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.armor.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 
@@ -257,7 +258,7 @@
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.evasion.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 
@@ -273,7 +274,7 @@
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.edefense.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 
@@ -303,7 +304,7 @@
                                     editSecondary={editingShield}
                                     
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                    tooltipTheme={theme}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.deployable.hitpointMax.tooltip")}
                                 />
@@ -312,7 +313,7 @@
                             <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
                                 <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
-                                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
                                 ><!--
                                 --->{getLocalized("LA.overshield.short")}<!--
@@ -347,7 +348,7 @@
                                     editSecondary={editingBurn}
 
                                     tooltipEnabled={tooltipEnabled}
-                                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                                    tooltipTheme={theme}
                                     tooltipDirection={TooltipDirection.LEFT}
                                     tooltip={getLocalized("LA.deployable.heatMax.tooltip")}
                                 />
@@ -365,7 +366,7 @@
                                 >
                                 <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
-                                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
                                 ><!--
                                 --->{getLocalized("LA.burn.short")}<!--
@@ -380,11 +381,11 @@
                             label={getLocalized("LA.deployable.hitpointMax.short")}
                             value={parseInt(system.stats.hp)}
                             valuePath={"system.stats.hp"}
-                            outerStyle={["-fontsize6", `${advancedOptions ? "" : "-displaynone"}`]}
+                            outerStyle={["-fontsize6", `${advancedOptions ? '' : '-displaynone'}`]}
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.deployable.hitpointMax.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 
@@ -400,7 +401,7 @@
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.save.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 
@@ -412,11 +413,11 @@
                             label={getLocalized("LA.deployable.heatMax.short")}
                             value={system.stats.heatcap}
                             valuePath={"system.stats.heatcap"}
-                            outerStyle={["-fontsize7", `${advancedOptions ? "" : "-displaynone"}`]}
+                            outerStyle={["-fontsize7", `${advancedOptions ? '' : '-displaynone'}`]}
                             innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
-                            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                            tooltipTheme={theme}
                             tooltip={getLocalized("LA.deployable.heatMax.tooltip")}
                             tooltipDirection={TooltipDirection.LEFT}
 

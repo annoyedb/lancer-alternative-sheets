@@ -36,17 +36,18 @@
         weapon,
         index,
     }: WeaponItemProps = $props();
-
-    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
-    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
-    const qualityMode = getExtraEffectsEnabled();
-    const tooltipEnabled = getNPCSheetTooltipEnabled();
-
     let attackButtonHover = $state(false);
     let damageButtonHover = $state(false);
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
-    
+
+    const qualityMode = getExtraEffectsEnabled();
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
+    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
+    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
+
     function renderOuter(item: any)
     {
         return !isDestroyed(item) && (isRecharge(item) || item.system.uses.max || isLoading(item) || hasAccuracyBonus(item) || hasAttackBonus(item));
@@ -151,7 +152,7 @@
         {#if hasAccuracyBonus(weapon)}
             <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                 data-tooltip={tooltipEnabled ? accuracyTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.DOWN}
             >
                 {weapon.system.accuracy[tier - 1]}
@@ -161,7 +162,7 @@
         {#if hasAttackBonus(weapon)}
             <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                 data-tooltip={tooltipEnabled ? attackTip : undefined}
-                data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.DOWN}
             >
                 {weapon.system.attack_bonus[tier - 1]}
@@ -200,7 +201,7 @@
         path={`system.loadout.weapon_mounts.${index}`}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltipDirection={TooltipDirection.UP}
         tooltip={ weapon.system.effect
             ? `${getRollWeaponTip(weapon)}<br><br>${weapon.system.effect}` 
@@ -226,7 +227,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
 
         disabled={isDestroyed(weapon)}
 
@@ -243,7 +244,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
 
             onClick={event => sendToChat(event, weapon)}
@@ -260,7 +261,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
 
             onPointerEnter={() => {editButtonHover = true;} }

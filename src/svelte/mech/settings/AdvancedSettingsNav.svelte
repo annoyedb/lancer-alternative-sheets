@@ -10,10 +10,11 @@
     const props = $props();
     const {
         actor,
-    }: MechSheetProps = props
-    
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    }: MechSheetProps = $derived(props)
+
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <SidebarRatioSlider
@@ -23,7 +24,7 @@
     style={["-aligncontentcenter"]}
     
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 />
@@ -34,7 +35,7 @@
     style={["-alignselfstart"]}
     
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     setOverride={setThemeOverride}
 
     logType={TextLogHook.MechHeader}

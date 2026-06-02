@@ -82,8 +82,10 @@
     let effectButtonHover = $state(false);
     let messageButtonHover = $state(false);
 
-    const isMechSheet = actor?.type === "mech" || false;
     const qualityMode = getExtraEffectsEnabled();
+    const isMechSheet = $derived(actor?.type === "mech" || false);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
     const defaultPlaceholder = getLocalized("LA.placeholder");
     
     function getActivationClass(activation: string): string 
@@ -195,7 +197,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.chat.tooltip")}
         logText={getLocalized("LA.chat.tooltip")}
         logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }

@@ -24,22 +24,23 @@
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
 
-    const frame: any = system.loadout.frame!.value;
-    const core: any = frame.system.core_system;
-    const collID: string = `${actor.uuid}.${frame.id}.activePower`;
-    const actionCollID: string = `${actor.uuid}.${frame.id}.activePower.action`;
-    const name = core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label");
-    const activationClass = `activation-${slugify(core.activation, "-")}`;
-    const activationTheme = system.core_energy
+    const frame = $derived(system.loadout.frame!.value);
+    const core = $derived(frame.system.core_system);
+    const collID = $derived(`${actor.uuid}.${frame.id}.activePower`);
+    const actionCollID = $derived(`${actor.uuid}.${frame.id}.activePower.action`);
+    const name = $derived(core.active_actions.length ? core.active_actions[0].name : getLocalized("LA.activate.label"));
+    const activationClass = $derived(`activation-${slugify(core.activation, "-")}`);
+    const activationTheme = $derived(system.core_energy
         ? `${ACTIVATION_COLOR_MAP[core.activation]}`
-        : "la-bckg-repcap";
-    const frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
-    const frameColorBrdr = system.core_energy
+        : "la-bckg-repcap");
+    const frameColorBckg = $derived(getManufacturerColor(frame.system.manufacturer, "bckg"));
+    const frameColorBrdr = $derived(system.core_energy
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
-        : "la-brdr-repcap";
-    const tip = TooltipFactory.buildTooltip(
-        `${core.active_effect}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[core.activation])}`, 
-        getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation]));
+        : "la-brdr-repcap");
+    const tip = $derived(TooltipFactory.buildTooltip(
+        `${core.active_effect}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[core.activation])}`,
+        getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <!-- Frame Active -->
@@ -52,7 +53,7 @@
     flowClass={FlowClass.None}
     
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltipDirection={TooltipDirection.LEFT}
     tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
     logType={TextLogHook.MechHeader}
@@ -65,18 +66,20 @@
 <div class="la-flexrow -widthfull -margin0-t">
     <button type="button"
         class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull 
-            {activationTheme} {system.core_energy ? "" : "la-dropshadow -disabled"} 
+            {activationTheme} {system.core_energy ? '' : 'la-dropshadow -disabled'}
             activation-flow {activationClass}"
         data-uuid={frame.uuid}
         data-path={"system.core_system"}
         data-tooltip={tip}
-        data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+        data-tooltip-class="clipped-bot la-tooltip {theme}"
         data-tooltip-direction={TooltipDirection.LEFT}
         aria-label={name}
         disabled={!system.core_energy}
     >
         <i class="la-corepower__i cci cci-activate la-dropshadow -flexthird -textalignleft -height7 -lineheight7 -fontsize19"></i>
-        <span class="la-corepower__span {system.core_energy ? "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover" : "la-dropshadow"} -upper -flexthird -textwrapnowrap">
+        <span class="la-corepower__span -upper -flexthird -textwrapnowrap
+            {system.core_energy ? 'la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover' : 'la-dropshadow'}"
+        >
             {name}
         </span>
         <div class="-flexthird">
@@ -114,7 +117,7 @@
         startCollapsed={false}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />
@@ -125,7 +128,7 @@
         sheetUUID={actor.uuid}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

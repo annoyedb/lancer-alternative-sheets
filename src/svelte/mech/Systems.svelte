@@ -32,7 +32,7 @@
     const {
         actor,
         system,
-    } = props;
+    } = $derived(props);
     let collapseAllButtonHover = $state(false);
     let effectButtonHover = $state(false);
     let editButtonHover = $state(false);
@@ -40,10 +40,11 @@
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
-    const systemComponents = system?.loadout.systems?.filter((item: any) => item !== null);
-    const collID = systemComponents.length
+    const systemComponents = $derived(system?.loadout.systems?.filter((item: any) => item !== null));
+    const collID = $derived(systemComponents.length
         ? `${actor.uuid}.systems`
-        : `${actor.uuid}.systems.empty`;
+        : `${actor.uuid}.systems.empty`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function renderOuter(component: any)
     {
@@ -122,7 +123,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}
 
@@ -181,7 +182,7 @@
             path={getComponentPath(index)}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={component.value.system.effect}
             logType={TextLogHook.MechHeader}
@@ -212,7 +213,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
                 logType={TextLogHook.MechHeader}
@@ -231,7 +232,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.MechHeader}
@@ -313,7 +314,7 @@
                     startCollapsed={false}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
@@ -324,7 +325,7 @@
                     sheetUUID={actor.uuid}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />

@@ -12,7 +12,7 @@
         uuid,
         hookID,
         hookResetID,
-    }: TextLogProps = props;
+    }: TextLogProps = $derived(props);
     let typeItComponent: HTMLElement | null = $state(null);
     let typedComponent: HTMLElement | null = $state(null);
     let typedWriter: TypedWriter | null = null;
@@ -43,7 +43,7 @@
 {#if enabled}
 <div class="la-textlog la-flexrow -justifystart {style?.join(' ')}">
     <div class="la-flexcol -gap1 la-textlog-left -aligncontentend -overflowhidden -width4">
-        <div class="la-textlog__ruler -flex1 -widthfull {introType ? "" : "-visibilityhidden"}"></div>
+        <div class="la-textlog__ruler -flex1 -widthfull {introType ? '' : '-visibilityhidden'}"></div>
         <div class="la-textlog-left__current -widthfull"></div>
     </div>
     <div class="la-flexcol la-textlog-left -justifyend -overflowhidden">
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="la-flexcol -gap1 la-textlog-right -aligncontentend -overflowhidden -width4">
-        <div class="la-textlog__ruler -flex1 -widthfull {introType ? "" : "-visibilityhidden"}"></div>
+        <div class="la-textlog__ruler -flex1 -widthfull {introType ? '' : '-visibilityhidden'}"></div>
         <div class="la-textlog-right__current -widthfull"></div>
     </div>
 </div>

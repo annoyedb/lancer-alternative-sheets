@@ -16,22 +16,23 @@
     const props = $props();
     const {
         actor,
-    }: NPCSheetProps = props;
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let sidebarExes = $state(getSidebarExecutables(actor.uuid));
+    }: NPCSheetProps = $derived(props);
     let collapseAllButtonHover = $state(false);
 
-    const tooltipEnabled = getNPCSheetTooltipEnabled(); 
-    const activeEffectsCollID = `${actor.uuid}.status.activeEffects`;
-    const utilitiesCollID = `${actor.uuid}.status.utilities`;
-    const macrosCollID = `${actor.uuid}.status.macros`;
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const sidebarExes = $derived(getSidebarExecutables(actor.uuid));
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const activeEffectsCollID = $derived(`${actor.uuid}.status.activeEffects`);
+    const utilitiesCollID = $derived(`${actor.uuid}.status.utilities`);
+    const macrosCollID = $derived(`${actor.uuid}.status.macros`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={activeEffectsCollID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -77,7 +78,7 @@
             flowClass={FlowClass.RechargeFeatures}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltipDirection={TooltipDirection.UP}
             tooltip={getLocalized("LA.npc.recharge.tooltip")}
             tooltipHeader={getLocalized("LA.action.startofturn.label")}
@@ -93,7 +94,7 @@
                     flowType={"BasicAttack"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltipDirection={TooltipDirection.UP}
                     tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                 />
@@ -106,7 +107,7 @@
                     flowType={"Damage"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltipDirection={TooltipDirection.UP}
                     tooltip={getLocalized("LA.flow.rollDamage.tooltip")}
                 />
@@ -121,7 +122,7 @@
                     flowType={"TechAttack"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltipDirection={TooltipDirection.UP}
                     tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                 />
@@ -134,7 +135,7 @@
                     flowType={"Burn"}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                    tooltipTheme={theme}
                     tooltipDirection={TooltipDirection.UP}
                     tooltipHeader={getLocalized("LA.action.endofturn.label")}
                     tooltip={getLocalized("LA.flow.extinguish.tooltip")}

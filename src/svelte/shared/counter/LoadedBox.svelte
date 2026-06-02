@@ -20,9 +20,9 @@ Special implementation of the `CounterBox` component for items with the `Loading
 
         onPointerClick,
     }: LoadedBoxProps & TextLogEventProps & PointerClickProps = $props();
-    const loaded = item.system.loaded;
 
-    const log = logText || getLocalized("LA.loaded.tooltip");
+    const loaded = $derived(item.system.loaded);
+    const log = $derived(logText || getLocalized("LA.loaded.tooltip"));
     
     // Reimplementation of Lancer's `handleLoadedInteraction` function for this module
     export function handleLoadedInteraction(event: MouseEvent, index: number)

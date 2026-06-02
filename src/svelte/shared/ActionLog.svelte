@@ -14,7 +14,6 @@
         collapsePrefix,
     }: ActionLogProps = $props();
 
-    const idParts = uuid.split('.');
     //@ts-ignore Foundry native
     const messages = game.messages as Array<any>;
 
@@ -27,7 +26,9 @@
     let extractedNames: Array<string> = $state([]);
     let animationFrame: number;
 
-    onMount(() => 
+    const idParts = $derived(uuid.split('.'));
+
+    onMount(() =>
     {
         filteredMessages.forEach((message) => 
         {

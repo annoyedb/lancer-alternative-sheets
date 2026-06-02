@@ -36,9 +36,7 @@
         contentRight,
     }: HeaderProps & HeaderSecondaryProps & TerminalTextProps & ContentSidesProps = $props();
     
-    let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
-    
-    const extraOptions =  contentRight ? true : false;
+    const isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
     // (#3)
     onMount(() => 
@@ -78,8 +76,8 @@
 </script>
 
 
-<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ""}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
+<div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ''}
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ''}
         collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
@@ -93,7 +91,7 @@
     <div class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || H2_HEADER_STYLE}
-            {collapseID ? "collapse-trigger" : ""}"
+            {collapseID ? 'collapse-trigger' : ''}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Icon, Name -->
@@ -111,12 +109,10 @@
             />
             <!-- <span class="la-name__span {headerFontStyle?.join(' ') || "-fontsize4"}">{title}</span> -->
         </div>
-    {#if extraOptions}
+    {#if contentRight}
         <!-- Options -->
         <div class="la-right la-flexrow -aligncenter">
-        {#if contentRight}
             {@render contentRight()}
-        {/if}
         </div>
     {/if}
     </div>
@@ -125,12 +121,12 @@
     {/if}
     {#if collapseID || children}
     <div class="la-collapsegroup__wrapper
-            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+            {collapseID ? 'collapse-wrapper' : ''} {isCollapsed ? 'collapsed' : ''}"
         data-la-collapse-id={collapseID}
     >
         <div class="la-collapsecontent 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
-                {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
+                {borderStyle ? borderStyle.join(' ') : 'la-brdr-primary'}"
         >
             {#if children}
                 {@render children()}

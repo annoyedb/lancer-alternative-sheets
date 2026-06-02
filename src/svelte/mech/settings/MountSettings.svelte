@@ -21,22 +21,27 @@
         actor,
         document,
         system,
-    } = props;
+    } = $derived(props);
     
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let active = $derived(getActiveTab(actor.uuid, ActiveTab.Primary) || "loadout");// This is set to match the initial tab on the sheet setup
+    // svelte-ignore state_referenced_locally
     let toggles = $state(new Array(system.loadout.weapon_mounts.length).fill(false));
+    // svelte-ignore state_referenced_locally
     let tooltipElements = new Array(system.loadout.weapon_mounts.length).fill(null);
     let removeToggle = $state(false);
     let editToggle = $state(false);
     let removeElement: HTMLElement | null = null;
     let editElement: HTMLElement | null = null;
     // (#8*) This looks redundant but it's necessary since tooltips aren't updated when the actor sheet does a rerender
+    // svelte-ignore state_referenced_locally
     let mountNames = $state(system.loadout.weapon_mounts.map((mount: any) => MOUNT_LOCALIZE_MAP[mount.type] || ""));
     // (#8*)
+    // svelte-ignore state_referenced_locally
     let mountIndices = $state(system.loadout.weapon_mounts.map((_mount: any, index: number) => index));
 
-    const weaponMounts = system.loadout.weapon_mounts;
+    const weaponMounts = $derived(system.loadout.weapon_mounts);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const removeTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.remove.tooltip"));
@@ -79,7 +84,7 @@
                 { content: snippet },
                 {
                     direction: TooltipDirection.UP, 
-                    cssClass: `la-tooltip -widthfull ${getCSSDocumentTheme(actor.uuid)}`,
+                    cssClass: `la-tooltip -widthfull ${theme}`,
                     locked: true,
                 }
             )
@@ -158,7 +163,7 @@
                 },
                 {
                     direction: TooltipDirection.RIGHT,
-                    cssClass: `la-tooltip -widthfull ${getCSSDocumentTheme(actor.uuid)}`,
+                    cssClass: `la-tooltip -widthfull ${theme}`,
                     locked: true,
                 }
             );
@@ -223,7 +228,7 @@
 
 <!-- Component -->
 <div class="-heightfull
-    {advancedOptions && active === "loadout" ? "la-flexrow" : "-displaynone"}"
+    {advancedOptions && active === 'loadout' ? 'la-flexrow' : '-displaynone'}"
 >    
     <span class="{SETTINGS_HEADER_STYLE} -alignend">
         {getLocalized("LA.advanced.mount.label")}
@@ -231,13 +236,13 @@
     <div class="la-flexcol -alignstart -padding0-b -heightfull">
         <MountAdd
             tooltipEnabled={getMechSheetTooltipEnabled()}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
         />
         <button type="button" 
             class={SETTINGS_BUTTON_STYLE}
             data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.remove.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleRemove(event, removeMount)}
@@ -251,7 +256,7 @@
             class={SETTINGS_BUTTON_STYLE}
             data-tooltip={tooltipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
-            data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
             onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.edit.tooltip"), TextLogHook.MechHeader) }
             onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
             onclick={event => handleEdit(event, editMount)}

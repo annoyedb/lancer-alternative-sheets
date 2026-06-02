@@ -13,17 +13,18 @@
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
 
-    const props = $props();
     const {
         actor,
         system,
-    } = props;
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
-    let questionAnswer = $derived(getBondQNAMode(actor.uuid));
+    } = $props();
+    // svelte-ignore state_referenced_locally
     let bondImageSrc = $state(getBondImageSrc(actor.uuid));
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const questionAnswer = $derived(getBondQNAMode(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function getGlowColor()
     {
@@ -105,8 +106,8 @@
         >
             <img
                 class="la-bond-card__img"
-                src="{bondImageSrc}"
-                alt="{getLocalized("LA.placeholder")}"
+                src={bondImageSrc}
+                alt={getLocalized("LA.placeholder")}
             />
         </div>
     {#if !questionAnswer}
@@ -204,7 +205,7 @@
             flowClass={FlowClass.None}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltipDirection={TooltipDirection.DOWN}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}
@@ -213,7 +214,7 @@
 
             onClick={tallyAndUpdate}
         />
-        <div class="la-flexrow -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? "" : "-visibilityhidden"}">
+        <div class="la-flexrow -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? '' : '-visibilityhidden'}">
             <!-- Edit Bond Image -->
             <GlyphButton
                 style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
@@ -221,7 +222,7 @@
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logText={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -238,7 +239,7 @@
                 path="itemTypes.bond"
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -247,14 +248,16 @@
         </div>
         <div class="la-flexrow -positionabsolute -left0 -padding3-l -gap1">
             <!-- Q&A Toggle -->
-            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0 {qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}"></i>
+            <i class="mdi mdi-swap-vertical -fontsize la-text-text -positionabsolute -left0
+                {qualityMode ? '-glow-prmy la-prmy-primary -glow-prmy-hover' + getGlowColor() : ''}"
+            ></i>
             <GlyphButton
                 style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
 
                 flowClass={FlowClass.None}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.swap.tooltip")}
                 logText={getLocalized(!questionAnswer ? "LA.pilot.bond.qa.tooltip" : "LA.pilot.bond.xp.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -269,7 +272,7 @@
                 flowClass={FlowClass.BondPowerRefresh}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logText={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logType={TextLogHook.PilotHeader}

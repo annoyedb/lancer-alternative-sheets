@@ -14,11 +14,10 @@
         actor,
         document,
         system,
-    } = props;
-
-    let advancedOptions = $derived(getAdvancedState(actor.uuid));
+    } = $derived(props);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
 
     function levelUp(event : MouseEvent)
     {
@@ -38,7 +37,7 @@
 </script>
 
 <div class="-heightfull
-    {advancedOptions ? "la-flexrow" : "-displaynone"}"
+    {advancedOptions ? 'la-flexrow' : '-displaynone'}"
 >
     <span class="{SETTINGS_HEADER_STYLE} -alignend -capitalize">
         {getLocalized("LA.systems.label")}

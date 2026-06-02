@@ -21,7 +21,7 @@ Special implementation of the `CounterBox` component for items with the `Limited
         onPointerClick,
     }: LimitedBoxProps & TextLogEventProps & PointerClickProps = $props();
 
-    const log = logText || getLocalized("LA.limited.tooltip");
+    const log = $derived(logText || getLocalized("LA.limited.tooltip"));
 </script>
 
 <CounterBox

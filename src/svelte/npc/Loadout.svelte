@@ -13,13 +13,15 @@
     const {
         system,
         itemTypes,
-    }: NPCSheetProps = props;
+    }: NPCSheetProps = $derived(props);
 
     const traits: Array<any> = [];
     const systems: Array<any> = [];
     const reactions: Array<any> = [];
     const weapons: Array<any> = [];
     const techs: Array<any> = [];
+
+    // svelte-ignore state_referenced_locally
     itemTypes.npc_feature.forEach((feature: { system: { type: any; }; }, index: number) => {
         // @ts-expect-error Add index to the npc feature so that it can be used to resolve the correct path
         feature.index = index;

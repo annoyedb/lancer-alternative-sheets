@@ -31,8 +31,6 @@
     }: HeaderProps & HeaderMainProps & TerminalTextProps = $props();
     let isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
-    const extraOptions = headerContent ? true : false;
-
     // (#3) - Since collapsables may not always be collapsable, may want to reset their collapse state 
     // to the default, need to be persistent across rerenders, and still be able to read from derived()
     // we need to use a state with varying levels of fallbacks, and to properly set the store based on 
@@ -72,7 +70,7 @@
 </script>
 
 <div class="la-collapsegroup -widthfull {rootStyle?.join(' ')}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ""}
+        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ''}
         collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}
@@ -85,7 +83,7 @@
     <h1 class="la-summary la-flexrow la-dropshadow 
             -justifybetween -widthfull -whitespacenowrap 
             {headerStyle?.join(' ') || MAIN_HEADER_STYLE}
-            {collapseID ? "collapse-trigger" : ""}"
+            {collapseID ? 'collapse-trigger' : ''}"
         on:click={(event) => toggleCollapse(event)}
     >
         <!-- Header Label -->
@@ -95,21 +93,19 @@
             extensionText={getExtensionText()}
         />
         <!-- Header Options -->
-    {#if extraOptions}
+    {#if headerContent}
         <div class="la-flexrow -gap2 -aligncenter">
-        {#if headerContent}
             {@render headerContent()}
-        {/if}
         </div>
     {/if}
     </h1>
     <div class="la-collapsegroup__wrapper
-            {collapseID ? "collapse-wrapper" : ""} {isCollapsed ? "collapsed" : ""}"
+            {collapseID ? 'collapse-wrapper' : ''} {isCollapsed ? 'collapsed' : ''}"
         data-la-collapse-id={collapseID}
     >
         <div class="la-collapsecontent 
                 -padding0-l -padding0-tb -bordersround-lb -widthfull -heightfull
-                {borderStyle ? borderStyle.join(' ') : "la-brdr-primary"}"
+                {borderStyle ? borderStyle.join(' ') : 'la-brdr-primary'}"
         >
             {#if children}
                 {@render children()}

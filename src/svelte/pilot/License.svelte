@@ -28,8 +28,9 @@
     let messageButtonHover = $state(false);
     let licenseDescriptions = $state<string[]>([]);
 
-    const collID = `${actor.uuid}.licenses`;
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const collID = $derived(`${actor.uuid}.licenses`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     onMount(() => {
         // Fetch license descriptions from the compendium's cold storage
@@ -80,7 +81,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -124,7 +125,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
             logType={TextLogHook.PilotHeader}
@@ -144,7 +145,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
             logType={TextLogHook.PilotHeader}

@@ -29,7 +29,8 @@
         contentLeft,
         contentRight,
     }: StatComboProps & TooltipProps & PointerClickProps & ContentSidesProps = $props();
-    const tip = tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined;
+
+    const tip = $derived(tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined);
 
     function handleSubtract(event: MouseEvent)
     {
@@ -46,7 +47,7 @@
 
 {#snippet renderEditable()}
 <div class="-widthfull -positionrelative">
-    <div class="la-flexrow {editable ? "" : "-displaynone"}">
+    <div class="la-flexrow {editable ? '' : '-displaynone'}">
         <GlyphButton
             style={["la-bckg-secondary -width3", "clicker-minus-button input-update"]}
             flowClass={FlowClass.None}
@@ -67,7 +68,9 @@
             onClick={handleAddition}
         >+</GlyphButton>
     </div>
-    <span class="-widthfull {editable ? "-displaynone" : ""}">{value}</span>
+    <span class="-widthfull
+        {editable ? '-displaynone' : ''}"
+    >{value}</span>
 </div>
 {/snippet}
 

@@ -18,9 +18,10 @@
     }: NPCSheetProps & {techs : Array<any>} = $props();
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
-    const collID = `${actor.uuid}.techs`;
-    const pinCollID = `${actor.uuid}.techs.pins`
-    const nonpinCollID = `${actor.uuid}.techs.nonpins`
+    const collID = $derived(`${actor.uuid}.techs`);
+    const pinCollID = $derived(`${actor.uuid}.techs.pins`)
+    const nonpinCollID = $derived(`${actor.uuid}.techs.nonpins`)
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     let pinnedItems = $derived.by(() => {
         const serializedLIDs = NPCStore.get(actor.uuid).pinnedTechs;
@@ -41,7 +42,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}

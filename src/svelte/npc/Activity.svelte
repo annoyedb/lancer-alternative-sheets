@@ -7,7 +7,7 @@
     const props = $props();
     const {
         actor,
-    }: NPCSheetProps = props;
+    }: NPCSheetProps = $derived(props);
 
     const actionLogSaveCollapse = getNPCSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getNPCSheetLogActionStartCollapsed();

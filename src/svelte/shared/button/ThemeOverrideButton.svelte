@@ -30,9 +30,10 @@
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.themeOverride.tooltip"), tooltipHeader);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.advanced.themeOverride.tooltip");
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.themeOverride.tooltip"), tooltipHeader));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.advanced.themeOverride.tooltip"));
+    const theme = $derived(getCSSDocumentTheme(uuid));
     
     function handleOnClick(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
@@ -52,7 +53,7 @@
                 },
                 {
                     direction: TooltipDirection.DOWN,
-                    cssClass: `la-tooltip -widthfull ${getCSSDocumentTheme(uuid)}`,
+                    cssClass: `la-tooltip -widthfull ${theme}`,
                     locked: true,
                 }
             );
@@ -65,17 +66,15 @@
     {
         event.stopPropagation();
         const selectedTheme = theme === "default" ? "" : theme;
-        if (optionElement) 
+        if (optionElement)
         {
-            const currentThemeClass = getCSSDocumentTheme(uuid);
-            
-            optionElement.classList.remove(currentThemeClass);
+            optionElement.classList.remove(getCSSDocumentTheme(uuid));
             if (selectedTheme)
                 optionElement.classList.add(convertToCSSTheme(selectedTheme));
             else
                 optionElement.classList.add(getCSSSystemTheme());
         }
-        
+
         setOverride(uuid, selectedTheme);
     }
 </script>
@@ -104,10 +103,10 @@
 <button type="button"
     class="{style?.join(' ')} la-prmy-primary -glow-prmy-hover"
     data-tooltip={tooltipEnabled ? tip : undefined }
-    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${getCSSDocumentTheme(uuid)}`}
+    data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
     onclick={event => handleOnClick(event)}
     aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >

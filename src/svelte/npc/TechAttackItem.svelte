@@ -36,17 +36,18 @@
         tech,
         pinned,
     }: TechAttackItem = $props();
-
-    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
-    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
-    const qualityMode = getExtraEffectsEnabled();
-    const tier = system.tier;
-    const tooltipEnabled = getNPCSheetTooltipEnabled();
-
     let effectButtonHover = $state(false);
     let editButtonHover = $state(false);
     let messageButtonHover = $state(false);
     let pinButtonHover = $state(false);
+
+    const qualityMode = getExtraEffectsEnabled();
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const tier = $derived(system.tier);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+
+    const accuracyTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.accuracy.tooltip"));
+    const attackTip = TooltipFactory.buildTooltip(getLocalized("LA.npc.attackBonus.tooltip"));
 
     function getTechIcon(tech: any)
     {
@@ -166,7 +167,7 @@
             {#if hasAccuracyBonus(tech)}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={accuracyTip}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={"DOWN"}
                 >
                     {tech.system.accuracy[tier - 1]}
@@ -176,7 +177,7 @@
             {#if hasAttackBonus(tech)}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                     data-tooltip={attackTip}
-                    data-tooltip-class="clipped-bot la-tooltip {getCSSDocumentTheme(actor.uuid)}"
+                    data-tooltip-class="clipped-bot la-tooltip {theme}"
                     data-tooltip-direction={"DOWN"}
                 >
                     {tech.system.attack_bonus[tier - 1]}
@@ -212,7 +213,7 @@
         path={`itemTypes.npc_feature.${tech.index}`}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltipDirection={TooltipDirection.UP}
         tooltipHeader={getTechTipHeader(tech)}
         tooltip={tech.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
@@ -232,7 +233,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized(pinned ? "LA.pin.unpinned.tooltip" : "LA.pin.pinned.tooltip")}
 
         onClick={(event) => {pinned ? unpinItem(event, tech) : pinItem(event, tech)}}
@@ -253,7 +254,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.tooltip")}
 
         onPointerEnter={() => {editButtonHover = true;} }
@@ -270,7 +271,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.UP}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         tooltip={getLocalized("LA.chat.tooltip")}
 
         onClick={event => sendToChat(event, tech)}

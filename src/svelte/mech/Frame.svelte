@@ -19,31 +19,32 @@
     const {
         actor,
         system,
-    } = props;
+    } = $derived(props);
     let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
-    const frame: any | undefined = system.loadout.frame?.value;
-    const core: any = frame?.system.core_system;
-    const frameName: string = frame
+    const frame = $derived(system.loadout.frame?.value);
+    const core = $derived(frame?.system.core_system);
+    const frameName: string = $derived(frame
         ? `${frame.system.manufacturer} ${frame.name}`
-        : getLocalized("LA.placeholder");
-    const frameColorBckg: string = frame 
+        : getLocalized("LA.placeholder"));
+    const frameColorBckg: string = $derived(frame
         ? getManufacturerColor(frame.system.manufacturer, "bckg")
-        : "la-bckg-frame";
-    const frameColorBrdr: string = frame 
+        : "la-bckg-frame");
+    const frameColorBrdr: string = $derived(frame
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
-        : "la-brdr-frame";
-    const collID = frame
+        : "la-brdr-frame");
+    const collID = $derived(frame
         ? `${actor.uuid}.frame.${frame.id}`
-        : `${actor.uuid}.frame.empty`;
+        : `${actor.uuid}.frame.empty`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#snippet headerOptions()}
     <CollapseAllButton
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
 

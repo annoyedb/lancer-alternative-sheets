@@ -7,7 +7,7 @@
     const props = $props();
     const {
         actor
-    }: PilotSheetProps = props;
+    }: PilotSheetProps = $derived(props);
     const actionLogSaveCollapse = getPilotSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getPilotSheetLogActionStartCollapsed();
 </script>

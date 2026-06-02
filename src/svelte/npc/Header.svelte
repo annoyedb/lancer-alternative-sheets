@@ -9,9 +9,9 @@
         actor,
         system,
         itemTypes,
-    }: NPCSheetProps = props;
+    }: NPCSheetProps = $derived(props);
 
-    const templates = itemTypes.npc_template;
+    const templates = $derived(itemTypes.npc_template);
 </script>
 
 <div class="la-flexcol -widthfull -heightfull">
@@ -22,7 +22,7 @@
                 class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"
                 name="name" 
                 value="{actor.name}" 
-                placeholder="{getLocalized("LA.namePlaceholder")}"
+                placeholder={getLocalized("LA.namePlaceholder")}
             />
             <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
             {#if templates.length}

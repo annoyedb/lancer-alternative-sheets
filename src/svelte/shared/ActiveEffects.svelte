@@ -20,7 +20,9 @@
         logType,
         logTypeReset,
     }: ActiveEffectsProps & TooltipProps & TextLogEventProps = $props();
-    const themeOverride = getThemeKey(actor.uuid);
+
+    const themeOverride = $derived(getThemeKey(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function getThemedIcon(effect: any)
     {
@@ -63,7 +65,7 @@
         onClick={deleteActiveEffect}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logText={getLocalized("LA.delete.tooltip")}
         logType={logType}
         logTypeReset={logTypeReset}

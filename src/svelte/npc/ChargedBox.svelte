@@ -20,8 +20,9 @@ Special implementation of the `CounterBox` component for npc features that can b
 
         onPointerClick,
     }: ChargedBoxProps & TextLogEventProps & PointerClickProps = $props();
-    let charged = item.system.charged;
-    const log = logText || getLocalized("LA.npc.charged.tooltip")
+    
+    const charged = $derived(item.system.charged);
+    const log = $derived(logText || getLocalized("LA.npc.charged.tooltip"));
 </script>
 
 {#if isRecharge(item)}

@@ -23,8 +23,9 @@
     }: MechSheetProps = $props();
     let messageButtonHover = $state(false);
 
-    const frame = system.loadout.frame!.value;
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const frame = $derived(system.loadout.frame!.value);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function getCollapseID(index: number)
     {
@@ -52,7 +53,7 @@
 
     tooltipEnabled={tooltipEnabled}
     tooltipDirection={TooltipDirection.UP}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltip={getLocalized("LA.chat.tooltip")}
     logText={getLocalized("LA.chat.tooltip")}
     logType={TextLogHook.MechHeader}
@@ -121,7 +122,7 @@
             startCollapsed={false}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />
@@ -132,7 +133,7 @@
             sheetUUID={actor.uuid}
 
             tooltipEnabled={tooltipEnabled}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             logType={TextLogHook.MechHeader}
             logTypeReset={TextLogHook.MechHeaderReset}
         />

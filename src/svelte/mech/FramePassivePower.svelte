@@ -25,13 +25,14 @@
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
-    const frame: any = system.loadout.frame!.value;
-    const core: any = frame.system.core_system;
-    const frameColorBckg = getManufacturerColor(frame.system.manufacturer, "bckg")
-    const frameColorBrdr = getManufacturerColor(frame.system.manufacturer, "brdr")
-    const collID: string = `${actor.uuid}.${frame.id}.passive`;
-    const actionCollID: string = `${actor.uuid}.${frame.id}.passive.action`;
-    const tip = core.passive_effect || getLocalized("LA.chat.tooltip");
+    const frame = $derived(system.loadout.frame!.value);
+    const core = $derived(frame.system.core_system);
+    const frameColorBckg = $derived(getManufacturerColor(frame.system.manufacturer, "bckg"));
+    const frameColorBrdr = $derived(getManufacturerColor(frame.system.manufacturer, "brdr"));
+    const tip = $derived(core.passive_effect || getLocalized("LA.chat.tooltip"));
+    const collID: string = $derived(`${actor.uuid}.${frame.id}.passive`);
+    const actionCollID: string = $derived(`${actor.uuid}.${frame.id}.passive.action`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     function sendToChat(event: MouseEvent & { currentTarget: EventTarget & HTMLElement })
     {
@@ -60,7 +61,7 @@
     onClick={sendToChat}
 
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     tooltipDirection={TooltipDirection.LEFT}
     tooltip={tip}
     logType={TextLogHook.MechHeader}
@@ -107,7 +108,7 @@
         startCollapsed={false}
 
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.MechHeader}
         logTypeReset={TextLogHook.MechHeaderReset}
     />

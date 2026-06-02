@@ -21,16 +21,17 @@
         logType,
         logTypeReset,
     }: {pilot: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
-    let activeTab = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
 
     const qualityMode = getExtraEffectsEnabled();
+    const activeTab = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <!-- HASE Stats -->
 {#if actor.type === "pilot" || 
     actor.type === "mech" && pilot?.system.active_mech?.value.uuid === actor.uuid}
 <div class="la-hasegroup -positionabsolute -widthnone
-        {activeTab === "statistics" ? "" : "-displaynone"}"
+        {activeTab === 'statistics' ? '' : '-displaynone'}"
 >
     <div class="la-hase la-flexcol -justifybetween -heightnone">
         <div class="la-flexrow -aligncenter">
@@ -41,7 +42,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.grit.tooltip")}
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logText={getLocalized("LA.grit.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -66,7 +67,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.hull.tooltip")}
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logText={getLocalized("LA.hull.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -88,7 +89,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.agility.tooltip")}
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logText={getLocalized("LA.agility.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -112,7 +113,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.systems.tooltip")}
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logText={getLocalized("LA.systems.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}
@@ -137,7 +138,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltip={getLocalized("LA.engineering.tooltip")}
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logText={getLocalized("LA.engineering.tooltip")}
                 logType={logType}
                 logTypeReset={logTypeReset}

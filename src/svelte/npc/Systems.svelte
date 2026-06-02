@@ -16,13 +16,14 @@
         system, // The `system` object in the NPC object
         systems, // The actual NPC systems (the gameplay mechanic)
     }: NPCSheetProps & {systems : Array<any>} = $props();
+    let collapseAllButtonHover = $state(false);
     
     const tooltipEnabled = getNPCSheetTooltipEnabled(); 
-    const collID = `${actor.uuid}.systems`;
-    const pinCollID = `${actor.uuid}.systems.pins`
-    const nonpinCollID = `${actor.uuid}.systems.nonpins`
-
-    let pinnedItems = $derived.by(() => {
+    const collID = $derived(`${actor.uuid}.systems`);
+    const pinCollID = $derived(`${actor.uuid}.systems.pins`)
+    const nonpinCollID = $derived(`${actor.uuid}.systems.nonpins`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
+    const pinnedItems = $derived.by(() => {
         const serializedLIDs = NPCStore.get(actor.uuid).pinnedSystems;
         let pinned: any[] = [];
         let unpinned: any[] = [];
@@ -34,14 +35,13 @@
         });
         return {pinned, unpinned} as PinItem;
     });
-    let collapseAllButtonHover = $state(false);
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}

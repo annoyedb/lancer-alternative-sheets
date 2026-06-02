@@ -14,17 +14,18 @@
         weapons,
     }: NPCSheetProps & {weapons : Array<any>} = $props();
     let collapseAllButtonHover = $state(false);
-    const tier = system.tier;
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
-    const collID = `${actor.uuid}.weapons`;
+    const tier = $derived(system.tier);
+    const collID = $derived(`${actor.uuid}.weapons`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 {#snippet headerOptions()}
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}

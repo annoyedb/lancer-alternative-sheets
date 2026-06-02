@@ -35,10 +35,11 @@
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
 
-    const isMechSheet = sheetActor?.type === "mech" || false;
-    const tooltipEnabled = isMechSheet ? getMechSheetTooltipEnabled() : getPilotSheetTooltipEnabled();
-    const coreBonuses = actor.itemTypes.core_bonus;
-    const collID = `${sheetActor.uuid}.coreBonus`;
+    const isMechSheet = $derived(sheetActor?.type === "mech" || false);
+    const tooltipEnabled = $derived(isMechSheet ? getMechSheetTooltipEnabled() : getPilotSheetTooltipEnabled());
+    const coreBonuses = $derived(actor.itemTypes.core_bonus);
+    const collID = $derived(`${sheetActor.uuid}.coreBonus`);
+    const theme = $derived(getCSSDocumentTheme(sheetActor.uuid));
     
     onMount(() => {
         if (isMechSheet)
@@ -87,7 +88,7 @@
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
-    tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+    tooltipTheme={theme}
     logType={isMechSheet ? TextLogHook.MechHeader : undefined }
     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
 
@@ -148,7 +149,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
@@ -168,7 +169,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
                 logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
@@ -233,7 +234,7 @@
                     onClick={sendToChat}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(sheetActor.uuid)}
+                    tooltipTheme={theme}
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />
@@ -244,7 +245,7 @@
                     sheetUUID={sheetActor?.uuid}
 
                     tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={getCSSDocumentTheme(sheetActor.uuid)}
+                    tooltipTheme={theme}
                     logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
                     logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
                 />

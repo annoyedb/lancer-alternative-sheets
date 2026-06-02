@@ -42,9 +42,10 @@
     let messageButtonHover = $state(false);
     let editButtonHover = $state(false);
     
-    const collID = `${actor.uuid}.weapons`;
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
+    const collID = $derived(`${actor.uuid}.weapons`);
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
     
     function getWeaponPath(index: number)
     {
@@ -118,7 +119,7 @@
     <CollapseAllButton
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
-        tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+        tooltipTheme={theme}
         logType={TextLogHook.PilotHeader}
         logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -201,7 +202,7 @@
                 path={getWeaponPath(index)}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltipDirection={TooltipDirection.LEFT}
                 tooltip={getRollWeaponTip(weapon)}
                 logText={getRollWeaponTip(weapon)}
@@ -225,7 +226,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
-            tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+            tooltipTheme={theme}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
 
@@ -241,7 +242,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -261,7 +262,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipDirection={TooltipDirection.UP}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
                 logType={TextLogHook.PilotHeader}
@@ -316,7 +317,7 @@
                 sheetUUID={actor.uuid}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
@@ -330,7 +331,7 @@
                 startCollapsed={true}
 
                 tooltipEnabled={tooltipEnabled}
-                tooltipTheme={getCSSDocumentTheme(actor.uuid)}
+                tooltipTheme={theme}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />

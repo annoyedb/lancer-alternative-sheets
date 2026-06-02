@@ -15,8 +15,8 @@
         logTypeReset,
     }: ProfileBoxProps & TextLogEventProps = $props();
 
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.profile.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.profile.tooltip"));
 </script>
 <script lang="ts" module>
     const _STYLE = " la-text-header la-bckg-pilot clipped -flex1 ";
@@ -27,15 +27,15 @@
 {#each profiles as profile, index}
     <button type="button" 
         class="la-prmy-primary -glow-prmy-hover -height7
-            gen-control {index === weapon.system.selected_profile_index ? "-pulse-glow-prmy la-prmy-header la-bckg-secondary selected-profile -pointerdisable" : ""}"
+            gen-control {index === weapon.system.selected_profile_index ? '-pulse-glow-prmy la-prmy-header la-bckg-secondary selected-profile -pointerdisable' : ''}"
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset) : undefined }
+        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
-        <span class="-padding1-lr -fontsizemedium -upper {index === weapon.system.selected_profile_index ? "-pulse-glow-prmy la-prmy-header -bold" : ""}">{profile.name}</span>
+        <span class="-padding1-lr -fontsizemedium -upper {index === weapon.system.selected_profile_index ? '-pulse-glow-prmy la-prmy-header -bold' : ''}">{profile.name}</span>
     </button>
 {/each}
 </div>

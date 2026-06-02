@@ -43,12 +43,13 @@
         onPointerEnter,
         onPointerLeave,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+
     const qualityMode = getExtraEffectsEnabled();
-    const tip = TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader);
-    const hasAllWeaponProperties = damage?.length && range?.length;
-    const rollable = !disabled && (damage?.length > 0);
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.flow.rollDamage.tooltip");
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader));
+    const hasAllWeaponProperties = $derived(damage?.length && range?.length);
+    const rollable = $derived(!disabled && (damage?.length > 0));
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.flow.rollDamage.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
     {
@@ -56,7 +57,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType);
+            sendToLog(event, log, logType!);
         else
             return undefined;
     }
@@ -67,7 +68,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset);
+            resetLog(event, logTypeReset!);
         else
             return undefined;
     }
@@ -79,7 +80,7 @@
 <button type="button"
     class="
         la-properties la-flexcol -fontsize5 la-prmy-accent -justifycenter -positionrelative
-        {hasAllWeaponProperties ? "-divider" : ""} 
+        {hasAllWeaponProperties ? '-divider' : ''}
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}"
     data-tooltip={tooltipEnabled && rollable ? tip : undefined }

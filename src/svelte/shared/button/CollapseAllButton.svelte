@@ -33,8 +33,8 @@
     let isExpanding = $derived(!getCollapseState(collapseID));
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
-    const logging = logType && logTypeReset;
-    const log = logText || getLocalized("LA.collapseAll.tooltip");
+    const logging = $derived(logType && logTypeReset);
+    const log = $derived(logText || getLocalized("LA.collapseAll.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
     {
@@ -42,7 +42,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType);
+            sendToLog(event, log, logType!);
         else
             return undefined;
     }
@@ -53,7 +53,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset);
+            resetLog(event, logTypeReset!);
         else
             return undefined;
     }
@@ -94,7 +94,7 @@
     onclick={(event) => toggleCollapseAll(event)}
     aria-label={getLocalized("LA.collapseAll.tooltip")}
 >
-    <i class="mdi {isExpanding ? "mdi-arrow-collapse-all" : "mdi-arrow-expand-all" }
+    <i class="mdi {isExpanding ? 'mdi-arrow-collapse-all' : 'mdi-arrow-expand-all'}
         {iconStyle?.join(' ')}"
     ></i>
 </button>
