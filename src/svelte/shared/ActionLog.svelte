@@ -16,6 +16,7 @@
 
     //@ts-ignore Foundry native
     const messages = game.messages as Array<any>;
+    const idParts = $derived(uuid.split('.'));
 
     let filteredMessages: Array<any> = $state(messages?.filter((m: any) => {
         const msgActorID = m.speaker.token || m.speaker.actor;
@@ -25,8 +26,6 @@
     let extractedTimes: Array<string> = $state([]);
     let extractedNames: Array<string> = $state([]);
     let animationFrame: number;
-
-    const idParts = $derived(uuid.split('.'));
 
     onMount(() =>
     {
