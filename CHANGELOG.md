@@ -44,7 +44,7 @@ Additions:
 + "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
 ### Svelte
 * Continuation of reducing join lengths introduced in 1.4.0
-* ### CSS
+### CSS
 * `la-ruler` renamed to `la-ruler-scroll`
 
 # 1.4.1
