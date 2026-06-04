@@ -83,7 +83,7 @@ function tagView(tagPath: string, tag: any, compact: boolean = true, editable: b
     return `<div
     class="${editable ? "editable-tag-instance" : ""} ${compact ? "compact-tag flexrow" : "large-tag"}"
     ${editable ? `data-path="${tagPath}"` : ""}
-    ${compact ? `data-tippy-content="${interpolatedDescription}"` : ""}
+    ${compact ? `data-tooltip="${interpolatedDescription}"` : ""}
   >
     ${compact
             ? `
