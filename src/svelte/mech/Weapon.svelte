@@ -85,7 +85,7 @@
     {
         return isDestroyed(weapon)
             ? "la-text-repcap"
-            : "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover";
+            : "la-prmy-header la-scdy-primary " + (qualityMode ? "-glow-prmy -glow-scdy-hover " : " ");
     }
 
     function getWeaponPath(index: number)

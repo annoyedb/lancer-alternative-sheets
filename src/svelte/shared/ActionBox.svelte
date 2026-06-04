@@ -215,7 +215,8 @@
     <EffectButton
         style={["-positionabsolute", "-left0", "-top0", "-padding0-l"]}
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
-        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary", `${qualityMode ? `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}` : "la-text-scrollbar-secondary"}`]}
+        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary",
+            qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
 
         flowClass={onClick
             ? FlowClass.None

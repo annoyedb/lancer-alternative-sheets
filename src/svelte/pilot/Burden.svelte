@@ -14,6 +14,7 @@
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -23,6 +24,7 @@
     let addButtonHover = $state(false);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const collID = $derived(`${actor.uuid}.burdens`);
     const burdens = $derived(system.bond_state.burdens);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
@@ -38,7 +40,8 @@
 {#if system.bond}
 {#snippet headerContent()}
 <GlyphButton
-    style={["mdi mdi-plus-circle-outline -fontsize5 -height4 -lineheight4 la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover"]}
+    style={["mdi mdi-plus-circle-outline -fontsize5 -height4 -lineheight4 la-prmy-header la-scdy-primary",
+        qualityMode ? "-glow-prmy -glow-scdy-hover" : ""]}
 
     flowClass={FlowClass.GeneralControl}
     path="system.bond_state.burdens"

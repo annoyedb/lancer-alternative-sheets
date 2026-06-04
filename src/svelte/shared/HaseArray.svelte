@@ -54,9 +54,11 @@
                 
                 outerStyle={["-grit"]}
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
-                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute",
+                    qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
                 outerTextStyle={["-widthfull -textaligncenter"]}
-                innerTextStyle={["-fontsize6 -lineheight15", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerTextStyle={["-fontsize6 -lineheight15",
+                    qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -78,9 +80,11 @@
 
                 outerStyle={["-hull"]}
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
-                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute",
+                    qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
                 outerTextStyle={["-widthfull -textaligncenter"]}
-                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerTextStyle={["-fontsize5 -lineheight13",
+                    qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
             <HexButton
                 text={getLocalized("LA.agility.short")}
@@ -100,9 +104,11 @@
 
                 outerStyle={["-agi"]}
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
-                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute",
+                    qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
                 outerTextStyle={["-widthfull -textaligncenter"]}
-                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerTextStyle={["-fontsize5 -lineheight13",
+                    qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -124,9 +130,11 @@
 
                 outerStyle={["-sys"]}
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
-                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute",
+                    qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
                 outerTextStyle={["-widthfull -textaligncenter"]}
-                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerTextStyle={["-fontsize5 -lineheight13",
+                    qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
         </div>
         <div class="la-flexrow -aligncenter">
@@ -149,9 +157,11 @@
 
                 outerStyle={["-eng"]}
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
-                buttonStyle={["-widthfull -heightfull -positionabsolute", `${qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""}`]}
+                buttonStyle={["-widthfull -heightfull -positionabsolute",
+                    qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
                 outerTextStyle={["-widthfull -textaligncenter"]}
-                innerTextStyle={["-fontsize5 -lineheight13", `${qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""}`]}
+                innerTextStyle={["-fontsize5 -lineheight13",
+                    qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
         </div>
     </div>

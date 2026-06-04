@@ -26,6 +26,7 @@
 
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         source, 
@@ -40,6 +41,7 @@
         logTypeReset,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
 
+    const qualityMode = getExtraEffectsEnabled();
     const themeOverride = $derived(getThemeKey(sheetUUID));
     const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
         (a) => !!(a.is_deployable() && a.system.owner?.value == source)
@@ -202,7 +204,8 @@
                         />
                     {/each}
                     </div>
-                    <img class="-height15 click-open la-prmy-secondary -glow-prmy la-scdy-primary -glow-scdy-hover" 
+                    <img class="-height15 click-open la-prmy-secondary la-scdy-primary
+                            {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}"
                         src={getThemeImg(deployable)}
                         alt={getLocalized("LA.placeholder")}
                         data-tooltip={tooltipEnabled ? tip : undefined}

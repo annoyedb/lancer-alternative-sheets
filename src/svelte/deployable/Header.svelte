@@ -2,17 +2,22 @@
     import { getLocalized } from "@/scripts/helpers";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
     import Stats from "@/svelte/deployable/Stats.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const {
         actor,
         system,
     }: DeployableSheetProps = $derived(props);
+
+    const qualityMode = getExtraEffectsEnabled();
 </script>
 
 <div class="la-flexcol -widthfull -heightfull">
     <!-- Name & Templates -->
-    <div class="la-bg-scroll-alt la-bckg-primary -widthfull -height15">
+    <div class="la-bckg-primary -widthfull -height15
+            {qualityMode ? 'la-bg-scroll-alt' : 'la-bg-alt'}"
+    >
         <div class="la-flexcol -widthfull -heightfull -padding1-lr">
             <input type="text" 
                 class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"

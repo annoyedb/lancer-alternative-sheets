@@ -55,7 +55,8 @@
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
     iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
-    iconBackgroundStyle={[H2_ICON_SIZE, "la-prmy-secondary", `${qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"}`]}
+    iconBackgroundStyle={[H2_ICON_SIZE, "la-prmy-secondary",
+        qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
     
     flowClass={FlowClass.None}
     onClick={sendToChat}

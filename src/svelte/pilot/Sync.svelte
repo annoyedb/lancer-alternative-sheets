@@ -9,6 +9,7 @@
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -19,6 +20,7 @@
     let cloudID = $state(system.cloud_id || "");
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const collID = $derived(`${actor.uuid}.sync`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
@@ -38,7 +40,7 @@
 <HeaderMain
     text={getLocalized("LA.pilot.sync.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     
     collapseID={collID}
@@ -49,7 +51,8 @@
     >
         <div class="la-flexrow -aligncenter -widthfull -gap1">
             <GlyphButton
-                style={["la-flexcol", "mdi mdi-cloud-download", "-fontsize7", getGlowColor(), "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover", "-padding1-lr"]}
+                style={["la-flexcol mdi mdi-cloud-download -fontsize7 la-prmy-header la-scdy-primary -padding1-lr",
+                    qualityMode ? "-glow-prmy -glow-scdy-hover" + getGlowColor() : ""]}
                 flowClass={FlowClass.DownloadFromCloud}
                 action="download"
 

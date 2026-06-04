@@ -5,6 +5,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         text,
@@ -20,7 +21,8 @@
 
         onPointerClick,
     }: CounterBoxProps & TextLogEventProps & PointerClickProps = $props();
-    
+
+    const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.counter.tooltip"));
 
@@ -50,7 +52,8 @@
     <button type="button"
         class="la-counterbox__button
             mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}
-            la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize7 
+            la-prmy-header la-scdy-primary -fontsize7
+            {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}
             {type}"
         data-available={index < usesValue}
         data-path={path}

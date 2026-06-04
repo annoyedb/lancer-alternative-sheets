@@ -3,6 +3,16 @@
 :root,
 .la-common
 {
+    .la-bg
+    {
+        background: url(/assets/grid.png);
+    }
+
+    .la-bg-alt
+    {
+        background: url(/assets/dots.png);
+    }
+
     .la-bg-scroll
     {
         background: url(/assets/grid.png);

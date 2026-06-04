@@ -2,6 +2,7 @@
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { handleMountChange } from "@/scripts/mech/mount-helpers";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actorSheet,
@@ -11,6 +12,8 @@
     } = $props();
 
     let bracing = $state(false);
+
+    const qualityMode = getExtraEffectsEnabled();
 
     function swapMount(event: MouseEvent, mountIndex: number, morphIndex: number)
     {
@@ -40,7 +43,8 @@
     because of (#5), we use the non-depreciated way of applying 
     the event. If this is changed, the issue turns to (#2) -->
     <button type="button"
-        class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
+        class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+            {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}"
         onclick={event => swapMount(event, mountIndex, morphIndex)}
     >
         {getLocalized(MOUNT_LOCALIZE_MAP[mountType])}

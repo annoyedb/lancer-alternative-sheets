@@ -1,5 +1,7 @@
 <script lang="ts">
-    type DamageArrayProps = 
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
+
+    type DamageArrayProps =
     {
         damages: any[],
 
@@ -10,6 +12,8 @@
         damages,
         style,
     }: DamageArrayProps = $props();
+
+    const qualityMode = getExtraEffectsEnabled();
 </script>
 
 {#if damages.length}
@@ -19,7 +23,9 @@
 >
     {#each damages as damage}
         <span class="la-number-weapon__span">{damage.val.replace(/\s/g, "")}</span><!--
-    ---><i class="cci {damage.icon} -glow-{damage.type.toLowerCase()}"></i>
+    ---><i class="cci {damage.icon}
+                {qualityMode ? '-glow-' + damage.type.toLowerCase() : ''}"
+        ></i>
     {/each}
 </span>
 {/if}

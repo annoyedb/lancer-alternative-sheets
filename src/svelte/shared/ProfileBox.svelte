@@ -3,6 +3,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         profiles,
@@ -15,6 +16,7 @@
         logTypeReset,
     }: ProfileBoxProps & TextLogEventProps = $props();
 
+    const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.profile.tooltip"));
 </script>
@@ -26,8 +28,9 @@
 <div class="la-limited la-flexrow {style?.join(' ') || _STYLE}">
 {#each profiles as profile, index}
     <button type="button" 
-        class="la-prmy-primary -glow-prmy-hover -height7
-            gen-control {index === weapon.system.selected_profile_index ? '-pulse-glow-prmy la-prmy-header la-bckg-secondary selected-profile -pointerdisable' : ''}"
+        class="la-prmy-primary -height7
+            {qualityMode ? '-glow-prmy-hover -pulse-glow-prmy' : ''}
+            gen-control {index === weapon.system.selected_profile_index ? 'la-prmy-header la-bckg-secondary selected-profile -pointerdisable' : ''}"
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
@@ -35,7 +38,10 @@
         onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
-        <span class="-padding1-lr -fontsizemedium -upper {index === weapon.system.selected_profile_index ? '-pulse-glow-prmy la-prmy-header -bold' : ''}">{profile.name}</span>
+        <span class="-padding1-lr -fontsizemedium -upper
+            {qualityMode ? '-pulse-glow-prmy' : ''}
+            {index === weapon.system.selected_profile_index ? 'la-prmy-header -bold' : ''}"
+        >{profile.name}</span>
     </button>
 {/each}
 </div>

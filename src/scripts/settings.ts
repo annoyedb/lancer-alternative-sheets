@@ -32,5 +32,8 @@ export function getVerboseLoggingEnabled(): boolean
 
 export function getExtraEffectsEnabled(): boolean
 {
-    return game.settings.get(LancerAlternative.Name, `settings-enable-effects`) as boolean;
+    // (#13) This optional chaining is not a mistake; the module will try to preload
+    // `game.settings` before they are initialized via Svelte's own initialization step
+    // even though the sheets can't get accessed until Foundry is fully initialized
+    return game.settings?.get(LancerAlternative.Name, `settings-enable-effects`) as boolean;
 }

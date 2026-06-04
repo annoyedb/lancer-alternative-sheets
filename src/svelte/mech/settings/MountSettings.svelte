@@ -15,6 +15,7 @@
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props: MechSheetProps = $props();
     const {
@@ -44,6 +45,7 @@
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const removeTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.remove.tooltip"));
     const editTip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.mount.edit.tooltip"));
 
@@ -211,7 +213,8 @@
 
         <!-- (#5*) -->
         <button type="button"
-            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+                {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}"
             onclick={(event) => handleSelection(event, dropdownContent, index)}
         >
             {getLocalized(mountNames[index])}

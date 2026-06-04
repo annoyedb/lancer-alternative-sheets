@@ -10,6 +10,7 @@
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         effects,
@@ -21,6 +22,7 @@
         logTypeReset,
     }: ActiveEffectsProps & TooltipProps & TextLogEventProps = $props();
 
+    const qualityMode = getExtraEffectsEnabled();
     const themeOverride = $derived(getThemeKey(actor.uuid));
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
@@ -58,7 +60,7 @@
 {#each effects as effect, index}
     {#snippet headerOptions()}
     <GlyphButton
-        style={["la-prmy-primary -glow-prmy-hover", "-fontsize4", "-height4", "-lineheight3"]}
+        style={["la-prmy-primary -fontsize4 -height4 -lineheight3", qualityMode ? "-glow-prmy-hover" : ""]}
 
         uuid={effect._id}
         flowClass={FlowClass.DeleteActiveEffect}
@@ -75,9 +77,9 @@
     {/snippet}
     <HeaderMain 
         text={effect.name}
-        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning", "clipped-bot-alt"]}
-        textStyle={["la-text-header-anti", "la-prmy-header-anti", "-fontsizemedium"]}
-        borderStyle={["la-bckg-card", "la-brdr-warning", "-overflowhidden", "-padding1-lr"]}
+        headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning clipped-bot-alt"]}
+        textStyle={["la-text-header-anti la-prmy-header-anti -fontsizemedium"]}
+        borderStyle={["la-bckg-card la-brdr-warning -overflowhidden -padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         
         collapseID={`${actor.uuid}.status.activeEffects.${index}`}

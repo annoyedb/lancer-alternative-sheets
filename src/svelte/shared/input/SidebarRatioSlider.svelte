@@ -8,6 +8,7 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const { 
@@ -25,16 +26,18 @@
         logType,
         logTypeReset,
     }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = $derived(props)
-    
-    let advancedOptions = $derived(getAdvancedState(uuid));
+
     // svelte-ignore state_referenced_locally
     let ratio = $state(ratioGetter(uuid));
     let component: HTMLElement | null = $state(null);
     let sidebar: JQuery<HTMLElement> | null = null;
-        
-    const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
+
+    const qualityMode = getExtraEffectsEnabled();
+    const advancedOptions = $derived(getAdvancedState(uuid));
     const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.advanced.sidebarRatio.tooltip"));
+
+    const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
 
     // Force the sidebar to update its flex value based on the changes we make to ratio
     onMount(() => 
@@ -69,7 +72,8 @@
     bind:this={component}
 >
     <input type="range"
-        class="la-prmy-primary -glow-prmy-hover"
+        class="la-prmy-primary
+            {qualityMode ? '-glow-prmy-hover' : ''}"
         min={0.5}
         max={2}
         value={ratio}

@@ -3,6 +3,6 @@
 
     const qualityMode = getExtraEffectsEnabled();
 
-    export const CLICKABLE_HOVER = `la-scdy-primary ${ qualityMode ? "-glow-scdy-hover la-prmy-header -glow-prmy" : "" }`;
-    export const H2_BUTTON_ICON_STYLE = `la-prmy-header -fontsize4 ${ qualityMode ? "-glow-prmy la-scdy-primary -glow-scdy-hover" : "" }`;
+    export const CLICKABLE_HOVER = " la-scdy-primary la-prmy-header " + (qualityMode ? "-glow-scdy-hover -glow-prmy " : " ");
+    export const H2_BUTTON_ICON_STYLE = " la-prmy-header -fontsize4 la-scdy-primary " + (qualityMode ? "-glow-prmy -glow-scdy-hover " : " ");
 </script>

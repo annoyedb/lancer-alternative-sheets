@@ -86,7 +86,7 @@
     {
         return isDestroyed(item)
             ? "la-text-repcap"
-            : "la-text-header la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover";
+            : "la-text-header la-prmy-header la-scdy-primary " + (qualityMode ? "-glow-prmy -glow-scdy-hover " : " ");
     }
 
     function getRollWeaponTip(item: any)

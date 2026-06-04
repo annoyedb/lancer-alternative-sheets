@@ -20,6 +20,7 @@
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
 
     const props = $props();
@@ -34,6 +35,7 @@
     let editingShield = $state(false);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
     const showTechAttack = getPilotSheetTechAttackEnabled();
     const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
@@ -122,8 +124,8 @@
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -134,8 +136,8 @@
         icon={"cci cci-evasion -alignselfcenter"}
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -146,8 +148,8 @@
         icon={"cci cci-edef -alignselfcenter"}
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -173,9 +175,9 @@
                 maxValueTertiary={system.bond ? undefined : system.hp.max}
                 barStyle={["la-bckg-bar-health"]}
                 barEditStyle={["la-prmy-bar-health"]}
-                barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                barStyleSecondary={["la-bckg-bar-shield -shield"]}
                 barEditStyleSecondary={["la-prmy-bar-shield"]}
-                barStyleTertiary={["la-bckg-bar-burn", "-burn"]}
+                barStyleTertiary={["la-bckg-bar-burn -burn"]}
                 barEditStyleTertiary={["la-prmy-bar-burn"]}
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
@@ -189,7 +191,9 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -margin0-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.overshield.value"}
@@ -208,7 +212,9 @@
         ---></span>
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
@@ -243,7 +249,7 @@
                 maxValueTertiary={system.bond ? undefined : system.hp.max}
                 barStyle={["la-bckg-bar-health"]}
                 barEditStyle={["la-prmy-bar-health"]}
-                barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                barStyleSecondary={["la-bckg-bar-shield -shield"]}
                 barEditStyleSecondary={["la-prmy-bar-shield"]}
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
@@ -256,7 +262,9 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -289,7 +297,7 @@
                 maxValueSecondary={system.bond_state.stress.max}
                 barStyle={["la-bckg-bar-heat"]}
                 barEditStyle={["la-prmy-bar-heat"]}
-                barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
+                barStyleSecondary={["la-bckg-bar-burn -burn"]}
                 barEditStyleSecondary={["la-prmy-bar-burn"]}
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
@@ -302,7 +310,9 @@
             />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin1-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
                 name={"system.burn"}
@@ -332,8 +342,8 @@
         icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -345,8 +355,8 @@
         icon={"cci cci-save -alignselfcenter"}
         label={getLocalized("LA.save.short")}
         value={system.save}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -358,8 +368,8 @@
         icon={"cci cci-sensor -alignselfcenter"}
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}

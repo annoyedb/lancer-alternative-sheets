@@ -2,6 +2,7 @@
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { handleMountDelete } from "@/scripts/mech/mount-helpers";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actorSheet,
@@ -9,6 +10,8 @@
         mountIndex, // depends on mountIndices which changes, do not assume it's always the true index for path
         mountIndices,
     } = $props();
+
+    const qualityMode = getExtraEffectsEnabled();
 
     function deleteMount(event: MouseEvent)
     {
@@ -40,7 +43,8 @@
 
 <!-- (#5*) -->
 <button type="button"
-    class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus
+    class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+        {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}
         gen-control"
     data-action={"splice"}
     data-path={`system.loadout.weapon_mounts.${mountIndex}`}

@@ -6,6 +6,7 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import HexButton from "@/svelte/shared/button/HexButton.svelte";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         actor,
@@ -13,6 +14,7 @@
     }: NPCSheetProps = $props();
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
@@ -37,10 +39,10 @@
                     path={"system.hull"}
 
                     outerStyle={["-hull"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                    outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
+                    innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                    buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
+                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
             <div class="la-flexrow -aligncenter -pointerdisable">
@@ -61,10 +63,10 @@
                     path={"system.agi"}
 
                     outerStyle={["-agi"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                    outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
+                    innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                    buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
+                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
             <div class="la-flexrow -aligncenter">
@@ -84,10 +86,10 @@
                     path={"system.sys"}
 
                     outerStyle={["-sys"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                    outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
+                    innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                    buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
+                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
             <div class="la-flexrow -aligncenter -pointerdisable">
@@ -108,10 +110,10 @@
                     path={"system.eng"}
 
                     outerStyle={["-eng"]}
-                    innerStyle={["la-text-header", "-positionabsolute", "-divider", "-thickness1", "la-prmy-header"]}
-                    buttonStyle={["-widthfull", "-heightfull", "-positionabsolute", "la-prmy-primary -glow-prmy-hover"]}
-                    outerTextStyle={["-widthfull", "-textaligncenter"]}
-                    innerTextStyle={["-fontsize5", "-lineheight13", "la-prmy-header -glow-prmy"]}
+                    innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
+                    buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
+                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
         </div>

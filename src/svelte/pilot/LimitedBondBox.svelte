@@ -3,6 +3,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const {
         usesValue,
@@ -15,6 +16,7 @@
         logTypeReset,
     }: LimitedBondBoxProps & TextLogEventProps = $props();
 
+    const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.limited.tooltip"));
 </script>
@@ -27,7 +29,8 @@
     </span>
 {#each {length: usesMax} as _, index}
     <button type="button" 
-        class="la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover -fontsize7"
+        class="la-prmy-header la-scdy-primary -fontsize7
+            {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}"
         onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}

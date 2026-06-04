@@ -15,6 +15,7 @@
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionLog from "@/svelte/shared/ActionLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props: MechSheetProps = $props();
     const {
@@ -25,6 +26,7 @@
     let collapseAllButtonHover = $state(false);
     
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
     const actionLogMaxHeight = getMechSheetLogActionMainMaxHeight();
     const actionLogSaveCollapse = getMechSheetLogActionDontSaveCollapse();
@@ -175,7 +177,7 @@
                             <span class="la-top__span -widthfull">
                                 <GlyphButton type="button"
                                     flowClass={FlowClass.None}
-                                    style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
+                                    style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter", qualityMode ? "-glow-prmy-hover" : ""]}
                                     tooltip={overchargeMinusTip}
                                     tooltipTheme={theme}
                                     tooltipDirection={TooltipDirection.UP}
@@ -185,7 +187,7 @@
                                     {getCurrentOvercharge(actor)}
                                 <GlyphButton type="button"
                                     flowClass={FlowClass.None}
-                                    style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
+                                    style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter", qualityMode ? "-glow-prmy-hover" : ""]}
                                     tooltip={overchargePlusTip}
                                     tooltipTheme={theme}
                                     tooltipDirection={TooltipDirection.UP}

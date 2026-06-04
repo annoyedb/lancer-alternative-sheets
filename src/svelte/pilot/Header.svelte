@@ -15,6 +15,7 @@
     import TextLog from "@/svelte/shared/TextLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const {
@@ -24,6 +25,7 @@
     } : PilotSheetProps = $derived(props);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const introPlayed = $derived(getIntroRun(actor.uuid));
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
     const tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
@@ -46,14 +48,16 @@
         >
         {#if advancedOptions}
             <i 
-                class="mdi mdi-mouse-move-vertical -fontsize6 -aligncontentcenter la-text-header -glow-prmy la-prmy-primary"
+                class="mdi mdi-mouse-move-vertical -fontsize6 -aligncontentcenter la-text-header la-prmy-primary
+                    {qualityMode ? '-glow-prmy' : ''}"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.LEFT}
             ></i>
         {/if}
             <AdvancedButton
-                style={["-fontsize5 -glow-prmy la-prmy-primary"]}
+                style={["-fontsize5 la-prmy-primary",
+                    qualityMode ? "-glow-prmy" : ""]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
@@ -65,7 +69,8 @@
         
     {#if advancedOptions}
         <LockImageButton
-            style={"-fontsize7 la-text-header la-prmy-primary -glow-prmy"}
+            style="-fontsize7 la-text-header la-prmy-primary
+                {qualityMode ? '-glow-prmy' : ''}"
             actor={actor}
             setState={setActorTokenSync}
             tooltipEnabled={tooltipEnabled}
@@ -76,7 +81,8 @@
         {#if !tokenImageLocked}
             <GlyphButton
                 flowClass={FlowClass.None}
-                style={["mdi mdi-image-edit", "-fontsize6", "la-text-header", "-width7", "-glow-prmy", "la-prmy-primary"]}
+                style={["mdi mdi-image-edit -fontsize6 la-text-header -width7 la-prmy-primary",
+                    qualityMode ? "-glow-prmy" : ""]}
                 onClick={event => browseActorImage(event, actor)}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
@@ -140,7 +146,7 @@
             -pointerdisable"
     >
         <TextLog
-            style={["-widthfull", "-heightfull"]}
+            style={["-widthfull -heightfull"]}
             uuid={actor.uuid}
             hookID={TextLogHook.PilotHeader}
             hookResetID={TextLogHook.PilotHeaderReset}

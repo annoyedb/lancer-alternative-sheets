@@ -88,7 +88,9 @@
 </script>
 
 {#if ownedMechs.length}
-<div class="la-bg-scroll-alt la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover">
+<div class="la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover
+        {qualityMode ? 'la-bg-scroll-alt' : 'la-bg-alt'}"
+>
     <div class="-positionrelative -widthfull la-reveal">
         <span class="la-selected-mech__active -positionabsolute la-outl-header -bold -textaligncenter -letterspacing1 -widthfull -height5 -lineheight5 la-bckg-darken-2
             {isInactive() ? 'la-text-error' : 'la-text-system'}"
@@ -101,7 +103,8 @@
         </span>
     </div>
     <button 
-        class="-fontsize6 -letterspacing1 -upper -glow-hover-primary
+        class="-fontsize6 -letterspacing1 -upper
+            {qualityMode ? '-glow-hover-primary' : ''}
             ref set click-open"
         data-uuid={ownedMechs[selectedMechIndex].uuid}
         onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.mechStorage.open.tooltip"), TextLogHook.PilotHeader) }

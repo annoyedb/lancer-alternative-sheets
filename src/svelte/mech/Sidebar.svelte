@@ -28,6 +28,7 @@
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from '@/svelte/shared/ImageVideo.svelte';
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const { 
@@ -39,6 +40,7 @@
     let editingShield = $state(false);
 
     const tooltipEnabled = getMechSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
     const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
     const sidebarExes = $derived(getSidebarExecutables(actor.uuid));
@@ -124,8 +126,8 @@
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -136,8 +138,8 @@
         icon={"cci cci-evasion -alignselfcenter"}
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -148,8 +150,8 @@
         icon={"cci cci-edef -alignselfcenter"}
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -171,7 +173,7 @@
                 barEditStyle={["la-prmy-bar-health"]}
                 currentValueSecondary={system.overshield.value}
                 maxValueSecondary={system.hp.max}
-                barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                barStyleSecondary={["la-bckg-bar-shield -shield"]}
                 barEditStyleSecondary={["la-prmy-bar-shield"]}
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
@@ -201,7 +203,9 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -margin0-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <input type={"number"}
                 class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.overshield.value"}
@@ -235,7 +239,7 @@
                 barEditStyle={["la-prmy-bar-heat"]}
                 currentValueSecondary={system.burn}
                 maxValueSecondary={system.heat.max}
-                barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
+                barStyleSecondary={["la-bckg-bar-burn -burn"]}
                 barEditStyleSecondary={["la-prmy-bar-burn"]}
                 textStyle={["la-text-text"]}
                 clipPath={"clipped"}
@@ -265,7 +269,9 @@
                 />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy -margin0-r">
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -margin0-r
+                {qualityMode ? '-glow-prmy' : ''}"
+        >
             <input type={"number"}
                 class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 name={"system.burn"}
@@ -291,8 +297,8 @@
         icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -303,8 +309,8 @@
         icon={"cci cci-save -alignselfcenter"}
         label={getLocalized("LA.save.short")}
         value={system.save}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -315,8 +321,8 @@
         icon={"cci cci-sensor -alignselfcenter"}
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -330,7 +336,8 @@
     {#snippet overchargeContentLeft()}
         <GlyphButton type="button"
             flowClass={FlowClass.None}
-            style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
+            style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter",
+                qualityMode ? "-glow-prmy-hover" : ""]}
             tooltip={overchargeMinusTip}
             tooltipTheme={theme}
             tooltipDirection={TooltipDirection.UP}
@@ -341,7 +348,8 @@
     {#snippet overchargeContentRight()}
         <GlyphButton type="button"
             flowClass={FlowClass.None}
-            style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -glow-prmy-hover -fontsize5 -alignselfcenter"]}
+            style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter",
+                qualityMode ? "-glow-prmy-hover" : ""]}
             tooltip={overchargePlusTip}
             tooltipTheme={theme}
             tooltipDirection={TooltipDirection.UP}
@@ -353,8 +361,8 @@
             icon={"cci cci-overcharge -alignselfcenter -width5"}
             label={getLocalized("LA.overcharge.short")}
             value={getCurrentOvercharge(actor)}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -369,8 +377,8 @@
         icon={"cci cci-repair -alignselfcenter"}
         label={getLocalized("LA.repair.short")}
         value={system.repairs.value}
-        outerStyle={["la-text-text", "-fontsize7"]}
-        innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+        outerStyle={["la-text-text -fontsize7"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}

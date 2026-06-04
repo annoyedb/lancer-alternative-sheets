@@ -88,8 +88,8 @@
             currentValue={system.bond_state.xp.value}
             maxValue={system.bond_state.xp.max}
             barStyle={["la-bckg-bar-health"]}
-            barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
-            barStyleTertiary={["la-bckg-bar-burn", "-burn"]}
+            barStyleSecondary={["la-bckg-bar-shield -shield"]}
+            barStyleTertiary={["la-bckg-bar-burn -burn"]}
             textStyle={["la-text-text"]}
             clipPath={"clipped"}
 
@@ -200,7 +200,7 @@
     <!-- Bond XP Tally -->
         <FlowButton
             text={getLocalized("LA.pilot.bond.tally.label")}
-            style={["clipped", "la-bckg-secondary", "-padding0-tb", "-flex1"]}
+            style={["clipped la-bckg-secondary -padding0-tb -flex1"]}
 
             flowClass={FlowClass.None}
 
@@ -217,7 +217,8 @@
         <div class="la-flexrow -positionabsolute -right0 -padding3-r -gap2 {advancedOptions ? '' : '-visibilityhidden'}">
             <!-- Edit Bond Image -->
             <GlyphButton
-                style={["mdi mdi-image-edit", "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-image-edit la-text-secondary -fontsize7 la-flexrow -justifycenter -aligncenter",
+                    qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
 
                 flowClass={FlowClass.None}
 
@@ -232,7 +233,8 @@
             />
             <!-- Edit Bond -->
             <GlyphButton
-                style={["fas fa-edit", "la-text-secondary", "-fontsize6", "-lineheight8", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`, "-justifycenter", "-aligncenter"]}
+                style={["fas fa-edit la-text-secondary -fontsize6 -lineheight8 -justifycenter -aligncenter",
+                    qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
 
                 flowClass={FlowClass.ContextMenu}
                 uuid={system.bond.uuid}
@@ -252,7 +254,9 @@
                 {qualityMode ? '-glow-prmy la-prmy-primary -glow-prmy-hover' + getGlowColor() : ''}"
             ></i>
             <GlyphButton
-                style={[`${questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle"}`, "la-text-secondary", "-fontsize7", "la-flexrow", "-justifycenter", "-aligncenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["la-text-secondary -fontsize7 la-flexrow -justifycenter -aligncenter",
+                    questionAnswer ? "mdi mdi-list-box" : "mdi mdi-help-circle",
+                    qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
 
                 flowClass={FlowClass.None}
 
@@ -267,7 +271,8 @@
             />
             <!-- Refresh Powers -->
             <GlyphButton
-                style={["mdi mdi-refresh-circle", "la-text-secondary", "-fontsize7", "-justifycenter", `${qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""}`]}
+                style={["mdi mdi-refresh-circle la-text-secondary -fontsize7 -justifycenter",
+                    qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
 
                 flowClass={FlowClass.BondPowerRefresh}
 

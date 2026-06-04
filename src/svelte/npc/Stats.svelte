@@ -24,6 +24,7 @@
     import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
 
     const props = $props();
     const {
@@ -34,6 +35,7 @@
     let editingShield = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();
+    const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
     const isInstanced = $derived(actor.parent && actor.type === "npc");
     const themeOverride = $derived(getBrightness(getThemeKey(actor.uuid)) === 'light' ? 'la-text-primary' : 'la-text-text');
@@ -81,7 +83,9 @@
     }
 </script>
 
-<div class="la-bg-scroll la-bckg-background la-shadow -medium -inset -widthfull -heightfull">
+<div class="la-bckg-background la-shadow -medium -inset -widthfull -heightfull
+        {qualityMode ? 'la-bg-scroll' : 'la-bg'}"
+>
     <div class="la-flexrow la-dropshadow -justifyevenly">
     <!-- Left Side -->
         <div class="la-flexcol -gap1">
@@ -150,7 +154,9 @@
                             <i class="cci cci-activate {themeOverride} la-outl-shadow -fontsize8"></i>
                             <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.activations}</span>
                         </div>
-                        <div class="la-recharge -lineheight5 -width8 -height8 la-prmy-primary -glow-prmy-hover">
+                        <div class="la-recharge -lineheight5 -width8 -height8 la-prmy-primary
+                                {qualityMode ? '-glow-prmy-hover' : ''}"
+                        >
                             <button type="button"
                                 class="mdi mdi-refresh-circle la-text-secondary -fontsize8
                                     charge-macro"
@@ -187,7 +193,8 @@
                     <div class="la-flexrow -gap1">
                         <AdvancedButton
                             uuid={actor.uuid}
-                            style={["-lineheight5 la-prmy-primary -glow-prmy-hover"]}
+                            style={["-lineheight5 la-prmy-primary",
+                                qualityMode ? "-glow-prmy-hover" : ""]}
                             iconStyle={["-fontsize7"]}
 
                             tooltipEnabled={tooltipEnabled}
@@ -196,7 +203,8 @@
                         />
                     {#if advancedOptions && !isInstanced}
                         <LockImageButton
-                            style={"-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"}
+                            style="-fontsize4 la-text-text la-prmy-primary
+                                {qualityMode ? '-glow-prmy-hover' : ''}"
                             actor={actor}
                             setState={setActorTokenSync}
                             tooltipEnabled={tooltipEnabled}
@@ -206,7 +214,8 @@
                         {#if !tokenImageLocked}
                             <GlyphButton
                                 flowClass={FlowClass.None}
-                                style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary -glow-prmy-hover"]}
+                                style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary",
+                                    qualityMode ? "-glow-prmy-hover" : ""]}
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={theme}
@@ -215,7 +224,8 @@
                             />
                         {/if}
                     {:else}
-                        <i class="mdi mdi-creation la-text-text -fontsize4 la-prmy-warning -glow-prmy"
+                        <i class="mdi mdi-creation la-text-text -fontsize4 la-prmy-warning
+                                {qualityMode ? '-glow-prmy' : ''}"
                             data-tooltip={tooltipEnabled ? tokenErrorTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {theme}"
                             data-tooltip-direction={TooltipDirection.DOWN}></i>
@@ -235,7 +245,8 @@
                     </div>
                     <div class="la-flexrow -gap1">
                         <button type="button"
-                            class="mdi mdi-note-edit -fontsize4 la-prmy-primary -glow-prmy-hover
+                            class="mdi mdi-note-edit -fontsize4 la-prmy-primary
+                                {qualityMode ? '-glow-prmy-hover' : ''}
                                 {advancedOptions ? '' : '-visibilityhidden'}
                                 popout-text-edit-button"
                             data-tooltip={notesEditTip}
@@ -246,7 +257,8 @@
                         >
                         </button>
                         <button type="button"
-                            class="mdi mdi-information -fontsize4 la-prmy-primary -glow-prmy-hover"
+                            class="mdi mdi-information -fontsize4 la-prmy-primary
+                                {qualityMode ? '-glow-prmy-hover' : ''}"
                             data-tooltip={notesTip}
                             data-tooltip-class="clipped-bot la-tooltip -scrollbar {theme}"
                             data-tooltip-direction={TooltipDirection.UP}
@@ -340,7 +352,9 @@
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -glow-prmy">
+                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield
+                                {qualityMode ? '-glow-prmy' : ''}"
+                            >
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.overshield.value" 
@@ -404,7 +418,9 @@
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -glow-prmy">
+                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn
+                                {qualityMode ? '-glow-prmy' : ''}"
+                            >
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                                     name="system.burn" 

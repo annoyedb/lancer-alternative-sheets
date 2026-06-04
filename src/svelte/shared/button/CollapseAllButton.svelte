@@ -81,7 +81,11 @@
     }
 </script>
 <script lang="ts" module>
-    const _DEFAULT_BUTTON = "la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover la-text-header -fontsize5 -lineheight4";
+    import {getExtraEffectsEnabled} from "@/scripts/settings";
+
+    const qualityMode = getExtraEffectsEnabled();
+
+    const _DEFAULT_BUTTON = " la-prmy-header la-scdy-primary la-text-header -fontsize5 -lineheight4 " + (qualityMode ? "-glow-scdy-hover -glow-prmy " : " ");
 </script>
 
 <button type="button"

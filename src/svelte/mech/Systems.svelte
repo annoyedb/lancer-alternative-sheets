@@ -80,7 +80,7 @@
         let icon = SYSTEM_ICON_MAP[component.value.system.type] || "cci-system";
         return isDestroyed(component)
             ? `cci ${icon} la-text-repcap`
-            : `cci ${icon} la-prmy-header -glow-prmy la-scdy-primary -glow-scdy-hover`;
+            : `cci ${icon} la-prmy-header la-scdy-primary ` + (qualityMode ? "-glow-prmy -glow-scdy-hover " : " ");
     }
 
     function getSPStyle(component: any)
