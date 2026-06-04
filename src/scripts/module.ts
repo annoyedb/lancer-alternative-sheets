@@ -6,7 +6,7 @@ import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
 import { DeployableSheetBase } from "@/classes/deployable/DeployableSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
-import { registerModuleSettings } from "@/scripts/settings";
+import {getExtraEffectsEnabled, registerModuleSettings} from "@/scripts/settings";
 import { registerMechSheetSettings, resetMechSheetData, resetMechSheetLocalData } from "@/scripts/mech/settings";
 import { registerNPCSheetSettings, resetNPCSheetData } from "@/scripts/npc/settings";
 import { registerPilotSheetSettings, resetPilotSheetData, resetPilotSheetLocalData } from "@/scripts/pilot/settings";
@@ -50,6 +50,15 @@ function registerHandlebarsHelpers()
     Handlebars.registerHelper("la_logData", logData);
     Handlebars.registerHelper("la_logConsole", logConsole)
     Handlebars.registerHelper("la_setDatastore", forwardData);
+    Handlebars.registerHelper("la_getBackgroundStyle", () => {
+        return getExtraEffectsEnabled() ? 'la-bg-scroll' : 'la-bg';
+    });
+    Handlebars.registerHelper("la_getBackgroundAltStyle", () => {
+        return getExtraEffectsEnabled() ? 'la-bg-scroll-alt' : 'la-bg-alt';
+    });
+    Handlebars.registerHelper("la_getScrollStyle", () => {
+        return getExtraEffectsEnabled() ? 'la-ruler-scroll' : 'la-ruler';
+    });
 }
 
 function registerSettings()

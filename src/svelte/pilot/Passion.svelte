@@ -76,7 +76,9 @@
 </script>
 
 {#if system.bond}
-<div class="la-bg-scroll-alt la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover">
+<div class="la-flexcol -widthfull -margin1-b -padding1-tb la-reveal-hover
+        {qualityMode ? 'la-bg-scroll-alt' : 'la-bg-alt'}"
+>
     <!-- Bond Name -->
     <span class="-fontsize6 -letterspacing1 -upper">
         {system.bond.name}
@@ -99,7 +101,8 @@
         />
     </div>
     <div
-        class="la-bond-card la-flexrow -positionrelative -widthfull -aligncenter"
+        class="la-flexrow -positionrelative -widthfull -aligncenter
+            {qualityMode ? 'la-bond-card-spin' : 'la-bond-card'}"
     >
         <!-- Bond Image -->
         <div class="la-bond-card__img-anchor -margin7-tb"

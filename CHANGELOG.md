@@ -1,7 +1,8 @@
 # 1.4.2
 ## Changes
-* #64 - Fixed NPC tech attack referring to an effectively unused actor attribute to instead use system instead
 * #61 - Added support for adding/editing deployable effects if there is none
+* #63 - Added support for disabling non-functional CSS effects such as animated backgrounds, various glow effects, and some others
+* #64 - Fixed NPC tech attack referring to an effectively unused actor attribute to instead use system instead
 * #62 - Added disabling HORUS glitchy text within these sheets when Foundry photosensitivity mode is enabled
 * Added clarification to what the tech attack stat on NPCs represent
 ## Technical Changes
@@ -17,8 +18,8 @@ zh-tw:
 + "LA.pin.unpinned.tooltip": "Unpin this item from the top",
 + "LA.pin.unpinned.extension": "unpin_item",
 + "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
-  "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
-  "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
++ "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
++ "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
 pt-br:
 + "LA.pin.pinned.label": "PINNED",
 + "LA.pin.unpinned.label": "OTHER",
@@ -27,8 +28,12 @@ pt-br:
 + "LA.pin.unpinned.tooltip": "Unpin this item from the top",
 + "LA.pin.unpinned.extension": "unpin_item",
 + "LA.tattack.append.tooltip.npc": "When NPCs take the Invade quick-tech option, they use their System attribute versus the target's E-Defense",
-  "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
-  "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
++ "LA.SETTINGS.enableEffects.label": "Enable Extra Effects",
++ "LA.SETTINGS.enableEffects.subLabel": "When disabled, non-functional CSS animations and effects are turned off. This may help performance for players that do not have access to hardware acceleration.",
+### Svelte
+* Continuation of reducing join lengths introduced in 1.4.0
+* ### CSS
+* `la-ruler` renamed to `la-ruler-scroll`
 
 # 1.4.1
 My git apparently does not recognize capitalization differences

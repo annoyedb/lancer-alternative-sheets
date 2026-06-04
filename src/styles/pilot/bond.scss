@@ -1,3 +1,5 @@
+@use '../shared/mixins' as *;
+
 .la-root .la-bonds
 {
     .bond-power-flow>.mdi
@@ -14,17 +16,7 @@
         .la-bond-card__img-anchor
         {
             width: fit-content;
-            animation: rotate-y-360 10s linear infinite;
-    
-            @keyframes rotate-y-360 {
-                from {
-                    transform: rotateY(0deg);
-                }
-                to {
-                    transform: rotateY(360deg);
-                }
-            }
-    
+
             >.la-bond-card__img
             {
                 --angle: 30deg;
@@ -32,6 +24,27 @@
                 object-fit: contain;
                 height: 13rem;
     
+                transform: rotate(var(--angle));
+            }
+        }
+    }
+
+    .la-bond-card-spin
+    {
+        perspective: 800px;
+
+        .la-bond-card__img-anchor
+        {
+            width: fit-content;
+            @include rotateY360;
+
+            >.la-bond-card__img
+            {
+                --angle: 30deg;
+
+                object-fit: contain;
+                height: 13rem;
+
                 transform: rotate(var(--angle));
             }
         }

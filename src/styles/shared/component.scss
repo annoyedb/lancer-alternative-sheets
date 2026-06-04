@@ -136,6 +136,13 @@
         min-width: 1rem;
         background-image: url(/assets/scale_1.png);
         background-repeat: repeat-y;
+    }
+
+    .la-ruler-scroll
+    {
+        min-width: 1rem;
+        background-image: url(/assets/scale_1.png);
+        background-repeat: repeat-y;
         animation: scroll-up 600s infinite linear;
         -webkit-animation: scroll-up 600s infinite linear;
         -moz-animation: scroll-up 600s infinite linear;
