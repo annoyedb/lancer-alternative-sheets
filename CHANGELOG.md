@@ -1,4 +1,16 @@
 # 1.4.2
+This is for ***Lancer V12 only***
+
+1.4.x will mark the end of explicit Lancer V12 support, barring the occasional bug fix (consider it on long-term support).
+1.5.x will mark the start of Lancer V13 support whenever I get around to releasing it.
+
+While I'm aware that some of you have forcibly installed my sheets onto Lancer V13 --in which case I am flattered by your insistence on continuing to use my module in an unsupported environment-- I am not currently offering explicit support as of writing due to two major roadblocks; with one being more of a personal lamentation than a strict requirement:
+* Update the `foundry-vtt-types` dependency to its latest version. Trying to do so completely blows up the compilation of this module. I don't really have the mental space for debugging this at present
+* Compile the proper d.ts types from the `foundryvtt-lancer` system into actual referenceable and compilable types. Currently, due to various TypeScript errors in the system itself, this cannot be done, which has led me to create the `src/scripts/lancer` folder to try and force it to work. This folder is essentially a ~~worse~~ copy of various parts of the system's codebase required for the sheets to reference and use. I expect some large changes to V13/V14 Lancer in its lifetime that will affect how this module uses said codebase `and my own sanity` and so I no longer accept this as an acceptable work-around.
+
+That said, as usual I am open to accepting PRs for the `dev` branch concerning V13 support.
+I am also accepting updates to the two localizations currently supported by this module by anyone willing to update it for their respective languages! I have compiled the required localizations below, so please take a look if you are interested.
+
 ## Changes
 * #61 - Added support for adding/editing deployable effects if there is none
 * #63 - Added support for disabling non-functional CSS effects such as animated backgrounds, various glow effects, and some others
