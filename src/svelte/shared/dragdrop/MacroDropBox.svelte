@@ -231,7 +231,7 @@
         {:else}
             <FlowButton
                 textStyle={["-padding1-r", "-padding0-tb", "-height5", "-letterspacing0", "la-text-header", "la-prmy-header", ...(buttonStyle || [])]}
-                text={fromUuidSync(type)?.name || getLocalized("LA.placeholder")}
+                text={(fromUuidSync(type)?.name as string) || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {
                     event.stopPropagation();

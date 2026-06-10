@@ -32,7 +32,6 @@ export class SocketManager
                 caller: string
             ) =>
             {
-                //@ts-expect-error
                 if (data.type === "GM" && game.user.isGM)
                 {
                     //@ts-expect-error
@@ -127,7 +126,6 @@ export class SocketManager
 
     public runAsGM(func: (...args: any[]) => any, callback?: (data: any) => any, ...args: any[])
     {
-        // @ts-expect-error
         if (game.user.isGM)
         {
             const response = func(...args);
@@ -150,7 +148,6 @@ export class SocketManager
             }
             return;
         }
-        //@ts-expect-error
         if (!game.users.activeGM)
         {
             Logger.error(`An active GM must be online to run GM-proxied functions`);

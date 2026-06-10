@@ -41,7 +41,8 @@ export class TypedWriter
 
     public registerHooks(uuid: string)
     {
-        trackHook(uuid, Hooks.on(this.hookID, (text: string) =>
+        // Dynamic, per-instance hook IDs (runtime strings) - outside fvtt-types' typed hook registry.
+        trackHook(uuid, (Hooks.on as any)(this.hookID, (text: string) =>
         {
             this.typed?.destroy();
             this.typed = new Typed(this.component, {
@@ -50,7 +51,7 @@ export class TypedWriter
             });
         }), this.hookID);
 
-        trackHook(uuid, Hooks.on(this.hookResetID, () =>
+        trackHook(uuid, (Hooks.on as any)(this.hookResetID, () =>
         {
             this.garbage = this.typed;
             this.typed = new Typed(this.component, {
@@ -156,12 +157,12 @@ export function sendToLog(event: PointerEvent, logText: string, type: TextLogHoo
 {
     // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
-    Hooks.call(type, logText);
+    (Hooks.call as any)(type, logText); // dynamic TextLogHook id, outside the typed hook registry
 }
 
 export function resetLog(event: PointerEvent, type: TextLogHook)
 {
     // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
-    Hooks.call(type);
+    (Hooks.call as any)(type); // dynamic TextLogHook id, outside the typed hook registry
 }

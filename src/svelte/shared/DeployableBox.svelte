@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { LancerActor } from "@/types/foundryvtt-lancer/module/actor/lancer-actor";
     import type { DeployableBoxProps } from "@/interfaces/actor/DeployableBoxProps";
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
@@ -43,13 +42,13 @@
 
     const qualityMode = getExtraEffectsEnabled();
     const themeOverride = $derived(getThemeKey(sheetUUID));
-    const globallyOwnedDeployables: StoredDocument<any>[] = game.actors!.filter(
-        (a) => !!(a.is_deployable() && a.system.owner?.value == source)
+    const globallyOwnedDeployables: any[] = game.actors!.filter(
+        (a: any) => !!(a.is_deployable() && a.system.owner?.value == source)
     );
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.system.deployable.tooltip"));
 
-    function lidSourceHasDeployable(deployable: StoredDocument<LancerActor>)
+    function lidSourceHasDeployable(deployable: any)
     {
         return lidSource.deployables?.includes(deployable.system.lid) ?? false;
     }
@@ -59,7 +58,7 @@
         "systems/lancer/assets/icons/white/deployable.svg"
     ];
     
-    function getThemeImg(deployable: StoredDocument<LancerActor>)
+    function getThemeImg(deployable: any)
     {
         let theme = getBrightness(themeOverride);
         // If not assigned an image
@@ -76,7 +75,7 @@
             return deployable.img;
     }
 
-    function getDeployableActions(deployable: StoredDocument<any>)
+    function getDeployableActions(deployable: any)
     {
         return [
             { 

@@ -1,5 +1,5 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
-import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
+import type { FlowState } from "@/types/lancer";
 import type { UUIDData } from "@/interfaces/flows/UUIDData";
 import { Logger } from "@/classes/Logger";
 import { FlowBase } from "./FlowBase";

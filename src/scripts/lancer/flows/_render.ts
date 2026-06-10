@@ -1,3 +1,4 @@
+// Reimplementation of bare-minimum foundryvtt-lancer functionality (src/module/flows/_render.ts)
 import { nanoid } from "nanoid";
 
 export async function renderTemplateStep(actor: any, template: string, templateData: any, flags?: any) {
@@ -50,5 +51,5 @@ export async function createChatMessageStep(
 
   //@ts-expect-error haha I sure hope noone looks here
   const cm = await ChatMessage.implementation.create(chat_data);
-  cm?.render();
+  (cm as any)?.render();
 }

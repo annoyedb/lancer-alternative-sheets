@@ -12,7 +12,7 @@ export function unregisterTrackedHooks(uuid: string)
     const hooks = SheetStore.get(uuid).trackedHooks;
     for (const [key, value] of Object.entries(hooks))
     {
-        Hooks.off(value, Number(key));
+        (Hooks.off as any)(value, Number(key)); // dynamic tracked-hook id, outside the typed hook registry
     }
     SheetStore.set(uuid, { trackedHooks: {} });
 }

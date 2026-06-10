@@ -15,7 +15,7 @@ export function registerDeployableSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `deployable-settings-sheet-width`, {
         name: "LA.SETTINGS.deployable.sheetWidth.label",
@@ -26,7 +26,7 @@ export function registerDeployableSheetSettings()
         // @ts-ignore
         type: Number,
         default: 500,
-    } as ClientSettings.PartialSetting<number>);
+    });
 
     game.settings.register(LancerAlternative.Name, `deployable-settings-sheet-height`, {
         name: "LA.SETTINGS.deployable.sheetHeight.label",
@@ -37,7 +37,7 @@ export function registerDeployableSheetSettings()
         // @ts-ignore
         type: Number,
         default: 800,
-    } as ClientSettings.PartialSetting<number>);
+    });
 
     game.settings.register(LancerAlternative.Name, `deployable-settings-log-action-save-collapse`, {
         name: "LA.SETTINGS.deployable.saveCollapse.label",
@@ -46,7 +46,7 @@ export function registerDeployableSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `deployable-settings-log-action-start-collapsed`, {
         name: "LA.SETTINGS.deployable.startCollapsed.label",
@@ -55,7 +55,7 @@ export function registerDeployableSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     // Private Settings
     game.settings.register(LancerAlternative.Name, `_deployable-settings`, {
@@ -63,14 +63,14 @@ export function registerDeployableSheetSettings()
         config: false,
         type: Array, // MessagePack encoded object
         default: [],
-    } as ClientSettings.PartialSetting<Array<number>>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_deployable-settings-version`, {
         scope: "world",
         config: false,
         type: String,
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     // Sockets
     SocketManager.getInstance().register(setDeployableSheetData);

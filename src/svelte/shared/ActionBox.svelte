@@ -28,7 +28,7 @@
     import { TextLogHook } from "@/enums/TextLogHook";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
 
-    export type ActionBoxProps = {
+    type ActionBoxProps = {
         children?: Snippet;
         flowButton?: Snippet;
 

@@ -62,16 +62,16 @@ export class MechSheetBase
 
                 Hooks.on("laOverrideTheme", (uuid: string, theme: string) =>
                 {
-                    if (uuid !== this.actor.uuid)
+                    if (uuid !== this.actor.uuid!)
                         return;
                     
-                    setThemeKey(this.actor.uuid, theme);
+                    setThemeKey(this.actor.uuid!, theme);
                     this.render();
                 })
 
                 // (#6)
                 Hooks.on("laForceRerender", (uuid: string, callback?: () => void) => {
-                    if (uuid !== this.actor.uuid)
+                    if (uuid !== this.actor.uuid!)
                         return;
                     this.render();
                     if (callback)
@@ -79,12 +79,12 @@ export class MechSheetBase
                 });
                 
                 Hooks.on("updateActor", (document: any, changes: any) => {
-                    if (document.uuid === this.actor.uuid && 
+                    if (document.uuid === this.actor.uuid! && 
                         changes.prototypeToken?.texture?.src && 
-                        getActorTokenSync(this.actor.uuid) // Actor-token image sync enabled
+                        getActorTokenSync(this.actor.uuid!) // Actor-token image sync enabled
                     )
                     {
-                        setSelectedTokenImage(this.actor.uuid, changes.prototypeToken.texture.src);
+                        setSelectedTokenImage(this.actor.uuid!, changes.prototypeToken.texture.src);
                         if (isValidImageContainer(changes.prototypeToken.texture.src))
                             this.actor.update({"img": changes.prototypeToken.texture.src});
                     }
@@ -95,7 +95,7 @@ export class MechSheetBase
                 Hooks.on("closeSettingsConfig", () =>
                 {
                     this.render();
-                    setIntroRun(this.actor.uuid, false);
+                    setIntroRun(this.actor.uuid!, false);
                 });
             }
 
@@ -135,7 +135,7 @@ export class MechSheetBase
                 super._propagateData(formData);
                 
                 delete formData["prototypeToken.texture.src"]; // GO AWAY MYSTERY MAN AAAAAAA
-                const updateToken = getSelectedTokenImage(this.actor.uuid); // (#12)
+                const updateToken = getSelectedTokenImage(this.actor.uuid!); // (#12)
                 if (updateToken)
                 {
                     formData["prototypeToken.texture.src"] = updateToken;
@@ -146,18 +146,18 @@ export class MechSheetBase
             {
                 super._injectHTML(html);
 
-                setThemeKey(this.actor.uuid, getThemeOverride(this.actor.uuid));
-                applyThemeTo(this.element, getThemeKey(this.actor.uuid));
+                setThemeKey(this.actor.uuid!, getThemeOverride(this.actor.uuid!));
+                applyThemeTo(this.element, getThemeKey(this.actor.uuid!));
 
-                this.mountComponents(html, dataMap[this.actor.uuid]);
+                this.mountComponents(html, dataMap[this.actor.uuid!]);
             }
 
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);
-                applyThemeTo(element, getThemeKey(this.actor.uuid));
+                applyThemeTo(element, getThemeKey(this.actor.uuid!));
                 
-                this.mountComponents(html, dataMap[this.actor.uuid]);
+                this.mountComponents(html, dataMap[this.actor.uuid!]);
                 
                 // Saving and restoring scroll positions calls before rerender, so 
                 // restore the scroll positions after the rerender
@@ -166,7 +166,7 @@ export class MechSheetBase
 
             mountComponents(html: JQuery<HTMLElement>, data: any)
             {
-                unregisterTrackedHooks(this.actor.uuid); // Untrack all hooks that were registered from Svelte components
+                unregisterTrackedHooks(this.actor.uuid!); // Untrack all hooks that were registered from Svelte components
                 mount(Header, {
                     target: html.find(".la-SVELTE-HEADER")[0],
                     props: data,
@@ -215,7 +215,7 @@ export class MechSheetBase
                     $(button).on('click', (event) =>
                     {
                         const tab = $(event.currentTarget).data('tab');
-                        setActiveTab(this.actor.uuid, ActiveTab.Primary, tab);
+                        setActiveTab(this.actor.uuid!, ActiveTab.Primary, tab);
                     });
                 });
 
@@ -224,14 +224,14 @@ export class MechSheetBase
                     $(button).on('click', (event) =>
                     {
                         const tab = $(event.currentTarget).data('tab');
-                        setActiveTab(this.actor.uuid, ActiveTab.Secondary, tab);
+                        setActiveTab(this.actor.uuid!, ActiveTab.Secondary, tab);
                     });
                 });
             }
         }
 
         Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
-            types: ["mech"],
+            types: ["mech"] as any[], // Lancer system actor subtype (registered by the system at runtime)
             label: getLocalized("LA.SHEET.mech.label"),
             makeDefault: false
         });

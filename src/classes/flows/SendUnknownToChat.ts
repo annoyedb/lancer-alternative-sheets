@@ -1,5 +1,5 @@
 import { CustomFlowClass } from "@/enums/FlowClass";
-import type { FlowState } from "@/types/foundryvtt-lancer/module/flows/flow";
+import type { FlowState } from "@/types/lancer";
 import type { ChatData } from "@/interfaces/flows/ChatData";
 import { TEMPLATE_PATHS } from "@/scripts/loader";
 import { renderTemplateStep } from "@/scripts/lancer/flows/_render";

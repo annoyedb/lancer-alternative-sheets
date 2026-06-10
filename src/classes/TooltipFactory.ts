@@ -26,7 +26,6 @@ export class TooltipFactory
         tooltipSettings: TooltipSettings
     )
     {
-        //@ts-expect-error Tooltip Manager
         const manager = game.tooltip;
 
         const options: any = {};
@@ -51,7 +50,7 @@ export class TooltipFactory
             options.cssClass = tooltipSettings.cssClass;
         }
 
-        manager.activate(event.currentTarget, options);
+        manager.activate(event.currentTarget as HTMLElement, options);
     }
 
     // (#5)
@@ -61,7 +60,6 @@ export class TooltipFactory
         tooltipSettings: TooltipSettings
     )
     {
-        //@ts-expect-error Tooltip Manager
         const manager = game.tooltip;
 
         const mountDiv: HTMLElement = document.createElement('div');
@@ -93,7 +91,7 @@ export class TooltipFactory
             options.cssClass = tooltipSettings.cssClass;
         }
 
-        manager.activate(event.currentTarget, options);
+        manager.activate(event.currentTarget as HTMLElement, options);
 
         // Observe when this is removed from the DOM
         const root = mountDiv.parentElement;
@@ -121,7 +119,6 @@ export class TooltipFactory
     {
         if (!element)
             return;
-        //@ts-expect-error Tooltip Manager
         const manager = game.tooltip;
 
         manager.dismissLockedTooltip(element);
@@ -129,7 +126,6 @@ export class TooltipFactory
 
     public static unrenderTooltips()
     {
-        //@ts-expect-error Tooltip Manager
         const manager = game.tooltip;
 
         manager.dismissLockedTooltips();

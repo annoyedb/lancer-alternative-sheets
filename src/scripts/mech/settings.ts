@@ -16,7 +16,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-header`, {
         name: "LA.SETTINGS.mech.enableHeaderLog.label",
@@ -25,7 +25,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-sidebar`, {
         name: "LA.SETTINGS.mech.enableSidebarActionLog.label",
@@ -34,7 +34,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main`, {
         name: "LA.SETTINGS.mech.enableMainActionLog.label",
@@ -43,7 +43,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-main-max-height`, {
         name: "LA.SETTINGS.mech.sizeMainActionLog.label",
@@ -57,7 +57,7 @@ export function registerMechSheetSettings()
             step: 1,
         },
         default: 12,
-    } as ClientSettings.PartialSetting<number>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-save-collapse`, {
         name: "LA.SETTINGS.mech.saveCollapse.label",
@@ -66,7 +66,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`, {
         name: "LA.SETTINGS.mech.startCollapsed.label",
@@ -75,7 +75,7 @@ export function registerMechSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     // Private Settings
     game.settings.register(LancerAlternative.Name, `_mech-settings-local`, {
@@ -83,28 +83,28 @@ export function registerMechSheetSettings()
         config: false,
         type: String,
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_mech-settings-local-version`, {
         scope: "client",
         config: false,
         type: String, // JSON object
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_mech-settings`, {
         scope: "world",
         config: false,
         type: Array, // MessagePack encoded object
         default: [],
-    } as ClientSettings.PartialSetting<Array<number>>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_mech-settings-version`, {
         scope: "world",
         config: false,
         type: String,
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     // Sockets
     SocketManager.getInstance().register(setMechSheetData);

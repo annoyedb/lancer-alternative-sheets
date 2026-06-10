@@ -5,7 +5,7 @@
             "@/*": ["./src/*"]
         },
         "types": [
-            "@league-of-foundry-developers/foundry-vtt-types",
+            "fvtt-types",
             "svelte"
         ],
         "target": "ESNext",
@@ -15,7 +15,7 @@
             "ESNext",
             "DOM"
         ],
-        "moduleResolution": "Node",
+        "moduleResolution": "bundler",
         "strict": true,
         "sourceMap": true,
         "resolveJsonModule": true,
