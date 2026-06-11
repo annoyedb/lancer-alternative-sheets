@@ -17,7 +17,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-log-header`, {
         name: "LA.SETTINGS.pilot.enableHeaderLog.label",
@@ -26,7 +26,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-log-action-sidebar`, {
         name: "LA.SETTINGS.pilot.enableSidebarActionLog.label",
@@ -35,7 +35,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-log-action-save-collapse`, {
         name: "LA.SETTINGS.pilot.saveCollapse.label",
@@ -44,7 +44,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-log-action-start-collapsed`, {
         name: "LA.SETTINGS.pilot.startCollapsed.label",
@@ -53,7 +53,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-enable-sensors`, {
         name: "LA.SETTINGS.pilot.enableSensors.label",
@@ -62,7 +62,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `pilot-settings-enable-tech-attack`, {
         name: "LA.SETTINGS.pilot.enableTechAttack.label",
@@ -71,7 +71,7 @@ export function registerPilotSheetSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     // Private Settings
     game.settings.register(LancerAlternative.Name, `_pilot-settings-local`, {
@@ -79,28 +79,28 @@ export function registerPilotSheetSettings()
         config: false,
         type: String,
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_pilot-settings-local-version`, {
         scope: "client",
         config: false,
         type: String, // JSON object
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_pilot-settings`, {
         scope: "world",
         config: false,
         type: Array, // MessagePack encoded object
         default: [],
-    } as ClientSettings.PartialSetting<Array<number>>);
+    });
 
     game.settings.register(LancerAlternative.Name, `_pilot-settings-version`, {
         scope: "world",
         config: false,
         type: String,
         default: "",
-    } as ClientSettings.PartialSetting<string>);
+    });
 
     // Sockets
     SocketManager.getInstance().register(setPilotSheetData);

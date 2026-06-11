@@ -13,7 +13,7 @@ export function registerModuleSettings()
         config: true,
         type: Boolean,
         default: false,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 
     game.settings.register(LancerAlternative.Name, `settings-enable-effects`, {
         name: "LA.SETTINGS.enableEffects.label",
@@ -22,7 +22,7 @@ export function registerModuleSettings()
         config: true,
         type: Boolean,
         default: true,
-    } as ClientSettings.PartialSetting<boolean>);
+    });
 }
 
 export function getVerboseLoggingEnabled(): boolean

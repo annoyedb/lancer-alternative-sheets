@@ -1,3 +1,4 @@
+// Reimplementation of bare-minimum foundryvtt-lancer functionality (src/module/models/bits/damage.ts)
 
 // "Hydrated" DamageData
 export class Damage implements Readonly<any>

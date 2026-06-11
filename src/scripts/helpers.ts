@@ -61,25 +61,27 @@ export function formatString(template: string, ...values: string[]): string
     });
 }
 
-export function getFoundryVersion(split: boolean = false)
+export function getFoundryVersion(split: true): string[];
+export function getFoundryVersion(split?: false): string;
+export function getFoundryVersion(split: boolean = false): string | string[]
 {
     if (split)
-        // @ts-expect-error
         return game.release.version.split('.');
-    // @ts-expect-error
     return game.release.version;
 }
 
-export function getLancerVersion(split: boolean = false)
+export function getLancerVersion(split: true): string[];
+export function getLancerVersion(split?: false): string;
+export function getLancerVersion(split: boolean = false): string | string[]
 {
     if (split)
-        // @ts-expect-error
         return game.system.version.split('.');
-    // @ts-expect-error
     return game.system.version;
 }
 
-export function getModuleVersion(split: boolean = false)
+export function getModuleVersion(split: true): string[];
+export function getModuleVersion(split?: false): string;
+export function getModuleVersion(split: boolean = false): string | string[]
 {
     if (split)
         // @ts-expect-error
@@ -263,7 +265,6 @@ export async function handleToggleImageSync(
 
     if (!lockState)
     {
-        // @ts-expect-error
         const confirm = await foundry.applications.api.DialogV2.confirm({
             window: { title: getLocalized("LA.confirm") },
             content: getLocalized("LA.advanced.link.subLabel"),

@@ -1,8 +1,7 @@
-import type { Document } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/module.mjs";
 import { Logger } from "@/classes/Logger";
 import { MOUNT_FITTINGS, MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
 import { array_path_edit_changes, drilldownDocument, parse_control_val } from "@/scripts/lancer/helpers/common";
-import type { EmbeddedRef } from "@/types/foundryvtt-lancer/module/source-template";
+import type { EmbeddedRef } from "@/types/lancer";
 
 // Reimplementation of Lancer's mount change handler
 export function handleMountChange(
@@ -10,7 +9,7 @@ export function handleMountChange(
     mountPath: string,
     selectionIndex: number,
     bracing: boolean,
-    document: Document<any, any>,
+    document: any,
     callback?: (morph: string) => void
 )
 {
@@ -106,7 +105,8 @@ export async function handleMountDelete(
         docOverride = (await fromUuid(button.dataset.uuid)) as any;
         if (!docOverride)
         {
-            return ui.notifications?.error("Bad uuid: " + button.dataset.uuid);
+            ui.notifications?.error("Bad uuid: " + button.dataset.uuid);
+            return;
         }
         dd = drilldownDocument(docOverride, path);
     }

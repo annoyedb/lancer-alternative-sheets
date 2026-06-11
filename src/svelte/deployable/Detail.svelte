@@ -28,7 +28,7 @@
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
     const actions = $derived(getDeployableActions(actor));
 
-    function getDeployableActions(deployable: StoredDocument<any>)
+    function getDeployableActions(deployable: any)
     {
         return [
             { 

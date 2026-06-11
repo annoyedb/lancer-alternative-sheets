@@ -4,8 +4,8 @@
   "description": "A set of immersive alternative sheets designed for ease-of-use for the Lancer game system. Included currently are mech sheets, pilot sheets, and NPC sheets.",
   "version": "0.0.0",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12"
+    "minimum": "13",
+    "verified": "13"
   },
   "relationships": {
     "systems": [
@@ -13,7 +13,7 @@
         "id": "lancer",
         "type": "system",
         "compatibility": {
-          "minimum": "2.4.3"
+          "minimum": "3.0.0"
         }
       }
     ]

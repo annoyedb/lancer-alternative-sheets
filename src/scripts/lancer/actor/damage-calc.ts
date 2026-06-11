@@ -1,3 +1,4 @@
+// Reimplementation of bare-minimum foundryvtt-lancer functionality (src/module/actor/damage-calc.ts)
 import type { Damage } from "../models/bits/damage";
 
 export class AppliedDamage
