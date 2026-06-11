@@ -38,7 +38,7 @@ export class DeployableSheetBase
 
     static setupSheet()
     {
-        const LADeployableSheet = class extends ((game.lancer.applications as any).LancerDeployableSheet as typeof ActorSheet)
+        const LADeployableSheet = class extends ((game.lancer.applications as any).LancerDeployableSheet as typeof  foundry.appv1.sheets.ActorSheet)
         {
             constructor(...args: [any])
             {
@@ -74,7 +74,7 @@ export class DeployableSheetBase
 
             static override get defaultOptions(): ActorSheet.Options
             {
-                return mergeObject(super.defaultOptions, DeployableSheetBase.mergeOptions);
+                return foundry.utils.mergeObject(super.defaultOptions, DeployableSheetBase.mergeOptions);
             }
 
             override async getData(): Promise<DeployableSheetProps>
@@ -145,7 +145,7 @@ export class DeployableSheetBase
             }
         }
 
-        Actors.registerSheet(LancerAlternative.Name, LADeployableSheet, {
+        foundry.documents.collections.Actors.registerSheet(LancerAlternative.Name, LADeployableSheet, {
             types: ["deployable"] as any[], // Lancer system actor subtype (registered by the system at runtime)
             label: getLocalized("LA.SHEET.deployable.label"),
             makeDefault: false

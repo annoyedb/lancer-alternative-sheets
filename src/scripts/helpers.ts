@@ -10,9 +10,9 @@ export function getLocalized(keys: string | string[], separator?: string): strin
 {
     if (Array.isArray(keys))
     {
-        return keys.map(k => HandlebarsHelpers.localize(k, {} as HelperOptions)).join(separator ? separator : "<br><br>");
+        return keys.map(k => foundry.applications.handlebars.localize(k, {} as HelperOptions)).join(separator ? separator : "<br><br>");
     }
-    return HandlebarsHelpers.localize(keys, {} as HelperOptions);
+    return foundry.applications.handlebars.localize(keys, {} as HelperOptions);
 }
 
 /**

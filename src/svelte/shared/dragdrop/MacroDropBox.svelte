@@ -100,7 +100,7 @@
 
     // Foundry drag and drop handler -------------------------------------------------
     // Drag and drop handler for Foundry document items
-    const macroDropHandler = new DragDrop({
+    const macroDropHandler = new foundry.applications.ux.DragDrop.implementation({
         dropSelector: ".macro-droppable",
         callbacks: {
             drop: (event) => handleMacroDocumentDrop(event),

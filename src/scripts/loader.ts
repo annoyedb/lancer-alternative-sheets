@@ -11,5 +11,5 @@ export const TEMPLATE_PATHS = {
 
 export const preloadTemplates = async function ()
 {
-    return loadTemplates(Object.values(TEMPLATE_PATHS));
+    return foundry.applications.handlebars.loadTemplates(Object.values(TEMPLATE_PATHS));
 }

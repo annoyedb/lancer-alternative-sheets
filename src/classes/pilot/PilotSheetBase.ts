@@ -67,7 +67,7 @@ export class PilotSheetBase
         // from Lancer's extension of a ActorSheet, we have to essentially run setup 'twice'
         //
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
-        const LAPilotSheet = class extends ((game.lancer.applications as any).LancerPilotSheet as typeof ActorSheet)
+        const LAPilotSheet = class extends ((game.lancer.applications as any).LancerPilotSheet as typeof  foundry.appv1.sheets.ActorSheet)
         {
             constructor(...args: [any])
             {
@@ -116,7 +116,7 @@ export class PilotSheetBase
 
             static override get defaultOptions()
             {
-                return mergeObject(super.defaultOptions, PilotSheetBase.mergeOptions);
+                return foundry.utils.mergeObject(super.defaultOptions, PilotSheetBase.mergeOptions);
             }
 
             override activateListeners(html: JQuery<HTMLElement>)
@@ -267,7 +267,7 @@ export class PilotSheetBase
             }
         }
 
-        Actors.registerSheet(LancerAlternative.Name, LAPilotSheet, {
+        foundry.documents.collections.Actors.registerSheet(LancerAlternative.Name, LAPilotSheet, {
             types: ["pilot"] as any[], // Lancer system actor subtype (registered by the system at runtime)
             label: getLocalized("LA.SHEET.pilot.label"),
             makeDefault: false

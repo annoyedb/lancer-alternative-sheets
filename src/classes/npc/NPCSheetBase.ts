@@ -39,7 +39,7 @@ export class NPCSheetBase
 
     static setupSheet()
     {
-        const LANPCSheet = class extends ((game.lancer.applications as any).LancerNPCSheet as typeof ActorSheet)
+        const LANPCSheet = class extends ((game.lancer.applications as any).LancerNPCSheet as typeof  foundry.appv1.sheets.ActorSheet)
         {
             constructor(...args: [any])
             {
@@ -75,7 +75,7 @@ export class NPCSheetBase
 
             static override get defaultOptions(): ActorSheet.Options
             {
-                return mergeObject(super.defaultOptions, NPCSheetBase.mergeOptions);
+                return foundry.utils.mergeObject(super.defaultOptions, NPCSheetBase.mergeOptions);
             }
 
             override async getData(): Promise<NPCSheetProps>
@@ -146,7 +146,7 @@ export class NPCSheetBase
             }
         }
 
-        Actors.registerSheet(LancerAlternative.Name, LANPCSheet, {
+        foundry.documents.collections.Actors.registerSheet(LancerAlternative.Name, LANPCSheet, {
             types: ["npc"] as any[], // Lancer system actor subtype (registered by the system at runtime)
             label: getLocalized("LA.SHEET.npc.label"),
             makeDefault: false

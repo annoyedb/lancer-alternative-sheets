@@ -6,7 +6,7 @@ import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
 import { DeployableSheetBase } from "@/classes/deployable/DeployableSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
-import {getExtraEffectsEnabled, registerModuleSettings} from "@/scripts/settings";
+import { getExtraEffectsEnabled, registerModuleSettings } from "@/scripts/settings";
 import { registerMechSheetSettings, resetMechSheetData, resetMechSheetLocalData } from "@/scripts/mech/settings";
 import { registerNPCSheetSettings, resetNPCSheetData } from "@/scripts/npc/settings";
 import { registerPilotSheetSettings, resetPilotSheetData, resetPilotSheetLocalData } from "@/scripts/pilot/settings";

@@ -54,7 +54,7 @@ export class MechSheetBase
         // from Lancer's extension of a ActorSheet, we have to essentially run setup 'twice'
         //
         // Hopefully since the 'first time' should end in an early leaf node, it won't be too bad
-        const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof ActorSheet)
+        const LAMechSheet = class extends ((game.lancer.applications as any).LancerMechSheet as typeof foundry.appv1.sheets.ActorSheet)
         {
             constructor(...args: [any])
             {
@@ -101,7 +101,7 @@ export class MechSheetBase
 
             static override get defaultOptions()
             {
-                return mergeObject(super.defaultOptions, MechSheetBase.mergeOptions);
+                return foundry.utils.mergeObject(super.defaultOptions, MechSheetBase.mergeOptions);
             }
 
             override activateListeners(html: JQuery<HTMLElement>)
@@ -230,7 +230,7 @@ export class MechSheetBase
             }
         }
 
-        Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
+        foundry.documents.collections.Actors.registerSheet(LancerAlternative.Name, LAMechSheet, {
             types: ["mech"] as any[], // Lancer system actor subtype (registered by the system at runtime)
             label: getLocalized("LA.SHEET.mech.label"),
             makeDefault: false
