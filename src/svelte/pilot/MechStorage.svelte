@@ -168,8 +168,8 @@
 <HeaderMain
     text={getLocalized("LA.tab.mechs.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-    borderStyle={["la-brdr-transparent", "la-bckg-card", "clipped-bot-alt"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+    borderStyle={["la-brdr-transparent la-bckg-card clipped-bot-alt"]}
 
     collapseID={collID}
     startCollapsed={true}

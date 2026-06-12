@@ -15,7 +15,7 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";    import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
@@ -37,7 +37,7 @@
         // Separate bonuses into armor-related and other-related categories
         return armor.system.bonuses.reduce(
             (bonusCategories: { armorBonuses: { [key: string]: any }; otherBonuses: { [key: string]: any } }, bonus: { lid: string; val: any }) => {
-                const isArmorBonus = ["pilot_hp", "pilot_armor", "pilot_evasion", "pilot_edef", "pilot_speed"].includes(bonus.lid);
+                const isArmorBonus = ["pilot_hp pilot_armor pilot_evasion pilot_edef pilot_speed"].includes(bonus.lid);
                 const categoryKey = isArmorBonus ? "armorBonuses" : "otherBonuses";
                 bonusCategories[categoryKey][bonus.lid] = bonus.val;
                 return bonusCategories;
@@ -260,7 +260,7 @@
         <HeaderSecondary
             text={armor.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)
@@ -282,62 +282,64 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
+            <div class="la-generated -widthfull -gap1 la-flexcol">
             {#if otherBonuses.length}
-            <BonusBox
-                bonuses={otherBonuses}
-                bonusPath={`${getArmorPath(index)}.system.bonuses`}
-            />
+                <BonusBox
+                    bonuses={otherBonuses}
+                    bonusPath={`${getArmorPath(index)}.system.bonuses`}
+                />
             {/if}
-            <DeployableBox
-                source={actor}
-                lidSource={armor.system}
-                uuid={actor.uuid}
-                sheetUUID={actor.uuid}
+                <DeployableBox
+                    source={actor}
+                    lidSource={armor.system}
+                    uuid={actor.uuid}
+                    sheetUUID={actor.uuid}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <ActionBox
-                actions={armor.system.actions}
-                actor={actor}
-                uuid={armor.uuid}
-                path={`system.actions`}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <ActionBox
+                    actions={armor.system.actions}
+                    actor={actor}
+                    uuid={armor.uuid}
+                    path={`system.actions`}
 
-                collapseID={`${armor.uuid}.actions`}
-                startCollapsed={true}
+                    collapseID={`${armor.uuid}.actions`}
+                    startCollapsed={true}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={armor.system.description}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={armor.system.description}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {#if armor.system.effect}
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                effect={armor.system.effect}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {#if armor.system.effect}
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    effect={armor.system.effect}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {/if}
-            <TagArray
-                tags={armor.system.tags}
-                justify={"start"}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {/if}
+                <TagArray
+                    tags={armor.system.tags}
+                    justify={"start"}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                />
+            </div>
         </HeaderSecondary>
     {/each}
     </div>

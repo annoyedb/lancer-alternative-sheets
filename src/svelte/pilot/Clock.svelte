@@ -9,7 +9,7 @@
     import { CounterBoxType } from "@/enums/CounterBoxType";
     
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
@@ -75,7 +75,7 @@
     headerContent={headerContent}
 >
 {#if clocks.length}
-    <div class="la-flexcol -gap0 -widthfull">
+    <div class="la-generated -widthfull -gap1 la-flexcol">
     {#each clocks as clock, index}
         <div class="la-flexcol -widthfull">
         {#snippet outerContent()}
@@ -93,7 +93,7 @@
             </div>
         {/snippet}
         {#snippet headerSecondaryLeftOptions()}
-            <i class="mdi mdi-progress-clock -fontsize5 -padding0"></i>
+            <i class="mdi mdi-progress-clock -fontsize5 -padding0-lr"></i>
         {/snippet}
         {#snippet headerSecondaryRightOptions()}
             <!-- Edit -->
@@ -119,7 +119,7 @@
             <HeaderSecondary
                 text={clock.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
+                textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)

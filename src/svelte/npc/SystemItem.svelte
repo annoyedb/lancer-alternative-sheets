@@ -204,7 +204,7 @@
 <HeaderSecondary
     text={component.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={[getHeaderStyle(component), "-fontsizemedium"]}
+    textStyle={[getHeaderStyle(component), "-fontsizemedium -overflowhidden -fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
@@ -230,49 +230,51 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-{#if hasAttackBonus(component) || hasAccuracyBonus(component)}
-    <div class="la-flexrow -gap0 -widthfull">
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+    {#if hasAttackBonus(component) || hasAccuracyBonus(component)}
+        <div class="la-flexrow -gap0 -widthfull">
+            <EffectBox
+                name={getLocalized("LA.npc.attackBonus.label")}
+                outerStyle={[hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"]}
+
+                tooltipEnabled={tooltipEnabled}
+            >
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
+                    {component.system.attack_bonus[tier - 1]}
+                    <i class="cci cci-reticule -fontsize4"></i>
+                </span>
+            </EffectBox>
+            <EffectBox
+                name={getLocalized("LA.npc.accuracy.label")}
+
+                tooltipEnabled={tooltipEnabled}
+            >
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
+                    {component.system.accuracy[tier - 1]}
+                    <i class="cci cci-accuracy -fontsize6"></i>
+                </span>
+            </EffectBox>
+        </div>
+    {/if}
         <EffectBox
-            name={getLocalized("LA.npc.attackBonus.label")}
-            outerStyle={[hasAccuracyBonus(component) ? "-bordersround" : "-bordersround-ltb"]}
+            name={getLocalized("LA.mech.system.effect.label")}
 
             tooltipEnabled={tooltipEnabled}
         >
-            <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                {component.system.attack_bonus[tier - 1]}
-                <i class="cci cci-reticule -fontsize4"></i>
-            </span>
+            {@html component.system.effect}
         </EffectBox>
         <EffectBox
-            name={getLocalized("LA.npc.accuracy.label")}
+            name={getLocalized("LA.effect.hit.label")}
+            effect={component.system.on_hit}
 
             tooltipEnabled={tooltipEnabled}
-        >
-            <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                {component.system.accuracy[tier - 1]}
-                <i class="cci cci-accuracy -fontsize6"></i>
-            </span>
-        </EffectBox>
+        />
+        <TagArray
+            tags={component.system.tags}
+            justify={"end"}
+
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+        />
     </div>
-{/if}
-    <EffectBox
-        name={getLocalized("LA.mech.system.effect.label")}
-
-        tooltipEnabled={tooltipEnabled}
-    >
-        {@html component.system.effect}
-    </EffectBox>
-    <EffectBox
-        name={getLocalized("LA.effect.hit.label")}
-        effect={component.system.on_hit}
-
-        tooltipEnabled={tooltipEnabled}
-    />
-    <TagArray
-        tags={component.system.tags}
-        justify={"start"}
-
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-    />
 </HeaderSecondary>

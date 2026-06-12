@@ -284,7 +284,7 @@
 <HeaderSecondary
     text={tech.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={[getHeaderStyle(tech), "-fontsizemedium"]}
+    textStyle={[getHeaderStyle(tech), "-fontsizemedium -overflowhidden -fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
@@ -310,24 +310,26 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-    <EffectBox
-        name={getLocalized("LA.mech.system.effect.label")}
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+        <EffectBox
+            name={getLocalized("LA.mech.system.effect.label")}
 
-        tooltipEnabled={tooltipEnabled}
-    >
-        {@html tech.system.effect}
-    </EffectBox>
-    <EffectBox
-        name={getLocalized("LA.effect.hit.label")}
-        effect={tech.system.on_hit}
+            tooltipEnabled={tooltipEnabled}
+        >
+            {@html tech.system.effect}
+        </EffectBox>
+        <EffectBox
+            name={getLocalized("LA.effect.hit.label")}
+            effect={tech.system.on_hit}
 
-        tooltipEnabled={tooltipEnabled}
-    />
-    <TagArray
-        tags={tech.system.tags}
-        justify={"start"}
+            tooltipEnabled={tooltipEnabled}
+        />
+        <TagArray
+            tags={tech.system.tags}
+            justify={"end"}
 
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-    />
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+        />
+    </div>
 </HeaderSecondary>

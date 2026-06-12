@@ -1,6 +1,85 @@
 :root,
 .la-common
 {
+    & // #region Font Face
+    {
+        @font-face
+        {
+            font-family: 'JetBrains Mono';
+            font-weight: 400;
+            font-style: normal;
+            src: url(/assets/fonts/JetBrainsMono-Regular.woff2) format('woff2');
+        }
+
+        @font-face
+        {
+            font-family: 'JetBrains Mono';
+            font-weight: 700;
+            font-style: normal;
+            src: url(/assets/fonts/JetBrainsMono-Bold.woff2) format('woff2');
+        }
+
+        @font-face
+        {
+            font-family: 'JetBrains Mono';
+            font-weight: 400;
+            font-style: italic;
+            src: url(/assets/fonts/JetBrainsMono-Italic.woff2) format('woff2');
+
+        }
+
+        @font-face
+        {
+            font-family: 'JetBrains Mono';
+            font-weight: 700;
+            font-style: italic;
+            src: url(/assets/fonts/JetBrainsMono-BoldItalic.woff2) format('woff2');
+        }
+
+        @font-face
+        {
+            font-family: 'Noto Sans';
+            font-weight: 400;
+            font-style: normal;
+            src: url(/assets/fonts/NotoSans-Regular.woff2) format('woff2');
+        }
+
+        @font-face
+        {
+            font-family: 'Noto Sans';
+            font-weight: 700;
+            font-style: normal;
+            src: url(/assets/fonts/NotoSans-Bold.woff2) format('woff2');
+        }
+
+        @font-face
+        {
+            font-family: 'Noto Sans';
+            font-weight: 400;
+            font-style: italic;
+            src: url(/assets/fonts/NotoSans-Regular.woff2) format('woff2');
+
+        }
+
+        @font-face
+        {
+            font-family: 'Noto Sans';
+            font-weight: 700;
+            font-style: italic;
+            src: url(/assets/fonts/NotoSans-Bold.woff2) format('woff2');
+        }
+    }
+
+    .-fontface-stylized
+    {
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .-fontface-neutral
+    {
+        font-family: 'Noto Sans', sans-serif;
+    }
+
     .-writingmode-v
     {
         writing-mode: vertical-lr;
@@ -60,9 +139,14 @@
         font-size: 0.75rem;
     }
 
+    .-fontsizemediumer // I'm not sorry
+    {
+        font-size: 0.8rem;
+    }
+
     .-fontsizemedium
     {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .-strikethrough
@@ -107,6 +191,11 @@
         font-weight: bold;
     }
 
+    .-italic
+    {
+        font-style: italic;
+    }
+
     @mixin generate-letterspacing($start: 0, $end: 10, $step: 0.1rem)
     {
         @for $i from $start through $end
@@ -118,5 +207,5 @@
         }
     }
 
-    @include generate-letterspacing(0, 5, 0.1rem);
+    @include generate-letterspacing(0, 5, 0.05rem);
 }

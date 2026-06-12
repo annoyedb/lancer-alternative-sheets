@@ -93,7 +93,7 @@
     text={core.name}
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
-    textStyle={["la-text-header", "la-prmy-header"]}
+    textStyle={["la-text-header la-prmy-header"]}
 
     collapseID={collID}
 

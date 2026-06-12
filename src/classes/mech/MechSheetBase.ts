@@ -26,8 +26,8 @@ export class MechSheetBase
     {
         return {
             classes: [
-                "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "mech", getCSSSystemTheme()
+                "la-common la-override__header clipped-alt",
+                "lancer sheet actor mech", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.mechSheetSvelte,
             width: 900,
@@ -44,7 +44,7 @@ export class MechSheetBase
                     initial: "statistics"
                 }
             ],
-            scrollY: [".la-SCROLL-BODY", ".la-SCROLL-SIDEBAR"],
+            scrollY: [".la-SCROLL-BODY .la-SCROLL-SIDEBAR"],
         }
     }
 

@@ -41,7 +41,7 @@
                     outerStyle={["-hull"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -65,7 +65,7 @@
                     outerStyle={["-agi"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -88,7 +88,7 @@
                     outerStyle={["-sys"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -112,7 +112,7 @@
                     outerStyle={["-eng"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>

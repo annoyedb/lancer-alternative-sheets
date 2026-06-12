@@ -194,25 +194,6 @@ aside.la-tooltip.active
         margin: unset;
     }
 
-    .core-power-toggle
-    {
-        cursor: pointer;
-        margin: unset !important;
-        width: unset;
-        height: unset;
-
-        &:checked::before
-        {
-            content: "\F12A3";
-        }
-
-        &:not(:checked)::before
-        {
-            content: "\F125E";
-            color: currentColor;
-        }
-    }
-
     .loaded-hex,
     .uses-hex,
     .power-uses-hex,

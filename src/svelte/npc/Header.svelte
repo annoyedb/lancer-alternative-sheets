@@ -4,6 +4,9 @@
     import Template from "@/svelte/npc/Template.svelte";
     import Stats from "@/svelte/npc/Stats.svelte";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getAdvancedState } from "@/scripts/store/advanced";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import { getCSSDocumentTheme } from "@/scripts/theme";
 
     const props = $props();
     const {
@@ -13,7 +16,10 @@
     }: NPCSheetProps = $derived(props);
 
     const qualityMode = getExtraEffectsEnabled();
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const templates = $derived(itemTypes.npc_template);
+    const advancedOptions = $derived(getAdvancedState(actor.uuid));
+    const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>
 
 <div class="la-flexcol -widthfull -heightfull">
@@ -35,6 +41,10 @@
                     name={template.name}
                     uuid={template.uuid}
                     path={`itemTypes.npc_template.${index}`}
+                    editOption={advancedOptions}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    tooltip={getLocalized("LA.edit.tooltip")}
                 />
             {/each}
             {/if}
@@ -43,6 +53,10 @@
                     name={system.class.name}
                     uuid={system.class.uuid}
                     path={`system.class`}
+                    editOption={advancedOptions}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    tooltip={getLocalized("LA.edit.tooltip")}
                 />
             {/if}
             </div>

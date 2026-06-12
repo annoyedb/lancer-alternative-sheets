@@ -9,7 +9,7 @@
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
     import FramePassivePower from "@/svelte/mech/FramePassivePower.svelte";
     import FrameTrait from "@/svelte/mech/FrameTrait.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -59,7 +59,7 @@
 <HeaderMain
     text={frame ? frameName : getLocalized("LA.placeholder")}
     headerStyle={[MAIN_HEADER_STYLE, frameColorBckg, "-upper"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={[frameColorBrdr]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -73,7 +73,7 @@
     headerContent={headerOptions}
 >
 {#if frame}
-    <div class="la-generated la-flexcol -widthfull -gap0">
+    <div class="la-generated -widthfull -gap1 la-flexcol">
         {#snippet outerContent()}
             {#if core.counters?.length}
             <div class="la-flexcol -widthfull -padding2-l">
@@ -84,7 +84,7 @@
                     usesValue={counter.value}
                     usesMax={counter.max}
                     path="system.loadout.frame.value.system.core_system.counters.{index}"
-                    style={["clipped-bot-alt", "-widthfull", "la-bckg-header-anti"]}
+                    style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                     
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
@@ -97,7 +97,7 @@
         <HeaderSecondary
             text={core.name}
             headerStyle={[H2_HEADER_STYLE, frameColorBckg]}
-            textStyle={["-fontsize4"]}
+            textStyle={[H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
 
             collapseID={`${collID}.core`}

@@ -242,7 +242,7 @@
 <HeaderSecondary
     text={reaction.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={[getHeaderStyle(reaction), "-fontsizemedium"]}
+    textStyle={[getHeaderStyle(reaction), "-fontsizemedium -overflowhidden -fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
@@ -268,57 +268,59 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-{#if hasAttackBonus(reaction) || hasAccuracyBonus(reaction)}
-    <div class="la-flexrow -gap0 -widthfull">
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+    {#if hasAttackBonus(reaction) || hasAccuracyBonus(reaction)}
+        <div class="la-flexrow -gap0 -widthfull">
+            <EffectBox
+                name={getLocalized("LA.npc.attackBonus.label")}
+                outerStyle={[
+                    hasAccuracyBonus(reaction) ? "-bordersround" : "-bordersround-ltb",
+                ]}
+
+                tooltipEnabled={tooltipEnabled}
+            >
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
+                    {reaction.system.attack_bonus[tier - 1]}
+                    <i class="cci cci-reticule -fontsize4"></i>
+                </span>
+            </EffectBox>
+            <EffectBox
+                name={getLocalized("LA.npc.accuracy.label")}
+
+                tooltipEnabled={tooltipEnabled}
+            >
+                <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
+                    {reaction.system.accuracy[tier - 1]}
+                    <i class="cci cci-accuracy -fontsize6"></i>
+                </span>
+            </EffectBox>
+        </div>
+    {/if}
         <EffectBox
-            name={getLocalized("LA.npc.attackBonus.label")}
-            outerStyle={[
-                hasAccuracyBonus(reaction) ? "-bordersround" : "-bordersround-ltb", 
-            ]}
+            name={getLocalized("LA.trigger.label")}
 
             tooltipEnabled={tooltipEnabled}
         >
-            <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                {reaction.system.attack_bonus[tier - 1]}
-                <i class="cci cci-reticule -fontsize4"></i>
-            </span>
+            {@html reaction.system.trigger}
         </EffectBox>
         <EffectBox
-            name={getLocalized("LA.npc.accuracy.label")}
+            name={getLocalized("LA.mech.system.effect.label")}
+            effect={reaction.system.effect}
 
             tooltipEnabled={tooltipEnabled}
-        >
-            <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -height3">
-                {reaction.system.accuracy[tier - 1]}
-                <i class="cci cci-accuracy -fontsize6"></i>
-            </span>
-        </EffectBox>
+        />
+        <EffectBox
+            name={getLocalized("LA.effect.hit.label")}
+            effect={reaction.system.on_hit}
+
+            tooltipEnabled={tooltipEnabled}
+        />
+        <TagArray
+            tags={reaction.system.tags}
+            justify={"end"}
+
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+        />
     </div>
-{/if}
-    <EffectBox
-        name={getLocalized("LA.trigger.label")}
-
-        tooltipEnabled={tooltipEnabled}
-    >
-        {@html reaction.system.trigger}
-    </EffectBox>
-    <EffectBox
-        name={getLocalized("LA.mech.system.effect.label")}
-        effect={reaction.system.effect}
-
-        tooltipEnabled={tooltipEnabled}
-    />
-    <EffectBox
-        name={getLocalized("LA.effect.hit.label")}
-        effect={reaction.system.on_hit}
-
-        tooltipEnabled={tooltipEnabled}
-    />
-    <TagArray
-        tags={reaction.system.tags}
-        justify={"start"}
-
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-    />
 </HeaderSecondary>

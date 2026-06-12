@@ -70,7 +70,7 @@
     {#if pinnedItems.pinned.length}
         <HeaderSecondary
             text={getLocalized("LA.pin.pinned.label")}
-            headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
+            headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium -fontface-stylized"]}
 
             collapseID={pinCollID}
             startCollapsed={false}

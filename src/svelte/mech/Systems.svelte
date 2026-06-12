@@ -2,9 +2,10 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 
     import { SYSTEM_ICON_MAP, SYSTEM_LOCALIZE_MAP } from "@/scripts/constants";
-    import {formatString, getLocalized, photosensitiveStyling} from "@/scripts/helpers";
+    import { formatString, getLocalized, photosensitiveStyling } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -26,7 +27,7 @@
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import TotalSP from "@/svelte/shared/decoration/TotalSP.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const props: MechSheetProps = $props();  
     const {
@@ -256,7 +257,7 @@
 
             text={component.value.name}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={[getTitleStyle(component), "-fontsize4"]}
+            headerFontStyle={[getTitleStyle(component), H2_TEXT_SIZE]}
 
             subText={getSubtitle(component)}
             subHeaderFontStyle={[getSubtitleStyle(component), "-fontsizesmall"]}
@@ -276,7 +277,7 @@
             contentRight={headerTertiaryRightOptions}
         >
         {#if !isDestroyed(component)}
-            <div class="la-generated -widthfull -gap2 la-flexcol">
+            <div class="la-generated -widthfull -gap1 la-flexcol">
             {#if component.value.system.counters?.length}
                 <div class="la-flexcol -gap0 -widthfull -padding1-l">
                 {#each component.value.system.counters as counter, jndex}

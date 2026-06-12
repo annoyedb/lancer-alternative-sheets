@@ -58,7 +58,7 @@
     <HeaderMain 
         text={getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+        textStyle={["la-text-header -fontsize4 -overflowhidden"]}
         borderStyle={["la-brdr-primary"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)

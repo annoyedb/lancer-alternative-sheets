@@ -10,7 +10,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -162,7 +162,7 @@
         <HeaderSecondary
             text={reserve.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[getHeaderStyle(reserve), "-fontsize4 -overflowhidden"]}
+            textStyle={["-overflowhidden", H2_TEXT_SIZE, getHeaderStyle(reserve)]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)
@@ -184,50 +184,52 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
-            <BonusBox
-                bonuses={reserve.system.bonuses}
-                bonusPath={`${getReservePath(index)}.system.bonuses`}
-            />
-            <DeployableBox
-                source={actor}
-                lidSource={reserve.system}
-                uuid={actor.uuid}
-                sheetUUID={actor.uuid}
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <BonusBox
+                    bonuses={reserve.system.bonuses}
+                    bonusPath={`${getReservePath(index)}.system.bonuses`}
+                />
+                <DeployableBox
+                    source={actor}
+                    lidSource={reserve.system}
+                    uuid={actor.uuid}
+                    sheetUUID={actor.uuid}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <ActionBox
-                actions={reserve.system.actions}
-                actor={actor}
-                uuid={reserve.uuid}
-                path={`system.actions`}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <ActionBox
+                    actions={reserve.system.actions}
+                    actor={actor}
+                    uuid={reserve.uuid}
+                    path={`system.actions`}
 
-                collapseID={`${reserve.uuid}.actions`}
-                startCollapsed={true}
+                    collapseID={`${reserve.uuid}.actions`}
+                    startCollapsed={true}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={reserve.system.description}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={reserve.system.description}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <TagArray
-                tags={reserve.system.tags}
-                justify={"start"}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <TagArray
+                    tags={reserve.system.tags}
+                    justify={"start"}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                />
+            </div>
         </HeaderSecondary>
     {/each}
     </div>

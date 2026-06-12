@@ -156,7 +156,7 @@
         contentLeft={headerSecondaryLeftOptions}
         contentRight={headerSecondaryRightOptions}
     >
-        <div class="la-generated -widthfull -gap2 la-flexcol">
+        <div class="la-generated -widthfull -gap1 la-flexcol">
         <!-- Generated Content -->
         {#if mod.system.added_range.length || mod.system.added_damage.length}
             <div class="la-flexrow -widthfull">

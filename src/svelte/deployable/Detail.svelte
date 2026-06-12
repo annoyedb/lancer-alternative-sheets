@@ -131,8 +131,8 @@
         rootStyle ={[`${ system.detail || advancedOptions ? "" : "-displaynone" }`]}
         text={getLocalized("LA.deployable.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
-        borderStyle={["la-brdr-primary", "-gap0"]}
+        textStyle={["-fontsize4 -overflowhidden -upper"]}
+        borderStyle={["la-brdr-primary -gap0"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)
                 return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -154,8 +154,8 @@
     <HeaderMain
         text={getLocalized("LA.deployable.actions.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden", "-upper"]}
-        borderStyle={["la-brdr-primary", "-gap0"]}
+        textStyle={["-fontsize4 -overflowhidden -upper"]}
+        borderStyle={["la-brdr-primary -gap0"]}
         extensionTextFunction={() => {
             if (collapseAllButtonHover)
                 return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -167,14 +167,14 @@
 
         headerContent={headerActions}
     >
-        <div class="la-flexcol -gap0 -widthfull -fontsize4">
+        <div class="la-flexcol -gap1 -widthfull -fontsize4">
             <EffectBox
                 name={getLocalized("LA.npc.utilities.label")}
             >
                 <div class="la-flexrow -wrapwrap -widthfull -gap0">
                     <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
-                            style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                            style={["clipped-alt -widthfull la-bckg-secondary"]}
                             text={getLocalized("LA.flow.rollAttack.label")}
 
                             uuid={actor.uuid}
@@ -189,7 +189,7 @@
                     </div>
                     <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
-                            style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                            style={["clipped -widthfull la-bckg-secondary"]}
                             text={getLocalized("LA.flow.rollDamage.label")}
 
                             uuid={actor.uuid}
@@ -214,7 +214,7 @@
                     {#if index % 2 == 0}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped-alt", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped-alt -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={actor.uuid}
                             path={`system.lid`}
@@ -235,7 +235,7 @@
                     {#if index % 2 != 0}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={actor.uuid}
                             path={`system.lid`}

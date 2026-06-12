@@ -19,8 +19,8 @@
 <HeaderMain
     text={getLocalized("LA.tab.statistics.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-weapon"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-    borderStyle={["la-brdr-transparent", "la-bckg-card", "clipped-bot-alt"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+    borderStyle={["la-brdr-transparent la-bckg-card clipped-bot-alt"]}
 
     collapseID={collID}
     startCollapsed={true}
@@ -31,8 +31,8 @@
             icon={"cci cci-role-defender -alignselfcenter"}
             label={getLocalized("LA.armor.short")}
             value={selectedMech.system.armor}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -43,8 +43,8 @@
             icon={"cci cci-evasion -alignselfcenter"}
             label={getLocalized("LA.evasion.short")}
             value={selectedMech.system.evasion}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -55,8 +55,8 @@
             icon={"cci cci-edef -alignselfcenter"}
             label={getLocalized("LA.edefense.short")}
             value={selectedMech.system.edef}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -69,8 +69,8 @@
             icon={"mdi mdi-heart-flash -alignselfcenter"}
             label={getLocalized("LA.hitpoint.short")}
             value={selectedMech.system.hp.max}
-            outerStyle={["la-text-text", "-fontsize6"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize6"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -81,8 +81,8 @@
             icon={"cci cci-structure -alignselfcenter"}
             label={getLocalized("LA.structure.label")}
             value={selectedMech.system.structure.max}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -93,8 +93,8 @@
             icon={"cci cci-heat -alignselfcenter"}
             label={getLocalized("LA.heat.label")}
             value={selectedMech.system.heat.max}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -105,8 +105,8 @@
             icon={"cci cci-reactor -alignselfcenter"}
             label={getLocalized("LA.stress.label")}
             value={selectedMech.system.stress.max}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -119,8 +119,8 @@
             icon={"cci cci-tech-full -alignselfcenter"}
             label={getLocalized("LA.tattack.short")}
             value={selectedMech.system.tech_attack}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -131,8 +131,8 @@
             icon={"cci cci-save -alignselfcenter"}
             label={getLocalized("LA.save.short")}
             value={selectedMech.system.save}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -143,8 +143,8 @@
             icon={"cci cci-sensor -alignselfcenter"}
             label={getLocalized("LA.sensor.short")}
             value={selectedMech.system.sensor_range}
-            outerStyle={["la-text-text", "-fontsize7"]}
-            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+            outerStyle={["la-text-text -fontsize7"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}

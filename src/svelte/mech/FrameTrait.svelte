@@ -9,7 +9,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
@@ -70,7 +70,7 @@
 <HeaderSecondary
     text={trait.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["-fontsize4"]}
+    textStyle={[H2_TEXT_SIZE]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (messageButtonHover)
@@ -84,7 +84,7 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-    <div class="la-generated -widthfull -gap2 la-flexcol">
+    <div class="la-generated -widthfull -gap1 la-flexcol">
         <EffectBox
             name={getLocalized("LA.mech.frame.trait.label")}
             effect={trait.description}

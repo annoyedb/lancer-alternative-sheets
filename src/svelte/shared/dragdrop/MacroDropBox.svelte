@@ -163,7 +163,7 @@
             root={component}
             data={buildFlowData(type, index)}
             style={["-justifyend"]}
-            iconStyle={["-fontsize4", "-padding1-lr", ...(iconStyle || [])]}
+            iconStyle={["-fontsize4 -padding1-lr", ...(iconStyle || [])]}
             onDrop={handleFlowDrop}
             onDelete={event => handleDelete(event, index)}
 
@@ -230,7 +230,7 @@
             {/if}
         {:else}
             <FlowButton
-                textStyle={["-padding1-r", "-padding0-tb", "-height5", "-letterspacing0", "la-text-header", "la-prmy-header", ...(buttonStyle || [])]}
+                textStyle={["-padding1-r -padding0-tb -height5 -letterspacing0 la-text-header la-prmy-header", ...(buttonStyle || [])]}
                 text={(fromUuidSync(type)?.name as string) || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {

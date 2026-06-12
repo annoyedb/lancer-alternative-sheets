@@ -78,7 +78,7 @@
     <HeaderMain 
         text={effect.name}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-warning clipped-bot-alt"]}
-        textStyle={["la-text-header-anti la-prmy-header-anti -fontsizemedium"]}
+        textStyle={["la-text-header-anti la-prmy-header-anti -fontsizemedium -bold"]}
         borderStyle={["la-bckg-card la-brdr-warning -overflowhidden -padding1-lr"]}
         extensionText={`--${getLocalized("LA.info.label")}`}
         

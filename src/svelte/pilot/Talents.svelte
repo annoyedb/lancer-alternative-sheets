@@ -14,7 +14,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
@@ -144,7 +144,7 @@
         <HeaderSecondary
             text={`${talent.name} ${talent.system.curr_rank}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["-fontsize4"]}
+            textStyle={[H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (collapseAllButtonHoverRank)
@@ -238,7 +238,7 @@
                     contentLeft={headerSecondaryRankLeftOptions}
                     contentRight={headerSecondaryRankRightOptions}
                 >
-                    <div class="la-generated -widthfull -gap2 la-flexcol">
+                    <div class="la-generated -widthfull -gap1 la-flexcol">
                         <BonusBox
                             bonuses={rank.bonuses}
                             bonusPath={ isMechSheet

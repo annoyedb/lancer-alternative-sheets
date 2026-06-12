@@ -104,7 +104,7 @@
         damages={damage}
         style={(iconStyle || []).concat(disabled 
             ? "" 
-            : `la-prmy-header
+            : `la-prmy-header 
                 ${ qualityMode ? "-glow-prmy la-scdy-primary -glow-scdy-hover" : "" }
             `)
         }

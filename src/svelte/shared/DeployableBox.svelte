@@ -177,7 +177,7 @@
         --->{deployable.name ? deployable.name : ""}<!--
     ---></span>
         <!-- Generated Content -->
-        <div class="la-generated -gap2 la-flexcol">
+        <div class="la-generated -widthfull -gap1 la-flexcol">
             <div class="-fontsizemedium">
                 <!-- Deployable Actions -->
                 <div class="la-effectbox-buttons la-flexrow -justifybetween">
@@ -186,7 +186,7 @@
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped-bot", "-widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped-bot -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={deployable.uuid}
                             path={`deployables.${deployable.system.lid}`}

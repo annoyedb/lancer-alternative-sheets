@@ -12,6 +12,7 @@
         currentValueTertiary,
         maxValueTertiary,
         name,
+        nameStyle,
         dataName,
         barStyle,
         barEditStyle,
@@ -38,7 +39,8 @@
 
 <div class="la-statusbar la-flexrow -fontsizemedium -gap2 {textStyle?.join(' ')}">
     {#if name}
-    <span class="la-damage__span -fontsizesmall -flexbasis13 -textalignright"
+    <span class="la-damage__span -fontsizesmall -flexbasis13 -textalignright
+            {nameStyle?.join(' ')}"
         data-tooltip={tooltipEnabled ? tip : undefined}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection ? tooltipDirection : "RIGHT" }
@@ -49,7 +51,7 @@
     <div class="la-bar-h la-bckg-darken-3 -flex1 -positionrelative -widthfull -height3 -overflowhidden {clipPath}">
         <div class="la-bar-h-progress la-flexrow -widthfull -heightfull">
             <input type="number" 
-                class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter 
+                class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter
                     {editing ? textStyle?.join(' ') : 'la-text-transparent'}"
                 name="{dataName}"
                 data-dtype="Number" 
@@ -59,7 +61,7 @@
                 onchange={(event) => handleRelativeDataInput(event, currentValue)}
             >
             <span 
-                class="la-bar-h-progress__span -lineheight3 -positionabsolute -pointerdisable 
+                class="la-bar-h-progress__span -lineheight3 -positionabsolute -pointerdisable
                     {editing ? '-visibilityhidden' : ''}"
             >
                 {currentValue}/{maxValue}

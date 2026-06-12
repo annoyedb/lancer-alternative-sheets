@@ -6,6 +6,7 @@
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { CHAT_CARD_COLOR_MAP, SLOT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 
@@ -29,7 +30,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const {
         actor,
@@ -323,7 +324,7 @@
 
         text={weapon.name}
         headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-        headerFontStyle={[getHeaderStyle(weapon), "-fontsize4"]}
+        headerFontStyle={[getHeaderStyle(weapon), H2_TEXT_SIZE]}
 
         subText={getSubtitle(weapon)}
         subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall"]}
@@ -346,7 +347,7 @@
     >
     {#if !weapon.system.destroyed}
         {@const profile = weapon.system.active_profile}
-        <div class="la-generated -widthfull -gap2 la-flexcol">
+        <div class="la-generated -widthfull -gap1 la-flexcol">
             <!-- Generated Content -->
             <EffectBox
                 name={getLocalized("LA.mech.system.effect.label")}

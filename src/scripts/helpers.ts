@@ -23,6 +23,15 @@ export function photosensitiveStyling(text: string): string
     return game.settings.get("core", "photosensitiveMode") ? "" : text;
 }
 
+/**
+ * If the Foundry core setting is in a logographic language, attempt to make styling more accomodating
+ */
+export function logographicLanguage(): boolean
+{
+    const languages = ["zh-TW", "zh-CN", "ja-JP"];
+    return languages.includes(game.settings.get("core", "language"));
+}
+
 export function randomExtension(): string
 {
     const extensions = [".exe", ".bat", ".cmd", ".sh", ".bash", ".zsh", ".ksh", ".csh"];

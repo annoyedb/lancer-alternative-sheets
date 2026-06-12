@@ -1,12 +1,24 @@
 <script lang="ts">
     import type { TemplateProps } from "@/interfaces/npc/TemplateProps";
     import { getLocalized } from "@/scripts/helpers";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
 
     const {
         uuid,
         name,
         path,
-    }: TemplateProps = $props();
+        editOption,
+
+        tooltipEnabled,
+        tooltipHeader,
+        tooltip,
+        tooltipDirection,
+        tooltipClass,
+        tooltipTheme,
+    }: TemplateProps & TooltipProps = $props();
+
+    const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
 </script>
 
 <div class="
@@ -15,9 +27,14 @@
 >
     <span class="-upper -fontsize4">{name}</span>
     <button type="button" 
-        class="mdi mdi-pencil-ruler-outline -fontsizemedium -positionabsolute
+        class="mdi mdi-pencil -fontsize3 -positionabsolute
+            {editOption ? '' : '-displaynone'}
             lancer-context-menu"
         data-path={path}
+        data-tooltip={tooltipEnabled ? tip : undefined }
+        data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
+        data-tooltip-direction={tooltipDirection || 'DOWN'}
+
         aria-label={getLocalized("LA.edit.label")}
     ></button>
 </div>

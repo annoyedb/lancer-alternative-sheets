@@ -191,7 +191,7 @@
 <HeaderSecondary
     text={trait.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={[getHeaderStyle(trait), "-fontsizemedium -overflowhidden"]}
+    textStyle={[getHeaderStyle(trait), "-fontsizemedium -overflowhidden -fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
@@ -217,24 +217,26 @@
     contentLeft={headerSecondaryLeftOptions}
     contentRight={headerSecondaryRightOptions}
 >
-    <EffectBox
-        name={getLocalized("LA.mech.system.effect.label")}
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+        <EffectBox
+            name={getLocalized("LA.mech.system.effect.label")}
 
-        tooltipEnabled={tooltipEnabled}
-    >
-        {@html trait.system.effect}
-    </EffectBox>
-    <EffectBox
-        name={getLocalized("LA.effect.hit.label")}
-        effect={trait.system.on_hit}
+            tooltipEnabled={tooltipEnabled}
+        >
+            {@html trait.system.effect}
+        </EffectBox>
+        <EffectBox
+            name={getLocalized("LA.effect.hit.label")}
+            effect={trait.system.on_hit}
 
-        tooltipEnabled={tooltipEnabled}
-    />
-    <TagArray
-        tags={trait.system.tags}
-        justify={"start"}
+            tooltipEnabled={tooltipEnabled}
+        />
+        <TagArray
+            tags={trait.system.tags}
+            justify={"end"}
 
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-    />
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+        />
+    </div>
 </HeaderSecondary>

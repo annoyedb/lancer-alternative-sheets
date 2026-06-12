@@ -28,8 +28,10 @@
 </script>
 
 {#if effect || children}
-<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -fontsizemedium -bordersround-ltb {outerStyle?.join(' ')}">
-    <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsizesmall">
+<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb -fontsizemediumer
+        {outerStyle?.join(' ')}"
+>
+    <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontface-stylized -fontsizesmall">
         {name}<!--
 ---><button type="button"
         class="mdi mdi-pencil-ruler-outline popout-text-edit-button -padding0-l

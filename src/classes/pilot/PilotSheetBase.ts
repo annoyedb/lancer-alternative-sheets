@@ -29,8 +29,8 @@ export class PilotSheetBase
     {
         return {
             classes: [
-                "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "pilot", getCSSSystemTheme()
+                "la-common la-override__header clipped-alt",
+                "lancer sheet actor pilot", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.pilotSheetSvelte,
             width: 900,
@@ -57,7 +57,7 @@ export class PilotSheetBase
                     initial: "dossier"
                 }
             ],
-            scrollY: [".la-SCROLL-BODY", "la-SCROLL-BODY-ABILITIES", "la-SCROLL-BODY-EQUIPMENT", ".la-SCROLL-SIDEBAR"],
+            scrollY: [".la-SCROLL-BODY la-SCROLL-BODY-ABILITIES la-SCROLL-BODY-EQUIPMENT .la-SCROLL-SIDEBAR"],
         }
     }
 

@@ -7,7 +7,7 @@
 
 {#if ranges.length}
 <span 
-    class="la-range la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1 
+    class="la-range la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1 -fontface-stylized
         {style?.join(' ')}"
 >
     {#each ranges as range}

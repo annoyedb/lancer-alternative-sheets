@@ -145,14 +145,14 @@
                             data-tooltip-class="clipped-bot la-tooltip {theme}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize8"></i>
-                            <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.speed}</span>
+                            <span class="{themeOverride} la-outl-shadow -fontsize7 -bold">{system.speed}</span>
                         </div>
                         <div class="la-flexrow -aligncenter" 
                             data-tooltip={tooltipEnabled ? activateTip : undefined}
                             data-tooltip-class="clipped-bot la-tooltip {theme}"
                             data-tooltip-direction={TooltipDirection.RIGHT}>
                             <i class="cci cci-activate {themeOverride} la-outl-shadow -fontsize8"></i>
-                            <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.activations}</span>
+                            <span class="{themeOverride} la-outl-shadow -fontsize7 -bold">{system.activations}</span>
                         </div>
                         <div class="la-recharge -lineheight5 -width8 -height8 la-prmy-primary
                                 {qualityMode ? '-glow-prmy-hover' : ''}"
@@ -186,7 +186,7 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="la-flexrow -padding1-r">
+        <div class="la-flexrow -padding1-r -fontface-stylized">
             <div class="la-flexcol -gap1">
                 <div class="la-flexrow -height4 -justifybetween -widthfull">
                     <!-- Advanced options, theme override, notes, etc -->
@@ -214,7 +214,7 @@
                         {#if !tokenImageLocked}
                             <GlyphButton
                                 flowClass={FlowClass.None}
-                                style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary",
+                                style={["mdi mdi-image-edit -fontsize4 la-text-text la-prmy-primary",
                                     qualityMode ? "-glow-prmy-hover" : ""]}
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
@@ -276,7 +276,7 @@
                             label={getLocalized("LA.armor.short")}
                             value={system.armor}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -288,7 +288,7 @@
                             label={getLocalized("LA.evasion.short")}
                             value={system.evasion}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -300,7 +300,7 @@
                             label={getLocalized("LA.edefense.short")}
                             value={system.edef}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -322,7 +322,7 @@
                                     barEditStyle={["la-prmy-bar-health"]}
                                     currentValueSecondary={system.overshield.value}
                                     maxValueSecondary={system.hp.max}
-                                    barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                                    barStyleSecondary={["la-bckg-bar-shield -shield"]}
                                     barEditStyleSecondary={["la-prmy-bar-shield"]}
                                     textStyle={["la-text-text"]}
                                     clipPath={"clipped"}
@@ -388,7 +388,7 @@
                                     barEditStyle={["la-prmy-bar-heat"]}
                                     currentValueSecondary={system.burn}
                                     maxValueSecondary={system.heat.max}
-                                    barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
+                                    barStyleSecondary={["la-bckg-bar-burn -burn"]}
                                     barEditStyleSecondary={["la-prmy-bar-burn"]}
                                     textStyle={["la-text-text"]}
                                     clipPath={"clipped"}
@@ -447,7 +447,7 @@
                             label={getLocalized("LA.tattack.short")}
                             value={system.sys}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -459,7 +459,7 @@
                             label={getLocalized("LA.save.short")}
                             value={system.save}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -471,7 +471,7 @@
                             label={getLocalized("LA.sensor.short")}
                             value={system.sensor_range}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -479,6 +479,7 @@
                             tooltipDirection={TooltipDirection.LEFT}
                         />
                     </div>
+                    <div class="la-spacer -large"></div>
                 </div>
             </div>
         </div>

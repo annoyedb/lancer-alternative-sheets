@@ -76,11 +76,11 @@
     bind:this={component}
 >
     <div 
-        class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height5 -margin7-t -margin1-l" 
+        class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height5 -margin7-t -margin1-l"
     >
-        <span class="la-cmdline la-text-header -fadein">>//: </span>
-        LL{system.level} - {actor.system.callsign}
-        <span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-prmy-header -fadein"></span>
+        <span class="la-cmdline la-text-header -fadein">>//:</span><!--
+    --->LL{system.level} &mdash; {actor.system.callsign}<!--
+    ---><span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-prmy-header -fadein"></span>
     </div>
 </div>
 <div class="la-pilot__sidebar la-dropshadow -aligncontentcenter -positionrelative">
@@ -118,7 +118,7 @@
         onPointerClick={event => handleEditToken(event, actor)}
     />
 </div>
-<!-- Mech Stats 1 -->
+<!-- Pilot Stats 1 -->
 <div class="la-stats la-dropshadow la-flexrow -justifyevenly">
     <StatComboShort
         icon={"cci cci-role-defender -alignselfcenter"}
@@ -157,8 +157,8 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
 </div>
-<!-- Mech Bars -->
-<div class="la-damage la-dropshadow -margin0-lr -margin2-t -margin0-b">
+<!-- Pilot Bars -->
+<div class="la-damage la-dropshadow -margin0-lr -margin0-t">
 <!-- No KTB -->
 {#if !system.bond}
     <div class="la-flexrow -gap2">
@@ -335,7 +335,7 @@
 </div>
 <div class="la-dropshadow la-flexrow -justifyevenly">
 </div>
-<!-- Mech Stats 2 -->
+<!-- Pilot Stats 2 -->
 <div class="la-stats la-dropshadow la-flexrow -justifyevenly">
 {#if showTechAttack}
     <StatComboShort

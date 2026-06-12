@@ -22,13 +22,13 @@
             <input type="text" 
                 class="la-actorname__input la-text-header -upper -fontsize6 -textaligncenter -heightfull"
                 name="name" 
-                value="{actor.name}" 
+                value={actor.name}
                 placeholder={getLocalized("LA.placeholder")}
             />
             <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
                 <!-- 'id' in this case is actually the uuid -->
                 <span 
-                    class="-upper -fontsize4
+                    class=" -upper -fontsize4
                         mech ref set click-open"
                     data-uuid={system.owner?.id}
                 >

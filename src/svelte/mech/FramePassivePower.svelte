@@ -54,7 +54,7 @@
 <!-- Frame Passive -->
 {#snippet headerQuinaryLeftOptions()}
 <EffectButton
-    iconStyle={[H2_ICON_SIZE, "cci", "cci-corebonus"]}
+    iconStyle={[H2_ICON_SIZE, "cci cci-corebonus"]}
     iconBackgroundStyle={[H2_ICON_SIZE, "la-prmy-secondary",
         qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
     
@@ -76,7 +76,7 @@
     text={core.passive_name}
     headerStyle={[frameColorBckg, "-padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
-    textStyle={["la-text-header", "la-prmy-header"]}
+    textStyle={["la-text-header la-prmy-header"]}
     extensionTextFunction={() => {
         if (effectButtonHover)
             return `--${getLocalized("LA.use.label")}`;

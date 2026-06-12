@@ -4,6 +4,7 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { formatString, getLocalized, isLoading } from "@/scripts/helpers";
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { ChatCardType } from "@/enums/ChatCardType";
@@ -30,7 +31,7 @@
     import BonusBox from "@/svelte/shared/BonusBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const {
         actor,
@@ -292,7 +293,7 @@
                 return undefined;
             }}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={["la-text-header -fontsize4"]}
+            headerFontStyle={["la-text-header", H2_TEXT_SIZE]}
 
             itemID={weapon.id}
             uuid={weapon.uuid}
@@ -306,60 +307,62 @@
             contentLeft={headerTertiaryLeftOptions}
             contentRight={headerTertiaryRightOptions}
         >
-            <BonusBox    
-                bonuses={weapon.system.bonuses}
-                bonusPath={`${getWeaponPath(index)}.system.bonuses`}
-            />
-            <DeployableBox
-                source={actor}
-                lidSource={weapon.system}
-                uuid={actor.uuid}
-                sheetUUID={actor.uuid}
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <BonusBox
+                    bonuses={weapon.system.bonuses}
+                    bonusPath={`${getWeaponPath(index)}.system.bonuses`}
+                />
+                <DeployableBox
+                    source={actor}
+                    lidSource={weapon.system}
+                    uuid={actor.uuid}
+                    sheetUUID={actor.uuid}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <ActionBox
-                actions={weapon.system.actions}
-                actor={actor}
-                uuid={weapon.uuid}
-                path={`system.actions`}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <ActionBox
+                    actions={weapon.system.actions}
+                    actor={actor}
+                    uuid={weapon.uuid}
+                    path={`system.actions`}
 
-                collapseID={`${weapon.uuid}.actions`}
-                startCollapsed={true}
+                    collapseID={`${weapon.uuid}.actions`}
+                    startCollapsed={true}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={weapon.system.description}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={weapon.system.description}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {#if weapon.system.effect}
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                effect={weapon.system.effect}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {#if weapon.system.effect}
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    effect={weapon.system.effect}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {/if}
-            <TagArray
-                tags={weapon.system.tags}
-                justify={"start"}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {/if}
+                <TagArray
+                    tags={weapon.system.tags}
+                    justify={"start"}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                />
+            </div>
         </HeaderTertiary>
     {/each}
     </div>

@@ -20,8 +20,8 @@ export class NPCSheetBase
     {
         return {
             classes: [
-                "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "npc", getCSSSystemTheme()
+                "la-common la-override__header clipped-alt",
+                "lancer sheet actor npc", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.npcSheetSvelte,
             width: getNPCSheetWidth() || 500,

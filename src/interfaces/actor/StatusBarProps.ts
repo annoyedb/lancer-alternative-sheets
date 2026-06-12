@@ -7,6 +7,7 @@ export interface StatusBarProps
     currentValueTertiary?: number,
     maxValueTertiary?: number,
     name?: string,
+    nameStyle?: Array<string>,
     dataName?: string,
     barStyle?: Array<string>,
     barEditStyle?: Array<string>,

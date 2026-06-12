@@ -111,7 +111,7 @@
 {/if}
 {#if !disabled && !deleteDisabled}
     <button type="button"
-        class="fas fa-delete-left -positionabsolute -right0 la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
+        class="mdi mdi-close-thick -positionabsolute -right0 la-prmy-error -glow-prmy-hover {iconStyle?.join(' ')}"
         onpointerenter={ logging ? event => sendToLog(event, getLocalized("LA.delete.tooltip"), logType!) : undefined }
         onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
         onclick={handleOnDelete}

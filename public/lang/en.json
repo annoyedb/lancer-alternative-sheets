@@ -222,7 +222,7 @@
 	"LA.flow.overcharge.tooltip": "Make an extra quick action for the cost of {0} heat",
 	"LA.flow.overchargeReset.label": "RESET",
 	"LA.flow.overchargeReset.tooltip": "Reset overcharge stage",
-	"LA.flow.structureDamage.label": "EVALUATE",
+	"LA.flow.structureDamage.label": "SEAL BREACH",
 	"LA.flow.structureDamage.tooltip": "Roll the structure damage table",
 	"LA.flow.reactorStress.label": "FLUSH COOLANT",
 	"LA.flow.reactorStress.tooltip": "Roll the reactor stress table",

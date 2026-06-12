@@ -9,7 +9,7 @@
     import { AcceptType } from "@/enums/AcceptType";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
@@ -147,7 +147,7 @@
         <HeaderSecondary
             text={skill.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)
@@ -170,22 +170,24 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={skill.system.description}
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={skill.system.description}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <EffectBox
-                name={getLocalized("LA.detail.label")}
-                effect={skill.system.detail}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <EffectBox
+                    name={getLocalized("LA.detail.label")}
+                    effect={skill.system.detail}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            </div>
         </HeaderSecondary>
     {/each}
     </div>

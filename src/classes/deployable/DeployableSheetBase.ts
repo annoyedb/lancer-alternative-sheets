@@ -19,8 +19,8 @@ export class DeployableSheetBase
     {
         return {
             classes: [
-                "la-common", "la-override__header", "clipped-alt",
-                "lancer", "sheet", "actor", "deployable", getCSSSystemTheme()
+                "la-common la-override__header clipped-alt",
+                "lancer sheet actor deployable", getCSSSystemTheme()
             ],
             template: TEMPLATE_PATHS.deployableSheetSvelte,
             width: getDeployableSheetWidth() || 500,

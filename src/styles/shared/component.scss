@@ -5,15 +5,10 @@
 .la-common
 {
     // #region Terminal Text
-    .la-cmdline
-    {
-        font-weight: bold;
-    }
-    
     .la-extension
     {
         display: inline-block;
-        font-size: .75em;
+        font-size: .65em;
     }
 
     .la-cmdline,
@@ -210,33 +205,26 @@
         }
     }
 
-    // Edits here are made so that when the user hovers over the header, 
-    // the anims will play regardless of whether there are additional 
-    // elements in the header
-    .la-collapsegroup
+    // TerminalText
+    button:hover,
+    .la-summary:hover
     {
-        >.la-summary
+        .la-terminaltext>.la-cmdline,
+        .la-terminaltext>.la-extension
         {
-            &:hover
+            @include hoverFadeIn;
+        }
+
+        .la-terminaltext>.la-cursor
+        {
+            @include blinking;
+            @include hoverFadeIn;
+
+            &
             {
-                .la-terminaltext>.la-cmdline,
-                .la-terminaltext>.la-extension
-                {
-                    @include hoverFadeIn;
-                }
-
-                .la-terminaltext>.la-cursor
-                {
-                    @include blinking;
-                    @include hoverFadeIn;
-
-                    &
-                    {
-                        animation: fadeIn 0.25s, blink 1s step-end infinite;
-                        -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
-                        -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
-                    }
-                }
+                animation: fadeIn 0.25s, blink 1s step-end infinite;
+                -webkit-animation: fadeIn 0.25s, blink 1s step-end infinite;
+                -moz-animation: fadeIn 0.25s, blink 1s step-end infinite;
             }
         }
     }

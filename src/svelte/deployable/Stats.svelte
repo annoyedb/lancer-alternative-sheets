@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import { 
-        browseActorImage, 
-        browseActorImageSync, 
-        browseTokenImage, 
-        getLocalized, 
-        handleRelativeDataInput
+    import {
+        browseActorImage,
+        browseActorImageSync,
+        browseTokenImage,
+        getLocalized,
+        handleRelativeDataInput, logographicLanguage
     } from "@/scripts/helpers";
     import { getActorTokenSync, setActorTokenSync, setThemeOverride } from "@/scripts/deployable/settings";
     import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
@@ -36,7 +36,8 @@
     let tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     let editingBurn = $state(false);
     let editingShield = $state(false);
-    
+
+    const logographic = logographicLanguage();
     const tooltipEnabled = getDeployableSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const isInstanced = $derived(actor.parent && actor.type === "deployable");
@@ -118,7 +119,7 @@
                                 value={system.stats.size}
                                 valuePath="system.stats.size"
                                 outerStyle={["-fontsize7"]}
-                                innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={theme}
@@ -136,7 +137,7 @@
                                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                                 data-tooltip-direction={TooltipDirection.RIGHT}>
                                 <i class="mdi mdi-arrow-right-bold-hexagon-outline {themeOverride} la-outl-shadow -fontsize8"></i>
-                                <span class="{themeOverride} la-outl-shadow -fontsize8 -bold">{system.stats.speed}</span>
+                                <span class="{themeOverride} la-outl-shadow -fontsize7 -bold">{system.stats.speed}</span>
                             </div>
                         </div>
                         <div class="{advancedOptions ? '' : '-displaynone'}">
@@ -147,7 +148,7 @@
                                 value={system.stats.speed}
                                 valuePath="system.stats.speed"
                                 outerStyle={["-fontsize7"]}
-                                innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
 
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={theme}
@@ -177,7 +178,7 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="la-flexrow -padding1-r">
+        <div class="la-flexrow -padding1-r -fontface-stylized">
             <div class="la-flexcol -gap1">
                 <div class="la-flexrow -height4 -justifybetween -widthfull">
                     <!-- Advanced options, theme override, notes, etc -->
@@ -205,7 +206,7 @@
                         {#if !tokenImageLocked}
                             <GlyphButton
                                 flowClass={FlowClass.None}
-                                style={["mdi mdi-image-edit", "-fontsize4 la-text-text la-prmy-primary",
+                                style={["mdi mdi-image-edit -fontsize4 la-text-text la-prmy-primary",
                                     qualityMode ? "-glow-prmy-hover" : ""]}
                                 onClick={event => browseActorImage(event, actor)}
                                 tooltipEnabled={tooltipEnabled}
@@ -247,7 +248,7 @@
                             value={system.stats.armor}
                             valuePath="system.stats.armor"
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -263,7 +264,7 @@
                             value={system.stats.evasion}
                             valuePath="system.stats.evasion"
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -279,7 +280,7 @@
                             value={system.stats.edef}
                             valuePath="system.stats.edef"
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -298,6 +299,7 @@
                                 <!-- HP, SHIELD (BAR) -->
                                 <StatusBar
                                     name={getLocalized("LA.hitpoint.short")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.hp.value"
                                     currentValue={system.hp.value}
                                     maxValue={parseInt(system.stats.hp)}
@@ -305,9 +307,9 @@
                                     barEditStyle={["la-prmy-bar-health"]}
                                     currentValueSecondary={system.overshield.value}
                                     maxValueSecondary={parseInt(system.stats.hp)}
-                                    barStyleSecondary={["la-bckg-bar-shield", "-shield"]}
+                                    barStyleSecondary={["la-bckg-bar-shield -shield"]}
                                     barEditStyleSecondary={["la-prmy-bar-shield"]}
-                                    textStyle={["la-text-text"]}
+                                    textStyle={["la-text-text", logographic ? "" : "-fontsize4"]}
                                     clipPath={"clipped"}
                                     editSecondary={editingShield}
                                     
@@ -318,10 +320,12 @@
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield
-                                    {qualityMode ? '-glow-prmy' : ''}"
+                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -textaligncenter la-prmy-bar-shield
+                                    {qualityMode ? '-glow-prmy' : ''}
+                                    {logographic ? '-width4ch' : '-width3ch'}"
                             >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : ''}"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
@@ -344,6 +348,7 @@
                                 <!-- HEAT, BURN (BAR) -->
                                 <StatusBar
                                     name={getLocalized("LA.heat.label")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.heat.value"
                                     currentValue={system.heat.value}
                                     maxValue={system.stats.heatcap}
@@ -351,7 +356,7 @@
                                     barEditStyle={["la-prmy-bar-heat"]}
                                     currentValueSecondary={system.burn}
                                     maxValueSecondary={system.stats.heatcap || parseInt(system.stats.hp)}
-                                    barStyleSecondary={["la-bckg-bar-burn", "-burn"]}
+                                    barStyleSecondary={["la-bckg-bar-burn -burn"]}
                                     barEditStyleSecondary={["la-prmy-bar-burn"]}
                                     textStyle={["la-text-text"]}
                                     clipPath={"clipped-alt"}
@@ -364,8 +369,9 @@
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn
-                                    {qualityMode ? '-glow-prmy' : ''}"
+                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -textaligncenter la-prmy-bar-burn
+                                    {qualityMode ? '-glow-prmy' : ''}
+                                    {logographic ? '-width4ch' : '-width3ch'}"
                             >
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
@@ -376,7 +382,8 @@
                                     onblur={() => {editingBurn = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.burn)}
                                 >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : ''}"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
@@ -394,7 +401,7 @@
                             value={parseInt(system.stats.hp)}
                             valuePath={"system.stats.hp"}
                             outerStyle={["-fontsize6", `${advancedOptions ? '' : '-displaynone'}`]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -410,7 +417,7 @@
                             value={system.stats.save}
                             valuePath="system.stats.save"
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -426,7 +433,7 @@
                             value={system.stats.heatcap}
                             valuePath={"system.stats.heatcap"}
                             outerStyle={["-fontsize7", `${advancedOptions ? '' : '-displaynone'}`]}
-                            innerStyle={["-divider", "-fontsizemedium", "la-prmy-accent", "-textaligncenter", "-bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}

@@ -49,26 +49,26 @@
 <div class="-widthfull -positionrelative">
     <div class="la-flexrow {editable ? '' : '-displaynone'}">
         <GlyphButton
-            style={["la-bckg-secondary -width3", "clicker-minus-button input-update"]}
+            style={["la-bckg-secondary -width3 clicker-minus-button input-update"]}
             flowClass={FlowClass.None}
             tooltipEnabled={false}
             onClick={handleSubtract}
         >-</GlyphButton>
         <input type="number"
-            class="la-text-text -bold -width3ch -height3"
+            class="la-text-text -width3ch -height3"
             name={valuePath}
             value={value}
             data-dtype={"Number"}
             onfocus={event => event.currentTarget.select()}
         />
         <GlyphButton
-            style={["la-bckg-secondary -width3", "clicker-plus-button input-update"]}
+            style={["la-bckg-secondary -width3 clicker-plus-button input-update"]}
             flowClass={FlowClass.None}
             tooltipEnabled={false}
             onClick={handleAddition}
         >+</GlyphButton>
     </div>
-    <span class="-widthfull
+    <span class="-fontface-neutral -widthfull
         {editable ? '-displaynone' : ''}"
     >{value}</span>
 </div>
@@ -87,7 +87,7 @@
     {#if valuePath != undefined && value != undefined && editable != undefined}
         {@render renderEditable()}
     {:else}
-        <span class="-widthfull">{value}</span>
+        <span class="-fontface-neutral -widthfull">{value}</span>
     {/if}
         <span class="">{label}</span>
     </div>

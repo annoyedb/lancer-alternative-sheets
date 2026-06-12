@@ -70,9 +70,9 @@
     }
 </script>
 <script lang="ts" module>
-    export const H2_HEADER_STYLE = "clipped-bot-alt -padding0-l -padding3-r la-text-header la-prmy-header";
+    export const H2_HEADER_STYLE = "clipped-bot-alt -padding0-l -padding3-r la-text-header la-prmy-header -bol";
     export const H2_ICON_SIZE = "-fontsize7";
-    export const H2_TEXT_SIZE = "-fontsize4";
+    export const H2_TEXT_SIZE = "-fontsize3";
 </script>
 
 

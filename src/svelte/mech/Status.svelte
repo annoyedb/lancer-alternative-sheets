@@ -62,8 +62,8 @@
     <HeaderMain
         text={getLocalized("LA.tab.status.actionLog.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-        borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+        borderStyle={["la-bckg-card la-brdr-transparent clipped-bot-alt"]}
         extensionTextFunction={() => {      
             if (collapseAllButtonHover)
                 return `--${getLocalized("LA.collapseAll.extension")}`;
@@ -86,8 +86,8 @@
     <HeaderMain 
         text={getLocalized("LA.tab.status.effects.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-        borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+        borderStyle={["la-bckg-card la-brdr-transparent clipped-bot-alt"]}
 
         collapseID={collID}
         startCollapsed={false}
@@ -104,8 +104,8 @@
     <HeaderMain
         text={getLocalized("LA.tab.status.integrity.label")}
         headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-        textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
-        borderStyle={["la-bckg-card", "la-brdr-transparent", "clipped-bot-alt"]}
+        textStyle={["la-text-header -fontsize4 -overflowhidden"]}
+        borderStyle={["la-bckg-card la-brdr-transparent clipped-bot-alt"]}
 
         collapseID={`${actor.uuid}.status.integrity`}
         startCollapsed={false}
@@ -204,7 +204,7 @@
             <div class="la-flexrow -gap0 -wrapwrap -justifybetween -widthfull -heightfull -flex0">
                 <div class="la-flexcol -gap0 la-dropshadow -flex1 -widthfull">
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
                         text={getLocalized("LA.flow.structureDamage.label")}
     
                         uuid={actor.uuid}
@@ -220,7 +220,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
                         text={getLocalized("LA.flow.reactorStress.label")}
     
                         uuid={actor.uuid}
@@ -236,7 +236,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt", "-widthfull", "la-bckg-tabs", "-padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
                         text={getLocalized("LA.flow.fullRepair.label")}
     
                         uuid={actor.uuid}
@@ -254,7 +254,7 @@
                 </div>
                 <div class="la-flexcol -gap0 la-dropshadow -flex1">
                     <FlowButton 
-                        style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                        style={["clipped -widthfull la-bckg-secondary"]}
                         text={getLocalized("LA.flow.overcharge.label")}
 
                         uuid={actor.uuid}
@@ -271,7 +271,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                        style={["clipped -widthfull la-bckg-secondary"]}
                         text={getLocalized("LA.flow.overchargeReset.label")}
 
                         uuid={actor.uuid}
@@ -286,7 +286,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                        style={["clipped -widthfull la-bckg-secondary"]}
                         text={getLocalized("LA.flow.stabilize.label")}
                         
                         uuid={actor.uuid}
@@ -303,7 +303,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                        style={["clipped -widthfull la-bckg-secondary"]}
                         text={getLocalized("LA.flow.extinguish.label")}
     
                         uuid={actor.uuid}

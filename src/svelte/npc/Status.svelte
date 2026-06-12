@@ -41,7 +41,7 @@
 <HeaderMain 
     text={getLocalized("LA.tab.status.effects.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
 
     collapseID={activeEffectsCollID}
@@ -59,7 +59,7 @@
 <HeaderMain 
     text={getLocalized("LA.npc.utilities.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
     extensionTextFunction={() => {
         if (collapseAllButtonHover)
@@ -72,7 +72,7 @@
 >
     <div class="la-flexcol -gap0 -widthfull">
         <FlowButton 
-            style={["clipped-alt", "-widthfull", "la-bckg-header-anti", "-padding0"]}
+            style={["clipped-alt -widthfull la-bckg-header-anti -padding0"]}
             text={getLocalized("LA.npc.recharge.label")}
             
             flowClass={FlowClass.RechargeFeatures}
@@ -86,7 +86,7 @@
         <div class="la-flexrow -wrapwrap -widthfull -gap0">
             <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
-                    style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                    style={["clipped-alt -widthfull la-bckg-secondary"]}
                     text={getLocalized("LA.flow.rollAttack.label")}
 
                     uuid={actor.uuid}
@@ -99,7 +99,7 @@
                     tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                 />
                 <FlowButton 
-                    style={["clipped-alt", "-widthfull", "la-bckg-secondary"]}
+                    style={["clipped-alt -widthfull la-bckg-secondary"]}
                     text={getLocalized("LA.flow.rollDamage.label")}
 
                     uuid={actor.uuid}
@@ -114,7 +114,7 @@
             </div>
             <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
-                    style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                    style={["clipped -widthfull la-bckg-secondary"]}
                     text={getLocalized("LA.flow.rollTechAttack.label")}
 
                     uuid={actor.uuid}
@@ -127,7 +127,7 @@
                     tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                 />
                 <FlowButton
-                    style={["clipped", "-widthfull", "la-bckg-secondary"]}
+                    style={["clipped -widthfull la-bckg-secondary"]}
                     text={getLocalized("LA.flow.extinguish.label")}
 
                     uuid={actor.uuid}
@@ -148,7 +148,7 @@
 <HeaderMain 
     text={getLocalized("LA.npc.macros.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-pilot"]}
 
     collapseID={macrosCollID}

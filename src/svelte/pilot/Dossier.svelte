@@ -20,7 +20,7 @@
 <HeaderMain
     text={getLocalized("LA.tab.status.effects.label")}
     headerStyle={[MAIN_HEADER_STYLE, "la-bckg-primary"]}
-    textStyle={["la-text-header", "-fontsize4", "-overflowhidden"]}
+    textStyle={["la-text-header -fontsize4 -overflowhidden"]}
     borderStyle={["la-brdr-primary"]}
     
     collapseID={collID}

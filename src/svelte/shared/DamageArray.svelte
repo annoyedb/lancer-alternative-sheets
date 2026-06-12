@@ -17,8 +17,7 @@
 </script>
 
 {#if damages.length}
-<span class="
-    la-damage la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1 
+<span class="la-damage la-flexrow -justifycenter -aligncenter -lineheight3 -widthfull -flex1 -fontface-stylized
     {style?.join(' ')}"
 >
     {#each damages as damage}

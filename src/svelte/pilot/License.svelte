@@ -12,7 +12,7 @@
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
@@ -161,7 +161,7 @@
         <HeaderSecondary
             text={`${license.system.manufacturer} ${license.name}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)
@@ -182,14 +182,16 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={licenseDescriptions[index]}
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={licenseDescriptions[index]}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            </div>
         </HeaderSecondary>
     {/each}
     </div>

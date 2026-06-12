@@ -213,9 +213,9 @@
 {/snippet}
 {#snippet headerQuinaryLeftOptions()}
     <EffectButton
-        style={["-positionabsolute", "-left0", "-top0", "-padding0-l"]}
+        style={["-positionabsolute -left0 -top0 -padding0-l"]}
         iconStyle={[H2_ICON_SIZE, ACTIVATION_ICON_MAP[action.activation]]}
-        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l", "la-prmy-secondary",
+        iconBackgroundStyle={[H2_ICON_SIZE, "-padding0-l la-prmy-secondary",
             qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"]}
 
         flowClass={onClick
@@ -245,7 +245,7 @@
     <HeaderQuinary
         text={action.name}
         headerStyle={[ACTIVATION_COLOR_MAP[action.activation], "-padding0-l"]}
-        textStyle={["la-text-header", "la-prmy-header", "-lineheight7"]}
+        textStyle={["la-text-header la-prmy-header -fontface-stylized"]}
         extensionTextFunction={() => {
             if (effectButtonHover)
                 return `--${getLocalized("LA.chat.extension")}`;
@@ -266,36 +266,38 @@
     <!-- Action Box Content -->
     {#if action.trigger}
         <div class="-fontsizemedium">
-            <div class="la-divider-h la-bckg-primary -margin0-tb -margin2-b"></div>
-            <!-- Trigger -->
-            <EffectBox
-                name={getLocalized("LA.trigger.label")}
-                outerStyle={["-bordersround"]}
+            <div class="la-divider-h la-bckg-primary -margin0-tb"></div>
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <!-- Trigger -->
+                <EffectBox
+                    name={getLocalized("LA.trigger.label")}
+                    outerStyle={["-bordersround"]}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={logType}
-                logTypeReset={logTypeReset}
-            >
-            {#if !collapseID}
-                {@render defaultFlowButton()}
-                <hr class="-widthfull">
-            {/if}
-                {@html action.trigger || defaultPlaceholder}
-            </EffectBox>
-            <!-- TODO: allow editDetails -->
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                outerStyle={["-bordersround"]}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={logType}
+                    logTypeReset={logTypeReset}
+                >
+                {#if !collapseID}
+                    {@render defaultFlowButton()}
+                    <hr class="-widthfull">
+                {/if}
+                    {@html action.trigger || defaultPlaceholder}
+                </EffectBox>
+                <!-- TODO: allow editDetails -->
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    outerStyle={["-bordersround"]}
 
-                editOption={editDetails}
-                editPath={`${path}.detail`}
+                    editOption={editDetails}
+                    editPath={`${path}.detail`}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={logType}
-                logTypeReset={logTypeReset}
-            >
-                {@html action.detail || defaultPlaceholder}
-            </EffectBox>
+                    tooltipEnabled={tooltipEnabled}
+                    logType={logType}
+                    logTypeReset={logTypeReset}
+                >
+                    {@html action.detail || defaultPlaceholder}
+                </EffectBox>
+            </div>
         {#if children}
             {@render children()}
         {/if}

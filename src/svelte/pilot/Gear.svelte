@@ -9,7 +9,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+    import HeaderSecondary, { H2_HEADER_STYLE, H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import TagArray from "@/svelte/shared/TagArray.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -154,7 +154,7 @@
         <HeaderSecondary
             text={gear.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -fontsize4 -overflowhidden"]}
+            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)
@@ -176,60 +176,62 @@
             contentLeft={headerSecondaryLeftOptions}
             contentRight={headerSecondaryRightOptions}
         >
-            <BonusBox
-                bonuses={gear.system.bonuses}
-                bonusPath={`${getGearPath(index)}.system.bonuses`}
-            />
-            <DeployableBox
-                source={actor}
-                lidSource={gear.system}
-                uuid={actor.uuid}
-                sheetUUID={actor.uuid}
+            <div class="la-generated -widthfull -gap1 la-flexcol">
+                <BonusBox
+                    bonuses={gear.system.bonuses}
+                    bonusPath={`${getGearPath(index)}.system.bonuses`}
+                />
+                <DeployableBox
+                    source={actor}
+                    lidSource={gear.system}
+                    uuid={actor.uuid}
+                    sheetUUID={actor.uuid}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <ActionBox
-                actions={gear.system.actions}
-                actor={actor}
-                uuid={gear.uuid}
-                path={`system.actions`}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <ActionBox
+                    actions={gear.system.actions}
+                    actor={actor}
+                    uuid={gear.uuid}
+                    path={`system.actions`}
 
-                collapseID={`${gear.uuid}.actions`}
-                startCollapsed={true}
+                    collapseID={`${gear.uuid}.actions`}
+                    startCollapsed={true}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-            <EffectBox
-                name={getLocalized("LA.description.label")}
-                effect={gear.system.description}
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+                <EffectBox
+                    name={getLocalized("LA.description.label")}
+                    effect={gear.system.description}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {#if gear.system.effect}
-            <EffectBox
-                name={getLocalized("LA.mech.system.effect.label")}
-                effect={gear.system.effect}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {#if gear.system.effect}
+                <EffectBox
+                    name={getLocalized("LA.mech.system.effect.label")}
+                    effect={gear.system.effect}
 
-                tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {/if}
-            <TagArray
-                tags={gear.system.tags}
-                justify={"start"}
+                    tooltipEnabled={tooltipEnabled}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                />
+            {/if}
+                <TagArray
+                    tags={gear.system.tags}
+                    justify={"start"}
 
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-            />
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                />
+            </div>
         </HeaderSecondary>
     {/each}
     </div>

@@ -217,7 +217,7 @@
     <DamageButton
         iconStyle={isDestroyed(weapon) ? ["la-text-repcap"] : undefined }
         iconBackgroundStyle={[
-            "-fontsize9 la-prmy-secondary", 
+            "-fontsize9 la-prmy-secondary",
             qualityMode ? "-pulse-prmy" : "la-text-scrollbar-secondary"
         ]}
         
@@ -281,10 +281,10 @@
 
     text={weapon.name}
     headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-    headerFontStyle={[getTitleStyle(weapon), "-fontsizemedium"]}
+    headerFontStyle={[getTitleStyle(weapon), "-fontsize3 -fontface-stylized"]}
 
     subText={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
-    subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall"]}
+    subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall -fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (attackButtonHover)
@@ -302,23 +302,25 @@
     contentLeft={headerTertiaryLeftOptions}
     contentRight={headerTertiaryRightOptions}
 >
-    <EffectBox
-        name={getLocalized("LA.mech.system.effect.label")}
-        effect={weapon.system.effect}
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+        <EffectBox
+            name={getLocalized("LA.mech.system.effect.label")}
+            effect={weapon.system.effect}
 
-        tooltipEnabled={tooltipEnabled}
-    />
-    <EffectBox
-        name={getLocalized("LA.effect.hit.label")}
-        effect={weapon.system.on_hit}
+            tooltipEnabled={tooltipEnabled}
+        />
+        <EffectBox
+            name={getLocalized("LA.effect.hit.label")}
+            effect={weapon.system.on_hit}
 
-        tooltipEnabled={tooltipEnabled}
-    />
-    <TagArray
-        tags={weapon.system.tags}
-        justify={"end"}
+            tooltipEnabled={tooltipEnabled}
+        />
+        <TagArray
+            tags={weapon.system.tags}
+            justify={"end"}
 
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-    />
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+        />
+    </div>
 </HeaderTertiary>
