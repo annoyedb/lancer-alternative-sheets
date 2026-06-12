@@ -34,7 +34,11 @@
         mountNames[mountIndex] = localizationString;
     }
 </script>
-<h3>{getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}<i class="mdi mdi-arrow-down-right"></i></h3>
+
+<div class="la-bckg-primary -fontsize4 -upper -padding0"
+>
+    {getLocalized(MOUNT_LOCALIZE_MAP[mount.type])}<i class="mdi mdi-arrow-down-right"></i>
+</div>
 <div class="la-flexcol -widthfull -gap0 -padding0">
 {#each Object.keys(MOUNT_LOCALIZE_MAP) as mountType, morphIndex}
     <!-- (#5*) 
@@ -43,7 +47,7 @@
     because of (#5), we use the non-depreciated way of applying 
     the event. If this is changed, the issue turns to (#2) -->
     <button type="button"
-        class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+        class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent -widthfull
             {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}"
         onclick={event => swapMount(event, mountIndex, morphIndex)}
     >

@@ -80,18 +80,20 @@
 </script>
 
 {#snippet themeOverride()}
-    <h3>{getLocalized("LA.advanced.themeOverride.tooltip")}<i class="mdi mdi-arrow-down-right"></i></h3>
+    <div class="la-bckg-primary -fontsize4 -upper -padding0">
+        {getLocalized("LA.advanced.themeOverride.tooltip")}<i class="mdi mdi-arrow-down-right"></i>
+    </div>
     <div class="la-flexcol -widthfull -gap0 -padding0">
     {#each Object.values(ThemeKey) as theme}
         <button type="button"
-            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover -widthfull"
             onclick={event => handleThemeOverride(event, theme)}
         >
             {getThemeName(theme)}
         </button>
     {/each}
         <button type="button"
-            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus"
+            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary -glow-prmy-hover la-scdy-accent -glow-scdy-focus -widthfull"
             onclick={event => handleThemeOverride(event, "default")}
         >
             {getLocalized("LA.advanced.theme.default.label")}

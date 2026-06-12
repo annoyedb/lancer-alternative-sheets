@@ -353,10 +353,12 @@
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
         {/if}
-            <TagArray 
+            <TagArray
                 tags={weapon.system.tags}
-                path={`${getWeaponPath(index)}.system.tags`}
                 justify={"start"}
+
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={theme}
             />
         </HeaderTertiary>
     {/each}

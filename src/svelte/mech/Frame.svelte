@@ -110,9 +110,11 @@
                 <FrameActivePower {...props} />
                 <FramePassivePower {...props} />
             {#if core.tags?.length}
-                <TagArray 
+                <TagArray
                     tags={core.tags}
-                    path={"system.loadout.frame.value.system.core_system.tags"}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
                 />
             {/if}
             </div>

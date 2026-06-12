@@ -314,9 +314,11 @@
 
         tooltipEnabled={tooltipEnabled}
     />
-    <TagArray 
+    <TagArray
         tags={weapon.system.tags}
-        path={`itemTypes.npc_feature.${weapon.index}.system.all_tags`}
         justify={"end"}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
     />
 </HeaderTertiary>

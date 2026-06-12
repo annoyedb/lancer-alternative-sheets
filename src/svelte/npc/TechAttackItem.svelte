@@ -325,7 +325,9 @@
     />
     <TagArray
         tags={tech.system.tags}
-        path={`itemTypes.npc_feature.${tech.index}.system.tags`}
         justify={"start"}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
     />
 </HeaderSecondary>

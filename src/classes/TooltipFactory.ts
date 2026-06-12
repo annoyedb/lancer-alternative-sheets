@@ -10,7 +10,7 @@ export class TooltipFactory
     {
         return `
             ${header
-                ? `<h3 class="la-tooltip__header">${header}</h3>`
+                ? `<div class="la-bckg-primary -fontsize4 -upper -padding0">${header}</div>`
                 : ""
             }
             <div class="la-tooltip__content">

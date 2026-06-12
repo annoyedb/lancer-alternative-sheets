@@ -221,10 +221,12 @@
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
             />
-            <TagArray 
+            <TagArray
                 tags={reserve.system.tags}
-                path={`${getReservePath(index)}.system.tags`}
                 justify={"start"}
+
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={theme}
             />
         </HeaderSecondary>
     {/each}

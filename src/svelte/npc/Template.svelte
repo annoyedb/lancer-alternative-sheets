@@ -15,7 +15,7 @@
 >
     <span class="-upper -fontsize4">{name}</span>
     <button type="button" 
-        class="fas fa-edit -fontsizesmall -positionabsolute
+        class="mdi mdi-pencil-ruler-outline -fontsizemedium -positionabsolute
             lancer-context-menu"
         data-path={path}
         aria-label={getLocalized("LA.edit.label")}

@@ -232,7 +232,9 @@
     />
     <TagArray
         tags={trait.system.tags}
-        path={`itemTypes.npc_feature.${trait.index}.system.tags`}
         justify={"start"}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
     />
 </HeaderSecondary>
