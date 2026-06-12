@@ -68,6 +68,9 @@ import { slugify } from "@/scripts/lancer/util/lid";
 import { getLocalized } from "@/scripts/helpers";
 import { SheetStore } from "@/scripts/store/module-store";
 
+/**
+ * Lancer system to Alternative Sheets theme names
+ */
 const THEME_MAP: Record<ThemeKey | string, ThemeValue> = {
     [ThemeKey.GMS]: ThemeValue.GMS,
     [ThemeKey.GMSDark]: ThemeValue.GMSDark,
@@ -79,6 +82,9 @@ const THEME_MAP: Record<ThemeKey | string, ThemeValue> = {
     [ThemeKey.IPSN]: ThemeValue.IPSN,
 };
 
+/**
+ * Whether to use the dark/light color palette (mostly for stats)
+ */
 const LIGHT_MAP: Record<ThemeKey | string, "light" | "dark"> = {
     [ThemeKey.GMS]: "light",
     [ThemeKey.GMSDark]: "dark",
@@ -90,6 +96,9 @@ const LIGHT_MAP: Record<ThemeKey | string, "light" | "dark"> = {
     [ThemeKey.IPSN]: "light",
 };
 
+/**
+ * Localization map for names of themes, used by `getThemeName`
+ */
 const THEME_LOCALIZE_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.GMS]: "LA.advanced.theme.gms.label",
     [ThemeKey.GMSDark]: "LA.advanced.theme.gmsDark.label",
@@ -101,6 +110,9 @@ const THEME_LOCALIZE_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.IPSN]: "LA.advanced.theme.ipsn.label",
 };
 
+/**
+ * Localization flavor-text map for different themes, used by `getThemeHistoryLabel`.
+ */
 const THEME_LOCALIZE_HISTORY_MAP: Record<ThemeKey | string, string> = {
     [ThemeKey.GMS]: "LA.pilot.history.gms",
     [ThemeKey.GMSDark]: "LA.pilot.history.gms",
@@ -194,10 +206,9 @@ export function getManufacturerColor(key: ThemeKey | string, type: "bckg" | "tex
 
 export function applyThemeTo(html: JQuery<HTMLElement>, theme?: ThemeKey | string)
 {
-    const selectedtheme = theme || game.settings.get("lancer", "uiTheme") as string;
-
+    const selectedTheme = theme || game.settings.get("lancer", "uiTheme") as string;
     const themeClasses = Object.values(THEME_MAP);
-    html.removeClass(themeClasses.join(' ')).addClass(THEME_MAP[selectedtheme]);
+    html.removeClass(themeClasses.join(' ')).addClass(THEME_MAP[selectedTheme]);
 }
 
 export function applyThemeToImages(html: JQuery<HTMLElement>)

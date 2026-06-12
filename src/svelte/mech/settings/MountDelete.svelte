@@ -43,7 +43,7 @@
 
 <!-- (#5*) -->
 <button type="button"
-    class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+    class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent -widthfull
         {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}
         gen-control"
     data-action={"splice"}

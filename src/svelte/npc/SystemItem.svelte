@@ -270,7 +270,9 @@
     />
     <TagArray
         tags={component.system.tags}
-        path={`itemTypes.npc_feature.${component.index}.system.tags`}
         justify={"start"}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
     />
 </HeaderSecondary>

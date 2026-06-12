@@ -29,7 +29,7 @@
 
     function aggregateMountWeaponNames(mount: any)
     {
-        let names = mount.slots.map((slot: any) => slot.weapon?.value.name);
+        let names = mount.slots.map((slot: any) => slot.weapon?.value?.name);
         return names.filter((name: any) => name !== undefined);
     }
 </script>

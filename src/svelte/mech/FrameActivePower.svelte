@@ -38,7 +38,7 @@
         ? getManufacturerColor(frame.system.manufacturer, "brdr")
         : "la-brdr-repcap");
     const tip = $derived(TooltipFactory.buildTooltip(
-        `${core.active_effect}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[core.activation])}`,
+        getLocalized([core.active_effect, ACTIVATION_TOOLTIP_LOCALIZE_MAP[core.activation]]),
         getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])));
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 </script>

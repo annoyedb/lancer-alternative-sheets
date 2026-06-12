@@ -204,11 +204,15 @@
             >
                 <TagArray
                     tags={mod.system.added_tags}
-                    path={`${path}.system.added_tags`}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
                 />
                 <TagArray
                     tags={mod.system.tags}
-                    path={`${path}.system.tags`}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
                 />
             </EffectBox>
             <EffectBox

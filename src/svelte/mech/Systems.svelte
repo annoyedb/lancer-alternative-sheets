@@ -58,7 +58,7 @@
 
     function isDestroyed(component: any)
     {
-        return component.value.system.destroyed;
+        return component.value?.system.destroyed;
     }
 
     function getTitleStyle(component: any)
@@ -245,6 +245,7 @@
             </GlyphButton>
         </div>
     {/snippet}
+    {#if component.value}
         <HeaderTertiary
             itemID={component.value.id}
             uuid={component.value.uuid}
@@ -276,7 +277,7 @@
         >
         {#if !isDestroyed(component)}
             <div class="la-generated -widthfull -gap2 la-flexcol">
-                {#if component.value.system.counters?.length}
+            {#if component.value.system.counters?.length}
                 <div class="la-flexcol -gap0 -widthfull -padding1-l">
                 {#each component.value.system.counters as counter, jndex}
                     <CounterBox
@@ -291,7 +292,7 @@
                     />
                 {/each}
                 </div>
-                {/if}
+            {/if}
                 <BonusBox
                     bonuses={component.value.system.bonuses}
                     bonusPath={`${getComponentPath(index)}.system.bonuses`}
@@ -329,14 +330,17 @@
                     logType={TextLogHook.MechHeader}
                     logTypeReset={TextLogHook.MechHeaderReset}
                 />
-                <TagArray 
+                <TagArray
                     tags={component.value.system.tags}
-                    path={`${getComponentPath(index)}.system.tags`}
                     justify={"start"}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
                 />
             </div>
         {/if}
         </HeaderTertiary>
+    {/if}
     {/each}
     {#if system.loadout.sp.value < system.loadout.sp.max}
         {@render emptySystems()}

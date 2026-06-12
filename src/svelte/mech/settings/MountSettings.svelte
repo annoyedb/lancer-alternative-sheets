@@ -184,7 +184,9 @@
 
 <!-- Remove mount snippet -->
 {#snippet removeMount()}
-    <h3 class="-widthfull">{getLocalized("LA.advanced.mount.remove.label")}</h3>
+    <div class="la-bckg-primary -fontsize4 -upper -padding0">
+        {getLocalized("LA.advanced.mount.remove.label")}<i class="mdi mdi-arrow-down-right"></i>
+    </div>
     <div class="la-flexcol -widthfull -heightfull -gap0 -padding0">
     {#each weaponMounts as mount, index}
         <MountDelete
@@ -199,7 +201,9 @@
 
 <!-- Edit mount snippet -->
 {#snippet editMount()}
-    <h3 class="-widthfull">{getLocalized("LA.advanced.mount.edit.label")}</h3>
+    <div class="la-bckg-primary -fontsize4 -upper -padding0">
+        {getLocalized("LA.advanced.mount.edit.label")}<i class="mdi mdi-arrow-down-right"></i>
+    </div>
     <div class="la-flexcol -widthfull -heightfull -gap0 -padding0">
     {#each weaponMounts as mount, index}
         {#snippet dropdownContent()}
@@ -213,7 +217,7 @@
 
         <!-- (#5*) -->
         <button type="button"
-            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent
+            class="la-bckg-scrollbar-secondary la-text-header -fontsizemedium -letterspacing0 la-prmy-secondary la-scdy-accent -widthfull
                 {qualityMode ? '-glow-prmy-hover -glow-scdy-focus' : ''}"
             onclick={(event) => handleSelection(event, dropdownContent, index)}
         >
@@ -242,7 +246,7 @@
             tooltipTheme={theme}
         />
         <button type="button" 
-            class={SETTINGS_BUTTON_STYLE}
+            class="{SETTINGS_BUTTON_STYLE}"
             data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class="clipped-bot la-tooltip {theme}"

@@ -32,7 +32,7 @@
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontsizesmall">
         {name}<!--
 ---><button type="button"
-        class="fas fa-edit popout-text-edit-button -padding0-l
+        class="mdi mdi-pencil-ruler-outline popout-text-edit-button -padding0-l
             {editOption ? '' : '-displaynone'}"
         data-path={editPath}
         aria-label={getLocalized("LA.edit.label")}>

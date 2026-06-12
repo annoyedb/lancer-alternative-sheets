@@ -316,7 +316,9 @@
     />
     <TagArray
         tags={reaction.system.tags}
-        path={`itemTypes.npc_feature.${reaction.index}.system.tags`}
         justify={"start"}
+
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
     />
 </HeaderSecondary>

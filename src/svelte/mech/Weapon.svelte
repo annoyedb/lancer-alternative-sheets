@@ -416,10 +416,12 @@
                 path={`${getModPath(index)}`}
             />
         {/if}
-            <TagArray 
+            <TagArray
                 tags={profile.all_tags}
-                path={`${getWeaponPath(index)}.system.profiles.${weapon.system.selected_profile_index}.all_tags`}
                 justify={"start"}
+
+                tooltipEnabled={tooltipEnabled}
+                tooltipTheme={theme}
             />
         </div>
     {/if}
@@ -427,7 +429,7 @@
 {:else}
 <!-- Empty Weapon -->
 <!-- svelte-ignore block_empty -->
-{#if index === 1 && mount.slots[0].size === "Flex" && 
+{#if index === 1 && mount.slots[0].size === "Flex" &&
     (mount.slots[0].weapon?.value.system.size !== "Auxiliary")}
 {:else}
 <EmptyBox

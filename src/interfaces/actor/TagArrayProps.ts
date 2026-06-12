@@ -1,6 +1,6 @@
 export interface TagArrayProps
 {
+    uuid: string;
     tags: Array<any>,
-    path: string,
     justify?: "start" | "center" | "end" | "between"
 }
