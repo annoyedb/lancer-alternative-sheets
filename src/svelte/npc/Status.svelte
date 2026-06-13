@@ -160,7 +160,8 @@
         setExes={setSidebarExecutables}
         hintDropArea={false}
         allowDrop={advancedOptions}
-        buttonStyle={[`${advancedOptions ? "-padding3-l" : ""}`]}
+        buttonStyle={[advancedOptions ? "-padding3-l" : ""]}
+        innerStyle={["-gap0"]}
         tooltipEnabled={tooltipEnabled}
     />
 </HeaderMain>
