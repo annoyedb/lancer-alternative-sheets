@@ -7,4 +7,5 @@ export interface MacroDropBoxProps
     allowDrop: boolean;
     iconStyle?: Array<string>;
     buttonStyle?: Array<string>;
+    innerStyle?: Array<string>;
 }

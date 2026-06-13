@@ -28,6 +28,7 @@
 
         iconStyle,
         buttonStyle,
+        innerStyle,
 
         tooltipHeader,
         tooltipClass,
@@ -130,7 +131,10 @@
     }
 </script>
 
-<div class="la-flexcol -widthfull {hintDropArea ? '-divider la-prmy-accent' : ''}">
+<div bind:this={component}
+    class="la-flexcol -widthfull
+    {hintDropArea ? '-divider la-prmy-accent' : ''}"
+>
 {#if hintDropArea}
     {#if allowDrop}
         <div role="none"
@@ -149,8 +153,8 @@
     {/if}
 {/if}
     <div class="la-macroflows la-dropshadow la-flexcol -widthfull
+        {innerStyle?.join(' ')}
         macro-droppable"
-        bind:this={component}
     >
     {#if executables.length}
     <!-- 
