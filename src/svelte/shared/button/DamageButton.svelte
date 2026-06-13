@@ -1,7 +1,5 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
-    import DamageArray from "@/svelte/shared/DamageArray.svelte";
-    import RangeArray from "@/svelte/shared/RangeArray.svelte";
 
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
@@ -16,7 +14,10 @@
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+
+    import DamageArray from "@/svelte/shared/DamageArray.svelte";
+    import RangeArray from "@/svelte/shared/RangeArray.svelte";
+    import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
 
     const {
         damage,
@@ -44,7 +45,6 @@
         onPointerLeave,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
 
-    const qualityMode = getExtraEffectsEnabled();
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader));
     const hasAllWeaponProperties = $derived(damage?.length && range?.length);
     const rollable = $derived(!disabled && (damage?.length > 0));
@@ -82,7 +82,8 @@
         la-properties la-flexcol -fontsize5 la-prmy-accent -justifycenter -positionrelative
         {hasAllWeaponProperties ? '-divider' : ''}
         {style?.join(' ')}
-        {flowClass || FlowClass.RollDamage}"
+        {flowClass || FlowClass.RollDamage}
+        {disabled ? '' : CLICKABLE_HOVER}"
     data-tooltip={tooltipEnabled && rollable ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
@@ -102,11 +103,7 @@
 {#if damage}
     <DamageArray
         damages={damage}
-        style={(iconStyle || []).concat(disabled 
-            ? "" 
-            : `la-prmy-header 
-                ${ qualityMode ? "-glow-prmy la-scdy-primary -glow-scdy-hover" : "" }
-            `)
+        style={(iconStyle || [])
         }
     />
 {/if}

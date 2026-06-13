@@ -72,6 +72,7 @@
 
 <button type="button" 
     class="-positionrelative
+        {disabled ? '' : CLICKABLE_HOVER}
         {style?.join(' ')}
         {flowClass || FlowClass.RollAttack}"
     data-tooltip={tooltipEnabled && !disabled ? tip : undefined }
@@ -84,7 +85,6 @@
 >
     <i 
         class="
-            {disabled ? '' : CLICKABLE_HOVER}
             {iconStyle?.join(' ') || _DEFAULT_I_FOREGROUND}"
     ></i>
 {#if !disabled}

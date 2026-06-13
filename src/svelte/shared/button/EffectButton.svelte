@@ -76,7 +76,8 @@
 <button type="button"
     class="-positionrelative
         {style?.join(' ')}
-        {flowClass || FlowClass.SendEffectToChat}"
+        {flowClass || FlowClass.SendEffectToChat}
+        {disabled ? '' : CLICKABLE_HOVER}"
     style="z-index: 1;"
     data-uuid={uuid}
     data-path={path}
@@ -92,7 +93,6 @@
 >
     <i 
         class="
-            {disabled ? '' : CLICKABLE_HOVER}
             {iconStyle?.join(' ') || _DEFAULT_FOREGROUND}"
     ></i>
 {#if !disabled}

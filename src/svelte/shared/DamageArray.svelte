@@ -21,7 +21,9 @@
     {style?.join(' ')}"
 >
     {#each damages as damage}
-        <span class="la-number-weapon__span">{damage.val.replace(/\s/g, "")}</span><!--
+        <span class="la-number-weapon__span
+                {qualityMode ? '-glow-' + damage.type.toLowerCase() : ''}"
+        >{damage.val.replace(/\s/g, "")}</span><!--
     ---><i class="cci {damage.icon}
                 {qualityMode ? '-glow-' + damage.type.toLowerCase() : ''}"
         ></i>
