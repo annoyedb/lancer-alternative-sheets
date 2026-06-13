@@ -1,14 +1,15 @@
 import { writable, fromStore } from "svelte/store";
 
-const collapseStates = writable<{ 
+const collapseStates = writable<{
     [key: string]: boolean
 }>({});
+const _collapseStatesRune = fromStore(collapseStates);
 
 export function getCollapseState(id?: string)
 {
     if (!id)
         return false;
-    return fromStore(collapseStates).current[id];
+    return _collapseStatesRune.current[id];
 }
 
 /**
