@@ -3,7 +3,7 @@
     import type { CounterBoxProps } from "@/interfaces/actor/CounterBoxProps";
     import type { PointerClickProps } from "@/interfaces/actor/events/PointerClickProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
 
@@ -44,7 +44,7 @@
         {style?.join(' ') || type === CounterBoxType.Counter ? _COUNTER_STYLE : ''}"
 >
 {#if text}
-    <span class="la-counterbox__span -fontsizemedium">
+    <span class="la-counterbox__span {logographicLanguage() ? '-fontsize3' : '-fontsizemedium'}">
         {text}
     </span>
 {/if}

@@ -4,7 +4,7 @@
     import type { EffectBoxProps } from "@/interfaces/actor/EffectBoxProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
 
     const {
@@ -25,13 +25,16 @@
         logTypeReset,
     }: EffectBoxProps & TooltipProps & TextLogEventProps = $props();
 
+    const logographic = logographicLanguage();
 </script>
 
 {#if effect || children}
-<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb -fontsizemediumer
+<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb
+        {logographic ? '-fontsizemedium' : '-fontsizemediumer'}
         {outerStyle?.join(' ')}"
 >
-    <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontface-stylized -fontsizesmall">
+    <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontface-stylized
+            {logographic ? '-fontsizemediumer' : '-fontsizesmall'}">
         {name}<!--
 ---><button type="button"
         class="mdi mdi-pencil-ruler-outline popout-text-edit-button -padding0-l

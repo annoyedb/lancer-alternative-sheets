@@ -15,6 +15,8 @@
         valuePath,
         outerStyle,
         innerStyle,
+        topStyle,
+        bottomStyle,
         editable,
 
         tooltipEnabled,
@@ -47,7 +49,9 @@
 
 {#snippet renderEditable()}
 <div class="-widthfull -positionrelative">
-    <div class="la-flexrow {editable ? '' : '-displaynone'}">
+    <div class="la-flexrow {editable ? '' : '-displaynone'}
+            {topStyle?.join(' ') || '-fontface-neutral'}"
+    >
         <GlyphButton
             style={["la-bckg-secondary -width3 clicker-minus-button input-update"]}
             flowClass={FlowClass.None}
@@ -68,8 +72,9 @@
             onClick={handleAddition}
         >+</GlyphButton>
     </div>
-    <span class="-fontface-neutral -widthfull
-        {editable ? '-displaynone' : ''}"
+    <span class="-widthfull
+            {editable ? '-displaynone' : ''}
+            {topStyle?.join(' ') || '-fontface-neutral'}"
     >{value}</span>
 </div>
 {/snippet}
@@ -87,9 +92,13 @@
     {#if valuePath != undefined && value != undefined && editable != undefined}
         {@render renderEditable()}
     {:else}
-        <span class="-fontface-neutral -widthfull">{value}</span>
+        <span class="-widthfull
+                {topStyle?.join(' ') || '-fontface-neutral'}"
+        >{value}</span>
     {/if}
-        <span class="">{label}</span>
+        <span class="
+                {bottomStyle?.join(' ')}"
+        >{label}</span>
     </div>
     {#if contentRight}
         {@render contentRight()}

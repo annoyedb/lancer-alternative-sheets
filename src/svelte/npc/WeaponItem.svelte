@@ -147,7 +147,7 @@
 </script>
 
 {#snippet outerContent()}
-    <div class="-widthfull -padding2-l">
+    <div class="-widthfull -padding2-l -fontface-stylized">
         <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
         {#if hasAccuracyBonus(weapon)}
             <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"

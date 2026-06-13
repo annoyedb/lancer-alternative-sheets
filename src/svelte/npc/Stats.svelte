@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import { 
-        browseActorImage, 
-        browseActorImageSync, 
-        browseTokenImage, 
-        getLocalized, 
-        handleRelativeDataInput
+    import {
+        browseActorImage,
+        browseActorImageSync,
+        browseTokenImage,
+        getLocalized,
+        handleRelativeDataInput, logographicLanguage
     } from "@/scripts/helpers";
     import { getActorTokenSync, setActorTokenSync, setThemeOverride } from "@/scripts/npc/settings";
     import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
@@ -34,6 +34,7 @@
     let editingBurn = $state(false);
     let editingShield = $state(false);
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getNPCSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
@@ -65,7 +66,7 @@
         TooltipFactory.renderTooltip(
             event, 
             { 
-                text: notesContent, 
+                html: notesContent,
                 direction: TooltipDirection.RIGHT,
                 locked: true,
             } 
@@ -243,6 +244,7 @@
                         />
                     {/if}
                     </div>
+                    <!-- Notes -->
                     <div class="la-flexrow -gap1">
                         <button type="button"
                             class="mdi mdi-note-edit -fontsize4 la-prmy-primary
@@ -276,7 +278,7 @@
                             label={getLocalized("LA.armor.short")}
                             value={system.armor}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -288,7 +290,7 @@
                             label={getLocalized("LA.evasion.short")}
                             value={system.evasion}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -300,7 +302,7 @@
                             label={getLocalized("LA.edefense.short")}
                             value={system.edef}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -315,6 +317,7 @@
                                 <!-- HP, SHIELD (BAR) -->
                                 <StatusBar
                                     name={getLocalized("LA.hitpoint.short")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.hp.value"
                                     currentValue={system.hp.value}
                                     maxValue={system.hp.max}
@@ -337,6 +340,7 @@
                                 <!-- STRUCTURE -->
                                 <StatusBar
                                     name={getLocalized("LA.structure.label")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.structure.value"
                                     currentValue={system.structure.value}
                                     maxValue={system.structure.max}
@@ -352,8 +356,9 @@
                                 />
                             </div>
                             <!-- SHIELD (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield
-                                {qualityMode ? '-glow-prmy' : ''}"
+                            <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -textaligncenter la-prmy-bar-shield
+                                {qualityMode ? '-glow-prmy' : ''}
+                                {logographic ? '-width4ch' : '-width3ch'}"
                             >
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
@@ -364,7 +369,8 @@
                                     onblur={() => {editingShield = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
                                 >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : ''}"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
@@ -381,6 +387,7 @@
                                 <!-- HEAT -->
                                 <StatusBar
                                     name={getLocalized("LA.heat.label")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.heat.value"
                                     currentValue={system.heat.value}
                                     maxValue={system.heat.max}
@@ -403,6 +410,7 @@
                                 <!-- STRESS, BURN (BAR) -->
                                 <StatusBar
                                     name={getLocalized("LA.stress.label")}
+                                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.stress.value"
                                     currentValue={system.stress.value}
                                     maxValue={system.stress.max}
@@ -418,8 +426,9 @@
                                 />
                             </div>
                             <!-- BURN (VALUE) -->
-                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn
-                                {qualityMode ? '-glow-prmy' : ''}"
+                            <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -textaligncenter la-prmy-bar-burn
+                                    {qualityMode ? '-glow-prmy' : ''}
+                                    {logographic ? '-width4ch' : '-width3ch'}"
                             >
                                 <input type="number" 
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
@@ -430,7 +439,8 @@
                                     onblur={() => {editingBurn = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.burn)}
                                 >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+                                <span class="la-damage__span -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
@@ -447,7 +457,7 @@
                             label={getLocalized("LA.tattack.short")}
                             value={system.sys}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -459,7 +469,7 @@
                             label={getLocalized("LA.save.short")}
                             value={system.save}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
@@ -471,7 +481,7 @@
                             label={getLocalized("LA.sensor.short")}
                             value={system.sensor_range}
                             outerStyle={["-fontsize7"]}
-                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}

@@ -111,15 +111,15 @@
                                 data-tooltip-direction={TooltipDirection.RIGHT}></i>
                         {/if}
                         </div>
-                        <div class="{advancedOptions ? '' : '-displaynone'}">
+                        <div class="{advancedOptions ? '' : '-displaynone'} -fontface-stylized">
                             <!-- Edit Size -->
                             <StatComboShort
                                 icon={""}
                                 label={getLocalized("LA.size.short")}
                                 value={system.stats.size}
                                 valuePath="system.stats.size"
-                                outerStyle={["-fontsize7"]}
-                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
+                                bottomStyle={[logographic ? "-fontsize3" : ""]}
 
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={theme}
@@ -140,15 +140,15 @@
                                 <span class="{themeOverride} la-outl-shadow -fontsize7 -bold">{system.stats.speed}</span>
                             </div>
                         </div>
-                        <div class="{advancedOptions ? '' : '-displaynone'}">
+                        <div class="{advancedOptions ? '' : '-displaynone'} -fontface-stylized">
                             <!-- Edit Speed -->
                             <StatComboShort
                                 icon={""}
                                 label={getLocalized("LA.speed.short")}
                                 value={system.stats.speed}
                                 valuePath="system.stats.speed"
-                                outerStyle={["-fontsize7"]}
-                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+                                innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
+                                bottomStyle={[logographic ? "-fontsize3" : ""]}
 
                                 tooltipEnabled={tooltipEnabled}
                                 tooltipTheme={theme}
@@ -309,7 +309,7 @@
                                     maxValueSecondary={parseInt(system.stats.hp)}
                                     barStyleSecondary={["la-bckg-bar-shield -shield"]}
                                     barEditStyleSecondary={["la-prmy-bar-shield"]}
-                                    textStyle={["la-text-text", logographic ? "" : "-fontsize4"]}
+                                    textStyle={["la-text-text"]}
                                     clipPath={"clipped"}
                                     editSecondary={editingShield}
                                     
@@ -324,8 +324,8 @@
                                     {qualityMode ? '-glow-prmy' : ''}
                                     {logographic ? '-width4ch' : '-width3ch'}"
                             >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3
-                                        {logographic ? '-fontsizemedium' : ''}"
+                                <span class="la-damage__span -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                                     data-tooltip={tooltipEnabled ? shieldTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
@@ -382,8 +382,8 @@
                                     onblur={() => {editingBurn = false;}}
                                     onchange={(event) => handleRelativeDataInput(event, system.burn)}
                                 >
-                                <span class="la-damage__span -fontsizesmall -heightfull -lineheight3
-                                        {logographic ? '-fontsizemedium' : ''}"
+                                <span class="la-damage__span -heightfull -lineheight3
+                                        {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                                     data-tooltip={tooltipEnabled ? burnTip : undefined}
                                     data-tooltip-class="clipped-bot la-tooltip {theme}"
                                     data-tooltip-direction="LEFT"
