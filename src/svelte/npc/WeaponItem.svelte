@@ -61,7 +61,7 @@
     function hasAttackBonus(item: any)
     {
         return item.system.attack_bonus.some((bonus: number) => bonus !== 0);
-    } 
+    }
 
     function isDestroyed(item: any)
     {
@@ -147,8 +147,8 @@
 </script>
 
 {#snippet outerContent()}
-    <div class="-widthfull -padding2-l -fontface-stylized">
-        <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+    <div class="-widthfull -padding2-l">
+        <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -fontface-stylized">
         {#if hasAccuracyBonus(weapon)}
             <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr"
                 data-tooltip={tooltipEnabled ? accuracyTip : undefined}

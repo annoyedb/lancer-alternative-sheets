@@ -91,7 +91,7 @@
 
 {#snippet outerContent()}
     <div class="-widthfull -padding2-l">
-        <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull">
+        <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -fontface-stylized">
             <!-- Rechargeable -->
             <ChargedBox
                 item={trait}
