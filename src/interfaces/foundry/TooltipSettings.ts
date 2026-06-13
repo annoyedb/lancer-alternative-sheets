@@ -3,6 +3,7 @@ import type { TooltipDirection } from "@/enums/TooltipDirection";
 export interface TooltipSettings
 {
     text?: string;
+    html?: string;
     direction: TooltipDirection | string;
     cssClass?: string;
     locked?: boolean;

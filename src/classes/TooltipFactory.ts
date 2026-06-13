@@ -10,10 +10,10 @@ export class TooltipFactory
     {
         return `
             ${header
-                ? `<div class="la-bckg-primary -fontsize4 -upper -padding0">${header}</div>`
+                ? `<div class="la-bckg-primary -fontface-stylized -fontsize4 -upper -padding0">${header}</div>`
                 : ""
             }
-            <div class="la-tooltip__content">
+            <div class="la-tooltip__content -fontface-neutral">
                 ${text}
             </div>
         `;
@@ -38,6 +38,11 @@ export class TooltipFactory
         if (tooltipSettings.text)
         {
             options.text = tooltipSettings.text;
+        }
+
+        if (tooltipSettings.html)
+        {
+            options.html = tooltipSettings.html;
         }
 
         if (tooltipSettings.locked)
