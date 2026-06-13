@@ -206,9 +206,9 @@
                         }}
                     />
                     <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary la-bckg-darken-2">
-                        <div class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize4 -textaligncenter -overflowhidden -height5">
+                        <span class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize4 -textaligncenter -overflowhidden -height5">
                             0
-                        </div>
+                        </span>
                     </span>
                 </div>
             {:else}
@@ -257,7 +257,7 @@
                 onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
                 onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
             >
-                <div class="la-left la-flexrow">
+                <span class="la-left la-flexrow">
                     {#if allowDrop}
                     <span class="la-name__span -fontsize4">
                         {getLocalized("LA.advanced.addMacro.subLabel")}
@@ -268,7 +268,7 @@
                         {getLocalized("LA.advanced.addMacro.label")}
                     </span>
                     {/if}
-                </div>
+                </span>
             </summary>
         </details>
     {/if}
