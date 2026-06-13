@@ -37,7 +37,7 @@
         // Separate bonuses into armor-related and other-related categories
         return armor.system.bonuses.reduce(
             (bonusCategories: { armorBonuses: { [key: string]: any }; otherBonuses: { [key: string]: any } }, bonus: { lid: string; val: any }) => {
-                const isArmorBonus = ["pilot_hp pilot_armor pilot_evasion pilot_edef pilot_speed"].includes(bonus.lid);
+                const isArmorBonus = ["pilot_hp", "pilot_armor", "pilot_evasion", "pilot_edef", "pilot_speed"].includes(bonus.lid);
                 const categoryKey = isArmorBonus ? "armorBonuses" : "otherBonuses";
                 bonusCategories[categoryKey][bonus.lid] = bonus.val;
                 return bonusCategories;
@@ -58,6 +58,7 @@
         },
         [[], []]
     ));
+    console.log("ARMORS", armorBonuses, otherBonuses)
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const collID = $derived(`${actor.uuid}.armors`);
