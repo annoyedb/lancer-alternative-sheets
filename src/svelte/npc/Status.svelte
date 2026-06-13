@@ -154,7 +154,6 @@
     collapseID={macrosCollID}
     startCollapsed={false}
 >
-<!-- TODO: make tooltipEnabled respect a setting -->
     <MacroDropBox
         uuid={actor.uuid}
         getExes={sidebarExes}
@@ -162,6 +161,6 @@
         hintDropArea={false}
         allowDrop={advancedOptions}
         buttonStyle={[`${advancedOptions ? "-padding3-l" : ""}`]}
-        tooltipEnabled={true}
+        tooltipEnabled={tooltipEnabled}
     />
 </HeaderMain>
