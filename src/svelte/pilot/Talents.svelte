@@ -144,7 +144,7 @@
         <HeaderSecondary
             text={`${talent.name} ${talent.system.curr_rank}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (collapseAllButtonHoverRank)
@@ -172,7 +172,7 @@
             {#if jndex < talent.system.curr_rank}
                 {#snippet outerContent()}
                     {#if rank.counters.length}
-                    <div class="la-flexcol -widthfull -padding2-l
+                    <div class="la-flexcol -widthfull -padding2-l -fontface-stylized
                         {getCollapseState(getRankCollID(index, jndex)) ? 'la-brdr-transparent -borders-l' : 'la-brdr-trait -borders-l -collapse-fade-out'}"
                     >
                     {#each rank.counters as counter, kndex}
@@ -221,7 +221,7 @@
                 <HeaderSecondary
                     text={rank.name}
                     headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
-                    textStyle={["-fontsize4"]}
+                    textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
                     borderStyle={["la-brdr-trait"]}
                     extensionTextFunction={() => {
                         if (messageButtonHover)

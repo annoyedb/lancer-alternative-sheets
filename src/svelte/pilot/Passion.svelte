@@ -3,7 +3,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { getBondQNAMode, setBondQNAMode } from "@/scripts/store/bond";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getBondImageSrc, getPilotSheetTooltipEnabled, setBondImageSrc } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getThemeKey } from "@/scripts/store/theme";
@@ -20,15 +20,17 @@
     // svelte-ignore state_referenced_locally
     let bondImageSrc = $state(getBondImageSrc(actor.uuid));
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
     const questionAnswer = $derived(getBondQNAMode(actor.uuid));
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
+    const darkTheme = $derived(getBrightness(getThemeKey(actor.uuid)) === "dark");
 
     function getGlowColor()
     {
-        return getBrightness(getThemeKey(actor.uuid)) === "dark" ? "la-prmy-text" : "la-prmy-primary";
+        return darkTheme ? "la-prmy-text" : "la-prmy-primary";
     }
 
     function browseImage()
@@ -84,9 +86,10 @@
         {system.bond.name}
     </span>
     <!-- Bond XP -->
-    <div class="-widthhalf -padding0-tb">
+    <div class="-widthhalf -padding0-tb -fontface-stylized">
         <StatusBar
             dataName={"system.bond_state.xp.value"}
+            nameStyle={[logographic ? "-fontsizemedium" : ""]}
             currentValue={system.bond_state.xp.value}
             maxValue={system.bond_state.xp.max}
             barStyle={["la-bckg-bar-health"]}
@@ -116,24 +119,28 @@
     {#if !questionAnswer}
         <div class="la-bond-card__content la-flexcol -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Major Ideals -->
-            <div class="la-bond-major la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
-                {#each system.bond.system.major_ideals as major, index}
-                    <div class="la-flexrow">
-                        <input type="checkbox"
-                            class=""
-                            name="system.bond_state.xp_checklist.major_ideals.{index}"
-                            checked={system.bond_state.xp_checklist.major_ideals[index]}
-                        />
-                        <span
-                            class="-fontsizemedium -lineheight5"
-                        >
-                            {major}
-                        </span>
-                    </div>
-                {/each}
+            <div class="la-bond-major la-flexcol -alignstart clipped -widthfull -padding0 -padding1-r
+                    {darkTheme ? 'la-bckg-darken-1' : 'la-bckg-lighten-5' }"
+            >
+            {#each system.bond.system.major_ideals as major, index}
+                <div class="la-flexrow">
+                    <input type="checkbox"
+                        class=""
+                        name="system.bond_state.xp_checklist.major_ideals.{index}"
+                        checked={system.bond_state.xp_checklist.major_ideals[index]}
+                    />
+                    <span
+                        class="-fontsizemedium -lineheight5"
+                    >
+                        {major}
+                    </span>
+                </div>
+            {/each}
             </div>
             <!-- Minor Ideals -->
-            <div class="la-bond-minor la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding0 -padding1-r">
+            <div class="la-bond-minor la-flexcol -alignstart clipped -widthfull -padding0 -padding1-r
+                    {darkTheme ? 'la-bckg-darken-1' : 'la-bckg-lighten-5' }"
+            >
                 <div class="la-flexrow -widthfull">
                     <input type="checkbox"
                         class=""

@@ -81,7 +81,7 @@
 {#if burdens.length}
     <div class="la-generated -widthfull -gap1 la-flexcol">
     {#each burdens as burden, index}
-        <div class="la-flexcol -widthfull">
+        <div class="la-flexcol -widthfull -fontface-stylized">
         {#snippet outerContent()}
             <div class="-padding2-l">
                 <CounterBox
@@ -123,7 +123,7 @@
             <HeaderSecondary
                 text={burden.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+                textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)

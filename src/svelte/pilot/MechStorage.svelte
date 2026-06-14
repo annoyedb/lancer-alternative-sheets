@@ -192,7 +192,7 @@
                         src={mech.img}
                         alt={getLocalized("LA.placeholder")}
                     >
-                    <span class="-fontsizesmall">
+                    <span class="-fontsizesmall -fontface-stylized">
                         {mech.name}
                     </span>
                 </button>

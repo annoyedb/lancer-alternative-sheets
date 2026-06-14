@@ -162,7 +162,7 @@
         <HeaderSecondary
             text={reserve.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["-overflowhidden", H2_TEXT_SIZE, getHeaderStyle(reserve)]}
+            textStyle={[H2_TEXT_SIZE, getHeaderStyle(reserve), "-fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

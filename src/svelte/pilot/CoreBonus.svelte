@@ -118,7 +118,7 @@
     {#each coreBonuses as coreBonus, index}
         {#snippet outerContent()}
             {#if coreBonus.system.counters.length}
-            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l">
+            <div class="la-flexrow clipped-bot-alt la-text-header la-bckg-header-anti -widthfull -padding2-l -fontface-stylized">
             {#each coreBonus.system.counters as counter, jndex}
                 <CounterBox
                     text={counter.name}
@@ -184,7 +184,7 @@
         <HeaderSecondary
             text={coreBonus.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={[H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

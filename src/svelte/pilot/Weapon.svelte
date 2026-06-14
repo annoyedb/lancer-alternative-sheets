@@ -279,7 +279,7 @@
         <HeaderTertiary
             text={weapon.name}
             subText={getLocalized("LA.weapons.label")}
-            subHeaderFontStyle={["la-text-header la-prmy-header -fontsizesmall"]}
+            subHeaderFontStyle={["la-text-header la-prmy-header -fontsizesmall -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (attackButtonHover)
@@ -293,7 +293,7 @@
                 return undefined;
             }}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={["la-text-header", H2_TEXT_SIZE]}
+            headerFontStyle={[H2_TEXT_SIZE, "-fontface-stylized"]}
 
             itemID={weapon.id}
             uuid={weapon.uuid}

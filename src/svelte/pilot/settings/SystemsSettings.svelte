@@ -39,7 +39,7 @@
 <div class="-heightfull
     {advancedOptions ? 'la-flexrow' : '-displaynone'}"
 >
-    <span class="{SETTINGS_HEADER_STYLE} -alignend -capitalize">
+    <span class="{SETTINGS_HEADER_STYLE()} -alignend -capitalize">
         {getLocalized("LA.systems.label")}
     </span>
     <div class="la-flexcol -alignstart -padding1-b -heightfull">

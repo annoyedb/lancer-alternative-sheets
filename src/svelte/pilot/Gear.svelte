@@ -76,7 +76,7 @@
     <div class="la-flexcol -gap0 -widthfull">
     {#each gears as gear, index}
     {#snippet outerContent()}
-        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l -fontface-stylized">
         {#if gear.system.uses.max}
             <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <!-- Limited -->
@@ -154,7 +154,7 @@
         <HeaderSecondary
             text={gear.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

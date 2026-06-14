@@ -111,7 +111,7 @@
         <i class="{H2_ICON_SIZE} cci cci-license"></i>
     {/snippet}
     {#snippet headerSecondaryRightOptions()}
-        <span class="la-flexrow -gap0 -padding2-r">
+        <span class="la-flexrow -gap0 -padding2-r -fontface-stylized">
             <span class="-fontsizesmall -letterspacing0">
                 {getLocalized("LA.rank.label")}
             </span>
@@ -161,7 +161,7 @@
         <HeaderSecondary
             text={`${license.system.manufacturer} ${license.name}`}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

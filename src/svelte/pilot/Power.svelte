@@ -92,7 +92,7 @@
     {#each unlockedPowers as power}
     {#snippet outerContent()}
         {#if power.uses || power.frequency}
-        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l -fontface-stylized">
             <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
             {#if power.uses}
                 <LimitedBondBox
@@ -172,7 +172,7 @@
         <HeaderSecondary
             text={power.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

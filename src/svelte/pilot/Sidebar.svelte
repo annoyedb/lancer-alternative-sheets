@@ -4,7 +4,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { getLocalized, handleEditToken, handleRelativeDataInput } from "@/scripts/helpers";
+    import { getLocalized, handleEditToken, handleRelativeDataInput, logographicLanguage } from "@/scripts/helpers";
     import { 
         getPilotSheetSensorsEnabled, 
         getPilotSheetTechAttackEnabled, 
@@ -34,6 +34,7 @@
     let editingBurn = $state(false);
     let editingShield = $state(false);
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const showSensors = getPilotSheetSensorsEnabled();
@@ -76,10 +77,10 @@
     bind:this={component}
 >
     <div 
-        class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -height5 -margin7-t -margin1-l"
+        class="la-flow -textalignleft -letterspacing0 la-bckg-primary la-text-header clipped-bot-alt -padding0-tb -margin7-t -margin1-l -fontface-stylized"
     >
-        <span class="la-cmdline la-text-header -fadein">>//:</span><!--
-    --->LL{system.level} &mdash; {actor.system.callsign}<!--
+        <span class="la-cmdline la-text-header -fadein -fontface-neutral">>//:</span><!--
+    ---><span class="">LL{system.level} &mdash; {actor.system.callsign}</span><!--
     ---><span class="la-extension la-text-header -lower -fadein">--{getLocalized("LA.scan.label")}</span><span class="la-cursor la-prmy-header -fadein"></span>
     </div>
 </div>
@@ -97,7 +98,7 @@
             data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.RIGHT}></i>
     {/if}
-        <div class="la-flexrow -fontsize9" 
+        <div class="la-flexrow -fontsize9"
             data-tooltip={tooltipEnabled ? speedTip : undefined}
             data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.RIGHT}>
@@ -119,13 +120,13 @@
     />
 </div>
 <!-- Pilot Stats 1 -->
-<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly -fontface-stylized">
     <StatComboShort
         icon={"cci cci-role-defender -alignselfcenter"}
         label={getLocalized("LA.armor.short")}
         value={system.armor}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -137,7 +138,7 @@
         label={getLocalized("LA.evasion.short")}
         value={system.evasion}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -149,7 +150,7 @@
         label={getLocalized("LA.edefense.short")}
         value={system.edef}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -161,11 +162,12 @@
 <div class="la-damage la-dropshadow -margin0-lr -margin0-t">
 <!-- No KTB -->
 {#if !system.bond}
-    <div class="la-flexrow -gap2">
+    <div class="la-flexrow -gap2 -fontface-stylized">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR), BURN (BAR) -->
             <StatusBar
                 name={getLocalized("LA.hitpoint.short")}
+                nameStyle={[logographic ? "-fontsizemedium" : ""]}
                 dataName={"system.hp.value"}
                 currentValue={system.hp.value}
                 maxValue={system.hp.max}
@@ -235,11 +237,12 @@
     </div>
 <!-- KTB -->
 {:else}
-    <div class="la-flexrow -gap2 -alignend">
+    <div class="la-flexrow -gap2 -alignend -fontface-stylized">
         <div class="la-visuals -flex5">
             <!-- HP, SHIELD (BAR) -->
             <StatusBar
                 name={getLocalized("LA.hitpoint.short")}
+                nameStyle={[logographic ? "-fontsizemedium" : ""]}
                 dataName={"system.hp.value"}
                 currentValue={system.hp.value}
                 maxValue={system.hp.max}
@@ -284,12 +287,13 @@
         </div>
     </div>
     <div class="la-spacer -tiny"></div>
-    <div class="la-flexrow -gap2">
+    <div class="la-flexrow -gap2 -fontface-stylized">
         <div class="la-visuals -flex5">
             <div class="la-spacer -tiny"></div>
             <!-- STRESS, BURN (BAR) -->
             <StatusBar
                 name={getLocalized("LA.stress.label")}
+                nameStyle={[logographic ? "-fontsizemedium" : ""]}
                 dataName={"system.bond_state.stress.value"}
                 currentValue={system.bond_state.stress.value}
                 maxValue={system.bond_state.stress.max}
@@ -336,14 +340,14 @@
 <div class="la-dropshadow la-flexrow -justifyevenly">
 </div>
 <!-- Pilot Stats 2 -->
-<div class="la-stats la-dropshadow la-flexrow -justifyevenly">
+<div class="la-stats la-dropshadow la-flexrow -justifyevenly -fontface-stylized">
 {#if showTechAttack}
     <StatComboShort
         icon={"cci cci-tech-full -alignselfcenter"}
         label={getLocalized("LA.tattack.short")}
         value={system.tech_attack}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -356,7 +360,7 @@
         label={getLocalized("LA.save.short")}
         value={system.save}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
@@ -369,7 +373,7 @@
         label={getLocalized("LA.sensor.short")}
         value={system.sensor_range}
         outerStyle={["la-text-text -fontsize7"]}
-        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+        innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}

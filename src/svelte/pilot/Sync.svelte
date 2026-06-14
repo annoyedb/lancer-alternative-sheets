@@ -46,64 +46,66 @@
     collapseID={collID}
     startCollapsed={false}
 >
-    <EffectBox
-        name={getLocalized("LA.pilot.sync.download.label")}
-    >
-        <div class="la-flexrow -aligncenter -widthfull -gap1">
-            <GlyphButton
-                style={["la-flexcol mdi mdi-cloud-download -fontsize7 la-prmy-header la-scdy-primary -padding1-lr",
-                    qualityMode ? "-glow-prmy -glow-scdy-hover" + getGlowColor() : ""]}
-                flowClass={FlowClass.DownloadFromCloud}
-                action="download"
-
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
-                tooltipDirection={TooltipDirection.LEFT}
-                logText={getLocalized("LA.pilot.sync.download.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            >
-                <span class="-fontsizesmall -upper">
-                    SYNC
-                </span>
-            </GlyphButton>
-            <div class="la-flexcol -widthfull -gap0">
-                {#if pilotCache?.length}
-                <select
-                    class="la-sync__select -textaligncenter la-bckg-transparent la-text-text la-brdr-text"
-                    name="selectCloudId"
-                    data-type="text"
-                    onchange={event => overridePilotIDWithCloudID(event)}
-                >
-                {#each pilotCache as pilot}
-                    <option value={pilot.id}
-                        selected={pilot.id === cloudID}
-                    >
-                        {`${pilot.callsign} - ${pilot.name}`}
-                    </option>
-                {/each}
-                </select>
-                {/if}
-                <input type="text"
-                    class="-bordersround -small la-text-text -padding1-lr"
-                    name="system.cloud_id"
-                    value={cloudID}
-                    data-dtype="string"
-                    placeholder={getLocalized("LA.pilot.sync.download.subLabel")}
-                />
-            </div>
-        </div>
-    </EffectBox>
-    <EffectBox
-        name={getLocalized("LA.pilot.sync.import.label")}
-    >
-        <input type="file" 
-            class="la-text-text
-                lcp-up"
-            id="pilot-json-import" 
-            name="pilot-json-up" 
-            accept=".json"
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+        <EffectBox
+            name={getLocalized("LA.pilot.sync.download.label")}
         >
-    </EffectBox>
+            <div class="la-flexrow -aligncenter -widthfull">
+                <GlyphButton
+                    style={["la-flexcol mdi mdi-cloud-download -fontsize7 la-prmy-header la-scdy-primary -padding1-lr",
+                        qualityMode ? " -glow-prmy -glow-scdy-hover " + getGlowColor() : ""]}
+                    flowClass={FlowClass.DownloadFromCloud}
+                    action="download"
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
+                    tooltipDirection={TooltipDirection.LEFT}
+                    logText={getLocalized("LA.pilot.sync.download.tooltip")}
+                    logType={TextLogHook.PilotHeader}
+                    logTypeReset={TextLogHook.PilotHeaderReset}
+                >
+                    <span class="-fontsizesmall -upper -fontface-stylized">
+                        SYNC
+                    </span>
+                </GlyphButton>
+                <div class="la-flexcol -widthfull -gap0">
+                    {#if pilotCache?.length}
+                    <select
+                        class="la-sync__select -textaligncenter la-bckg-transparent la-text-text la-brdr-text"
+                        name="selectCloudId"
+                        data-type="text"
+                        onchange={event => overridePilotIDWithCloudID(event)}
+                    >
+                    {#each pilotCache as pilot}
+                        <option value={pilot.id}
+                            selected={pilot.id === cloudID}
+                        >
+                            {`${pilot.callsign} - ${pilot.name}`}
+                        </option>
+                    {/each}
+                    </select>
+                    {/if}
+                    <input type="text"
+                        class="-bordersround -small la-text-text -padding1-lr -letterspacing1 -fontface-stylized -fontsize4"
+                        name="system.cloud_id"
+                        value={cloudID}
+                        data-dtype="string"
+                        placeholder={getLocalized("LA.pilot.sync.download.subLabel")}
+                    />
+                </div>
+            </div>
+        </EffectBox>
+        <EffectBox
+            name={getLocalized("LA.pilot.sync.import.label")}
+        >
+            <input type="file"
+                class="la-text-text -widthfull -padding0-tb -fontface-stylized -upper
+                    lcp-up"
+                id="pilot-json-import"
+                name="pilot-json-up"
+                accept=".json"
+            >
+        </EffectBox>
+    </div>
 </HeaderMain>

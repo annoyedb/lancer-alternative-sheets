@@ -58,7 +58,6 @@
         },
         [[], []]
     ));
-    console.log("ARMORS", armorBonuses, otherBonuses)
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const collID = $derived(`${actor.uuid}.armors`);
@@ -143,7 +142,7 @@
     {#each armors as armor, index}
     {#snippet outerContent()}
     {#if Object.keys(armorBonuses[index]).length}
-        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l -fontface-stylized">
             <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull -justifyevenly">
                 {#if armorBonuses[index].pilot_hp}
                 <span class="la-flexrow -justifycenter -aligncenter -fontsize5 -padding0-lr -padding0-tb la-text-header -gap0"
@@ -261,7 +260,7 @@
         <HeaderSecondary
             text={armor.name}
             headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-            textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-overflowhidden -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (messageButtonHover)

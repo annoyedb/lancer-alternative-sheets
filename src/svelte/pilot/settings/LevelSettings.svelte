@@ -41,7 +41,7 @@
 <div class="-heightfull
     {advancedOptions ? 'la-flexrow' : '-displaynone'}"
 >
-    <span class="{SETTINGS_HEADER_STYLE} -alignend">
+    <span class="{SETTINGS_HEADER_STYLE()} -alignend">
         {getLocalized("LA.pilot.level.label")}
     </span>
     <div class="la-flexcol -alignstart -padding1-b -heightfull">

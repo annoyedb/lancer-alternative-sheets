@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
@@ -11,6 +11,7 @@
         selectedMech,
     } = $props();
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const collID = $derived(`${actor.uuid}.mechStats`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
@@ -25,14 +26,14 @@
     collapseID={collID}
     startCollapsed={true}
 >
-<div class="la-flexcol -widthfull clipped-bot-alt">
+<div class="la-flexcol -widthfull clipped-bot-alt -fontface-stylized">
     <div class="la-flexrow -justifyevenly -widthfull la-bckg-darken-1 -padding0-tb">
         <StatComboShort
             icon={"cci cci-role-defender -alignselfcenter"}
             label={getLocalized("LA.armor.short")}
             value={selectedMech.system.armor}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -44,7 +45,7 @@
             label={getLocalized("LA.evasion.short")}
             value={selectedMech.system.evasion}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -56,7 +57,7 @@
             label={getLocalized("LA.edefense.short")}
             value={selectedMech.system.edef}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -64,13 +65,14 @@
             tooltipDirection={TooltipDirection.LEFT}
         />
     </div>
-    <div class="la-flexrow -justifyevenly -widthfull -padding1-tb -fontsizemedium -bold">
+    <div class="la-flexrow -justifyevenly -widthfull -padding1-tb -fontsizemedium"
+    >
         <StatComboShort
             icon={"mdi mdi-heart-flash -alignselfcenter"}
             label={getLocalized("LA.hitpoint.short")}
             value={selectedMech.system.hp.max}
             outerStyle={["la-text-text -fontsize6"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -82,7 +84,7 @@
             label={getLocalized("LA.structure.label")}
             value={selectedMech.system.structure.max}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -94,7 +96,7 @@
             label={getLocalized("LA.heat.label")}
             value={selectedMech.system.heat.max}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -106,7 +108,7 @@
             label={getLocalized("LA.stress.label")}
             value={selectedMech.system.stress.max}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
     
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -120,7 +122,7 @@
             label={getLocalized("LA.tattack.short")}
             value={selectedMech.system.tech_attack}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -132,7 +134,7 @@
             label={getLocalized("LA.save.short")}
             value={selectedMech.system.save}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
@@ -144,7 +146,7 @@
             label={getLocalized("LA.sensor.short")}
             value={selectedMech.system.sensor_range}
             outerStyle={["la-text-text -fontsize7"]}
-            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter -bold"]}
+            innerStyle={["-divider -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}

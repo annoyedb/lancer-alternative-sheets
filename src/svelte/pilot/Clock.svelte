@@ -77,7 +77,7 @@
 {#if clocks.length}
     <div class="la-generated -widthfull -gap1 la-flexcol">
     {#each clocks as clock, index}
-        <div class="la-flexcol -widthfull">
+        <div class="la-flexcol -widthfull -fontface-stylized">
         {#snippet outerContent()}
             <div class="-padding2-l">
                 <CounterBox
@@ -119,7 +119,7 @@
             <HeaderSecondary
                 text={clock.name}
                 headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-                textStyle={["la-text-header la-prmy-header -overflowhidden", H2_TEXT_SIZE]}
+                textStyle={[H2_TEXT_SIZE, "-fontface-stylized"]}
                 borderStyle={["-bordersoff"]}
                 extensionTextFunction={() => {
                     if (editButtonHover)
