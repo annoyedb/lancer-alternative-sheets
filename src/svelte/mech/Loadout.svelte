@@ -14,15 +14,15 @@
     <Mounts {...props} />
     <Systems {...props} />
     
-    {#if props.pilot && 
-        props.pilot.system.active_mech?.value.uuid === props.actor.uuid}
-        <CoreBonus
-            actor={props.pilot}
-            sheetActor={props.actor}
-        />
-        <Talents
-            actor={props.pilot}
-            sheetActor={props.actor}
-        />
-    {/if}
+{#if props.pilot &&
+    props.pilot.system.active_mech?.value.uuid === props.actor.uuid}
+    <CoreBonus
+        actor={props.pilot}
+        sheetActor={props.actor}
+    />
+    <Talents
+        actor={props.pilot}
+        sheetActor={props.actor}
+    />
+{/if}
 </div>

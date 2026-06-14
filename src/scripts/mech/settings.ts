@@ -275,6 +275,24 @@ export function setMechSheetData(encoded: Array<number>)
     ]);
 }
 
+export function setImageOffsetXY(uuid: string, x: number, y: number)
+{
+    const data = getMechSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgOffsetX = x;
+    data[uuid].headerImgOffsetY = y;
+
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
+}
+
 export function getImageOffsetY(uuid: string): number
 {
     const data = getMechSheetData();
@@ -287,13 +305,35 @@ export function setImageOffsetY(uuid: string, value: number)
     if (!data[uuid])
         data[uuid] = migratedDefaults(uuid, data);
     data[uuid].headerImgOffsetY = value;
-    // setMechSheetData(data);
 
     SocketManager.getInstance().runAsGM(
         setMechSheetData,
         () =>
         {
             Logger.log(`Image offset Y set to ${value} for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
+}
+
+export function getImageOffsetX(uuid: string): number
+{
+    const data = getMechSheetData();
+    return data[uuid]?.headerImgOffsetX ?? 0;
+}
+
+export function setImageOffsetX(uuid: string, value: number)
+{
+    const data = getMechSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgOffsetX = value;
+
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Image offset X set to ${value} for ${uuid}`);
         },
         encodeMechSheetData(data),
     );
@@ -317,6 +357,27 @@ export function setImageWidth(uuid: string, value: number)
         () =>
         {
             Logger.log(`Image width set to ${value} for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
+}
+
+// Note that calling separate setImage functions requires callbacks to run in sequence, otherwise requests will get dropped
+// Which is mainly why this optimization function exists
+export function setImageBatched(uuid: string, x: number, y: number, width: number)
+{
+    const data = getMechSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgOffsetX = x;
+    data[uuid].headerImgOffsetY = y;
+    data[uuid].headerImgWidth = width;
+
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) and width set to ${width} for ${uuid}`);
         },
         encodeMechSheetData(data),
     );

@@ -176,7 +176,7 @@
 {@const weapon = slot.weapon.value}
 <!-- Snippets -->
 {#snippet outerContent()}
-    <div class="la-flexcol -gap0 -widthfull -padding2-l">
+    <div class="la-flexcol -gap0 -widthfull -padding2-l -fontface-stylized">
     {#if slot.size !== "Integrated" && weapon.system.mod}
         <WeaponMod
             actor={actor}
@@ -324,10 +324,10 @@
 
         text={weapon.name}
         headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-        headerFontStyle={[getHeaderStyle(weapon), H2_TEXT_SIZE]}
+        headerFontStyle={[getHeaderStyle(weapon), H2_TEXT_SIZE, "-fontface-stylized"]}
 
         subText={getSubtitle(weapon)}
-        subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall"]}
+        subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall -fontface-stylized"]}
         borderStyle={["-bordersoff"]}
         extensionTextFunction={() => {
             if (attackButtonHover)

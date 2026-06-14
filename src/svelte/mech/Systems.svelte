@@ -154,7 +154,7 @@
     <div class="la-flexcol -gap0 -widthfull">
     {#each systemComponents as component, index}
     {#snippet outerContent()}
-        <div class="la-flexcol -gap0 -widthfull -padding2-l">
+        <div class="la-flexcol -gap0 -widthfull -padding2-l -fontface-stylized">
             <div class="la-flexrow clipped-bot-alt la-bckg-header-anti -widthfull">
                 <!-- Limited -->
                 <LimitedBox
@@ -198,7 +198,7 @@
     {#snippet headerTertiaryRightOptions()}
         <TotalSP
             value={component.value.system.sp}
-            style={[getSPStyle(component)]}
+            style={[getSPStyle(component), "-fontface-stylized"]}
 
             logText={getLocalized("LA.mech.system.points.tooltip")}
             logType={TextLogHook.MechHeader}
@@ -257,10 +257,10 @@
 
             text={component.value.name}
             headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-            headerFontStyle={[getTitleStyle(component), H2_TEXT_SIZE]}
+            headerFontStyle={[getTitleStyle(component), H2_TEXT_SIZE, "-fontface-stylized"]}
 
             subText={getSubtitle(component)}
-            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsizesmall"]}
+            subHeaderFontStyle={[getSubtitleStyle(component), "-fontsizesmall -fontface-stylized"]}
             borderStyle={["-bordersoff"]}
             extensionTextFunction={() => {
                 if (effectButtonHover)

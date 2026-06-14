@@ -381,7 +381,7 @@ export function setImageBatched(uuid: string, x: number, y: number, width: numbe
         setPilotSheetData,
         () =>
         {
-            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) for ${uuid}`);
+            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) and width set to ${width} for ${uuid}`);
         },
         encodePilotSheetData(data),
     );

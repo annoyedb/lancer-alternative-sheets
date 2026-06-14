@@ -70,7 +70,7 @@
     {#snippet headerSecondaryRightOptions()}
     <TotalSP
         value={mod.system.sp}
-        style={[H2_TEXT_SIZE, "-margin1-r"]}
+        style={["-fontsize4", "-margin1-r -fontface-stylized"]}
 
         logText={getLocalized("LA.mech.system.points.tooltip")}
         logType={TextLogHook.MechHeader}
@@ -139,7 +139,7 @@
 
         text={mod.name}
         headerStyle={[H2_HEADER_STYLE, "la-bckg-header-anti"]}
-        textStyle={[H2_TEXT_SIZE]}
+        textStyle={[H2_TEXT_SIZE, "-fontface-stylized"]}
         borderStyle={["la-brdr-weapon-mod"]}
         extensionTextFunction={() => {
             if (effectButtonHover)
@@ -195,6 +195,7 @@
                 bonuses={mod.system.bonuses}
                 bonusPath={`${path}.system.bonuses`}
             />
+        {#if mod.system.added_tags.length || mod.system.tags.length}
             <EffectBox
                 name={getLocalized("LA.mech.mod.tags.label")}
 
@@ -215,6 +216,7 @@
                     tooltipTheme={theme}
                 />
             </EffectBox>
+        {/if}
             <EffectBox
                 name={getLocalized("LA.mech.mod.effect.label")}
 

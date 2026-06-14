@@ -110,7 +110,7 @@
         collapseID={`${actor.uuid}.status.integrity`}
         startCollapsed={false}
     >
-        <div class="la-flexcol -widthfull -heightfull -padding0-r">
+        <div class="la-flexcol -widthfull -heightfull -padding0-r -padding1-t -fontface-stylized">
             <div class="la-flexrow -justifyevenly -wrapwrap -widthfull -heightfull -flex1">
                 <!-- Structure -->
                 <div class="la-flexrow -aligncenter">

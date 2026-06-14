@@ -5,6 +5,8 @@ export class MechSheetSettings implements MechSheetSettingsData
 {
     [uuid: string]: {
         headerImgOffsetY: number;
+        headerImgOffsetX: number;
+        headerImgWidth: number;
         themeOverride: string;
         sidebarExes: Array<string>;
         syncActorTokenImages: boolean;
@@ -14,6 +16,8 @@ export class MechSheetSettings implements MechSheetSettingsData
     {
         return {
             headerImgOffsetY: 0,
+            headerImgOffsetX: 0,
+            headerImgWidth: 0,
             themeOverride: "",
             sidebarExes: [
                 SystemButton.Stabilize,

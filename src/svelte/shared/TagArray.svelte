@@ -32,7 +32,7 @@
 
 {#snippet renderTags(tag: any)}
     <div
-            class="la-flexrow la-bckg-primary la-text-header -bordersround -small -bordersoff -padding0-l -padding1-r -aligncenter -gap0"
+        class="la-flexrow la-bckg-primary la-text-header -bordersround -small -bordersoff -padding0-l -padding1-r -aligncenter -gap0"
         data-tooltip={tooltipEnabled ? getTooltip(tag) : ""}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.DOWN}
