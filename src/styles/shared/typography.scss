@@ -134,6 +134,11 @@
 
     @include generate-fontsize(0, 20, 0.25rem);
 
+    .-fontsizesmaller
+    {
+        font-size: 0.7rem;
+    }
+
     .-fontsizesmall
     {
         font-size: 0.75rem;

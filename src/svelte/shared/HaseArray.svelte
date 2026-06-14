@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getActiveTab } from "@/scripts/store/advanced";
     import { FlowClass } from "@/enums/FlowClass";
     import { ActiveTab } from "@/enums/ActiveTab";
@@ -22,6 +22,7 @@
         logTypeReset,
     }: {pilot: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
 
+    const logographic = logographicLanguage();
     const qualityMode = getExtraEffectsEnabled();
     const activeTab = $derived(getActiveTab(actor.uuid, ActiveTab.Secondary) || "statistics");
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
@@ -56,7 +57,7 @@
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                 buttonStyle={["-widthfull -heightfull -positionabsolute",
                     qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
-                outerTextStyle={["-widthfull -textaligncenter"]}
+                outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemedium" : "-fontsizesmall"]}
                 innerTextStyle={["-fontsize6 -lineheight15",
                     qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
@@ -82,7 +83,7 @@
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                 buttonStyle={["-widthfull -heightfull -positionabsolute",
                     qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
-                outerTextStyle={["-widthfull -textaligncenter"]}
+                outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmaller"]}
                 innerTextStyle={["-fontsize5 -lineheight13",
                     qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
@@ -106,7 +107,7 @@
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                 buttonStyle={["-widthfull -heightfull -positionabsolute",
                     qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
-                outerTextStyle={["-widthfull -textaligncenter"]}
+                outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmaller"]}
                 innerTextStyle={["-fontsize5 -lineheight13",
                     qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
@@ -132,7 +133,7 @@
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                 buttonStyle={["-widthfull -heightfull -positionabsolute",
                     qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
-                outerTextStyle={["-widthfull -textaligncenter"]}
+                outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmaller"]}
                 innerTextStyle={["-fontsize5 -lineheight13",
                     qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />
@@ -159,7 +160,7 @@
                 innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                 buttonStyle={["-widthfull -heightfull -positionabsolute",
                     qualityMode ? "la-prmy-primary -glow-prmy-hover" : ""]}
-                outerTextStyle={["-widthfull -textaligncenter"]}
+                outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmaller"]}
                 innerTextStyle={["-fontsize5 -lineheight13",
                     qualityMode ? "-pulse-glow-prmy la-prmy-header" : ""]}
             />

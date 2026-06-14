@@ -7,7 +7,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
 
-    import { browseActorImage, getLocalized, photosensitiveStyling } from "@/scripts/helpers";
+    import { browseActorImage, getLocalized, logographicLanguage, photosensitiveStyling } from "@/scripts/helpers";
     import {
         getActorTokenSync,
         getImageOffsetX,
@@ -41,6 +41,7 @@
         owner,
     } : PilotSheetProps = $derived(props);
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
@@ -212,7 +213,10 @@
             class="la-flexrow -justifystart -widthfull"
         >
             <i class="mdi mdi-fingerprint -fontsize6"></i>
-            <span class="-fontsizesmall -aligncontentcenter -fontface-stylized">
+            <span
+                class="-aligncontentcenter -fontface-stylized
+                    {logographic ? '-fontsize3' : '-fontsizesmall'}"
+            >
                 {getLocalized("LA.pilot.fluff.2")}
             </span>
         </div>
@@ -221,14 +225,20 @@
         >
             {#if owner}
                 <i class="mdi mdi-cable-data -fontsize6"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized">
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.isOwner.label")}
             </span>
             {:else}
                 <i class="mdi mdi-cable-data -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized {photosensitiveStyling('horus--subtle')}">
-                {getLocalized("LA.pilot.isLimited.label")}
-            </span>
+                <span
+                    class="-aligncontentcenter -fontface-stylized {photosensitiveStyling('horus--subtle')}
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
+                    {getLocalized("LA.pilot.isLimited.label")}
+                </span>
             {/if}
         </div>
         <div
@@ -236,32 +246,53 @@
         >
             {#if system.hp.value >= system.hp.max}
                 <i class="mdi mdi-heart-pulse -fontsize6"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized">
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.1.label")}
             </span>
             {:else if system.hp.value <= system.hp.max && system.hp.value > system.hp.max * 0.75}
                 <i class="mdi mdi-heart-pulse -fontsize6"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized">
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.2.label")}
             </span>
             {:else if system.hp.value <= system.hp.max * 0.75 && system.hp.value > system.hp.max * 0.5}
-                <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized {photosensitiveStyling('horus--very--subtle')}">
+                <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--very--subtle')}"></i>
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {photosensitiveStyling('horus--very--subtle')}
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.3.label")}
             </span>
             {:else if system.hp.value <= system.hp.max * 0.5 && system.hp.value > system.hp.max * 0.25}
-                <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized {photosensitiveStyling('horus--very--subtle')}">
+                <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--very--subtle')}"></i>
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {photosensitiveStyling('horus--very--subtle')}
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.4.label")}
             </span>
             {:else if system.hp.value <= system.hp.max * 0.25 && system.hp.value > 0}
                 <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
-                <span class="-fontsizesmall -aligncontentcenter -fontface-stylized {photosensitiveStyling('horus--subtle')}">
+                <span
+                    class="-aligncontentcenter -fontface-stylized
+                        {photosensitiveStyling('horus--subtle')}
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.5.label")}
             </span>
             {:else}
                 <i class="mdi mdi-heart-pulse -fontsize6 {photosensitiveStyling('horus--subtle')}"></i>
-                <span class="-fontsizesmall -aligncontentcenter {photosensitiveStyling('horus--subtle')}">
+                <span class="-aligncontentcenter -fontface-stylized
+                        {photosensitiveStyling('horus--subtle')}
+                        {logographic ? '-fontsize3' : '-fontsizesmall'}"
+                >
                 {getLocalized("LA.pilot.activity.6.label")}
             </span>
             {/if}

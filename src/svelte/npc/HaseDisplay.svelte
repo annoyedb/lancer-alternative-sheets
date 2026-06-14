@@ -1,7 +1,7 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import { getLocalized } from "@/scripts/helpers";
+    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import HexButton from "@/svelte/shared/button/HexButton.svelte";
@@ -13,6 +13,7 @@
         system,
     }: NPCSheetProps = $props();
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getNPCSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
@@ -41,7 +42,7 @@
                     outerStyle={["-hull"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmall"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -65,7 +66,7 @@
                     outerStyle={["-agi"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmall"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -88,7 +89,7 @@
                     outerStyle={["-sys"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmall"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>
@@ -112,7 +113,7 @@
                     outerStyle={["-eng"]}
                     innerStyle={["la-text-header -positionabsolute -divider -thickness1 la-prmy-header"]}
                     buttonStyle={["-widthfull -heightfull -positionabsolute la-prmy-primary", qualityMode ? "-glow-prmy-hover" : ""]}
-                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized"]}
+                    outerTextStyle={["-widthfull -textaligncenter -fontface-stylized", logographic ? "-fontsizemediumer" : "-fontsizesmall"]}
                     innerTextStyle={["-fontsize5 -lineheight13 la-prmy-header", qualityMode ? "-glow-prmy" : ""]}
                 />
             </div>

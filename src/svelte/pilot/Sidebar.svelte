@@ -193,8 +193,9 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -margin0-r
-                {qualityMode ? '-glow-prmy' : ''}"
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -textaligncenter la-prmy-bar-shield -margin0-r
+                {qualityMode ? '-glow-prmy' : ''}
+                {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
@@ -205,7 +206,8 @@
                 onblur={() => {editingShield = false;}}
                 onchange={(event) => handleRelativeDataInput(event, system.overshield.value)}
             >
-            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+            <span class="la-damage__span -heightfull -lineheight3
+                    {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
@@ -214,8 +216,9 @@
         ---></span>
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -margin1-r
-                {qualityMode ? '-glow-prmy' : ''}"
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -textaligncenter la-prmy-bar-burn -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}
+                {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
@@ -226,7 +229,8 @@
                 onblur={() => {editingBurn = false;}}
                 onchange={(event) => handleRelativeDataInput(event, system.burn)}
             >
-            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+            <span class="la-damage__span -heightfull -lineheight3
+                    {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
@@ -265,10 +269,13 @@
             />
         </div>
         <!-- SHIELD (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -width3ch -textaligncenter la-prmy-bar-shield -margin1-r
-                {qualityMode ? '-glow-prmy' : ''}"
+        <div class="la-flexcol -divider la-prmy-bar-shield -flex0 -textaligncenter la-prmy-bar-shield -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}
+                {logographic ? '-width4ch' : '-width3ch'}"
         >
-            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+            <span
+                class="la-damage__span -heightfull -lineheight3
+                    {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                 data-tooltip={tooltipEnabled ? shieldTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
@@ -314,8 +321,9 @@
             />
         </div>
         <!-- BURN (VALUE) -->
-        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -width3ch -textaligncenter la-prmy-bar-burn -margin1-r
-                {qualityMode ? '-glow-prmy' : ''}"
+        <div class="la-flexcol -divider la-prmy-bar-burn -flex0 -textaligncenter la-prmy-bar-burn -margin1-r
+                {qualityMode ? '-glow-prmy' : ''}
+                {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
                 type={"number"}
@@ -326,7 +334,9 @@
                 onblur={() => {editingBurn = false;}}
                 onchange={(event) => handleRelativeDataInput(event, system.burn)}
             >
-            <span class="la-damage__span -fontsizesmall -heightfull -lineheight3"
+            <span
+                class="la-damage__span -heightfull -lineheight3
+                    {logographic ? '-fontsizemedium' : '-fontsizesmall'}"
                 data-tooltip={tooltipEnabled ? burnTip : undefined}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.RIGHT}
