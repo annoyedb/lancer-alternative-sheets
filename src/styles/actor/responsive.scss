@@ -37,15 +37,15 @@
     //     }
     // }
 
-    .la-header-content
-    {
-        container-type: inline-size;
-        @container (max-width: 37.5rem)
-        {
-            .la-boundimage
-            {
-                display: none;
-            }
-        }
-    }
+    //.la-header-content
+    //{
+    //    container-type: inline-size;
+    //    @container (max-width: 37.5rem)
+    //    {
+    //        .la-boundimage
+    //        {
+    //            display: none;
+    //        }
+    //    }
+    //}
 }

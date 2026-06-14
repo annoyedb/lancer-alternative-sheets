@@ -236,8 +236,8 @@
             />
             <!-- Edit Bond -->
             <GlyphButton
-                style={["mdi mdi-pencil-ruler-outline la-text-secondary -fontsize6 -lineheight8 -justifycenter -aligncenter",
-                    qualityMode ? "-glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
+                style={["mdi mdi-pencil la-text-secondary -fontsize6 -lineheight8 -justifycenter -aligncenter",
+                    qualityMode ? " -glow-prmy la-prmy-primary -glow-prmy-hover " + getGlowColor() : ""]}
 
                 flowClass={FlowClass.ContextMenu}
                 uuid={system.bond.uuid}

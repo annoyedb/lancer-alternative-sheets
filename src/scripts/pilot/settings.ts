@@ -343,6 +343,29 @@ export function setImageOffsetX(uuid: string, value: number)
     );
 }
 
+export function getImageWidth(uuid: string): number
+{
+    const data = getPilotSheetData();
+    return data[uuid]?.headerImgWidth ?? 0;
+}
+
+export function setImageWidth(uuid: string, value: number)
+{
+    const data = getPilotSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgWidth = value;
+
+    SocketManager.getInstance().runAsGM(
+        setPilotSheetData,
+        () =>
+        {
+            Logger.log(`Image width set to ${value} for ${uuid}`);
+        },
+        encodePilotSheetData(data),
+    );
+}
+
 export function getThemeOverride(uuid: string): string
 {
     const data = getPilotSheetData();

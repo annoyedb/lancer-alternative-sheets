@@ -11,4 +11,6 @@ export interface BoundImageProps
     ySetter?: (uuid: string, value: number) => void;
     xGetter?: (uuid: string) => number;
     xSetter?: (uuid: string, value: number) => void;
+    widthGetter?: (uuid: string) => number;
+    widthSetter?: (uuid: string, value: number) => void;
 }

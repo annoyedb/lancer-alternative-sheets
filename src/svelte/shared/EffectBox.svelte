@@ -5,7 +5,9 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized, logographicLanguage } from "@/scripts/helpers";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
 
     const {
         children,
@@ -25,6 +27,7 @@
         logTypeReset,
     }: EffectBoxProps & TooltipProps & TextLogEventProps = $props();
 
+    const qualityMode = getExtraEffectsEnabled();
     const logographic = logographicLanguage();
 </script>
 
@@ -37,7 +40,8 @@
             {logographic ? '-fontsizemediumer' : '-fontsizesmall'}">
         {name}<!--
 ---><button type="button"
-        class="mdi mdi-pencil-ruler-outline popout-text-edit-button -padding0-l
+        class="mdi mdi-pencil popout-text-edit-button -padding0-l
+            {qualityMode ? CLICKABLE_HOVER() : ''}
             {editOption ? '' : '-displaynone'}"
         data-path={editPath}
         aria-label={getLocalized("LA.edit.label")}>

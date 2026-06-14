@@ -4,24 +4,21 @@
     .la-header
     {
         height: 10rem;
-
-        .la-header-content
-        {
-            //min-width: 100rem;
-            //
-            //.la-actorname__input
-            //{
-            //    text-overflow: ellipsis;
-            //}
-        }
         
         >.la-nav__island
         {
-            top: 8.25rem;
+            top: 8rem;
         }
 
         .la-header-content
         {
+            .la-divider-h
+            {
+                mask-image: linear-gradient(to right, black 70%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+                -moz-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+            }
+
             .la-textlog__wrapper
             {
                 top: 5rem;

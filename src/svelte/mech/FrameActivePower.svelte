@@ -84,8 +84,8 @@
         >
             {name}
         </span>
-        <div class="-flexthird">
-        </div>
+        <span class="-flexthird">
+        </span>
     </button>
 </div>
 {/snippet}

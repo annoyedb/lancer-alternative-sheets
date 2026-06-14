@@ -26,8 +26,8 @@
 
 {#snippet headerOptions()}
 <GlyphButton
-    style={["mdi mdi-pencil-ruler-outline -fontsize4 -height4 -lineheight4 la-prmy-header la-scdy-primary",
-        qualityMode ? "-glow-prmy -glow-scdy-hover" : ""]}
+    style={["mdi mdi-pencil -fontsize4 -height4 -lineheight4 la-prmy-header la-scdy-primary",
+        qualityMode ? " -glow-prmy -glow-scdy-hover " : ""]}
 
     flowClass={FlowClass.EditText}
     path="system.history"

@@ -7,7 +7,7 @@
     import { browseActorImage, getLocalized } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
-    import { getActorTokenSync, getImageOffsetY, getMechSheetTooltipEnabled, setActorTokenSync, setImageOffsetY } from "@/scripts/mech/settings";
+    import { getActorTokenSync, getImageOffsetY, getImageWidth, getMechSheetTooltipEnabled, setActorTokenSync, setImageOffsetY, setImageWidth } from "@/scripts/mech/settings";
     import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
@@ -162,5 +162,7 @@
         uuid={actor.uuid}
         yGetter={getImageOffsetY}
         ySetter={setImageOffsetY}
+        widthGetter={getImageWidth}
+        widthSetter={setImageWidth}
     />
 </div>

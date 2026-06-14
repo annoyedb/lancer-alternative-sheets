@@ -15,11 +15,11 @@
     // listener can be added through the activateListeners() override, or hooks, etc
     --}}
     <header 
-        class="la-header la-bckg-primary {{la_getBackgroundStyle}} -flex0 -positionrelative -fontface-neutral
+        class="la-header {{la_getBackgroundStyle}} la-flexcol -widthfull la-bckg-primary -positionrelative -fontface-neutral
             sheet-header"
     >
         <div 
-            class="-heightfull
+            class="-heightfull -widthfull
                 la-SVELTE-HEADER"
         >
             {{!-- Svelte is injected in-place here --}}
@@ -136,7 +136,7 @@
                 >
                     {{!-- Status Content --}}
                     <nav 
-                        class="la-tabs-quaternary la-flexrow -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        class="la-tabs-quaternary la-flexrow -justifyend la-bckg-tabs clipped -margin1-t -positionabsolute -right0"
                         data-group="quaternary"
                         style="z-index: 1;"
                     >
@@ -179,7 +179,7 @@
                     data-tab="loadout"
                 >
                     <nav 
-                        class="la-tabs la-flexrow -justifyend la-bckg-tabs clipped -margin2-t -positionabsolute -right0" 
+                        class="la-tabs la-flexrow -justifyend la-bckg-tabs clipped -margin1-t -positionabsolute -right0"
                         data-group="primary"
                         style="z-index: 1;"
                     >

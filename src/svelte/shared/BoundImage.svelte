@@ -2,6 +2,7 @@
     import type { BoundImageProps } from "@/interfaces/actor/BoundImageProps";
     import { id as moduleID } from '@/module.json';
     import { getAdvancedState } from "@/scripts/store/advanced";
+    import { onMount } from "svelte";
 
     const {
         children,
@@ -12,6 +13,8 @@
         ySetter,
         xGetter,
         xSetter,
+        widthGetter,
+        widthSetter,
     }: BoundImageProps = $props();
 
     let advancedOptions = $derived(getAdvancedState(uuid));
@@ -20,12 +23,12 @@
     let dragging = false;
     let offset = { x: 0, y: 0 };
     // svelte-ignore state_referenced_locally
-    let position = $state({ 
-        x: xGetter ? xGetter(uuid) : 0, 
-        y: yGetter ? yGetter(uuid) : 0 
+    let position = $state({
+        x: xGetter ? xGetter(uuid) : 0,
+        y: yGetter ? yGetter(uuid) : 0
     });
 
-    function handlePointerDown(event: PointerEvent) 
+    function handlePointerDown(event: PointerEvent)
     {
         if (!advancedOptions) return;
 
@@ -37,16 +40,16 @@
         };
     }
 
-    function handlePointerMove(event: PointerEvent) 
+    function handlePointerMove(event: PointerEvent)
     {
-        if (dragging) 
+        if (dragging)
             position = {
                 x: event.clientX - offset.x,
                 y: event.clientY - offset.y
             };
     }
 
-    function handlePointerUp(_event: PointerEvent, callback?: () => void) 
+    function handlePointerUp(_event: PointerEvent, callback?: () => void)
     {
         if (dragging && callback)
             callback();
@@ -62,27 +65,105 @@
             {
                 xySetter(uuid, position.x, position.y);
             }
-            if (ySetter) 
+            if (ySetter)
             {
                 ySetter(uuid, position.y);
             }
-            if (xSetter) 
+            if (xSetter)
             {
                 xSetter(uuid, position.x);
             }
         });
     }
 
+    // Resizing ---------------------------------------------------------------
+    let containerElement: HTMLDivElement | undefined = $state();
+    let width = $state(widthGetter ? widthGetter(uuid) : 0);
+
+    let saveTimeout: ReturnType<typeof setTimeout> | undefined;
+    function debouncedSave()
+    {
+        if (saveTimeout) clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+            if (widthSetter) widthSetter(uuid, width);
+            saveTimeout = undefined;
+        }, 400);
+    }
+
+    // Touch pinch state
+    let pinchStartDist = 0;
+    let pinchStartWidth = 0;
+
+    function getTouchDist(touches: TouchList): number
+    {
+        const dx = touches[1].clientX - touches[0].clientX;
+        const dy = touches[1].clientY - touches[0].clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    onMount(() => {
+        if (!containerElement) return;
+
+        if (widthGetter && width === 0)
+            width = containerElement.offsetWidth;
+
+        const onWheel = (event: WheelEvent) =>
+        {
+            if (!advancedOptions || !widthSetter) return;
+            event.preventDefault();
+            width = Math.max(50, width - event.deltaY * 0.5);
+            debouncedSave();
+        };
+
+        const onTouchStart = (event: TouchEvent) =>
+        {
+            if (!advancedOptions || !widthSetter || event.touches.length !== 2) return;
+            event.preventDefault();
+            pinchStartDist = getTouchDist(event.touches);
+            pinchStartWidth = width;
+        };
+
+        const onTouchMove = (event: TouchEvent) =>
+        {
+            if (!advancedOptions || !widthSetter || event.touches.length !== 2) return;
+            event.preventDefault();
+            const scale = getTouchDist(event.touches) / pinchStartDist;
+            width = Math.max(50, Math.round(pinchStartWidth * scale));
+        };
+
+        const onTouchEnd = () =>
+        {
+            if (!advancedOptions || !widthSetter) return;
+            if (saveTimeout) clearTimeout(saveTimeout);
+            widthSetter(uuid, width);
+        };
+
+        containerElement.addEventListener('wheel', onWheel, { passive: false });
+        containerElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        containerElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        containerElement.addEventListener('touchend', onTouchEnd);
+
+        return () =>
+        {
+            if (saveTimeout) clearTimeout(saveTimeout);
+            containerElement?.removeEventListener('wheel', onWheel);
+            containerElement?.removeEventListener('touchstart', onTouchStart);
+            containerElement?.removeEventListener('touchmove', onTouchMove);
+            containerElement?.removeEventListener('touchend', onTouchEnd);
+        };
+    });
 </script>
-<div class="la-boundimage -flex1 -widthfull -heightfull"
+<div class="la-boundimage -flex1 -heightfull"
+    style="{width > 0 ? `width: ${width}px;` : 'width: 100%;'}"
+    bind:this={containerElement}
     >
     {#if children}
         {@render children()}
     {/if}
-    <img 
+    <img
         class="la-boundimage__image -heightfull -overflowhidden -float-r
             {advancedOptions ? '-pointermove' : ''}"
-        src={image} 
+        src={image}
         alt={`modules/${moduleID}/assets/nodata.png`}
         style="
             margin-top: { xySetter || ySetter ? position.y : 0 }px;

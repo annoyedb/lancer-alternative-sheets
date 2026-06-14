@@ -299,6 +299,29 @@ export function setImageOffsetY(uuid: string, value: number)
     );
 }
 
+export function getImageWidth(uuid: string): number
+{
+    const data = getMechSheetData();
+    return data[uuid]?.headerImgWidth ?? 0;
+}
+
+export function setImageWidth(uuid: string, value: number)
+{
+    const data = getMechSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgWidth = value;
+
+    SocketManager.getInstance().runAsGM(
+        setMechSheetData,
+        () =>
+        {
+            Logger.log(`Image width set to ${value} for ${uuid}`);
+        },
+        encodeMechSheetData(data),
+    );
+}
+
 export function getThemeOverride(uuid: string): string
 {
     const data = getMechSheetData();
