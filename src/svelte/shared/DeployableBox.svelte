@@ -167,7 +167,7 @@
 {#each globallyOwnedDeployables as deployable}
     {#if lidSourceHasDeployable(deployable)}
     <!-- Deployable -->
-    <div class="la-effectbox la-bckg-card la-brdr-repcap -widthful -bordersround-ltb
+    <div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb
             ref set"
         data-uuid="{deployable.uuid}"
     >
@@ -178,7 +178,7 @@
     ---></span>
         <!-- Generated Content -->
         <div class="la-generated -widthfull -gap1 la-flexcol">
-            <div class="-fontsizemedium">
+            <div class="-fontsizemedium -widthfull">
                 <!-- Deployable Actions -->
                 <div class="la-effectbox-buttons la-flexrow -justifybetween">
                     <div class="la-flexcol -alignstart">

@@ -4,6 +4,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -21,8 +22,8 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import { getExtraEffectsEnabled } from "@/scripts/settings";
-    
+    import { H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
+
     type WeaponItemProps = {
         actor: any;
         tier: number;
@@ -281,7 +282,7 @@
 
     text={weapon.name}
     headerStyle={[H3_HEADER_STYLE, "la-bckg-pilot"]}
-    headerFontStyle={[getTitleStyle(weapon), "-fontsize3 -fontface-stylized"]}
+    headerFontStyle={[H2_TEXT_SIZE, getTitleStyle(weapon), "-fontface-stylized"]}
 
     subText={isDestroyed(weapon) ? getLocalized("LA.mech.slot.destroyed.label") : weapon.system.weapon_type}
     subHeaderFontStyle={[getSubtitleStyle(weapon), "-fontsizesmall -fontface-stylized"]}
