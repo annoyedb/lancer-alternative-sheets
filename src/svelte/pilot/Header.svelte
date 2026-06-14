@@ -8,14 +8,14 @@
     import {browseActorImage, getLocalized, photosensitiveStyling} from "@/scripts/helpers";
     import { getActorTokenSync, getImageOffsetX, getImageOffsetY, getPilotSheetTooltipEnabled, setActorTokenSync, setImageOffsetXY } from "@/scripts/pilot/settings";
     import { getAdvancedState, getTokenImageLock, setTokenImageLock } from "@/scripts/store/advanced";
-    import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/shared/BoundImage.svelte";
     import TextLog from "@/svelte/shared/TextLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
     const {
@@ -26,7 +26,6 @@
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
-    const introPlayed = $derived(getIntroRun(actor.uuid));
     const advancedOptions = $derived(getAdvancedState(actor.uuid));
     const tokenImageLocked = $derived(getTokenImageLock(actor.uuid));
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
@@ -36,123 +35,134 @@
     });
 </script>
 
-<!-- Header -->
-<div class="la-header-content la-flexrow">
-    <!-- Advanced Options Toggle -->
-    <div 
-        class="la-flexcol -alignend la-settings__island -padding1 -positionabsolute -right0 -top0" 
+<!-- Advanced Options Toggle -->
+{#snippet advancedOptionsToggle()}
+<div
+        class="la-flexcol -alignend la-settings__island -padding1 -positionabsolute -right0 -top0"
         style="z-index: 2;"
-    >
-        <div
+>
+    <div
             class="la-flexrow"
-        >
-        {#if advancedOptions}
-            <i 
+    >
+    {#if advancedOptions}
+        <i
                 class="mdi mdi-mouse-move-vertical -fontsize6 -aligncontentcenter la-text-header la-prmy-primary
-                    {qualityMode ? '-glow-prmy' : ''}"
+            {qualityMode ? '-glow-prmy' : ''}"
                 data-tooltip={TooltipFactory.buildTooltip(getLocalized("LA.advanced.imageOffset.tooltip"))}
                 data-tooltip-class="clipped-bot la-tooltip {theme}"
                 data-tooltip-direction={TooltipDirection.LEFT}
-            ></i>
-        {/if}
-            <AdvancedButton
+        ></i>
+    {/if}
+        <AdvancedButton
                 style={["-fontsize5 la-prmy-primary",
-                    qualityMode ? "-glow-prmy" : ""]}
+                qualityMode ? "-glow-prmy" : ""]}
                 uuid={actor.uuid}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
                 logType={TextLogHook.PilotHeader}
                 logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        </div>
-    {#if advancedOptions}
-        
-    {#if advancedOptions}
-        <LockImageButton
+        />
+    </div>
+{#if advancedOptions}
+    <LockImageButton
             style="-fontsize7 la-text-header la-prmy-primary
-                {qualityMode ? '-glow-prmy' : ''}"
+    {qualityMode ? '-glow-prmy' : ''}"
             actor={actor}
             setState={setActorTokenSync}
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.LEFT}
             logType={TextLogHook.PilotHeader}
             logTypeReset={TextLogHook.PilotHeaderReset}
+    />
+    {#if !tokenImageLocked}
+    <GlyphButton
+        flowClass={FlowClass.None}
+        style={["mdi mdi-image-edit -fontsize6 la-text-header -width7 la-prmy-primary",
+qualityMode ? "-glow-prmy" : ""]}
+        onClick={event => browseActorImage(event, actor)}
+        tooltipEnabled={tooltipEnabled}
+        tooltipTheme={theme}
+        tooltip={getLocalized("LA.edit.image.actor.tooltip")}
+        tooltipDirection={TooltipDirection.LEFT}
+        logText={getLocalized("LA.edit.image.actor.tooltip")}
+        logType={TextLogHook.PilotHeader}
+        logTypeReset={TextLogHook.PilotHeaderReset}
+    />
+    {/if}
+{/if}
+</div>
+{/snippet}
+
+<!-- Name, Callsign, Background -->
+{#snippet identification()}
+<div class="la-names -margin3-l -margin3-t -flex1">
+    <div class="la-flexrow">
+        <input type="text"
+               class="la-actorname__input la-text-header -fontsize6 -upper -letterspacing1
+                charname"
+               name={"name"}
+               value={actor.name}
+               placeholder={getLocalized("LA.namePlaceholder")}
+               onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.alias.tooltip"), TextLogHook.PilotHeader) }
+               onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
         />
-        {#if !tokenImageLocked}
-            <GlyphButton
-                flowClass={FlowClass.None}
-                style={["mdi mdi-image-edit -fontsize6 la-text-header -width7 la-prmy-primary",
-                    qualityMode ? "-glow-prmy" : ""]}
-                onClick={event => browseActorImage(event, actor)}
-                tooltipEnabled={tooltipEnabled}
-                tooltipTheme={theme}
-                tooltip={getLocalized("LA.edit.image.actor.tooltip")}
-                tooltipDirection={TooltipDirection.LEFT}
-                logText={getLocalized("LA.edit.image.actor.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
-            />
-        {/if}
-    {/if}
-    {/if}
+        <span class="-fontsizesmall la-text-darken-3">
+            {getLocalized("LA.pilot.alias.label")}
+        </span>
     </div>
-    <div class="la-names -margin3-l -margin3-t -flex1">
-        <div class="la-flexrow">
-            <input type="text"
-                class="la-actorname__input la-text-header -fontsize6 -upper -letterspacing1
-                    charname"
-                name={"name"}
-                value={actor.name}
-                placeholder={getLocalized("LA.namePlaceholder")}
-                onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.alias.tooltip"), TextLogHook.PilotHeader) }
-                onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-            />
-            <span class="-fontsizesmall la-text-darken-3">
-                {getLocalized("LA.pilot.alias.label")}
-            </span>
-        </div>
-        <hr class="la-divider-h -spacemedium -margin0-b la-bckg-header">
-        <div class="la-flexrow">
-            <input type="text"
-                class="la-pilotcallsign__input la-text-header -upper -fontsize4 -letterspacing0
-                    charname"
-                name={"system.callsign"}
-                value={system.callsign}
-                placeholder={getLocalized("LA.placeholder")}
-                onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.callsign.tooltip"), TextLogHook.PilotHeader) }
-                onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-            />
-            <span class="-fontsizesmall la-text-darken-3">
-                {getLocalized("LA.pilot.callsign.label")}
-            </span>
-        </div>
-        <div class="la-flexrow">
-            <input type="text"
-                class="la-pilotbackground__input la-text-header -upper -fontsizemedium -letterspacing0
-                    charname"
-                name={"system.background"}
-                value={system.background}
-                placeholder={getLocalized("LA.placeholder")}
-                onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.background.tooltip"), TextLogHook.PilotHeader) }
-                onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
-            />
-            <span class="-fontsizesmall la-text-darken-3">
-                {getLocalized("LA.pilot.background.label")}
-            </span>
-        </div>
+    <hr class="la-divider-h -spacemedium -margin0-b la-bckg-header">
+    <div class="la-flexrow">
+        <input type="text"
+               class="la-pilotcallsign__input la-text-header -upper -fontsize4 -letterspacing0
+                charname"
+               name={"system.callsign"}
+               value={system.callsign}
+               placeholder={getLocalized("LA.placeholder")}
+               onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.callsign.tooltip"), TextLogHook.PilotHeader) }
+               onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
+        />
+        <span class="-fontsizesmall la-text-darken-3">
+            {getLocalized("LA.pilot.callsign.label")}
+        </span>
     </div>
-    <span 
+    <div class="la-flexrow">
+        <input type="text"
+               class="la-pilotbackground__input la-text-header -upper -fontsizemedium -letterspacing0
+                charname"
+               name={"system.background"}
+               value={system.background}
+               placeholder={getLocalized("LA.placeholder")}
+               onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.background.tooltip"), TextLogHook.PilotHeader) }
+               onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
+        />
+        <span class="-fontsizesmall la-text-darken-3">
+            {getLocalized("LA.pilot.background.label")}
+        </span>
+    </div>
+</div>
+{/snippet}
+
+<!-- Text Log -->
+{#snippet textLog()}
+<span
         class="la-textlog__wrapper -left0 -positionabsolute -padding1
-            -pointerdisable"
-    >
-        <TextLog
-            style={["-widthfull -heightfull"]}
+        -pointerdisable"
+>
+    <TextLog
+            style={["-widthfull -heightfull -fontface-stylized"]}
             uuid={actor.uuid}
             hookID={TextLogHook.PilotHeader}
             hookResetID={TextLogHook.PilotHeaderReset}
-            runIntro={!introPlayed}
-        />
-    </span>
+            runIntro={false}
+    />
+</span>
+{/snippet}
+
+<!-- Header -->
+<div class="la-header-content la-flexrow">
+    {@render advancedOptionsToggle()}
+
+
     <BoundImage
         image={actor.img}
         uuid={actor.uuid}

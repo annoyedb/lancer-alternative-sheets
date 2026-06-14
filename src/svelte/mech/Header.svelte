@@ -17,7 +17,7 @@
     import TextLog from "@/svelte/shared/TextLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import LockImageButton from "@/svelte/shared/button/LockImageButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
     const {

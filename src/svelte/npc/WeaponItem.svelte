@@ -21,7 +21,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     
     type WeaponItemProps = {
         actor: any;
@@ -237,7 +237,7 @@
     <div class="la-flexcol -margin3-lr">
         <!-- Send to Chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE]}
+            style={[H2_BUTTON_ICON_STYLE()]}
             flowClass={FlowClass.None}
             uuid={weapon.uuid}
             index={weapon.index}
@@ -255,7 +255,7 @@
         </GlyphButton>
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "la-flexcol -padding0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={`itemTypes.npc_feature.${weapon.index}`}
 

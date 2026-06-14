@@ -20,7 +20,7 @@
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { Logger } from "@/classes/Logger";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,
@@ -149,7 +149,7 @@
             {/if}
         </span>
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.None}
             index={power.index}
             uuid={power.uuid}

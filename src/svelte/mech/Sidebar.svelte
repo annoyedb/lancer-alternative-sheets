@@ -28,7 +28,7 @@
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from '@/svelte/shared/ImageVideo.svelte';
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
     const { 

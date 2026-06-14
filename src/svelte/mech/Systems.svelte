@@ -207,7 +207,7 @@
         <div class="la-flexcol -margin3-lr">
             <!-- Send to chat -->
             <GlyphButton
-                style={[H2_BUTTON_ICON_STYLE]}
+                style={[H2_BUTTON_ICON_STYLE()]}
                 flowClass={FlowClass.SendToChat}
                 type={"system"}
                 index={index}
@@ -227,7 +227,7 @@
             </GlyphButton>
             <!-- Edit -->
             <GlyphButton
-                style={[H2_BUTTON_ICON_STYLE]}
+                style={[H2_BUTTON_ICON_STYLE()]}
                 flowClass={FlowClass.ContextMenu}
                 path={getComponentPath(index)}
 

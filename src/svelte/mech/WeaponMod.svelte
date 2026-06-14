@@ -26,7 +26,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,
@@ -78,7 +78,7 @@
     />
     <!-- Edit -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE]}
+        style={[H2_BUTTON_ICON_STYLE()]}
         flowClass={FlowClass.ContextMenu}
         path={path}
 

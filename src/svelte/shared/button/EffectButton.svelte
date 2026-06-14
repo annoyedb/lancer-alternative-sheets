@@ -77,7 +77,7 @@
     class="-positionrelative
         {style?.join(' ')}
         {flowClass || FlowClass.SendEffectToChat}
-        {disabled ? '' : CLICKABLE_HOVER}"
+        {disabled ? '' : CLICKABLE_HOVER()}"
     style="z-index: 1;"
     data-uuid={uuid}
     data-path={path}

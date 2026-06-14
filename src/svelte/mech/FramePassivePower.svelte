@@ -15,7 +15,7 @@
     import HeaderQuinary, { H4_BORDER_STYLE } from "@/svelte/shared/header/HeaderQuinary.svelte";
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import { H2_ICON_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,

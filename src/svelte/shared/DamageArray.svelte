@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type DamageArrayProps =
     {

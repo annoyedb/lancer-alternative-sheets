@@ -15,7 +15,7 @@
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionLog from "@/svelte/shared/ActionLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props: MechSheetProps = $props();
     const {

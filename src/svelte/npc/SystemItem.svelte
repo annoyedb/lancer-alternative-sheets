@@ -16,7 +16,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type SystemItemProps = {
         actor: any;
@@ -146,7 +146,7 @@
 {#snippet headerSecondaryRightOptions()}
     <!-- Pin -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "la-flexcol -padding0-lr"]}
         flowClass={FlowClass.None}
         path={`itemTypes.npc_feature.${component.index}`}
 
@@ -167,7 +167,7 @@
     </GlyphButton>
     <!-- Edit -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "la-flexcol -padding0-lr"]}
         flowClass={FlowClass.ContextMenu}
         path={`itemTypes.npc_feature.${component.index}`}
 
@@ -183,7 +183,7 @@
     </GlyphButton>
     <!-- Send to Chat -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
         flowClass={FlowClass.SendEffectToChat}
         type={"system"}
         index={component.index}

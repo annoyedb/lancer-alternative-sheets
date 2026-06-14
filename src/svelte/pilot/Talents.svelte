@@ -113,7 +113,7 @@
     {#snippet headerSecondaryTalentRightOptions()}
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow -margin0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr la-flexrow -margin0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={getTalentPath(index)}
 
@@ -199,7 +199,7 @@
                 {/snippet}
                     {#snippet headerSecondaryRankRightOptions()}
                     <GlyphButton
-                        style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+                        style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
                         flowClass={FlowClass.SendToChat}
                         rank={jndex}
                         uuid={talent.uuid}

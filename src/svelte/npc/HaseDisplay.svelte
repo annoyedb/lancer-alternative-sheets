@@ -6,7 +6,7 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import HexButton from "@/svelte/shared/button/HexButton.svelte";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,

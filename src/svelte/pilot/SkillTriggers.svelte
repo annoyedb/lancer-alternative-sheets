@@ -16,7 +16,7 @@
     import EffectButton from "@/svelte/shared/button/EffectButton.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,
@@ -106,7 +106,7 @@
         </span>
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr la-flexrow"]}
             flowClass={FlowClass.ContextMenu}
             path={getSkillPath(index)}
 
@@ -125,7 +125,7 @@
         </GlyphButton>
         <!-- Send to chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.SendToChat}
             index={index}
             uuid={skill.uuid}

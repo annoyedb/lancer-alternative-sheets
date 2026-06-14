@@ -33,7 +33,7 @@
         <!-- This div is what actually triggers the inventory event from the Lancer system -->
         <div class="inventory">
             <GlyphButton
-                style={[SETTINGS_BUTTON_STYLE, "mdi mdi-archive -widthfull -heightfull"]}
+                style={[SETTINGS_BUTTON_STYLE(), "mdi mdi-archive -widthfull -heightfull"]}
                 
                 flowClass={FlowClass.Inventory}
                 

@@ -272,7 +272,7 @@
         <!-- Overriding default flow behaviour -->
         <!-- Send to chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE]}
+            style={[H2_BUTTON_ICON_STYLE()]}
             flowClass={FlowClass.None}
             index={index}
             uuid={weapon.uuid}
@@ -293,7 +293,7 @@
         </GlyphButton>
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE]}
+            style={[H2_BUTTON_ICON_STYLE()]}
             flowClass={FlowClass.ContextMenu}
             path={getWeaponPath(index)}
 

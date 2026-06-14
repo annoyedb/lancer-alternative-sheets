@@ -26,7 +26,7 @@
     import { Logger } from "@/classes/Logger";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TextLogHook } from "@/enums/TextLogHook";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type ActionBoxProps = {
         children?: Snippet;
@@ -190,7 +190,7 @@
     <!-- Send to chat -->
     {#if actor}
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "-margin2-r"]}
+        style={[H2_BUTTON_ICON_STYLE(), "-margin2-r"]}
         flowClass={FlowClass.None}
         uuid={uuid}
         path={path}

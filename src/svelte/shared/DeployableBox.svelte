@@ -25,7 +25,7 @@
 
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         source, 

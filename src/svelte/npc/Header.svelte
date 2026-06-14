@@ -3,7 +3,7 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import Template from "@/svelte/npc/Template.svelte";
     import Stats from "@/svelte/npc/Stats.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";

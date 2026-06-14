@@ -46,7 +46,7 @@
     </span>
     <div class="la-flexcol -alignstart -padding1-b -heightfull">
         <GlyphButton
-            style={[SETTINGS_BUTTON_STYLE, "mdi mdi-plus-box -verticalaligntop"]}
+            style={[SETTINGS_BUTTON_STYLE(), "mdi mdi-plus-box -verticalaligntop"]}
             
             flowClass={FlowClass.None}
             
@@ -61,7 +61,7 @@
             onClick={levelUp}
         />
         <GlyphButton
-            style={[SETTINGS_BUTTON_STYLE, "mdi mdi-minus-box -verticalaligntop"]}
+            style={[SETTINGS_BUTTON_STYLE(), "mdi mdi-minus-box -verticalaligntop"]}
             
             flowClass={FlowClass.None}
             

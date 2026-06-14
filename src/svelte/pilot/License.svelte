@@ -119,7 +119,7 @@
         </span>
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr la-flexrow"]}
             flowClass={FlowClass.ContextMenu}
             path={getLicensePath(index)}
 
@@ -138,7 +138,7 @@
         </GlyphButton>
         <!-- Send to chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.None}
             index={index}
             uuid={license.uuid}

@@ -20,7 +20,7 @@
     import LimitedBox from "@/svelte/shared/counter/LimitedBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import ChargedBox from "@/svelte/npc/ChargedBox.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type ReactionItemProps = {
         actor: any;
@@ -185,7 +185,7 @@
 {#snippet headerSecondaryRightOptions()}
     <!-- Pin -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "la-flexcol -padding0-lr"]}
         flowClass={FlowClass.None}
         path={`itemTypes.npc_feature.${reaction.index}`}
 
@@ -206,7 +206,7 @@
     </GlyphButton>
     <!-- Edit -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "la-flexcol -padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "la-flexcol -padding0-lr"]}
         flowClass={FlowClass.ContextMenu}
         path={`itemTypes.npc_feature.${reaction.index}`}
 
@@ -222,7 +222,7 @@
     </GlyphButton>
     <!-- Send to chat -->
     <GlyphButton
-        style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+        style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
         flowClass={FlowClass.None}
         uuid={reaction.uuid}
         index={reaction.index}

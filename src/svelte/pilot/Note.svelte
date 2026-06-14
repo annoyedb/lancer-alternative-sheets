@@ -8,7 +8,7 @@
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import {getThemeKey} from "@/scripts/store/theme";
 
     const {

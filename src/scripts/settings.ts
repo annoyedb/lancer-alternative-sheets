@@ -20,6 +20,7 @@ export function registerModuleSettings()
         hint: "LA.SETTINGS.enableEffects.subLabel",
         scope: "client",
         config: true,
+        requiresReload: true,
         type: Boolean,
         default: true,
     });

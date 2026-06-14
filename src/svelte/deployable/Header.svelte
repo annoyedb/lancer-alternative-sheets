@@ -2,7 +2,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import type { DeployableSheetProps } from "@/interfaces/deployable/DeployableSheetProps";
     import Stats from "@/svelte/deployable/Stats.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
     const {

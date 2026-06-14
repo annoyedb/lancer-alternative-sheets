@@ -219,7 +219,7 @@
     {#snippet headerSecondaryRightOptions()}
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.ContextMenu}
             path={getArmorPath(index)}
 
@@ -238,7 +238,7 @@
         </GlyphButton>
         <!-- Send to Chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.None}
             index={index}
             uuid={armor.uuid}

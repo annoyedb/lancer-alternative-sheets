@@ -20,7 +20,7 @@
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
 
     const props = $props();

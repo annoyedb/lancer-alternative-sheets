@@ -2,7 +2,7 @@
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getLocalized } from "@/scripts/helpers";
     import { handleMountDelete } from "@/scripts/mech/mount-helpers";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actorSheet,

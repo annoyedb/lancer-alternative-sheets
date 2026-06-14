@@ -45,7 +45,7 @@
 {/snippet}
 {#snippet headerSecondaryRightOptions()}
 <GlyphButton
-    style={[H2_BUTTON_ICON_STYLE]}
+    style={[H2_BUTTON_ICON_STYLE()]}
     flowClass={FlowClass.SendToChat}
     uuid={frame.uuid}
     type={"trait"}

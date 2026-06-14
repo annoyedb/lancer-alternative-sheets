@@ -14,7 +14,7 @@
     import CounterBox from "@/svelte/shared/counter/CounterBox.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,
@@ -102,7 +102,7 @@
         {#snippet headerSecondaryRightOptions()}
             <!-- Edit -->
             <GlyphButton
-                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+                style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
                 flowClass={FlowClass.ContextMenu}
                 path={getBurdenPath(index)}
 

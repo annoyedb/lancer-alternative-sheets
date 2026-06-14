@@ -10,7 +10,7 @@
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         effects,

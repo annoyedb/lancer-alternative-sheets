@@ -83,7 +83,7 @@
         {hasAllWeaponProperties ? '-divider' : ''}
         {style?.join(' ')}
         {flowClass || FlowClass.RollDamage}
-        {disabled ? '' : CLICKABLE_HOVER}"
+        {disabled ? '' : CLICKABLE_HOVER()}"
     data-tooltip={tooltipEnabled && rollable ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}

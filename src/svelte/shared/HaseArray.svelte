@@ -8,7 +8,7 @@
     import HexButton from "@/svelte/shared/button/HexButton.svelte";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         pilot,

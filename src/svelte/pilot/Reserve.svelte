@@ -121,7 +121,7 @@
     {#snippet headerSecondaryRightOptions()}
         <!-- Edit -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr la-flexrow"]}
             flowClass={FlowClass.ContextMenu}
             path={getReservePath(index)}
 
@@ -140,7 +140,7 @@
         </GlyphButton>
         <!-- Send to chat -->
         <GlyphButton
-            style={[H2_BUTTON_ICON_STYLE, "-padding0-lr"]}
+            style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr"]}
             flowClass={FlowClass.SendToChat}
             index={index}
             uuid={reserves.uuid}

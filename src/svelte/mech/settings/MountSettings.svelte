@@ -15,7 +15,7 @@
     import { resetLog, sendToLog } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props: MechSheetProps = $props();
     const {
@@ -246,7 +246,7 @@
             tooltipTheme={theme}
         />
         <button type="button" 
-            class="{SETTINGS_BUTTON_STYLE}"
+            class="{SETTINGS_BUTTON_STYLE()}"
             data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -260,7 +260,7 @@
         <!-- (#5*) -->
         <!-- svelte-ignore event_directive_deprecated -->
         <button type="button" 
-            class={SETTINGS_BUTTON_STYLE}
+            class={SETTINGS_BUTTON_STYLE()}
             data-tooltip={tooltipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class="clipped-bot la-tooltip {theme}"

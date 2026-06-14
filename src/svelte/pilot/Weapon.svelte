@@ -237,7 +237,7 @@
         <div class="la-flexcol -margin3-lr">
             <!-- Send to chat -->
             <GlyphButton
-                style={[H2_BUTTON_ICON_STYLE]}
+                style={[H2_BUTTON_ICON_STYLE()]}
                 flowClass={FlowClass.None}
                 uuid={weapon.uuid}
 
@@ -257,7 +257,7 @@
             </GlyphButton>
             <!-- Edit -->
             <GlyphButton
-                style={[H2_BUTTON_ICON_STYLE, "-padding0-lr la-flexrow -margin0-lr"]}
+                style={[H2_BUTTON_ICON_STYLE(), "-padding0-lr la-flexrow -margin0-lr"]}
                 flowClass={FlowClass.ContextMenu}
                 path={getWeaponPath(index)}
 

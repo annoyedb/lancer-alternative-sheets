@@ -11,7 +11,7 @@
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
         actor,

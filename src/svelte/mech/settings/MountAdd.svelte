@@ -22,7 +22,7 @@
 </script>
 
 <button type="button"
-    class="{SETTINGS_BUTTON_STYLE}
+    class="{SETTINGS_BUTTON_STYLE()}
         gen-control"
     data-path={"system.loadout.weapon_mounts"}
     data-action={"append"}

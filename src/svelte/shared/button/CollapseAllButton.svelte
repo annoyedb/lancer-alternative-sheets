@@ -81,15 +81,13 @@
     }
 </script>
 <script lang="ts" module>
-    import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
-    const qualityMode = getExtraEffectsEnabled();
-
-    const _DEFAULT_BUTTON = " la-prmy-header la-scdy-primary la-text-header -fontsize5 -lineheight4 " + (qualityMode ? "-glow-scdy-hover -glow-prmy " : " ");
+    const _DEFAULT_BUTTON = () => " la-prmy-header la-scdy-primary la-text-header -fontsize5 -lineheight4 " + (getExtraEffectsEnabled() ? "-glow-scdy-hover -glow-prmy " : " ");
 </script>
 
 <button type="button"
-    class="{style?.join(' ') || _DEFAULT_BUTTON}"
+    class="{style?.join(' ') || _DEFAULT_BUTTON()}"
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
