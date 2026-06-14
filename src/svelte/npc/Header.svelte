@@ -34,7 +34,7 @@
                 value="{actor.name}" 
                 placeholder={getLocalized("LA.namePlaceholder")}
             />
-            <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
+            <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb -fontface-stylized">
             {#if templates.length}
             {#each templates as template, index}
                 <Template

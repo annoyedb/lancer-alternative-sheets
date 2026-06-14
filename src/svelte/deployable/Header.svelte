@@ -28,7 +28,7 @@
             <div class="la-flexrow -gap5 la-text-header -widthfull -textaligncenter -padding0-tb">
                 <!-- 'id' in this case is actually the uuid -->
                 <span 
-                    class=" -upper -fontsize4
+                    class="-upper -fontsize4 -fontface-stylized
                         mech ref set click-open"
                     data-uuid={system.owner?.id}
                 >

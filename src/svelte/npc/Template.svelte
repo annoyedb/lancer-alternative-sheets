@@ -3,6 +3,8 @@
     import { getLocalized } from "@/scripts/helpers";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { TooltipFactory } from "@/classes/TooltipFactory";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { CLICKABLE_HOVER } from "@/svelte/shared/button/Button.svelte";
 
     const {
         uuid,
@@ -18,6 +20,7 @@
         tooltipTheme,
     }: TemplateProps & TooltipProps = $props();
 
+    const qualityMode = getExtraEffectsEnabled();
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
 </script>
 
@@ -29,6 +32,7 @@
     <button type="button" 
         class="mdi mdi-pencil -fontsize3 -positionabsolute
             {editOption ? '' : '-displaynone'}
+            {qualityMode ? CLICKABLE_HOVER() : ''}
             lancer-context-menu"
         data-path={path}
         data-tooltip={tooltipEnabled ? tip : undefined }
