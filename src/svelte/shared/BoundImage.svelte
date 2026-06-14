@@ -19,6 +19,13 @@
 
     let advancedOptions = $derived(getAdvancedState(uuid));
 
+    export function resetLocalState()
+    {
+        position.x = 0;
+        position.y = 0;
+        width = 0;
+    }
+
     // Dragging ---------------------------------------------------------------
     let dragging = false;
     let offset = { x: 0, y: 0 };
@@ -100,6 +107,8 @@
         const dy = touches[1].clientY - touches[0].clientY;
         return Math.sqrt(dx * dx + dy * dy);
     }
+
+    // ------------------------------------------------------------------------
 
     onMount(() => {
         if (!containerElement) return;

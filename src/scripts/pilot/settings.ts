@@ -366,6 +366,27 @@ export function setImageWidth(uuid: string, value: number)
     );
 }
 
+// Note that calling separate setImage functions requires callbacks to run in sequence, otherwise requests will get dropped
+// Which is mainly why this optimization function exists
+export function setImageBatched(uuid: string, x: number, y: number, width: number)
+{
+    const data = getPilotSheetData();
+    if (!data[uuid])
+        data[uuid] = migratedDefaults(uuid, data);
+    data[uuid].headerImgOffsetX = x;
+    data[uuid].headerImgOffsetY = y;
+    data[uuid].headerImgWidth = width;
+
+    SocketManager.getInstance().runAsGM(
+        setPilotSheetData,
+        () =>
+        {
+            Logger.log(`Image offset (X, Y) set to (${x}, ${y}) for ${uuid}`);
+        },
+        encodePilotSheetData(data),
+    );
+}
+
 export function getThemeOverride(uuid: string): string
 {
     const data = getPilotSheetData();
