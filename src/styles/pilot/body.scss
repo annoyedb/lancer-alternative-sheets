@@ -5,13 +5,40 @@
         .la-content,
         .la-content-quaternary
         {
-            overflow-y: scroll;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
 
-            .tab,
-            >.la-tab
+            >.-margin7-t
             {
-                margin-left: 2.25rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+                // margin-top from .-margin7-t utility class pushes content below the nav
+
+                >.la-tab
+                {
+                    height: 100%;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    margin-left: 2.25rem;
+
+                    // #region Browser
+                    scrollbar-width: thin;
+                    scrollbar-color: var(--la-scrollbar-primary) transparent;
+                    // #endregion
+
+                    // #region Electron
+                    &::-webkit-scrollbar { width: 2px; }
+                    &::-webkit-scrollbar-thumb { background: var(--la-scrollbar-primary); border: 0px; }
+                    &::-webkit-scrollbar-track { background: transparent; }
+                    &::-moz-scrollbar { width: 2px; }
+                    &::-moz-scrollbar-thumb { background: var(--la-scrollbar-primary); border: 0px; }
+                    &::-moz-scrollbar-track { background: transparent; }
+                    // #endregion
+                }
             }
         }
 

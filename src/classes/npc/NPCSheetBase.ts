@@ -33,7 +33,7 @@ export class NPCSheetBase
                     initial: "loadout"
                 },
             ],
-            scrollY: [".la-SCROLL_BODY"],
+            scrollY: [".la-SVELTE-LOADOUT", ".la-SVELTE-STATUS", ".la-SVELTE-ACTIVITY"],
         }
     }
 

@@ -1,10 +1,39 @@
 .la-root.la-pilot
 {
-    .la-body>.la-sidebar>.la-content-secondary>.la-sidebar__statistics
+    .la-body>.la-sidebar>.la-content-secondary
     {
-        .la-actor__img
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        >.tab
         {
-            min-height: 8rem;
+            flex: 1;
+            min-height: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            // #region Browser
+            scrollbar-width: thin;
+            scrollbar-color: var(--la-scrollbar-secondary) transparent;
+            // #endregion
+
+            // #region Electron
+            &::-webkit-scrollbar { width: 2px; }
+            &::-webkit-scrollbar-thumb { background: var(--la-scrollbar-secondary); border: 0px; }
+            &::-webkit-scrollbar-track { background: transparent; }
+            &::-moz-scrollbar { width: 2px; }
+            &::-moz-scrollbar-thumb { background: var(--la-scrollbar-secondary); border: 0px; }
+            &::-moz-scrollbar-track { background: transparent; }
+            // #endregion
+        }
+
+        >.la-sidebar__statistics
+        {
+            .la-actor__img
+            {
+                min-height: 8rem;
+            }
         }
     }
 }

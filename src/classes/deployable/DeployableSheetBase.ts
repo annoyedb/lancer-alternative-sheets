@@ -32,7 +32,7 @@ export class DeployableSheetBase
                     initial: "detail"
                 },
             ],
-            scrollY: [".la-SCROLL_BODY"],
+            scrollY: [".la-SVELTE-DETAIL", ".la-SVELTE-ACTIVITY"],
         }
     }
 
