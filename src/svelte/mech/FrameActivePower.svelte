@@ -64,7 +64,7 @@
 />
 {/snippet}
 {#snippet outerContent()}
-<div class="la-flexrow -widthfull -margin0-t">
+<div class="la-flexrow -widthfull">
     <button type="button"
         class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull 
             {activationTheme} {system.core_energy ? '' : 'la-dropshadow -disabled'}
@@ -91,9 +91,9 @@
 {/snippet}
 <HeaderQuinary
     text={core.name}
-    headerStyle={[frameColorBckg, "-padding0-l"]}
+    headerStyle={[frameColorBckg, "la-text-header la-prmy-header -padding0-l"]}
     borderStyle={[H4_BORDER_STYLE, frameColorBrdr]}
-    textStyle={["la-text-header la-prmy-header"]}
+    textStyle={["-fontface-stylized"]}
 
     collapseID={collID}
 
@@ -101,38 +101,40 @@
     contentLeft={headerQuinaryLeftOptions}
 >
     <div class="la-divider-h la-bckg-primary -margin0-tb -margin2-b"></div>
-    <EffectBox
-        name={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
-        effect={core.active_effect}
+    <div class="la-generated -widthfull -gap1 la-flexcol">
+        <EffectBox
+            name={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
+            effect={core.active_effect}
 
-        tooltipEnabled={tooltipEnabled}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <ActionBox
-        uuid={frame.uuid}
-        actions={core.active_actions}
-        actor={actor}
-        path={'system.core_system.active_actions'}
+            tooltipEnabled={tooltipEnabled}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
+        />
+        <ActionBox
+            uuid={frame.uuid}
+            actions={core.active_actions}
+            actor={actor}
+            path={'system.core_system.active_actions'}
 
-        collapseID={actionCollID}
-        startCollapsed={false}
+            collapseID={actionCollID}
+            startCollapsed={false}
 
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
-    <DeployableBox
-        source={actor}
-        lidSource={core}
-        uuid={frame.uuid}
-        sheetUUID={actor.uuid}
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
+        />
+        <DeployableBox
+            source={actor}
+            lidSource={core}
+            uuid={frame.uuid}
+            sheetUUID={actor.uuid}
 
-        tooltipEnabled={tooltipEnabled}
-        tooltipTheme={theme}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
-    />
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+            logType={TextLogHook.MechHeader}
+            logTypeReset={TextLogHook.MechHeaderReset}
+        />
+    </div>
 </HeaderQuinary>
 {/if}

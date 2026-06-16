@@ -97,7 +97,7 @@
         <HeaderSecondary
             text={core.name}
             headerStyle={[H2_HEADER_STYLE, frameColorBckg]}
-            textStyle={[H2_TEXT_SIZE]}
+            textStyle={[H2_TEXT_SIZE, "-fontface-stylized"]}
             borderStyle={["-bordersoff"]}
 
             collapseID={`${collID}.core`}

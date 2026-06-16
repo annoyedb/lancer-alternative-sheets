@@ -70,7 +70,7 @@
 <HeaderSecondary
     text={trait.name}
     headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}
-    textStyle={[H2_TEXT_SIZE]}
+    textStyle={[H2_TEXT_SIZE, "-fontface-stylized"]}
     borderStyle={["-bordersoff"]}
     extensionTextFunction={() => {
         if (messageButtonHover)
