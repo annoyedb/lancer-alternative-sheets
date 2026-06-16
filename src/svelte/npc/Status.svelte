@@ -9,7 +9,7 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
+    import FlowButton, { FLOW_BUTTON_DEFAULT } from "@/svelte/shared/button/FlowButton.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
 
@@ -160,7 +160,7 @@
         setExes={setSidebarExecutables}
         hintDropArea={false}
         allowDrop={advancedOptions}
-        buttonStyle={[advancedOptions ? "-padding3-l" : ""]}
+        buttonStyle={[FLOW_BUTTON_DEFAULT, advancedOptions ? "-margin8-l" : ""]}
         innerStyle={["-gap0"]}
         tooltipEnabled={tooltipEnabled}
     />

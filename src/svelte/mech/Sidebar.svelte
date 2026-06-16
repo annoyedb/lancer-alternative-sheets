@@ -19,16 +19,19 @@
         setSidebarExecutables, 
         getSidebarRatio 
     } from "@/scripts/mech/settings";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
+
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { FlowClass } from '@/enums/FlowClass';
+
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import CoreAvailability from "@/svelte/shared/input/CoreAvailability.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from '@/svelte/shared/ImageVideo.svelte';
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { FLOW_BUTTON_DEFAULT } from '@/svelte/shared/button/FlowButton.svelte';
 
     const props = $props();
     const { 
@@ -414,6 +417,7 @@
     setExes={setSidebarExecutables}
     hintDropArea={true}
     allowDrop={advancedOptions}
+    buttonStyle={[FLOW_BUTTON_DEFAULT, advancedOptions ? "-margin7-l" : "-margin2-l"]}
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.MechHeader}
     logTypeReset={TextLogHook.MechHeaderReset}

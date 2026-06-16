@@ -28,6 +28,7 @@
 
         iconStyle,
         buttonStyle,
+        buttonTextStyle,
         innerStyle,
 
         tooltipHeader,
@@ -130,6 +131,9 @@
         }
     }
 </script>
+<script lang="ts" module>
+    export const MACRO_FLOW_DEFAULT = "-padding1-r -padding0-tb -height5 -letterspacing0 la-text-header la-prmy-header";
+</script>
 
 <div bind:this={component}
     class="la-flexcol -widthfull
@@ -179,6 +183,8 @@
         >
         {#if isSkillTrigger(type)}
             <SkillTriggerButton
+                buttonStyle={[...(buttonStyle || [])]}
+                buttonTextStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
                 item={fromUuidSync(type)}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
@@ -188,8 +194,10 @@
             />
         {:else if isSystemFlow(type)}
             {#if type === SystemButton.SkillTriggerOther}
-                <div class="la-skilltrigger la-flexrow -justifyend">
+                <div class="la-skilltrigger la-flexrow -justifyend -widthfull">
                     <FlowButton
+                        style={[...(buttonStyle || [])]}
+                        textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
                         text={ButtonFactory.getSystemButtonLabel(type)}
 
                         flowClass={FlowClass.None}
@@ -210,13 +218,15 @@
                         }}
                     />
                     <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary la-bckg-darken-2">
-                        <span class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize4 -textaligncenter -overflowhidden -height5">
-                            0
+                        <span class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize4 -fontface-stylized -textaligncenter -overflowhidden -padding0-lr">
+                            &nbsp;0
                         </span>
                     </span>
                 </div>
             {:else}
                 <FlowButton
+                    style={[...(buttonStyle || [])]}
+                    textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
                     text={ButtonFactory.getSystemButtonLabel(type)}
 
                     flowClass={FlowClass.Standard}
@@ -234,7 +244,8 @@
             {/if}
         {:else}
             <FlowButton
-                textStyle={["-padding1-r -padding0-tb -height5 -letterspacing0 la-text-header la-prmy-header", ...(buttonStyle || [])]}
+                style={[...(buttonStyle || [])]}
+                textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
                 text={(fromUuidSync(type)?.name as string) || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {

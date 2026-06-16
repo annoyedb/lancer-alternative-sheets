@@ -34,9 +34,6 @@
                     &::-webkit-scrollbar { width: 2px; }
                     &::-webkit-scrollbar-thumb { background: var(--la-scrollbar-primary); border: 0px; }
                     &::-webkit-scrollbar-track { background: transparent; }
-                    &::-moz-scrollbar { width: 2px; }
-                    &::-moz-scrollbar-thumb { background: var(--la-scrollbar-primary); border: 0px; }
-                    &::-moz-scrollbar-track { background: transparent; }
                     // #endregion
                 }
             }
@@ -76,51 +73,6 @@
         .la-sync__select
         {
             width: 100%;
-        }
-
-    }
-
-    // Scrollbar
-    .la-content-tertiary
-    {
-        // Browser
-        .la-available-mechs__list
-        {
-            scrollbar-width: thin;
-            scrollbar-color: var(--la-scrollbar-primary) transparent;
-        }
-
-        // Electron
-        .la-available-mechs__list::-webkit-scrollbar
-        {
-            width: 2px;
-        }
-
-        .la-available-mechs__list::-webkit-scrollbar-thumb
-        {
-            background: var(--la-scrollbar-primary);
-            border: 0px;
-        }
-
-        .la-available-mechs__list::-webkit-scrollbar-track
-        {
-            background: transparent;
-        }
-
-        .la-available-mechs__list::-moz-scrollbar
-        {
-            width: 2px;
-        }
-
-        .la-available-mechs__list::-moz-scrollbar-thumb
-        {
-            background: var(--la-scrollbar-primary);
-            border: 0px;
-        }
-
-        .la-available-mechs__list::-moz-scrollbar-track
-        {
-            background: transparent;
         }
     }
 }

@@ -23,9 +23,6 @@
             &::-webkit-scrollbar { width: 2px; }
             &::-webkit-scrollbar-thumb { background: var(--la-scrollbar-secondary); border: 0px; }
             &::-webkit-scrollbar-track { background: transparent; }
-            &::-moz-scrollbar { width: 2px; }
-            &::-moz-scrollbar-thumb { background: var(--la-scrollbar-secondary); border: 0px; }
-            &::-moz-scrollbar-track { background: transparent; }
             // #endregion
         }
 

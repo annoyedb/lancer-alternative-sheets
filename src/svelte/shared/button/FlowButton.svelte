@@ -46,14 +46,14 @@
     const log = $derived(logText || getLocalized("LA.flow.tooltip"));
 </script>
 <script lang="ts" module>
-    const _DEFAULT_BUTTON = "clipped-bot-alt la-bckg-secondary";
+    export const FLOW_BUTTON_DEFAULT = "clipped-bot-alt la-bckg-secondary -widthfull -overflowhidden";
 </script>
 
 <button 
     type="button"
     class="-upper
         {disableSlide || 'la-flow'} 
-        {style?.join(' ') || _DEFAULT_BUTTON} 
+        {style?.join(' ') || FLOW_BUTTON_DEFAULT}
         {flowClass || ''}"
     data-uuid={uuid}
     data-flow-type={flowType}

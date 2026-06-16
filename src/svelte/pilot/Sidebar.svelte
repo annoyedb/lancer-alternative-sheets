@@ -3,6 +3,7 @@
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextLogHook } from '@/enums/TextLogHook';
+
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized, handleEditToken, handleRelativeDataInput, logographicLanguage } from "@/scripts/helpers";
     import { 
@@ -16,11 +17,13 @@
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getThemeKey } from "@/scripts/store/theme";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
+
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
-    import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { FLOW_BUTTON_DEFAULT } from "@/svelte/shared/button/FlowButton.svelte";
 
 
     const props = $props();
@@ -399,6 +402,7 @@
     setExes={setSidebarExecutables}
     hintDropArea={true}
     allowDrop={advancedOptions}
+    buttonStyle={[FLOW_BUTTON_DEFAULT, advancedOptions ? "-margin7-l"  : "-margin2-l"]}
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.PilotHeader}
     logTypeReset={TextLogHook.PilotHeaderReset}
