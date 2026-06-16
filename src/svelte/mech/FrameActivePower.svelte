@@ -64,6 +64,7 @@
 />
 {/snippet}
 {#snippet outerContent()}
+<div class="la-spacer -medium"></div>
 <div class="la-flexrow -widthfull">
     <button type="button"
         class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull 
