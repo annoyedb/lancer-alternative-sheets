@@ -9,6 +9,7 @@
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getThemeKey } from "@/scripts/store/theme";
 
     const {
         actor,
@@ -16,6 +17,7 @@
     } = $props();
     let editButtonHover = $state(false);
 
+    const labelTheme = $derived(getThemeKey(actor.uuid));
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const collID = $derived(`${actor.uuid}.history`);
@@ -60,7 +62,7 @@
     headerContent={headerOptions}
 >
     <EffectBox
-        name={getThemeHistoryLabel(theme)}
+        name={getThemeHistoryLabel(labelTheme)}
         effect={ system.history ? system.history : getLocalized("LA.placeholder") }
     />
 </HeaderMain>

@@ -9,6 +9,7 @@
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import {getExtraEffectsEnabled} from "@/scripts/settings";
+    import { getThemeKey } from "@/scripts/store/theme";
 
     const {
         actor,
@@ -20,6 +21,7 @@
     const qualityMode = getExtraEffectsEnabled();
     const collID = $derived(`${actor.uuid}.notes`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
+    const labelTheme = $derived(getThemeKey(actor.uuid));
 </script>
 
 {#snippet headerOptions()}
@@ -60,7 +62,7 @@
     headerContent={headerOptions}
 >
     <EffectBox
-        name={getThemeHistoryLabel(theme)}
+        name={getThemeHistoryLabel(labelTheme)}
         effect={ system.notes ? system.notes : getLocalized("LA.placeholder") }
     />
 </HeaderMain>

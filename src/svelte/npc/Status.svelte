@@ -162,6 +162,6 @@
         hintDropArea={false}
         allowDrop={advancedOptions}
         buttonStyle={[`${advancedOptions ? "-padding3-l" : ""}`]}
-        tooltipEnabled={true}
+        tooltipEnabled={tooltipEnabled}
     />
 </HeaderMain>

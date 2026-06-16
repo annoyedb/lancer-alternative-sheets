@@ -1,3 +1,13 @@
+# 1.4.3 - FVTT V12 Long Long-term LTS Term Support Support
+This is for ***Lancer V12 only***
+
+`no, i'm not having a stroke, why do you ask`
+
+## Changes
+* Fixed occasional empty labels in History and Notes inside Pilot sheets
+* Fixed a potential cold boot issue for collapse headers
+* Fixed MacroDropBox not respecting tooltips setting
+
 # 1.4.2
 This is for ***Lancer V12 only***
 
