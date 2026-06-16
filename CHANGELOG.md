@@ -1,3 +1,7 @@
+# 1.5.1
+## Changes
+* #73 - Fixed a bug introduced in 1.4.0 where opening an NPC sheet in sequence breaks the Svelte for the rest of the session
+
 # 1.5.0 - V13 Support!
 This is for ***Lancer V13 only*** and builds upon changes in V12's module version 1.4.3
 

@@ -1,5 +1,6 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
 import type { ThemeKey } from "@/enums/ThemeKey";
+import { untrack } from "svelte";
 import { fromStore, get, writable } from "svelte/store";
 import { 
     getPinnedTraits, 
@@ -42,12 +43,27 @@ export class SheetStore
 
     static store = writable<{ [key: string]: SheetStoreData }>({});
 
+    static init(key: string): void
+    {
+        const store = get(SheetStore.store);
+        if (key in store) return;
+
+        SheetStore.store.update(s =>
+        {
+            if (!s[key])
+            {
+                s[key] = SheetStore.createDefaultData();
+            }
+            return s;
+        });
+    }
+
     static get(key: string): SheetStoreData
     {
         const store = get(SheetStore.store);
         if (!(key in store))
         {
-            SheetStore.set(key, {});
+            untrack(() => SheetStore.init(key));
         }
         return fromStore(SheetStore.store).current[key];
     }
@@ -84,12 +100,27 @@ export class PilotStore
 
     static store = writable<{ [key: string]: PilotStoreData }>({});
 
+    static init(key: string): void
+    {
+        const store = get(PilotStore.store);
+        if (key in store) return;
+
+        PilotStore.store.update(s =>
+        {
+            if (!s[key])
+            {
+                s[key] = PilotStore.createDefaultData();
+            }
+            return s;
+        });
+    }
+
     static get(key: string): PilotStoreData
     {
         const store = get(PilotStore.store);
         if (!(key in store))
         {
-            PilotStore.set(key, {});
+            untrack(() => PilotStore.init(key));
         }
         return fromStore(PilotStore.store).current[key];
     }
@@ -136,16 +167,33 @@ export class NPCStore
 
     static store = writable<{ [key: string]: NPCStoreData }>({});
 
+    static init(key: string): void
+    {
+        const store = get(NPCStore.store);
+        if (key in store) return;
+
+        NPCStore.store.update(s =>
+        {
+            if (!s[key])
+            {
+                s[key] = {
+                    ...NPCStore.createDefaultData(),
+                    pinnedTraits: getPinnedTraits(key),
+                    pinnedSystems: getPinnedSystems(key),
+                    pinnedTechs: getPinnedTechs(key),
+                    pinnedReactions: getPinnedReactions(key),
+                };
+            }
+            return s;
+        });
+    }
+
     static get(key: string): NPCStoreData
     {
         const store = get(NPCStore.store);
         if (!(key in store))
         {
-            NPCStore.set(key, {});
-            store[key].pinnedTraits = getPinnedTraits(key);  // Persistent storage
-            store[key].pinnedSystems = getPinnedSystems(key);  // Persistent storage
-            store[key].pinnedTechs = getPinnedTechs(key);  // Persistent storage
-            store[key].pinnedReactions = getPinnedReactions(key);  // Persistent storage
+            untrack(() => NPCStore.init(key));
         }
         return fromStore(NPCStore.store).current[key];
     }
