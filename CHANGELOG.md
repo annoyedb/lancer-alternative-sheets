@@ -1,3 +1,7 @@
+# 1.4.4
+## Changes
+* #73 - Fixed a bug introduced in 1.4.0 where opening an NPC sheet in sequence breaks the Svelte for the rest of the session 
+
 # 1.4.3 - FVTT V12 Long Long-term LTS Term Support Support
 This is for ***Lancer V12 only***
 
