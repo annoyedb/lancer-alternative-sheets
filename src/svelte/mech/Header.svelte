@@ -8,7 +8,7 @@
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextLogHook } from "@/enums/TextLogHook";
 
-    import { browseActorImage, getLocalized, photosensitiveStyling } from "@/scripts/helpers";
+    import { browseActorImage, getLocalized, logographicLanguage, photosensitiveStyling } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import {
         getActorTokenSync,
@@ -42,6 +42,7 @@
         pilot 
     }: MechSheetProps = $derived(props);
 
+    const logographic = logographicLanguage();
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
 
@@ -211,7 +212,7 @@
         -pointerdisable"
 >
     <TextLog
-        style={["-widthfull -heightfull -fontface-stylized"]}
+        style={["-widthfull -heightfull -fontface-stylized", logographic ? "-fontsize3" : "-fontsizemediumer"]}
         uuid={actor.uuid}
         hookID={TextLogHook.MechHeader}
         hookResetID={TextLogHook.MechHeaderReset}

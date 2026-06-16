@@ -308,7 +308,7 @@
         -pointerdisable"
 >
     <TextLog
-        style={["-widthfull -heightfull -fontface-stylized"]}
+        style={["-widthfull -heightfull -fontface-stylized", logographic ? "-fontsize3" : "-fontsizemediumer"]}
         uuid={actor.uuid}
         hookID={TextLogHook.PilotHeader}
         hookResetID={TextLogHook.PilotHeaderReset}
