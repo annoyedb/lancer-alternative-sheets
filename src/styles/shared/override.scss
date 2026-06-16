@@ -4,19 +4,20 @@
 aside.la-tooltip.active
 {
     padding: unset;
-    border-color: var(--la-primary);
+    border: unset; // Idk why Foundry tooltips mess up the border when fading away, so just get rid of it
+    //border-color: var(--la-primary);
     background-color: var(--la-darken-8);
     text-align: left;
-        
+
     >.la-tooltip__content
-    {    
+    {
         padding: 3px;
         padding-left: 10px;
         padding-right: 10px;
     }
-    
+
     h3
-    {    
+    {
         margin: unset;
         border: unset;
         background-color: var(--la-primary);

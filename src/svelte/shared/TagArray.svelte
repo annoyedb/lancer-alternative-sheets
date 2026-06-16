@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { TagArrayProps } from "@/interfaces/actor/TagArrayProps";
-    import {TooltipDirection} from "@/enums/TooltipDirection";
-    import {TooltipFactory} from "@/classes/TooltipFactory";
-    import type {TooltipProps} from "@/interfaces/actor/TooltipProps";
+    import { TooltipDirection } from "@/enums/TooltipDirection";
+    import { TooltipFactory } from "@/classes/TooltipFactory";
+    import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
 
     const {
         tags,

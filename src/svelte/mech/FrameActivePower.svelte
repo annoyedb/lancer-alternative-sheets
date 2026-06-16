@@ -65,9 +65,12 @@
 {/snippet}
 {#snippet outerContent()}
 <div class="la-spacer -medium"></div>
-<div class="la-flexrow -widthfull">
+<div
+    class="la-flexrow -widthfull
+        {system.core_energy && qualityMode ? 'la-prmy-primary -glow-prmy-hover' : ''}"
+>
     <button type="button"
-        class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull 
+        class="la-corepower clipped la-text-header la-flexrow -padding0-tb -fontsize5 -lineheight7 -widthfull
             {activationTheme} {system.core_energy ? '' : 'la-dropshadow -disabled'}
             activation-flow {activationClass}"
         data-uuid={frame.uuid}
