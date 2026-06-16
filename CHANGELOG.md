@@ -1,3 +1,45 @@
+# 1.5.0 - V13 Support!
+This is for ***Lancer V13 only*** and builds upon changes in V12's module version 1.4.3
+
+Big thank you to @Shteb for laying out the necessary groundwork for me to update this module into V13!
+This and the relatively more-than-I-expected changes comes with better compatability across different browsers and personalized settings that hopefully better unifies the experience across all platforms.
+
+There were enough changes that needed to be done that frankly outweighed the effort of bookkeeping, so the change log is a bit stout relative to the amount of time that was put into this `but it's not like the sheets were properly working in v13 before this update anyway`
+Changes to V12 will now be catalogued in the `fvtt-v12` branch, while updates to the current Lancer version `fvtt-v13` will be tracked on master 
+
+I don't really have much else to say regarding this update, so have fun!
+
+## Known Issues
+* #72 - Removing core bonuses or pilot talents from the Mech sheet does not trigger a rerender. Closing it and then reopening it will show the up-to-date core bonus/talent. This does not affect Pilot sheets.
+## Changes
+* #55 - Pilot and Mech header images can now be resized and their repositioning functionality is now identical. Header images are now also set to a fixed width/position and will not move/resize when the sheets are resized
+* #68, #67, #71 - Added support for V13
+* Changed editing NPC templates/classes to require "advanced options" on 
+* Enforced sheet font face with `JetBrains Mono` and `Noto Sans` `and if you don't like it, you can fight me`. In a practical sense, the sheets were originally designed around `Segoe UI`, a proprietary Microsoft font face found only on Windows operating systems, `because I was lazy` so this change should ensure all users no matter their platform experience the same sheets. If there is enough demand `or if my dyslexic friend misreads their abilities enough` I will implement an explicit setting to change it within the sheet options later on.
+* Tags are replaced with a custom implementation that matches with the current sheet theme on tooltip hovers
+* Improved readability for logographic languages such as Chinese on sheets where bolded or small text becomes very hard to read
+* Improved readability for bond answers on light themes
+* Logger warnings and errors come with trace logs
+## Technical Changes
+### Svelte
+* Headers for Pilot and Mech sheets have been completely blown up by I don't know what in V13, so they've been refactored in big sweeping ways `sorry`
+### Localization
+Changes:
+* "LA.flow.structureDamage.label": "EVALUATE", → "LA.flow.structureDamage.label": "SEAL BREACH",
+Additions:
++ "LA.edit.image.reset.tooltip": "Click to reset this image",
++ "LA.advanced.imageSize.tooltip": "Pinch or scroll the image to adjust the size",
+
+# 1.4.3 - FVTT V12 Long Long-term LTS Term Support Support
+This is for ***Lancer V12 only***
+
+`no, i'm not having a stroke, why do you ask`
+
+## Changes
+* Fixed occasional empty labels in History and Notes inside Pilot sheets
+* Fixed a potential cold boot issue for collapse headers
+* Fixed MacroDropBox not respecting tooltips setting
+
 # 1.4.2
 This is for ***Lancer V12 only***
 
