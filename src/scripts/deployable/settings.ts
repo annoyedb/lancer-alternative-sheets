@@ -4,6 +4,72 @@ import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { getModuleVersion } from "@/scripts/helpers";
 import { Logger } from "@/classes/Logger";
+import { TEMPLATE_PATHS } from "@/scripts/loader";
+
+export class DeployableSheetSettingsSubmenu extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2
+)
+{
+    static override DEFAULT_OPTIONS: foundry.applications.api.ApplicationV2.DefaultOptions = {
+        id: "la-deployable-settings-submenu",
+        tag: "form",
+        window: {
+            title: "LA.SETTINGS.deployable.label",
+            icon: "fas fa-gear",
+            contentClasses: ["standard-form"],
+        },
+        position: {
+            width: 600,
+        },
+        form: {
+            handler: DeployableSheetSettingsSubmenu.#onSubmit,
+            closeOnSubmit: true,
+            submitOnChange: false,
+        },
+    };
+
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
+        body: {
+            template: TEMPLATE_PATHS.deployableSettingsSubmenu,
+        },
+        footer: {
+            template: "templates/generic/form-footer.hbs",
+        },
+    };
+
+    // Return type is `any` to work around the opaque generic RenderContext in the mixin
+    protected override async _prepareContext(
+        _options: object
+    ): Promise<any>
+    {
+        return {
+            tip: game.settings.get(LancerAlternative.Name, `deployable-settings-tip`) as boolean,
+            sheetWidth: game.settings.get(LancerAlternative.Name, `deployable-settings-sheet-width`) as number,
+            sheetHeight: game.settings.get(LancerAlternative.Name, `deployable-settings-sheet-height`) as number,
+            saveCollapse: game.settings.get(LancerAlternative.Name, `deployable-settings-log-action-save-collapse`) as boolean,
+            startCollapsed: game.settings.get(LancerAlternative.Name, `deployable-settings-log-action-start-collapsed`) as boolean,
+            buttons: [
+                { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
+            ],
+        };
+    }
+
+    static async #onSubmit(
+        _event: SubmitEvent | Event,
+        _form: HTMLFormElement,
+        formData: foundry.applications.ux.FormDataExtended,
+    ): Promise<void>
+    {
+        const data = formData.object;
+        await Promise.all([
+            game.settings.set(LancerAlternative.Name, `deployable-settings-tip`, data["tip"] === true),
+            game.settings.set(LancerAlternative.Name, `deployable-settings-sheet-width`, Number(data["sheetWidth"])),
+            game.settings.set(LancerAlternative.Name, `deployable-settings-sheet-height`, Number(data["sheetHeight"])),
+            game.settings.set(LancerAlternative.Name, `deployable-settings-log-action-save-collapse`, data["saveCollapse"] === true),
+            game.settings.set(LancerAlternative.Name, `deployable-settings-log-action-start-collapsed`, data["startCollapsed"] === true),
+        ]);
+    }
+}
 
 export function registerDeployableSheetSettings()
 {
@@ -12,7 +78,7 @@ export function registerDeployableSheetSettings()
         name: "LA.SETTINGS.deployable.enableTooltip.label",
         hint: "LA.SETTINGS.deployable.enableTooltip.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -21,7 +87,7 @@ export function registerDeployableSheetSettings()
         name: "LA.SETTINGS.deployable.sheetWidth.label",
         hint: "LA.SETTINGS.deployable.sheetWidth.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         requiresReload: true,
         // @ts-ignore
         type: Number,
@@ -32,7 +98,7 @@ export function registerDeployableSheetSettings()
         name: "LA.SETTINGS.deployable.sheetHeight.label",
         hint: "LA.SETTINGS.deployable.sheetHeight.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         requiresReload: true,
         // @ts-ignore
         type: Number,
@@ -43,7 +109,7 @@ export function registerDeployableSheetSettings()
         name: "LA.SETTINGS.deployable.saveCollapse.label",
         hint: "LA.SETTINGS.deployable.saveCollapse.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });
@@ -52,7 +118,7 @@ export function registerDeployableSheetSettings()
         name: "LA.SETTINGS.deployable.startCollapsed.label",
         hint: "LA.SETTINGS.deployable.startCollapsed.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });

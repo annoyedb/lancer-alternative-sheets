@@ -1,0 +1,49 @@
+<section class="standard-form scrollable">
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.mech.group.display.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.enableTooltip.label"}}</label>
+            <input type="checkbox" name="tip" {{checked tip}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.enableTooltip.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.enableHeaderLog.label"}}</label>
+            <input type="checkbox" name="logHeader" {{checked logHeader}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.enableHeaderLog.subLabel"}}</p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.mech.group.actionLog.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.enableSidebarActionLog.label"}}</label>
+            <input type="checkbox" name="logActionSidebar" {{checked logActionSidebar}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.enableSidebarActionLog.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.enableMainActionLog.label"}}</label>
+            <input type="checkbox" name="logActionMain" {{checked logActionMain}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.enableMainActionLog.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.sizeMainActionLog.label"}}</label>
+            <div class="form-fields" style="max-width:12em">
+                <input type="range" name="logActionMainMaxHeight" value="{{logActionMainMaxHeight}}"
+                    min="6" max="32" step="1" data-dtype="Number"
+                    oninput="this.nextElementSibling.textContent = this.value"
+                >
+                <span class="range-value" style="max-width: 2ch">{{logActionMainMaxHeight}}</span>
+            </div>
+            <p class="hint">{{localize "LA.SETTINGS.mech.sizeMainActionLog.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.saveCollapse.label"}}</label>
+            <input type="checkbox" name="saveCollapse" {{checked saveCollapse}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.saveCollapse.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.startCollapsed.label"}}</label>
+            <input type="checkbox" name="startCollapsed" {{checked startCollapsed}}>
+            <p class="hint">{{localize "LA.SETTINGS.mech.startCollapsed.subLabel"}}</p>
+        </div>
+    </fieldset>
+</section>

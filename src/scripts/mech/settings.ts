@@ -5,6 +5,76 @@ import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { getModuleVersion } from "@/scripts/helpers";
 import { msgPackDecoder, msgPackEncoder } from "@/scripts/settings";
+import { TEMPLATE_PATHS } from "@/scripts/loader";
+
+export class MechSheetSettingsSubmenu extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2
+)
+{
+    static override DEFAULT_OPTIONS: foundry.applications.api.ApplicationV2.DefaultOptions = {
+        id: "la-mech-settings-submenu",
+        tag: "form",
+        window: {
+            title: "LA.SETTINGS.mech.label",
+            icon: "fas fa-gear",
+            contentClasses: ["standard-form"],
+        },
+        position: {
+            width: 600,
+        },
+        form: {
+            handler: MechSheetSettingsSubmenu.#onSubmit,
+            closeOnSubmit: true,
+            submitOnChange: false,
+        },
+    };
+
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
+        body: {
+            template: TEMPLATE_PATHS.mechSettingsSubmenu,
+        },
+        footer: {
+            template: "templates/generic/form-footer.hbs",
+        },
+    };
+
+    // Return type is `any` to work around the opaque generic RenderContext in the mixin
+    protected override async _prepareContext(
+        _options: object
+    ): Promise<any>
+    {
+        return {
+            tip: game.settings.get(LancerAlternative.Name, `mech-settings-tip`) as boolean,
+            logHeader: game.settings.get(LancerAlternative.Name, `mech-settings-log-header`) as boolean,
+            logActionSidebar: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-sidebar`) as boolean,
+            logActionMain: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main`) as boolean,
+            logActionMainMaxHeight: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-max-height`) as number,
+            saveCollapse: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-save-collapse`) as boolean,
+            startCollapsed: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`) as boolean,
+            buttons: [
+                { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
+            ],
+        };
+    }
+
+    static async #onSubmit(
+        _event: SubmitEvent | Event,
+        _form: HTMLFormElement,
+        formData: foundry.applications.ux.FormDataExtended,
+    ): Promise<void>
+    {
+        const data = formData.object;
+        await Promise.all([
+            game.settings.set(LancerAlternative.Name, `mech-settings-tip`, data["tip"] === true),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-header`, data["logHeader"] === true),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-action-sidebar`, data["logActionSidebar"] === true),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-action-main`, data["logActionMain"] === true),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-action-main-max-height`, Number(data["logActionMainMaxHeight"])),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-action-save-collapse`, data["saveCollapse"] === true),
+            game.settings.set(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`, data["startCollapsed"] === true),
+        ]);
+    }
+}
 
 export function registerMechSheetSettings()
 {
@@ -13,7 +83,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.enableTooltip.label",
         hint: "LA.SETTINGS.mech.enableTooltip.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -22,7 +92,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.enableHeaderLog.label",
         hint: "LA.SETTINGS.mech.enableHeaderLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -31,7 +101,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.enableSidebarActionLog.label",
         hint: "LA.SETTINGS.mech.enableSidebarActionLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -40,7 +110,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.enableMainActionLog.label",
         hint: "LA.SETTINGS.mech.enableMainActionLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });
@@ -49,7 +119,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.sizeMainActionLog.label",
         hint: "LA.SETTINGS.mech.sizeMainActionLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Number,
         range: {
             min: 10,
@@ -63,7 +133,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.saveCollapse.label",
         hint: "LA.SETTINGS.mech.saveCollapse.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });
@@ -72,7 +142,7 @@ export function registerMechSheetSettings()
         name: "LA.SETTINGS.mech.startCollapsed.label",
         hint: "LA.SETTINGS.mech.startCollapsed.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });

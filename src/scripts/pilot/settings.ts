@@ -5,8 +5,84 @@ import { SocketManager } from "@/classes/SocketManager";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { getModuleVersion } from "@/scripts/helpers";
 import { msgPackDecoder, msgPackEncoder } from "@/scripts/settings";
+import { TEMPLATE_PATHS } from "@/scripts/loader";
 
-// This mirrors pilot sheet settings
+export class PilotSheetSettingsSubmenu extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2
+)
+{
+    static override DEFAULT_OPTIONS: foundry.applications.api.ApplicationV2.DefaultOptions = {
+        id: "la-pilot-settings-submenu",
+        tag: "form",
+        window: {
+            title: "LA.SETTINGS.pilot.label",
+            icon: "fas fa-gear",
+            contentClasses: ["standard-form"],
+        },
+        position: {
+            width: 600,
+        },
+        form: {
+            handler: PilotSheetSettingsSubmenu.#onSubmit,
+            closeOnSubmit: true,
+            submitOnChange: false,
+        },
+    };
+
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
+        body: {
+            template: TEMPLATE_PATHS.pilotSettingsSubmenu,
+        },
+        footer: {
+            template: "templates/generic/form-footer.hbs",
+        },
+    };
+
+    // Return type is `any` to work around the opaque generic RenderContext in the mixin
+    protected override async _prepareContext(
+        _options: object
+    ): Promise<any>
+    {
+        return {
+            tip: game.settings.get(LancerAlternative.Name, `pilot-settings-tip`) as boolean,
+            logHeader: game.settings.get(LancerAlternative.Name, `pilot-settings-log-header`) as boolean,
+            logActionSidebar: game.settings.get(LancerAlternative.Name, `pilot-settings-log-action-sidebar`) as boolean,
+            saveCollapse: game.settings.get(LancerAlternative.Name, `pilot-settings-log-action-save-collapse`) as boolean,
+            startCollapsed: game.settings.get(LancerAlternative.Name, `pilot-settings-log-action-start-collapsed`) as boolean,
+            enableSensors: game.settings.get(LancerAlternative.Name, `pilot-settings-enable-sensors`) as boolean,
+            enableTechAttack: game.settings.get(LancerAlternative.Name, `pilot-settings-enable-tech-attack`) as boolean,
+            isGM: game.user.isGM,
+            buttons: [
+                { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
+            ],
+        };
+    }
+
+    static async #onSubmit(
+        _event: SubmitEvent | Event,
+        _form: HTMLFormElement,
+        formData: foundry.applications.ux.FormDataExtended,
+    ): Promise<void>
+    {
+        const data = formData.object;
+        const promises: Promise<unknown>[] = [
+            game.settings.set(LancerAlternative.Name, `pilot-settings-tip`, data["tip"] === true),
+            game.settings.set(LancerAlternative.Name, `pilot-settings-log-header`, data["logHeader"] === true),
+            game.settings.set(LancerAlternative.Name, `pilot-settings-log-action-sidebar`, data["logActionSidebar"] === true),
+            game.settings.set(LancerAlternative.Name, `pilot-settings-log-action-save-collapse`, data["saveCollapse"] === true),
+            game.settings.set(LancerAlternative.Name, `pilot-settings-log-action-start-collapsed`, data["startCollapsed"] === true),
+        ];
+        if (game.user.isGM)
+        {
+            promises.push(
+                game.settings.set(LancerAlternative.Name, `pilot-settings-enable-sensors`, data["enableSensors"] === true),
+                game.settings.set(LancerAlternative.Name, `pilot-settings-enable-tech-attack`, data["enableTechAttack"] === true),
+            );
+        }
+        await Promise.all(promises);
+    }
+}
+
 export function registerPilotSheetSettings()
 {
     // Public Settings
@@ -14,7 +90,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.enableTooltip.label",
         hint: "LA.SETTINGS.pilot.enableTooltip.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -23,7 +99,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.enableHeaderLog.label",
         hint: "LA.SETTINGS.pilot.enableHeaderLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -32,7 +108,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.enableSidebarActionLog.label",
         hint: "LA.SETTINGS.pilot.enableSidebarActionLog.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -41,7 +117,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.saveCollapse.label",
         hint: "LA.SETTINGS.pilot.saveCollapse.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });
@@ -50,7 +126,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.startCollapsed.label",
         hint: "LA.SETTINGS.pilot.startCollapsed.subLabel",
         scope: "client",
-        config: true,
+        config: false,
         type: Boolean,
         default: true,
     });
@@ -59,7 +135,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.enableSensors.label",
         hint: "LA.SETTINGS.pilot.enableSensors.subLabel",
         scope: "world",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });
@@ -68,7 +144,7 @@ export function registerPilotSheetSettings()
         name: "LA.SETTINGS.pilot.enableTechAttack.label",
         hint: "LA.SETTINGS.pilot.enableTechAttack.subLabel",
         scope: "world",
-        config: true,
+        config: false,
         type: Boolean,
         default: false,
     });

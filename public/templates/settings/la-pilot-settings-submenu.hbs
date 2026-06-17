@@ -1,0 +1,48 @@
+<section class="standard-form scrollable">
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.pilot.group.display.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.enableTooltip.label"}}</label>
+            <input type="checkbox" name="tip" {{checked tip}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.enableTooltip.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.enableHeaderLog.label"}}</label>
+            <input type="checkbox" name="logHeader" {{checked logHeader}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.enableHeaderLog.subLabel"}}</p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.pilot.group.actionLog.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.enableSidebarActionLog.label"}}</label>
+            <input type="checkbox" name="logActionSidebar" {{checked logActionSidebar}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.enableSidebarActionLog.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.saveCollapse.label"}}</label>
+            <input type="checkbox" name="saveCollapse" {{checked saveCollapse}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.saveCollapse.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.startCollapsed.label"}}</label>
+            <input type="checkbox" name="startCollapsed" {{checked startCollapsed}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.startCollapsed.subLabel"}}</p>
+        </div>
+    </fieldset>
+    {{#if isGM}}
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.pilot.group.extras.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.enableSensors.label"}}</label>
+            <input type="checkbox" name="enableSensors" {{checked enableSensors}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.enableSensors.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.enableTechAttack.label"}}</label>
+            <input type="checkbox" name="enableTechAttack" {{checked enableTechAttack}}>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.enableTechAttack.subLabel"}}</p>
+        </div>
+    </fieldset>
+    {{/if}}
+</section>

@@ -1,0 +1,42 @@
+<section class="standard-form scrollable">
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.npc.group.display.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.enableTooltip.label"}}</label>
+            <input type="checkbox" name="tip" {{checked tip}}>
+            <p class="hint">{{localize "LA.SETTINGS.npc.enableTooltip.subLabel"}}</p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.npc.group.default.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.sheetWidth.label"}}</label>
+            <input type="number" name="sheetWidth" value="{{sheetWidth}}"
+                min="0" step="1" data-dtype="Number"
+                style="max-width:12em"
+            >
+            <p class="hint">{{localize "LA.SETTINGS.npc.sheetWidth.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.sheetHeight.label"}}</label>
+            <input type="number" name="sheetHeight" value="{{sheetHeight}}"
+                min="0" step="1" data-dtype="Number"
+                style="max-width:12em"
+            >
+            <p class="hint">{{localize "LA.SETTINGS.npc.sheetHeight.subLabel"}}</p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.npc.group.actionLog.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.saveCollapse.label"}}</label>
+            <input type="checkbox" name="saveCollapse" {{checked saveCollapse}}>
+            <p class="hint">{{localize "LA.SETTINGS.npc.saveCollapse.subLabel"}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.startCollapsed.label"}}</label>
+            <input type="checkbox" name="startCollapsed" {{checked startCollapsed}}>
+            <p class="hint">{{localize "LA.SETTINGS.npc.startCollapsed.subLabel"}}</p>
+        </div>
+    </fieldset>
+</section>

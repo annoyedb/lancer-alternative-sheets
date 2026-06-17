@@ -7,6 +7,11 @@ export const TEMPLATE_PATHS = {
     deployableSheetSvelte: `modules/${moduleID}/templates/la-deployable-svelte.hbs`,
 
     featureCard: `modules/${moduleID}/templates/chat/feature-card.hbs`,
+
+    pilotSettingsSubmenu: `modules/${moduleID}/templates/settings/la-pilot-settings-submenu.hbs`,
+    mechSettingsSubmenu: `modules/${moduleID}/templates/settings/la-mech-settings-submenu.hbs`,
+    npcSettingsSubmenu: `modules/${moduleID}/templates/settings/la-npc-settings-submenu.hbs`,
+    deployableSettingsSubmenu: `modules/${moduleID}/templates/settings/la-deployable-settings-submenu.hbs`,
 };
 
 export const preloadTemplates = async function ()
