@@ -72,7 +72,7 @@
 >
     <div class="la-flexcol -gap0 -widthfull">
         <FlowButton 
-            style={["clipped-alt -widthfull la-bckg-header-anti -padding0"]}
+            style={["clipped-alt la-bckg-header-anti -padding0 -widthfull -overflowhidden -lineheight3"]}
             text={getLocalized("LA.npc.recharge.label")}
             
             flowClass={FlowClass.RechargeFeatures}
@@ -86,7 +86,7 @@
         <div class="la-flexrow -wrapwrap -widthfull -gap0">
             <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
-                    style={["clipped-alt -widthfull la-bckg-secondary"]}
+                    style={["clipped-alt la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                     text={getLocalized("LA.flow.rollAttack.label")}
 
                     uuid={actor.uuid}
@@ -99,7 +99,7 @@
                     tooltip={getLocalized("LA.flow.rollAttack.tooltip")}
                 />
                 <FlowButton 
-                    style={["clipped-alt -widthfull la-bckg-secondary"]}
+                    style={["clipped-alt la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                     text={getLocalized("LA.flow.rollDamage.label")}
 
                     uuid={actor.uuid}
@@ -114,7 +114,7 @@
             </div>
             <div class="la-flexcol -gap0 -flex1 -widthfull">
                 <FlowButton 
-                    style={["clipped -widthfull la-bckg-secondary"]}
+                    style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                     text={getLocalized("LA.flow.rollTechAttack.label")}
 
                     uuid={actor.uuid}
@@ -127,7 +127,7 @@
                     tooltip={getLocalized("LA.flow.rollTechAttack.tooltip")}
                 />
                 <FlowButton
-                    style={["clipped -widthfull la-bckg-secondary"]}
+                    style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                     text={getLocalized("LA.flow.extinguish.label")}
 
                     uuid={actor.uuid}
@@ -160,7 +160,7 @@
         setExes={setSidebarExecutables}
         hintDropArea={false}
         allowDrop={advancedOptions}
-        buttonStyle={[FLOW_BUTTON_DEFAULT, advancedOptions ? "-margin8-l" : ""]}
+        buttonStyle={[FLOW_BUTTON_DEFAULT(), advancedOptions ? "-margin8-l" : ""]}
         innerStyle={["-gap0"]}
         tooltipEnabled={tooltipEnabled}
     />

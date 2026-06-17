@@ -1,21 +1,30 @@
 <script lang="ts">
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { formatString, getCurrentOvercharge, getLocalized, handleOverchargeDecrease, handleOverchargeIncrease } from "@/scripts/helpers";
+    import {
+        formatString,
+        getCurrentOvercharge,
+        getLocalized,
+        handleOverchargeDecrease,
+        handleOverchargeIncrease,
+        logographicLanguage
+    } from "@/scripts/helpers";
+    import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight, getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
+
     import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import ActionLog from "@/svelte/shared/ActionLog.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
-    import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props: MechSheetProps = $props();
     const {
@@ -24,7 +33,8 @@
         document
     } = $derived(props);
     let collapseAllButtonHover = $state(false);
-    
+
+    const logographic = logographicLanguage();
     const tooltipEnabled = getMechSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const actionLogEnabled = getMechSheetLogActionMainEnabled();
@@ -115,7 +125,9 @@
                 <!-- Structure -->
                 <div class="la-flexrow -aligncenter">
                     <i class="cci cci-structure la-dropshadow -fontsize11 -displayinline"></i>
-                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.structure.label")}</span>
+                    <span class="la-label__span -fontsizemedium
+                            {logographic ? '-width2ch' : '-writingmode-v'}"
+                    >{getLocalized("LA.structure.label")}</span>
                     <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) Lancer base sheets make it currently impossible to use the 'name' property as intended, 
                         forcing it to send it back as an array; so we handle the update in a roundabout way -->
@@ -131,7 +143,9 @@
                 <!-- Repair -->
                 <div class="la-flexrow -aligncenter">
                     <i class="cci cci-repair la-dropshadow -fontsize11"></i>
-                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.flow.repair.label")}</span>
+                    <span class="la-label__span -fontsizemedium
+                            {logographic ? '-width2ch' : '-writingmode-v'}"
+                    >{getLocalized("LA.flow.repair.label")}</span>
                     <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
                             type="number" 
@@ -145,7 +159,9 @@
                 <!-- Stress -->
                 <div class="la-flexrow -aligncenter">
                     <i class="cci cci-reactor la-dropshadow -fontsize11"></i>
-                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.stress.label")}</span>
+                    <span class="la-label__span -fontsizemedium
+                            {logographic ? '-width2ch' : '-writingmode-v'}"
+                    >{getLocalized("LA.stress.label")}</span>
                     <div class="la-flexcol -divider la-prmy-accent -fontsize6 -textaligncenter">
                         <!-- (#11) -->
                         <input class="la-top__input -width2ch la-shadow -medium -inset la-text-text"
@@ -160,7 +176,9 @@
                 <!-- Burn -->
                 <div class="la-flexrow -aligncenter">
                     <i class="cci cci-burn la-dropshadow -fontsize11"></i>
-                    <span class="la-label__span -fontsizemedium -writingmode-v">{getLocalized("LA.burn.label")}</span>
+                    <span class="la-label__span -fontsizemedium
+                            {logographic ? '-width2ch' : '-writingmode-v'}"
+                    >{getLocalized("LA.burn.label")}</span>
                     <!-- (#11) -->
                     <input class="la-top__input -width2ch la-shadow -fontsize6 -medium -inset la-text-text"
                         type="number" 
@@ -204,7 +222,7 @@
             <div class="la-flexrow -gap0 -wrapwrap -justifybetween -widthfull -heightfull -flex0">
                 <div class="la-flexcol -gap0 la-dropshadow -flex1 -widthfull">
                     <FlowButton
-                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0 -lineheight4"]}
                         text={getLocalized("LA.flow.structureDamage.label")}
     
                         uuid={actor.uuid}
@@ -220,7 +238,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0 -lineheight4"]}
                         text={getLocalized("LA.flow.reactorStress.label")}
     
                         uuid={actor.uuid}
@@ -236,7 +254,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped-alt -widthfull la-bckg-tabs -padding0"]}
+                        style={["clipped-alt -widthfull la-bckg-tabs -padding0 -lineheight4"]}
                         text={getLocalized("LA.flow.fullRepair.label")}
     
                         uuid={actor.uuid}
@@ -254,7 +272,7 @@
                 </div>
                 <div class="la-flexcol -gap0 la-dropshadow -flex1">
                     <FlowButton 
-                        style={["clipped -widthfull la-bckg-secondary"]}
+                        style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                         text={getLocalized("LA.flow.overcharge.label")}
 
                         uuid={actor.uuid}
@@ -271,7 +289,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped -widthfull la-bckg-secondary"]}
+                        style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                         text={getLocalized("LA.flow.overchargeReset.label")}
 
                         uuid={actor.uuid}
@@ -286,7 +304,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped -widthfull la-bckg-secondary"]}
+                        style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                         text={getLocalized("LA.flow.stabilize.label")}
                         
                         uuid={actor.uuid}
@@ -303,7 +321,7 @@
                         logTypeReset={TextLogHook.MechHeaderReset}
                     />
                     <FlowButton
-                        style={["clipped -widthfull la-bckg-secondary"]}
+                        style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                         text={getLocalized("LA.flow.extinguish.label")}
     
                         uuid={actor.uuid}

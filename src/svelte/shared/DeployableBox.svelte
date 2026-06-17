@@ -186,7 +186,7 @@
                     {#each getDeployableActions(deployable) as action}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped-bot -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped-bot -widthfull -overflowhidden -lineheight3 ", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={deployable.uuid}
                             path={`deployables.${deployable.system.lid}`}

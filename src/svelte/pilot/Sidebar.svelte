@@ -402,7 +402,7 @@
     setExes={setSidebarExecutables}
     hintDropArea={true}
     allowDrop={advancedOptions}
-    buttonStyle={[FLOW_BUTTON_DEFAULT, advancedOptions ? "-margin7-l"  : "-margin2-l"]}
+    buttonStyle={[FLOW_BUTTON_DEFAULT(), advancedOptions ? "-margin7-l"  : "-margin2-l"]}
     tooltipEnabled={tooltipEnabled}
     logType={TextLogHook.PilotHeader}
     logTypeReset={TextLogHook.PilotHeaderReset}

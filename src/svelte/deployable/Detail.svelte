@@ -174,7 +174,7 @@
                 <div class="la-flexrow -wrapwrap -widthfull -gap0">
                     <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
-                            style={["clipped-alt -widthfull la-bckg-secondary"]}
+                            style={["clipped-alt la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                             text={getLocalized("LA.flow.rollAttack.label")}
 
                             uuid={actor.uuid}
@@ -189,7 +189,7 @@
                     </div>
                     <div class="la-flexcol -gap0 -flex1 -widthfull">
                         <FlowButton 
-                            style={["clipped -widthfull la-bckg-secondary"]}
+                            style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
                             text={getLocalized("LA.flow.rollDamage.label")}
 
                             uuid={actor.uuid}
@@ -214,7 +214,7 @@
                     {#if index % 2 == 0}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped-alt -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped-alt -widthfull -overflowhidden -lineheight3", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={actor.uuid}
                             path={`system.lid`}
@@ -235,7 +235,7 @@
                     {#if index % 2 != 0}
                         <FlowButton
                             text={getLocalized(action.label)}
-                            style={["clipped -widthfull", ACTIVATION_COLOR_MAP[action.deployableAction]]}
+                            style={["clipped -widthfull -overflowhidden -lineheight3", ACTIVATION_COLOR_MAP[action.deployableAction]]}
 
                             uuid={actor.uuid}
                             path={`system.lid`}
