@@ -1,3 +1,31 @@
+# 1.5.2
+Dipping my toes into ApplicationV2 by kicking things off a with a settings menu refactor.
+
+Also better improved logographic language support
+Also fixed some typos caused from copying and pasting the English localization :grimacing:
+
+## Changes
+* Refactored the Settings menu into ApplicationV2 submenus, `for your viewing pleasure`
+* Mech sheet's 'integrity' section, macros and actions in NPC and Deployable sheets are now more logographic friendly
+
+## Technical Changes
+### Localization
++ "LA.SETTINGS.mech.label": "Mech Sheet Settings",
++ "LA.SETTINGS.mech.group.display.label": "Mech Sheet Hints",
++ "LA.SETTINGS.mech.group.actionLog.label": "Mech Sheet Action Log",
++ "LA.SETTINGS.npc.label": "NPC Sheet Settings",
++ "LA.SETTINGS.npc.group.display.label": "NPC Sheet Hints",
++ "LA.SETTINGS.npc.group.default.label": "NPC Sheet Defaults",
++ "LA.SETTINGS.npc.group.actionLog.label": "NPC Sheet Action Log",
++ "LA.SETTINGS.pilot.label": "Pilot Sheet Settings",
++ "LA.SETTINGS.pilot.group.display.label": "Pilot Sheet Hints",
++ "LA.SETTINGS.pilot.group.actionLog.label": "Pilot Sheet Action Log",
++ "LA.SETTINGS.pilot.group.extras.label": "Pilot Sheet Extras",
+* "LA.SETTINGS.pilot.enableTooltip.subLabel": "Enable display of non-essential tooltips in mech sheets.", → "LA.SETTINGS.pilot.enableTooltip.subLabel": "Enable display of non-essential tooltips in pilot sheets.",
+* "LA.SETTINGS.pilot.enableEffects.subLabel": "Enable the display of CSS effects such as animations and drop shadows in mech sheets.", → "LA.SETTINGS.pilot.enableEffects.subLabel": "Enable the display of CSS effects such as animations and drop shadows in pilot sheets.",
+* "LA.SETTINGS.pilot.enableSidebarActionLog.subLabel": "Enable the action log to be displayed in the mech sheet's sidebar in its own tab.", → "LA.SETTINGS.pilot.enableSidebarActionLog.subLabel": "Enable the action log to be displayed in the pilot sheet's sidebar in its own tab.",
+* Deployable settings sublabels were incorrectly titleized
+
 # 1.5.1
 ## Changes
 * #73 - Fixed a bug introduced in 1.4.0 where opening an NPC sheet in sequence breaks the Svelte for the rest of the session
