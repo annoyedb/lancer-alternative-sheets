@@ -27,6 +27,10 @@ export class MechSheetSettingsSubmenu extends foundry.applications.api.Handlebar
             closeOnSubmit: true,
             submitOnChange: false,
         },
+        actions: {
+            resetLocalData: MechSheetSettingsSubmenu.#onResetLocalData,
+            resetServerData: MechSheetSettingsSubmenu.#onResetServerData,
+        },
     };
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
@@ -51,10 +55,30 @@ export class MechSheetSettingsSubmenu extends foundry.applications.api.Handlebar
             logActionMainMaxHeight: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-main-max-height`) as number,
             saveCollapse: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-save-collapse`) as boolean,
             startCollapsed: game.settings.get(LancerAlternative.Name, `mech-settings-log-action-start-collapsed`) as boolean,
+            isGM: game.user.isGM,
             buttons: [
                 { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
             ],
         };
+    }
+
+    static #onResetLocalData(
+        this: MechSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        resetMechSheetLocalData();
+    }
+
+    static #onResetServerData(
+        this: MechSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        if (!game.user.isGM) return;
+        resetMechSheetData();
     }
 
     static async #onSubmit(

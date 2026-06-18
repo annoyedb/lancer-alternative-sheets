@@ -1,3 +1,31 @@
+# 1.5.3
+Added more settings and still trying out ApplicationV2 things
+
+## Technical Changes
+### Localization
++ "LA.SETTINGS.mech.group.reset.label": "Mech Sheet Reset",
++ "LA.SETTINGS.mech.resetLocalData.label": "Reset Local Mech Sheet Data",
++ "LA.SETTINGS.mech.resetLocalData.button": "Reset",
++ "LA.SETTINGS.mech.resetLocalData.subLabel": "Reset locally saved mech sheet data such as sidebar ratios. This only affects you.",
++ "LA.SETTINGS.mech.resetServerData.label": "Reset World Mech Sheet Data",
++ "LA.SETTINGS.mech.resetServerData.button": "Reset",
++ "LA.SETTINGS.mech.resetServerData.subLabel": "Reset all world-saved mech sheet data such as image offsets and theme overrides. This affects all players.",
++ "LA.SETTINGS.pilot.group.reset.label": "Pilot Sheet Reset",
++ "LA.SETTINGS.pilot.resetLocalData.label": "Reset Local Pilot Sheet Data",
++ "LA.SETTINGS.pilot.resetLocalData.button": "Reset",
++ "LA.SETTINGS.pilot.resetLocalData.subLabel": "Reset locally saved pilot sheet data such as sidebar ratios. This only affects your client.",
++ "LA.SETTINGS.pilot.resetServerData.label": "Reset World Pilot Sheet Data",
++ "LA.SETTINGS.pilot.resetServerData.button": "Reset",
++ "LA.SETTINGS.pilot.resetServerData.subLabel": "Reset all world-saved pilot sheet data such as image offsets and theme overrides. This affects all players.",
++ "LA.SETTINGS.npc.group.reset.label": "NPC Sheet Reset",
++ "LA.SETTINGS.npc.resetServerData.label": "Reset World NPC Sheet Data",
++ "LA.SETTINGS.npc.resetServerData.button": "Reset",
++ "LA.SETTINGS.npc.resetServerData.subLabel": "Reset all world-saved NPC sheet data such as image offsets and theme overrides. This affects all players.",
++ "LA.SETTINGS.deployable.group.reset.label": "Deployable Sheet Reset",
++ "LA.SETTINGS.deployable.resetServerData.label": "Reset World Deployable Sheet Data",
++ "LA.SETTINGS.deployable.resetServerData.button": "Reset",
++ "LA.SETTINGS.deployable.resetServerData.subLabel": "Reset all world-saved deployable sheet data such as image offsets and theme overrides. This affects all players.",
+
 # 1.5.2
 Dipping my toes into ApplicationV2 by kicking things off a with a settings menu refactor.
 

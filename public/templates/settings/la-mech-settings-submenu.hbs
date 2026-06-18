@@ -46,4 +46,29 @@
             <p class="hint">{{localize "LA.SETTINGS.mech.startCollapsed.subLabel"}}</p>
         </div>
     </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.mech.group.reset.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.resetLocalData.label"}}</label>
+            <button type="button" data-action="resetLocalData"
+                style="max-width:12em"
+            >
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.mech.resetLocalData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.mech.resetLocalData.subLabel"}}</p>
+        </div>
+        {{#if isGM}}
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.mech.resetServerData.label"}}</label>
+            <button type="button" data-action="resetServerData"
+                style="max-width:12em"
+            >
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.mech.resetServerData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.mech.resetServerData.subLabel"}}</p>
+        </div>
+        {{/if}}
+    </fieldset>
 </section>

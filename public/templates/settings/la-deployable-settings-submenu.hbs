@@ -39,4 +39,17 @@
             <p class="hint">{{localize "LA.SETTINGS.deployable.startCollapsed.subLabel"}}</p>
         </div>
     </fieldset>
+    {{#if isGM}}
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.deployable.group.reset.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.deployable.resetServerData.label"}}</label>
+            <button type="button" data-action="resetServerData">
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.deployable.resetServerData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.deployable.resetServerData.subLabel"}}</p>
+        </div>
+    </fieldset>
+    {{/if}}
 </section>

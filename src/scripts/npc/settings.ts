@@ -26,6 +26,9 @@ export class NPCSheetSettingsSubmenu extends foundry.applications.api.Handlebars
             closeOnSubmit: true,
             submitOnChange: false,
         },
+        actions: {
+            resetServerData: NPCSheetSettingsSubmenu.#onResetServerData,
+        },
     };
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
@@ -48,10 +51,21 @@ export class NPCSheetSettingsSubmenu extends foundry.applications.api.Handlebars
             sheetHeight: game.settings.get(LancerAlternative.Name, `npc-settings-sheet-height`) as number,
             saveCollapse: game.settings.get(LancerAlternative.Name, `npc-settings-log-action-save-collapse`) as boolean,
             startCollapsed: game.settings.get(LancerAlternative.Name, `npc-settings-log-action-start-collapsed`) as boolean,
+            isGM: game.user.isGM,
             buttons: [
                 { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
             ],
         };
+    }
+
+    static #onResetServerData(
+        this: NPCSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        if (!game.user.isGM) return;
+        resetNPCSheetData();
     }
 
     static async #onSubmit(

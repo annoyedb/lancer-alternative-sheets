@@ -26,6 +26,9 @@ export class DeployableSheetSettingsSubmenu extends foundry.applications.api.Han
             closeOnSubmit: true,
             submitOnChange: false,
         },
+        actions: {
+            resetServerData: DeployableSheetSettingsSubmenu.#onResetServerData,
+        },
     };
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
@@ -48,10 +51,21 @@ export class DeployableSheetSettingsSubmenu extends foundry.applications.api.Han
             sheetHeight: game.settings.get(LancerAlternative.Name, `deployable-settings-sheet-height`) as number,
             saveCollapse: game.settings.get(LancerAlternative.Name, `deployable-settings-log-action-save-collapse`) as boolean,
             startCollapsed: game.settings.get(LancerAlternative.Name, `deployable-settings-log-action-start-collapsed`) as boolean,
+            isGM: game.user.isGM,
             buttons: [
                 { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
             ],
         };
+    }
+
+    static #onResetServerData(
+        this: DeployableSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        if (!game.user.isGM) return;
+        resetDeployableSheetData();
     }
 
     static async #onSubmit(

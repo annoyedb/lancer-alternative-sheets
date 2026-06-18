@@ -30,6 +30,31 @@
             <p class="hint">{{localize "LA.SETTINGS.pilot.startCollapsed.subLabel"}}</p>
         </div>
     </fieldset>
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.pilot.group.reset.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.resetLocalData.label"}}</label>
+            <button type="button" data-action="resetLocalData"
+                style="max-width:12em"
+            >
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.pilot.resetLocalData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.resetLocalData.subLabel"}}</p>
+        </div>
+        {{#if isGM}}
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.pilot.resetServerData.label"}}</label>
+            <button type="button" data-action="resetServerData"
+                style="max-width:12em"
+            >
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.pilot.resetServerData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.pilot.resetServerData.subLabel"}}</p>
+        </div>
+        {{/if}}
+    </fieldset>
     {{#if isGM}}
     <fieldset>
         <legend>{{localize "LA.SETTINGS.pilot.group.extras.label"}}</legend>

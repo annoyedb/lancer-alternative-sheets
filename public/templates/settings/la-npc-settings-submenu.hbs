@@ -39,4 +39,19 @@
             <p class="hint">{{localize "LA.SETTINGS.npc.startCollapsed.subLabel"}}</p>
         </div>
     </fieldset>
+    {{#if isGM}}
+    <fieldset>
+        <legend>{{localize "LA.SETTINGS.npc.group.reset.label"}}</legend>
+        <div class="form-group">
+            <label>{{localize "LA.SETTINGS.npc.resetServerData.label"}}</label>
+            <button type="button" data-action="resetServerData"
+                style="max-width:12em"
+            >
+                <i class="fas fa-rotate-left"></i>
+                {{localize "LA.SETTINGS.npc.resetServerData.button"}}
+            </button>
+            <p class="hint">{{localize "LA.SETTINGS.npc.resetServerData.subLabel"}}</p>
+        </div>
+    </fieldset>
+    {{/if}}
 </section>

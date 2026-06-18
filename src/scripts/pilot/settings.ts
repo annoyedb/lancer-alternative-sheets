@@ -27,6 +27,10 @@ export class PilotSheetSettingsSubmenu extends foundry.applications.api.Handleba
             closeOnSubmit: true,
             submitOnChange: false,
         },
+        actions: {
+            resetLocalData: PilotSheetSettingsSubmenu.#onResetLocalData,
+            resetServerData: PilotSheetSettingsSubmenu.#onResetServerData,
+        },
     };
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsApplicationMixin.HandlebarsTemplatePart> = {
@@ -56,6 +60,24 @@ export class PilotSheetSettingsSubmenu extends foundry.applications.api.Handleba
                 { type: "submit", icon: "fa-solid fa-floppy-disk", label: "SETTINGS.Save" },
             ],
         };
+    }
+
+    static #onResetLocalData(
+        this: PilotSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        resetPilotSheetLocalData();
+    }
+
+    static #onResetServerData(
+        this: PilotSheetSettingsSubmenu,
+        _event: PointerEvent,
+        _target: HTMLElement,
+    ): void
+    {
+        resetPilotSheetData();
     }
 
     static async #onSubmit(
