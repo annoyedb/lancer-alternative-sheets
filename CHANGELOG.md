@@ -1,3 +1,8 @@
+# 1.5.4
+I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines
+## Technical Changes
+* Fixed `module.json` not pointing builds to specific build releases `hopefully? idk here goes nothing`
+
 # 1.5.3
 Added more settings and still trying out ApplicationV2 things
 
