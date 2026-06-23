@@ -7,7 +7,8 @@ import MANIFEST from "./src/module.json";
 
 const substitutions = {
   version: process.env.VERSION,
-  download: process.env.ARCHIVE_URL,
+  download: process.env.ARCHIVE,
+  manifest: process.env.MANIFEST,
 }
 
 export default defineConfig({

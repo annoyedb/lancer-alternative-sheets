@@ -1,3 +1,8 @@
+# 1.4.5
+I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines
+## Technical Changes
+* Fixed `module.json` not pointing builds to specific build releases `hopefully? idk here goes nothing`
+
 # 1.4.4
 ## Changes
 * #73 - Fixed a bug introduced in 1.4.0 where opening an NPC sheet in sequence breaks the Svelte for the rest of the session 
