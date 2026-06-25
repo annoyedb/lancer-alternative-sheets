@@ -4,7 +4,6 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { NPCStore } from "@/scripts/store/module-store";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import type { PinItem } from "@/interfaces/npc/PinInfo";
 
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -20,21 +19,31 @@
     
     const tooltipEnabled = getNPCSheetTooltipEnabled(); 
     const collID = $derived(`${actor.uuid}.systems`);
-    const pinCollID = $derived(`${actor.uuid}.systems.pins`)
+    const pinCollID = $derived(`${actor.uuid}.systems.pins`);
     const nonpinCollID = $derived(`${actor.uuid}.systems.nonpins`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
-    const pinnedItems = $derived.by(() => {
-        const serializedLIDs = NPCStore.get(actor.uuid).pinnedSystems;
-        let pinned: any[] = [];
-        let unpinned: any[] = [];
-        systems.map((component: any) => {
-            if (serializedLIDs.includes(component.system.lid))
-                pinned.push(component);
-            else
-                unpinned.push(component);
-        });
-        return {pinned, unpinned} as PinItem;
-    });
+
+    // Stable container refs; items are moved into these via placeItem rather than
+    // re-rendered, so Foundry's directly-bound event listeners survive pin/unpin.
+    const pinnedSet = $derived(new Set<string>(NPCStore.get(actor.uuid).pinnedSystems ?? []));
+    const pinnedSystems = $derived(systems.filter((s: any) => pinnedSet.has(s.system.lid)));
+    const hasPinned = $derived(pinnedSystems.length > 0);
+
+    let pinnedContainer = $state<HTMLElement | undefined>();
+    let unpinnedContainer = $state<HTMLElement | undefined>();
+    let noSectionsContainer = $state<HTMLElement | undefined>();
+
+    function placeItem(node: HTMLElement, container: HTMLElement | undefined) {
+        container?.appendChild(node);
+        return {
+            update(newContainer: HTMLElement | undefined) {
+                newContainer?.appendChild(node);
+            },
+            destroy() {
+                node.remove();
+            }
+        };
+    }
 </script>
 
 {#snippet headerOptions()}
@@ -66,56 +75,59 @@
     headerContent={headerOptions}
 >
     <div class="la-flexcol -gap0 -widthfull">
-    <!-- Pinned -->
-    {#if pinnedItems.pinned.length}
-        <HeaderSecondary
-            text={getLocalized("LA.pin.pinned.label")}
-            headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium -fontface-stylized"]}
-
-            collapseID={pinCollID}
-            startCollapsed={false}
+        <!-- No pins -->
+        <div bind:this={noSectionsContainer}
+            class="la-flexcol -gap0 -widthfull
+                {hasPinned ? '-displaynone' : ''}"
+        ></div>
+        <!-- Pin/Unpinned -->
+        <div class="-widthfull
+                {hasPinned ? '' : '-displaynone'}"
         >
-            <div class="la-flexcol -gap0 -widthfull">
-            {#each pinnedItems.pinned as component}
+            <HeaderSecondary
+                text={getLocalized("LA.pin.pinned.label")}
+                headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium -fontface-stylized"]}
+                collapseID={pinCollID}
+                startCollapsed={false}
+            >
+                <div bind:this={pinnedContainer}
+                    class="la-flexcol -gap0 -widthfull"
+                ></div>
+            </HeaderSecondary>
+            <div></div>
+            <HeaderSecondary
+                text={getLocalized("LA.pin.unpinned.label")}
+                headerStyle={["clipped-bot-alt la-bckg-weapon -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
+                collapseID={nonpinCollID}
+                startCollapsed={false}
+            >
+                <div bind:this={unpinnedContainer}
+                    class="la-flexcol -gap0 -widthfull"
+                ></div>
+            </HeaderSecondary>
+        </div>
+        <!-- Staging area
+            Items rendered here then immediately moved into the correct container above. -->
+        <div
+            class="-displaynone"
+            aria-hidden="true"
+        >
+        {#each systems as component (component.uuid)}
+            {@const container = hasPinned
+                ? (pinnedSet.has(component.system.lid) ? pinnedContainer : unpinnedContainer)
+                : noSectionsContainer}
+            <div use:placeItem={container}
+                class="-widthfull"
+            >
                 <SystemItem
                     actor={actor}
                     system={system}
                     component={component}
-                    pinned={true}
-                ></SystemItem>
-            {/each}
+                    pinned={pinnedSet.has(component.system.lid)}
+                />
             </div>
-        </HeaderSecondary>
-        <div></div>
-        <HeaderSecondary
-            text={getLocalized("LA.pin.unpinned.label")}
-            headerStyle={["clipped-bot-alt la-bckg-weapon -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
-
-            collapseID={nonpinCollID}
-            startCollapsed={false}
-        >
-            <div class="la-flexcol -gap0 -widthfull">
-            {#each pinnedItems.unpinned as component}
-                <SystemItem
-                    actor={actor}
-                    system={system}
-                    component={component}
-                    pinned={false}
-                ></SystemItem>
-            {/each}
-            </div>
-        </HeaderSecondary>
-    {:else}
-        <!-- Non-pinned -->
-        {#each pinnedItems.unpinned as component}
-            <SystemItem
-                actor={actor}
-                    system={system}
-                    component={component}
-                pinned={false}
-            ></SystemItem>
         {/each}
-    {/if}
+        </div>
     </div>
 </HeaderMain>
 {/if}

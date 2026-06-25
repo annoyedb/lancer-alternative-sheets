@@ -1,3 +1,7 @@
+# 1.5.5
+## Changes
+* Fixed lost Foundry-applied events when pinning/unpinning NPC items
+
 # 1.5.4
 I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines I love build pipelines
 ## Technical Changes
