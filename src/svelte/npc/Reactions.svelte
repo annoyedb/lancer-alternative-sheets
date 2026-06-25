@@ -4,8 +4,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { NPCStore } from "@/scripts/store/module-store";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
-    import type { PinItem } from "@/interfaces/npc/PinInfo";
-    
+
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import HeaderSecondary from "@/svelte/shared/header/HeaderSecondary.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -24,18 +23,27 @@
     const nonpinCollID = $derived(`${actor.uuid}.reactions.nonpins`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
 
-    const pinnedItems = $derived.by(() => {
-        const serializedLIDs = NPCStore.get(actor.uuid).pinnedReactions;
-        let pinned: any[] = [];
-        let unpinned: any[] = [];
-        reactions.map((reaction: any) => {
-            if (serializedLIDs.includes(reaction.system.lid))
-                pinned.push(reaction);
-            else
-                unpinned.push(reaction);
-        });
-        return {pinned, unpinned} as PinItem;
-    });
+    // Stable container refs; items are moved into these via placeItem rather than
+    // re-rendered, so Foundry's directly-bound event listeners survive pin/unpin.
+    const pinnedSet = $derived(new Set<string>(NPCStore.get(actor.uuid).pinnedReactions ?? []));
+    const pinnedReactions = $derived(reactions.filter((r: any) => pinnedSet.has(r.system.lid)));
+    const hasPinned = $derived(pinnedReactions.length > 0);
+
+    let pinnedContainer = $state<HTMLElement | undefined>();
+    let unpinnedContainer = $state<HTMLElement | undefined>();
+    let noSectionsContainer = $state<HTMLElement | undefined>();
+
+    function placeItem(node: HTMLElement, container: HTMLElement | undefined) {
+        container?.appendChild(node);
+        return {
+            update(newContainer: HTMLElement | undefined) {
+                newContainer?.appendChild(node);
+            },
+            destroy() {
+                node.remove();
+            }
+        };
+    }
 </script>
 
 {#snippet headerOptions()}
@@ -60,63 +68,65 @@
             return `--${getLocalized("LA.collapseAll.extension")}`;
         return undefined;
     }}
-    
+
     collapseID={collID}
     startCollapsed={true}
 
     headerContent={headerOptions}
 >
     <div class="la-flexcol -gap0 -widthfull">
-    <!-- Pinned -->
-    {#if pinnedItems.pinned.length}
-        <HeaderSecondary
-            text={getLocalized("LA.pin.pinned.label")}
-            headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
-
-            collapseID={pinCollID}
-            startCollapsed={false}
+        <!-- No pins -->
+        <div bind:this={noSectionsContainer}
+            class="la-flexcol -gap0 -widthfull
+                {hasPinned ? '-displaynone' : ''}"
+        ></div>
+        <!-- Pin/Unpinned -->
+        <div class="-widthfull
+                {hasPinned ? '' : '-displaynone'}"
         >
-            <div class="la-flexcol -gap0 -widthfull">
-            {#each pinnedItems.pinned as reaction}
+            <HeaderSecondary
+                text={getLocalized("LA.pin.pinned.label")}
+                headerStyle={["clipped-bot-alt la-bckg-primary -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
+                collapseID={pinCollID}
+                startCollapsed={false}
+            >
+                <div bind:this={pinnedContainer}
+                    class="la-flexcol -gap0 -widthfull"
+                ></div>
+            </HeaderSecondary>
+            <div></div>
+            <HeaderSecondary
+                text={getLocalized("LA.pin.unpinned.label")}
+                headerStyle={["clipped-bot-alt la-bckg-weapon -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
+                collapseID={nonpinCollID}
+                startCollapsed={false}
+            >
+                <div bind:this={unpinnedContainer}
+                    class="la-flexcol -gap0 -widthfull"
+                ></div>
+            </HeaderSecondary>
+        </div>
+        <!-- Staging area
+            Items rendered here then immediately moved into the correct container above. -->
+        <div
+            class="-displaynone"
+            aria-hidden="true"
+        >
+        {#each reactions as reaction (reaction.uuid)}
+            {@const container = hasPinned
+                ? (pinnedSet.has(reaction.system.lid) ? pinnedContainer : unpinnedContainer)
+                : noSectionsContainer}
+            <div use:placeItem={container}
+                class="-widthfull">
                 <ReactionItem
                     actor={actor}
                     system={system}
                     reaction={reaction}
-                    pinned={true}
-                ></ReactionItem>
-            {/each}
+                    pinned={pinnedSet.has(reaction.system.lid)}
+                />
             </div>
-        </HeaderSecondary>
-        <div></div>
-        <HeaderSecondary
-            text={getLocalized("LA.pin.unpinned.label")}
-            headerStyle={["clipped-bot-alt la-bckg-weapon -letterspacing0 la-text-header la-prmy-header -padding2-l -padding0-tb -fontsizemedium"]}
-
-            collapseID={nonpinCollID}
-            startCollapsed={false}
-        >
-            <div class="la-flexcol -gap0 -widthfull">
-            {#each pinnedItems.unpinned as reaction}
-                <ReactionItem
-                    actor={actor}
-                    system={system}
-                    reaction={reaction}
-                    pinned={false}
-                ></ReactionItem>
-            {/each}
-            </div>
-        </HeaderSecondary>
-    {:else}
-        <!-- Non-pinned -->
-        {#each pinnedItems.unpinned as reaction}
-            <ReactionItem
-                actor={actor}
-                    system={system}
-                    reaction={reaction}
-                pinned={false}
-            ></ReactionItem>
         {/each}
-    {/if}
+        </div>
     </div>
 </HeaderMain>
 {/if}
