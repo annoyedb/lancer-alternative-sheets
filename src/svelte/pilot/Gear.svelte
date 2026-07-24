@@ -3,7 +3,6 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -85,8 +84,7 @@
                     usesMax={gear.system.uses.max}
                     path={getGearPath(index)}
         
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
                 />
             </div>
         {/if}
@@ -100,8 +98,7 @@
                 usesMax={counter.max}
                 path="{getGearPath(index)}.system.counters.{jndex}"
         
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             />
         {/each}
         {/if}
@@ -122,8 +119,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -142,8 +138,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={ TextConsoleHook.PilotHeader }
-            logTypeReset={ TextConsoleHook.PilotHeaderReset }
+            logging={true}
 
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
@@ -189,8 +184,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <ActionBox
                     actions={gear.system.actions}
@@ -203,16 +197,14 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <EffectBox
                     name={getLocalized("LA.description.label")}
                     effect={gear.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             {#if gear.system.effect}
                 <EffectBox
@@ -220,8 +212,7 @@
                     effect={gear.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             {/if}
                 <TagArray

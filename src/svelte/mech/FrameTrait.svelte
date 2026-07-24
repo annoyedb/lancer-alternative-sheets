@@ -3,7 +3,6 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -56,8 +55,7 @@
     tooltipTheme={theme}
     tooltip={getLocalized("LA.chat.tooltip")}
     logText={getLocalized("LA.chat.tooltip")}
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 
     onPointerEnter={() => {messageButtonHover = true;} }
     onPointerLeave={() => {messageButtonHover = false;} }
@@ -90,8 +88,7 @@
             effect={trait.description}
 
             tooltipEnabled={tooltipEnabled}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
         <!-- Generated Content -->
     {#if trait.counters?.length}
@@ -103,8 +100,7 @@
             usesMax={counter.max}
             path="system.loadout.frame.value.system.traits.{index}.counters.{jndex}"
             
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
     {/each}
     {/if}
@@ -123,8 +119,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
         <DeployableBox
             source={actor}
@@ -134,8 +129,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
     </div>
 </HeaderSecondary>

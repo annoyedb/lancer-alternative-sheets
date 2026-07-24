@@ -14,19 +14,17 @@
         iconStyle,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
     }: TotalSPProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.mech.system.points.total.tooltip"));
 </script>
 
 <div role="none"
     class="la-flexrow -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
 >
     <span class="{textStyle?.join(' ')}">
     {#if max}

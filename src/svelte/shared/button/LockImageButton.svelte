@@ -22,8 +22,7 @@
         tooltipEnabled,
         tooltipDirection,
 
-        logType,
-        logTypeReset,
+        logging,
     } : LockImageButtonProps & TooltipProps & TextLogEventProps = $props();
 
     const isVideo = $derived(isValidVideoContainer(actor.prototypeToken?.texture.src));
@@ -42,8 +41,7 @@
             tooltip={getLocalized("LA.advanced.link.error")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
             logText={getLocalized("LA.advanced.link.error")}
-            logType={logType}
-            logTypeReset={logTypeReset}
+            logging={logging}
         />
     {:else}
         <GlyphButton
@@ -55,8 +53,7 @@
             tooltip={getLocalized("LA.advanced.link.tooltip")}
             tooltipDirection={tooltipDirection || TooltipDirection.UP}
             logText={getLocalized("LA.advanced.link.tooltip")}
-            logType={logType}
-            logTypeReset={logTypeReset}
+            logging={logging}
         />
     {/if}
 {:else}
@@ -69,7 +66,6 @@
         tooltip={getLocalized("LA.advanced.unlink.tooltip")}
         tooltipDirection={tooltipDirection || TooltipDirection.UP}
         logText={getLocalized("LA.advanced.unlink.tooltip")}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
     />
 {/if}

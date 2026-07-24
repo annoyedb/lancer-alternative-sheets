@@ -22,8 +22,7 @@
         iconStyle,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         tooltipEnabled,
         tooltip,
@@ -36,7 +35,6 @@
     let advancedOptions = $derived(getAdvancedState(uuid));
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.tooltip"), tooltipHeader));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.advanced.tooltip"));
 
     function toggleAdvancedOptions(event: MouseEvent)
@@ -57,8 +55,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
     onclick={(event) => toggleAdvancedOptions(event)}
 >
     <i class="mdi {iconStyle?.join(' ') || _DEFAULT_I}

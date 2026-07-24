@@ -7,6 +7,7 @@
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogIntro } from "@/enums/TextLogIntro";
     import { TextConsoleHook } from "@/enums/TextConsoleHook";
+    import { TextLogHook } from "@/enums/TextLogHook";
 
     import { browseActorImage, getLocalized, logographicLanguage, photosensitiveStyling } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -93,8 +94,7 @@
             tooltip={getLocalized("LA.edit.image.reset.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
             logText={getLocalized("LA.edit.image.reset.tooltip")}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
     {/if}
         <AdvancedButton
@@ -103,8 +103,7 @@
             uuid={actor.uuid}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
     </div>
 {#if advancedOptions}
@@ -115,8 +114,7 @@
         setState={setActorTokenSync}
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
 {#if !tokenImageLocked}
     <GlyphButton
@@ -129,8 +127,7 @@
         tooltip={getLocalized("LA.edit.image.actor.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getLocalized("LA.edit.image.actor.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
 {/if}
 {/if}
@@ -149,8 +146,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.name.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.name.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.name.label")}
@@ -168,8 +165,8 @@
             data-uuid={pilot?.uuid}
             data-path={"system.pilot"}
             data-accept-types={"pilot"}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.open.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.open.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         >
             <TerminalText
                 text="LL{pilot?.system.level || '?'}"
@@ -218,6 +215,8 @@
         uuid={actor.uuid}
         hookID={TextConsoleHook.MechHeader}
         hookResetID={TextConsoleHook.MechHeaderReset}
+        logHookID={TextLogHook.MechLog}
+        logHookResetID={TextLogHook.MechLogReset}
         introType={TextLogIntro.Header}
         runIntro={!introPlayed}
     />

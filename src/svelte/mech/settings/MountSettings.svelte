@@ -11,7 +11,6 @@
     import MountDelete from "@/svelte/mech/settings/MountDelete.svelte";
     import MountAdd from "@/svelte/mech/settings/MountAdd.svelte";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { ActiveTab } from "@/enums/ActiveTab";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -250,8 +249,8 @@
             data-tooltip={tooltipEnabled ? removeTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class="clipped-bot la-tooltip {theme}"
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.advanced.mount.remove.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.advanced.mount.remove.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
             onclick={event => handleRemove(event, removeMount)}
             aria-label={getLocalized("LA.advanced.mount.remove.tooltip")}
         >
@@ -264,8 +263,8 @@
             data-tooltip={tooltipEnabled ? editTip : undefined}
             data-tooltip-direction={TooltipDirection.RIGHT}
             data-tooltip-class="clipped-bot la-tooltip {theme}"
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.advanced.mount.edit.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.advanced.mount.edit.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
             onclick={event => handleEdit(event, editMount)}
             aria-label={getLocalized("LA.advanced.mount.edit.tooltip")}
         >

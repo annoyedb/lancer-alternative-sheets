@@ -13,13 +13,11 @@
         style,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
     }: ProfileBoxProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.profile.tooltip"));
 </script>
 <script lang="ts" module>
@@ -36,8 +34,8 @@
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <span class="-padding1-lr -fontsizemedium -upper

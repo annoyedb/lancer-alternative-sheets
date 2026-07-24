@@ -1,7 +1,6 @@
 <script lang="ts">
     import { ActiveTab } from "@/enums/ActiveTab";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import { getActiveTab, getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
@@ -41,8 +40,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.advanced.inventory.open.tooltip")}
                 tooltipDirection={TooltipDirection.RIGHT}
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             ></GlyphButton>
         </div>
     </div>

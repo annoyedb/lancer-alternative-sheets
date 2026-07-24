@@ -38,13 +38,11 @@
         disableCursor,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
     } : IconButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.flow.tooltip"));
 </script>
 <script lang="ts" module>
@@ -64,8 +62,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
     onclick={(event) => onClick && onClick(event)}
     aria-label={text}
 >

@@ -8,7 +8,6 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import ActionBox from "@/svelte/shared/ActionBox.svelte";
     import DeployableBox from "@/svelte/shared/DeployableBox.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
@@ -57,8 +56,7 @@
     tooltipTheme={theme}
     tooltipDirection={TooltipDirection.LEFT}
     tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[core.activation])}
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 
     disabled={system.core_energy === 0}
 />
@@ -111,8 +109,7 @@
             effect={core.active_effect}
 
             tooltipEnabled={tooltipEnabled}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
         <ActionBox
             uuid={frame.uuid}
@@ -125,8 +122,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
         <DeployableBox
             source={actor}
@@ -136,8 +132,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.MechHeader}
-            logTypeReset={TextConsoleHook.MechHeaderReset}
+            logging={true}
         />
     </div>
 </HeaderQuinary>

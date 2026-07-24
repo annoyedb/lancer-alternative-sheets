@@ -25,8 +25,7 @@
         tooltipTheme,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerEnter,
         onPointerLeave,
@@ -35,7 +34,6 @@
     let isExpanding = $derived(!getCollapseState(collapseID));
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.collapseAll.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
@@ -44,7 +42,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!, actorUuid!);
+            sendToTextConsole(event, log, actorUuid!);
         else
             return undefined;
     }
@@ -55,7 +53,7 @@
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!, actorUuid!);
+            resetTextConsole(event, actorUuid!);
         else
             return undefined;
     }

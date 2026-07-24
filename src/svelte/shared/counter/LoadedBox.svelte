@@ -15,8 +15,7 @@ Special implementation of the `CounterBox` component for items with the `Loading
         style,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerClick,
     }: LoadedBoxProps & TextLogEventProps & PointerClickProps = $props();
@@ -50,8 +49,7 @@ Special implementation of the `CounterBox` component for items with the `Loading
         style={style}
 
         logText={log}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
 
         onPointerClick={handleLoadedInteraction}
     />

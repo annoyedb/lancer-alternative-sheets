@@ -6,7 +6,6 @@
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getThemeKey } from '@/scripts/store/theme';
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import MechStats from "@/svelte/pilot/MechStats.svelte";
@@ -109,8 +108,8 @@
             {qualityMode ? '-glow-hover-primary' : ''}
             ref set click-open"
         data-uuid={ownedMechs[selectedMechIndex].uuid}
-        onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.mechStorage.open.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
-        onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+        onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.mechStorage.open.tooltip"), actor.uuid) }
+        onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         draggable={true}
     >
         {ownedMechs[selectedMechIndex].name}
@@ -159,8 +158,8 @@
             onpointerenter={ event => sendToTextConsole(event, isInactive()
                     ? getLocalized("LA.pilot.mechStorage.activate.tooltip")
                     : getLocalized("LA.pilot.mechStorage.deactivate.tooltip"),
-                TextConsoleHook.PilotHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+                actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
             aria-label={isInactive() ? activateTip : deactivateTip }
             onclick={setActiveMech}
         ></button>
@@ -179,8 +178,8 @@
     <div class="la-flexcol -widthfull">
         <div role="none"
             class="la-available-mechs__list"
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.mechStorage.select.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.mechStorage.select.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         >
             <div class=" la-flexrow -justifystart -padding0-b">
             {#each ownedMechs as mech, index}

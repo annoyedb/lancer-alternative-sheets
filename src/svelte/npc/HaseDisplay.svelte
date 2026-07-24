@@ -1,6 +1,5 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
@@ -32,8 +31,7 @@
                     tooltipTheme={theme}
                     tooltip={getLocalized("LA.hull.tooltip")}
                     logText={getLocalized("LA.hull.tooltip")}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.RollStat}
@@ -56,8 +54,7 @@
                     tooltipTheme={theme}
                     tooltip={getLocalized("LA.agility.tooltip")}
                     logText={getLocalized("LA.agility.tooltip")}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.RollStat}
@@ -79,8 +76,7 @@
                     tooltipTheme={theme}
                     tooltip={getLocalized("LA.systems.tooltip")}
                     logText={getLocalized("LA.systems.tooltip")}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.RollStat}
@@ -103,8 +99,7 @@
                     tooltipTheme={theme}
                     tooltip={getLocalized("LA.engineering.tooltip")}
                     logText={getLocalized("LA.engineering.tooltip")}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
 
                     uuid={actor.uuid}
                     flowClass={FlowClass.RollStat}

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getLocalized } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
@@ -53,8 +52,7 @@
 >
     <ActiveEffects { ...props }
         tooltipEnabled={tooltipEnabled}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
 </HeaderMain>
 

@@ -37,8 +37,7 @@
         tooltipEnabled,
         tooltipClass,
         tooltipTheme,
-        logType,
-        logTypeReset,
+        logging,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
     const actorUuid = getActorContext()?.uuid;
 
@@ -200,8 +199,7 @@
                             tooltipDirection={TooltipDirection.LEFT}
                             tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.deployableAction])}
                             tooltip={`${getLocalized(action.tooltip)}<br><br>${getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.deployableAction])}`}
-                            logType={logType}
-                            logTypeReset={logTypeReset}
+                            logging={logging}
                         />
                     {/each}
                     </div>
@@ -212,8 +210,8 @@
                         data-tooltip={tooltipEnabled ? tip : undefined}
                         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
                         data-tooltip-direction={TooltipDirection.LEFT}
-                        onpointerenter={ logType ? event => sendToTextConsole(event, getLocalized("LA.mech.system.deployable.tooltip"), logType, actorUuid!) : undefined }
-                        onpointerleave={ logTypeReset ? event => resetTextConsole(event, logTypeReset, actorUuid!) : undefined }
+                        onpointerenter={ logging ? event => sendToTextConsole(event, getLocalized("LA.mech.system.deployable.tooltip"), actorUuid!) : undefined }
+                        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
                     />
                 </div>
                 <hr>
@@ -236,8 +234,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={tooltipTheme}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
             />
         {/if}
         </div>

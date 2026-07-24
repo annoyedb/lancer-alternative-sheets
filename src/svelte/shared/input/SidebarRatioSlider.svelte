@@ -24,8 +24,7 @@
         tooltipTheme,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
     }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = $derived(props)
     const actorUuid = getActorContext()?.uuid;
 
@@ -36,7 +35,6 @@
 
     const qualityMode = getExtraEffectsEnabled();
     const advancedOptions = $derived(getAdvancedState(uuid));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.advanced.sidebarRatio.tooltip"));
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.advanced.sidebarRatio.tooltip"));
@@ -85,8 +83,8 @@
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>

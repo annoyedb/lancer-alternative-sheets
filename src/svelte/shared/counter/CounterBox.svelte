@@ -17,15 +17,13 @@
         style,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerClick,
     }: CounterBoxProps & TextLogEventProps & PointerClickProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.counter.tooltip"));
 
     function handleOnClick(event: MouseEvent & { currentTarget: EventTarget & HTMLElement }, index: number)
@@ -59,8 +57,8 @@
             {type}"
         data-available={index < usesValue}
         data-path={path}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         onclick={event => handleOnClick(event, index)}
         aria-label="{getLocalized('LA.use.label')} {text}"
     ></button>

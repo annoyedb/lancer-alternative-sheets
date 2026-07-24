@@ -3,7 +3,6 @@
     import { Logger } from "@/classes/Logger";
 
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
@@ -89,8 +88,7 @@
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={isMechSheet ? TextConsoleHook.MechHeader : undefined }
-    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : undefined }
+    logging={isMechSheet}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -130,8 +128,7 @@
                         : `itemTypes.core_bonus.${index}.system.counters.${jndex}`}
                     style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
 
-                    logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                    logging={true}
                 />
             {/each}
             </div>
@@ -152,8 +149,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                logging={true}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
@@ -172,8 +168,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
-                logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                logging={true}
 
                 onPointerEnter={() => {messageButtonHover = true;} }
                 onPointerLeave={() => {messageButtonHover = false;} }
@@ -217,8 +212,7 @@
                     effect={coreBonus.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                    logging={true}
                 />
                 <ActionBox
                     actions={coreBonus.system.actions}
@@ -235,8 +229,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                    logging={true}
                 />
                 <DeployableBox
                     source={actor}
@@ -246,8 +239,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-                    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+                    logging={true}
                 />
             </div>
         </HeaderSecondary>

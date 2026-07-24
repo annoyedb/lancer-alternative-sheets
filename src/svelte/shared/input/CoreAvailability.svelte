@@ -1,6 +1,5 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
@@ -29,8 +28,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined}
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={TooltipDirection.RIGHT}
-    onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.core.available.tooltip"), TextConsoleHook.MechHeader, actorUuid!) }
-    onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actorUuid!) }
+    onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.core.available.tooltip"), actorUuid!) }
+    onpointerleave={ event => resetTextConsole(event, actorUuid!) }
 >
     <input
         name="system.core_energy"

@@ -4,6 +4,7 @@
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
 
     import { TextConsoleHook } from "@/enums/TextConsoleHook";
+    import { TextLogHook } from "@/enums/TextLogHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
 
@@ -90,8 +91,7 @@
             tooltip={getLocalized("LA.edit.image.reset.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
             logText={getLocalized("LA.edit.image.reset.tooltip")}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
         />
     {/if}
         <AdvancedButton
@@ -100,8 +100,7 @@
             uuid={actor.uuid}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
         />
     </div>
 {#if advancedOptions}
@@ -112,8 +111,7 @@
         setState={setActorTokenSync}
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={TextConsoleHook.PilotHeader}
-        logTypeReset={TextConsoleHook.PilotHeaderReset}
+        logging={true}
     />
     {#if !tokenImageLocked}
     <GlyphButton
@@ -126,8 +124,7 @@
         tooltip={getLocalized("LA.edit.image.actor.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getLocalized("LA.edit.image.actor.tooltip")}
-        logType={TextConsoleHook.PilotHeader}
-        logTypeReset={TextConsoleHook.PilotHeaderReset}
+        logging={true}
     />
     {/if}
 {/if}
@@ -144,8 +141,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.alias.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.alias.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.alias.label")}
@@ -163,8 +160,8 @@
             name={"system.callsign"}
             value={system.callsign}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.callsign.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.callsign.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.callsign.label")}
@@ -177,8 +174,8 @@
             name={"system.background"}
             value={system.background}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.background.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.background.tooltip"), actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.background.label")}
@@ -314,6 +311,8 @@
         uuid={actor.uuid}
         hookID={TextConsoleHook.PilotHeader}
         hookResetID={TextConsoleHook.PilotHeaderReset}
+        logHookID={TextLogHook.PilotLog}
+        logHookResetID={TextLogHook.PilotLogReset}
         runIntro={false}
     />
 </span>

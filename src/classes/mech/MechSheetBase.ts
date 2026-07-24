@@ -9,7 +9,6 @@ import { setIntroRun } from "@/scripts/store/text-log";
 import { getThemeKey, setThemeKey } from "@/scripts/store/theme";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
-import { TextConsoleHook } from "@/enums/TextConsoleHook";
 import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
 import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
@@ -202,8 +201,7 @@ export class MechSheetBase
                         actor: data.actor,
                         system: data.system,
                         tooltipEnabled: getMechSheetTooltipEnabled(),
-                        logType: TextConsoleHook.MechHeader,
-                        logTypeReset: TextConsoleHook.MechHeaderReset,
+                        logging: true,
                     },
                 });
             }

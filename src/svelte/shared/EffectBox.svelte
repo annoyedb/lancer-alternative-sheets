@@ -23,8 +23,7 @@
         tooltipEnabled,
         tooltipTheme,
 
-        logType,
-        logTypeReset,
+        logging,
     }: EffectBoxProps & TooltipProps & TextLogEventProps = $props();
 
     const qualityMode = getExtraEffectsEnabled();
@@ -55,8 +54,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={tooltipTheme}
-            logType={logType}
-            logTypeReset={logTypeReset}
+            logging={logging}
         />
     {/if}
     <span

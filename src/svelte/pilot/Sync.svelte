@@ -4,7 +4,6 @@
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getThemeKey } from "@/scripts/store/theme";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
@@ -62,8 +61,7 @@
                     tooltip={getLocalized("LA.pilot.sync.download.tooltip")}
                     tooltipDirection={TooltipDirection.LEFT}
                     logText={getLocalized("LA.pilot.sync.download.tooltip")}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 >
                     <span class="-fontsizesmall -upper -fontface-stylized">
                         SYNC

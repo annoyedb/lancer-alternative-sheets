@@ -4,7 +4,6 @@
     import { getCSSDocumentTheme, getThemeHistoryLabel } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import EffectBox from "@/svelte/shared/EffectBox.svelte";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
@@ -37,8 +36,7 @@
     tooltip={getLocalized("LA.edit.tooltip")}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.edit.tooltip")}
-    logType={TextConsoleHook.PilotHeader}
-    logTypeReset={TextConsoleHook.PilotHeaderReset}
+    logging={true}
 
     onPointerEnter={() => {editButtonHover = true;}}
     onPointerLeave={() => {editButtonHover = false;}}

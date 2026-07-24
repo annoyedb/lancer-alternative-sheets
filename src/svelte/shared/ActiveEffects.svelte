@@ -18,8 +18,7 @@
         owner,
 
         tooltipEnabled,
-        logType,
-        logTypeReset,
+        logging,
     }: ActiveEffectsProps & TooltipProps & TextLogEventProps = $props();
 
     const qualityMode = getExtraEffectsEnabled();
@@ -69,8 +68,7 @@
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
         logText={getLocalized("LA.delete.tooltip")}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
     >
         <i class="mdi mdi-close-circle -fontsize4 la-text-header-anti"></i>
     </GlyphButton>

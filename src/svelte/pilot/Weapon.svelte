@@ -8,7 +8,6 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { ChatCardType } from "@/enums/ChatCardType";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -121,8 +120,7 @@
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
-        logType={TextConsoleHook.PilotHeader}
-        logTypeReset={TextConsoleHook.PilotHeaderReset}
+        logging={true}
 
         onPointerEnter={() => {collapseAllButtonHover = true;}}
         onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -156,8 +154,7 @@
                     item={weapon}
                     path={getWeaponPath(index)}
                     
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <!-- Limited -->
                 <LimitedBox
@@ -165,8 +162,7 @@
                     usesMax={weapon.system.uses.max}
                     path={getWeaponPath(index)}
 
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <SpCostArray
                     cost={weapon.system.sp}
@@ -183,8 +179,7 @@
                 usesMax={counter.max}
                 path="{getWeaponPath(index)}.system.counters.{jndex}"
         
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             />
         {/each}
         {/if}
@@ -207,8 +202,7 @@
                 tooltipDirection={TooltipDirection.LEFT}
                 tooltip={getRollWeaponTip(weapon)}
                 logText={getRollWeaponTip(weapon)}
-                logType={TextConsoleHook.PilotHeader}
-                logTypeReset={TextConsoleHook.PilotHeaderReset}
+                logging={true}
 
                 onPointerEnter={() => {attackButtonHover = true;} }
                 onPointerLeave={() => {attackButtonHover = false;} }
@@ -228,8 +222,7 @@
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
             tooltipTheme={theme}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
 
             onPointerEnter={() => {damageButtonHover = true;} }
             onPointerLeave={() => {damageButtonHover = false;} }
@@ -246,8 +239,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
-                logType={TextConsoleHook.PilotHeader}
-                logTypeReset={TextConsoleHook.PilotHeaderReset}
+                logging={true}
 
                 onClick={(event) => sendToChat(event, weapon)}
                 onPointerEnter={() => {messageButtonHover = true;} }
@@ -266,8 +258,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextConsoleHook.PilotHeader}
-                logTypeReset={TextConsoleHook.PilotHeaderReset}
+                logging={true}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
@@ -320,8 +311,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <ActionBox
                     actions={weapon.system.actions}
@@ -334,16 +324,14 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <EffectBox
                     name={getLocalized("LA.description.label")}
                     effect={weapon.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             {#if weapon.system.effect}
                 <EffectBox
@@ -351,8 +339,7 @@
                     effect={weapon.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             {/if}
                 <TagArray

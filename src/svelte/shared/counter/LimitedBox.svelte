@@ -15,8 +15,7 @@ Special implementation of the `CounterBox` component for items with the `Limited
         usesMax,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerClick,
     }: LimitedBoxProps & TextLogEventProps & PointerClickProps = $props();
@@ -33,8 +32,7 @@ Special implementation of the `CounterBox` component for items with the `Limited
     path={path}
 
     logText={log}
-    logType={logType}
-    logTypeReset={logTypeReset}
+    logging={logging}
 
     onPointerClick={onPointerClick}
 />

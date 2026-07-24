@@ -25,15 +25,13 @@
         tooltipDirection,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
     }: ThemeOverrideButtonProps & IconButtonProps & TooltipProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.themeOverride.tooltip"), tooltipHeader));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.advanced.themeOverride.tooltip"));
     const theme = $derived(getCSSDocumentTheme(uuid));
     
@@ -109,8 +107,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
     onclick={event => handleOnClick(event)}
     aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >

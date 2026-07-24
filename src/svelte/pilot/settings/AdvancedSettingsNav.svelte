@@ -3,7 +3,6 @@
     import { getPilotSheetTooltipEnabled, getSidebarRatio, setSidebarRatio, setThemeOverride } from "@/scripts/pilot/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import SidebarRatioSlider from "@/svelte/shared/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/shared/button/ThemeOverrideButton.svelte";
     import { setActorContext } from "@/scripts/context";
@@ -27,8 +26,7 @@
     
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 />
 
 <ThemeOverrideButton
@@ -40,6 +38,5 @@
     tooltipTheme={theme}
     setOverride={setThemeOverride}
 
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 />

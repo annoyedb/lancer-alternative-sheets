@@ -1,13 +1,18 @@
 import { TextLogIntro } from "@/enums/TextLogIntro";
 import { TextConsoleHook } from "@/enums/TextConsoleHook";
+import { TextLogHook } from "@/enums/TextLogHook";
 import {
     formatString,
     getFoundryVersion,
     getLancerVersion,
     getLocalized,
-    getModuleVersion
+    getModuleVersion,
+    photosensitiveStyling
 } from "@/scripts/helpers";
 import { trackHook } from "@/scripts/store/hooks";
+import type { TextLogEntry } from "@/interfaces/actor/TextLogEntry";
+
+const GLITCHY_CLASS = "horus--subtle";
 
 function escapeHtml(text: string): string
 {
@@ -18,9 +23,10 @@ function escapeHtml(text: string): string
 }
 
 type Action =
-    | { kind: 'type'; text: string; charDelay: number; pos: number }
+    | { kind: 'type'; text: string; charDelay: number; pos: number; className?: string }
     | { kind: 'pause'; ms: number }
-    | { kind: 'break' };
+    | { kind: 'break' }
+    | { kind: 'append'; html: string };
 
 interface TextWriterOptions
 {
@@ -37,6 +43,7 @@ export class TextWriter
     private timer: ReturnType<typeof setTimeout> | null = null;
     private committedHTML = '';
     private currentSegment = '';
+    private currentSegmentClass: string | undefined;
     private readonly showCursor: boolean;
     private readonly cursorChar: string;
     private readonly defaultSpeed: number;
@@ -49,11 +56,11 @@ export class TextWriter
         this.defaultSpeed = options.speed ?? 25;
     }
 
-    type(text: string, options: { delay?: number } = {}): this
+    type(text: string, options: { delay?: number; className?: string } = {}): this
     {
         if (options.delay)
             this.queue.push({ kind: 'pause', ms: options.delay });
-        this.queue.push({ kind: 'type', text, charDelay: this.defaultSpeed, pos: 0 });
+        this.queue.push({ kind: 'type', text, charDelay: this.defaultSpeed, pos: 0, className: options.className });
         return this;
     }
 
@@ -76,7 +83,12 @@ export class TextWriter
         this.processNext();
     }
 
-    reset(): void
+    resetAll(): void
+    {
+        this.reset('');
+    }
+
+    reset(html: string): void
     {
         if (this.timer !== null)
         {
@@ -85,8 +97,9 @@ export class TextWriter
         }
         this.running = false;
         this.queue = [];
-        this.committedHTML = '';
+        this.committedHTML = html;
         this.currentSegment = '';
+        this.currentSegmentClass = undefined;
         this.render();
     }
 
@@ -94,15 +107,29 @@ export class TextWriter
     {
         this.committedHTML = html;
         this.currentSegment = '';
+        this.currentSegmentClass = undefined;
         this.render();
+    }
+
+    // Queued rather than applied immediately, so it can't race with an in-progress typewriter
+    // animation (a direct/synchronous commit here would stomp on whatever the queue is mid-typing).
+    appendHTML(html: string): this
+    {
+        this.queue.push({ kind: 'append', html });
+        return this;
     }
 
     private render(): void
     {
         const content = this.committedHTML
-            + (this.currentSegment ? `<span>${escapeHtml(this.currentSegment)}</span>` : '');
+            + (this.currentSegment ? `<span${this.classAttr(this.currentSegmentClass)}>${escapeHtml(this.currentSegment)}</span>` : '');
         const cursor = this.showCursor ? `<span class="la-textlog__cursor">${this.cursorChar}</span>` : '';
         this.element.innerHTML = content + cursor;
+    }
+
+    private classAttr(className: string | undefined): string
+    {
+        return className ? ` class="${className}"` : '';
     }
 
     private processNext(): void
@@ -119,7 +146,14 @@ export class TextWriter
         {
             case 'type':
             {
+                if (item.text.length === 0)
+                {
+                    this.queue.shift();
+                    this.processNext();
+                    break;
+                }
                 this.currentSegment += item.text[item.pos++];
+                this.currentSegmentClass = item.className;
                 this.render();
                 if (item.pos >= item.text.length)
                     this.queue.shift();
@@ -137,10 +171,44 @@ export class TextWriter
             case 'break':
             {
                 this.queue.shift();
-                this.committedHTML += this.currentSegment
-                    ? `<span>${escapeHtml(this.currentSegment)}</span><br>`
-                    : '<br>';
-                this.currentSegment = '';
+                // Only commit if there's a pending segment to close off. Keeps break() safe to
+                // call defensively (e.g. to flush leftover text before a new line) without ever
+                // inserting a stray blank line.
+                if (this.currentSegment)
+                {
+                    this.committedHTML += `<span${this.classAttr(this.currentSegmentClass)}>${escapeHtml(this.currentSegment)}</span><br>`;
+                    this.currentSegment = '';
+                    this.currentSegmentClass = undefined;
+                    this.render();
+                }
+                // Already-committed content that just happens to not end in a break yet (e.g. a
+                // persistent-only reset() back to buildFinishedHTML's output) still needs closing
+                // off before whatever comes next in the queue.
+                else if (this.committedHTML && !this.committedHTML.endsWith('<br>'))
+                {
+                    this.committedHTML += '<br>';
+                    this.render();
+                }
+                this.processNext();
+                break;
+            }
+
+            case 'append':
+            {
+                this.queue.shift();
+                // Whatever was mid-typing (e.g. `runIntro`'s last line, which never gets a
+                // trailing break()) needs to be closed off before we add anything after it.
+                if (this.currentSegment)
+                {
+                    this.committedHTML += `<span${this.classAttr(this.currentSegmentClass)}>${escapeHtml(this.currentSegment)}</span><br>`;
+                    this.currentSegment = '';
+                    this.currentSegmentClass = undefined;
+                }
+                // For already-committed content that just happens to not end in a
+                // break yet (e.g. `buildFinishedHTML`'s output).
+                if (this.committedHTML && !this.committedHTML.endsWith('<br>'))
+                    this.committedHTML += '<br>';
+                this.committedHTML += item.html;
                 this.render();
                 this.processNext();
                 break;
@@ -165,21 +233,29 @@ export class TextConsoleWriter
     public registerHooks(uuid: string): void
     {
         // Dynamic, per-instance hook IDs (runtime strings) - outside fvtt-types' typed hook registry.
+        //
         // hookID/hookResetID are shared by every open sheet of this type, so the emitted sourceUuid
         // must be checked against this instance's own uuid to avoid reacting to another sheet's event.
         trackHook(uuid, (Hooks.on as any)(this.hookID, (text: string, sourceUuid: string) =>
         {
             if (sourceUuid !== uuid)
                 return;
-            this.writer.reset();
-            this.writer.type(text).start();
+            this.writer.resetAll();
+            const lines = text.split(/<br\s*\/?>/i);
+            lines.forEach((line, index) =>
+            {
+                this.writer.type(line);
+                if (index < lines.length - 1)
+                    this.writer.break();
+            });
+            this.writer.start();
         }), this.hookID);
 
         trackHook(uuid, (Hooks.on as any)(this.hookResetID, (sourceUuid: string) =>
         {
             if (sourceUuid !== uuid)
                 return;
-            this.writer.reset();
+            this.writer.resetAll();
         }), this.hookResetID);
     }
 }
@@ -187,10 +263,60 @@ export class TextConsoleWriter
 export class TextLogWriter
 {
     private writer: TextWriter;
+    private hookID: TextLogHook;
+    private hookResetID: TextLogHook;
+    private introType: TextLogIntro | undefined;
 
-    constructor(component: HTMLElement)
+    constructor(component: HTMLElement, hookID: TextLogHook, hookResetID: TextLogHook)
     {
         this.writer = new TextWriter(component, { cursor: false, speed: 25 });
+        this.hookID = hookID;
+        this.hookResetID = hookResetID;
+    }
+
+    public registerHooks(uuid: string): void
+    {
+        // Dynamic, per-instance hook IDs (runtime strings) - outside fvtt-types' typed hook registry.
+        //
+        // hookID/hookResetID are shared by every open sheet of this type, so the emitted sourceUuid
+        // must be checked against this instance's own uuid to avoid reacting to another sheet's event.
+        trackHook(uuid, (Hooks.on as any)(this.hookID, (text: string, sourceUuid: string, glitchy?: boolean) =>
+        {
+            if (sourceUuid !== uuid)
+                return;
+            // First break is for flushing, second break is an actual break
+            this.writer.break().type(text, { className: glitchy ? photosensitiveStyling(GLITCHY_CLASS) : undefined }).break().start();
+        }), this.hookID);
+
+        trackHook(uuid, (Hooks.on as any)(this.hookResetID, (sourceUuid: string, all: boolean = false) =>
+        {
+            if (sourceUuid !== uuid)
+                return;
+            if (all)
+                this.writer.resetAll();
+            else
+                this.writer.reset(this.buildFinishedHTML(this.introType!));
+        }), this.hookResetID);
+    }
+
+    /**
+     * Instantly renders entries previously sent via sendToTextLog, so a remounted sheet picks back up where it
+     * left off instead of losing everything sent before.
+     *
+     * Queued via appendHTML rather than committed directly, so it plays after (not on top of) an
+     * in-progress runIntro animation instead of corrupting it.
+     * @param entries
+     */
+    public showPersistedEntries(entries: TextLogEntry[]): void
+    {
+        if (!entries.length)
+            return;
+        const html = entries.map(entry =>
+        {
+            const className = entry.glitchy ? photosensitiveStyling(GLITCHY_CLASS) : undefined;
+            return `<span${className ? ` class="${className}"` : ''}>${escapeHtml(entry.text)}</span><br>`;
+        }).join('');
+        this.writer.appendHTML(html).start();
     }
 
     private getRandomDelay(): number
@@ -213,6 +339,7 @@ export class TextLogWriter
 
     public runIntro(introType: TextLogIntro): void
     {
+        this.introType = introType;
         switch (introType)
         {
             case TextLogIntro.Header:
@@ -252,6 +379,7 @@ export class TextLogWriter
 
     public setFinished(introType: TextLogIntro): void
     {
+        this.introType = introType;
         this.writer.setHTML(this.buildFinishedHTML(introType));
     }
 

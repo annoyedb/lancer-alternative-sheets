@@ -23,7 +23,6 @@
     import { setActorContext } from "@/scripts/context";
 
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { FlowClass } from '@/enums/FlowClass';
 
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
@@ -123,8 +122,7 @@
         tooltip={getLocalized("LA.edit.image.token.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
         logText={getLocalized("LA.edit.image.token.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
         onPointerClick={event => handleEditToken(event, actor)}
     />
 </div>
@@ -421,6 +419,5 @@
     allowDrop={advancedOptions}
     buttonStyle={[FLOW_BUTTON_DEFAULT(), advancedOptions ? "-margin7-l" : "-margin2-l"]}
     tooltipEnabled={tooltipEnabled}
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 />

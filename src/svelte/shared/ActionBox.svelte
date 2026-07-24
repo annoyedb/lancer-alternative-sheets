@@ -25,7 +25,6 @@
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import { Logger } from "@/classes/Logger";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type ActionBoxProps = {
@@ -75,8 +74,7 @@
 
         tooltipEnabled,
         tooltipTheme,
-        logType,
-        logTypeReset
+        logging,
     }: ActionBoxProps & TooltipProps & TextLogEventProps = $props();
 
     let effectButtonHover = $state(false);
@@ -162,8 +160,7 @@
         tooltipDirection={undefined}
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getLocalized(ACTIVATION_TOOLTIP_LOCALIZE_MAP[action.activation])}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
     />
 {/snippet}
 {#snippet outerContent()}
@@ -200,8 +197,7 @@
         tooltipTheme={theme}
         tooltip={getLocalized("LA.chat.tooltip")}
         logText={getLocalized("LA.chat.tooltip")}
-        logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
-        logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
+        logging={true}
         
         onClick={event => sendToChat(event, action)}
         onPointerEnter={() => {messageButtonHover = true;} }
@@ -233,8 +229,7 @@
         tooltipHeader={getLocalized(ACTIVATION_LOCALIZE_MAP[action.activation])}
         tooltip={getReactionTooltip(action)}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
 
         disabled={disableLeftButton}
 
@@ -274,8 +269,7 @@
                     outerStyle={["-bordersround"]}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={logType}
-                    logTypeReset={logTypeReset}
+                    logging={logging}
                 >
                 {#if !collapseID}
                     {@render defaultFlowButton()}
@@ -292,8 +286,7 @@
                     editPath={`${path}.detail`}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={logType}
-                    logTypeReset={logTypeReset}
+                    logging={logging}
                 >
                     {@html action.detail || defaultPlaceholder}
                 </EffectBox>
@@ -314,8 +307,7 @@
                 outerStyle={["-bordersround"]}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
             >
                 {@html action.detail || defaultPlaceholder}
             </EffectBox>

@@ -21,8 +21,7 @@
         tooltipDirection,
 
         logText,
-        logType,
-        logTypeReset,
+        logging: loggingEnabled,
 
         onPointerClick,
     }: {actor: any; editDisabled?: boolean;} & TooltipProps & TextLogEventProps & PointerClickProps = $props();
@@ -32,11 +31,11 @@
         ? `modules/${moduleID}/assets/nodata.png`
         : actorImgVid);
     const tokenVideoMimeType = $derived(getVideoMimeType(actorImgVid));
-    
+
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.edit.image.token.tooltip"), tooltipHeader));
     const tokenErrorTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.edit.image.token.error")));
 
-    const logging = $derived(logType && logTypeReset && !editDisabled);
+    const logging = $derived(loggingEnabled && !editDisabled);
     const log = $derived(logText || getLocalized("LA.edit.image.token.tooltip"));
 </script>
 
@@ -51,8 +50,8 @@
             : undefined }
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         onclick={editDisabled ? undefined : onPointerClick}
     >
         <source src={actorImgVid} type={tokenVideoMimeType}>
@@ -67,8 +66,8 @@
             : undefined }
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         onclick={editDisabled ? undefined : onPointerClick}
     >
         <img 

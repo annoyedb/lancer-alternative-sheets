@@ -13,13 +13,11 @@
         power,
 
         logText,
-        logType,
-        logTypeReset,
+        logging,
     }: LimitedBondBoxProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.limited.tooltip"));
 </script>
 
@@ -33,8 +31,8 @@
     <button type="button" 
         class="la-prmy-header la-scdy-primary -fontsize7
             {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}"
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <i class="mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}

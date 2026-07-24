@@ -39,8 +39,7 @@
         tooltipTheme,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerEnter,
         onPointerLeave,
@@ -50,7 +49,6 @@
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader));
     const hasAllWeaponProperties = $derived(damage?.length && range?.length);
     const rollable = $derived(!disabled && (damage?.length > 0));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.flow.rollDamage.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
@@ -59,7 +57,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!, actorUuid!);
+            sendToTextConsole(event, log, actorUuid!);
         else
             return undefined;
     }
@@ -70,7 +68,7 @@
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!, actorUuid!);
+            resetTextConsole(event, actorUuid!);
         else
             return undefined;
     }

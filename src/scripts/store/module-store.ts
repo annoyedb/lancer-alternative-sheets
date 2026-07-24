@@ -1,5 +1,6 @@
 import type { ActiveTab } from "@/enums/ActiveTab";
 import type { ThemeKey } from "@/enums/ThemeKey";
+import type { TextLogEntry } from "@/interfaces/actor/TextLogEntry";
 import { untrack } from "svelte";
 import { fromStore, get, writable } from "svelte/store";
 import { 
@@ -23,6 +24,7 @@ interface SheetStoreData
     trackedHooks: { [key: number]: string };
     tokenImageLock: boolean;
     selectedTokenImage: string; // (#12)
+    textLogEntries: TextLogEntry[];
 }
 
 export class SheetStore
@@ -38,6 +40,7 @@ export class SheetStore
             trackedHooks: {} as { [key: number]: string },
             tokenImageLock: true,
             selectedTokenImage: "", // (#12)
+            textLogEntries: [],
         };
     }
 

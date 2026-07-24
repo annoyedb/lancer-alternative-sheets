@@ -5,7 +5,6 @@
     import type { ChatData } from "@/interfaces/flows/ChatData";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getLocalized } from "@/scripts/helpers";
@@ -65,8 +64,7 @@
     tooltipTheme={theme}
     tooltipDirection={TooltipDirection.LEFT}
     tooltip={tip}
-    logType={TextConsoleHook.MechHeader}
-    logTypeReset={TextConsoleHook.MechHeaderReset}
+    logging={true}
 
     onPointerEnter={() => {effectButtonHover = true;}}
     onPointerLeave={() => {effectButtonHover = false;}}
@@ -94,8 +92,7 @@
         effect={core.passive_effect}
 
         tooltipEnabled={tooltipEnabled}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
 {/if}
     <!-- Generated Content -->
@@ -110,8 +107,7 @@
 
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
 </HeaderQuinary>
 {/if}

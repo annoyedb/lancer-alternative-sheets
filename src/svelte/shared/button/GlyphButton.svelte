@@ -37,24 +37,23 @@
         tooltipDirection,
 
         logText,
-        logType,
-        logTypeReset,
-        
+        logging: loggingEnabled,
+
         onPointerEnter,
         onPointerLeave,
     }: GlyphButtonProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
     const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined);
-    const logging = $derived(logType && logTypeReset && logText);
+    const logging = $derived(loggingEnabled && logText);
 
-    function handleOnPointerEnter(event: PointerEvent) 
+    function handleOnPointerEnter(event: PointerEvent)
     {
         if (onPointerEnter)
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, logText!, logType!, actorUuid!);
+            sendToTextConsole(event, logText!, actorUuid!);
         else
             return undefined;
     }
@@ -65,7 +64,7 @@
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!, actorUuid!);
+            resetTextConsole(event, actorUuid!);
         else
             return undefined;
     }

@@ -34,8 +34,7 @@
         tooltipTheme,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onClick,
         onPointerEnter,
@@ -44,7 +43,6 @@
     const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.effect.tooltip"), tooltipHeader));
-    const logging = $derived(logType && logTypeReset);
     const log = $derived(logText || getLocalized("LA.flow.effect.tooltip"));
 
     function handleOnPointerEnter(event: PointerEvent) 
@@ -53,7 +51,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!, actorUuid!);
+            sendToTextConsole(event, log, actorUuid!);
         else
             return undefined;
     }
@@ -64,7 +62,7 @@
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!, actorUuid!);
+            resetTextConsole(event, actorUuid!);
         else
             return undefined;
     }

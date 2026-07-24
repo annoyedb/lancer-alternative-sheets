@@ -4,7 +4,6 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { AcceptType } from "@/enums/AcceptType";
 
@@ -84,8 +83,7 @@
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={skill.system.description}
             tooltipHeader={getLocalized("LA.pilot.skillTrigger.label")}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
                         
             onPointerEnter={() => {effectButtonHover = true;} }
             onPointerLeave={() => {effectButtonHover = false;} }
@@ -115,8 +113,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -135,8 +132,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={ TextConsoleHook.PilotHeader }
-            logTypeReset={ TextConsoleHook.PilotHeaderReset }
+            logging={true}
 
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
@@ -176,16 +172,14 @@
                     effect={skill.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <EffectBox
                     name={getLocalized("LA.detail.label")}
                     effect={skill.system.detail}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             </div>
         </HeaderSecondary>

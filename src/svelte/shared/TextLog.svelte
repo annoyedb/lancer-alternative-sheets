@@ -2,7 +2,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getMechSheetLogHeaderEnabled } from "@/scripts/mech/settings";
-    import { setIntroRun } from "@/scripts/store/text-log.js";
+    import { getTextLogEntries, setIntroRun } from "@/scripts/store/text-log.js";
     import { TextLogWriter, TextConsoleWriter } from "@/scripts/text-writer.js";
     import type { TextLogProps } from "@/interfaces/actor/TextLogProps";
 
@@ -14,6 +14,8 @@
         uuid,
         hookID,
         hookResetID,
+        logHookID,
+        logHookResetID,
     }: TextLogProps = $derived(props);
     let consoleComponent: HTMLElement | null = $state(null);
     let logComponent: HTMLElement | null = $state(null);
@@ -29,7 +31,8 @@
         // Setup TextWriter
         consoleWriter = new TextConsoleWriter(consoleComponent!, hookID, hookResetID);
         consoleWriter.registerHooks(uuid);
-        logWriter = new TextLogWriter(logComponent!);
+        logWriter = new TextLogWriter(logComponent!, logHookID, logHookResetID);
+        logWriter.registerHooks(uuid);
         if (runIntro)
         {
             logWriter.runIntro(introType);
@@ -39,6 +42,7 @@
         {
             logWriter.setFinished(introType);
         }
+        logWriter.showPersistedEntries(getTextLogEntries(uuid));
     });
 </script>
 

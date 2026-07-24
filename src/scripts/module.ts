@@ -1,5 +1,6 @@
 import { preloadTemplates } from "./loader";
 import { forwardData, logConsole, logData } from "./helpers";
+import { resetTextLog, sendToTextLog } from "@/scripts/store/text-log";
 import { MechSheetBase } from "@/classes/mech/MechSheetBase";
 import { NPCSheetBase } from "@/classes/npc/NPCSheetBase";
 import { PilotSheetBase } from "@/classes/pilot/PilotSheetBase";
@@ -43,7 +44,8 @@ Hooks.once("ready", async () =>
             resetDeployableSheetData,
         },
         textLog: {
-
+            sendToTextLog,
+            resetTextLog,
         }
     };
 });

@@ -4,7 +4,6 @@
     import { RESERVE_ICON_MAP } from "@/scripts/constants";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -95,8 +94,7 @@
                     path="{getReservePath(index)}.system.used"
                     onPointerClick={updateReserveUses}
 
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             </div>
         {/if}
@@ -108,8 +106,7 @@
                 usesMax={counter.max}
                 path="{getReservePath(index)}.system.counters.{jndex}"
         
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             />
         {/each}
         </div>
@@ -130,8 +127,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextConsoleHook.PilotHeader}
-            logTypeReset={TextConsoleHook.PilotHeaderReset}
+            logging={true}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -150,8 +146,7 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={ TextConsoleHook.PilotHeader }
-            logTypeReset={ TextConsoleHook.PilotHeaderReset }
+            logging={true}
 
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
@@ -197,8 +192,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <ActionBox
                     actions={reserve.system.actions}
@@ -211,16 +205,14 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <EffectBox
                     name={getLocalized("LA.description.label")}
                     effect={reserve.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
                 <TagArray
                     tags={reserve.system.tags}

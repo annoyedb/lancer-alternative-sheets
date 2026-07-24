@@ -37,8 +37,7 @@
         tooltipDirection,
         tooltipEnabled,
 
-        logType,
-        logTypeReset,
+        logging,
     }: MacroDropBoxProps & TooltipProps & TextLogEventProps = $props();
     const actorUuid = getActorContext()?.uuid;
     interface LocalDropData { type: string; index: number; }
@@ -52,7 +51,6 @@
 
     const tipMain = $derived(TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.0"), tooltipHeader));
     const tipAlt = $derived(TooltipFactory.buildTooltip(getLocalized("LA.advanced.addMacro.tooltip.1"), tooltipHeader));
-    const logging = $derived(logType && logTypeReset);
     const logMain = getLocalized("LA.advanced.addMacro.tooltip.0");
     const logAlt = getLocalized("LA.advanced.addMacro.tooltip.1");
     const log = $derived(allowDrop ? logAlt : logMain);
@@ -145,8 +143,8 @@
     {#if allowDrop}
         <div role="none"
             class="la-flexrow -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
-            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+            onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+            onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
         >
             <i class="mdi mdi-arrow-down-left"></i>
             <span>
@@ -180,8 +178,7 @@
             disabled={!allowDrop}
             deleteDisabled={isSystemFlow(type) || isSkillTrigger(type)}
 
-            logType={logType}
-            logTypeReset={logTypeReset}
+            logging={logging}
         >
         {#if isSkillTrigger(type)}
             <SkillTriggerButton
@@ -191,8 +188,7 @@
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
                 tooltipHeader={tooltipHeader}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
             />
         {:else if isSystemFlow(type)}
             {#if type === SystemButton.SkillTriggerOther}
@@ -210,8 +206,7 @@
                         tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                         tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                         logText={ButtonFactory.getSystemButtonTip(type, uuid)}
-                        logType={logType}
-                        logTypeReset={logTypeReset}
+                        logging={logging}
                         
                         onClick={event => {
                             event.stopPropagation();
@@ -240,8 +235,7 @@
                     tooltipHeader={ButtonFactory.getSystemButtonTipHeader(type)}
                     tooltip={ButtonFactory.getSystemButtonTip(type, uuid)}
                     logText={ButtonFactory.getSystemButtonTip(type, uuid)}
-                    logType={logType}
-                    logTypeReset={logTypeReset}
+                    logging={logging}
                 />
             {/if}
         {:else}
@@ -257,8 +251,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
             />
         {/if}
         </DragDropHandle>
@@ -271,8 +264,8 @@
                     : undefined}
                 data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-                onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
-                onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
+                onpointerenter={ logging ? event => sendToTextConsole(event, log, actorUuid!) : undefined }
+                onpointerleave={ logging ? event => resetTextConsole(event, actorUuid!) : undefined }
             >
                 <span class="la-left la-flexrow">
                     {#if allowDrop}

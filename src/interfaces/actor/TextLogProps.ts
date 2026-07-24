@@ -1,4 +1,5 @@
 import type { TextConsoleHook } from "@/enums/TextConsoleHook";
+import type { TextLogHook } from "@/enums/TextLogHook";
 import type { TextLogIntro } from "@/enums/TextLogIntro";
 
 export interface TextLogProps
@@ -9,4 +10,6 @@ export interface TextLogProps
     uuid: string;
     hookID: TextConsoleHook;
     hookResetID: TextConsoleHook;
+    logHookID: TextLogHook;
+    logHookResetID: TextLogHook;
 }

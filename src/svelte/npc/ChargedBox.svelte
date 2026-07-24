@@ -15,8 +15,7 @@ Special implementation of the `CounterBox` component for npc features that can b
         style,
         
         logText,
-        logType,
-        logTypeReset,
+        logging,
 
         onPointerClick,
     }: ChargedBoxProps & TextLogEventProps & PointerClickProps = $props();
@@ -36,8 +35,7 @@ Special implementation of the `CounterBox` component for npc features that can b
     style={style}
 
     logText={log}
-    logType={logType}
-    logTypeReset={logTypeReset}
+    logging={logging}
 
     onPointerClick={onPointerClick}
 />

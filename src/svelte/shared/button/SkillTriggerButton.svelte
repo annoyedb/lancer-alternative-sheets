@@ -20,8 +20,7 @@
 
         tooltipEnabled,
         tooltipTheme,
-        logType,
-        logTypeReset,
+        logging,
     } : SkillTriggerButtonProps & TooltipProps & TextLogEventProps = $props();
 </script>
 
@@ -38,8 +37,7 @@
         tooltipHeader={getLocalized("LA.pilot.skillTrigger.label")}
         tooltip={item.system.description}
         logText={item.system.description}
-        logType={logType}
-        logTypeReset={logTypeReset}
+        logging={logging}
     />
     <span class="la-skilltrigger__span -bordersround-rtb -small la-brdr-secondary la-bckg-darken-2">
         <span class="la-skilltrigger__inner -bordersround-rtb -small la-brdr-darken-2 la-text-text -fontsize4 -fontface-stylized -textaligncenter -overflowhidden -padding0-lr">

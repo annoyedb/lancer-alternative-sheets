@@ -4,7 +4,6 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     
@@ -51,8 +50,7 @@
     tooltip={addClockTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.clock.add.tooltip")}
-    logType={TextConsoleHook.PilotHeader}
-    logTypeReset={TextConsoleHook.PilotHeaderReset}
+    logging={true}
 
     onPointerEnter={() => {addButtonHover = true;}}
     onPointerLeave={() => {addButtonHover = false;}}
@@ -87,8 +85,7 @@
                     path="system.bond_state.clocks.{index}"
                     style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                     
-                    logType={TextConsoleHook.PilotHeader}
-                    logTypeReset={TextConsoleHook.PilotHeaderReset}
+                    logging={true}
                 />
             </div>
         {/snippet}
@@ -107,8 +104,7 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextConsoleHook.PilotHeader}
-                logTypeReset={TextConsoleHook.PilotHeaderReset}
+                logging={true}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }

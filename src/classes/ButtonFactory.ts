@@ -3,10 +3,10 @@ import { mount } from "svelte";
 import type { UUIDData } from "@/interfaces/flows/UUIDData";
 import { SystemButton } from "@/enums/SystemButton";
 import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
-import { TextConsoleHook } from "@/enums/TextConsoleHook";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { Logger } from "@/classes/Logger";
 import { formatString, getCurrentOvercharge, getLocalized } from "@/scripts/helpers";
+import { buildActorContext } from "@/scripts/context";
 import FlowButton from '@/svelte/shared/button/FlowButton.svelte';
 
 /**
@@ -94,8 +94,10 @@ export class ButtonFactory
         target: HTMLElement, ownerUUID: string, type: SystemButton,
         label: string, tip: string, tipHeader: string | undefined): void
     {
+        const actor = fromUuidSync(ownerUUID) as any;
         mount(FlowButton, {
             target: target,
+            context: buildActorContext(actor),
             props: {
                 text: label,
 
@@ -106,8 +108,7 @@ export class ButtonFactory
                 tooltip: tip,
                 tooltipHeader: tipHeader,
                 logText: tip,
-                logType: TextConsoleHook.MechHeader,
-                logTypeReset: TextConsoleHook.MechHeaderReset,
+                logging: true,
             }
         });
     }
@@ -123,18 +124,19 @@ export class ButtonFactory
             RunMacroBase.getInstance().startFlow(ownerUUID, macroData);
         }
 
+        const actor = fromUuidSync(ownerUUID) as any;
         // Mount the button onto the element
         fromUuid(macroUUID).then((item) =>
         {
             // Build a macro button
             mount(FlowButton, {
                 target: target,
+                context: buildActorContext(actor),
                 props: {
                     text: item?.name || getLocalized("LA.placeholder"),
                     flowClass: CustomFlowClass.RunMacro,
                     onClick: () => onClickHandler(ownerUUID, macroUUID),
-                    logType: TextConsoleHook.MechHeader,
-                    logTypeReset: TextConsoleHook.MechHeaderReset,
+                    logging: true,
                 }
             });
         });

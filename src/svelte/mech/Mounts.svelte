@@ -4,7 +4,6 @@
     import { MOUNT_LOCALIZE_MAP } from "@/scripts/constants";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import Weapon from "@/svelte/mech/Weapon.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
@@ -41,15 +40,13 @@
         mountNames={aggregateMountWeaponNames(mount)}
 
         logText={getLocalized("LA.mech.mount.preview.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
     <CollapseAllButton
         collapseID={getCollapseID(index)}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
 
         onPointerEnter={() => {collapseAllButtonHover = true;}}
         onPointerLeave={() => {collapseAllButtonHover = false;}}

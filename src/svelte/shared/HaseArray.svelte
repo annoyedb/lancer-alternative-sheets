@@ -19,8 +19,7 @@
         tooltipEnabled,
         tooltipDirection,
 
-        logType,
-        logTypeReset,
+        logging,
     }: {pilot: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
     setActorContext(actor);
 
@@ -47,8 +46,7 @@
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 tooltipTheme={theme}
                 logText={getLocalized("LA.grit.tooltip")}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollStat}
@@ -74,8 +72,7 @@
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 tooltipTheme={theme}
                 logText={getLocalized("LA.hull.tooltip")}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -98,8 +95,7 @@
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 tooltipTheme={theme}
                 logText={getLocalized("LA.agility.tooltip")}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -124,8 +120,7 @@
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 tooltipTheme={theme}
                 logText={getLocalized("LA.systems.tooltip")}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}
@@ -151,8 +146,7 @@
                 tooltipDirection={tooltipDirection || TooltipDirection.LEFT}
                 tooltipTheme={theme}
                 logText={getLocalized("LA.engineering.tooltip")}
-                logType={logType}
-                logTypeReset={logTypeReset}
+                logging={logging}
 
                 uuid={actor.uuid}
                 flowClass={FlowClass.RollHASE}

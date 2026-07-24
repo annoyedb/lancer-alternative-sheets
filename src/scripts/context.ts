@@ -20,3 +20,12 @@ export function getActorContext(): any
 {
     return getContext(ACTOR_CONTEXT);
 }
+
+// For mounting a component with no parent Svelte tree to inherit context from (e.g. ButtonFactory,
+// which mounts directly onto a target element outside any sheet's component hierarchy). Pass the
+// result as the `context` option to svelte's mount() to seed it as if setActorContext(actor) had
+// been called by an ancestor.
+export function buildActorContext(actor: any): Map<any, any>
+{
+    return new Map([[ACTOR_CONTEXT, actor]]);
+}

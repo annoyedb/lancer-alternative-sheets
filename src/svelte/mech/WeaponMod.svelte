@@ -7,7 +7,6 @@
 
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
 
@@ -59,8 +58,7 @@
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
 
         onPointerEnter={() => {effectButtonHover = true;}}
         onPointerLeave={() => {effectButtonHover = false;}}
@@ -73,8 +71,7 @@
         style={["-fontsize4", "-margin1-r -fontface-stylized"]}
 
         logText={getLocalized("LA.mech.system.points.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
     />
     <!-- Edit -->
     <GlyphButton
@@ -87,8 +84,7 @@
         tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.tooltip")}
         logText={getLocalized("LA.edit.tooltip")}
-        logType={TextConsoleHook.MechHeader}
-        logTypeReset={TextConsoleHook.MechHeaderReset}
+        logging={true}
 
         onPointerEnter={() => {editButtonHover = true;} }
         onPointerLeave={() => {editButtonHover = false;} }
@@ -108,8 +104,7 @@
                         usesMax={mod.system.uses.max}
                         path={path}
                         
-                        logType={TextConsoleHook.MechHeader}
-                        logTypeReset={TextConsoleHook.MechHeaderReset}
+                        logging={true}
                     />
                 </div>
             {/if}
@@ -123,8 +118,7 @@
                     usesMax={counter.max}
                     path="{path}.system.counters.{index}"
             
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
                 />
             {/each}
             {/if}
@@ -167,8 +161,7 @@
                     outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-bordersround"] : []}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
                 >
                     <RangeArray
                         ranges={mod.system.added_range}
@@ -181,8 +174,7 @@
                     innerStyle={["-fontsize5"]}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
                 >
                     <DamageArray
                         damages={mod.system.added_damage}
@@ -200,8 +192,7 @@
                 name={getLocalized("LA.mech.mod.tags.label")}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             >
                 <TagArray
                     tags={mod.system.added_tags}
@@ -221,8 +212,7 @@
                 name={getLocalized("LA.mech.mod.effect.label")}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             >
                 <FlowButton
                     style={["clipped-bot la-bckg-secondary"]}
@@ -232,8 +222,7 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextConsoleHook.MechHeader}
-                    logTypeReset={TextConsoleHook.MechHeaderReset}
+                    logging={true}
                 />
                 <hr>
                 {@html mod.system.effect}
@@ -249,8 +238,7 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
-                logType={TextConsoleHook.MechHeader}
-                logTypeReset={TextConsoleHook.MechHeaderReset}
+                logging={true}
             />
         </div>
     </HeaderSecondary>
