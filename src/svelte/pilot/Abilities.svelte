@@ -4,12 +4,14 @@
     import Talents from "@/svelte/pilot/Talents.svelte";
     import SkillTriggers from "@/svelte/pilot/SkillTriggers.svelte";
     import License from "./License.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
         itemTypes,
     } : PilotSheetProps = $derived(props);
+    setActorContext(actor);
 </script>
 
 <SkillTriggers

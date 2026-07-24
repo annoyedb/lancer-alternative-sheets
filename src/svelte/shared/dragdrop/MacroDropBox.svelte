@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { resetTextConsole, sendToTextConsole } from '@/scripts/store/text-log';
+    import { getActorContext } from '@/scripts/context';
     import type { MacroDropBoxProps } from '@/interfaces/actor/dragdrop/MacroDropBoxProps';
     import type { TooltipProps } from '@/interfaces/actor/TooltipProps';
     import type { TextLogEventProps } from '@/interfaces/actor/TextLogEventProps';
@@ -39,6 +40,7 @@
         logType,
         logTypeReset,
     }: MacroDropBoxProps & TooltipProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
     interface LocalDropData { type: string; index: number; }
 
     let component: HTMLElement | null = $state(null);
@@ -143,8 +145,8 @@
     {#if allowDrop}
         <div role="none"
             class="la-flexrow -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
-            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         >
             <i class="mdi mdi-arrow-down-left"></i>
             <span>
@@ -269,8 +271,8 @@
                     : undefined}
                 data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-                onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-                onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+                onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+                onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
             >
                 <span class="la-left la-flexrow">
                     {#if allowDrop}

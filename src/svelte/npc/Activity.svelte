@@ -3,11 +3,13 @@
     import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { getNPCSheetLogActionDontSaveCollapse, getNPCSheetLogActionStartCollapsed } from "@/scripts/npc/settings";
     import ActionLog from "@/svelte/shared/ActionLog.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
     }: NPCSheetProps = $derived(props);
+    setActorContext(actor);
 
     const actionLogSaveCollapse = getNPCSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getNPCSheetLogActionStartCollapsed();

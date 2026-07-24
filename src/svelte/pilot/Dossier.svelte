@@ -5,11 +5,13 @@
     import Sync from "@/svelte/pilot/Sync.svelte";
     import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor
     } = $derived(props);
+    setActorContext(actor);
 
     const collID = $derived(`${actor.uuid}.status.activeEffects`);
 </script>

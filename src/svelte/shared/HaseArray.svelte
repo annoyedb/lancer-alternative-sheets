@@ -9,6 +9,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { setActorContext } from "@/scripts/context";
 
     const {
         pilot,
@@ -21,6 +22,7 @@
         logType,
         logTypeReset,
     }: {pilot: any; actor: any; system: any} & TooltipProps & TextLogEventProps = $props();
+    setActorContext(actor);
 
     const logographic = logographicLanguage();
     const qualityMode = getExtraEffectsEnabled();

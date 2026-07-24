@@ -4,12 +4,14 @@
     import Armor from "@/svelte/pilot/Armor.svelte";
     import Gear from "@/svelte/pilot/Gear.svelte";
     import Reserve from "@/svelte/pilot/Reserve.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
         itemTypes
     } : PilotSheetProps = $derived(props);
+    setActorContext(actor);
 </script>
 
 <Weapon

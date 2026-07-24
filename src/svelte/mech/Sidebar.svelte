@@ -20,6 +20,7 @@
         getSidebarRatio 
     } from "@/scripts/mech/settings";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { setActorContext } from "@/scripts/context";
 
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TextConsoleHook } from "@/enums/TextConsoleHook";
@@ -34,10 +35,11 @@
     import { FLOW_BUTTON_DEFAULT } from '@/svelte/shared/button/FlowButton.svelte';
 
     const props = $props();
-    const { 
+    const {
         system,
         actor,
     }: MechSheetProps = $derived(props);
+    setActorContext(actor);
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);
     let editingShield = $state(false);

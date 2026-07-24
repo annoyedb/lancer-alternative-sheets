@@ -5,6 +5,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -21,6 +22,7 @@
 
         onPointerClick,
     }: CounterBoxProps & TextLogEventProps & PointerClickProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
@@ -57,8 +59,8 @@
             {type}"
         data-available={index < usesValue}
         data-path={path}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         onclick={event => handleOnClick(event, index)}
         aria-label="{getLocalized('LA.use.label')} {text}"
     ></button>

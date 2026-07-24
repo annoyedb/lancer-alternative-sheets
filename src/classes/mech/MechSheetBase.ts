@@ -156,7 +156,7 @@ export class MechSheetBase
             {
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getThemeKey(this.actor.uuid!));
-                
+
                 this.mountComponents(html, dataMap[this.actor.uuid!]);
                 
                 // Saving and restoring scroll positions calls before rerender, so 

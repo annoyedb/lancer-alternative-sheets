@@ -8,6 +8,7 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
@@ -26,6 +27,7 @@
         logType,
         logTypeReset,
     }: SidebarRatioSliderProps & TooltipProps & TextLogEventProps = $derived(props)
+    const actorUuid = getActorContext()?.uuid;
 
     // svelte-ignore state_referenced_locally
     let ratio = $state(ratioGetter(uuid));
@@ -83,8 +85,8 @@
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>

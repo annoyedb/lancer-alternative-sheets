@@ -8,6 +8,7 @@
     import type { DragDropHandleProps } from "@/interfaces/dragdrop/DragDropHandleProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     const {
         children,
@@ -33,6 +34,7 @@
         logType,
         logTypeReset,
     }: DragDropHandleProps & TooltipProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
     let component: HTMLElement | null = $state(null);
 
     const deleteTip = TooltipFactory.buildTooltip(getLocalized("LA.delete.tooltip"));
@@ -101,8 +103,8 @@
 {#if !disabled}
     <i role="none"
         class="fas fa-grip-lines -positionabsolute -left0 -pointergrab la-prmy-primary -glow-prmy-hover {iconStyle?.join(' ')}"
-        onpointerenter={ logging ? event => sendToTextConsole(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, getLocalized("LA.advanced.reorderMacro.tooltip"), logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         style="z-index: 1;"
     ></i>
 {/if}
@@ -112,8 +114,8 @@
 {#if !disabled && !deleteDisabled}
     <button type="button"
         class="mdi mdi-close-thick -positionabsolute -right0 la-prmy-error -glow-prmy-hover {iconStyle?.join(' ')}"
-        onpointerenter={ logging ? event => sendToTextConsole(event, getLocalized("LA.delete.tooltip"), logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, getLocalized("LA.delete.tooltip"), logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         onclick={handleOnDelete}
         data-tooltip={deleteTip}
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}

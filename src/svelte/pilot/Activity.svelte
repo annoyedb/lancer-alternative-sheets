@@ -3,11 +3,13 @@
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { getPilotSheetLogActionDontSaveCollapse, getPilotSheetLogActionStartCollapsed } from "@/scripts/pilot/settings";
     import ActionLog from "@/svelte/shared/ActionLog.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor
     }: PilotSheetProps = $derived(props);
+    setActorContext(actor);
     const actionLogSaveCollapse = getPilotSheetLogActionDontSaveCollapse();
     const actionLogStartCollapsed = getPilotSheetLogActionStartCollapsed();
 </script>

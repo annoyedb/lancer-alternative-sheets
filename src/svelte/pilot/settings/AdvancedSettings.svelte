@@ -5,10 +5,12 @@
     import AgilitySettings from "@/svelte/pilot/settings/AgilitySettings.svelte";
     import SystemsSettings from "@/svelte/pilot/settings/SystemsSettings.svelte";
     import EngineeringSettings from "@/svelte/pilot/settings/EngineeringSettings.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props: PilotSheetProps = $props();
     const {
     } = $derived(props);
+    setActorContext(props.actor);
 </script>
 <script lang="ts" module>
     import { getExtraEffectsEnabled } from "@/scripts/settings";

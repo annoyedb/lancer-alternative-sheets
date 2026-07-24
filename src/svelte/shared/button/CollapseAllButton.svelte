@@ -5,6 +5,7 @@
     import { getCollapseState, setCollapseState } from "@/scripts/store/collapse";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     import type { CollapseAllButtonProps } from "@/interfaces/actor/button/CollapseAllButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
@@ -30,6 +31,7 @@
         onPointerEnter,
         onPointerLeave,
     }: IconButtonProps & CollapseAllButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+    const actorUuid = getActorContext()?.uuid;
     let isExpanding = $derived(!getCollapseState(collapseID));
 
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.collapseAll.tooltip"));
@@ -42,18 +44,18 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!);
+            sendToTextConsole(event, log, logType!, actorUuid!);
         else
             return undefined;
     }
 
-    function handleOnPointerLeave(event: PointerEvent) 
+    function handleOnPointerLeave(event: PointerEvent)
     {
         if (onPointerLeave)
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!, actorUuid!);
         else
             return undefined;
     }

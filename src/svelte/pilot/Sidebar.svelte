@@ -18,6 +18,7 @@
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getThemeKey } from "@/scripts/store/theme";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { setActorContext } from "@/scripts/context";
 
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
     import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
@@ -27,11 +28,12 @@
 
 
     const props = $props();
-    const { 
+    const {
         system,
         actor,
         itemTypes
     }: PilotSheetProps = $derived(props);
+    setActorContext(actor);
     let advancedOptions = $derived(getAdvancedState(actor.uuid));
     let component: HTMLElement | null = $state(null);
     let editingBurn = $state(false);

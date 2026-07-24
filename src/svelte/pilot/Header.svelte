@@ -26,6 +26,7 @@
     } from "@/scripts/store/advanced";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { setActorContext } from "@/scripts/context";
 
     import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
     import BoundImage from "@/svelte/shared/BoundImage.svelte";
@@ -40,6 +41,7 @@
         system,
         owner,
     } : PilotSheetProps = $derived(props);
+    setActorContext(actor);
 
     const logographic = logographicLanguage();
     const tooltipEnabled = getPilotSheetTooltipEnabled();
@@ -142,8 +144,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.alias.tooltip"), TextConsoleHook.PilotHeader) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.alias.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.alias.label")}
@@ -161,8 +163,8 @@
             name={"system.callsign"}
             value={system.callsign}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.callsign.tooltip"), TextConsoleHook.PilotHeader) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.callsign.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.callsign.label")}
@@ -175,8 +177,8 @@
             name={"system.background"}
             value={system.background}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.background.tooltip"), TextConsoleHook.PilotHeader) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.background.tooltip"), TextConsoleHook.PilotHeader, actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.background.label")}

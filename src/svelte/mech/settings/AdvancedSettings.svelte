@@ -2,10 +2,12 @@
     import type { MechSheetProps } from "@/interfaces/mech/MechSheetProps";
     import MountSettings from "@/svelte/mech/settings/MountSettings.svelte";
     import InventorySettings from "@/svelte/mech/settings/InventorySettings.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props: MechSheetProps = $props();
     const {
     } = $derived(props);
+    setActorContext(props.actor);
 </script>
 <script lang="ts" module>
     import { getExtraEffectsEnabled } from "@/scripts/settings";

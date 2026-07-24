@@ -3,12 +3,14 @@
     import Power from "@/svelte/pilot/Power.svelte";
     import Clock from "@/svelte/pilot/Clock.svelte";
     import Passion from "@/svelte/pilot/Passion.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
         system,
     } = $derived(props);
+    setActorContext(actor);
 </script>
 
 <Passion

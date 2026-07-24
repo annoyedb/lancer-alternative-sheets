@@ -12,11 +12,13 @@
     import FlowButton, { FLOW_BUTTON_DEFAULT } from "@/svelte/shared/button/FlowButton.svelte";
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
     }: NPCSheetProps = $derived(props);
+    setActorContext(actor);
     let collapseAllButtonHover = $state(false);
 
     const tooltipEnabled = getNPCSheetTooltipEnabled();

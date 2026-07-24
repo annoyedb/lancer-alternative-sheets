@@ -7,6 +7,7 @@
 
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
@@ -44,6 +45,7 @@
         onPointerEnter,
         onPointerLeave,
     }: WeaponProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.rollDamage.tooltip"), tooltipHeader));
     const hasAllWeaponProperties = $derived(damage?.length && range?.length);
@@ -57,18 +59,18 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!);
+            sendToTextConsole(event, log, logType!, actorUuid!);
         else
             return undefined;
     }
 
-    function handleOnPointerLeave(event: PointerEvent) 
+    function handleOnPointerLeave(event: PointerEvent)
     {
         if (onPointerLeave)
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!, actorUuid!);
         else
             return undefined;
     }

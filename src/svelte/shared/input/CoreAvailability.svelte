@@ -4,15 +4,17 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
-    
+
     const {
         system,
         tooltipEnabled,
         tooltipClass,
         tooltipTheme,
     }: any = $props();
-    
+    const actorUuid = getActorContext()?.uuid;
+
     const tip = TooltipFactory.buildTooltip(getLocalized("LA.mech.core.available.tooltip"));
     const qualityMode = getExtraEffectsEnabled();
 </script>
@@ -27,8 +29,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined}
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={TooltipDirection.RIGHT}
-    onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.core.available.tooltip"), TextConsoleHook.MechHeader) }
-    onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
+    onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.core.available.tooltip"), TextConsoleHook.MechHeader, actorUuid!) }
+    onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actorUuid!) }
 >
     <input
         name="system.core_energy"

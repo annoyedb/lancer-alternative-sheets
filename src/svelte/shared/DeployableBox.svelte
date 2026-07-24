@@ -15,6 +15,7 @@
     import { getBrightness } from "@/scripts/theme";
     import { getThemeKey } from "@/scripts/store/theme";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
@@ -39,6 +40,7 @@
         logType,
         logTypeReset,
     }: DeployableBoxProps & TooltipProps & TextLogEventProps = $props(); // (#4)
+    const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
     const themeOverride = $derived(getThemeKey(sheetUUID));
@@ -210,8 +212,8 @@
                         data-tooltip={tooltipEnabled ? tip : undefined}
                         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
                         data-tooltip-direction={TooltipDirection.LEFT}
-                        onpointerenter={ logType ? event => sendToTextConsole(event, getLocalized("LA.mech.system.deployable.tooltip"), logType) : undefined }
-                        onpointerleave={ logTypeReset ? event => resetTextConsole(event, logTypeReset) : undefined }
+                        onpointerenter={ logType ? event => sendToTextConsole(event, getLocalized("LA.mech.system.deployable.tooltip"), logType, actorUuid!) : undefined }
+                        onpointerleave={ logTypeReset ? event => resetTextConsole(event, logTypeReset, actorUuid!) : undefined }
                     />
                 </div>
                 <hr>

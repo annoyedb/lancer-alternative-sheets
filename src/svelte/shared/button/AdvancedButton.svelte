@@ -2,6 +2,7 @@
 <script lang="ts">
     import { getAdvancedState, setAdvancedState } from "@/scripts/store/advanced";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -31,6 +32,7 @@
         tooltipTheme,
         tooltipDirection,
     }: AdvancedButtonProps & IconButtonProps & TextLogEventProps & TooltipProps = $props();
+    const actorUuid = getActorContext()?.uuid;
     let advancedOptions = $derived(getAdvancedState(uuid));
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.advanced.tooltip"), tooltipHeader));
@@ -55,8 +57,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
     onclick={(event) => toggleAdvancedOptions(event)}
 >
     <i class="mdi {iconStyle?.join(' ') || _DEFAULT_I}

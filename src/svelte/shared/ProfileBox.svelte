@@ -3,6 +3,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -10,11 +11,12 @@
         weapon,
         path,
         style,
-        
+
         logText,
         logType,
         logTypeReset,
     }: ProfileBoxProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
@@ -34,8 +36,8 @@
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <span class="-padding1-lr -fontsizemedium -upper

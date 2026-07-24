@@ -13,6 +13,7 @@
     import { getMechSheetLogActionMainEnabled, getMechSheetLogActionDontSaveCollapse, getMechSheetLogActionStartCollapsed } from "@/scripts/mech/settings";
     import { getMechSheetLogActionMainMaxHeight, getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { setActorContext } from "@/scripts/context";
 
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import { FlowClass } from "@/enums/FlowClass";
@@ -32,6 +33,7 @@
         system,
         document
     } = $derived(props);
+    setActorContext(actor);
     let collapseAllButtonHover = $state(false);
 
     const logographic = logographicLanguage();

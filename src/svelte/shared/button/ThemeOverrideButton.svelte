@@ -9,6 +9,7 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     const {
         uuid,
@@ -27,6 +28,7 @@
         logType,
         logTypeReset,
     }: ThemeOverrideButtonProps & IconButtonProps & TooltipProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
     let toggle = $state(false);
     let optionElement: HTMLElement | null = null;
 
@@ -107,8 +109,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
     onclick={event => handleOnClick(event)}
     aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >

@@ -3,6 +3,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -10,11 +11,12 @@
         usesMax,
         uuid,
         power,
-        
+
         logText,
         logType,
         logTypeReset,
     }: LimitedBondBoxProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const qualityMode = getExtraEffectsEnabled();
     const logging = $derived(logType && logTypeReset);
@@ -31,8 +33,8 @@
     <button type="button" 
         class="la-prmy-header la-scdy-primary -fontsize7
             {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}"
-        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <i class="mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}

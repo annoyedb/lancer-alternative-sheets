@@ -6,11 +6,13 @@
     import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import SidebarRatioSlider from "@/svelte/shared/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/shared/button/ThemeOverrideButton.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         actor,
     }: PilotSheetProps = $derived(props)
+    setActorContext(actor);
 
     const tooltipEnabled = getPilotSheetTooltipEnabled();
     const advancedOptions = $derived(getAdvancedState(actor.uuid));

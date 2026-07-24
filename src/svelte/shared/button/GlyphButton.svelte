@@ -6,6 +6,7 @@
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
 
     type GlyphButtonProps = {
@@ -42,6 +43,7 @@
         onPointerEnter,
         onPointerLeave,
     }: GlyphButtonProps & IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(tooltip ? TooltipFactory.buildTooltip(tooltip, tooltipHeader) : undefined);
     const logging = $derived(logType && logTypeReset && logText);
@@ -52,18 +54,18 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, logText!, logType!);
+            sendToTextConsole(event, logText!, logType!, actorUuid!);
         else
             return undefined;
     }
 
-    function handleOnPointerLeave(event: PointerEvent) 
+    function handleOnPointerLeave(event: PointerEvent)
     {
         if (onPointerLeave)
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!, actorUuid!);
         else
             return undefined;
     }

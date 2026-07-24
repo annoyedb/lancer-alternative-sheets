@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
 
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
@@ -40,6 +41,7 @@
         onPointerEnter,
         onPointerLeave,
     } : IconButtonProps & ButtonProps & TooltipProps & TextLogEventProps & PointerHoverProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.effect.tooltip"), tooltipHeader));
     const logging = $derived(logType && logTypeReset);
@@ -51,18 +53,18 @@
             onPointerEnter();
 
         if (logging)
-            sendToTextConsole(event, log, logType!);
+            sendToTextConsole(event, log, logType!, actorUuid!);
         else
             return undefined;
     }
 
-    function handleOnPointerLeave(event: PointerEvent) 
+    function handleOnPointerLeave(event: PointerEvent)
     {
         if (onPointerLeave)
             onPointerLeave();
 
         if (logging)
-            resetTextConsole(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!, actorUuid!);
         else
             return undefined;
     }

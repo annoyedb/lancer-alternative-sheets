@@ -26,7 +26,7 @@
     {
         if (!enabled)
             return;
-        // Setup Typed
+        // Setup TextWriter
         consoleWriter = new TextConsoleWriter(consoleComponent!, hookID, hookResetID);
         consoleWriter.registerHooks(uuid);
         logWriter = new TextLogWriter(logComponent!);

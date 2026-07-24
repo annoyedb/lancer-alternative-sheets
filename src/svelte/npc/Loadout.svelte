@@ -7,13 +7,14 @@
     import Reactions from "@/svelte/npc/Reactions.svelte";
     import TechAttack from "@/svelte/npc/TechAttack.svelte";
     import EmptyBox from "@/svelte/shared/EmptyBox.svelte";
-
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
         system,
         itemTypes,
     }: NPCSheetProps = $derived(props);
+    setActorContext(props.actor);
 
     const traits: Array<any> = [];
     const systems: Array<any> = [];

@@ -7,6 +7,7 @@
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
+    import { setActorContext } from "@/scripts/context";
 
     const props = $props();
     const {
@@ -14,6 +15,7 @@
         system,
         itemTypes,
     }: NPCSheetProps = $derived(props);
+    setActorContext(actor);
 
     const qualityMode = getExtraEffectsEnabled();
     const tooltipEnabled = getNPCSheetTooltipEnabled();

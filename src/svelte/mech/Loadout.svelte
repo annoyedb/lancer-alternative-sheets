@@ -5,8 +5,10 @@
     import Mounts from "@/svelte/mech/Mounts.svelte";
     import CoreBonus from "@/svelte/pilot/CoreBonus.svelte";
     import Talents from "@/svelte/pilot/Talents.svelte";
+    import { setActorContext } from "@/scripts/context";
 
     const props: MechSheetProps = $props();
+    setActorContext(props.actor);
 </script>
 
 <div class="la-mount__list la-flexcol -widthfull">

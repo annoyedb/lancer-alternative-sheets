@@ -165,14 +165,20 @@ export class TextConsoleWriter
     public registerHooks(uuid: string): void
     {
         // Dynamic, per-instance hook IDs (runtime strings) - outside fvtt-types' typed hook registry.
-        trackHook(uuid, (Hooks.on as any)(this.hookID, (text: string) =>
+        // hookID/hookResetID are shared by every open sheet of this type, so the emitted sourceUuid
+        // must be checked against this instance's own uuid to avoid reacting to another sheet's event.
+        trackHook(uuid, (Hooks.on as any)(this.hookID, (text: string, sourceUuid: string) =>
         {
+            if (sourceUuid !== uuid)
+                return;
             this.writer.reset();
             this.writer.type(text).start();
         }), this.hookID);
 
-        trackHook(uuid, (Hooks.on as any)(this.hookResetID, () =>
+        trackHook(uuid, (Hooks.on as any)(this.hookResetID, (sourceUuid: string) =>
         {
+            if (sourceUuid !== uuid)
+                return;
             this.writer.reset();
         }), this.hookResetID);
     }

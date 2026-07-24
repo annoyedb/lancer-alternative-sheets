@@ -2,6 +2,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
     import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
+    import { getActorContext } from "@/scripts/context";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
@@ -74,6 +75,7 @@
         logType,
         logTypeReset,
     }: HexButtonProps & ButtonProps & TooltipProps & TerminalTextProps & TextLogEventProps = $props();
+    const actorUuid = getActorContext()?.uuid;
 
     const tip = $derived(TooltipFactory.buildTooltip(tooltip || getLocalized("LA.flow.tooltip"), tooltipHeader));
     const logging = $derived(logType && logTypeReset);
@@ -100,8 +102,8 @@
             data-tooltip={tooltipEnabled ? tip : undefined }
             data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
             data-tooltip-direction={tooltipDirection}
-            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
-            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
+            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!, actorUuid!) : undefined }
+            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!, actorUuid!) : undefined }
             aria-label={text}
         >
             <span class="la-value__span {innerTextStyle?.join(' ')}"><!--

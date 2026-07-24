@@ -28,6 +28,7 @@
     } from "@/scripts/store/advanced";
     import { getIntroRun, resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
+    import { setActorContext } from "@/scripts/context";
 
     import TerminalText from "@/svelte/shared/TerminalText.svelte";
     import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
@@ -39,8 +40,9 @@
     const props = $props();
     const {
         actor,
-        pilot 
+        pilot
     }: MechSheetProps = $derived(props);
+    setActorContext(actor);
 
     const logographic = logographicLanguage();
     const tooltipEnabled = getMechSheetTooltipEnabled();
@@ -147,8 +149,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.name.tooltip"), TextConsoleHook.MechHeader) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.name.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.name.label")}
@@ -166,8 +168,8 @@
             data-uuid={pilot?.uuid}
             data-path={"system.pilot"}
             data-accept-types={"pilot"}
-            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.open.tooltip"), TextConsoleHook.MechHeader) }
-            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.open.tooltip"), TextConsoleHook.MechHeader, actor.uuid) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset, actor.uuid) }
         >
             <TerminalText
                 text="LL{pilot?.system.level || '?'}"

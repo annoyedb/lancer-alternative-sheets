@@ -12,16 +12,17 @@ export function getIntroRun(uuid: string): boolean
     return SheetStore.get(uuid)?.introPlayed;
 }
 
-export function sendToTextConsole(event: PointerEvent, logText: string, type: TextConsoleHook)
+// uuid identifies the actor whose sheet the event originated in (see getActorContext), since
+// hookID/hookResetID are shared by every open sheet of this type. Hooks.call broadcasts to
+// every listener regardless of source, so listeners filter on uuid to ignore other sheets' events.
+export function sendToTextConsole(event: PointerEvent, logText: string, type: TextConsoleHook, uuid: string)
 {
-    // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
-    (Hooks.call as any)(type, logText); // dynamic TextLogHook id, outside the typed hook registry
+    (Hooks.call as any)(type, logText, uuid); // dynamic TextLogHook id, outside the typed hook registry
 }
 
-export function resetTextConsole(event: PointerEvent, type: TextConsoleHook)
+export function resetTextConsole(event: PointerEvent, type: TextConsoleHook, uuid: string)
 {
-    // TODO: from the event get the sheet's UUID and check the caller against the owner uuid
     event.stopPropagation();
-    (Hooks.call as any)(type); // dynamic TextLogHook id, outside the typed hook registry
+    (Hooks.call as any)(type, uuid); // dynamic TextLogHook id, outside the typed hook registry
 }
