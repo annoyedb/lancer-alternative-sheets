@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from '@/enums/TextLogHook';
+    import { TextConsoleHook } from '@/enums/TextConsoleHook';
 
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized, handleEditToken, handleRelativeDataInput, logographicLanguage } from "@/scripts/helpers";
@@ -117,8 +117,8 @@
         tooltip={getLocalized("LA.edit.image.token.tooltip")}
         tooltipDirection={TooltipDirection.RIGHT}
         logText={getLocalized("LA.edit.image.token.tooltip")}
-        logType={TextLogHook.PilotHeader}
-        logTypeReset={TextLogHook.PilotHeaderReset}
+        logType={TextConsoleHook.PilotHeader}
+        logTypeReset={TextConsoleHook.PilotHeaderReset}
         onPointerClick={event => handleEditToken(event, actor)}
     />
 </div>
@@ -404,7 +404,7 @@
     allowDrop={advancedOptions}
     buttonStyle={[FLOW_BUTTON_DEFAULT(), advancedOptions ? "-margin7-l"  : "-margin2-l"]}
     tooltipEnabled={tooltipEnabled}
-    logType={TextLogHook.PilotHeader}
-    logTypeReset={TextLogHook.PilotHeaderReset}
+    logType={TextConsoleHook.PilotHeader}
+    logTypeReset={TextConsoleHook.PilotHeaderReset}
 />
 {/if}

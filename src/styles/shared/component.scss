@@ -290,7 +290,7 @@
     {
         &.-scrolling
         {
-            .la-textlog__typeit
+            .la-textlog__log
             {
                 display: flex;
                 flex-direction: column-reverse;
@@ -324,6 +324,17 @@
             height: 16px;
             background-image: url(/assets/sb_r.png);
             background-repeat: no-repeat;
+        }
+
+        .la-textlog__cursor
+        {
+            animation: textlog-cursor-blink 1s step-end infinite;
+
+            @keyframes textlog-cursor-blink
+            {
+                0%, 100% { opacity: 1; }
+                50%       { opacity: 0; }
+            }
         }
     }
 

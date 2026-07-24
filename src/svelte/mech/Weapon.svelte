@@ -12,7 +12,7 @@
 
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { AcceptType } from "@/enums/AcceptType";
     import { ChatCardType } from "@/enums/ChatCardType";
 
@@ -191,8 +191,8 @@
                 item={weapon}
                 path={getWeaponPath(index)}
                 
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <!-- Limited -->
             <LimitedBox
@@ -200,8 +200,8 @@
                 usesMax={weapon.system.uses.max}
                 path={getWeaponPath(index)}
 
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <SpCostArray
                 cost={weapon.system.sp}
@@ -214,8 +214,8 @@
             path={`${getWeaponPath(index)}.system.selected_profile_index`}
             style={["-widthfull la-bckg-header-anti la-text-header clipped-alt"]}
 
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
         />
     </div>
 {/snippet}
@@ -236,8 +236,8 @@
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={getRollWeaponTip(weapon)}
         logText={getRollWeaponTip(weapon)}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
 
         disabled={isDestroyed(weapon)}
 
@@ -260,8 +260,8 @@
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
         tooltipDirection={TooltipDirection.UP}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
 
         disabled={isDestroyed(weapon)}
 
@@ -282,8 +282,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
 
             onClick={event => sendToChat(event, weapon)}
             onPointerEnter={() => {messageButtonHover = true;} }
@@ -302,8 +302,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -354,32 +354,32 @@
                 effect={profile.effect}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.attack.label")}
                 effect={profile.on_attack}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.hit.label")}
                 effect={profile.on_hit}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <EffectBox
                 name={getLocalized("LA.effect.crit.label")}
                 effect={profile.on_crit}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <ActionBox
                 actions={weapon.system.actions}
@@ -392,8 +392,8 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
             <ActionBox
                 actions={profile.actions}
@@ -406,8 +406,8 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
         {#if slot.size !== "Integrated" && !weapon.system.mod}
         <!-- RAW integrated weapons can't have weapon mods but whatever -->

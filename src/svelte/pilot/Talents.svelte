@@ -9,7 +9,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
@@ -80,8 +80,8 @@
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={isMechSheet ? TextLogHook.MechHeader : undefined }
-    logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : undefined }
+    logType={isMechSheet ? TextConsoleHook.MechHeader : undefined }
+    logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : undefined }
 
     onPointerEnter={() => {collapseAllButtonHoverTalent = true;}}
     onPointerLeave={() => {collapseAllButtonHoverTalent = false;}}
@@ -122,8 +122,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+            logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+            logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -134,8 +134,8 @@
             collapseID={getTalentCollID(index)}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+            logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+            logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
 
             onPointerEnter={() => {collapseAllButtonHoverRank = true;}}
             onPointerLeave={() => {collapseAllButtonHoverRank = false;}}
@@ -187,8 +187,8 @@
                             }
                             style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                             
-                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+                            logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
                         />
                     {/each}
                     </div>
@@ -209,8 +209,8 @@
                         tooltipTheme={theme}
                         tooltip={getLocalized("LA.chat.tooltip")}
                         logText={getLocalized("LA.chat.tooltip")}
-                        logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-                        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+                        logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+                        logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
 
                         onPointerEnter={() => {messageButtonHover = true;} }
                         onPointerLeave={() => {messageButtonHover = false;} }
@@ -251,8 +251,8 @@
                             effect={rank.description}
 
                             tooltipEnabled={tooltipEnabled}
-                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+                            logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
                         />
                         <ActionBox
                             actions={rank.actions}
@@ -265,8 +265,8 @@
 
                             tooltipEnabled={tooltipEnabled}
                             tooltipTheme={theme}
-                            logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-                            logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+                            logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+                            logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
                         />
                     </div>
                 </HeaderSecondary>

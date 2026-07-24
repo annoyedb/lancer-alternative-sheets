@@ -1,7 +1,9 @@
+<!--TODO: translations and add API functionality-->
 <script lang="ts">
     import { onMount } from "svelte";
     import { getMechSheetLogHeaderEnabled } from "@/scripts/mech/settings";
-    import { TypeItWriter, TypedWriter, setIntroRun } from "@/scripts/store/text-log.js";
+    import { setIntroRun } from "@/scripts/store/text-log.js";
+    import { TextLogWriter, TextConsoleWriter } from "@/scripts/text-writer.js";
     import type { TextLogProps } from "@/interfaces/actor/TextLogProps";
 
     const props = $props();
@@ -13,10 +15,10 @@
         hookID,
         hookResetID,
     }: TextLogProps = $derived(props);
-    let typeItComponent: HTMLElement | null = $state(null);
-    let typedComponent: HTMLElement | null = $state(null);
-    let typedWriter: TypedWriter | null = null;
-    let typeItWriter: TypeItWriter | null = null;
+    let consoleComponent: HTMLElement | null = $state(null);
+    let logComponent: HTMLElement | null = $state(null);
+    let consoleWriter: TextConsoleWriter | null = null;
+    let logWriter: TextLogWriter | null = null;
 
     const enabled = getMechSheetLogHeaderEnabled();
 
@@ -25,17 +27,17 @@
         if (!enabled)
             return;
         // Setup Typed
-        typedWriter = new TypedWriter(typedComponent!, hookID, hookResetID);
-        typedWriter.registerHooks(uuid);
-        typeItWriter = new TypeItWriter(typeItComponent!);
+        consoleWriter = new TextConsoleWriter(consoleComponent!, hookID, hookResetID);
+        consoleWriter.registerHooks(uuid);
+        logWriter = new TextLogWriter(logComponent!);
         if (runIntro)
         {
-            typeItWriter.runIntro(introType);
+            logWriter.runIntro(introType);
             setIntroRun(uuid, true);
         }
         else
         {
-            typeItComponent!.innerHTML = typeItWriter.getFinishedIntro(introType);
+            logWriter.setFinished(introType);
         }
     });
 </script>
@@ -48,14 +50,14 @@
     </div>
     <div class="la-flexcol la-textlog-left -justifyend -overflowhidden">
         <div
-            class="la-textlog__typeit -flex1 -justifystart -aligncontentend -widthfull"
-            bind:this={typeItComponent}
+            class="la-textlog__log -flex1 -justifystart -aligncontentend -widthfull"
+            bind:this={logComponent}
         ></div>
-        <div class="la-textlog__typed la-flexrow -flex0 -justifystart -widthfull">
+        <div class="la-textlog__console la-flexrow -flex0 -justifystart -widthfull">
             >//:&nbsp;
             <div
                 class=""
-                bind:this={typedComponent}
+                bind:this={consoleComponent}
             >&nbsp;</div>
         </div>
     </div>

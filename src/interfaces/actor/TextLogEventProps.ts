@@ -1,8 +1,8 @@
-import type { TextLogHook } from "@/enums/TextLogHook";
+import type { TextConsoleHook } from "@/enums/TextConsoleHook";
 
 export interface TextLogEventProps
 {
     logText?: string;
-    logType?: TextLogHook;
-    logTypeReset?: TextLogHook;
+    logType?: TextConsoleHook;
+    logTypeReset?: TextConsoleHook;
 }

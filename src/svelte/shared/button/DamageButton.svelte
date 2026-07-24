@@ -6,7 +6,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
 
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
@@ -57,7 +57,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType!);
+            sendToTextConsole(event, log, logType!);
         else
             return undefined;
     }
@@ -68,7 +68,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!);
         else
             return undefined;
     }

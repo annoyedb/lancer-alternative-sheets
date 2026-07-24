@@ -16,7 +16,7 @@
 
     import { ActionLogCollapsePrefix } from "@/enums/ActionLogCollapsePrefix";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import ActiveEffects from "@/svelte/shared/ActiveEffects.svelte";
@@ -58,8 +58,8 @@
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={TextLogHook.MechHeader}
-    logTypeReset={TextLogHook.MechHeaderReset}
+    logType={TextConsoleHook.MechHeader}
+    logTypeReset={TextConsoleHook.MechHeaderReset}
 
     onPointerEnter={() => {collapseAllButtonHover = true;}}
     onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -106,8 +106,8 @@
     >
         <ActiveEffects { ...props }
             tooltipEnabled={tooltipEnabled}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset} 
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
         />
     </HeaderMain>
     <!-- Integrity -->
@@ -234,8 +234,8 @@
                         tooltipDirection={TooltipDirection.LEFT}
                         tooltip={getLocalized("LA.flow.structureDamage.tooltip")}
                         logText={getLocalized("LA.flow.structureDamage.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <FlowButton
                         style={["clipped-alt -widthfull la-bckg-tabs -padding0 -lineheight4"]}
@@ -250,8 +250,8 @@
                         tooltip={getLocalized("LA.flow.reactorStress.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.reactorStress.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <FlowButton
                         style={["clipped-alt -widthfull la-bckg-tabs -padding0 -lineheight4"]}
@@ -266,8 +266,8 @@
                         tooltip={getLocalized("LA.flow.fullRepair.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.fullRepair.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                 </div>
                 <div class="la-flexcol -gap0 la-dropshadow -flex1">
@@ -285,8 +285,8 @@
                         tooltip={overchargeText}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={overchargeText}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <FlowButton
                         style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
@@ -300,8 +300,8 @@
                         tooltip={getLocalized("LA.flow.overchargeReset.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.overchargeReset.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <FlowButton
                         style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
@@ -317,8 +317,8 @@
                         tooltip={getLocalized("LA.flow.stabilize.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.stabilize.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <FlowButton
                         style={["clipped la-bckg-secondary -widthfull -overflowhidden -lineheight3"]}
@@ -334,8 +334,8 @@
                         tooltip={getLocalized("LA.flow.extinguish.tooltip")}
                         tooltipDirection={TooltipDirection.LEFT}
                         logText={getLocalized("LA.flow.extinguish.tooltip")}
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                     <!-- TODO: make a flow for partial repair -->
                 </div>

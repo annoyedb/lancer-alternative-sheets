@@ -3,7 +3,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getCSSDocumentTheme, getManufacturerColor } from "@/scripts/theme";
     import { getMechSheetTooltipEnabled } from "@/scripts/mech/settings";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
     import FrameActivePower from "@/svelte/mech/FrameActivePower.svelte";
@@ -45,8 +45,8 @@
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
 
         onPointerEnter={() => {collapseAllButtonHover = true;}}
         onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -86,8 +86,8 @@
                     path="system.loadout.frame.value.system.core_system.counters.{index}"
                     style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                     
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
             {/each}
             </div>

@@ -2,7 +2,7 @@
     import type { ProfileBoxProps } from "@/interfaces/actor/ProfileBoxProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -34,8 +34,8 @@
         data-action="set" 
         data-action-value="(int){index}"
         data-path={path}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <span class="-padding1-lr -fontsizemedium -upper

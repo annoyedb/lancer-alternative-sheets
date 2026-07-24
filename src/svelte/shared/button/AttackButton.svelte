@@ -1,7 +1,7 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -47,7 +47,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, log, logType!);
+            sendToTextConsole(event, log, logType!);
         else
             return undefined;
     }
@@ -58,7 +58,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!);
         else
             return undefined;
     }

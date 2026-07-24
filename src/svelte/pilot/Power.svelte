@@ -4,7 +4,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
 
     import type { ChatData } from "@/interfaces/flows/ChatData";
@@ -128,8 +128,8 @@
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={power.description}
             tooltipHeader={getLocalized("LA.pilot.bond.power.subLabel")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
                         
             onPointerEnter={() => {effectButtonHover = true;} }
             onPointerLeave={() => {effectButtonHover = false;} }
@@ -159,8 +159,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onClick={event => sendToChat(event, power)}
             onPointerEnter={() => {messageButtonHover = true;} }
@@ -198,8 +198,8 @@
                     effect={power.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             </div>
         </HeaderSecondary>

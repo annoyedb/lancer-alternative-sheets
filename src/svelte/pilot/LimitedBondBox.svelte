@@ -2,7 +2,7 @@
     import type { LimitedBondBoxProps } from "@/interfaces/pilot/LimitedBondBoxProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -31,8 +31,8 @@
     <button type="button" 
         class="la-prmy-header la-scdy-primary -fontsize7
             {qualityMode ? '-glow-prmy -glow-scdy-hover' : ''}"
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.use.label")}
     >
         <i class="mdi {index < usesValue ? 'mdi-hexagon-slice-6' : 'mdi-hexagon-outline'}

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { resetLog, sendToLog } from '@/scripts/store/text-log';
+    import { resetTextConsole, sendToTextConsole } from '@/scripts/store/text-log';
     import type { MacroDropBoxProps } from '@/interfaces/actor/dragdrop/MacroDropBoxProps';
     import type { TooltipProps } from '@/interfaces/actor/TooltipProps';
     import type { TextLogEventProps } from '@/interfaces/actor/TextLogEventProps';
@@ -143,8 +143,8 @@
     {#if allowDrop}
         <div role="none"
             class="la-flexrow -justifybetween -widthfull -upper -fontsizesmall -letterspacing0 -padding0-lr"
-            onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-            onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         >
             <i class="mdi mdi-arrow-down-left"></i>
             <span>
@@ -269,8 +269,8 @@
                     : undefined}
                 data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
                 data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-                onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-                onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+                onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+                onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
             >
                 <span class="la-left la-flexrow">
                     {#if allowDrop}

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getBondQNAMode, setBondQNAMode } from "@/scripts/store/bond";
     import { getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getBondImageSrc, getPilotSheetTooltipEnabled, setBondImageSrc } from "@/scripts/pilot/settings";
@@ -219,8 +219,8 @@
             tooltipDirection={TooltipDirection.DOWN}
             tooltip={getLocalized("LA.pilot.bond.tally.tooltip")}
             logText={getLocalized("LA.pilot.bond.tally.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onClick={tallyAndUpdate}
         />
@@ -236,8 +236,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.changeImage.tooltip")}
                 logText={getLocalized("LA.pilot.bond.changeImage.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onClick={browseImage}
             />
@@ -254,8 +254,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
             />
         </div>
         <div class="la-flexrow -positionabsolute -left0 -padding3-l -gap1">
@@ -274,8 +274,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.swap.tooltip")}
                 logText={getLocalized(!questionAnswer ? "LA.pilot.bond.qa.tooltip" : "LA.pilot.bond.xp.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onClick={() => { setBondQNAMode(actor.uuid, !questionAnswer); }}
             />
@@ -290,8 +290,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
                 logText={getLocalized("LA.pilot.bond.power.refresh.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onClick={() => { setBondQNAMode(actor.uuid, !questionAnswer); }}
             />

@@ -1,4 +1,4 @@
-export enum TextLogHook
+export enum TextConsoleHook
 {
     MechHeader = "laMechHeaderLog",
     MechHeaderReset = "laMechHeaderLogReset",

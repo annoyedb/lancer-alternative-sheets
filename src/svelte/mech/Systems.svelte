@@ -8,7 +8,7 @@
     import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
 
@@ -118,15 +118,15 @@
     value={system.loadout.sp.value}
     max={system.loadout.sp.max}
     
-    logType={TextLogHook.MechHeader}
-    logTypeReset={TextLogHook.MechHeaderReset}
+    logType={TextConsoleHook.MechHeader}
+    logTypeReset={TextConsoleHook.MechHeaderReset}
 />
 <CollapseAllButton
     collapseID={collID}
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={TextLogHook.MechHeader}
-    logTypeReset={TextLogHook.MechHeaderReset}
+    logType={TextConsoleHook.MechHeader}
+    logTypeReset={TextConsoleHook.MechHeaderReset}
 
     onPointerEnter={() => {collapseAllButtonHover = true;} }
     onPointerLeave={() => {collapseAllButtonHover = false;} }
@@ -162,8 +162,8 @@
                     usesMax={component.value?.system.uses.max}
                     path={getComponentPath(index)}
 
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
             </div>
         </div>
@@ -186,8 +186,8 @@
             tooltipTheme={theme}
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={component.value.system.effect}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
             
             disabled={isDestroyed(component)}
             
@@ -201,8 +201,8 @@
             style={[getSPStyle(component), "-fontface-stylized"]}
 
             logText={getLocalized("LA.mech.system.points.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
         />
         <div class="la-flexcol -margin3-lr">
             <!-- Send to chat -->
@@ -217,8 +217,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
 
                 onPointerEnter={() => {messageButtonHover = true;} }
                 onPointerLeave={() => {messageButtonHover = false;} }
@@ -236,8 +236,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
@@ -288,8 +288,8 @@
                         usesMax={counter.max}
                         path="{getComponentPath(index)}.system.counters.{jndex}"
             
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                 {/each}
                 </div>
@@ -303,8 +303,8 @@
                     effect={component.value.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
                 <ActionBox
                     uuid={component.value.uuid}
@@ -317,8 +317,8 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
                 <DeployableBox
                     source={actor}
@@ -328,8 +328,8 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
                 <TagArray
                     tags={component.value.system.tags}

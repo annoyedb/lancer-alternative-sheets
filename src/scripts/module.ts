@@ -42,6 +42,9 @@ Hooks.once("ready", async () =>
             resetPilotSheetData,
             resetDeployableSheetData,
         },
+        textLog: {
+
+        }
     };
 });
 

@@ -25,7 +25,7 @@
     import { H2_BUTTON_ICON_STYLE } from "@/svelte/shared/button/Button.svelte";
     import { Logger } from "@/classes/Logger";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     type ActionBoxProps = {
@@ -200,8 +200,8 @@
         tooltipTheme={theme}
         tooltip={getLocalized("LA.chat.tooltip")}
         logText={getLocalized("LA.chat.tooltip")}
-        logType={isMechSheet ? TextLogHook.MechHeader : TextLogHook.PilotHeader }
-        logTypeReset={isMechSheet ? TextLogHook.MechHeaderReset : TextLogHook.PilotHeaderReset }
+        logType={isMechSheet ? TextConsoleHook.MechHeader : TextConsoleHook.PilotHeader }
+        logTypeReset={isMechSheet ? TextConsoleHook.MechHeaderReset : TextConsoleHook.PilotHeaderReset }
         
         onClick={event => sendToChat(event, action)}
         onPointerEnter={() => {messageButtonHover = true;} }

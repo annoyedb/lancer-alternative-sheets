@@ -6,7 +6,7 @@
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
     import { TextLogIntro } from "@/enums/TextLogIntro";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
 
     import { browseActorImage, getLocalized, logographicLanguage, photosensitiveStyling } from "@/scripts/helpers";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -26,7 +26,7 @@
         getTokenImageLock,
         setTokenImageLock,
     } from "@/scripts/store/advanced";
-    import { getIntroRun, resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { getIntroRun, resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     import TerminalText from "@/svelte/shared/TerminalText.svelte";
@@ -91,8 +91,8 @@
             tooltip={getLocalized("LA.edit.image.reset.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
             logText={getLocalized("LA.edit.image.reset.tooltip")}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
         />
     {/if}
         <AdvancedButton
@@ -101,8 +101,8 @@
             uuid={actor.uuid}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextLogHook.MechHeader}
-            logTypeReset={TextLogHook.MechHeaderReset}
+            logType={TextConsoleHook.MechHeader}
+            logTypeReset={TextConsoleHook.MechHeaderReset}
         />
     </div>
 {#if advancedOptions}
@@ -113,8 +113,8 @@
         setState={setActorTokenSync}
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
     />
 {#if !tokenImageLocked}
     <GlyphButton
@@ -127,8 +127,8 @@
         tooltip={getLocalized("LA.edit.image.actor.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getLocalized("LA.edit.image.actor.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
     />
 {/if}
 {/if}
@@ -147,8 +147,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.mech.name.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.mech.name.tooltip"), TextConsoleHook.MechHeader) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.name.label")}
@@ -166,8 +166,8 @@
             data-uuid={pilot?.uuid}
             data-path={"system.pilot"}
             data-accept-types={"pilot"}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.open.tooltip"), TextLogHook.MechHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.open.tooltip"), TextConsoleHook.MechHeader) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
         >
             <TerminalText
                 text="LL{pilot?.system.level || '?'}"
@@ -214,8 +214,8 @@
     <TextLog
         style={["-widthfull -heightfull -fontface-stylized", logographic ? "-fontsize3" : "-fontsizemediumer"]}
         uuid={actor.uuid}
-        hookID={TextLogHook.MechHeader}
-        hookResetID={TextLogHook.MechHeaderReset}
+        hookID={TextConsoleHook.MechHeader}
+        hookResetID={TextConsoleHook.MechHeaderReset}
         introType={TextLogIntro.Header}
         runIntro={!introPlayed}
     />

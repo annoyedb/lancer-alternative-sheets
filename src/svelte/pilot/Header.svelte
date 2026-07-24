@@ -3,7 +3,7 @@
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
 
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { FlowClass } from "@/enums/FlowClass";
 
@@ -24,7 +24,7 @@
         getTokenImageLock,
         setTokenImageLock,
     } from "@/scripts/store/advanced";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     import AdvancedButton from "@/svelte/shared/button/AdvancedButton.svelte";
@@ -88,8 +88,8 @@
             tooltip={getLocalized("LA.edit.image.reset.tooltip")}
             tooltipDirection={TooltipDirection.LEFT}
             logText={getLocalized("LA.edit.image.reset.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
         />
     {/if}
         <AdvancedButton
@@ -98,8 +98,8 @@
             uuid={actor.uuid}
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
         />
     </div>
 {#if advancedOptions}
@@ -110,8 +110,8 @@
         setState={setActorTokenSync}
         tooltipEnabled={tooltipEnabled}
         tooltipDirection={TooltipDirection.LEFT}
-        logType={TextLogHook.PilotHeader}
-        logTypeReset={TextLogHook.PilotHeaderReset}
+        logType={TextConsoleHook.PilotHeader}
+        logTypeReset={TextConsoleHook.PilotHeaderReset}
     />
     {#if !tokenImageLocked}
     <GlyphButton
@@ -124,8 +124,8 @@
         tooltip={getLocalized("LA.edit.image.actor.tooltip")}
         tooltipDirection={TooltipDirection.LEFT}
         logText={getLocalized("LA.edit.image.actor.tooltip")}
-        logType={TextLogHook.PilotHeader}
-        logTypeReset={TextLogHook.PilotHeaderReset}
+        logType={TextConsoleHook.PilotHeader}
+        logTypeReset={TextConsoleHook.PilotHeaderReset}
     />
     {/if}
 {/if}
@@ -142,8 +142,8 @@
             name={"name"}
             value={actor.name}
             placeholder={getLocalized("LA.namePlaceholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.alias.tooltip"), TextLogHook.PilotHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.alias.tooltip"), TextConsoleHook.PilotHeader) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.alias.label")}
@@ -161,8 +161,8 @@
             name={"system.callsign"}
             value={system.callsign}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.callsign.tooltip"), TextLogHook.PilotHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.callsign.tooltip"), TextConsoleHook.PilotHeader) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.callsign.label")}
@@ -175,8 +175,8 @@
             name={"system.background"}
             value={system.background}
             placeholder={getLocalized("LA.placeholder")}
-            onpointerenter={ event => sendToLog(event, getLocalized("LA.pilot.background.tooltip"), TextLogHook.PilotHeader) }
-            onpointerleave={ event => resetLog(event, TextLogHook.PilotHeaderReset) }
+            onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.pilot.background.tooltip"), TextConsoleHook.PilotHeader) }
+            onpointerleave={ event => resetTextConsole(event, TextConsoleHook.PilotHeaderReset) }
         />
         <span class="-fontsizesmall la-text-darken-4 -fontface-stylized">
             {getLocalized("LA.pilot.background.label")}
@@ -310,8 +310,8 @@
     <TextLog
         style={["-widthfull -heightfull -fontface-stylized", logographic ? "-fontsize3" : "-fontsizemediumer"]}
         uuid={actor.uuid}
-        hookID={TextLogHook.PilotHeader}
-        hookResetID={TextLogHook.PilotHeaderReset}
+        hookID={TextConsoleHook.PilotHeader}
+        hookResetID={TextConsoleHook.PilotHeaderReset}
         runIntro={false}
     />
 </span>

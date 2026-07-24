@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getLocalized, randomExtension } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { TooltipFactory } from "@/classes/TooltipFactory";
 
     import TerminalText, { FLOW_BUTTON_STYLE } from "@/svelte/shared/TerminalText.svelte";
@@ -62,8 +62,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || 'RIGHT'}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
     onclick={(event) => onClick && onClick(event)}
     aria-label={text}
 >

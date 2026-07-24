@@ -4,7 +4,7 @@
     import type { PointerClickProps } from "@/interfaces/actor/events/PointerClickProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized, logographicLanguage } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const {
@@ -57,8 +57,8 @@
             {type}"
         data-available={index < usesValue}
         data-path={path}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         onclick={event => handleOnClick(event, index)}
         aria-label="{getLocalized('LA.use.label')} {text}"
     ></button>

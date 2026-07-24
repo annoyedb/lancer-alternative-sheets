@@ -4,7 +4,7 @@
     import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { AcceptType } from "@/enums/AcceptType";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { ChatData } from "@/interfaces/flows/ChatData";
@@ -128,8 +128,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -148,8 +148,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onClick={event => sendToChat(event, license, index)}
             onPointerEnter={() => {messageButtonHover = true;} }
@@ -188,8 +188,8 @@
                     effect={licenseDescriptions[index]}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             </div>
         </HeaderSecondary>

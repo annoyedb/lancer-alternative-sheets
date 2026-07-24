@@ -8,7 +8,7 @@
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
 
     const {
         uuid,
@@ -107,8 +107,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${theme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
     onclick={event => handleOnClick(event)}
     aria-label={getLocalized("LA.advanced.themeOverride.tooltip")}
 >

@@ -5,7 +5,7 @@
     import type { IconButtonProps } from "@/interfaces/actor/button/IconButtonProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import type { PointerHoverProps } from "@/interfaces/actor/events/PointerHoverProps";
 
     type GlyphButtonProps = {
@@ -52,7 +52,7 @@
             onPointerEnter();
 
         if (logging)
-            sendToLog(event, logText!, logType!);
+            sendToTextConsole(event, logText!, logType!);
         else
             return undefined;
     }
@@ -63,7 +63,7 @@
             onPointerLeave();
 
         if (logging)
-            resetLog(event, logTypeReset!);
+            resetTextConsole(event, logTypeReset!);
         else
             return undefined;
     }

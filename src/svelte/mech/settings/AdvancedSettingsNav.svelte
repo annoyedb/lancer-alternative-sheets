@@ -3,7 +3,7 @@
     import { getMechSheetTooltipEnabled, getSidebarRatio, setSidebarRatio, setThemeOverride } from "@/scripts/mech/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getCSSDocumentTheme } from "@/scripts/theme";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import SidebarRatioSlider from "@/svelte/shared/input/SidebarRatioSlider.svelte";
     import ThemeOverrideButton from "@/svelte/shared/button/ThemeOverrideButton.svelte";
 
@@ -25,8 +25,8 @@
     
     tooltipEnabled={tooltipEnabled}
     tooltipTheme={theme}
-    logType={TextLogHook.MechHeader}
-    logTypeReset={TextLogHook.MechHeaderReset}
+    logType={TextConsoleHook.MechHeader}
+    logTypeReset={TextConsoleHook.MechHeaderReset}
 />
 
 <ThemeOverrideButton
@@ -38,6 +38,6 @@
     tooltipTheme={theme}
     setOverride={setThemeOverride}
 
-    logType={TextLogHook.MechHeader}
-    logTypeReset={TextLogHook.MechHeaderReset}
+    logType={TextConsoleHook.MechHeader}
+    logTypeReset={TextConsoleHook.MechHeaderReset}
 />

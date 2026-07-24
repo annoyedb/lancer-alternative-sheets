@@ -7,7 +7,7 @@
 
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     import { AcceptType } from "@/enums/AcceptType";
 
@@ -59,8 +59,8 @@
         tooltipDirection={TooltipDirection.LEFT}
         tooltip={mod.system.effect || getLocalized("LA.mech.mod.effect.tooltip")}
         logText={getLocalized("LA.mech.mod.effect.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
 
         onPointerEnter={() => {effectButtonHover = true;}}
         onPointerLeave={() => {effectButtonHover = false;}}
@@ -73,8 +73,8 @@
         style={["-fontsize4", "-margin1-r -fontface-stylized"]}
 
         logText={getLocalized("LA.mech.system.points.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
     />
     <!-- Edit -->
     <GlyphButton
@@ -87,8 +87,8 @@
         tooltipTheme={theme}
         tooltip={getLocalized("LA.edit.tooltip")}
         logText={getLocalized("LA.edit.tooltip")}
-        logType={TextLogHook.MechHeader}
-        logTypeReset={TextLogHook.MechHeaderReset}
+        logType={TextConsoleHook.MechHeader}
+        logTypeReset={TextConsoleHook.MechHeaderReset}
 
         onPointerEnter={() => {editButtonHover = true;} }
         onPointerLeave={() => {editButtonHover = false;} }
@@ -108,8 +108,8 @@
                         usesMax={mod.system.uses.max}
                         path={path}
                         
-                        logType={TextLogHook.MechHeader}
-                        logTypeReset={TextLogHook.MechHeaderReset}
+                        logType={TextConsoleHook.MechHeader}
+                        logTypeReset={TextConsoleHook.MechHeaderReset}
                     />
                 </div>
             {/if}
@@ -123,8 +123,8 @@
                     usesMax={counter.max}
                     path="{path}.system.counters.{index}"
             
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
             {/each}
             {/if}
@@ -167,8 +167,8 @@
                     outerStyle={mod.system.added_range.length && mod.system.added_damage.length ? ["-bordersround"] : []}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 >
                     <RangeArray
                         ranges={mod.system.added_range}
@@ -181,8 +181,8 @@
                     innerStyle={["-fontsize5"]}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 >
                     <DamageArray
                         damages={mod.system.added_damage}
@@ -200,8 +200,8 @@
                 name={getLocalized("LA.mech.mod.tags.label")}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             >
                 <TagArray
                     tags={mod.system.added_tags}
@@ -221,8 +221,8 @@
                 name={getLocalized("LA.mech.mod.effect.label")}
 
                 tooltipEnabled={tooltipEnabled}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             >
                 <FlowButton
                     style={["clipped-bot la-bckg-secondary"]}
@@ -232,8 +232,8 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextLogHook.MechHeader}
-                    logTypeReset={TextLogHook.MechHeaderReset}
+                    logType={TextConsoleHook.MechHeader}
+                    logTypeReset={TextConsoleHook.MechHeaderReset}
                 />
                 <hr>
                 {@html mod.system.effect}
@@ -249,8 +249,8 @@
 
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
         </div>
     </HeaderSecondary>

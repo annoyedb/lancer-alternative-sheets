@@ -1,7 +1,7 @@
 {
   "id": "lancer-alternative-sheets",
   "title": "Annoying's Lancer Alternative Sheets",
-  "description": "A set of immersive alternative sheets designed for ease-of-use for the Lancer game system. Included currently are mech sheets, pilot sheets, and NPC sheets.",
+  "description": "A set of immersive alternative sheets designed around ease-of-use for the Lancer game system.",
   "version": "0.0.0",
   "compatibility": {
     "minimum": "13",

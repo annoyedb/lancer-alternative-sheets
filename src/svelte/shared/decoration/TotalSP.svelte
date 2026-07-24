@@ -2,7 +2,7 @@
     import type { TotalSPProps } from "@/interfaces/actor/decoration/TotalSPProps";
     import type { TextLogEventProps } from "@/interfaces/actor/TextLogEventProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { H2_ICON_SIZE, H2_TEXT_SIZE } from "@/svelte/shared/header/HeaderSecondary.svelte";
 
     const {
@@ -23,8 +23,8 @@
 
 <div role="none"
     class="la-flexrow -aligncenter -height4 {style?.join(' ') || H2_TEXT_SIZE}"
-    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
 >
     <span class="{textStyle?.join(' ')}">
     {#if max}

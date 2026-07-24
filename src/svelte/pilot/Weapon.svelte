@@ -8,7 +8,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { CHAT_CARD_COLOR_MAP } from "@/scripts/constants";
     import { ChatCardType } from "@/enums/ChatCardType";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { CounterBoxType } from "@/enums/CounterBoxType";
@@ -121,8 +121,8 @@
         collapseID={collID}
         tooltipEnabled={tooltipEnabled}
         tooltipTheme={theme}
-        logType={TextLogHook.PilotHeader}
-        logTypeReset={TextLogHook.PilotHeaderReset}
+        logType={TextConsoleHook.PilotHeader}
+        logTypeReset={TextConsoleHook.PilotHeaderReset}
 
         onPointerEnter={() => {collapseAllButtonHover = true;}}
         onPointerLeave={() => {collapseAllButtonHover = false;}}
@@ -156,8 +156,8 @@
                     item={weapon}
                     path={getWeaponPath(index)}
                     
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
                 <!-- Limited -->
                 <LimitedBox
@@ -165,8 +165,8 @@
                     usesMax={weapon.system.uses.max}
                     path={getWeaponPath(index)}
 
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
                 <SpCostArray
                     cost={weapon.system.sp}
@@ -183,8 +183,8 @@
                 usesMax={counter.max}
                 path="{getWeaponPath(index)}.system.counters.{jndex}"
         
-                logType={TextLogHook.MechHeader}
-                logTypeReset={TextLogHook.MechHeaderReset}
+                logType={TextConsoleHook.MechHeader}
+                logTypeReset={TextConsoleHook.MechHeaderReset}
             />
         {/each}
         {/if}
@@ -207,8 +207,8 @@
                 tooltipDirection={TooltipDirection.LEFT}
                 tooltip={getRollWeaponTip(weapon)}
                 logText={getRollWeaponTip(weapon)}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onPointerEnter={() => {attackButtonHover = true;} }
                 onPointerLeave={() => {attackButtonHover = false;} }
@@ -228,8 +228,8 @@
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.UP}
             tooltipTheme={theme}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onPointerEnter={() => {damageButtonHover = true;} }
             onPointerLeave={() => {damageButtonHover = false;} }
@@ -246,8 +246,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.chat.tooltip")}
                 logText={getLocalized("LA.chat.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onClick={(event) => sendToChat(event, weapon)}
                 onPointerEnter={() => {messageButtonHover = true;} }
@@ -266,8 +266,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }
@@ -320,8 +320,8 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
                 <ActionBox
                     actions={weapon.system.actions}
@@ -334,16 +334,16 @@
 
                     tooltipEnabled={tooltipEnabled}
                     tooltipTheme={theme}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
                 <EffectBox
                     name={getLocalized("LA.description.label")}
                     effect={weapon.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             {#if weapon.system.effect}
                 <EffectBox
@@ -351,8 +351,8 @@
                     effect={weapon.system.effect}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             {/if}
                 <TagArray

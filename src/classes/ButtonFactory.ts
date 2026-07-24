@@ -3,7 +3,7 @@ import { mount } from "svelte";
 import type { UUIDData } from "@/interfaces/flows/UUIDData";
 import { SystemButton } from "@/enums/SystemButton";
 import { CustomFlowClass, FlowClass } from "@/enums/FlowClass";
-import { TextLogHook } from "@/enums/TextLogHook";
+import { TextConsoleHook } from "@/enums/TextConsoleHook";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { Logger } from "@/classes/Logger";
 import { formatString, getCurrentOvercharge, getLocalized } from "@/scripts/helpers";
@@ -106,8 +106,8 @@ export class ButtonFactory
                 tooltip: tip,
                 tooltipHeader: tipHeader,
                 logText: tip,
-                logType: TextLogHook.MechHeader,
-                logTypeReset: TextLogHook.MechHeaderReset,
+                logType: TextConsoleHook.MechHeader,
+                logTypeReset: TextConsoleHook.MechHeaderReset,
             }
         });
     }
@@ -133,8 +133,8 @@ export class ButtonFactory
                     text: item?.name || getLocalized("LA.placeholder"),
                     flowClass: CustomFlowClass.RunMacro,
                     onClick: () => onClickHandler(ownerUUID, macroUUID),
-                    logType: TextLogHook.MechHeader,
-                    logTypeReset: TextLogHook.MechHeaderReset,
+                    logType: TextConsoleHook.MechHeader,
+                    logTypeReset: TextConsoleHook.MechHeaderReset,
                 }
             });
         });

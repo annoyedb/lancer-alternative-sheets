@@ -1,7 +1,7 @@
 <!-- TODO: refactor into GlyphButton -->
 <script lang="ts">
     import { getAdvancedState, setAdvancedState } from "@/scripts/store/advanced";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getLocalized } from "@/scripts/helpers";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { TooltipFactory } from "@/classes/TooltipFactory";
@@ -55,8 +55,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined }
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
     data-tooltip-direction={tooltipDirection || TooltipDirection.LEFT}
-    onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-    onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+    onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+    onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
     onclick={(event) => toggleAdvancedOptions(event)}
 >
     <i class="mdi {iconStyle?.join(' ') || _DEFAULT_I}

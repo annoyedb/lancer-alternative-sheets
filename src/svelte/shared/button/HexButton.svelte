@@ -1,7 +1,7 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import type { ButtonProps } from "@/interfaces/actor/button/ButtonProps";
     import type { TerminalTextProps } from "@/interfaces/actor/TerminalTextProps";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
@@ -100,8 +100,8 @@
             data-tooltip={tooltipEnabled ? tip : undefined }
             data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
             data-tooltip-direction={tooltipDirection}
-            onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-            onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+            onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+            onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
             aria-label={text}
         >
             <span class="la-value__span {innerTextStyle?.join(' ')}"><!--

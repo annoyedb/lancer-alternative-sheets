@@ -14,7 +14,7 @@
     import { getLocalized } from "@/scripts/helpers";
     import { getBrightness } from "@/scripts/theme";
     import { getThemeKey } from "@/scripts/store/theme";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
 
     import { Logger } from "@/classes/Logger";
     import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
@@ -210,8 +210,8 @@
                         data-tooltip={tooltipEnabled ? tip : undefined}
                         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
                         data-tooltip-direction={TooltipDirection.LEFT}
-                        onpointerenter={ logType ? event => sendToLog(event, getLocalized("LA.mech.system.deployable.tooltip"), logType) : undefined }
-                        onpointerleave={ logTypeReset ? event => resetLog(event, logTypeReset) : undefined }
+                        onpointerenter={ logType ? event => sendToTextConsole(event, getLocalized("LA.mech.system.deployable.tooltip"), logType) : undefined }
+                        onpointerleave={ logTypeReset ? event => resetTextConsole(event, logTypeReset) : undefined }
                     />
                 </div>
                 <hr>

@@ -7,7 +7,7 @@
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
 
     const props = $props();
@@ -83,8 +83,8 @@
         data-tooltip-direction={TooltipDirection.UP}
         oninput={event => handleOnInput(event)}
         onpointerup={event => handleOnRelease(event)}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         aria-label={getLocalized("LA.advanced.sidebarRatio.tooltip")}
     />
 </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { id as moduleID } from '@/module.json';
-    import { resetLog, sendToLog } from '@/scripts/store/text-log';
+    import { resetTextConsole, sendToTextConsole } from '@/scripts/store/text-log';
     import { getLocalized, getVideoMimeType } from "@/scripts/helpers";
     import type { TextLogEventProps } from '@/interfaces/actor/TextLogEventProps';
     import type { TooltipProps } from '@/interfaces/actor/TooltipProps';
@@ -49,8 +49,8 @@
             : undefined }
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         onclick={editDisabled ? undefined : onPointerClick}
     >
         <source src={actorImgVid} type={tokenVideoMimeType}>
@@ -65,8 +65,8 @@
             : undefined }
         data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
         data-tooltip-direction={tooltipDirection || TooltipDirection.UP}
-        onpointerenter={ logging ? event => sendToLog(event, log, logType!) : undefined }
-        onpointerleave={ logging ? event => resetLog(event, logTypeReset!) : undefined }
+        onpointerenter={ logging ? event => sendToTextConsole(event, log, logType!) : undefined }
+        onpointerleave={ logging ? event => resetTextConsole(event, logTypeReset!) : undefined }
         onclick={editDisabled ? undefined : onPointerClick}
     >
         <img 

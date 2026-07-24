@@ -4,7 +4,7 @@
     import { getCSSDocumentTheme } from "@/scripts/theme";
 
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import { AcceptType } from "@/enums/AcceptType";
 
@@ -84,8 +84,8 @@
             tooltipDirection={TooltipDirection.LEFT}
             tooltip={skill.system.description}
             tooltipHeader={getLocalized("LA.pilot.skillTrigger.label")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
                         
             onPointerEnter={() => {effectButtonHover = true;} }
             onPointerLeave={() => {effectButtonHover = false;} }
@@ -115,8 +115,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.edit.tooltip")}
             logText={getLocalized("LA.edit.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onPointerEnter={() => {editButtonHover = true;} }
             onPointerLeave={() => {editButtonHover = false;} }
@@ -135,8 +135,8 @@
             tooltipTheme={theme}
             tooltip={getLocalized("LA.chat.tooltip")}
             logText={getLocalized("LA.chat.tooltip")}
-            logType={ TextLogHook.PilotHeader }
-            logTypeReset={ TextLogHook.PilotHeaderReset }
+            logType={ TextConsoleHook.PilotHeader }
+            logTypeReset={ TextConsoleHook.PilotHeaderReset }
 
             onPointerEnter={() => {messageButtonHover = true;} }
             onPointerLeave={() => {messageButtonHover = false;} }
@@ -176,16 +176,16 @@
                     effect={skill.system.description}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
                 <EffectBox
                     name={getLocalized("LA.detail.label")}
                     effect={skill.system.detail}
 
                     tooltipEnabled={tooltipEnabled}
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             </div>
         </HeaderSecondary>

@@ -1,10 +1,10 @@
 <script lang="ts">
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { TooltipProps } from "@/interfaces/actor/TooltipProps";
     import { getLocalized } from "@/scripts/helpers";
-    import { resetLog, sendToLog } from "@/scripts/store/text-log";
+    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
     import { SETTINGS_BUTTON_STYLE } from "@/svelte/mech/settings/AdvancedSettings.svelte";
     
     const {
@@ -30,8 +30,8 @@
     data-tooltip={tooltipEnabled ? tip : undefined}
     data-tooltip-direction={TooltipDirection.RIGHT}
     data-tooltip-class={`${tooltipClass || "clipped-bot la-tooltip"} ${tooltipTheme}`}
-    onpointerenter={ event => sendToLog(event, getLocalized("LA.advanced.mount.add.tooltip"), TextLogHook.MechHeader) }
-    onpointerleave={ event => resetLog(event, TextLogHook.MechHeaderReset) }
+    onpointerenter={ event => sendToTextConsole(event, getLocalized("LA.advanced.mount.add.tooltip"), TextConsoleHook.MechHeader) }
+    onpointerleave={ event => resetTextConsole(event, TextConsoleHook.MechHeaderReset) }
     onclick={ event => addMount(event) }
     aria-label={getLocalized("LA.advanced.mount.add.tooltip")}
 >

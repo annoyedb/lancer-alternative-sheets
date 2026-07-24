@@ -9,7 +9,7 @@ import { unregisterTrackedHooks } from "@/scripts/store/hooks";
 import { getThemeKey, setThemeKey } from "@/scripts/store/theme";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { ActiveTab } from "@/enums/ActiveTab";
-import { TextLogHook } from "@/enums/TextLogHook";
+import { TextConsoleHook } from "@/enums/TextConsoleHook";
 import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
 import Header from "@/svelte/pilot/Header.svelte";
 import Sidebar from "@/svelte/pilot/Sidebar.svelte";
@@ -221,8 +221,8 @@ export class PilotSheetBase
                         actor: data.actor,
                         system: data.system,
                         tooltipEnabled: getPilotSheetTooltipEnabled(),
-                        logType: TextLogHook.PilotHeader,
-                        logTypeReset: TextLogHook.PilotHeaderReset,
+                        logType: TextConsoleHook.PilotHeader,
+                        logTypeReset: TextConsoleHook.PilotHeaderReset,
                     },
                 });
             }

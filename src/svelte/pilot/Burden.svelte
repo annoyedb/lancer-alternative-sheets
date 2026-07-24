@@ -4,7 +4,7 @@
     import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
     import { getCSSDocumentTheme } from "@/scripts/theme";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { FlowClass } from "@/enums/FlowClass";
     import { CounterBoxType } from "@/enums/CounterBoxType";
     
@@ -53,8 +53,8 @@
     tooltip={addBurdenTip}
     tooltipDirection={TooltipDirection.UP}
     logText={getLocalized("LA.pilot.bond.burden.add.tooltip")}
-    logType={TextLogHook.PilotHeader}
-    logTypeReset={TextLogHook.PilotHeaderReset}
+    logType={TextConsoleHook.PilotHeader}
+    logTypeReset={TextConsoleHook.PilotHeaderReset}
 
     disabled={system.bond === null}
 
@@ -91,8 +91,8 @@
                     path="system.bond_state.burdens.{index}"
                     style={["clipped-bot-alt -widthfull la-bckg-header-anti"]}
                     
-                    logType={TextLogHook.PilotHeader}
-                    logTypeReset={TextLogHook.PilotHeaderReset}
+                    logType={TextConsoleHook.PilotHeader}
+                    logTypeReset={TextConsoleHook.PilotHeaderReset}
                 />
             </div>
         {/snippet}
@@ -111,8 +111,8 @@
                 tooltipTheme={theme}
                 tooltip={getLocalized("LA.edit.tooltip")}
                 logText={getLocalized("LA.edit.tooltip")}
-                logType={TextLogHook.PilotHeader}
-                logTypeReset={TextLogHook.PilotHeaderReset}
+                logType={TextConsoleHook.PilotHeader}
+                logTypeReset={TextConsoleHook.PilotHeaderReset}
 
                 onPointerEnter={() => {editButtonHover = true;} }
                 onPointerLeave={() => {editButtonHover = false;} }

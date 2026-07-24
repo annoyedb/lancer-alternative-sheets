@@ -1,6 +1,6 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
-    import { TextLogHook } from "@/enums/TextLogHook";
+    import { TextConsoleHook } from "@/enums/TextConsoleHook";
     import { TooltipDirection } from "@/enums/TooltipDirection";
     import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
     import { getAdvancedState } from "@/scripts/store/advanced";
@@ -52,8 +52,8 @@
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.systems.up.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onClick={levelUp}
         />
@@ -66,8 +66,8 @@
             tooltipEnabled={tooltipEnabled}
             tooltipDirection={TooltipDirection.RIGHT}
             logText={getLocalized("LA.pilot.systems.down.tooltip")}
-            logType={TextLogHook.PilotHeader}
-            logTypeReset={TextLogHook.PilotHeaderReset}
+            logType={TextConsoleHook.PilotHeader}
+            logTypeReset={TextConsoleHook.PilotHeaderReset}
 
             onClick={levelDown}
         />
