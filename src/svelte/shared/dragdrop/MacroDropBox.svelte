@@ -19,6 +19,7 @@
     import FlowButton from "@/svelte/shared/button/FlowButton.svelte";
     import DragDropHandle from '@/svelte/shared/dragdrop/DragDropHandle.svelte';
     import SkillTriggerButton from '@/svelte/shared/button/SkillTriggerButton.svelte';
+    import { FLOW_BUTTON_STYLE } from '@/svelte/shared/TerminalText.svelte';
 
     const {
         uuid,
@@ -131,10 +132,6 @@
         }
     }
 </script>
-<script lang="ts" module>
-    export const MACRO_FLOW_DEFAULT = "-padding1-r -padding0-tb -height5 -letterspacing0 la-text-header la-prmy-header";
-</script>
-
 <div bind:this={component}
     class="la-flexcol -widthfull
     {hintDropArea ? '-divider la-prmy-accent' : ''}"
@@ -183,7 +180,7 @@
         {#if isSkillTrigger(type)}
             <SkillTriggerButton
                 buttonStyle={[...(buttonStyle || [])]}
-                buttonTextStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
+                buttonTextStyle={[FLOW_BUTTON_STYLE, ...(buttonTextStyle || [])]}
                 item={fromUuidSync(type)}
                 tooltipEnabled={tooltipEnabled}
                 tooltipTheme={theme}
@@ -195,7 +192,7 @@
                 <div class="la-skilltrigger la-flexrow -justifyend -widthfull">
                     <FlowButton
                         style={[...(buttonStyle || [])]}
-                        textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
+                        textStyle={[FLOW_BUTTON_STYLE, ...(buttonTextStyle || [])]}
                         text={ButtonFactory.getSystemButtonLabel(type)}
 
                         flowClass={FlowClass.None}
@@ -223,7 +220,7 @@
             {:else}
                 <FlowButton
                     style={[...(buttonStyle || [])]}
-                    textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
+                    textStyle={[FLOW_BUTTON_STYLE, ...(buttonTextStyle || [])]}
                     text={ButtonFactory.getSystemButtonLabel(type)}
 
                     flowClass={FlowClass.Standard}
@@ -241,7 +238,7 @@
         {:else}
             <FlowButton
                 style={[...(buttonStyle || [])]}
-                textStyle={[MACRO_FLOW_DEFAULT, ...(buttonTextStyle || [])]}
+                textStyle={[FLOW_BUTTON_STYLE, ...(buttonTextStyle || [])]}
                 text={(fromUuidSync(type)?.name as string) || getLocalized("LA.placeholder")}
                 flowClass={CustomFlowClass.RunMacro}
                 onClick={event => {

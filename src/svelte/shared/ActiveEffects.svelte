@@ -59,7 +59,7 @@
 {#each effects as effect, index}
     {#snippet headerOptions()}
     <GlyphButton
-        style={["la-prmy-primary -fontsize4 -height4 -lineheight3", qualityMode ? "-glow-prmy-hover" : ""]}
+        style={["la-prmy-primary -fontsize4 -height4 -lineheight4", qualityMode ? "-glow-prmy-hover" : ""]}
 
         uuid={effect._id}
         flowClass={FlowClass.DeleteActiveEffect}
@@ -70,7 +70,7 @@
         logText={getLocalized("LA.delete.tooltip")}
         logging={logging}
     >
-        <i class="mdi mdi-close-circle -fontsize4 la-text-header-anti"></i>
+        <i class="mdi mdi-close-circle la-text-header-anti"></i>
     </GlyphButton>
     {/snippet}
     <HeaderMain 
