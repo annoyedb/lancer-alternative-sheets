@@ -1,4 +1,5 @@
 // Overrides for Foundry and Lancer
+$la-window-app: ':root body.game.system-lancer>.lancer.sheet.la-common.app.window-app'; // This used to be hyper specific for Monk's Little Details and I'm too afraid to change it lol
 
 #tooltip.la-tooltip,
 aside.la-tooltip.active
@@ -51,17 +52,14 @@ aside.la-tooltip.active
 }
 
 // #region Sheet Window
-
-// This is so oddly specific because Monk's Little Details adds an oddly specific 
-// border CSS rule for some reason and dominance must be asserted :triumph:
-:root body.game.system-lancer>.lancer.sheet.la-common.app.window-app
+#{$la-window-app}
 {
     >header.window-header
     {
         background-color: var(--la-primary);
         border: unset;
     }
-    
+
     >.window-resizable-handle
     {
         background-color: var(--la-darken-5);
@@ -163,9 +161,14 @@ aside.la-tooltip.active
         vertical-align: middle;
     }
 
-    header.sheet-header img
+    header.sheet-header
     {
-        margin-right: unset;
+        border-bottom: unset;
+
+        img
+        {
+            margin-right: unset;
+        }
     }
 
     // Lancer overrides under this sheet

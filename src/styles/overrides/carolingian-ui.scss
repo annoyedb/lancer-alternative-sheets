@@ -1,0 +1,165 @@
+// Overrides for Carolingian UI
+$la-window-app: ':root body.game.system-lancer>.lancer.sheet.la-common.app.window-app';
+$la-window-app-crlngn: ':root body.game.system-lancer.crlngn-ui>.lancer.sheet.la-common.app.window-app';
+$la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effect>.lancer.sheet.la-common.app.window-app';
+
+#{$la-window-app-glass}
+{
+    background: unset;
+    backdrop-filter: unset;
+    -webkit-backdrop-filter: unset;
+}
+
+#{$la-window-app}
+{
+    h1
+    {
+        border-bottom: unset;
+        margin: unset;
+        font-weight: unset;
+        line-height: unset;
+    }
+
+    img
+    {
+        border: unset;
+    }
+
+    input:disabled
+    {
+        color: unset;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"]
+    {
+        min-width: unset;
+        min-height: unset;
+        border: unset;
+        margin: unset;
+
+        // crlngn-ui draws its own checkbox/radio glyph via pseudo-elements
+        &::before,
+        &::after
+        {
+            content: unset;
+            background: unset;
+            position: unset;
+        }
+    }
+
+    textarea
+    {
+        color: unset;
+    }
+
+    select
+    {
+        >option
+        {
+            background-color: unset;
+            color: unset;
+        }
+    }
+
+    button
+    {
+        border: unset;
+        border-radius: unset;
+        background: unset;
+        box-shadow: unset;
+        color: unset;
+
+        margin-top: unset;
+        margin-bottom: unset;
+
+        &:not([class*="-padding"])
+        {
+            padding: unset;
+        }
+
+        &:not([class*="-margin"])
+        {
+            margin-left: unset;
+            margin-right: unset;
+        }
+
+        @for $i from 0 through 10
+        {
+            $value: ($i + 1) * 0.25rem;
+
+            &.-margin#{$i},
+            &.-margin#{$i}-l,
+            &.-margin#{$i}-lr
+            {
+                margin-left: $value;
+            }
+
+            &.-margin#{$i},
+            &.-margin#{$i}-r,
+            &.-margin#{$i}-lr
+            {
+                margin-right: $value;
+            }
+        }
+
+        &:hover
+        {
+            border-color: unset;
+            box-shadow: unset;
+        }
+    }
+
+    fieldset
+    {
+        border-style: unset;
+        border-width: unset;
+        border-color: unset;
+        margin: unset;
+        gap: unset;
+    }
+
+    a.content-link,
+    a.inline-roll
+    {
+        border-color: unset;
+        background-color: unset;
+        color: unset;
+
+        // crlngn-ui's optional "inline-roll-styling" setting turns these
+        // into a padded pill; unset it back to our own presentation
+        background: unset;
+        border-radius: unset;
+        display: unset;
+        padding: unset;
+        text-decoration: unset;
+    }
+
+    .window-content section.tab.active
+    {
+        padding-right: unset;
+        overflow: unset;
+        scrollbar-gutter: unset;
+    }
+}
+
+#{$la-window-app-crlngn}
+{
+    >header.window-header
+    {
+        background-color: var(--la-primary);
+        border: unset;
+        text-shadow: unset;
+
+        >*
+        {
+            text-shadow: unset;
+        }
+    }
+
+    >.window-resizable-handle
+    {
+        background-color: var(--la-darken-5);
+        border-color: var(--la-accent);
+    }
+}

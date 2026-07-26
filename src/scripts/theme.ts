@@ -7,7 +7,8 @@
  *      The third reason is that CSS it's easier to maintain and reuse CSS this way by virtue of being more easily managed by IDEs.
  */
 import "@/styles/shared/_mixins.scss";
-import "@/styles/shared/override.scss";
+import "@/styles/overrides/lancer.scss";
+import "@/styles/overrides/carolingian-ui.scss";
 import "@/styles/shared/typography.scss";
 import "@/styles/shared/space.scss";
 import "@/styles/shared/misc.scss";

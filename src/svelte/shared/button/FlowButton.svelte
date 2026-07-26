@@ -46,7 +46,7 @@
     const log = $derived(logText || getLocalized("LA.flow.tooltip"));
 </script>
 <script lang="ts" module>
-    export const FLOW_BUTTON_DEFAULT = () => " clipped-bot-alt la-bckg-secondary -widthfull -overflowhidden -lineheight3 ";
+    export const FLOW_BUTTON_DEFAULT = () => " clipped-bot-alt la-bckg-secondary -widthfull -overflowhidden -lineheight3 -padding0-lr ";
 </script>
 
 <button 
