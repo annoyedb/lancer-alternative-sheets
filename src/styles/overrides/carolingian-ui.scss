@@ -64,14 +64,28 @@ $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effe
 
     button
     {
-        border: unset;
-        border-radius: unset;
-        background: unset;
         box-shadow: unset;
         color: unset;
 
         margin-top: unset;
         margin-bottom: unset;
+
+        &:not(.la-tab)
+        {
+            background: unset;
+        }
+
+        &:not([class*="-borders"])
+        {
+            border-width: unset;
+            border-style: unset;
+            border-radius: unset;
+        }
+
+        &:not([class*="la-brdr-"])
+        {
+            border-color: unset;
+        }
 
         &:not([class*="-padding"])
         {
@@ -105,8 +119,12 @@ $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effe
 
         &:hover
         {
-            border-color: unset;
             box-shadow: unset;
+
+            &:not([class*="la-brdr-"])
+            {
+                border-color: unset;
+            }
         }
     }
 

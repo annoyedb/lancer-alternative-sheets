@@ -362,6 +362,7 @@
             flowClass={FlowClass.None}
             style={["mdi mdi-chevron-left la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter",
                 qualityMode ? "-glow-prmy-hover" : ""]}
+            tooltipEnabled={tooltipEnabled}
             tooltip={overchargeMinusTip}
             tooltipTheme={theme}
             tooltipDirection={TooltipDirection.UP}
@@ -374,6 +375,7 @@
             flowClass={FlowClass.None}
             style={["mdi mdi-chevron-right la-text-secondary la-prmy-primary -fontsize5 -alignselfcenter",
                 qualityMode ? "-glow-prmy-hover" : ""]}
+            tooltipEnabled={tooltipEnabled}
             tooltip={overchargePlusTip}
             tooltipTheme={theme}
             tooltipDirection={TooltipDirection.UP}

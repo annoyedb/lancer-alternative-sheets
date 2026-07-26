@@ -29,11 +29,14 @@
     const qualityMode = getExtraEffectsEnabled();
     const logographic = logographicLanguage();
 </script>
+<script lang="ts" module>
+    export const EFFECT_BOX_STYLE = ' la-bckg-card la-brdr-repcap -bordersround-ltb ';
+</script>
 
 {#if effect || children}
-<div class="la-effectbox la-bckg-card la-brdr-repcap -widthfull -bordersround-ltb
+<div class="la-effectbox -widthfull
         {logographic ? '-fontsizemedium' : '-fontsizemediumer'}
-        {outerStyle?.join(' ')}"
+        {outerStyle ? outerStyle?.join(' ') : EFFECT_BOX_STYLE}"
 >
     <span class="la-effectbox__span clipped-bot la-bckg-primary la-text-header -fontface-stylized
             {logographic ? '-fontsizemediumer' : '-fontsizesmall'}">

@@ -11,14 +11,14 @@ export class SkillTriggerOtherBase extends FlowBase
     {
         const SkillTriggerOther = class extends (game.lancer.Flow as any)<any>
         {
-            static steps = ["rollCheck", "printStatRollCard"];
+            static steps = ["initStatRollData", "showStatRollHUD", "rollCheck", "printStatRollCard"];
 
             constructor(uuid: string, _data: any)
             {
                 super(uuid, {
                     title: getLocalized("LA.pilot.skillTrigger.label"),
+                    path: "system.__generic_skill_trigger", // This should never resolve to anything
                     roll_str: "1d20",
-                    acc_diff: {}, // TODO: the complexity of the AccDiffHudData class is the reason why we can't use the 'showStatRollHUD' flow step
                 });
             }
         }

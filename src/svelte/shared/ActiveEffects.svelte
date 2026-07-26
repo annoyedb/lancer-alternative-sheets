@@ -59,7 +59,7 @@
 {#each effects as effect, index}
     {#snippet headerOptions()}
     <GlyphButton
-        style={["la-prmy-primary -fontsize4 -height4 -lineheight4", qualityMode ? "-glow-prmy-hover" : ""]}
+        style={["la-prmy-error -fontsize4 -height4 -lineheight4", qualityMode ? "-glow-prmy-hover" : ""]}
 
         uuid={effect._id}
         flowClass={FlowClass.DeleteActiveEffect}
