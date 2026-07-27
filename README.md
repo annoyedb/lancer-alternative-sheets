@@ -13,11 +13,13 @@ While the main goal was to provide aesthetic alternative sheets to the Lancer sy
 * counter/clock display on talents, core bonuses, and frame traits
 * more detailed send-to-chat for various Lancer items (such as weapons and NPC features)
 * configure and display bond, token, and actor art separately (also supports animated token display in the sheets)
+* add custom values to keep track of 'homebrew' data while still being referenceable in any of your favourite modules
 
 In addition to the above:
 * player mech sheets display some useful pilot sheet items such as core bonuses and pilot talents.
 * player mech sheets and pilot sheets feature a sidebar where useful stats are always easily accessed at a glance
 * deployable sheets list all their available actions and activations
+* NPC sheets can filter out irrelevant traits using the 'pin' feature
 
 ### Pilot Sheets
 <img src="https://raw.githubusercontent.com/annoyedb/lancer-alternative-sheets/refs/heads/master/docs/pilot-sheets.webp" style="display: block; margin-left: auto; margin-right: auto;"/>
