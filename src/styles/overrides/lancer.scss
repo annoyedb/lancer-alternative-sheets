@@ -93,7 +93,7 @@ aside.la-tooltip.active
     // Can't be section below, because Lancer system has odd specificity requirements
     select
     {
-        width: unset;
+        //width: unset;
 
         >option
         {
