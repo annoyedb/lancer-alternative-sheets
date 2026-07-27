@@ -424,7 +424,11 @@
 {#each Object.entries(customFlags) as [id, flag] (id)}
     {#snippet createFractionBar(data: CustomFlag)}
     <div class="la-flexcol -widthfull -fontface-stylized">
-        <span class="-fontsizesmall -upper -padding4-l">{data.name}</span>
+        <span class="-fontsizesmall -upper -padding4-l"
+            data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
+            data-tooltip-direction={TooltipDirection.RIGHT}
+        >{data.name}</span>
         <div class="la-flexrow -widthfull">
             <div class="-width14"></div>
             <div class="-flex5" style="--la-flag-custom: {data.color};">
@@ -438,11 +442,6 @@
                     barEditStyle={["la-bckg-custom"]}
                     textStyle={["la-text-text"]}
                     clipPath={"clipped-alt"}
-
-                    tooltipEnabled={tooltipEnabled}
-                    tooltipTheme={theme}
-                    tooltip={getLocalized("LA.structure.tooltip")}
-                    tooltipDirection={TooltipDirection.RIGHT}
                 />
             </div>
             <div class="-width10"></div>
@@ -461,7 +460,7 @@
 
             tooltipEnabled={tooltipEnabled}
             tooltipTheme={theme}
-            tooltip={getLocalized("LA.sensor.tooltip")}
+            tooltip={data.tooltip}
             tooltipDirection={TooltipDirection.RIGHT}
         />
     </div>

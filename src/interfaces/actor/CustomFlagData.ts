@@ -15,6 +15,7 @@ export interface CustomFlag
     content: CustomFlagContent;
     color: string;
     icon: string;
+    tooltip: string;
     showInSidebar: boolean;
 }
 

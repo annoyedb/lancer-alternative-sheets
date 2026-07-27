@@ -13,6 +13,8 @@ import Loadout from "@/svelte/npc/Loadout.svelte";
 import Header from "@/svelte/npc/Header.svelte";
 import Activity from '@/svelte/npc/Activity.svelte';
 import Status from "@/svelte/npc/Status.svelte";
+import Custom from "@/svelte/npc/Custom.svelte";
+import CustomToggle from "@/svelte/npc/CustomToggle.svelte";
 
 export class NPCSheetBase
 {
@@ -138,11 +140,22 @@ export class NPCSheetBase
                         target: html.find(".la-SVELTE-STATUS")[0],
                         props: data,
                     });
-                mount(Activity, 
+                mount(Activity,
                     {
                         target: html.find(".la-SVELTE-ACTIVITY")[0],
                         props: data,
                     });
+                mount(Custom, {
+                    target: html.find(".la-SVELTE-CUSTOM")[0],
+                    props: data,
+                });
+                mount(CustomToggle, { // (#14)
+                    target: html.find(".la-tabs")[0],
+                    props: {
+                        actor: data.actor,
+                        button: html.find('.la-tabs>[data-tab="custom"]')[0],
+                    },
+                });
             }
         }
 

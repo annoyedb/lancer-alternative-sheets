@@ -279,6 +279,16 @@
                             onfocus={event => event.currentTarget.select()}
                         />
                     </EffectBox>
+                    <EffectBox
+                        name={getLocalized("LA.tab.custom.flag.tooltip.label")}
+                    >
+                        <input type="text"
+                            class="la-customvalue__input la-text-text -bordersround -small la-brdr-repcap -padding0-lr"
+                            value={flag.tooltip}
+                            onchange={event => handleUpdateCustomFlag(actor, id, { tooltip: (event.target as HTMLInputElement).value })}
+                            onfocus={event => event.currentTarget.select()}
+                        />
+                    </EffectBox>
                     <HeaderSecondary
                         text={getLocalized("LA.tab.custom.flag.assist.label")}
                         headerStyle={[H2_HEADER_STYLE, "la-bckg-pilot"]}

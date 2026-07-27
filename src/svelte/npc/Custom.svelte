@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { PilotSheetProps } from "@/interfaces/pilot/PilotSheetProps";
+    import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
     import { setActorContext } from "@/scripts/context";
     import { getLocalized } from "@/scripts/helpers";
     import HeaderMain, { MAIN_HEADER_STYLE } from "@/svelte/shared/header/HeaderMain.svelte";
-    import { getPilotSheetTooltipEnabled } from "@/scripts/pilot/settings";
+    import { getNPCSheetTooltipEnabled } from "@/scripts/npc/settings";
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
@@ -25,7 +25,7 @@
 
     const {
         actor,
-    }: PilotSheetProps = $props();
+    }: NPCSheetProps = $props();
     setActorContext(actor);
 
     let component: HTMLElement | null = $state(null);
@@ -34,36 +34,36 @@
     let sortButtonHover = $state(false);
 
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
-    const customFlags = $derived(getCustomFlags(actor, CustomFlagKey.Pilot));
+    const customFlags = $derived(getCustomFlags(actor, CustomFlagKey.NPC));
     const flagEntries = $derived(Object.entries(customFlags));
     const sortable = $derived(getCustomFlagsSortable(actor.uuid));
 
-    const tooltipEnabled = getPilotSheetTooltipEnabled();
+    const tooltipEnabled = getNPCSheetTooltipEnabled();
     const qualityMode = getExtraEffectsEnabled();
     const refCopyTip = TooltipFactory.buildTooltip(getLocalized("LA.tab.custom.flag.ref.tooltip"));
     const enrichCopyTip = TooltipFactory.buildTooltip(getLocalized("LA.tab.custom.flag.enricher.tooltip"));
 
     function handleAddCustomFlag(_event: Event, actor: any)
     {
-        addCustomFlag(actor, CustomFlagKey.Pilot);
+        addCustomFlag(actor, CustomFlagKey.NPC);
     }
 
     function handleDeleteCustomFlag(event: Event, actor: any, id: string)
     {
         event.stopPropagation();
-        deleteCustomFlag(actor, CustomFlagKey.Pilot, id);
+        deleteCustomFlag(actor, CustomFlagKey.NPC, id);
     }
 
     function handleUpdateCustomFlag(actor: any, id: string, changes: Partial<CustomFlag>)
     {
-        updateCustomFlag(actor, CustomFlagKey.Pilot, id, changes);
+        updateCustomFlag(actor, CustomFlagKey.NPC, id, changes);
     }
 
     function handleReorderCustomFlag(_event: DragEvent, dropData: { type: string, index: number }, thisData: { type: string, index: number })
     {
         if (dropData.type !== LADataType.Sorting)
             return;
-        reorderCustomFlags(actor, CustomFlagKey.Pilot, dropData.index, thisData.index);
+        reorderCustomFlags(actor, CustomFlagKey.NPC, dropData.index, thisData.index);
     }
 
     function getTypeIcon(type: string)
@@ -251,7 +251,7 @@
                         </div>
                     </EffectBox>
                     <EffectBox
-                        name={getLocalized("LA.tab.custom.flag.sidebarToggle.label")}
+                        name={getLocalized("LA.tab.custom.flag.sidebarToggle.npc.label")}
                     >
                         <input type="checkbox"
                             class="-widthfull"
@@ -311,7 +311,7 @@
                                         { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                         ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                         : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                        value={getCustomFlagPath(CustomFlagKey.Pilot, id, "value")}
+                                        value={getCustomFlagPath(CustomFlagKey.NPC, id, "value")}
 
                                         data-tooltip={tooltipEnabled ? refCopyTip : undefined}
                                         data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -328,7 +328,7 @@
                                             { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                             ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                             : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                            value={getCustomFlagPath(CustomFlagKey.Pilot, id, "max")}
+                                            value={getCustomFlagPath(CustomFlagKey.NPC, id, "max")}
 
                                             data-tooltip={tooltipEnabled ? refCopyTip : undefined}
                                             data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -344,7 +344,7 @@
                                             { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                             ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                             : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                            value={getCustomFlagPath(CustomFlagKey.Pilot, id, "min")}
+                                            value={getCustomFlagPath(CustomFlagKey.NPC, id, "min")}
 
                                             data-tooltip={tooltipEnabled ? refCopyTip : undefined}
                                             data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -367,7 +367,7 @@
                                         { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                         ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                         : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                        value={getEnricher(actor.uuid, CustomFlagKey.Pilot, id, "value")}
+                                        value={getEnricher(actor.uuid, CustomFlagKey.NPC, id, "value")}
 
                                         data-tooltip={tooltipEnabled ? enrichCopyTip : undefined}
                                         data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -384,7 +384,7 @@
                                             { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                             ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                             : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                            value={getEnricher(actor.uuid, CustomFlagKey.Pilot, id, "max")}
+                                            value={getEnricher(actor.uuid, CustomFlagKey.NPC, id, "max")}
 
                                             data-tooltip={tooltipEnabled ? enrichCopyTip : undefined}
                                             data-tooltip-class="clipped-bot la-tooltip {theme}"
@@ -400,7 +400,7 @@
                                             { getBrightness(getThemeKey(actor.uuid)) === 'light'
                                             ? 'la-brdr-darken-3 la-text-darken-7 la-bckg-darken-1'
                                             : 'la-brdr-lighten-3 la-text-lighten-7 la-bckg-lighten-1' }"
-                                            value={getEnricher(actor.uuid, CustomFlagKey.Pilot, id, "min")}
+                                            value={getEnricher(actor.uuid, CustomFlagKey.NPC, id, "min")}
 
                                             data-tooltip={tooltipEnabled ? enrichCopyTip : undefined}
                                             data-tooltip-class="clipped-bot la-tooltip {theme}"
