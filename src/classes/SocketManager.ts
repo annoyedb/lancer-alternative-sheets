@@ -158,7 +158,7 @@ export class SocketManager
         let responseID = undefined;
         if (callback)
         {
-            responseID = randomID(16);
+            responseID = foundry.utils.randomID(16);
             this.awaitingResponse.set(responseID, callback);
         }
 
