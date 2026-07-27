@@ -10,11 +10,13 @@
             overflow-y: scroll;
             overflow-x: hidden;
 
-            >.la-sidebar__statistics
+            .la-sidebar__statistics
             {
                 .la-actor__img
                 {
                     max-height: 15rem;
+                    min-height: 15rem;
+                    object-fit: contain;
                 }
             }
         }
