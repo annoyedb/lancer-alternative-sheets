@@ -8,16 +8,17 @@
         handleEditToken,
         handleOverchargeDecrease,
         handleOverchargeIncrease,
-        handleRelativeDataInput, logographicLanguage
+        handleRelativeDataInput,
+        logographicLanguage
     } from "@/scripts/helpers";
     import { getBrightness, getCSSDocumentTheme } from "@/scripts/theme";
     import { getAdvancedState } from '@/scripts/store/advanced';
     import { getThemeKey } from '@/scripts/store/theme';
-    import { 
-        getMechSheetTooltipEnabled, 
-        getSidebarExecutables, 
-        setSidebarExecutables, 
-        getSidebarRatio 
+    import {
+        getMechSheetTooltipEnabled,
+        getSidebarExecutables,
+        getSidebarRatio,
+        setSidebarExecutables
     } from "@/scripts/mech/settings";
     import { getExtraEffectsEnabled } from "@/scripts/settings";
     import { setActorContext } from "@/scripts/context";
@@ -32,6 +33,10 @@
     import ImageVideo from '@/svelte/shared/ImageVideo.svelte';
     import GlyphButton from "@/svelte/shared/button/GlyphButton.svelte";
     import { FLOW_BUTTON_DEFAULT } from '@/svelte/shared/button/FlowButton.svelte';
+    import { getCustomFlagPath, getCustomFlags } from "@/scripts/flags";
+    import { CustomFlagKey } from "@/enums/CustomFlagKey";
+    import { CustomFlagContentType } from "@/enums/CustomFlagContentType";
+    import type { CustomFlag } from "@/interfaces/actor/CustomFlagData";
 
     const props = $props();
     const {
@@ -55,6 +60,7 @@
         : getLocalized("LA.placeholder"));
     const frameUUID = $derived(frame ? frame.uuid : "");
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
+    const customFlags = $derived(getCustomFlags(actor, CustomFlagKey.Mech));
 
     const sizeTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`));
     const speedTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`));
@@ -412,6 +418,65 @@
         tooltipDirection={TooltipDirection.RIGHT}
     />
 </div>
+
+<!-- Custom Flags -->
+<div class="la-flags la-flexcol -gap1 la-dropshadow -margin0-lr -widthfull">
+{#each Object.entries(customFlags) as [id, flag] (id)}
+    {#snippet createFractionBar(data: CustomFlag)}
+    <div class="la-flexcol -widthfull -fontface-stylized">
+        <span class="-fontsizesmall -upper -padding4-l">{data.name}</span>
+        <div class="la-flexrow -widthfull">
+            <div class="-width14"></div>
+            <div class="-flex5" style="--la-flag-custom: {data.color};">
+                <StatusBar
+                    name={""}
+                    nameStyle={[logographic ? "-fontsizemedium" : ""]}
+                    dataName={getCustomFlagPath(CustomFlagKey.Mech, id, "value")}
+                    currentValue={data.content.value}
+                    maxValue={data.content.max}
+                    barStyle={["la-bckg-custom"]}
+                    barEditStyle={["la-bckg-custom"]}
+                    textStyle={["la-text-text"]}
+                    clipPath={"clipped-alt"}
+
+                    tooltipEnabled={tooltipEnabled}
+                    tooltipTheme={theme}
+                    tooltip={getLocalized("LA.structure.tooltip")}
+                    tooltipDirection={TooltipDirection.RIGHT}
+                />
+            </div>
+            <div class="-width10"></div>
+        </div>
+    </div>
+    {/snippet}
+
+    {#snippet createValueGlyph(data: CustomFlag)}
+    <div class="-widthfull">
+        <StatComboShort
+            icon="{data.icon ? data.icon : "mdi mdi-abacus" } -alignselfcenter"
+            label={data.name}
+            value={data.content.value}
+            outerStyle={["la-text-text -fontsize6"]}
+            innerStyle={["-divider -upper -fontface-stylized -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
+
+            tooltipEnabled={tooltipEnabled}
+            tooltipTheme={theme}
+            tooltip={getLocalized("LA.sensor.tooltip")}
+            tooltipDirection={TooltipDirection.RIGHT}
+        />
+    </div>
+    {/snippet}
+
+    {#if flag.showInSidebar}
+        {#if flag.contentType === CustomFlagContentType.Fraction}
+            {@render createFractionBar(flag)}
+        {:else}
+            {@render createValueGlyph(flag)}
+        {/if}
+    {/if}
+{/each}
+</div>
+
 <!-- Macros/Flows -->
 <MacroDropBox
     uuid={actor.uuid}

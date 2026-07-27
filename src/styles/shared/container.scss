@@ -301,5 +301,10 @@
         {
             grid-template-columns: repeat(3, 1fr);
         }
+
+        &.-horizontal2-auto
+        {
+            grid-template-columns: auto 1fr;
+        }
     }
 }

@@ -40,6 +40,12 @@
         background-color: transparent !important;
     }
 
+    // Per-instance color set via the `--la-flag-custom` custom property on an element
+    .la-bckg-custom
+    {
+        background-color: var(--la-flag-custom, var(--la-primary)) !important;
+    }
+
     .la-brdr-transparent
     {
         border-color: transparent;

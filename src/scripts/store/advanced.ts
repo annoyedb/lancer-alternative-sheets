@@ -42,3 +42,13 @@ export function setTokenImageLock(uuid: string, value: boolean)
 {
     SheetStore.set(uuid, { tokenImageLock: value })
 }
+
+export function getCustomFlagsSortable(uuid: string): boolean
+{
+    return SheetStore.get(uuid).customFlagsSortable;
+}
+
+export function setCustomFlagsSortable(uuid: string, enabled: boolean)
+{
+    SheetStore.set(uuid, { customFlagsSortable: enabled });
+}

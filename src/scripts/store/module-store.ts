@@ -25,6 +25,7 @@ interface SheetStoreData
     tokenImageLock: boolean;
     selectedTokenImage: string; // (#12)
     textLogEntries: TextLogEntry[];
+    customFlagsSortable: boolean;
 }
 
 export class SheetStore
@@ -41,6 +42,7 @@ export class SheetStore
             tokenImageLock: true,
             selectedTokenImage: "", // (#12)
             textLogEntries: [],
+            customFlagsSortable: false,
         };
     }
 

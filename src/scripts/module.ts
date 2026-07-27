@@ -8,6 +8,7 @@ import { DeployableSheetBase } from "@/classes/deployable/DeployableSheetBase";
 import { SendUnknownToChatBase } from "@/classes/flows/SendUnknownToChat";
 import { RunMacroBase } from "@/classes/flows/RunMacro";
 import { getExtraEffectsEnabled, registerModuleSettings } from "@/scripts/settings";
+import { getAdvancedState } from "@/scripts/store/advanced";
 import { registerMechSheetSettings, resetMechSheetData, resetMechSheetLocalData } from "@/scripts/mech/settings";
 import { registerNPCSheetSettings, resetNPCSheetData } from "@/scripts/npc/settings";
 import { registerPilotSheetSettings, resetPilotSheetData, resetPilotSheetLocalData } from "@/scripts/pilot/settings";
@@ -15,11 +16,14 @@ import { registerDeployableSheetSettings, resetDeployableSheetData } from "@/scr
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import { SkillTriggerOtherBase } from "@/classes/flows/SkillTriggerOther";
 import { Logger } from "@/classes/Logger";
+import { registerCustomFlagEnricher } from "@/scripts/enrichers";
+import { addCustomFlag, deleteCustomFlag, getCustomFlagPath, getCustomFlags, setCustomFlags, updateCustomFlag } from "@/scripts/flags";
 
 Hooks.once("init", () =>
 {
     registerHandlebarsHelpers();
     registerSettings();
+    registerCustomFlagEnricher();
 });
 
 Hooks.once("setup", async () =>
@@ -46,7 +50,15 @@ Hooks.once("ready", async () =>
         textLog: {
             sendToTextLog,
             resetTextLog,
-        }
+        },
+        flags: {
+            getCustomFlags,
+            setCustomFlags,
+            addCustomFlag,
+            updateCustomFlag,
+            deleteCustomFlag,
+            getCustomFlagPath,
+        },
     };
 });
 
@@ -63,6 +75,9 @@ function registerHandlebarsHelpers()
     });
     Handlebars.registerHelper("la_getScrollStyle", () => {
         return getExtraEffectsEnabled() ? 'la-ruler-scroll' : 'la-ruler';
+    });
+    Handlebars.registerHelper("la_getAdvancedStyle", (uuid: string) => {
+        return getAdvancedState(uuid) ? '' : '-displaynone';
     });
 }
 

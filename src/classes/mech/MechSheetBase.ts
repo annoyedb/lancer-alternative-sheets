@@ -14,6 +14,8 @@ import Header from "@/svelte/mech/Header.svelte";
 import Sidebar from "@/svelte/mech/Sidebar.svelte";
 import Status from "@/svelte/mech/Status.svelte";
 import Loadout from "@/svelte/mech/Loadout.svelte";
+import Custom from "@/svelte/mech/Custom.svelte";
+import CustomToggle from "@/svelte/mech/CustomToggle.svelte";
 import HaseDisplay from "@/svelte/shared/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/mech/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/mech/settings/AdvancedSettingsNav.svelte";
@@ -193,6 +195,17 @@ export class MechSheetBase
                 mount(Loadout, {
                     target: html.find(".la-SVELTE-LOADOUT")[0],
                     props: data,
+                });
+                mount(Custom, {
+                    target: html.find(".la-SVELTE-CUSTOM")[0],
+                    props: data,
+                });
+                mount(CustomToggle, { // (#14)
+                    target: html.find(".la-tabs")[0],
+                    props: {
+                        actor: data.actor,
+                        button: html.find('.la-tabs>[data-tab="custom"]')[0],
+                    },
                 });
                 mount(HaseDisplay, {
                     target: html.find(".la-SVELTE-HASE")[0],
