@@ -50,7 +50,7 @@
     {/if}
     <div class="la-bar-h la-bckg-darken-3 -flex1 -positionrelative -widthfull -height3 -overflowhidden {clipPath}">
         <div class="la-bar-h-progress la-flexrow -widthfull -heightfull">
-            <input type="number" 
+            <input type="text"
                 class="la-bar-h-progress__input -widthfull -heightfull -positionrelative -textaligncenter
                     {editing ? textStyle?.join(' ') : 'la-text-transparent'}"
                 name="{dataName}"

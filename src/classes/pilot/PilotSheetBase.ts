@@ -58,7 +58,7 @@ export class PilotSheetBase
                     initial: "dossier"
                 }
             ],
-            scrollY: [".la-dossier", ".la-mechstorage", ".la-abilities", ".la-bonds", ".la-equipment", ".la-sidebar__statistics", ".la-sidebar__activity"],
+            scrollY: [".la-dossier", ".la-mechstorage", ".la-abilities", ".la-bonds", ".la-equipment", ".la-custom", ".la-sidebar__statistics", ".la-sidebar__activity"],
         }
     }
 

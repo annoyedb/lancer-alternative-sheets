@@ -34,6 +34,34 @@ export function updateCustomFlag(actor: any, flagKey: CustomFlagKey, id: string,
     return setCustomFlags(actor, flagKey, data);
 }
 
+export function handleCustomFlagValueInput(
+    event: Event & { currentTarget: EventTarget & HTMLInputElement; },
+    actor: any,
+    flagKey: CustomFlagKey,
+    flag: CustomFlag
+): Promise<any>
+{
+    event.preventDefault();
+    const inputValue = event.currentTarget.value;
+    let newValue = flag.content.value;
+
+    if (inputValue)
+    {
+        if (inputValue.startsWith('+'))
+            newValue = flag.content.value + Number(inputValue.slice(1));
+        else if (inputValue.startsWith('-'))
+            newValue = flag.content.value - Number(inputValue.slice(1));
+        else
+            newValue = Number(inputValue);
+
+        if (Number.isNaN(newValue))
+            newValue = flag.content.value;
+    }
+
+    event.currentTarget.value = newValue.toString();
+    return updateCustomFlag(actor, flagKey, flag.id, { content: { ...flag.content, value: newValue } });
+}
+
 export function deleteCustomFlag(actor: any, flagKey: CustomFlagKey, id: string): Promise<any>
 {
     return actor.update({

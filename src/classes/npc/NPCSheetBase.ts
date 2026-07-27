@@ -1,4 +1,4 @@
-import { mount } from "svelte";
+import { mount, flushSync } from "svelte";
 import { LancerAlternative } from "@/enums/LancerAlternative";
 import type { NPCSheetProps } from "@/interfaces/npc/NPCSheetProps";
 import { dataMap, getLocalized, isValidImageContainer } from "@/scripts/helpers";
@@ -35,7 +35,7 @@ export class NPCSheetBase
                     initial: "loadout"
                 },
             ],
-            scrollY: [".la-SVELTE-LOADOUT", ".la-SVELTE-STATUS", ".la-SVELTE-ACTIVITY"],
+            scrollY: [".la-SVELTE-LOADOUT", ".la-SVELTE-STATUS", ".la-SVELTE-CUSTOM", ".la-SVELTE-ACTIVITY"],
         }
     }
 
@@ -115,11 +115,10 @@ export class NPCSheetBase
                 super._replaceHTML(element, html);
                 applyThemeTo(element, getThemeKey(this.actor.uuid!));
 
-                this.mountComponents(html, dataMap[this.actor.uuid!]);
-
-                // Saving and restoring scroll positions calls before rerender, so 
-                // restore the scroll positions after the rerender
-                this._restoreScrollPositions(html);
+                // (#15) - flushSync ensures mounted content is fully laid out before Foundry's built-in scroll restore runs
+                // afterward, in _render(). No other sheet has this issue and only what is effectively a debounce is an
+                // alternative to fixing it.
+                flushSync(() => this.mountComponents(html, dataMap[this.actor.uuid!]));
             }
 
             mountComponents(html: JQuery<HTMLElement>, data: any)

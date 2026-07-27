@@ -45,7 +45,7 @@ export class MechSheetBase
                     initial: "statistics"
                 }
             ],
-            scrollY: [".la-status", ".la-loadout", ".la-sidebar__statistics", ".la-sidebar__activity"],
+            scrollY: [".la-status", ".la-loadout", ".la-custom", ".la-sidebar__statistics", ".la-sidebar__activity"],
         }
     }
 

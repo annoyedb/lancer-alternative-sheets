@@ -332,9 +332,9 @@
                                 ><!--
                                 --->{getLocalized("LA.overshield.short")}<!--
                             ---></span>
-                                <input type="number" 
+                                <input type="text"
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
-                                    name="system.overshield.value" 
+                                    name="system.overshield.value"
                                     data-dtype="Number"
                                     value="{system.overshield.value}"
                                     onfocus={(event) => {event.currentTarget.select(); editingShield = true;}}
@@ -373,9 +373,9 @@
                                     {qualityMode ? '-glow-prmy' : ''}
                                     {logographic ? '-width4ch' : '-width3ch'}"
                             >
-                                <input type="number" 
+                                <input type="text"
                                     class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
-                                    name="system.burn" 
+                                    name="system.burn"
                                     data-dtype="Number"
                                     value="{system.burn}"
                                     onfocus={(event) => {event.currentTarget.select(); editingBurn = true;}}

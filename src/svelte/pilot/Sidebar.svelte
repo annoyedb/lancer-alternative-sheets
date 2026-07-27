@@ -24,7 +24,7 @@
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import ImageVideo from "@/svelte/shared/ImageVideo.svelte";
     import { FLOW_BUTTON_DEFAULT } from "@/svelte/shared/button/FlowButton.svelte";
-    import { getCustomFlagPath, getCustomFlags } from "@/scripts/flags";
+    import { getCustomFlagPath, getCustomFlags, handleCustomFlagValueInput } from "@/scripts/flags";
     import { CustomFlagKey } from "@/enums/CustomFlagKey";
     import { CustomFlagContentType } from "@/enums/CustomFlagContentType";
     import type { CustomFlag } from "@/interfaces/actor/CustomFlagData";
@@ -51,6 +51,7 @@
     const sidebarExes = $derived(getSidebarExecutables(actor.uuid));
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
     const customFlags = $derived(getCustomFlags(actor, CustomFlagKey.Pilot));
+    const visibleCustomFlags = $derived(Object.values(customFlags).filter(flag => flag.showInSidebar));
 
     const sizeTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.size.tooltip"), `${getLocalized("LA.size.label")} ${system.size}`));
     const speedTip = $derived(TooltipFactory.buildTooltip(getLocalized("LA.speed.tooltip"), `${getLocalized("LA.speed.label")} ${system.speed}`));
@@ -206,7 +207,7 @@
                 {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
-                type={"number"}
+                type={"text"}
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
@@ -229,7 +230,7 @@
                 {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
-                type={"number"}
+                type={"text"}
                 name={"system.burn"}
                 data-dtype={"Number"}
                 value={system.burn}
@@ -291,7 +292,7 @@
             --->{getLocalized("LA.overshield.short")}<!--
         ---></span>
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrb -small -bordersoff"
-                type={"number"}
+                type={"text"}
                 name={"system.overshield.value"}
                 data-dtype={"Number"}
                 value={system.overshield.value}
@@ -334,7 +335,7 @@
                 {logographic ? '-width4ch' : '-width3ch'}"
         >
             <input class="la-damage__input la-shadow -medium -inset la-text-text -width7 -heightfull -bordersround-lrt -small -bordersoff"
-                type={"number"}
+                type={"text"}
                 name={"system.burn"}
                 data-dtype={"Number"}
                 value={system.burn}
@@ -402,22 +403,19 @@
 </div>
 
 <!-- Custom Flags -->
+{#if visibleCustomFlags.length}
+<hr class="-widthfull">
 <div class="la-flags la-flexcol -gap1 la-dropshadow -margin0-lr -widthfull">
-{#each Object.entries(customFlags) as [id, flag] (id)}
+{#each visibleCustomFlags as flag (flag.id)}
     {#snippet createFractionBar(data: CustomFlag)}
     <div class="la-flexcol -widthfull -fontface-stylized">
-        <span class="-fontsizesmall -upper -padding4-l"
-            data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {theme}"
-            data-tooltip-direction={TooltipDirection.RIGHT}
-        >{data.name}</span>
         <div class="la-flexrow -widthfull">
             <div class="-width14"></div>
             <div class="-flex5" style="--la-flag-custom: {data.color};">
                 <StatusBar
                     name={""}
                     nameStyle={[logographic ? "-fontsizemedium" : ""]}
-                    dataName={getCustomFlagPath(CustomFlagKey.Pilot, id, "value")}
+                    dataName={getCustomFlagPath(CustomFlagKey.Pilot, data.id, "value")}
                     currentValue={data.content.value}
                     maxValue={data.content.max}
                     barStyle={["la-bckg-custom"]}
@@ -428,35 +426,45 @@
             </div>
             <div class="-width11"></div>
         </div>
+        <span class="-fontsizemedium -upper -padding4-l
+                {logographic ? '' : '-bold'}"
+            data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
+            data-tooltip-direction={TooltipDirection.RIGHT}
+        >{data.name}</span>
     </div>
     {/snippet}
-
     {#snippet createValueGlyph(data: CustomFlag)}
     <div class="-widthfull">
-        <StatComboShort
-            icon="{data.icon ? data.icon : "mdi mdi-abacus" } -alignselfcenter"
-            label={data.name}
-            value={data.content.value}
-            outerStyle={["la-text-text -fontsize6"]}
-            innerStyle={["-divider -upper -fontface-stylized -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
-
-            tooltipEnabled={tooltipEnabled}
-            tooltipTheme={theme}
-            tooltip={data.tooltip}
-            tooltipDirection={TooltipDirection.RIGHT}
-        />
+        <div class="la-shortstat la-flexrow la-text-text -fontsize6">
+            <i class="{data.icon ? data.icon : "mdi mdi-abacus"} -alignselfcenter"></i>
+            <div class="la-flexcol -divider -upper -fontface-stylized -fontsizemedium la-prmy-accent -textaligncenter
+                    {logographic ? '' : '-bold'}"
+                data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
+                data-tooltip-direction={TooltipDirection.RIGHT}
+            >
+                <input class="la-top__input -widthfull -medium -inset la-text-text -fontface-neutral -height4"
+                    type="text"
+                    value={data.content.value}
+                    onfocus={event => event.currentTarget.select()}
+                    onchange={event => handleCustomFlagValueInput(event, actor, CustomFlagKey.Pilot, data)}
+                >
+                <span class="la-bottom__span">{data.name}</span>
+            </div>
+        </div>
     </div>
     {/snippet}
 
-    {#if flag.showInSidebar}
-        {#if flag.contentType === CustomFlagContentType.Fraction}
-            {@render createFractionBar(flag)}
-        {:else}
-            {@render createValueGlyph(flag)}
-        {/if}
+    {#if flag.contentType === CustomFlagContentType.Fraction}
+        {@render createFractionBar(flag)}
+    {:else}
+        {@render createValueGlyph(flag)}
     {/if}
 {/each}
 </div>
+<hr class="-widthfull">
+{/if}
 
 {#if itemTypes.skill.length}
 <MacroDropBox

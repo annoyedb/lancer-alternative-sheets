@@ -12,9 +12,8 @@
     import CollapseAllButton from "@/svelte/shared/button/CollapseAllButton.svelte";
     import MacroDropBox from '@/svelte/shared/dragdrop/MacroDropBox.svelte';
     import StatusBar from "@/svelte/shared/StatusBar.svelte";
-    import StatComboShort from "@/svelte/shared/StatComboShort.svelte";
     import { setActorContext } from "@/scripts/context";
-    import { getCustomFlagPath, getCustomFlags } from "@/scripts/flags";
+    import { getCustomFlagPath, getCustomFlags, handleCustomFlagValueInput } from "@/scripts/flags";
     import { CustomFlagKey } from "@/enums/CustomFlagKey";
     import { CustomFlagContentType } from "@/enums/CustomFlagContentType";
     import type { CustomFlag } from "@/interfaces/actor/CustomFlagData";
@@ -171,11 +170,6 @@
     <div class="la-flags la-flexcol -gap1 -widthfull">
     {#snippet createFractionBar(data: CustomFlag)}
     <div class="la-flexcol -widthfull -fontface-stylized">
-        <span class="-fontsizesmall -upper"
-            data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
-            data-tooltip-class="clipped-bot la-tooltip {theme}"
-            data-tooltip-direction={TooltipDirection.UP}
-        >{data.name}</span>
         <div class="la-flexrow -widthfull">
             <div class="-width10"></div>
             <div class="-flex5" style="--la-flag-custom: {data.color};">
@@ -193,23 +187,34 @@
             </div>
             <div class="-width10"></div>
         </div>
+        <span class="-fontsizemedium -upper
+                {logographic ? '' : '-bold'}"
+            data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
+            data-tooltip-class="clipped-bot la-tooltip {theme}"
+            data-tooltip-direction={TooltipDirection.UP}
+        >{data.name}</span>
     </div>
     {/snippet}
 
     {#snippet createValueGlyph(data: CustomFlag)}
     <div class="-widthfull">
-        <StatComboShort
-            icon="{data.icon ? data.icon : "mdi mdi-abacus" } -alignselfcenter"
-            label={data.name}
-            value={data.content.value}
-            outerStyle={["la-text-text -fontsize6"]}
-            innerStyle={["-divider -upper -fontface-stylized -fontsizemedium la-prmy-accent -textaligncenter", logographic ? "" : "-bold"]}
-
-            tooltipEnabled={tooltipEnabled}
-            tooltipTheme={theme}
-            tooltip={data.tooltip}
-            tooltipDirection={TooltipDirection.UP}
-        />
+        <div class="la-shortstat la-flexrow la-text-text -fontsize6">
+            <i class="{data.icon ? data.icon : "mdi mdi-abacus"} -alignselfcenter"></i>
+            <div class="la-flexcol -divider -upper -fontface-stylized -fontsizemedium la-prmy-accent -textaligncenter
+                    {logographic ? '' : '-bold'}"
+                data-tooltip={tooltipEnabled && data.tooltip ? TooltipFactory.buildTooltip(data.tooltip) : undefined}
+                data-tooltip-class="clipped-bot la-tooltip {theme}"
+                data-tooltip-direction={TooltipDirection.UP}
+            >
+                <input class="la-top__input -widthfull -medium -inset la-text-text -fontface-neutral -height4"
+                    type="text"
+                    value={data.content.value}
+                    onfocus={event => event.currentTarget.select()}
+                    onchange={event => handleCustomFlagValueInput(event, actor, CustomFlagKey.NPC, data)}
+                >
+                <span class="la-bottom__span">{data.name}</span>
+            </div>
+        </div>
     </div>
     {/snippet}
 

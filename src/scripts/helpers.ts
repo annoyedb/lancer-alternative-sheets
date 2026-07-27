@@ -131,6 +131,9 @@ export function handleRelativeDataInput(
         {
             newValue = Number(inputValue);
         }
+
+        if (Number.isNaN(newValue))
+            newValue = previous;
     }
 
     event.currentTarget.value = newValue.toString();
