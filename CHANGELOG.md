@@ -10,7 +10,7 @@ As a bit of an experiment, I am exposing some API stuff `to see if anyone other 
 * `flags.deleteCustomFlag` (`deleteCustomFlag(actor: any, flagKey: CustomFlagKey, id: string)`)
 * `flags.getCustomFlagPath` (`getCustomFlagPath(flagKey: CustomFlagKey, id: string, field: keyof CustomFlagContent = "value")`)
 
-You can take a look at the data structure for [CustomFlagKey](), [CustomFlagData](), [CustomFlagContent]() at the associated links.
+You can take a look at the data structure for [CustomFlagKey](https://github.com/annoyedb/lancer-alternative-sheets/blob/master/src/enums/CustomFlagKey.ts), [CustomFlagData](https://github.com/annoyedb/lancer-alternative-sheets/blob/master/src/interfaces/actor/CustomFlagData.ts), [CustomFlagContent](https://github.com/annoyedb/lancer-alternative-sheets/blob/master/src/interfaces/actor/CustomFlagData.ts) at the associated links.
 
 The `textLog` API was written for my `spooky-centric` campaign. This function can only be accessed from the API. `or I guess you can make a menu for it via macro, if you're really so inclined`
 Note that the `textLog` API calls only persist through the current 'session' as a deliberate choice; meaning if the client refreshes the page (as in the actual page, not the sheet), the text will be lost.
