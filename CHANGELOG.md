@@ -1,3 +1,69 @@
+# 1.5.6
+As a bit of an experiment, I am exposing some API stuff `to see if anyone other than myself bothers using it`
+
+* `textLog.sendToTextLog` (`sendToTextLog(text: string, uuid: string, glitchy?: boolean)`)
+* `textLog.resetTextLog` (`resetTextLog(uuid: string, all?: boolean)`)
+* `flags.getCustomFlags` (`getCustomFlags(actor: LancerActor, flagKey: CustomFlagKey)`)
+* `flags.setCustomFlags` (`setCustomFlags(actor: LancerActor, flagKey: CustomFlagKey, data: { CustomFlagData })`)
+* `flags.addCustomFlag` (`addCustomFlag(actor: LancerActor, flagKey: CustomFlagKey)`)
+* `flags.updateCustomFlag` (`updateCustomFlag(actor: LancerActor, flagKey: CustomFlagKey, id: string, changes: Partial<CustomFlag>)`)
+* `flags.deleteCustomFlag` (`deleteCustomFlag(actor: any, flagKey: CustomFlagKey, id: string)`)
+* `flags.getCustomFlagPath` (`getCustomFlagPath(flagKey: CustomFlagKey, id: string, field: keyof CustomFlagContent = "value")`)
+
+You can take a look at the data structure for [CustomFlagKey](), [CustomFlagData](), [CustomFlagContent]() at the associated links.
+
+The `textLog` API was written for my `spooky-centric` campaign. This function can only be accessed from the API. `or I guess you can make a menu for it via macro, if you're really so inclined`
+Note that the `textLog` API calls only persist through the current 'session' as a deliberate choice; meaning if the client refreshes the page (as in the actual page, not the sheet), the text will be lost.
+
+The `flags` API was written because I'm tired of individual manna (Lancer currency) being a footnote in my player's journals, or worse yet, something I tacked onto their sheet via an item promptly followed by a reimport of their pilot making it disappear forever, or worse yet still, a quickly mangled LCP to keep track of certain homebrew which may or may not have bricked my world.
+By toggling the advanced options on sheets, you can find a new 'Custom' tab that will allow you to add your own flags to be referenced from the canvas or other documents.
+
+If you use [Carolingian UI](https://foundryvtt.com/packages/crlngn-ui), you'll be pleased to know that I have made lengths to make sure that its sweeping changes do not completely `up my everything` in this module or at least side-steps some of them. `yay`
+
+Also, 'Other Skill' on Pilot sheets will now properly bring up the Accuracy HUD from the Lancer system. `extra yay`
+
+## Changes
+* Fixed missing tooltips on overcharge arrows
+* Changed generic skill triggers to now bring up the Svelte HUD implemented by native Lancer. This means that Lancer-style accuracy can be added the "Other Skill" skill trigger and will behave as you would expect.
+* Added the ability to add custom flags to the sheet, letting users track any sort of (numerical) value of something without making a whole item for it.
+* Added an HTML enricher for custom flags to display onto journals/chat/items/wherever Foundry uses HTML. The generated reference in the menu can be pasted directly into journal/chat/items without extra steps.
+* Added `sendToTextLog(text: string, uuid: string, glitchy?: boolean)` and `resetTextLog(uuid: string, all?: boolean)` which accepts the `uuid` parameter, which indicates which actor to send the command to, `logText` parameter which indicates what to type into their sheet, and an optional `glitchy` parameter to make the text... glitchy, `all` is for clearing all the text, including the intro text. For example: `game.modules.get("lancer-alternative-sheets").api.textLog.sendToTextLog("> Hello there, friend.", "Actor.cSeYrkc8Hwe9VXfc", true);`
+* Added specificity overrides to guard against Carolingian UI's sweeping CSS changes. A known issue is that sheet tooltips are not styled correctly with Carolingian UI. If you have any concerns regarding this minor issue, please refer to the `pain in my ass` section of the update
+## Technical Changes
+* Removed TypeIt and TypedWriter dependencies, replacing them with classes defined in `text-writer.ts`
+### Localization
++ "LA.copy.label": "COPY",
++ "LA.tab.custom.label": "CUSTOM",
++ "LA.tab.custom.subLabel": "CUSTOM ACTOR FLAGS",
++ "LA.tab.custom.add.tooltip": "Add custom actor flag",
++ "LA.tab.custom.add.extension": "add",
++ "LA.tab.custom.sort.tooltip": "Toggle sorting custom actor flags",
++ "LA.tab.custom.sort.extension": "toggle_sort",
++ "LA.tab.custom.delete.tooltip": "Delete custom actor flag",
++ "LA.tab.custom.delete.extension": "delete",
++ "LA.tab.custom.flag.name.label": "Value Name",
++ "LA.tab.custom.flag.contentType.label": "Content Type",
++ "LA.tab.custom.flag.contentType.value.label": "Value",
++ "LA.tab.custom.flag.contentType.fraction.label": "Fraction",
++ "LA.tab.custom.flag.content.label": "Content Value",
++ "LA.tab.custom.flag.content.value.label": "value",
++ "LA.tab.custom.flag.content.max.label": "max",
++ "LA.tab.custom.flag.content.min.label": "min",
++ "LA.tab.custom.flag.assist.label": "Generated References",
++ "LA.tab.custom.flag.ref.label": "Flag Path (read-only)",
++ "LA.tab.custom.flag.ref.tooltip": "Flag path used to reference this value in Foundry functions (e.g. `getProperty`)",
++ "LA.tab.custom.flag.enricher.label": "Enricher (read-only)",
++ "LA.tab.custom.flag.enricher.tooltip": "Enricher text for pasting into journals/items/chat",
++ "LA.tab.custom.flag.sidebarToggle.label": "Show in Sidebar",
++ "LA.tab.custom.flag.color.label": "Color",
++ "LA.tab.custom.flag.icon.label": "Icon",  "LA.tab.custom.flag.sidebarToggle.npc.label": "Show in Status Tab",
++ "LA.tab.custom.flag.tooltip.label": "Tooltip",
++ "LA.tab.custom.flag.sidebarToggle.npc.label": "Show in Status Tab",
++ "LA.tab.custom.flag.sidebarToggle.deployable.label": "Show in Details Tab",
++ "LA.tab.custom.empty.label": "NO CUSTOM VALUES SHOWN",
++ "LA.tab.custom.empty.tooltip.0": "Enable advanced options and add a custom actor flag to add to this list",
++ "LA.tab.custom.empty.tooltip.1": "Enable '{0}' option of a custom actor flag to add to this list",
+
 # 1.5.5
 ## Changes
 * Fixed lost Foundry-applied events when pinning/unpinning NPC items
