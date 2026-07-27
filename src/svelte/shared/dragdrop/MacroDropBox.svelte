@@ -86,14 +86,6 @@
         }
     }
 
-    function buildFlowData(_button: string, index: number)
-    {
-        return {
-            type: LADataType.Sorting, 
-            index,
-        }
-    }
-
     function handleDelete(event: MouseEvent, index: number)
     {
         event.stopPropagation();
@@ -166,7 +158,7 @@
         <DragDropHandle
             index={index}
             root={component}
-            data={buildFlowData(type, index)}
+            data={{type: LADataType.Sorting, index}}
             style={["-justifyend"]}
             iconStyle={["-fontsize4 -padding1-lr", ...(iconStyle || [])]}
             onDrop={handleFlowDrop}
