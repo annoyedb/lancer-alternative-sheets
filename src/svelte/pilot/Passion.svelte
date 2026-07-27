@@ -180,7 +180,8 @@
         <div class="la-bond-card__content la-flexcol -positionabsolute -margin0-tb -heightfull -justifyevenly la-reveal">
             <!-- Q&A -->
             {#each system.bond.system.questions as qna, index}
-            <div class="la-bond-question la-flexcol -alignstart la-bckg-darken-1 clipped -widthfull -padding2-lr -padding0-t -padding1-b">
+            <div class="la-bond-question la-flexcol -alignstart clipped -widthfull -padding2-lr -padding0-t -padding1-b
+                        {darkTheme ? 'la-bckg-darken-1' : 'la-bckg-lighten-5' }">
                 <span
                     class="-fontsizemedium -lineheight5"
                 >

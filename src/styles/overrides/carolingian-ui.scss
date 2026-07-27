@@ -1,7 +1,27 @@
 // Overrides for Carolingian UI
+@use 'sass:meta';
+@use '../color/themes/common' as common;
+@use '../color/themes/alpha' as alpha;
+@use '../color/themes/gms' as gms;
+
 $la-window-app: ':root body.game.system-lancer>.lancer.sheet.la-common.app.window-app';
 $la-window-app-crlngn: ':root body.game.system-lancer.crlngn-ui>.lancer.sheet.la-common.app.window-app';
 $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effect>.lancer.sheet.la-common.app.window-app';
+
+// go away
+@mixin generate-border-overrides($theme-map)
+{
+    @each $name, $color in $theme-map
+    {
+        @if meta.type-of($color) == 'color'
+        {
+            button.la-brdr-#{$name}
+            {
+                border-color: var(--la-#{$name});
+            }
+        }
+    }
+}
 
 #{$la-window-app-glass}
 {
@@ -184,5 +204,14 @@ $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effe
     button.la-tab:not(.active):not(:hover)
     {
         background-color: transparent;
+    }
+
+    @include generate-border-overrides(common.$common-theme);
+    @include generate-border-overrides(alpha.$alpha);
+    @include generate-border-overrides(gms.$gms-theme);
+
+    button.la-brdr-transparent
+    {
+        border-color: transparent;
     }
 }
