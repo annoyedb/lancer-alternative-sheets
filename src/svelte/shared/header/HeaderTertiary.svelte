@@ -81,7 +81,7 @@
     data-uuid={uuid}
     data-path={path}
     data-accept-types={acceptTypes}
-    draggable="true"
+    draggable={acceptTypes ? "true" : "false"}
 >
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
     <!-- (#2) 

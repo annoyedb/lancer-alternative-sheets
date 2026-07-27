@@ -180,4 +180,9 @@ $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effe
         background-color: var(--la-darken-5);
         border-color: var(--la-accent);
     }
+
+    button.la-tab
+    {
+        background-color: transparent;
+    }
 }

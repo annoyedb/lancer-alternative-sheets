@@ -129,7 +129,7 @@
                         checked={system.bond_state.xp_checklist.major_ideals[index]}
                     />
                     <span
-                        class="-fontsizemedium -lineheight5"
+                        class="-fontsizemedium -lineheight5 -padding0-lr"
                     >
                         {major}
                     </span>
@@ -169,7 +169,7 @@
                         checked={system.bond_state.xp_checklist.veteran_power}
                     />
                     <span
-                        class="-fontsizemedium -lineheight5"
+                        class="-fontsizemedium -lineheight5 -padding0-lr"
                     >
                         {getLocalized("LA.pilot.bond.other.label")}
                     </span>
