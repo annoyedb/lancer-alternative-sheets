@@ -302,11 +302,11 @@
                                     nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.hp.value"
                                     currentValue={system.hp.value}
-                                    maxValue={parseInt(system.stats.hp)}
+                                    maxValue={system.hp.max}
                                     barStyle={["la-bckg-bar-health"]}
                                     barEditStyle={["la-prmy-bar-health"]}
                                     currentValueSecondary={system.overshield.value}
-                                    maxValueSecondary={parseInt(system.stats.hp)}
+                                    maxValueSecondary={system.hp.max}
                                     barStyleSecondary={["la-bckg-bar-shield -shield"]}
                                     barEditStyleSecondary={["la-prmy-bar-shield"]}
                                     textStyle={["la-text-text"]}
@@ -351,11 +351,11 @@
                                     nameStyle={[logographic ? "-fontsizemedium" : ""]}
                                     dataName="system.heat.value"
                                     currentValue={system.heat.value}
-                                    maxValue={system.stats.heatcap}
+                                    maxValue={system.heat.max}
                                     barStyle={["la-bckg-bar-heat"]}
                                     barEditStyle={["la-prmy-bar-heat"]}
                                     currentValueSecondary={system.burn}
-                                    maxValueSecondary={system.stats.heatcap || parseInt(system.stats.hp)}
+                                    maxValueSecondary={system.heat.max || system.hp.max}
                                     barStyleSecondary={["la-bckg-bar-burn -burn"]}
                                     barEditStyleSecondary={["la-prmy-bar-burn"]}
                                     textStyle={["la-text-text"]}

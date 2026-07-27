@@ -23,6 +23,7 @@ If you use [Carolingian UI](https://foundryvtt.com/packages/crlngn-ui), you'll b
 Also, 'Other Skill' on Pilot sheets will now properly bring up the Accuracy HUD from the Lancer system. `extra yay`
 
 ## Changes
+* #74 - Fixed incorrect max HP reference value for deployables `two years later since releasing this and hydra players still find ways to hurt me`
 * Fixed missing tooltips on overcharge arrows
 * Changed generic skill triggers to now bring up the Svelte HUD implemented by native Lancer. This means that Lancer-style accuracy can be added the "Other Skill" skill trigger and will behave as you would expect.
 * Added the ability to add custom flags to the sheet, letting users track any sort of (numerical) value of something without making a whole item for it.
