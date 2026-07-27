@@ -181,7 +181,7 @@ $la-window-app-glass: ':root body.game.system-lancer.crlngn-ui.crlngn-glass-effe
         border-color: var(--la-accent);
     }
 
-    button.la-tab
+    button.la-tab:not(.active):not(:hover)
     {
         background-color: transparent;
     }
