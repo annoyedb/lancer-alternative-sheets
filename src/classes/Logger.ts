@@ -31,9 +31,9 @@ export class Logger
         console.error(
             `%c[${this.moduleName} ${this.getVersion()}] ${message}`,
             "color: #FF0000; font-weight: bold;",
-            ...args
+            ...args,
+            new Error("Trace")
         );
-        console.trace();
     }
 
     public static warn(message: string, ...args: any[]): void
@@ -44,8 +44,8 @@ export class Logger
         console.warn(
             `%c[${this.moduleName} ${this.getVersion()}] ${message}`,
             "color: #FFA500; font-weight: bold;",
-            ...args
+            ...args,
+            new Error("Trace")
         );
-        console.trace();
     }
 }
