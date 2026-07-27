@@ -18,7 +18,7 @@ export class CustomFlags implements CustomFlagData
             },
             showInSidebar: false,
             color: "#ffffff",
-            icon: "mdi mdi-numeric",
+            icon: "mdi mdi-abacus",
         };
     }
 }

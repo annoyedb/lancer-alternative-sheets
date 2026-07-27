@@ -14,6 +14,8 @@ import Header from "@/svelte/pilot/Header.svelte";
 import Sidebar from "@/svelte/pilot/Sidebar.svelte";
 import Equipment from "@/svelte/pilot/Equipment.svelte";
 import Bond from "@/svelte/pilot/Bond.svelte";
+import Custom from "@/svelte/pilot/Custom.svelte";
+import CustomToggle from "@/svelte/pilot/CustomToggle.svelte";
 import HaseDisplay from "@/svelte/shared/HaseArray.svelte";
 import AdvancedSettings from "@/svelte/pilot/settings/AdvancedSettings.svelte";
 import AdvancedSettingsNav from "@/svelte/pilot/settings/AdvancedSettingsNav.svelte";
@@ -209,6 +211,17 @@ export class PilotSheetBase
                     target: html.find(".la-SVELTE-BONDS")[0],
                     props: data,
                 })
+                mount(Custom, {
+                    target: html.find(".la-SVELTE-CUSTOM")[0],
+                    props: data,
+                });
+                mount(CustomToggle, { // (#14)
+                    target: html.find(".la-tabs-tertiary")[0],
+                    props: {
+                        actor: data.actor,
+                        button: html.find('.la-tabs-tertiary>[data-tab="custom"]')[0],
+                    },
+                });
                 mount(AdvancedSettings, {
                     target: html.find(".la-SVELTE-ADVANCED")[0],
                     props: data,

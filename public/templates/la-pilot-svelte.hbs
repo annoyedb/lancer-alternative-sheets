@@ -36,11 +36,18 @@
             </div>
             {{!-- Tertiary Tabs (main) --}}
             <div class="la-flexrow">
-                <nav 
-                    class="la-tabs-tertiary la-bckg-tabs clipped-alt" 
+                <nav
+                    class="la-tabs-tertiary la-bckg-tabs clipped-alt"
                     data-group="tertiary"
                 >
                     <button type="button"
+                        class="la-tab clipped-bot-alt la-text-header -fontsize4 -padding1
+                            {{la_getAdvancedStyle actor.uuid}}"
+                        data-tab="custom"
+                    >
+                        {{localize "LA.tab.custom.label"}}
+                    </button>{{!-- Handlebars randomly adds whitespace here
+                --}}<button type="button"
                         class="la-tab clipped-bot-alt la-text-header -fontsize4 -padding1"
                         data-tab="status"
                     >
@@ -124,10 +131,26 @@
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
-            <div 
+            <div
                 class="la-content-tertiary -widthfull -heightfull
                     "
             >
+                <div
+                    class="la-content-custom -widthfull -heightfull
+                        la-SCROLL-BODY tab"
+                    data-group="tertiary"
+                    data-tab="custom"
+                >
+                    <div class="-margin7-t">
+                        <div
+                            class="la-custom la-tab la-dropshadow -fontsize4
+                                la-SVELTE-CUSTOM tab"
+                            data-tab="custom"
+                        >
+                            {{!-- Svelte is injected in-place here --}}
+                        </div>
+                    </div>
+                </div>
                 {{!-- Primary Content --}}
                 <div class="la-content-quaternary -widthfull -heightfull
                         la-SCROLL-BODY tab"
