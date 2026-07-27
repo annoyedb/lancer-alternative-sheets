@@ -12,6 +12,8 @@ import { getThemeKey, setThemeKey } from "@/scripts/store/theme";
 import Detail from "@/svelte/deployable/Detail.svelte";
 import Header from "@/svelte/deployable/Header.svelte";
 import Activity from '@/svelte/deployable/Activity.svelte';
+import Custom from "@/svelte/deployable/Custom.svelte";
+import CustomToggle from "@/svelte/deployable/CustomToggle.svelte";
 
 export class DeployableSheetBase
 {
@@ -141,6 +143,17 @@ export class DeployableSheetBase
                 {
                     target: html.find(".la-SVELTE-ACTIVITY")[0],
                     props: data,
+                });
+                mount(Custom, {
+                    target: html.find(".la-SVELTE-CUSTOM")[0],
+                    props: data,
+                });
+                mount(CustomToggle, { // (#14)
+                    target: html.find(".la-tabs")[0],
+                    props: {
+                        actor: data.actor,
+                        button: html.find('.la-tabs>[data-tab="custom"]')[0],
+                    },
                 });
             }
         }

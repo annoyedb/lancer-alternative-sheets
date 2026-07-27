@@ -1,7 +1,7 @@
 <script lang="ts">
     import { FlowClass } from "@/enums/FlowClass";
     import { TooltipDirection } from "@/enums/TooltipDirection";
-    import { getLocalized, logographicLanguage } from "@/scripts/helpers";
+    import { formatString, getLocalized, logographicLanguage } from "@/scripts/helpers";
     import { getNPCSheetTooltipEnabled, getSidebarExecutables, setSidebarExecutables } from "@/scripts/npc/settings";
     import { getAdvancedState } from "@/scripts/store/advanced";
     import { getCSSDocumentTheme } from "@/scripts/theme";
@@ -19,7 +19,6 @@
     import { CustomFlagContentType } from "@/enums/CustomFlagContentType";
     import type { CustomFlag } from "@/interfaces/actor/CustomFlagData";
     import { TooltipFactory } from "@/classes/TooltipFactory";
-    import { resetTextConsole, sendToTextConsole } from "@/scripts/store/text-log";
 
     const props = $props();
     const {
@@ -38,8 +37,7 @@
     const customFlagsCollID = $derived(`${actor.uuid}.status.customFlags`);
     const theme = $derived(getCSSDocumentTheme(actor.uuid));
     const customFlagsEmptyTipMain = $derived(TooltipFactory.buildTooltip(getLocalized("LA.tab.custom.empty.tooltip.0")));
-    const customFlagsEmptyTipAlt = $derived(TooltipFactory.buildTooltip(getLocalized("LA.tab.custom.empty.tooltip.1")));
-    const customFlagsEmptyLog = $derived(advancedOptions ? getLocalized("LA.tab.custom.empty.tooltip.1") : getLocalized("LA.tab.custom.empty.tooltip.0"));
+    const customFlagsEmptyTipAlt = $derived(TooltipFactory.buildTooltip(formatString(getLocalized("LA.tab.custom.empty.tooltip.1"), getLocalized("LA.tab.custom.flag.sidebarToggle.npc.label"))));
     const customFlags = $derived(getCustomFlags(actor, CustomFlagKey.NPC));
     const visibleCustomFlags = $derived(Object.values(customFlags).filter(flag => flag.showInSidebar));
 </script>
@@ -231,8 +229,6 @@
                 : undefined}
             data-tooltip-class="clipped-bot la-tooltip {theme}"
             data-tooltip-direction={TooltipDirection.UP}
-            onpointerenter={ event => sendToTextConsole(event, customFlagsEmptyLog, actor.uuid) }
-            onpointerleave={ event => resetTextConsole(event, actor.uuid) }
         >
             <span class="la-left la-flexrow">
                 <i class="la-icon mdi mdi-card-off-outline -fontsize4 -margin1-lr"></i>

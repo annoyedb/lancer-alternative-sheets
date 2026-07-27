@@ -30,6 +30,13 @@
                     >
                         {{localize "LA.tab.activity.label"}}
                     </button>
+                    <button
+                        class="la-tab clipped-bot la-text-header -fontsizemedium -padding0 -padding1-lr
+                            {{la_getAdvancedStyle actor.uuid}}"
+                        data-tab="custom"
+                    >
+                        {{localize "LA.tab.custom.label"}}
+                    </button>
                 </nav>
             </div>
         </div>
@@ -48,6 +55,12 @@
             <div class="-widthfull
                     la-SVELTE-ACTIVITY tab"
                 data-tab="activity"
+            >
+                {{!-- Svelte is injected in-place here --}}
+            </div>
+            <div class="-widthfull
+                    la-SVELTE-CUSTOM tab"
+                data-tab="custom"
             >
                 {{!-- Svelte is injected in-place here --}}
             </div>
