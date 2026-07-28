@@ -47,7 +47,7 @@
     "lancer-alternative-sheets.mjs"
   ],
   "styles": [
-    "styles/lancer-alternative-sheets.css"
+    { "src": "styles/lancer-alternative-sheets.css", "layer": null }
   ],
   "flags": {
     "hotReload": { 
