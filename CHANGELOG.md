@@ -1,4 +1,4 @@
-# 1.5.6
+# 1.5.6 - Developers! Developers! Developers!
 As a bit of an experiment, I am exposing some API stuff `to see if anyone other than myself bothers using it`
 
 * `textLog.sendToTextLog` (`sendToTextLog(text: string, uuid: string, glitchy?: boolean)`)
@@ -24,6 +24,8 @@ Also, 'Other Skill' on Pilot sheets will now properly bring up the Accuracy HUD 
 
 ## Changes
 * #74 - Fixed incorrect max HP reference value for deployables `two years later since releasing this and hydra players still find ways to hurt me`
+* Fixed some issues regarding restoring scroll position or active navigation tab in some sheets
+* Fixed +/- syntax parsing on supported input fields (hp, stress, overshields, etc)
 * Fixed missing tooltips on overcharge arrows
 * Changed generic skill triggers to now bring up the Svelte HUD implemented by native Lancer. This means that Lancer-style accuracy can be added the "Other Skill" skill trigger and will behave as you would expect.
 * Added the ability to add custom flags to the sheet, letting users track any sort of (numerical) value of something without making a whole item for it.
