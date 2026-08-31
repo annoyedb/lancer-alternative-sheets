@@ -155,10 +155,11 @@
                 return undefined;
             }}
 
-            itemID={skill.lid}
+            itemID={skill.id}
             uuid={skill.uuid}
             path={getSkillPath(index)}
             acceptTypes={"skill"}
+            dropDisabled={true}
             
             collapseID={skill.uuid}
             startCollapsed={true}

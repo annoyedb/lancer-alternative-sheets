@@ -117,7 +117,8 @@
                 ? (pinnedSet.has(reaction.system.lid) ? pinnedContainer : unpinnedContainer)
                 : noSectionsContainer}
             <div use:placeItem={container}
-                class="-widthfull">
+                class="-widthfull"
+                data-item-id={reaction.id}>
                 <ReactionItem
                     actor={actor}
                     system={system}

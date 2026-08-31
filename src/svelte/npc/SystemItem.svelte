@@ -218,10 +218,10 @@
         return undefined;
     }}
 
-    itemID={component.id}
     uuid={component.uuid}
     path={`itemTypes.npc_feature.${component.index}`}
     acceptTypes={"npc_feature"}
+    dropDisabled={true}
     
     collapseID={component.uuid}
     startCollapsed={true}

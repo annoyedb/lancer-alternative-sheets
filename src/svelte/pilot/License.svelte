@@ -168,10 +168,11 @@
                 return undefined;
             }}
 
-            itemID={license.lid}
+            itemID={license.id}
             uuid={license.uuid}
             path={getLicensePath(index)}
             acceptTypes={"license"}
+            dropDisabled={true}
 
             collapseID={license.uuid}
             startCollapsed={true}

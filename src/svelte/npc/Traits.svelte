@@ -117,6 +117,7 @@
                 : noSectionsContainer}
             <div use:placeItem={container}
                 class="-widthfull"
+                data-item-id={trait.id}
             >
                 <TraitItem
                     actor={actor}

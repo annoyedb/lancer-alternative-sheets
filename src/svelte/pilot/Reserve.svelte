@@ -167,10 +167,11 @@
                 return undefined;
             }}
 
-            itemID={reserve.lid}
+            itemID={reserve.id}
             uuid={reserve.uuid}
             path={getReservePath(index)}
             acceptTypes={"reserve"}
+            dropDisabled={true}
             
             collapseID={reserve.uuid}
             startCollapsed={true}

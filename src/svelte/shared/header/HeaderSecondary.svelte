@@ -15,6 +15,7 @@
         uuid,
         path,
         acceptTypes,
+        dropDisabled,
         collapseID,
         startCollapsed,
         dontSaveCollapse,
@@ -36,6 +37,11 @@
         contentRight,
     }: HeaderProps & HeaderSecondaryProps & TerminalTextProps & ContentSidesProps = $props();
     
+    // `ref set` makes the element draggable; `drop-settable` additionally makes it a slot that
+    // Lancer assigns dropped items into, which ordered lists opt out of via `dropDisabled`.
+    const dropClass = $derived(dropDisabled ? '' : 'drop-settable');
+    const refClasses = $derived(acceptTypes ? `ref set ${dropClass} ${acceptTypes}` : '');
+
     const isCollapsed = $derived(getCollapseState(collapseID) ?? startCollapsed ?? false);
 
     // (#3)
@@ -77,7 +83,7 @@
 
 
 <div class="la-collapsegroup -widthfull {rootStyle ? rootStyle.join(' ') : ''}
-        {acceptTypes ? `ref set drop-settable ${acceptTypes}` : ''}
+        {refClasses}
         collapse-group"
     data-item-id={itemID}
     data-uuid={uuid}

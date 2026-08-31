@@ -298,10 +298,10 @@
         return undefined;
     }}
 
-    itemID={tech.id}
     uuid={tech.uuid}
     path={`itemTypes.npc_feature.${tech.index}`}
     acceptTypes={"npc_feature"}
+    dropDisabled={true}
     
     collapseID={tech.uuid}
     startCollapsed={true}

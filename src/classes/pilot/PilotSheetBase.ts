@@ -160,6 +160,22 @@ export class PilotSheetBase
                 }
             }
 
+            // Reorder an already-owned skill/license/reserve instead of letting Lancer re-process it
+            // as a fresh drop. Ensures only Triggers, Licenses and Reserves are caught.
+            // @ts-expect-error overriding function in LancerPilotSheet
+            override async onRootDrop(drop: any, event: any, dest: any): Promise<void>
+            {
+                if (this.isEditable && drop.type === "Item" && drop.document.parent === this.actor &&
+                    (drop.document.is_skill() || drop.document.is_license() || drop.document.is_reserve()))
+                {
+                    this._onSortItem(event, drop.document.toObject());
+                    return;
+                }
+
+                // @ts-expect-error overriding function in LancerPilotSheet
+                return super.onRootDrop(drop, event, dest);
+            }
+
             override async _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>): Promise<void>
             {
                 super._replaceHTML(element, html);

@@ -205,10 +205,10 @@
         return undefined;
     }}
 
-    itemID={trait.system.lid}
     uuid={trait.uuid}
     path={`itemTypes.npc_feature.${trait.index}`}
     acceptTypes={"npc_feature"}
+    dropDisabled={true}
     
     collapseID={trait.uuid}
     startCollapsed={true}

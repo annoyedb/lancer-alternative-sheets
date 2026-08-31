@@ -118,6 +118,7 @@
                 : noSectionsContainer}
             <div use:placeItem={container}
                 class="-widthfull"
+                data-item-id={component.id}
             >
                 <SystemItem
                     actor={actor}

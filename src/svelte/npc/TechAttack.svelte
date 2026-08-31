@@ -118,6 +118,7 @@
                 : noSectionsContainer}
             <div use:placeItem={container}
                 class="-widthfull"
+                data-item-id={tech.id}
             >
                 <TechAttackItem
                     actor={actor}

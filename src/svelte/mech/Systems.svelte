@@ -244,6 +244,7 @@
             uuid={component.value.uuid}
             path={getComponentPath(index)}
             acceptTypes={"mech_system"}
+            dropDisabled={true}
             collapseID={component.value.uuid}
             startCollapsed={true}
 

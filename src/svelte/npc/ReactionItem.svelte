@@ -256,10 +256,10 @@
         return undefined;
     }}
 
-    itemID={reaction.id}
     uuid={reaction.uuid}
     path={`itemTypes.npc_feature.${reaction.index}`}
     acceptTypes={"npc_feature"}
+    dropDisabled={true}
     
     collapseID={reaction.uuid}
     startCollapsed={true}

@@ -10,7 +10,8 @@ export interface HeaderProps {
     children?: Snippet;
 
     /**
-     * Identifier for the item. Only used for NPC features and seems to typically expect an item's LID.
+     * Foundry document id. Emitted as `data-item-id`, which Foundry's `_onSortItem`
+     * uses to identify the drop target and its siblings when reordering by drag.
      */
     itemID?: string;
 
@@ -28,6 +29,12 @@ export interface HeaderProps {
      * Accepted types for the component. Expects a space-separated list of Lancer System `EntryType`s.
      */
     acceptTypes?: string;
+
+    /**
+     * Omit the `drop-settable` class, so drops bubble to the sheet root and Lancer re-sorts the
+     * item instead of assigning it into the slot at `path`. For ordered lists, not for real slots.
+     */
+    dropDisabled?: boolean;
 
     /**
      * Identifier for the collapsible section.

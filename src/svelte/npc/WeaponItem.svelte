@@ -277,6 +277,7 @@
     uuid={weapon.uuid}
     path={`itemTypes.npc_feature.${weapon.index}`}
     acceptTypes={"npc_feature"}
+    dropDisabled={true}
     collapseID={weapon.uuid}
     startCollapsed={true}
 
